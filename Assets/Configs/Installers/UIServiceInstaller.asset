@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f841ea5294f4218993bdd4bd7b4819c, type: 3}
+  m_Name: UIServiceInstaller
+  m_EditorClassIdentifier: 
+  _defaultScreenRoot: {fileID: 1159766643086450979, guid: 7a0c7baefafb1436faf02b97d0c4814e, type: 3}
+  _screenInstallers:
+  - {fileID: 11400000, guid: 3293d751ba8864b1fb3eca28046522ae, type: 2}
