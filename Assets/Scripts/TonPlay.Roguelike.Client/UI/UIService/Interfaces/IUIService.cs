@@ -6,6 +6,6 @@ namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
 			where TContext : IScreenContext
 			where TScreen : IScreen;
 		
-		void Close(IScreen screen);
+		void Close(IScreen screen, bool isEmbedded = false);
 	}
 }

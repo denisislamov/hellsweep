@@ -5,23 +5,20 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 {
 	public class LayerUIService : IUIService
 	{
-		private readonly IScreenLayer _layer;
-		private readonly Transform _rootTransform;
-
-		private readonly IScreenStack _screenStack;
 
 		private readonly IOpeningScreenStrategy _defaultOpeningStrategy;
 		private readonly IOpeningScreenStrategy _embeddedOpeningStrategy;
+		private readonly DefaultClosingScreenStrategy _defaultClosingStrategy;
+		private readonly EmbeddedClosingScreenStrategy _embeddedClosingStrategy;
 
 		public LayerUIService(IScreenFactoryFacade screenFactoryFacade, IScreenLayer layer, Transform rootTransform)
 		{
-			_layer = layer;
-			_rootTransform = rootTransform;
-
-			_screenStack = new ScreenStack();
+			IScreenStack screenStack = new ScreenStack();
 			
-			_defaultOpeningStrategy = new DefaultOpeningScreenStrategy(screenFactoryFacade, layer, rootTransform, _screenStack);
-			_embeddedOpeningStrategy = new EmbeddedOpeningScreenStrategy(screenFactoryFacade, layer, _screenStack);
+			_defaultOpeningStrategy = new DefaultOpeningScreenStrategy(screenFactoryFacade, layer, rootTransform, screenStack);
+			_embeddedOpeningStrategy = new EmbeddedOpeningScreenStrategy(screenFactoryFacade, layer, screenStack);
+			_defaultClosingStrategy = new DefaultClosingScreenStrategy(screenStack);
+			_embeddedClosingStrategy = new EmbeddedClosingScreenStrategy(screenStack);
 		}
 		
 		public void Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
@@ -32,14 +29,20 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			openingScreenStrategy.Open<TScreen, TContext>(context);
 		}
 		
-		public void Close(IScreen screen)
+		public void Close(IScreen screen, bool isEmbedded = false)
 		{
-			
+			var closingScreenStrategy = GetClosingScreenStrategy(isEmbedded);
+			closingScreenStrategy.Close(screen);
 		}
 
 		private IOpeningScreenStrategy GetOpeningScreenStrategy(bool isEmbedded)
 		{
 			return isEmbedded ? _embeddedOpeningStrategy : _defaultOpeningStrategy;
+		}
+		
+		private IClosingScreenStrategy GetClosingScreenStrategy(bool isEmbedded)
+		{
+			return isEmbedded ? _embeddedClosingStrategy : _defaultClosingStrategy;
 		}
 	}
 }

@@ -1,6 +1,8 @@
+using System;
+
 namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
 {
-	public interface IPresenter
+	public interface IPresenter : IDisposable
 	{
 		void Show();
 		

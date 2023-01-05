@@ -45,9 +45,9 @@ namespace TonPlay.Roguelike.Client.UI.UIService
             _layeredServices[screenLayer.GetType()].Open<TScreen, TContext>(context, isEmbedded);
         }
         
-        public void Close(IScreen screen)
+        public void Close(IScreen screen, bool isEmbedded)
         {
-            _layeredServices[screen.RootLayer.GetType()].Close(screen);
+            _layeredServices[screen.RootLayer.GetType()].Close(screen, isEmbedded);
         }
     }
 }

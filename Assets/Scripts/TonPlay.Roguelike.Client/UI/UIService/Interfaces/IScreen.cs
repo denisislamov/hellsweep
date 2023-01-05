@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
 {
-	public interface IScreen
+	public interface IScreen : IDisposable
 	{
+		GameObject GameObject { get; }
+		
 		IScreenLayer RootLayer { get; }
 		
 		IScreenStack EmbeddedScreensStack { get; }

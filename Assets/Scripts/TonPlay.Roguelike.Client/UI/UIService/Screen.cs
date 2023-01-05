@@ -13,6 +13,8 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		[SerializeField]
 		private Transform _customEmbeddedScreensRoot;
 
+		public GameObject GameObject => gameObject;
+		
 		public IScreenLayer RootLayer => _rootLayer;
 		
 		public IScreenStack EmbeddedScreensStack { get; } = new ScreenStack();
@@ -58,6 +60,14 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			foreach (var presenter in Presenters)
 			{
 				presenter.Hide();
+			}
+		}
+		
+		public void Dispose()
+		{
+			foreach (var presenter in Presenters)
+			{
+				presenter.Dispose();
 			}
 		}
 	}

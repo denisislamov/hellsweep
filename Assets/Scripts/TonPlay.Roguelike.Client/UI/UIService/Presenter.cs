@@ -40,5 +40,9 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			
 			View.Hide();
 		}
+		
+		public virtual void Dispose()
+		{
+		}
 	}
 }
