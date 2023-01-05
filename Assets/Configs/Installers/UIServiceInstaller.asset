@@ -15,3 +15,4 @@ MonoBehaviour:
   _defaultScreenRoot: {fileID: 1159766643086450979, guid: 7a0c7baefafb1436faf02b97d0c4814e, type: 3}
   _screenInstallers:
   - {fileID: 11400000, guid: 3293d751ba8864b1fb3eca28046522ae, type: 2}
+  - {fileID: 11400000, guid: dc716183d3ba94eadb4c305185a2feb9, type: 2}

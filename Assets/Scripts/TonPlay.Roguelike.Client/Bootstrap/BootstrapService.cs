@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using TonPlay.Roguelike.Client.AppEntryPoint.Interfaces;
 using TonPlay.Roguelike.Client.Bootstrap.Interfaces;
-using UnityEngine;
+using UniRx;
 using Zenject;
 
 namespace TonPlay.Roguelike.Client.Bootstrap
@@ -17,7 +17,10 @@ namespace TonPlay.Roguelike.Client.Bootstrap
 		
 		public async UniTask Bootstrap()
 		{
-			Debug.Log("Bootstrapping...");
+#if UNITY_WEBGL
+			// Default AsyncConversions is Scheduler.ThreadPool
+			Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.MainThread;
+#endif
 			
 			await _appEntryPoint.ProcessEntrance();
 		}

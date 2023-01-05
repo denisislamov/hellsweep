@@ -21,7 +21,7 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			Context = context;
 		}
 		
-		public void Show()
+		public virtual void Show()
 		{
 			View.Show();
 			
@@ -31,7 +31,7 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			}
 		}
 		
-		public void Hide()
+		public virtual void Hide()
 		{
 			foreach (var presenter in Presenters)
 			{
