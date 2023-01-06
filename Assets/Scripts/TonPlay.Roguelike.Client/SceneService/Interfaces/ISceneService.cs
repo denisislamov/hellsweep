@@ -10,5 +10,9 @@ namespace TonPlay.Roguelike.Client.SceneService.Interfaces
 		UniTask LoadSingleSceneByNameAsync(SceneName sceneName);
 
 		UniTask LoadSingleSceneWithZenjectByNameAsync(SceneName name, Action<DiContainer> extraBindings = null);
+
+		UniTask UnloadAdditiveSceneByNameAsync(SceneName sceneName);
+
+		UniTask LoadAdditiveSceneWithZenjectByNameAsync(SceneName name, Action<DiContainer> extraBindings = null);
 	}
 }

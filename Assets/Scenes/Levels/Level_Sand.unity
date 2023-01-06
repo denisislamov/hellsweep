@@ -7522,6 +7522,7 @@ MonoBehaviour:
   _camera: {fileID: 334551596}
   _playerSpawnConfigProvider: {fileID: 11400000, guid: a82da983190724b32a37dbbe57699a76, type: 2}
   _enemySpawnConfigProvider: {fileID: 11400000, guid: e7289a949e05c480b84b1ab129a5421a, type: 2}
+  _updateCycleTime: 0.02
 --- !u!4 &1849853650
 Transform:
   m_ObjectHideFlags: 0

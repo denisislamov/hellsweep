@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using TonPlay.Roguelike.Client.AppEntryPoint.Interfaces;
 using TonPlay.Roguelike.Client.Bootstrap.Interfaces;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Roguelike.Client.Bootstrap
@@ -21,6 +22,8 @@ namespace TonPlay.Roguelike.Client.Bootstrap
 			// Default AsyncConversions is Scheduler.ThreadPool
 			Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.MainThread;
 #endif
+
+			Application.targetFrameRate = 60;
 			
 			await _appEntryPoint.ProcessEntrance();
 		}

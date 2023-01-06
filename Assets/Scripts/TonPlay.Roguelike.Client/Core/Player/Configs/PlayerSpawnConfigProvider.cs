@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
-using TonPlay.Roguelike.Client.Core.Player.Views.Intefacves;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 

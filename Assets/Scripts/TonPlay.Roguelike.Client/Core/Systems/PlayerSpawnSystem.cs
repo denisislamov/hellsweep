@@ -1,17 +1,16 @@
-using System;
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
-using UniRx;
-using UniRx.Triggers;
+using TonPlay.Roguelike.Client.Core.Interfaces;
+using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Player.Views;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
-	public class PlayerSpawnSystem : IEcsInitSystem, IEcsDestroySystem
+	public class PlayerSpawnSystem : IEcsInitSystem
 	{
 		private EcsWorld _world;
-		private IDisposable _collisionListener;
 
 		public void Init(EcsSystems systems)
 		{
@@ -20,40 +19,64 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var sharedData = systems.GetShared<SharedData>();
 			var spawnConfig = sharedData.PlayerSpawnConfigProvider.Get();
 			
+			var player = CreateViewAndEntity(spawnConfig, out var entity);
+			
+			AddPlayerComponent(entity);
+			AddRigidbodyComponent(entity, player);
+			var healthComponent = AddHealthComponent(entity, spawnConfig);
+
+			UpdatePlayerModel(sharedData, healthComponent);
+
+			sharedData.SetPlayerPositionProvider(player);
+			
+			AddToSharedMapEntityWithColliders(player, sharedData, entity);
+		}
+
+		private PlayerView CreateViewAndEntity(IPlayerSpawnConfig spawnConfig, out EcsEntity entity)
+		{
 			var player = Object.Instantiate(spawnConfig.Prefab);
-			var entity = _world.NewEntity();
-			
+			entity = _world.NewEntity();
+			return player;
+		}
+		
+		private static void AddPlayerComponent(EcsEntity entity)
+		{
 			entity.Add<PlayerComponent>();
-			
+		}
+		
+		private static void AddRigidbodyComponent(EcsEntity entity, PlayerView player)
+		{
 			ref var rigidbodyComponent = ref entity.Add<RigidbodyComponent>();
 			rigidbodyComponent.Rigidbody = player.Rigidbody2D;
-			
+		}
+		
+		private static HealthComponent AddHealthComponent(EcsEntity entity, IPlayerSpawnConfig spawnConfig)
+		{
 			ref var healthComponent = ref entity.Add<HealthComponent>();
 			healthComponent.CurrentHealth = spawnConfig.StartHealth;
 			healthComponent.MaxHealth = spawnConfig.StartHealth;
-			
-			_collisionListener = player.Rigidbody2D.OnCollisionStay2DAsObservable().Subscribe(collision => OnCollisionStay(collision));
-			
-			sharedData.SetPlayerPositionProvider(player);
+			return healthComponent;
 		}
 		
-		public void Destroy(EcsSystems systems)
+		private static void UpdatePlayerModel(ISharedData sharedData, HealthComponent healthComponent)
 		{
-			_collisionListener?.Dispose();
+			var playerModel = sharedData.GameModel.PlayerModel;
+			var playerData = playerModel.ToData();
+			playerData.Health = healthComponent.CurrentHealth;
+			playerData.MaxHealth = healthComponent.MaxHealth;
+			playerModel.Update(playerData);
 		}
-
-		private void OnCollisionStay(Collision2D collision)
+		
+		private static void AddToSharedMapEntityWithColliders(PlayerView player, SharedData sharedData, EcsEntity entity)
 		{
-			if (collision.rigidbody == null)
+			var attachedColliders = new Collider2D[player.Rigidbody2D.attachedColliderCount];
+			
+			player.Rigidbody2D.GetAttachedColliders(attachedColliders);
+			
+			foreach (var attached in attachedColliders)
 			{
-				return;
+				sharedData.AddColliderWithEntityToMap(attached, entity);
 			}
-			
-			var entity = _world.NewEntity();
-			entity.Add<EventComponent>();
-			
-			ref var collisionEventComponent = ref entity.Add<CollisionEventComponent>();
-			collisionEventComponent.CollidedRigidbody = collision.rigidbody;
 		}
 	}
 }

@@ -1,3 +1,6 @@
+using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar;
+using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Interfaces;
+using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
@@ -40,6 +43,8 @@ namespace TonPlay.Roguelike.Client.UI.Screens.Game
 						.WithArguments(ScreenPrefab);
 
 			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>();
+			
+			subContainer.BindFactory<IHealthBarView, IHealthBarContext, HealthBarPresenter, HealthBarPresenter.Factory>();
 		}
 	}
 }

@@ -7,7 +7,12 @@ namespace TonPlay.Roguelike.Client.Core.Enemies.Views
 	{
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
+		
+		[SerializeField]
+		private Collider2D _collider;
 
+		public Collider2D Collider2D => _collider;
+		
 		public Rigidbody2D Rigidbody2D => _rigidbody;
 	}
 }

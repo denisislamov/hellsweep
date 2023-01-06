@@ -4,19 +4,20 @@ using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
-	public class MovementSystem : IEcsRunSystem
+	public class RigidbodyMovementSystem : IEcsRunSystem
 	{
 		public void Run(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
-			var filter = world.Filter<MovementComponent>().Inc<RigidbodyComponent>().End();
+			var filter = world.Filter<MovementComponent>().Inc<PositionComponent>().Inc<RigidbodyComponent>().End();
+			var positionComponents = world.GetPool<PositionComponent>();
 			var movementComponents = world.GetPool<MovementComponent>();
-			var rigidbodyComponents = world.GetPool<RigidbodyComponent>();
 
 			foreach (var entityId in filter) {
 				ref var movementComponent = ref movementComponents.Get(entityId);
-				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
-				rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Vector * Time.deltaTime);
+				ref var positionComponent = ref positionComponents.Get(entityId);
+
+				positionComponent.Position = positionComponent.Position + movementComponent.Vector * Time.deltaTime;
 				
 				movementComponents.Del(entityId);
 			}

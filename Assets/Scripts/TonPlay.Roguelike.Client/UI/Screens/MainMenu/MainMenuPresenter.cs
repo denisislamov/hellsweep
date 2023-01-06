@@ -43,10 +43,10 @@ namespace TonPlay.Roguelike.Client.UI.Screens.MainMenu
 
 		private void OnPlayButtonClickHandler()
 		{
-			_sceneService.LoadSingleSceneByNameAsync(SceneName.Level_Sand).ContinueWith(() =>
+			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.Level_Sand).ContinueWith(() =>
 			{
 				_uiService.Close(Context.Screen);
-				_uiService.Open<GameScreen, IGameScreenContext>(new GameScreenContext());
+				_sceneService.UnloadAdditiveSceneByNameAsync(SceneName.MainMenu);
 			});
 		}
 
