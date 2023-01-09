@@ -1,56 +1,87 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
-using TonPlay.Roguelike.Client.Core.CollisionProcessors;
-using TonPlay.Roguelike.Client.Core.CollisionProcessors.Interfaces;
+using TonPlay.Roguelike.Client.Core.Collision;
+using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
+using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class PlayerCollisionSystem : IEcsInitSystem, IEcsRunSystem
 	{
-		private readonly Collider2D[] _overlappedColliders = new Collider2D[128];
+		private readonly IOverlapExecutor _overlapExecutor;
+
+		private List<int> _overlappedEntities = new List<int>(32);
 
 		private int _overlapLayerMask;
 		private IReadOnlyDictionary<int, ICollisionProcessor> _layersCollisionProcessors;
-		
+
+		public PlayerCollisionSystem(IOverlapExecutor overlapExecutor)
+		{
+			_overlapExecutor = overlapExecutor;
+		}
+
 		public void Init(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
+			
 			_overlapLayerMask = LayerMask.GetMask("Enemy", "Utility");
 			
 			_layersCollisionProcessors = new Dictionary<int, ICollisionProcessor>()
 			{
-				[LayerMask.NameToLayer("Enemy")] = new EnemyToPlayerCollisionProcessor(world, systems.GetShared<SharedData>())
+				[LayerMask.NameToLayer("Enemy")] = new PlayerWithEnemyCollisionProcessor(world)
 			};
 		}
 		
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
+			var sharedData = systems.GetShared<ISharedData>();
 			var filter = world.Filter<PlayerComponent>().Inc<PositionComponent>().Exc<DeadComponent>().End();
 			var positionComponents = world.GetPool<PositionComponent>();
+			var playerComponents = world.GetPool<PlayerComponent>();
+			var layerComponents = world.GetPool<LayerComponent>();
 			
-			foreach (var entityId in filter)
+			foreach (var playerEntityId in filter)
 			{
-				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
-				var collisionsCount = Physics2D.OverlapCircleNonAlloc(
-					rigidbodyComponent.Position, 
-					1f, 
-					_overlappedColliders,
-					_overlapLayerMask);
+				ref var positionComponent = ref positionComponents.Get(playerEntityId);
+				ref var playerComponent = ref playerComponents.Get(playerEntityId);
 
+				var collisionAreaConfig = sharedData.PlayerConfigProvider.Get(playerComponent.ConfigId).CollisionAreaConfig;
+				
+				var collisionsCount = _overlapExecutor.Overlap(
+					positionComponent.Position, 
+					collisionAreaConfig,
+					ref _overlappedEntities,
+					_overlapLayerMask);
+				
 				for (var i = 0; i < collisionsCount; i++)
 				{
-					var overlappedCollider = _overlappedColliders[i];
-					var collidedRigidbodyLayer = overlappedCollider.gameObject.layer;
+					var overlappedEntityId = _overlappedEntities[i];
 
-					if (_layersCollisionProcessors.ContainsKey(collidedRigidbodyLayer))
+					if (!layerComponents.Has(overlappedEntityId))
 					{
-						_layersCollisionProcessors[collidedRigidbodyLayer].Process(ref overlappedCollider);
+						Debug.LogWarning($"{overlappedEntityId} doesn't have {nameof(LayerComponent)}");
+						continue;
+					}
+					
+					ref var collidedRigidbodyLayer = ref layerComponents.Get(overlappedEntityId);
+
+					if (_layersCollisionProcessors.ContainsKey(collidedRigidbodyLayer.Layer))
+					{
+						_layersCollisionProcessors[collidedRigidbodyLayer.Layer].Process(ref overlappedEntityId);
 					}
 				}
+				
+				_overlappedEntities.Clear();
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

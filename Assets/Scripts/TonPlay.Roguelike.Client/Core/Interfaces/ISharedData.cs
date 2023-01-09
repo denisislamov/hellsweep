@@ -1,8 +1,12 @@
 using System.Collections.Generic;
+using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Roguelike.Client.Core.Collision.Config;
+using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Interfaces;
 using UnityEngine;
 
@@ -10,14 +14,18 @@ namespace TonPlay.Roguelike.Client.Core.Interfaces
 {
 	public interface ISharedData
 	{
-		IPlayerSpawnConfigProvider PlayerSpawnConfigProvider { get; }
+		IPlayerConfigProvider PlayerConfigProvider { get; }
 
-		IEnemySpawnConfigProvider EnemySpawnConfigProvider { get; }
+		IEnemyConfigProvider EnemyConfigProvider { get; }
 		
+		IWeaponConfigProvider WeaponConfigProvider { get; }
+		
+		ICollisionConfigProvider CollisionConfigProvider { get; }
+
 		IGameModel GameModel { get; }
 
 		IPositionProvider PlayerPositionProvider { get; }
 
-		IReadOnlyDictionary<Collider2D, EcsEntity> ColliderToEntityMap { get; }
+		string PlayerWeaponId { get; }
 	}
 }

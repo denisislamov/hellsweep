@@ -7,10 +7,17 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var transformComponents = world.GetPool<TransformComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
-			var filter = world.Filter<TransformComponent>().Exc<CameraComponent>().End();
+			var filter = world.Filter<TransformComponent>()
+							  .Exc<CameraComponent>()
+							  .Exc<DeadComponent>()
+							  .Exc<InactiveComponent>()
+							  .End();
 
 			foreach (var entityId in filter)
 			{
@@ -27,6 +34,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 					transformComponent.Transform.position = positionComponent.Position;
 				}
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

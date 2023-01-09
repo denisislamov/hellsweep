@@ -3,6 +3,7 @@ using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
+using TonPlay.Roguelike.Client.Core.Player.Views.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -17,11 +18,13 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			_world = systems.GetWorld();
 			
 			var sharedData = systems.GetShared<SharedData>();
-			var spawnConfig = sharedData.PlayerSpawnConfigProvider.Get();
+			var spawnConfig = sharedData.PlayerConfigProvider.Get();
 			
 			var player = CreateViewAndEntity(spawnConfig, out var entity);
 			
-			AddPlayerComponent(entity);
+			AddPlayerComponent(entity, spawnConfig);
+			AddMovementComponent(entity);
+			AddRotationComponent(entity, player);
 			AddRigidbodyComponent(entity, player);
 			var healthComponent = AddHealthComponent(entity, spawnConfig);
 
@@ -30,18 +33,53 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			sharedData.SetPlayerPositionProvider(player);
 			
 			AddToSharedMapEntityWithColliders(player, sharedData, entity);
+
+			CreateWeapon(entity.Id, sharedData, player);
+		}
+		
+		private void AddRotationComponent(EcsEntity entity, PlayerView playerView)
+		{
+			ref var rotationComponent = ref entity.Add<RotationComponent>();
+			rotationComponent.Direction = playerView.transform.right;
 		}
 
-		private PlayerView CreateViewAndEntity(IPlayerSpawnConfig spawnConfig, out EcsEntity entity)
+		private void CreateWeapon(int playerEntityId, ISharedData sharedData, IHasWeaponSpawnRoot playerWeaponSpawnRoot)
 		{
-			var player = Object.Instantiate(spawnConfig.Prefab);
+			if (string.IsNullOrEmpty(sharedData.PlayerWeaponId))
+			{
+				return;
+			}
+
+			var config = sharedData.WeaponConfigProvider.Get(sharedData.PlayerWeaponId);
+
+			var view = Object.Instantiate(config.Prefab, playerWeaponSpawnRoot.WeaponSpawnRoot);
+			view.transform.localPosition = Vector3.zero;
+
+			var entity = _world.NewEntity();
+			
+			ref var component = ref entity.Add<WeaponComponent>();
+			component.FireDelay = config.FireDelay;
+			component.FireType = config.FireType;
+			component.OwnerEntityId = playerEntityId;
+			component.WeaponConfigId = config.Id;
+		}
+
+		private PlayerView CreateViewAndEntity(IPlayerConfig config, out EcsEntity entity)
+		{
+			var player = Object.Instantiate(config.Prefab);
 			entity = _world.NewEntity();
 			return player;
 		}
 		
-		private static void AddPlayerComponent(EcsEntity entity)
+		private static void AddPlayerComponent(EcsEntity entity, IPlayerConfig playerConfig)
 		{
-			entity.Add<PlayerComponent>();
+			ref var playerComponent = ref entity.Add<PlayerComponent>();
+			playerComponent.ConfigId = playerConfig.Id;
+		}
+		
+		private void AddMovementComponent(EcsEntity entity)
+		{
+			entity.Add<MovementComponent>();
 		}
 		
 		private static void AddRigidbodyComponent(EcsEntity entity, PlayerView player)
@@ -50,11 +88,11 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			rigidbodyComponent.Rigidbody = player.Rigidbody2D;
 		}
 		
-		private static HealthComponent AddHealthComponent(EcsEntity entity, IPlayerSpawnConfig spawnConfig)
+		private static HealthComponent AddHealthComponent(EcsEntity entity, IPlayerConfig config)
 		{
 			ref var healthComponent = ref entity.Add<HealthComponent>();
-			healthComponent.CurrentHealth = spawnConfig.StartHealth;
-			healthComponent.MaxHealth = spawnConfig.StartHealth;
+			healthComponent.CurrentHealth = config.StartHealth;
+			healthComponent.MaxHealth = config.StartHealth;
 			return healthComponent;
 		}
 		
@@ -72,11 +110,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var attachedColliders = new Collider2D[player.Rigidbody2D.attachedColliderCount];
 			
 			player.Rigidbody2D.GetAttachedColliders(attachedColliders);
-			
-			foreach (var attached in attachedColliders)
-			{
-				sharedData.AddColliderWithEntityToMap(attached, entity);
-			}
 		}
 	}
 }

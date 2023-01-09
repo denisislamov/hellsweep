@@ -1,104 +1,128 @@
-using System;
 using System.Collections.Generic;
+using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
+using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class BasicEnemyMovementTargetSystem : IEcsInitSystem, IEcsRunSystem
 	{
-		private List<int> _neighbors;
-		
-		private const float AVOID_RADIUS = 0.6f;
 		private const float FIELD_OF_VIEW = 120f;
+		
+		private readonly IOverlapExecutor _overlapExecutor;
+
+		private ISharedData _sharedData;
+		private List<int> _neighborsEntityIds;
+		private int _neighborsLayer;
+
+		public BasicEnemyMovementTargetSystem(IOverlapExecutor overlapExecutor)
+		{
+			_overlapExecutor = overlapExecutor;
+		}
 
 		public void Init(EcsSystems systems)
 		{
-			_neighbors = new List<int>(16);
+			_neighborsEntityIds = new List<int>(16);
+			_sharedData = systems.GetShared<ISharedData>();
+			_neighborsLayer = LayerMask.NameToLayer("Enemy");
 		}
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
-			var enemyFilter = world.Filter<EnemyComponent>().Inc<PositionComponent>().Inc<SpeedComponent>().End();
+			var enemyFilter = world.Filter<EnemyComponent>()
+								   .Inc<PositionComponent>()
+								   .Inc<SpeedComponent>()
+								   .Inc<MovementComponent>()
+								   .Exc<DeadComponent>()
+								   .End();
 			var playerFilter = world.Filter<PlayerComponent>().Inc<PositionComponent>().End();
-			
+
+			var enemyComponents = world.GetPool<EnemyComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
 			var movementComponents = world.GetPool<MovementComponent>();
-			var speedComponents = world.GetPool<SpeedComponent>();
 
 			var playerPosition = Vector2.zero;
-			foreach (var entityId in playerFilter) {
+			foreach (var entityId in playerFilter)
+			{
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
 				playerPosition = rigidbodyComponent.Position;
 			}
 
-			foreach (var entityId in enemyFilter) {
-				ref var movementComponent = ref movementComponents.Add(entityId);
+			foreach (var entityId in enemyFilter)
+			{
+				ref var enemyComponent = ref enemyComponents.Get(entityId);
+				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
-				ref var speedComponent = ref speedComponents.Get(entityId);
-				
+
 				var position = rigidbodyComponent.Position;
 				var movementVector = (playerPosition - position).normalized;
 
-				GetNeighbors(ref _neighbors, world, AVOID_RADIUS, position, entityId);
+				var collisionAreaConfig = _sharedData.EnemyConfigProvider.Get(enemyComponent.ConfigId).CollisionAreaConfig;
 
-				var separateVector = SeparateWithNeighbors(_neighbors, positionComponents, position);
+				GetNeighbors(ref _neighborsEntityIds, position, collisionAreaConfig);
 
-				movementComponent.Vector = CombineMovementDirection(separateVector, movementVector).normalized * speedComponent.Speed;
-				
-				_neighbors.Clear();
+				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
+
+				movementComponent.Vector = CombineMovementDirection(separateVector, movementVector).normalized;
+
+				_neighborsEntityIds.Clear();
 			}
+
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 		}
-		
+
 		private static Vector2 CombineMovementDirection(Vector2 separateVector, Vector2 movementVector)
 		{
-			return separateVector * 0.8f + movementVector * 0.2f;
+			return separateVector*10f + movementVector*0.1f;
 		}
-		
-		private Vector2 SeparateWithNeighbors(List<int> neighbors, EcsPool<PositionComponent> positionComponents, Vector2 position)
+
+		private Vector2 SeparateWithNeighbors(
+			ref List<int> neighborsEntityIds,
+			EcsPool<PositionComponent> positionComponents,
+			Vector2 position,
+			int excludeEntityId)
 		{
 			var separateVector = Vector2.zero;
-			for (var i = 0; i < neighbors.Count; i++)
+			for (var i = 0; i < neighborsEntityIds.Count; i++)
 			{
-				var neighborEntityId = neighbors[i];
+				var neighborEntityId = neighborsEntityIds[i];
+
+				if (neighborEntityId == excludeEntityId)
+				{
+					continue;
+				}
+
 				ref var neighborPositionComponent = ref positionComponents.Get(neighborEntityId);
 				var neighborPosition = neighborPositionComponent.Position;
 
-				if (IsInFieldOfView(position, neighborPosition))
+				var oppositeDirection = position - neighborPosition;
+				if (oppositeDirection.sqrMagnitude > 0)
 				{
-					var oppositeDirection = position - neighborPosition;
-					if (oppositeDirection.sqrMagnitude > 0)
-					{
-						separateVector += oppositeDirection;
-					}
+					separateVector += oppositeDirection;
 				}
+
+				Debug.DrawLine(position, neighborPosition, Color.red, Time.deltaTime);
 			}
 			return separateVector;
 		}
 
-		private void GetNeighbors(ref List<int> cachedNeighbors, EcsWorld world, float radius, Vector2 position, int excludeEntityId)
+		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionAreaConfig collisionAreaConfig)
 		{
-			var enemyFilter = world.Filter<EnemyComponent>().Inc<PositionComponent>().End();
-			var positionComponents = world.GetPool<PositionComponent>();
-
-			foreach (var entityId in enemyFilter)
-			{
-				if (entityId == excludeEntityId)
-				{
-					continue;
-				}
-
-				ref var positionComponent = ref positionComponents.Get(entityId);
-
-				if (Vector2.Distance(positionComponent.Position, position) > radius)
-				{
-					continue;
-				}
-				
-				cachedNeighbors.Add(entityId);
-			}
+			_overlapExecutor.Overlap(
+				position, 
+				collisionAreaConfig,
+				ref cachedNeighborsEntityIds,
+				_neighborsLayer);
 		}
 
 		private bool IsInFieldOfView(Vector2 position, Vector2 targetPosition)

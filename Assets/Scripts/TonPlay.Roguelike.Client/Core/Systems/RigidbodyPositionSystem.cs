@@ -7,26 +7,36 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var rigidbodyComponents = world.GetPool<RigidbodyComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
-			var filter = world.Filter<RigidbodyComponent>().End();
+			var filter = world.Filter<RigidbodyComponent>()
+							  .Exc<DeadComponent>()
+							  .Exc<InactiveComponent>()
+							  .End();
 
 			foreach (var entityId in filter)
 			{
-				ref var transformComponent = ref rigidbodyComponents.Get(entityId);
+				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
 				
 				if (positionComponents.Has(entityId))
 				{
 					ref var positionComponent = ref positionComponents.Get(entityId);
-					transformComponent.Rigidbody.MovePosition(positionComponent.Position);
+					rigidbodyComponent.Rigidbody.MovePosition(positionComponent.Position);
+					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
 				}
 				else
 				{
 					ref var positionComponent = ref positionComponents.Add(entityId);
-					positionComponent.Position = transformComponent.Rigidbody.position;
+					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
 				}
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

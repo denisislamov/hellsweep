@@ -1,57 +1,61 @@
 using System.Collections.Generic;
+using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Roguelike.Client.Core.Collision.Config;
+using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace TonPlay.Roguelike.Client.Core
 {
 	public class SharedData : ISharedData
 	{
-		public IPlayerSpawnConfigProvider PlayerSpawnConfigProvider { get; }
+		public IPlayerConfigProvider PlayerConfigProvider { get; }
 
-		public IEnemySpawnConfigProvider EnemySpawnConfigProvider { get; }
+		public IEnemyConfigProvider EnemyConfigProvider { get; }
 		
+		public IWeaponConfigProvider WeaponConfigProvider { get; }
+		
+		public ICollisionConfigProvider CollisionConfigProvider { get; }
+
 		public IGameModel GameModel { get; }
 
 		public IPositionProvider PlayerPositionProvider { get; private set; }
-
-		public IReadOnlyDictionary<Collider2D, EcsEntity> ColliderToEntityMap => _colliderToEntityMap;
-
-		private readonly Dictionary<Collider2D, EcsEntity> _colliderToEntityMap;
+		
+		public string PlayerWeaponId { get; private set; }
 
 		public SharedData(
-			IPlayerSpawnConfigProvider playerSpawnConfigProvider,
-			IEnemySpawnConfigProvider enemySpawnConfigProvider,
-			IGameModel gameModel)
+			IPlayerConfigProvider playerConfigProvider,
+			IEnemyConfigProvider enemyConfigProvider,
+			IWeaponConfigProvider weaponConfigProvider,
+			IGameModelProvider gameModelProvider, 
+			ICollisionConfigProvider collisionConfigProvider)
 		{
-			PlayerSpawnConfigProvider = playerSpawnConfigProvider;
-			EnemySpawnConfigProvider = enemySpawnConfigProvider;
-			GameModel = gameModel;
-
-			_colliderToEntityMap = new Dictionary<Collider2D, EcsEntity>();
+			PlayerConfigProvider = playerConfigProvider;
+			EnemyConfigProvider = enemyConfigProvider;
+			WeaponConfigProvider = weaponConfigProvider;
+			CollisionConfigProvider = collisionConfigProvider;
+			GameModel = gameModelProvider.Get();
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)
 		{
 			PlayerPositionProvider = positionProvider;
 		}
-		
-		public void AddColliderWithEntityToMap(Collider2D collider, EcsEntity entity)
+
+		public void SetPlayerWeapon(string weaponId)
 		{
-			if (_colliderToEntityMap.ContainsKey(collider)) return;
-			
-			_colliderToEntityMap.Add(collider, entity);
+			PlayerWeaponId = weaponId;
 		}
-		
-		public void RemoveColliderFromEntityMap(Collider2D collider)
+
+		public class Factory : PlaceholderFactory<SharedData>
 		{
-			if (!_colliderToEntityMap.ContainsKey(collider)) return;
-			
-			_colliderToEntityMap.Remove(collider);
 		}
 	}
 }

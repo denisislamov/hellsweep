@@ -9,14 +9,14 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	public class BasicEnemySpawnSystem : IEcsInitSystem
 	{
 		private const float SPEED = 1f;
-		private const int ENEMIES_COUNT = 300;
+		private const int ENEMIES_COUNT = 1000;
 
 		public void Init(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<SharedData>();
 
-			var spawnConfig = sharedData.EnemySpawnConfigProvider.Get();
+			var spawnConfig = sharedData.EnemyConfigProvider.Get();
 			var playerPosition = sharedData.PlayerPositionProvider.Position;
 
 			for (var i = 0; i < ENEMIES_COUNT; i++)
@@ -24,9 +24,16 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				var enemyView = CreateViewAndEntity(spawnConfig, world, out var entity);
 				var randomPosition = CreateRandomPosition(playerPosition);
 
-				enemyView.transform.position = randomPosition;
+				enemyView.transform.position = randomPosition + Vector2.up;
+
+				var entityIdProvider = AddEntityIdProvider(enemyView, entity.Id);
+
+				ref var viewProviderComponent = ref entity.Add<ViewProviderComponent>();
+				viewProviderComponent.View = enemyView.gameObject;
 				
-				AddEnemyComponent(entity);
+				AddEnemyComponent(entity, spawnConfig);
+				AddMovementComponent(entity);
+				AddLayerComponent(entity, enemyView);
 				AddCollidersComponent(entity, enemyView);
 				AddTransformComponent(entity, enemyView);
 				AddPositionComponent(entity, randomPosition);
@@ -36,47 +43,65 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				AddSpeedComponent(entity, lerpTransformComponent);
 				AddHealthComponent(entity, spawnConfig);
 				AddDamageOnCollisionComponent(entity, spawnConfig);
-				
-				sharedData.AddColliderWithEntityToMap(enemyView.Collider2D, entity);
 			}
 		}
-		
-		private static void AddEnemyComponent(EcsEntity entity)
+
+		private EntityIdProvider AddEntityIdProvider(EnemyView enemyView, int entityId)
 		{
-			entity.Add<EnemyComponent>();
+			var entityIdProvider = enemyView.gameObject.AddComponent<EntityIdProvider>();
+			entityIdProvider.SetEntityId(entityId);
+			return entityIdProvider;
+		}
+
+		private void AddMovementComponent(EcsEntity entity)
+		{
+			entity.Add<MovementComponent>();
+		}
+
+		private static void AddEnemyComponent(EcsEntity entity, IEnemyConfig enemyConfig)
+		{
+			ref var enemy = ref entity.Add<EnemyComponent>();
+			enemy.ConfigId = enemyConfig.Id;
 		}
 		
-		private static EnemyView CreateViewAndEntity(IEnemySpawnConfig spawnConfig, EcsWorld world, out EcsEntity entity)
+		private void AddLayerComponent(EcsEntity entity, EnemyView enemyView)
 		{
-			var enemy = Object.Instantiate(spawnConfig.Prefab);
+			ref var layer = ref entity.Add<LayerComponent>();
+			layer.Layer = enemyView.gameObject.layer;
+		}
+		
+		private static EnemyView CreateViewAndEntity(IEnemyConfig config, EcsWorld world, out EcsEntity entity)
+		{
+			var enemy = Object.Instantiate(config.Prefab);
 			entity = world.NewEntity();
+			enemy.name = $"{enemy.name} ({entity.Id})";
 			return enemy;
 		}
 		
 		private static Vector2 CreateRandomPosition(Vector2 playerPosition)
 		{
-			var randomPosition = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
+			var randomPosition = Random.insideUnitCircle * 45f;
 			var distanceToPlayer = Vector2.Distance(randomPosition, playerPosition);
 
-			if (distanceToPlayer < 7f)
+			if (distanceToPlayer < 15f)
 			{
 				var direction = (randomPosition - playerPosition).normalized;
-				randomPosition = playerPosition + Vector2.one*7f + direction*Random.Range(0, 7f);
+				randomPosition = playerPosition + direction * Random.Range(15f, 45f);
 			}
 			return randomPosition;
 		}
 		
-		private static void AddDamageOnCollisionComponent(EcsEntity entity, IEnemySpawnConfig spawnConfig)
+		private static void AddDamageOnCollisionComponent(EcsEntity entity, IEnemyConfig config)
 		{
 			ref var damageOnCollisionComponent = ref entity.Add<DamageOnCollisionComponent>();
-			damageOnCollisionComponent.Damage = spawnConfig.DamageOnCollision;
+			damageOnCollisionComponent.Damage = config.DamageOnCollision;
 		}
 		
-		private static void AddHealthComponent(EcsEntity entity, IEnemySpawnConfig spawnConfig)
+		private static void AddHealthComponent(EcsEntity entity, IEnemyConfig config)
 		{
 			ref var healthComponent = ref entity.Add<HealthComponent>();
-			healthComponent.CurrentHealth = spawnConfig.StartHealth;
-			healthComponent.MaxHealth = spawnConfig.StartHealth;
+			healthComponent.CurrentHealth = config.StartHealth;
+			healthComponent.MaxHealth = config.StartHealth;
 		}
 		
 		private static void AddSpeedComponent(EcsEntity entity, LerpTransformComponent lerpTransformComponent)

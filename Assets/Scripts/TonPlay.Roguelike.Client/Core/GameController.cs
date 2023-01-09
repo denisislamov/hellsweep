@@ -1,5 +1,6 @@
 using System;
 using Leopotam.EcsLite;
+using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs;
 using TonPlay.Roguelike.Client.Core.Models;
@@ -20,90 +21,122 @@ namespace TonPlay.Roguelike.Client.Core
 		[SerializeField]
 		private Camera _camera;
 
-		[SerializeField]
-		private PlayerSpawnConfigProvider _playerSpawnConfigProvider;
-
-		[SerializeField]
-		private EnemySpawnConfigProvider _enemySpawnConfigProvider;
-		
 		private EcsWorld _world;
 		private EcsSystems _updateSystems;
 		private EcsSystems _fixedUpdateSystems;
 		private EcsSystems _spawnSystems;
+		
 		private IDisposable _updateCycle;
+		private IDisposable _fixedUpdateCycle;
+		private IDisposable _initTimer;
 
 		private IUIService _uiService;
 		private IGameModelProvider _gameModelProvider;
 		private IGameModel _gameModel;
+		private SharedData _sharedData;
+		private KdTreeStorage _kdTreeStorage;
+		private OverlapExecutor _overlapExecutor;
+		
+		private bool _inited;
 
 		[Inject]
 		public void Construct(
 			IGameModelProvider gameModelProvider, 
 			IGameModelSetter gameModelSetter,
-			IUIService uiService)
+			IUIService uiService,
+			OverlapExecutor.Factory overlapExecutorFactory,
+			SharedData.Factory sharedDataFactory)
 		{
 			_uiService = uiService;
+
+			CreateGameModel(gameModelProvider, gameModelSetter);
+
+			_world = new EcsWorld();
+
+			_kdTreeStorage = new KdTreeStorage();
+
+			_sharedData = sharedDataFactory.Create();
+			_overlapExecutor = overlapExecutorFactory.Create(_world, _kdTreeStorage);
 			
-			_gameModel = new GameModel();
-			_gameModelProvider = gameModelProvider;
-			
-			gameModelSetter.Set(_gameModel);
+			_sharedData.SetPlayerWeapon("bow");
 			
 			Initialize();
 		}
 
 		public void Initialize()
 		{
-			_world = new EcsWorld();
-
 			AddCameraToEcsWorld();
-
-			var sharedData = new SharedData(
-				_playerSpawnConfigProvider,
-				_enemySpawnConfigProvider,
-				_gameModel);
-
-			_spawnSystems = new EcsSystems(_world, sharedData)
+			
+			_spawnSystems = new EcsSystems(_world, _sharedData)
 						   .Add(new PlayerSpawnSystem())
 						   .Add(new BasicEnemySpawnSystem());
+			
+			var kdTreesSystem = new KdTreesSystem(_kdTreeStorage);
 
-			_updateSystems = new EcsSystems(_world, sharedData)
+			_updateSystems = new EcsSystems(_world, _sharedData)
+							.Add(new WeaponFireSystem())
+							.Add(new WeaponFireBlockSystem())
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
-							.Add(new BasicEnemyMovementTargetSystem())
-							.Add(new PlayerCollisionSystem())
+							.Add(new BasicEnemyMovementTargetSystem(_overlapExecutor))
+							.Add(new PlayerCollisionSystem(_overlapExecutor))
 							.Add(new ApplyDamageSystem())
-							.Add(new ClearUsedEventsSystem())
 							.Add(new TransformMovementSystem())
 							.Add(new UpdatePlayerModelSystem())
+							.Add(new ProjectileCollisionSystem(_overlapExecutor))
+							.Add(new DestroyOnCollisionSystem())
+							.Add(new ClearUsedEventsSystem())
+							.Add(new ClearHasCollidedComponentsSystem())
+							.Add(new ClearDeadEntityDataSystem())
+							.Add(kdTreesSystem)
 							.Add(new GameOverSystem());
 
-			_fixedUpdateSystems = new EcsSystems(_world, sharedData)
-								 .Add(new PlayerInputSystem())
+			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
+								 .Add(new PlayerMovementInputSystem())
 								 .Add(new RigidbodyPositionSystem())
 								 .Add(new RigidbodyMovementSystem());
 
 			_spawnSystems.Init();
+			
+			kdTreesSystem.Init(_spawnSystems);
+			
 			_updateSystems.Init();
 			_fixedUpdateSystems.Init();
 
-			_updateCycle = Observable.EveryUpdate()
-									 .Subscribe(_ => _updateSystems?.Run());
-			
 			_uiService.Open<GameScreen, IGameScreenContext>(new GameScreenContext());
+
+			_initTimer = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => _inited = true);
+		}
+		
+		private void Update()
+		{
+			if (!_inited) return;
+			
+			_updateSystems?.Run();
 		}
 
 		private void FixedUpdate()
 		{
+			if (!_inited) return;
+
 			_fixedUpdateSystems?.Run();
 		}
 
 		private void OnDestroy()
 		{
 			_updateCycle?.Dispose();
+			_fixedUpdateCycle?.Dispose();
+			
 			_updateSystems?.Destroy();
 			_fixedUpdateSystems?.Destroy();
 			_spawnSystems?.Destroy();
+		}
+		
+		private void CreateGameModel(IGameModelProvider gameModelProvider, IGameModelSetter gameModelSetter)
+		{
+			_gameModel = new GameModel();
+			_gameModelProvider = gameModelProvider;
+			gameModelSetter.Set(_gameModel);
 		}
 
 		private void AddCameraToEcsWorld()

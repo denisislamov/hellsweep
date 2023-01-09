@@ -4,6 +4,6 @@ namespace TonPlay.Roguelike.Client.Utilities
 	{
 		Bootstrap,
 		MainMenu,
-		Level_Sand
+		Level_Sands
 	}
 }
