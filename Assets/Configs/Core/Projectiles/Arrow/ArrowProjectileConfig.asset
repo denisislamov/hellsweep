@@ -15,5 +15,7 @@ MonoBehaviour:
   _prefab: {fileID: 3435113247933727680, guid: bb7b12ac07b0c40f190f431778ec464f, type: 3}
   _startSpeed: 10
   _acceleration: 0
-  _damage: 100
+  _damage: 2
   _collisionAreaConfig: {fileID: 11400000, guid: d78fa8b79d7ee49e4822950b2af184c9, type: 2}
+  _properties:
+  - {fileID: 11400000, guid: c4c16eee8bb89487db2989f1babd01ea, type: 2}

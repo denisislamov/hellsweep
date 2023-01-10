@@ -1,7 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
 using TonPlay.Roguelike.Client.Core.Components;
-using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
@@ -12,19 +11,14 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var world = systems.GetWorld();
 			var filter = world.Filter<HasCollidedComponent>()
 							  .Inc<DestroyOnCollisionComponent>()
-							  .Inc<ViewProviderComponent>()
-							  .Exc<InactiveComponent>().
-							   End();
+							  .Exc<InactiveComponent>()
+							  .End();
 
-			var viewPool = world.GetPool<ViewProviderComponent>();
-			var inactivePool = world.GetPool<InactiveComponent>();
+			var pool = world.GetPool<DestroyComponent>();
 
 			foreach (var entityId in filter)
 			{
-				ref var view = ref viewPool.Get(entityId);
-				view.View.SetActive(false);
-
-				inactivePool.Add(entityId);
+				pool.AddOrGet(entityId);
 			}
 		}
 	}

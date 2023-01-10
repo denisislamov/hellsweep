@@ -30,4 +30,5 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 #endregion 
 		}
 	}
+	
 }

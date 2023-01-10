@@ -22,15 +22,14 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			{
 				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
 				
-				if (positionComponents.Has(entityId))
+				if (!positionComponents.Has(entityId))
 				{
-					ref var positionComponent = ref positionComponents.Get(entityId);
-					rigidbodyComponent.Rigidbody.MovePosition(positionComponent.Position);
+					ref var positionComponent = ref positionComponents.Add(entityId);
 					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
 				}
 				else
 				{
-					ref var positionComponent = ref positionComponents.Add(entityId);
+					ref var positionComponent = ref positionComponents.Get(entityId);
 					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
 				}
 			}

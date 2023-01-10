@@ -2,6 +2,10 @@ using System;
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling.Identities;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -39,15 +43,24 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.FireStrategies
 			ref var ownerRotation = ref rotationPool.Get(ownerId);
 			ref var ownerPosition = ref positionPool.Get(ownerId);
 
+			var pool = _sharedData.CompositeViewPool;
+
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
 			var config = _sharedData.WeaponConfigProvider.Get(weaponComponent.WeaponConfigId).GetProjectileConfig();
+
+			if (!pool.TryGet(weaponComponent.ProjectileIdentity, out IViewPoolObject<ProjectileView> poolObject))
+			{
+				Debug.LogWarning("Pool is broken");
+				return;
+			}
+
+			var projectileView = poolObject.Object;
 			var projectileEntity = _world.NewEntity();
-			var projectileView = Object.Instantiate(config.PrefabView);
 			var projectileViewTransform = projectileView.transform;
 
 			var gameObject = projectileView.gameObject;
-			gameObject.name = string.Format("{0} (entity: {1})", gameObject.name, projectileEntity.Id.ToString());
+			gameObject.name = string.Format("{0} (entity: {1})", config.PrefabView.gameObject.name, projectileEntity.Id.ToString());
 			
 			projectileViewTransform.position = ownerPosition.Position;
 			projectileViewTransform.right = ownerRotation.Direction;
@@ -61,6 +74,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.FireStrategies
 			ref var projectileTransform = ref projectileEntity.Add<TransformComponent>();
 			ref var projectileSpeed = ref projectileEntity.Add<SpeedComponent>();
 			ref var projectileDamageOnCollision = ref projectileEntity.Add<DamageOnCollisionComponent>();
+			ref var projectileViewPoolObject = ref projectileEntity.Add<ViewPoolObjectComponent>();
 
 			projectileEntity.Add<DestroyOnCollisionComponent>();
 
@@ -74,6 +88,13 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.FireStrategies
 			projectileCollision.CollisionAreaConfig = config.CollisionAreaConfig; 
 			projectileCollision.LayerMask = collisionLayerMask;
 			projectileDamageOnCollision.Damage = config.Damage;
+			projectileViewPoolObject.ViewPoolObject = poolObject;
+
+			if (config.TryGetProperty<IDestroyOnTimerProjectileConfigProperty>(out var property))
+			{
+				ref var projectileDestroyOnTimer = ref projectileEntity.Add<DestroyOnTimerComponent>();
+				projectileDestroyOnTimer.TimeLeft = property.Timer;
+			}
 		}
 	}
 }

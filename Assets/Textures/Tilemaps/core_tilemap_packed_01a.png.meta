@@ -446,7 +446,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: d45d5a703b1c845af8e10113cd6b8895
@@ -2951,9 +2955,9 @@ TextureImporter:
       core_tilemap_packed_01a_3: 1368115492
       core_tilemap_packed_01a_24: -2103374893
       core_tilemap_packed_01a_84: 1377865095
-      core_tilemap_packed_01a_67: -659659478
-      core_tilemap_packed_01a_63: 1391996630
       core_tilemap_packed_01a_0: 166724185
+      core_tilemap_packed_01a_63: 1391996630
+      core_tilemap_packed_01a_67: -659659478
       core_tilemap_packed_01a_74: 459904108
       core_tilemap_packed_01a_65: -1907290917
       core_tilemap_packed_01a_21: 534070209
@@ -2988,10 +2992,10 @@ TextureImporter:
       core_tilemap_packed_01a_64: 516720740
       core_tilemap_packed_01a_100: 797418732
       core_tilemap_packed_01a_13: -1418656858
-      core_tilemap_packed_01a_46: 193407877
       core_tilemap_packed_01a_77: -1152544740
       core_tilemap_packed_01a_76: -2080713480
       core_tilemap_packed_01a_124: 1659747172
+      core_tilemap_packed_01a_46: 193407877
       core_tilemap_packed_01a_20: -2119190750
       core_tilemap_packed_01a_101: -541692786
       core_tilemap_packed_01a_78: -397494332

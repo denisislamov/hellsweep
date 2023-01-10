@@ -32,8 +32,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			_positions = new Vector3[count];
 
-			_storage.CreateEnemiesKdTreeIndexToEntityIdMap(count);
-			
 			var i = 0;
 			foreach (var entityId in filter)
 			{
@@ -42,6 +40,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				_positions[i] = position.Position;
 				
 				_storage.KdTreePositionIndexToEntityIdMap[i] = entityId;
+				_storage.KdTreeEntityIdToPositionIndexMap[entityId] = i;
 				i++;
 			}
 

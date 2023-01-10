@@ -21,5 +21,7 @@ namespace TonPlay.Roguelike.Client.Utilities
 		public const string COLLISION_AREAS_CONFIGS = CORE_CONFIGS + "Collision Areas/";
 		
 		public const string PROJECTILE_CONFIGS = CORE_CONFIGS + "Projectile/";
+		
+		public const string PROJECTILE_PROPERTIES_CONFIGS = PROJECTILE_CONFIGS + "Properties/";
 	}
 }

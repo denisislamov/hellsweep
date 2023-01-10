@@ -52,8 +52,8 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var playerPosition = Vector2.zero;
 			foreach (var entityId in playerFilter)
 			{
-				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
-				playerPosition = rigidbodyComponent.Position;
+				ref var positionComponent = ref positionComponents.Get(entityId);
+				playerPosition = positionComponent.Position;
 			}
 
 			foreach (var entityId in enemyFilter)

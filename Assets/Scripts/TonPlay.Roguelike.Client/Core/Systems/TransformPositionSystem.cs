@@ -14,6 +14,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var transformComponents = world.GetPool<TransformComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
 			var filter = world.Filter<TransformComponent>()
+							  .Exc<RigidbodyComponent>()
 							  .Exc<CameraComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<InactiveComponent>()

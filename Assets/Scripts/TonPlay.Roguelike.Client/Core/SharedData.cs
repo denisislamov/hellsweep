@@ -7,6 +7,8 @@ using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Interfaces;
 using UnityEngine;
@@ -29,6 +31,8 @@ namespace TonPlay.Roguelike.Client.Core
 		public IPositionProvider PlayerPositionProvider { get; private set; }
 		
 		public string PlayerWeaponId { get; private set; }
+		
+		public ICompositeViewPool CompositeViewPool { get; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
@@ -42,6 +46,7 @@ namespace TonPlay.Roguelike.Client.Core
 			WeaponConfigProvider = weaponConfigProvider;
 			CollisionConfigProvider = collisionConfigProvider;
 			GameModel = gameModelProvider.Get();
+			CompositeViewPool = new CompositeViewPool();
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)

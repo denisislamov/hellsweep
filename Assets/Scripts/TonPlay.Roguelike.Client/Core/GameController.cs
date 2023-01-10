@@ -25,6 +25,7 @@ namespace TonPlay.Roguelike.Client.Core
 		private EcsSystems _updateSystems;
 		private EcsSystems _fixedUpdateSystems;
 		private EcsSystems _spawnSystems;
+		private EcsSystems _destroySystems;
 		
 		private IDisposable _updateCycle;
 		private IDisposable _fixedUpdateCycle;
@@ -69,13 +70,16 @@ namespace TonPlay.Roguelike.Client.Core
 			
 			_spawnSystems = new EcsSystems(_world, _sharedData)
 						   .Add(new PlayerSpawnSystem())
-						   .Add(new BasicEnemySpawnSystem());
+						   .Add(new BasicEnemySpawnSystem(_kdTreeStorage));
 			
 			var kdTreesSystem = new KdTreesSystem(_kdTreeStorage);
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new WeaponFireSystem())
 							.Add(new WeaponFireBlockSystem())
+							.Add(new WeaponFireBlockSystem())
+							.Add(new WeaponRotationSystem())
+							.Add(new WeaponPositionSystem())
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
 							.Add(new BasicEnemyMovementTargetSystem(_overlapExecutor))
@@ -84,17 +88,22 @@ namespace TonPlay.Roguelike.Client.Core
 							.Add(new TransformMovementSystem())
 							.Add(new UpdatePlayerModelSystem())
 							.Add(new ProjectileCollisionSystem(_overlapExecutor))
-							.Add(new DestroyOnCollisionSystem())
-							.Add(new ClearUsedEventsSystem())
-							.Add(new ClearHasCollidedComponentsSystem())
-							.Add(new ClearDeadEntityDataSystem())
 							.Add(kdTreesSystem)
 							.Add(new GameOverSystem());
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())
-								 .Add(new RigidbodyPositionSystem())
-								 .Add(new RigidbodyMovementSystem());
+								 .Add(new RigidbodyMovementSystem())
+								 .Add(new RigidbodyPositionSystem());
+
+			_destroySystems = new EcsSystems(_world, _sharedData)
+							 .Add(new DestroyOnTimerSystem())
+							 .Add(new DestroyOnCollisionSystem())
+							 .Add(new DestroyPoolObjectSystem())
+							 .Add(new ClearUsedEventsSystem())
+							 .Add(new ClearHasCollidedComponentsSystem())
+							 .Add(new ClearDeadEntityDataSystem())
+							 .Add(new DestroyEntitySystem());
 
 			_spawnSystems.Init();
 			
@@ -102,17 +111,25 @@ namespace TonPlay.Roguelike.Client.Core
 			
 			_updateSystems.Init();
 			_fixedUpdateSystems.Init();
+			_destroySystems.Init();
 
 			_uiService.Open<GameScreen, IGameScreenContext>(new GameScreenContext());
 
-			_initTimer = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => _inited = true);
+			FinishInit();
 		}
-		
+
+		private void FinishInit()
+		{
+			_inited = true;
+		}
+
 		private void Update()
 		{
 			if (!_inited) return;
 			
+			_spawnSystems?.Run();
 			_updateSystems?.Run();
+			_destroySystems?.Run();
 		}
 
 		private void FixedUpdate()

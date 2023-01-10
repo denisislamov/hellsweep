@@ -6,8 +6,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class PlayerMovementInputSystem : IEcsRunSystem, IEcsInitSystem
 	{
-		private const float SPEED = 4f;
-
 		private InputControls _inputControls;
 		
 		public void Init(EcsSystems systems)
@@ -31,7 +29,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			foreach (var entityId in filter) {
 				ref var movementComponent = ref movementComponents.Get(entityId);
-				movementComponent.Vector = movementVector * SPEED;
+				movementComponent.Vector = movementVector;
 
 				ref var rotationComponent = ref rotationComponents.Get(entityId);
 				

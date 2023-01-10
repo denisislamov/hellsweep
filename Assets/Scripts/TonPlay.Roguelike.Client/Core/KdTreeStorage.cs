@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 
 namespace TonPlay.Roguelike.Client.Core
@@ -9,12 +10,19 @@ namespace TonPlay.Roguelike.Client.Core
 		private readonly KDQuery _kdQuery = new KDQuery();
 
 		private int[] _kdTreePositionIndexToEntityIdMap;
-		
+		private Dictionary<int, int> _kdTreeEntityIdToPositionIndexMap;
+
 		public KDTree KdTree => _kdTree;
 
 		public KDQuery KdQuery => _kdQuery;
 
 		public int[] KdTreePositionIndexToEntityIdMap => _kdTreePositionIndexToEntityIdMap;
+		public Dictionary<int, int> KdTreeEntityIdToPositionIndexMap => _kdTreeEntityIdToPositionIndexMap;
+		
+		public void CreateEnemiesEntityIdToKdTreeIndexMap(int count)
+		{
+			_kdTreeEntityIdToPositionIndexMap = new Dictionary<int, int>(count);
+		}
 		
 		public void CreateEnemiesKdTreeIndexToEntityIdMap(int count)
 		{

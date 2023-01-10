@@ -21,14 +21,19 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var positionComponents = world.GetPool<PositionComponent>();
 			var movementComponents = world.GetPool<MovementComponent>();
 			var speedComponents = world.GetPool<SpeedComponent>();
+			var rigidbodyComponents = world.GetPool<RigidbodyComponent>();
 
 			foreach (var entityId in filter) {
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var positionComponent = ref positionComponents.Get(entityId);
+				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
 
 				var speed = speedComponents.Has(entityId) ? speedComponents.Get(entityId).Speed : 1f;
 
-				positionComponent.Position = positionComponent.Position + movementComponent.Vector * (speed * Time.deltaTime);
+				if (movementComponent.Vector.sqrMagnitude > 0)
+				{
+					rigidbodyComponent.Rigidbody.MovePosition(positionComponent.Position + movementComponent.Vector * (speed * Time.deltaTime));
+				}
 			}
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();

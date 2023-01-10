@@ -14,5 +14,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
 		ICollisionAreaConfig CollisionAreaConfig { get; }
 		
 		int Damage { get; }
+		
+		bool TryGetProperty<T>(out T property) where T : IProjectileConfigProperty;
 	}
 }

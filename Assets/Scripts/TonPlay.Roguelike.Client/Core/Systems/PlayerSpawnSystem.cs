@@ -4,6 +4,7 @@ using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Player.Views.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -11,6 +12,8 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class PlayerSpawnSystem : IEcsInitSystem
 	{
+		private const float SPEED = 2f;
+
 		private EcsWorld _world;
 
 		public void Init(EcsSystems systems)
@@ -27,6 +30,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			AddRotationComponent(entity, player);
 			AddRigidbodyComponent(entity, player);
 			var healthComponent = AddHealthComponent(entity, spawnConfig);
+			AddSpeedComponent(entity);
 
 			UpdatePlayerModel(sharedData, healthComponent);
 
@@ -51,6 +55,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			}
 
 			var config = sharedData.WeaponConfigProvider.Get(sharedData.PlayerWeaponId);
+			var projectileConfig = config.GetProjectileConfig();
 
 			var view = Object.Instantiate(config.Prefab, playerWeaponSpawnRoot.WeaponSpawnRoot);
 			view.transform.localPosition = Vector3.zero;
@@ -58,10 +63,16 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var entity = _world.NewEntity();
 			
 			ref var component = ref entity.Add<WeaponComponent>();
+			ref var transform = ref entity.Add<TransformComponent>();
 			component.FireDelay = config.FireDelay;
 			component.FireType = config.FireType;
 			component.OwnerEntityId = playerEntityId;
 			component.WeaponConfigId = config.Id;
+			component.ProjectileIdentity = new ProjectileConfigViewPoolIdentity(projectileConfig);
+			transform.Transform = view.transform;
+
+			
+			sharedData.CompositeViewPool.Add(component.ProjectileIdentity, projectileConfig.PrefabView, 128);
 		}
 
 		private PlayerView CreateViewAndEntity(IPlayerConfig config, out EcsEntity entity)
@@ -69,6 +80,12 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var player = Object.Instantiate(config.Prefab);
 			entity = _world.NewEntity();
 			return player;
+		}
+		
+		private static void AddSpeedComponent(EcsEntity entity)
+		{
+			ref var speedComponent = ref entity.Add<SpeedComponent>();
+			speedComponent.Speed = SPEED;
 		}
 		
 		private static void AddPlayerComponent(EcsEntity entity, IPlayerConfig playerConfig)
