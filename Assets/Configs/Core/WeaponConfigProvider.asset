@@ -16,5 +16,5 @@ MonoBehaviour:
   - _id: bow
     _prefab: {fileID: 2344844706608791339, guid: 9acc5c8e795c24c24a3abe5bd3fdf586, type: 3}
     _projectileConfig: {fileID: 11400000, guid: 527465a918fbe4c5e92bb196edb5bbf8, type: 2}
-    _fireDelay: 0.2
+    _fireDelay: 0.85
     _fireType: 0

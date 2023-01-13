@@ -23,21 +23,21 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			_kdTreeStorage = kdTreeStorage;
 		}
 		
-		public int Overlap(Vector2 position, ICollisionAreaConfig collisionAreaConfig, ref List<int> entities, int layerMask)
+		public int Overlap(KDQuery query, Vector2 position, ICollisionAreaConfig collisionAreaConfig, ref List<int> entities, int layerMask)
 		{
 			var inactivePool = _world.GetPool<InactiveComponent>();
 			var deadPool = _world.GetPool<DeadComponent>();
 			
 			if (collisionAreaConfig is ICircleCollisionAreaConfig circleCollisionAreaConfig)
 			{
-				_kdTreeStorage.KdQuery.Radius(_kdTreeStorage.KdTree, position, circleCollisionAreaConfig.Radius, _results);
+				query.Radius(_kdTreeStorage.KdTree, position, circleCollisionAreaConfig.Radius, _results);
 
 				for (var i = 0; i < _results.Count; i++)
 				{
 					var index = _results[i];
 					var entityId = _kdTreeStorage.KdTreePositionIndexToEntityIdMap[index];
-
-					if (inactivePool.Has(entityId) || deadPool.Has(entityId))
+					
+					if (entityId == EcsEntity.DEFAULT_ID || inactivePool.Has(entityId) || deadPool.Has(entityId))
 					{
 						continue;
 					}

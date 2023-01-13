@@ -19,6 +19,8 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 		private List<int> _neighborsEntityIds;
 		private int _neighborsLayer;
 
+		private KDQuery _query = new KDQuery();
+
 		public BasicEnemyMovementTargetSystem(IOverlapExecutor overlapExecutor)
 		{
 			_overlapExecutor = overlapExecutor;
@@ -119,6 +121,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionAreaConfig collisionAreaConfig)
 		{
 			_overlapExecutor.Overlap(
+				_query,
 				position, 
 				collisionAreaConfig,
 				ref cachedNeighborsEntityIds,

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SandsLevelInstaller
   m_EditorClassIdentifier: 
   _enemyConfigProvider: {fileID: 11400000, guid: ee426b9f2b5f8435fad8deff81b589a6, type: 2}
+  _levelWaveConfigProvider: {fileID: 11400000, guid: 873307c55f16a449a8498d53bcc4dc97, type: 2}

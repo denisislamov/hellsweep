@@ -75,6 +75,7 @@ namespace TonPlay.Roguelike.Client.Core
 			var kdTreesSystem = new KdTreesSystem(_kdTreeStorage);
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
+							.Add(new GameSystem())
 							.Add(new WeaponFireSystem())
 							.Add(new WeaponFireBlockSystem())
 							.Add(new WeaponFireBlockSystem())
@@ -102,6 +103,7 @@ namespace TonPlay.Roguelike.Client.Core
 							 .Add(new DestroyPoolObjectSystem())
 							 .Add(new ClearUsedEventsSystem())
 							 .Add(new ClearHasCollidedComponentsSystem())
+							 .Add(new ClearDeadEnemiesFromKdTreeSystem(_kdTreeStorage))
 							 .Add(new ClearDeadEntityDataSystem())
 							 .Add(new DestroyEntitySystem());
 

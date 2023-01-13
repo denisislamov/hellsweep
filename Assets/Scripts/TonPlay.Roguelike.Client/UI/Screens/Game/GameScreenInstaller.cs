@@ -2,6 +2,9 @@ using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar;
 using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Interfaces;
+using TonPlay.Roguelike.Client.UI.Screens.Game.Timer;
+using TonPlay.Roguelike.Client.UI.Screens.Game.Timer.Interfaces;
+using TonPlay.Roguelike.Client.UI.Screens.Game.Timer.Views;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -45,6 +48,8 @@ namespace TonPlay.Roguelike.Client.UI.Screens.Game
 			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>();
 			
 			subContainer.BindFactory<IHealthBarView, IHealthBarContext, HealthBarPresenter, HealthBarPresenter.Factory>();
+			
+			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>();
 		}
 	}
 }

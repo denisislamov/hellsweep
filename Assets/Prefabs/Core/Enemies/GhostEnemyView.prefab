@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 9169473473442074979}
   - component: {fileID: 9169473473442074980}
   m_Layer: 7
-  m_Name: BasicEnemyView
+  m_Name: GhostEnemyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

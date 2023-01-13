@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -11,6 +12,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		private List<int> _overlappedEntities = new List<int>(32);
+		private KDQuery _query = new KDQuery();
 		
 		public ProjectileCollisionSystem(IOverlapExecutor overlapExecutor)
 		{
@@ -44,6 +46,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				ref var damage = ref damagePool.Get(entityId);
 				
 				var count = _overlapExecutor.Overlap(
+					_query,
 					position.Position, 
 					collision.CollisionAreaConfig, 
 					ref _overlappedEntities, 

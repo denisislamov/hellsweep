@@ -23,7 +23,7 @@ namespace TonPlay.Roguelike.Client.Bootstrap
 			Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.MainThread;
 #endif
 
-			Application.targetFrameRate = 60;
+			Application.targetFrameRate = 30;
 			
 			await _appEntryPoint.ProcessEntrance();
 		}

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
+using Leopotam.EcsLite;
 
 namespace TonPlay.Roguelike.Client.Core
 {
@@ -27,6 +28,11 @@ namespace TonPlay.Roguelike.Client.Core
 		public void CreateEnemiesKdTreeIndexToEntityIdMap(int count)
 		{
 			_kdTreePositionIndexToEntityIdMap = new int[count];
+			
+			for (int i = 0; i < count; i++)
+			{
+				_kdTreePositionIndexToEntityIdMap[i] = EcsEntity.DEFAULT_ID;
+			}
 		}
 	}
 }
