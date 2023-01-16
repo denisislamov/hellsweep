@@ -33,12 +33,7 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice
 		{
 			var presenter = _collectionPresenterFactory.Create(
 				View.CollectionView,
-				new SkillChoiceCollectionContext(new SkillName[]
-				{
-					SkillName.Molotov,
-					SkillName.OilBond,
-					SkillName.RPG
-				}, SkillClickedHandler));
+				new SkillChoiceCollectionContext(Context.SkillsToUpgrade, SkillClickedHandler));
 			
 			Presenters.Add(presenter);
 		}

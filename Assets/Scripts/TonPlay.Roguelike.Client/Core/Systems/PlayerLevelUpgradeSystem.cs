@@ -1,19 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
+using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using Random = UnityEngine.Random;
 
 namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class PlayerLevelUpgradeSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		private const int MAX_SKILLS_TO_CHOICE = 3;
+
 		private readonly IUIService _uiService;
 
 		private IGameModel _gameModel;
+		private ISkillConfigProvider _skillsConfigProvider;
+		private EcsWorld _world;
 
 		public PlayerLevelUpgradeSystem(IUIService uiService)
 		{
@@ -22,7 +31,11 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 		public void Init(EcsSystems systems)
 		{
-			_gameModel = systems.GetShared<ISharedData>().GameModel;
+			var sharedData = systems.GetShared<ISharedData>();
+
+			_world = systems.GetWorld();
+			_gameModel = sharedData.GameModel;
+			_skillsConfigProvider = sharedData.SkillsConfigProvider;
 		}
 
 		public void Run(EcsSystems systems)
@@ -31,9 +44,10 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var filter = world
 						.Filter<PlayerComponent>()
 						.Inc<LevelUpgradeEvent>()
+						.Inc<SkillsComponent>()
 						.Exc<DeadComponent>()
 						.End();
-			
+
 			var levelUpgradeEventPool = world.GetPool<LevelUpgradeEvent>();
 
 			foreach (var entityId in filter)
@@ -45,35 +59,66 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				{
 					SetGamePauseState(true);
 
-					ShowSkillChoiceScreen();
-					
+					var skillsToUpgrade = GenerateSkillsToUpgrade();
+					ShowSkillChoiceScreen(skillsToUpgrade, entityId);
+
 					upgradeEvent.Count--;
 				}
 			}
 		}
 
-		private void ShowSkillChoiceScreen()
+		private IEnumerable<SkillName> GenerateSkillsToUpgrade()
 		{
-			_uiService.Open<SkillChoiceScreen, ISkillChoiceScreenContext>(new SkillChoiceScreenContext(SkillChosenHandler));
+			var skills = _skillsConfigProvider.All;
+			var skillsModel = _gameModel.PlayerModel.SkillsModel;
+
+			var availableSkills = skills
+								 .Where(config => !skillsModel.SkillLevels.ContainsKey(config.SkillName)
+												  || skillsModel.SkillLevels[config.SkillName] < config.MaxLevel)
+								 .ToList();
+
+			var choiceAmount = Math.Min(MAX_SKILLS_TO_CHOICE, availableSkills.Count);
+
+			var result = new SkillName[choiceAmount];
+
+			for (var i = 0; i < choiceAmount; i++)
+			{
+				var randomSkillIndex = Random.Range(0, availableSkills.Count);
+				result[i] = availableSkills[randomSkillIndex].SkillName;
+				availableSkills.RemoveAt(randomSkillIndex);
+			}
+
+			return result;
 		}
 
-		private void SkillChosenHandler(SkillName updatedSkill)
+		private void ShowSkillChoiceScreen(
+			IEnumerable<SkillName> skillsToUpgrade,
+			int entityId)
 		{
-			UpgradeChosenSkill(updatedSkill);
+			_uiService.Open<SkillChoiceScreen, ISkillChoiceScreenContext>(
+				new SkillChoiceScreenContext(skillsToUpgrade, skillName =>
+				{
+					SkillChosenHandler(skillName, entityId);
+				}));
+		}
 
+		private void SkillChosenHandler(SkillName updatedSkill, int entityId)
+		{
+			UpgradeChosenSkill(updatedSkill, entityId);
 			SetGamePauseState(false);
 		}
 
-		private void UpgradeChosenSkill(SkillName updatedSkill)
+		private void UpgradeChosenSkill(SkillName updatedSkill, int entityId)
 		{
-			var playerData = _gameModel.PlayerModel.ToData();
-
-			if (!playerData.SkillsData.SkillLevels.ContainsKey(updatedSkill))
+			var skillsPool = _world.GetPool<SkillsComponent>();
+			ref var skills = ref skillsPool.Get(entityId);
+			
+			if (!skills.Levels.ContainsKey(updatedSkill))
 			{
-				playerData.SkillsData.SkillLevels.Add(updatedSkill, 0);
+				skills.Levels.Add(updatedSkill, 0);
 			}
 
-			playerData.SkillsData.SkillLevels[updatedSkill]++;
+			skills.Levels[updatedSkill]++;
 		}
 
 		private void SetGamePauseState(bool state)

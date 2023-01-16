@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
@@ -8,6 +9,7 @@ using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Player.Views.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
+using TonPlay.Roguelike.Client.Core.Skills;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -30,6 +32,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			AddMovementComponent(entity);
 			AddRotationComponent(entity, player);
 			AddRigidbodyComponent(entity, player);
+			AddSkillsComponent(entity);
 			//AddTransformComponent(entity, player);
 			var healthComponent = AddHealthComponent(entity, spawnConfig);
 			AddSpeedComponent(entity, spawnConfig.MovementConfig);
@@ -42,6 +45,12 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			AddToSharedMapEntityWithColliders(player, sharedData, entity);
 
 			CreateWeapon(entity.Id, sharedData, player);
+		}
+		
+		private void AddSkillsComponent(EcsEntity entity)
+		{
+			ref var skillsComponent = ref entity.Add<SkillsComponent>();
+			skillsComponent.Levels = new Dictionary<SkillName, int>();
 		}
 
 		private void AddRotationComponent(EcsEntity entity, PlayerView playerView)

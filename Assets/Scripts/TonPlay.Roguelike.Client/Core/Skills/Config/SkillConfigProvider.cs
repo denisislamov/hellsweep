@@ -15,6 +15,8 @@ namespace TonPlay.Roguelike.Client.Core.Skills.Config
 		private Dictionary<SkillName, SkillConfig> _map;
 		private Dictionary<SkillName, SkillConfig> Map => _map ??= _skillConfigs.ToDictionary(_ => _.SkillName, _ => _);
 
+		public IEnumerable<ISkillConfig> All => _skillConfigs;
+		
 		public ISkillConfig Get(SkillName skillName)
 		{
 			return Map[skillName];

@@ -52,13 +52,13 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
 		{
 			for (var i = 0; i < _activeLevelsImages.Length; i++)
 			{
-				_activeLevelsImages[i].gameObject.SetActive(level - i >= 0);
+				_activeLevelsImages[i].gameObject.SetActive(level - i - 1 >= 0);
 			}
 		}
 		
 		public void SetNextLevel(int level)
 		{
-			var activeImage = _activeLevelsImages[level];
+			var activeImage = _activeLevelsImages[level - 1];
 			activeImage.gameObject.SetActive(true);
 			activeImage.color = new Color(1, 1, 1, 0);
 
@@ -72,7 +72,7 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
 		{
 			for (var i = 0; i < _activeLevelsImages.Length; i++)
 			{
-				_backgroundLevelsImages[i].gameObject.SetActive(level - i >= 0);
+				_backgroundLevelsImages[i].gameObject.SetActive(level - i - 1>= 0);
 			}
 		}
 

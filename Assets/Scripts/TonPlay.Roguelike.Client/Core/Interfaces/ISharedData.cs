@@ -9,6 +9,7 @@ using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Interfaces;
 using UnityEngine;
@@ -36,5 +37,7 @@ namespace TonPlay.Roguelike.Client.Core.Interfaces
 		ICollectableConfigProvider CollectablesConfigProvider { get; }
 		
 		IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
+		
+		ISkillConfigProvider SkillsConfigProvider { get; }
 	}
 }

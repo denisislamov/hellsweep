@@ -15,3 +15,4 @@ MonoBehaviour:
   _playerConfigProvider: {fileID: 11400000, guid: a82da983190724b32a37dbbe57699a76, type: 2}
   _weaponConfigProvider: {fileID: 11400000, guid: 5f004192ab17a499ea9bb59b4d5ff7fb, type: 2}
   _collisionConfigProvider: {fileID: 11400000, guid: 3b002c0e8b08a48d7b8ed7b21999895f, type: 2}
+  _skillConfigProvider: {fileID: 11400000, guid: 03bd7816bb333457db6d5a2ac1ed953e, type: 2}
