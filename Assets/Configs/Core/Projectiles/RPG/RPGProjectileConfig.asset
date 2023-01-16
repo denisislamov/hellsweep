@@ -15,6 +15,6 @@ MonoBehaviour:
   _prefab: {fileID: 7013224165775778841, guid: 71c22b5147cb94c6dbf7d2beeaf2db33, type: 3}
   _movementConfig:
     _startSpeed: 5
-    _acceleration: 10
+    _acceleration: 15
   _properties:
   - {fileID: 11400000, guid: 062543e75edc745ec9616c682a379e61, type: 2}

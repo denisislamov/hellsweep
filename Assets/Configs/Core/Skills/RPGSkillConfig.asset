@@ -15,7 +15,7 @@ MonoBehaviour:
   _skillType: 0
   _title: RPG
   _description: RPG description
-  _icon: {fileID: -823627778, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _icon: {fileID: 197835442617683054, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   _maxLevel: 5
   _evolutions: 
   _projectileConfig: {fileID: 11400000, guid: 5ef15c66e0719426d82ef024ae17d916, type: 2}

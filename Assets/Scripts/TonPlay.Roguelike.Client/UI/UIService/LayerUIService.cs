@@ -9,8 +9,8 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 
 		private readonly IOpeningScreenStrategy _defaultOpeningStrategy;
 		private readonly IOpeningScreenStrategy _embeddedOpeningStrategy;
-		private readonly DefaultClosingScreenStrategy _defaultClosingStrategy;
-		private readonly EmbeddedClosingScreenStrategy _embeddedClosingStrategy;
+		private readonly IClosingScreenStrategy _defaultClosingStrategy;
+		private readonly IClosingScreenStrategy _embeddedClosingStrategy;
 
 		public LayerUIService(IScreenFactoryFacade screenFactoryFacade, IScreenLayer layer, Transform rootTransform)
 		{

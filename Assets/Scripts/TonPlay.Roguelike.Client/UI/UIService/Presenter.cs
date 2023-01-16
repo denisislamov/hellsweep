@@ -11,7 +11,7 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		
 		public TContext Context { get; }
 
-		protected List<IPresenter> Presenters { get; } = new ();
+		protected List<IPresenter> Presenters { get; } = new List<IPresenter>();
 		
 		public Presenter(
 			TView view, 

@@ -137,7 +137,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 					var leftEnemiesAmount = waveConfig.EnemiesQuantity - wavesData.WavesEnemiesKilledAmount[waveConfig.Id];
 					var maxEnemiesSpawnedQuantity = Math.Min(leftEnemiesAmount, waveConfig.MaxSpawnedQuantity);
 					var spawnQuantity = maxEnemiesSpawnedQuantity - wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id];
-					spawnQuantity = Math.Clamp(spawnQuantity, 0, waveConfig.SpawnQuantityPerRate);
+					spawnQuantity = Mathf.Clamp(spawnQuantity, 0, waveConfig.SpawnQuantityPerRate);
 
 					for (var i = 0; i < spawnQuantity; i++)
 					{
