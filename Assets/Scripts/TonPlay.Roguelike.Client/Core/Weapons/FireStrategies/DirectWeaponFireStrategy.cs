@@ -55,46 +55,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.FireStrategies
 				return;
 			}
 
-			var projectileView = poolObject.Object;
-			var projectileEntity = _world.NewEntity();
-			var projectileViewTransform = projectileView.transform;
-
-			var gameObject = projectileView.gameObject;
-			gameObject.name = string.Format("{0} (entity: {1})", config.PrefabView.gameObject.name, projectileEntity.Id.ToString());
-			
-			projectileViewTransform.position = ownerPosition.Position;
-			projectileViewTransform.right = ownerRotation.Direction;
-
-			ref var projectileViewProviderComponent = ref projectileEntity.Add<ViewProviderComponent>();
-			ref var projectileComponent = ref projectileEntity.Add<ProjectileComponent>();
-			ref var projectileCollision = ref projectileEntity.Add<CollisionComponent>();
-			ref var projectileRotation = ref projectileEntity.Add<RotationComponent>();
-			ref var projectilePosition = ref projectileEntity.Add<PositionComponent>();
-			ref var projectileMovement = ref projectileEntity.Add<MovementComponent>();
-			ref var projectileTransform = ref projectileEntity.Add<TransformComponent>();
-			ref var projectileSpeed = ref projectileEntity.Add<SpeedComponent>();
-			ref var projectileDamageOnCollision = ref projectileEntity.Add<DamageOnCollisionComponent>();
-			ref var projectileViewPoolObject = ref projectileEntity.Add<ViewPoolObjectComponent>();
-
-			projectileEntity.Add<DestroyOnCollisionComponent>();
-
-			projectileViewProviderComponent.View = projectileView.gameObject;
-			projectileComponent.Config = config;
-			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
-			projectileRotation.Direction = ownerRotation.Direction;
-			projectilePosition.Position = ownerPosition.Position;
-			projectileMovement.Vector = projectileRotation.Direction;
-			projectileTransform.Transform = projectileView.transform;
-			projectileCollision.CollisionAreaConfig = config.CollisionAreaConfig; 
-			projectileCollision.LayerMask = collisionLayerMask;
-			projectileDamageOnCollision.Damage = config.Damage;
-			projectileViewPoolObject.ViewPoolObject = poolObject;
-
-			if (config.TryGetProperty<IDestroyOnTimerProjectileConfigProperty>(out var property))
-			{
-				ref var projectileDestroyOnTimer = ref projectileEntity.Add<DestroyOnTimerComponent>();
-				projectileDestroyOnTimer.TimeLeft = property.Timer;
-			}
+			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, config, ownerPosition.Position, ownerRotation.Direction, collisionLayerMask);
 		}
 	}
 }

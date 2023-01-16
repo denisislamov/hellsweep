@@ -20,18 +20,10 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
 		private MovementConfig _movementConfig;
 		
 		[SerializeField]
-		private int _damage;
-		
-		[SerializeField]
-		private CollisionAreaConfig _collisionAreaConfig;
-
-		[SerializeField]
 		private ProjectileConfigProperty[] _properties;
 
 		public ProjectileView PrefabView => _prefab;
 		public IMovementConfig MovementConfig => _movementConfig;
-		public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
-		public int Damage => _damage;
 		
 		public bool TryGetProperty<T>(out T property) where T : IProjectileConfigProperty
 		{

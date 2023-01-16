@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59dca5472e64c0d9fdbe3b7f362594f, type: 3}
-  m_Name: RPG_SkillConfig
+  m_Script: {fileID: 11500000, guid: b3f46e03a6ab4f9484d3a89f95ad2e91, type: 3}
+  m_Name: RPGExplodeOnMoveDistanceProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _skillName: 0
-  _skillType: 0
-  _title: RPG
-  _description: RPG description
-  _icon: {fileID: 609219715, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
-  _maxLevel: 5
-  _evolutions: 
+  _distance: 3
+  _explodeCollisionAreConfig: {fileID: 11400000, guid: b9abbf0eebfae4325bfa867aa2661544, type: 2}
+  _damage: 25

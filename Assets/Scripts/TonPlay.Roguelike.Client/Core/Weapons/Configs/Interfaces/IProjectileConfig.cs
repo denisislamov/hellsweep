@@ -8,11 +8,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
 	{
 		ProjectileView PrefabView { get; }
 
-		ICollisionAreaConfig CollisionAreaConfig { get; }
-		
 		IMovementConfig MovementConfig { get; }
-		
-		int Damage { get; }
 		
 		bool TryGetProperty<T>(out T property) where T : IProjectileConfigProperty;
 	}

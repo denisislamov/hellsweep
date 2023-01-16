@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces
@@ -17,5 +18,7 @@ namespace TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces
 		int MaxLevel { get; }
 		
 		SkillName[] Evolutions { get; }
+
+		Type ComponentType { get; }
 	}
 }

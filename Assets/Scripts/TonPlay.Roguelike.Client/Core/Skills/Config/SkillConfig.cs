@@ -1,15 +1,12 @@
+using System;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Skills.Config
 {
-	[CreateAssetMenu(fileName = nameof(SkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(SkillConfig))]
-	public class SkillConfig : ScriptableObject, ISkillConfig
+	public abstract class SkillConfig : ScriptableObject, ISkillConfig
 	{
-		[SerializeField]
-		private SkillName _skillName;
-		
+		[Header("Common")]
 		[SerializeField]
 		private SkillType _skillType;
 
@@ -28,7 +25,10 @@ namespace TonPlay.Roguelike.Client.Core.Skills.Config
 		[SerializeField]
 		private SkillName[] _evolutions;
 
-		public SkillName SkillName => _skillName;
+		public abstract SkillName SkillName { get; }
+		
+		public abstract Type ComponentType { get; }
+		
 		public SkillType SkillType => _skillType;
 		public string Title => _title;
 		public string Description => _description;

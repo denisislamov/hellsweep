@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
-  m_Name: ArrowProjectileConfig
+  m_Name: RPGProjectileConfig
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3435113247933727680, guid: bb7b12ac07b0c40f190f431778ec464f, type: 3}
+  _prefab: {fileID: 7013224165775778841, guid: 71c22b5147cb94c6dbf7d2beeaf2db33, type: 3}
   _movementConfig:
-    _startSpeed: 10
-    _acceleration: 0
+    _startSpeed: 5
+    _acceleration: 10
   _properties:
-  - {fileID: 11400000, guid: c4c16eee8bb89487db2989f1babd01ea, type: 2}
-  - {fileID: 11400000, guid: 3f539d2cde2f043e39884ded7d338612, type: 2}
+  - {fileID: 11400000, guid: 062543e75edc745ec9616c682a379e61, type: 2}
