@@ -23,5 +23,9 @@ namespace TonPlay.Roguelike.Client.Utilities
 		public const string PROJECTILE_CONFIGS = CORE_CONFIGS + "Projectile/";
 		
 		public const string PROJECTILE_PROPERTIES_CONFIGS = PROJECTILE_CONFIGS + "Properties/";
+		
+		public const string SKILLS_CONFIGS = CORE_CONFIGS + "Skills/";
+		
+		public const string COLLECTABLES_CONFIGS = CORE_CONFIGS + "Collectables/";
 	}
 }

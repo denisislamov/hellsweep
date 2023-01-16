@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Interfaces;
+using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Interfaces;
@@ -35,7 +38,13 @@ namespace TonPlay.Roguelike.Client.Core
 		
 		public ICompositeViewPool CompositeViewPool { get; }
 		
+		public ICollectableConfigProvider CollectablesConfigProvider { get; }
+
 		public ILevelWaveConfigProvider WavesConfigProvider { get; }
+		
+		public ISkillConfigProvider SkillsConfigProvider { get; }
+		
+		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
@@ -43,13 +52,19 @@ namespace TonPlay.Roguelike.Client.Core
 			IWeaponConfigProvider weaponConfigProvider,
 			IGameModelProvider gameModelProvider, 
 			ICollisionConfigProvider collisionConfigProvider, 
-			ILevelWaveConfigProvider wavesConfigProvider)
+			ILevelWaveConfigProvider wavesConfigProvider, 
+			ICollectableConfigProvider collectablesConfigProvider, 
+			ISkillConfigProvider skillsConfigProvider, 
+			IPlayersLevelsConfigProvider playersLevelsConfigProvider)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
 			WeaponConfigProvider = weaponConfigProvider;
 			CollisionConfigProvider = collisionConfigProvider;
 			WavesConfigProvider = wavesConfigProvider;
+			CollectablesConfigProvider = collectablesConfigProvider;
+			SkillsConfigProvider = skillsConfigProvider;
+			PlayersLevelsConfigProvider = playersLevelsConfigProvider;
 			GameModel = gameModelProvider.Get();
 			CompositeViewPool = new CompositeViewPool();
 		}

@@ -1,0 +1,32 @@
+namespace TonPlay.Roguelike.Client.Core.Skills
+{
+	public enum SkillName
+	{
+		RPG,
+		Kunai,
+		Brick,
+		HEFuel,
+		Molotov,
+		OilBond,
+		Guardian,
+		ExoBracer,
+		Boomerang,
+		DrillShot,
+		GoldPouch,
+		EnergyCube,
+		SportShoes,
+		SoccerBall,
+		TypeADrone,
+		TypeBDrone,
+		StickOfHam,
+		EnergyDrink,
+		RoninOyoroi,
+		AmmoThruster,
+		FitnessGuide,
+		HIPowerMagnet,
+		HiPowerBullet,
+		KogaNinjaScroll,
+		LightningEmitter,
+		ForcefieldDevice,
+	}
+}

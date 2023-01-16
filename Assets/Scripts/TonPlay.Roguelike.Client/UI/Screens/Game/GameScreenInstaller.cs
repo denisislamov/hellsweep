@@ -1,7 +1,7 @@
-using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar;
-using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Interfaces;
-using TonPlay.Roguelike.Client.UI.Screens.Game.HealthBar.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Interfaces;
+using TonPlay.Roguelike.Client.UI.Screens.Game.ProgressBar;
+using TonPlay.Roguelike.Client.UI.Screens.Game.ProgressBar.Interfaces;
+using TonPlay.Roguelike.Client.UI.Screens.Game.ProgressBar.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Timer;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Timer.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.Game.Timer.Views;
@@ -47,7 +47,7 @@ namespace TonPlay.Roguelike.Client.UI.Screens.Game
 
 			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>();
 			
-			subContainer.BindFactory<IHealthBarView, IHealthBarContext, HealthBarPresenter, HealthBarPresenter.Factory>();
+			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>();
 			
 			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>();
 		}

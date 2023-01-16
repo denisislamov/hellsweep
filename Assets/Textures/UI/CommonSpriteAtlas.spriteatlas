@@ -35,7 +35,7 @@ SpriteAtlas:
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
-      padding: 4
+      padding: 8
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 0
@@ -50,11 +50,27 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
+  - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
+  - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
+  - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
+  - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
+  - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
+  - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
+  - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
   m_PackedSpriteNamesToIndex:
+  - RectangleRounded16
+  - RectangleHalfRounded32
+  - RectangleHalfRounded8
   - joystick_background_01a
   - joystick_01a
+  - Rectangle
+  - RectangleRounded32
+  - Star
+  - RectangleRounded8
+  - RectangleHalfRounded16
   m_RenderDataMap: {}
   m_Tag: CommonSpriteAtlas
   m_IsVariant: 0

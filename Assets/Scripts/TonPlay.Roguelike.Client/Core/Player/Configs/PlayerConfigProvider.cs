@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
+using TonPlay.Roguelike.Client.Core.Movement;
+using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Utilities;
@@ -42,6 +44,9 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
+
+			[SerializeField]
+			private MovementConfig _movementConfig;
 			
 			public string Id => _id;
 		
@@ -50,6 +55,8 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 
 			public int StartHealth => _health;
+			
+			public IMovementConfig MovementConfig => _movementConfig;
 		}
 	}
 }

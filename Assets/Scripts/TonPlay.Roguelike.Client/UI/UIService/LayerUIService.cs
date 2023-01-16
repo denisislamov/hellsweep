@@ -5,6 +5,7 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 {
 	public class LayerUIService : IUIService
 	{
+		private readonly Transform _rootTransform;
 
 		private readonly IOpeningScreenStrategy _defaultOpeningStrategy;
 		private readonly IOpeningScreenStrategy _embeddedOpeningStrategy;
@@ -13,6 +14,8 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 
 		public LayerUIService(IScreenFactoryFacade screenFactoryFacade, IScreenLayer layer, Transform rootTransform)
 		{
+			_rootTransform = rootTransform;
+			
 			IScreenStack screenStack = new ScreenStack();
 			
 			_defaultOpeningStrategy = new DefaultOpeningScreenStrategy(screenFactoryFacade, layer, rootTransform, screenStack);
@@ -33,6 +36,11 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		{
 			var closingScreenStrategy = GetClosingScreenStrategy(isEmbedded);
 			closingScreenStrategy.Close(screen);
+		}
+		
+		public Transform GetScreensRoot(IScreenLayer layer = null)
+		{
+			return _rootTransform;
 		}
 
 		private IOpeningScreenStrategy GetOpeningScreenStrategy(bool isEmbedded)

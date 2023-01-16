@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Views;
+using TonPlay.Roguelike.Client.Core.Movement;
+using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -45,6 +48,12 @@ namespace TonPlay.Roguelike.Client.Core.Enemies.Configs
 			
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
+			
+			[SerializeField]
+			private MovementConfig _movementConfig;
+			
+			[SerializeField]
+			private List<string> _collectablesIdsOnDeath;
 
 			public string Id => _id;
 		
@@ -54,7 +63,10 @@ namespace TonPlay.Roguelike.Client.Core.Enemies.Configs
 			
 			public int DamageOnCollision => _damageOnCollision;
 			
+			public IMovementConfig MovementConfig => _movementConfig;
+
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			public IReadOnlyList<string> CollectablesIdsOnDeath => _collectablesIdsOnDeath;
 		}
 	}
 }

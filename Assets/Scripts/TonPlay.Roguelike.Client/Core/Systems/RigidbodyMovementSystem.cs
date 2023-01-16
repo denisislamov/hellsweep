@@ -32,7 +32,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 				if (movementComponent.Vector.sqrMagnitude > 0)
 				{
-					rigidbodyComponent.Rigidbody.MovePosition(positionComponent.Position + movementComponent.Vector * (speed * Time.deltaTime));
+					rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Vector * (speed * Time.deltaTime));
 				}
 			}
 #region Profiling End

@@ -30,7 +30,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 		{
 			_neighborsEntityIds = new List<int>(16);
 			_sharedData = systems.GetShared<ISharedData>();
-			_neighborsLayer = LayerMask.NameToLayer("Enemy");
+			_neighborsLayer = LayerMask.GetMask("Enemy");
 		}
 
 		public void Run(EcsSystems systems)

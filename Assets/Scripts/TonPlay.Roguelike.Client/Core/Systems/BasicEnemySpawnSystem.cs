@@ -6,6 +6,7 @@ using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Views;
 using TonPlay.Roguelike.Client.Core.Interfaces;
+using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
@@ -17,8 +18,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class BasicEnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
 	{
-		private const float SPEED = 1f;
-
 		private readonly KdTreeStorage _kdTreeStorage;
 
 		private ICompositeViewPool _pool;
@@ -191,7 +190,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			var lerpTransformComponent = AddLerpTransformComponent(entity);
 
-			AddSpeedComponent(entity);
+			AddSpeedComponent(entity, enemyConfig.MovementConfig);
 			AddHealthComponent(entity, enemyConfig);
 			AddDamageOnCollisionComponent(entity, enemyConfig);
 
@@ -258,10 +257,10 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			healthComponent.MaxHealth = config.StartHealth;
 		}
 
-		private static void AddSpeedComponent(EcsEntity entity)
+		private static void AddSpeedComponent(EcsEntity entity, IMovementConfig movementConfig)
 		{
 			ref var speedComponent = ref entity.Add<SpeedComponent>();
-			speedComponent.Speed = SPEED;
+			speedComponent.Speed = movementConfig.StartSpeed;
 		}
 
 		private static LerpTransformComponent AddLerpTransformComponent(EcsEntity entity)

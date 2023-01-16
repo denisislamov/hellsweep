@@ -18,19 +18,39 @@ MonoBehaviour:
     _health: 2
     _damageOnCollision: 1
     _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
+    _movementConfig:
+      _startSpeed: 2
+      _acceleration: 0
+    _collectablesIdsOnDeath:
+    - exp_1
   - _id: crab
     _prefab: {fileID: 8459442970995604013, guid: 2882d39bb72a94d329d933fc78f002d1, type: 3}
     _health: 1
     _damageOnCollision: 5
     _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
+    _movementConfig:
+      _startSpeed: 3
+      _acceleration: 0
+    _collectablesIdsOnDeath:
+    - exp_1
   - _id: mage
     _prefab: {fileID: 5109476924477383283, guid: 5296a6b7114494c8e89c817bcfdeeab6, type: 3}
     _health: 3
     _damageOnCollision: 3
     _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
+    _movementConfig:
+      _startSpeed: 3
+      _acceleration: 0
+    _collectablesIdsOnDeath:
+    - exp_1
   - _id: cyclope
     _prefab: {fileID: 2141320536056758984, guid: 5f7ce176d7a4a41fe999f34cd955db7a, type: 3}
     _health: 15
     _damageOnCollision: 10
     _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
+    _movementConfig:
+      _startSpeed: 3
+      _acceleration: 0
+    _collectablesIdsOnDeath:
+    - exp_1
   _defaultConfigId: ghost

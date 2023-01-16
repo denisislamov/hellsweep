@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59dca5472e64c0d9fdbe3b7f362594f, type: 3}
+  m_Name: Molotov_SkillConfig
+  m_EditorClassIdentifier: 
+  _skillName: 4
+  _skillType: 0
+  _title: Molotov
+  _description: Molotov desc
+  _icon: {fileID: -1218209311, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _maxLevel: 5
+  _evolutions: 

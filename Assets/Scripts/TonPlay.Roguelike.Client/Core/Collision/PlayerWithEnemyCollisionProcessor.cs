@@ -15,7 +15,7 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			_ecsWorld = ecsWorld;
 		}
 		
-		public void Process(ref int enemyEntityId)
+		public void Process(ref int utilityEntityId)
 		{
 			var players = _ecsWorld.Filter<PlayerComponent>().Inc<HealthComponent>().End();
 
@@ -30,7 +30,7 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 				return;
 			}
 
-			AddApplyDamageComponentToPlayer(enemyEntityId, playerEntityId);
+			AddApplyDamageComponentToPlayer(utilityEntityId, playerEntityId);
 		}
 		
 		private void AddApplyDamageComponentToPlayer(

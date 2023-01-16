@@ -80,7 +80,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.FireStrategies
 
 			projectileViewProviderComponent.View = projectileView.gameObject;
 			projectileComponent.Config = config;
-			projectileSpeed.Speed = config.StartSpeed;
+			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
 			projectileRotation.Direction = ownerRotation.Direction;
 			projectilePosition.Position = ownerPosition.Position;
 			projectileMovement.Vector = projectileRotation.Direction;

@@ -5,5 +5,7 @@ namespace TonPlay.Roguelike.Client.Core.Models.Data
 		public float GameTime { get; set; }
 		
 		public PlayerData PlayerData { get; set; }
+		
+		public bool Paused { get; set; }
 	}
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25fc01e9ab840d6a78e03c9633e5e91, type: 3}
+  m_Name: SandsPlayerLevelConfigProvider
+  m_EditorClassIdentifier: 
+  _levelConfigs:
+  - _experienceToNextLevel: 4
+  - _experienceToNextLevel: 8
+  - _experienceToNextLevel: 16
+  - _experienceToNextLevel: 32
+  - _experienceToNextLevel: 64
+  - _experienceToNextLevel: 128
+  - _experienceToNextLevel: 256
+  - _experienceToNextLevel: 512
+  - _experienceToNextLevel: 1024
+  - _experienceToNextLevel: 2048
+  - _experienceToNextLevel: 4096
+  - _experienceToNextLevel: 8192
+  - _experienceToNextLevel: 16384
+  - _experienceToNextLevel: 32768
+  - _experienceToNextLevel: 65536

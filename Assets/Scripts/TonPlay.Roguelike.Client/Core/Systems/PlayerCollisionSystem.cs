@@ -33,7 +33,8 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			
 			_layersCollisionProcessors = new Dictionary<int, ICollisionProcessor>()
 			{
-				[LayerMask.NameToLayer("Enemy")] = new PlayerWithEnemyCollisionProcessor(world)
+				[LayerMask.NameToLayer("Enemy")] = new PlayerWithEnemyCollisionProcessor(world),
+				[LayerMask.NameToLayer("Utility")] = new PlayerWithUtilityCollisionProcessor(world)
 			};
 		}
 		

@@ -17,7 +17,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			var damageOnCollisionPool = world.GetPool<DamageOnCollisionComponent>();
 			var collisionPool = world.GetPool<CollisionComponent>();
-			var enemyPool = world.GetPool<EnemyComponent>();
 			
 			foreach (var entityId in filter)
 			{

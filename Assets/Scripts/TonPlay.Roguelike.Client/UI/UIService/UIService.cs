@@ -49,5 +49,15 @@ namespace TonPlay.Roguelike.Client.UI.UIService
         {
             _layeredServices[screen.RootLayer.GetType()].Close(screen, isEmbedded);
         }
+        
+        public Transform GetScreensRoot(IScreenLayer screenLayer = null)
+        {
+            if (screenLayer is null)
+            {
+                screenLayer = new DefaultScreenLayer();
+            }
+            
+            return _layeredServices[screenLayer.GetType()].GetScreensRoot();
+        }
     }
 }

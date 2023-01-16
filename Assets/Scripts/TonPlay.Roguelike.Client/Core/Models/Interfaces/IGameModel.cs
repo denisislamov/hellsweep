@@ -8,6 +8,8 @@ namespace TonPlay.Roguelike.Client.Core.Models.Interfaces
 		IPlayerModel PlayerModel { get; }
 		
 		IReadOnlyReactiveProperty<float> GameTime { get; }
+		
+		IReadOnlyReactiveProperty<bool> Paused { get; }
 
 		void Update(GameData data);
 

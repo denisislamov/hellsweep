@@ -5,11 +5,15 @@ namespace TonPlay.Roguelike.Client.Core.Models.Interfaces
 {
 	public interface IPlayerModel
 	{
-		IReadOnlyReactiveProperty<int> Health { get; }
+		IReadOnlyReactiveProperty<float> Health { get; }
 		
-		IReadOnlyReactiveProperty<int> MaxHealth { get; }
+		IReadOnlyReactiveProperty<float> MaxHealth { get; }
 		
 		IReadOnlyReactiveProperty<float> Experience { get; }
+		
+		IReadOnlyReactiveProperty<float> MaxExperience { get; }
+		
+		ISkillsModel SkillsModel { get; }
 		
 		void Update(PlayerData data);
 		

@@ -4,6 +4,8 @@ using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Skills.Config;
+using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -25,13 +27,17 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 		[SerializeField]
 		private CollisionConfigProvider _collisionConfigProvider;
 
+		[SerializeField]
+		private SkillConfigProvider _skillConfigProvider;
+
 		public override void InstallBindings()
 		{
 			Container.BindFactory<SharedData, SharedData.Factory>().AsSingle();
-			Container.BindFactory<EcsWorld, KdTreeStorage, OverlapExecutor, OverlapExecutor.Factory>().AsSingle();
+			Container.BindFactory<EcsWorld, KdTreeStorage[], OverlapExecutor, OverlapExecutor.Factory>().AsSingle();
 			Container.Bind<IPlayerConfigProvider>().FromInstance(_playerConfigProvider).AsSingle();
 			Container.Bind<IWeaponConfigProvider>().FromInstance(_weaponConfigProvider).AsSingle();
 			Container.Bind<ICollisionConfigProvider>().FromInstance(_collisionConfigProvider).AsSingle();
+			Container.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
 		}
 	}
 }

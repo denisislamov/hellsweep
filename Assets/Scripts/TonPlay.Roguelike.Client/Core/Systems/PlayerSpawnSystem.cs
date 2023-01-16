@@ -1,6 +1,9 @@
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
+using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
+using TonPlay.Roguelike.Client.Core.Models.Interfaces;
+using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Player.Views.Interfaces;
@@ -12,8 +15,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class PlayerSpawnSystem : IEcsInitSystem
 	{
-		private const float SPEED = 2f;
-
 		private EcsWorld _world;
 
 		public void Init(EcsSystems systems)
@@ -29,8 +30,10 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			AddMovementComponent(entity);
 			AddRotationComponent(entity, player);
 			AddRigidbodyComponent(entity, player);
+			//AddTransformComponent(entity, player);
 			var healthComponent = AddHealthComponent(entity, spawnConfig);
-			AddSpeedComponent(entity);
+			AddSpeedComponent(entity, spawnConfig.MovementConfig);
+			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
 
 			UpdatePlayerModel(sharedData, healthComponent);
 
@@ -40,7 +43,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			CreateWeapon(entity.Id, sharedData, player);
 		}
-		
+
 		private void AddRotationComponent(EcsEntity entity, PlayerView playerView)
 		{
 			ref var rotationComponent = ref entity.Add<RotationComponent>();
@@ -82,10 +85,10 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			return player;
 		}
 		
-		private static void AddSpeedComponent(EcsEntity entity)
+		private static void AddSpeedComponent(EcsEntity entity, IMovementConfig movementConfig)
 		{
 			ref var speedComponent = ref entity.Add<SpeedComponent>();
-			speedComponent.Speed = SPEED;
+			speedComponent.Speed = movementConfig.StartSpeed;
 		}
 		
 		private static void AddPlayerComponent(EcsEntity entity, IPlayerConfig playerConfig)
@@ -103,6 +106,12 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 		{
 			ref var rigidbodyComponent = ref entity.Add<RigidbodyComponent>();
 			rigidbodyComponent.Rigidbody = player.Rigidbody2D;
+		}
+		
+		private static void AddTransformComponent(EcsEntity entity, PlayerView player)
+		{
+			ref var rigidbodyComponent = ref entity.Add<TransformComponent>();
+			rigidbodyComponent.Transform = player.transform;
 		}
 		
 		private static HealthComponent AddHealthComponent(EcsEntity entity, IPlayerConfig config)
@@ -127,6 +136,20 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var attachedColliders = new Collider2D[player.Rigidbody2D.attachedColliderCount];
 			
 			player.Rigidbody2D.GetAttachedColliders(attachedColliders);
+		}
+		
+		private void AddExperienceComponent(EcsEntity entity, IPlayerLevelConfig levelConfig, IPlayerModel playerModel)
+		{
+			ref var exp = ref entity.Add<ExperienceComponent>();
+			exp.Value = 0;
+			exp.MaxValue = levelConfig.ExperienceToNextLevel;
+			exp.Level = 0;
+
+			var data = playerModel.ToData();
+			data.Experience = exp.Value;
+			data.MaxExperience = exp.MaxValue;
+			
+			playerModel.Update(data);
 		}
 	}
 }

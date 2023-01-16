@@ -17,4 +17,7 @@ MonoBehaviour:
     _prefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
     _health: 100
     _collisionAreaConfig: {fileID: 11400000, guid: 74bf294c08e584ad683f485d246aa3f9, type: 2}
+    _movementConfig:
+      _startSpeed: 2
+      _acceleration: 0
   _defaultConfigId: knight

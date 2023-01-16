@@ -1,6 +1,8 @@
 using System.Linq;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
+using TonPlay.Roguelike.Client.Core.Movement;
+using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using TonPlay.Roguelike.Client.Utilities;
@@ -13,12 +15,9 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private ProjectileView _prefab;
-		
+
 		[SerializeField]
-		private float _startSpeed;
-		
-		[SerializeField]
-		private float _acceleration;
+		private MovementConfig _movementConfig;
 		
 		[SerializeField]
 		private int _damage;
@@ -30,8 +29,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
 		private ProjectileConfigProperty[] _properties;
 
 		public ProjectileView PrefabView => _prefab;
-		public float StartSpeed => _startSpeed;
-		public float Acceleration => _acceleration;
+		public IMovementConfig MovementConfig => _movementConfig;
 		public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 		public int Damage => _damage;
 		

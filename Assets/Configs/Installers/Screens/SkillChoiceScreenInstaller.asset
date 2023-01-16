@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23503bef1526476880a11063c1b6a668, type: 3}
+  m_Name: SkillChoiceScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 8982653900484023035, guid: 8f1db361b94124e6fb97b15442e450d0, type: 3}
+  _itemPrefab: {fileID: 5606453533825811638, guid: 296e9fd8e7d0c449ba637071559b776f, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 7891257684163152712, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}
+  _skillConfigProvider: {fileID: 11400000, guid: 03bd7816bb333457db6d5a2ac1ed953e, type: 2}
