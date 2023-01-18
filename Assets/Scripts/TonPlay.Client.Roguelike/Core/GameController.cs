@@ -59,13 +59,17 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_world = new EcsWorld();
 
-			_enemyKdTreeStorage = new KdTreeStorage();
-			_collectablesKdTreeStorage = new KdTreeStorage();
+			_enemyKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Enemy"));
+			_collectablesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Utility"));
 
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(
 				_world,
-				new KdTreeStorage[] {_enemyKdTreeStorage, _collectablesKdTreeStorage});
+				new KdTreeStorage[]
+				{
+					_enemyKdTreeStorage, 
+					_collectablesKdTreeStorage
+				});
 
 			_sharedData.SetPlayerWeapon("bow");
 
@@ -80,7 +84,8 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new PlayerSpawnSystem())
 						   .Add(new BasicEnemySpawnSystem(_enemyKdTreeStorage))
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
-						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesKdTreeStorage));
+						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesKdTreeStorage))
+						   ;
 
 			var kdTreesSystem = new KdTreesSystem(_enemyKdTreeStorage);
 

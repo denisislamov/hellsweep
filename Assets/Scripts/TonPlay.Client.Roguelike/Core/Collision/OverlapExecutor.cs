@@ -34,6 +34,11 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			{
 				var kdTreeStorage = _kdTreeStorages[i];
 
+				if (!DoesLayerMaskContainsLayer(layerMask, kdTreeStorage.Layer))
+				{
+					continue;
+				}
+
 				if (collisionAreaConfig is ICircleCollisionAreaConfig circleCollisionAreaConfig)
 				{
 					query.Radius(kdTreeStorage.KdTree, position, circleCollisionAreaConfig.Radius, _results);
@@ -60,7 +65,7 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 
 					ref var layer = ref layerPool.Get(entityId);
 
-					if (DoesLayerMaskContainsLayer(layerMask, layer))
+					if (DoesLayerMaskContainsLayer(layerMask, layer.Layer))
 					{
 						entities.Add(entityId);
 					}
@@ -72,9 +77,9 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			return entities.Count;
 		}
 		
-		private static bool DoesLayerMaskContainsLayer(int layerMask, LayerComponent layer)
+		private static bool DoesLayerMaskContainsLayer(int layerMask, int layer)
 		{
-			return (layerMask & (1 << layer.Layer)) != 0;
+			return (layerMask & (1 << layer)) != 0;
 		}
 
 		public class Factory : PlaceholderFactory<EcsWorld, KdTreeStorage[], OverlapExecutor>

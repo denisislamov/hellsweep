@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DevNetworkSettings
   m_EditorClassIdentifier: 
   _baseAddress: 
-  _port: 0
+  _port: 777

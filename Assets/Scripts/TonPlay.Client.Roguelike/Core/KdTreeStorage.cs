@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core
 {
@@ -10,15 +11,24 @@ namespace TonPlay.Roguelike.Client.Core
 
 		private readonly KDQuery _kdQuery = new KDQuery();
 
+		private readonly int _layer;
+
 		private int[] _kdTreePositionIndexToEntityIdMap;
 		private Dictionary<int, int> _kdTreeEntityIdToPositionIndexMap;
 
+		public int Layer => _layer;
+		
 		public KDTree KdTree => _kdTree;
 
 		public KDQuery KdQuery => _kdQuery;
 
 		public int[] KdTreePositionIndexToEntityIdMap => _kdTreePositionIndexToEntityIdMap;
 		public Dictionary<int, int> KdTreeEntityIdToPositionIndexMap => _kdTreeEntityIdToPositionIndexMap;
+
+		public KdTreeStorage(int layer)
+		{
+			_layer = layer;
+		}
 		
 		public void CreateEnemiesEntityIdToKdTreeIndexMap(int count)
 		{
