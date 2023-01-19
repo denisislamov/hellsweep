@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
@@ -36,8 +37,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			//AddTransformComponent(entity, player);
 			var healthComponent = AddHealthComponent(entity, spawnConfig);
 			AddSpeedComponent(entity, spawnConfig.MovementConfig);
+			
+			AddGoldComponent(entity);
 			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
-
+			AddProfileExperienceComponent(entity);
+			
 			UpdatePlayerModel(sharedData, healthComponent);
 
 			sharedData.SetPlayerPositionProvider(player);
@@ -130,6 +134,30 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			healthComponent.MaxHealth = config.StartHealth;
 			return healthComponent;
 		}
+
+		private void AddExperienceComponent(EcsEntity entity, IPlayerLevelConfig levelConfig, IPlayerModel playerModel)
+		{
+			ref var exp = ref entity.Add<ExperienceComponent>();
+			exp.Value = 0;
+			exp.MaxValue = levelConfig.ExperienceToNextLevel;
+			exp.Level = 0;
+
+			var data = playerModel.ToData();
+			data.Experience = exp.Value;
+			data.MaxExperience = exp.MaxValue;
+			
+			playerModel.Update(data);
+		}
+		
+		private static void AddProfileExperienceComponent(EcsEntity entity)
+		{
+			entity.Add<ProfileExperienceComponent>();
+		}
+		
+		private static void AddGoldComponent(EcsEntity entity)
+		{
+			entity.Add<GoldComponent>();
+		}
 		
 		private static void UpdatePlayerModel(ISharedData sharedData, HealthComponent healthComponent)
 		{
@@ -145,20 +173,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var attachedColliders = new Collider2D[player.Rigidbody2D.attachedColliderCount];
 			
 			player.Rigidbody2D.GetAttachedColliders(attachedColliders);
-		}
-		
-		private void AddExperienceComponent(EcsEntity entity, IPlayerLevelConfig levelConfig, IPlayerModel playerModel)
-		{
-			ref var exp = ref entity.Add<ExperienceComponent>();
-			exp.Value = 0;
-			exp.MaxValue = levelConfig.ExperienceToNextLevel;
-			exp.Level = 0;
-
-			var data = playerModel.ToData();
-			data.Experience = exp.Value;
-			data.MaxExperience = exp.MaxValue;
-			
-			playerModel.Update(data);
 		}
 	}
 }

@@ -1,28 +1,28 @@
 using System;
-using TonPlay.Roguelike.Client.Core.Models.Data;
+using TonPlay.Client.Roguelike.Core.Models.Data;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using UniRx;
 
-namespace TonPlay.Roguelike.Client.Core.Models
+namespace TonPlay.Client.Roguelike.Core.Models
 {
 	public class PlayerModel : IPlayerModel
 	{
 		private readonly PlayerData _playerData = new PlayerData();
 		private readonly SkillsModel _skillsModel = new SkillsModel();
+		private readonly MatchProfileGainModel _matchProfileGainModel = new MatchProfileGainModel();
+
+		private readonly ReactiveProperty<float> _health = new ReactiveProperty<float>();
+		private readonly ReactiveProperty<float> _maxHealth = new ReactiveProperty<float>();
+		private readonly ReactiveProperty<float> _experience = new ReactiveProperty<float>();
+		private readonly ReactiveProperty<float> _maxExperience = new ReactiveProperty<float>();
 
 		public IReadOnlyReactiveProperty<float> Health => _health;
-		
 		public IReadOnlyReactiveProperty<float> MaxHealth => _maxHealth;
-		
 		public IReadOnlyReactiveProperty<float> Experience => _experience;
 		public IReadOnlyReactiveProperty<float> MaxExperience => _maxExperience;
-
 		public ISkillsModel SkillsModel => _skillsModel;
-
-		private ReactiveProperty<float> _health = new ReactiveProperty<float>();
-		private ReactiveProperty<float> _maxHealth = new ReactiveProperty<float>();
-		private ReactiveProperty<float> _experience = new ReactiveProperty<float>();
-		private ReactiveProperty<float> _maxExperience = new ReactiveProperty<float>();
+		public IMatchProfileGainModel MatchProfileGainModel => _matchProfileGainModel;
 
 		public void Update(PlayerData data)
 		{
@@ -30,25 +30,26 @@ namespace TonPlay.Roguelike.Client.Core.Models
 			{
 				_health.SetValueAndForceNotify(data.Health);
 			}
-			
+
 			if (Math.Abs(_maxHealth.Value - data.MaxHealth) > 0.001f)
 			{
 				_maxHealth.SetValueAndForceNotify(data.MaxHealth);
 			}
-			
+
 			if (Math.Abs(_experience.Value - data.Experience) > 0.001f)
 			{
 				_experience.SetValueAndForceNotify(data.Experience);
 			}
-			
+
 			if (Math.Abs(_maxExperience.Value - data.MaxExperience) > 0.001f)
 			{
 				_maxExperience.SetValueAndForceNotify(data.MaxExperience);
 			}
-			
+
 			_skillsModel.Update(data.SkillsData);
+			_matchProfileGainModel.Update(data.MatchProfileGainModel);
 		}
-		
+
 		public PlayerData ToData()
 		{
 			_playerData.Health = _health.Value;
@@ -56,6 +57,7 @@ namespace TonPlay.Roguelike.Client.Core.Models
 			_playerData.Experience = _experience.Value;
 			_playerData.MaxExperience = _maxExperience.Value;
 			_playerData.SkillsData = _skillsModel.ToData();
+			_playerData.MatchProfileGainModel = _matchProfileGainModel.ToData();
 			return _playerData;
 		}
 	}

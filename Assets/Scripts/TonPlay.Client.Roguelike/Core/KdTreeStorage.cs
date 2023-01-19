@@ -30,12 +30,12 @@ namespace TonPlay.Roguelike.Client.Core
 			_layer = layer;
 		}
 		
-		public void CreateEnemiesEntityIdToKdTreeIndexMap(int count)
+		public void CreateEntityIdToKdTreeIndexMap(int count)
 		{
 			_kdTreeEntityIdToPositionIndexMap = new Dictionary<int, int>(count);
 		}
 		
-		public void CreateEnemiesKdTreeIndexToEntityIdMap(int count)
+		public void CreateKdTreeIndexToEntityIdMap(int count)
 		{
 			_kdTreePositionIndexToEntityIdMap = new int[count];
 			

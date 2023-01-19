@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;

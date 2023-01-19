@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cdd00fc1c947d3a15f8d5b521945a8, type: 3}
+  m_Name: LargeGoldCollectableConfig
+  m_EditorClassIdentifier: 
+  _id: large_gold_20
+  _value: 20
+  _prefab: {fileID: 6293467483275004161, guid: 520e61fafdcb94f9b949481f2f4f5eb7, type: 3}
+  _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
+  _layer: 9

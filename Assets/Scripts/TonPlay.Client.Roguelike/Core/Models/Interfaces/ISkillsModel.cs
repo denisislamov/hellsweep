@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TonPlay.Roguelike.Client.Core.Models.Data;
+using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Roguelike.Client.Core.Skills;
 using UniRx;
 

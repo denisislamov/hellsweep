@@ -16,3 +16,4 @@ MonoBehaviour:
   _levelWaveConfigProvider: {fileID: 11400000, guid: 873307c55f16a449a8498d53bcc4dc97, type: 2}
   _playersLevelsConfigProvider: {fileID: 11400000, guid: 83ca1f1d1c1a44f22ba1391b6467ca95, type: 2}
   _collectablesConfigProvider: {fileID: 11400000, guid: 11178122303ac42a58a82fbab912186a, type: 2}
+  _locationConfigProvider: {fileID: 11400000, guid: f06b0b73840c3454288b0d1854380c88, type: 2}

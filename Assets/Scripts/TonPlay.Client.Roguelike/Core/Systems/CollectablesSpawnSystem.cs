@@ -12,8 +12,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class CollectablesSpawnSystem : IEcsInitSystem
 	{
-		private const int POOL_SIZE = 512;
-		
 		private readonly KdTreeStorage _kdTreeStorage;
 
 		private ICompositeViewPool _pool;
@@ -27,6 +25,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Init(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<SharedData>();
  
@@ -38,9 +39,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			foreach (var config in _collectablesConfigProvider.AllCollectables)
 			{
-				maxSpawnedQuantityPerPrefab.Add(config.Prefab, POOL_SIZE);
+				maxSpawnedQuantityPerPrefab.Add(config.Prefab, config.PoolSize);
 
-				total += POOL_SIZE;
+				total += config.PoolSize;
 			}
 
 			foreach (var kvp in maxSpawnedQuantityPerPrefab)
@@ -48,12 +49,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				_pool.Add(new CollectableViewPoolIdentity(kvp.Key), kvp.Key, kvp.Value);
 			}
 
-			_kdTreeStorage.CreateEnemiesKdTreeIndexToEntityIdMap(total);
-			_kdTreeStorage.CreateEnemiesEntityIdToKdTreeIndexMap(total);
+			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(total);
+			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(total);
 			
 			_kdTreeStorage.KdTree.Build(new Vector3[total]);
 
 			_sharedData = sharedData;
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 		}
 	}
 }

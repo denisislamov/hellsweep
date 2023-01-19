@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
@@ -19,7 +20,10 @@ namespace TonPlay.Roguelike.Client.Core.Collectables.Config
 		
 		[SerializeField]
 		private CollisionAreaConfig _collisionAreaConfig;
-		
+
+		[SerializeField]
+		private int _poolSize = 512;
+
 		[SerializeField, Layer]
 		private int _layer;
 
@@ -29,5 +33,6 @@ namespace TonPlay.Roguelike.Client.Core.Collectables.Config
 		public CollectableView Prefab => _prefab;
 		public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 		public int Layer => _layer;
+		public int PoolSize => _poolSize;
 	}
 }

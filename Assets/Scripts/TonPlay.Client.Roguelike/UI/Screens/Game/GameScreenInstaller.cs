@@ -1,4 +1,6 @@
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
+using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
@@ -50,6 +52,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>();
 			
 			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>();
+			
+			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>();
 		}
 	}
 }

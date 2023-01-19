@@ -1,3 +1,5 @@
+using TonPlay.Client.Roguelike.Core.Locations;
+using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collectables.Config;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs;
@@ -27,12 +29,16 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 		[SerializeField]
 		private CollectableConfigProvider _collectablesConfigProvider;
 
+		[SerializeField]
+		private LocationConfigProvider _locationConfigProvider;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<IEnemyConfigProvider>().FromInstance(_enemyConfigProvider).AsSingle();
 			Container.Bind<ILevelWaveConfigProvider>().FromInstance(_levelWaveConfigProvider).AsSingle();
 			Container.Bind<ICollectableConfigProvider>().FromInstance(_collectablesConfigProvider).AsSingle();
 			Container.Bind<IPlayersLevelsConfigProvider>().FromInstance(_playersLevelsConfigProvider).AsSingle();
+			Container.Bind<ILocationConfigProvider>().FromInstance(_locationConfigProvider).AsSingle();
 		}
 	}
 }

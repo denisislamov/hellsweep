@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1522cc08af2749e49ac5ba0a4c39615b, type: 3}
+  m_Name: SandsLocationConfigProvider
+  m_EditorClassIdentifier: 
+  _config:
+    _blockSize: {x: 7.91, y: 9.8}
+    _blocksMatrix:
+    - _prefabs:
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+    - _prefabs:
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+    - _prefabs:
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+    - _prefabs:
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+    - _prefabs:
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}
+      - {fileID: 977696046143378398, guid: e90629d92ea3b45ab91818e3a1b54032, type: 3}

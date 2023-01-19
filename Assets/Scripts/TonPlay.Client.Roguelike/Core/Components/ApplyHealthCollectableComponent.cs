@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
-	public struct ApplyExperienceComponent
+	public struct ApplyHealthCollectableComponent
 	{
 		public float Value;
 		public HashSet<int> CollectableEntityIds;

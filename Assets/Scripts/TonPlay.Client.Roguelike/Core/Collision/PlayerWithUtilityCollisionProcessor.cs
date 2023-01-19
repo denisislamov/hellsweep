@@ -1,5 +1,6 @@
 using System;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -17,6 +18,9 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 		
 		public void Process(ref int utilityEntityId)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var players = _ecsWorld.Filter<PlayerComponent>().Inc<HealthComponent>().End();
 
 			var playerEntityId = EcsEntity.DEFAULT_ID;
@@ -31,6 +35,9 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			}
 
 			AddCollidedWithUtilityComponentToPlayer(utilityEntityId, playerEntityId);
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 		}
 		
 		private void AddCollidedWithUtilityComponentToPlayer(

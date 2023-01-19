@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TonPlay.Roguelike.Client.Core.Models.Data;
+using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
 using UniRx;
 
-namespace TonPlay.Roguelike.Client.Core.Models
+namespace TonPlay.Client.Roguelike.Core.Models
 {
 	public class SkillsModel : ISkillsModel
 	{

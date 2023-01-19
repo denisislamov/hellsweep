@@ -4,6 +4,9 @@ namespace TonPlay.Roguelike.Client.Core.Collectables
 	{
 		Gold,
 		Experience,
-		Health
+		Health,
+		Magnet,
+		Bomb,
+		ProfileExperience,
 	}
 }

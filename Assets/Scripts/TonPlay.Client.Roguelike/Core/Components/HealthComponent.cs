@@ -1,8 +1,8 @@
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct HealthComponent
 	{
-		public int CurrentHealth;
-		public int MaxHealth;
+		public float CurrentHealth;
+		public float MaxHealth;
 	}
 }

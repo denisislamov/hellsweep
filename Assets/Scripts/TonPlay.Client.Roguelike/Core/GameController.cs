@@ -1,5 +1,8 @@
 using System;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
+using TonPlay.Client.Roguelike.Core.Models;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Core.Systems;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
@@ -21,6 +24,9 @@ namespace TonPlay.Client.Roguelike.Core
 		[SerializeField]
 		private Camera _camera;
 
+		[SerializeField]
+		private Transform _blocksRoot;
+
 		private EcsWorld _world;
 		private EcsSystems _updateSystems;
 		private EcsSystems _collectablesSystem;
@@ -34,7 +40,6 @@ namespace TonPlay.Client.Roguelike.Core
 		private IDisposable _initTimer;
 
 		private IUIService _uiService;
-		private IGameModelProvider _gameModelProvider;
 		private IGameModel _gameModel;
 		private SharedData _sharedData;
 
@@ -42,6 +47,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private KdTreeStorage _collectablesKdTreeStorage;
 
 		private OverlapExecutor _overlapExecutor;
+		private ILocationConfigProvider _locationConfigProvider;
 
 		private bool _inited;
 
@@ -51,11 +57,13 @@ namespace TonPlay.Client.Roguelike.Core
 			IGameModelSetter gameModelSetter,
 			IUIService uiService,
 			OverlapExecutor.Factory overlapExecutorFactory,
-			SharedData.Factory sharedDataFactory)
+			SharedData.Factory sharedDataFactory,
+			ILocationConfigProvider locationConfigProvider)
 		{
 			_uiService = uiService;
+			_locationConfigProvider = locationConfigProvider;
 
-			CreateGameModel(gameModelProvider, gameModelSetter);
+			CreateGameModel(gameModelSetter);
 
 			_world = new EcsWorld();
 
@@ -85,6 +93,7 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new BasicEnemySpawnSystem(_enemyKdTreeStorage))
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
 						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesKdTreeStorage))
+						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigProvider))
 						   ;
 
 			var kdTreesSystem = new KdTreesSystem(_enemyKdTreeStorage);
@@ -131,7 +140,9 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_collectablesSystem = new EcsSystems(_world, _sharedData)
 								 .Add(new ApplyCollectablesSystem())
-								 .Add(new ApplyExperienceSystem());
+								 .Add(new ApplyProfileExperienceCollectableSystem())
+								 .Add(new ApplyExperienceCollectableSystem())
+								 .Add(new ApplyGoldCollectableSystem());
 
 			_spawnSystems.Init();
 
@@ -181,10 +192,9 @@ namespace TonPlay.Client.Roguelike.Core
 			_spawnSystems?.Destroy();
 		}
 
-		private void CreateGameModel(IGameModelProvider gameModelProvider, IGameModelSetter gameModelSetter)
+		private void CreateGameModel(IGameModelSetter gameModelSetter)
 		{
 			_gameModel = new GameModel();
-			_gameModelProvider = gameModelProvider;
 			gameModelSetter.Set(_gameModel);
 		}
 

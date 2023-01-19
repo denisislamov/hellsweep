@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TonPlay.Roguelike.Client.Core.Skills;
 
-namespace TonPlay.Roguelike.Client.Core.Models.Data
+namespace TonPlay.Client.Roguelike.Core.Models.Data
 {
 	public class SkillsData
 	{

@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.Profiling;
@@ -22,6 +23,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var positionPool = world.GetPool<PositionComponent>();
 			var destroyPool = world.GetPool<DestroyComponent>();
 
+			var gameModelData = sharedData.GameModel.ToData();
+
 			foreach (var entityId in filter)
 			{
 				ref var healthComponent = ref healthComponents.Get(entityId);
@@ -42,11 +45,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						diedEvent.EnemyConfig = sharedData.EnemyConfigProvider.Get(enemy.ConfigId);
 
 						destroyPool.Add(entityId);
+
+						gameModelData.DeadEnemies++;
 					}
 				}
 
 				applyDamageComponents.Del(entityId);
 			}
+
+			sharedData.GameModel.Update(gameModelData);
 #region Profiling End
 			Profiler.EndSample();
 #endregion 

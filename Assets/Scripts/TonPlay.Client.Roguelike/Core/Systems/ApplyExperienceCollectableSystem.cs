@@ -1,11 +1,12 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class ApplyExperienceSystem : IEcsInitSystem, IEcsRunSystem
+	public class ApplyExperienceCollectableSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private IPlayersLevelsConfigProvider _playersLevelsConfigProvider;
 
@@ -18,11 +19,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var world = systems.GetWorld();
 			var filter = world
-						.Filter<ApplyExperienceComponent>()
+						.Filter<ApplyExperienceCollectableComponent>()
 						.Inc<ExperienceComponent>()
 						.Exc<DeadComponent>()
 						.End();
-			var applyPool = world.GetPool<ApplyExperienceComponent>();
+			var applyPool = world.GetPool<ApplyExperienceCollectableComponent>();
 			var expPool = world.GetPool<ExperienceComponent>();
 			var destroyPool = world.GetPool<DestroyComponent>();
 			var levelUpgradeEventPool = world.GetPool<LevelUpgradeEvent>();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -77,8 +78,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				_pool.Add(new EnemyViewPoolIdentity(kvp.Key), kvp.Key, kvp.Value);
 			}
 
-			_kdTreeStorage.CreateEnemiesKdTreeIndexToEntityIdMap(totalEnemies);
-			_kdTreeStorage.CreateEnemiesEntityIdToKdTreeIndexMap(totalEnemies);
+			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(totalEnemies);
+			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(totalEnemies);
 			
 			_kdTreeStorage.KdTree.Build(new Vector3[totalEnemies]);
 
