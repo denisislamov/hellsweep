@@ -90,7 +90,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_spawnSystems = new EcsSystems(_world, _sharedData)
 						   .Add(new PlayerSpawnSystem())
-						   .Add(new BasicEnemySpawnSystem(_enemyKdTreeStorage))
+						   .Add(new EnemyWaveSpawnSystem(_enemyKdTreeStorage))
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
 						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesKdTreeStorage))
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigProvider))

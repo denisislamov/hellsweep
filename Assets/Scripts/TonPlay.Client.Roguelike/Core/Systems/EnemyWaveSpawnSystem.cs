@@ -17,7 +17,7 @@ using Random = UnityEngine.Random;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class BasicEnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
+	public class EnemyWaveSpawnSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly KdTreeStorage _kdTreeStorage;
 
@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private IEnemyConfigProvider _enemyConfigProvider;
 		private ISharedData _sharedData;
 
-		public BasicEnemySpawnSystem(KdTreeStorage kdTreeStorage)
+		public EnemyWaveSpawnSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
 		}
@@ -185,6 +185,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			AddEnemyComponent(entity, enemyConfig, waveConfig);
 			AddMovementComponent(entity);
 			AddLayerComponent(entity, enemyView);
+			AddStickToLocationBlockComponent(entity);
 			AddCollidersComponent(entity, enemyView);
 			AddTransformComponent(entity, enemyView);
 			AddPositionComponent(entity, randomPosition);
@@ -232,9 +233,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			layer.Layer = enemyView.gameObject.layer;
 		}
 
+		private void AddStickToLocationBlockComponent(EcsEntity entity)
+		{
+			entity.Add<StickToLocationBlockComponent>();
+		}
+
 		private static Vector2 CreateRandomPosition(Vector2 playerPosition)
 		{
-			var randomPosition = Random.insideUnitCircle*45f;
+			var randomPosition = playerPosition + Random.insideUnitCircle*45f;
 			var distanceToPlayer = Vector2.Distance(randomPosition, playerPosition);
 
 			if (distanceToPlayer < 15f)
