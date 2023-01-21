@@ -1,5 +1,7 @@
 using System;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collectables;
+using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
@@ -19,7 +21,7 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core
 {
-	public class GameController : MonoBehaviour, IInitializable
+	internal class GameController : MonoBehaviour, IInitializable
 	{
 		[SerializeField]
 		private Camera _camera;
@@ -34,6 +36,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private EcsSystems _spawnSystems;
 		private EcsSystems _destroySystems;
 		private EcsSystems _skillsSystems;
+		private EcsSystems _syncKdTreePositionSystems;
 
 		private IDisposable _updateCycle;
 		private IDisposable _fixedUpdateCycle;
@@ -48,6 +51,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 		private OverlapExecutor _overlapExecutor;
 		private ILocationConfigProvider _locationConfigProvider;
+		private ICollectableEntityFactory _collectablesEntityFactory;
 
 		private bool _inited;
 
@@ -58,7 +62,8 @@ namespace TonPlay.Client.Roguelike.Core
 			IUIService uiService,
 			OverlapExecutor.Factory overlapExecutorFactory,
 			SharedData.Factory sharedDataFactory,
-			ILocationConfigProvider locationConfigProvider)
+			ILocationConfigProvider locationConfigProvider,
+			CollectablesEntityFactory.Factory collectablesEntityFactoryFactory)
 		{
 			_uiService = uiService;
 			_locationConfigProvider = locationConfigProvider;
@@ -75,11 +80,14 @@ namespace TonPlay.Client.Roguelike.Core
 				_world,
 				new KdTreeStorage[]
 				{
-					_enemyKdTreeStorage, 
+					_enemyKdTreeStorage,
 					_collectablesKdTreeStorage
 				});
 
 			_sharedData.SetPlayerWeapon("bow");
+			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
+
+			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
 
 			Initialize();
 		}
@@ -92,14 +100,22 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new PlayerSpawnSystem())
 						   .Add(new EnemyWaveSpawnSystem(_enemyKdTreeStorage))
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
-						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesKdTreeStorage))
+						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesEntityFactory))
+						   .Add(new GoldCollectablesSpawnSystem(_collectablesEntityFactory))
+						   .Add(new HealthCollectablesSpawnSystem(_collectablesEntityFactory))
+						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigProvider))
-						   ;
+				;
 
-			var kdTreesSystem = new KdTreesSystem(_enemyKdTreeStorage);
+			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
+										.Add(new SyncEnemiesPositionWithKdTreeSystem(_enemyKdTreeStorage))
+										.Add(new SyncCollectablesPositionWithKdTreeSystem(_collectablesKdTreeStorage));
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
+							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))
+							.Add(new StickEaseMovementToEntityPositionSystem())
+							.Add(new EaseMovementSystem())
 							.Add(new WeaponFireSystem())
 							.Add(new WeaponFireBlockSystem())
 							.Add(new WeaponFireBlockSystem())
@@ -116,11 +132,10 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new UpdatePlayerModelSystem())
 							.Add(new ProjectileCollisionSystem(_overlapExecutor))
 							.Add(new ProjectileExplodeOnMoveDistanceSystem(_overlapExecutor))
-							.Add(kdTreesSystem)
 							.Add(new GameOverSystem());
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
-						    .Add(new RPGSkillSystem());
+			   .Add(new RPGSkillSystem());
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())
@@ -142,14 +157,14 @@ namespace TonPlay.Client.Roguelike.Core
 								 .Add(new ApplyCollectablesSystem())
 								 .Add(new ApplyProfileExperienceCollectableSystem())
 								 .Add(new ApplyExperienceCollectableSystem())
-								 .Add(new ApplyGoldCollectableSystem());
+								 .Add(new ApplyGoldCollectableSystem())
+								 .Add(new ApplyHealthCollectableSystem())
+								 .Add(new ApplyMagnetCollectableSystem());
 
 			_spawnSystems.Init();
-
-			kdTreesSystem.Init(_spawnSystems);
-
 			_collectablesSystem.Init();
 			_updateSystems.Init();
+			_syncKdTreePositionSystems.Init();
 			_skillsSystems.Init();
 			_fixedUpdateSystems.Init();
 			_destroySystems.Init();
@@ -170,6 +185,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_spawnSystems?.Run();
 			_updateSystems?.Run();
+			_syncKdTreePositionSystems?.Run();
 			_skillsSystems?.Run();
 			_collectablesSystem?.Run();
 			_destroySystems?.Run();

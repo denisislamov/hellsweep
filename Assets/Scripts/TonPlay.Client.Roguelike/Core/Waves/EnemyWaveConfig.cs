@@ -1,12 +1,12 @@
 using System;
-using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
+using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Waves
+namespace TonPlay.Client.Roguelike.Core.Waves
 {
 	[Serializable]
-	public class WaveConfig : IWaveConfig
+	public class EnemyWaveConfig : IEnemyWaveConfig
 	{
 		[SerializeField]
 		private string _id;

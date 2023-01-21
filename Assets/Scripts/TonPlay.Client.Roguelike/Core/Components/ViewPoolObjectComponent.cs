@@ -1,6 +1,6 @@
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct ViewPoolObjectComponent
 	{

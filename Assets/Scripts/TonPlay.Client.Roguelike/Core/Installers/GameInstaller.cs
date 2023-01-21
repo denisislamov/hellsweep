@@ -1,10 +1,15 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core;
+using TonPlay.Client.Roguelike.Core.Collectables;
+using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
+using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills.Config;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;
@@ -39,6 +44,15 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 			Container.Bind<IWeaponConfigProvider>().FromInstance(_weaponConfigProvider).AsSingle();
 			Container.Bind<ICollisionConfigProvider>().FromInstance(_collisionConfigProvider).AsSingle();
 			Container.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
+
+			Container.Bind<ICompositeViewPool>().To<CompositeViewPool>().AsSingle();
+			
+			Container.BindFactory<ISharedData, CollectablesEntityFactory, CollectablesEntityFactory.Factory>().AsSingle();
+			Container.Bind<GoldCollectablesEntityFactory>().To<GoldCollectablesEntityFactory>().AsSingle();
+			Container.Bind<ProfileExperienceCollectablesEntityFactory>().To<ProfileExperienceCollectablesEntityFactory>().AsSingle();
+			Container.Bind<ExperienceCollectablesEntityFactory>().To<ExperienceCollectablesEntityFactory>().AsSingle();
+			Container.Bind<HealthCollectablesEntityFactory>().To<HealthCollectablesEntityFactory>().AsSingle();
+			Container.Bind<MagnetCollectablesEntityFactory>().To<MagnetCollectablesEntityFactory>().AsSingle();
 		}
 	}
 }

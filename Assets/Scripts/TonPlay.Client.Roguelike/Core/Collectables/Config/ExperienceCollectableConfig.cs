@@ -8,9 +8,4 @@ namespace TonPlay.Roguelike.Client.Core.Collectables.Config
 	{
 		public override CollectableType Type => CollectableType.Experience;
 	}
-	[CreateAssetMenu(fileName = nameof(ProfileExperienceCollectableConfig), menuName = AssetMenuConstants.COLLECTABLES_CONFIGS + nameof(ProfileExperienceCollectableConfig))]
-	public class ProfileExperienceCollectableConfig : CollectableConfig
-	{
-		public override CollectableType Type => CollectableType.Experience;
-	}
 }

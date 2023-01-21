@@ -1,26 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
+using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace TonPlay.Roguelike.Client.Core.Waves
+namespace TonPlay.Client.Roguelike.Core.Waves
 {
-	[CreateAssetMenu(fileName = nameof(LevelWaveConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(LevelWaveConfigProvider))]
-	public class LevelWaveConfigProvider : ScriptableObject, ILevelWaveConfigProvider
+	[CreateAssetMenu(fileName = nameof(LevelEnemyWaveConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(LevelEnemyWaveConfigProvider))]
+	public class LevelEnemyWaveConfigProvider : ScriptableObject, ILevelEnemyWaveConfigProvider
 	{
 		[SerializeField]
-		private List<WaveGroupConfig> _waveConfigs;
+		private List<EnemyWaveGroupConfig> _waveConfigs;
 
-		private List<WaveGroupConfig> _sortedWaveConfigs;
+		private List<EnemyWaveGroupConfig> _sortedWaveConfigs;
 
-		private readonly List<IWaveConfig> _emptyList;
+		private readonly List<IEnemyWaveConfig> _emptyList;
 
-		public IEnumerable<IWaveConfig> AllWaves => _waveConfigs.SelectMany(_ => _.Waves);
+		public IEnumerable<IEnemyWaveConfig> AllWaves => _waveConfigs.SelectMany(_ => _.Waves);
 
-		public IEnumerable<IWaveConfig> Get(long ticks)
+		public IEnumerable<IEnemyWaveConfig> Get(long ticks)
 		{
 			if (_sortedWaveConfigs == null || _sortedWaveConfigs.Count != _waveConfigs.Count)
 			{
@@ -28,8 +27,8 @@ namespace TonPlay.Roguelike.Client.Core.Waves
 				Sort();
 			}
 
-			WaveGroupConfig next = null;
-			WaveGroupConfig current = null;
+			EnemyWaveGroupConfig next = null;
+			EnemyWaveGroupConfig current = null;
 			
 			for (int i = 0; i < _sortedWaveConfigs.Count; i++)
 			{
@@ -44,7 +43,7 @@ namespace TonPlay.Roguelike.Client.Core.Waves
 					return _emptyList;
 				}
 
-				if (next == default(WaveGroupConfig) || next.StartTimingTicks > ticks)
+				if (next == default(EnemyWaveGroupConfig) || next.StartTimingTicks > ticks)
 				{
 					return current.Waves;
 				}
@@ -59,17 +58,17 @@ namespace TonPlay.Roguelike.Client.Core.Waves
 		}
 
 		[Serializable]
-		private class WaveGroupConfig
+		private class EnemyWaveGroupConfig
 		{
 			[SerializeField]
-			private List<WaveConfig> _waves;
+			private List<EnemyWaveConfig> _waves;
 			
 			[SerializeField]
 			private TimingConfig _startTiming;
 
 			public long StartTimingTicks => _startTiming.GetTimeSpan().Ticks;
 
-			public IEnumerable<WaveConfig> Waves => _waves;
+			public IEnumerable<EnemyWaveConfig> Waves => _waves;
 		}
 	}
 }

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
@@ -30,37 +32,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var player = CreateViewAndEntity(spawnConfig, out var entity);
 			
 			AddPlayerComponent(entity, spawnConfig);
-			AddMovementComponent(entity);
-			AddRotationComponent(entity, player);
-			AddRigidbodyComponent(entity, player);
-			AddSkillsComponent(entity);
-			//AddTransformComponent(entity, player);
-			var healthComponent = AddHealthComponent(entity, spawnConfig);
-			AddSpeedComponent(entity, spawnConfig.MovementConfig);
+			entity.AddMovementComponent();
+			entity.AddRotationComponent(player.transform.right.ToVector2XY());
+			entity.AddRigidbodyComponent(player.Rigidbody2D);
+			entity.AddSkillsComponent();
 			
-			AddGoldComponent(entity);
+			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
+			entity.AddSpeedComponent(spawnConfig.MovementConfig);
+			entity.AddGoldComponent();
+			entity.AddProfileExperienceComponent();
+
 			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
-			AddProfileExperienceComponent(entity);
 			
 			UpdatePlayerModel(sharedData, healthComponent);
 
 			sharedData.SetPlayerPositionProvider(player);
 			
-			AddToSharedMapEntityWithColliders(player, sharedData, entity);
-
 			CreateWeapon(entity.Id, sharedData, player);
-		}
-		
-		private void AddSkillsComponent(EcsEntity entity)
-		{
-			ref var skillsComponent = ref entity.Add<SkillsComponent>();
-			skillsComponent.Levels = new Dictionary<SkillName, int>();
-		}
-
-		private void AddRotationComponent(EcsEntity entity, PlayerView playerView)
-		{
-			ref var rotationComponent = ref entity.Add<RotationComponent>();
-			rotationComponent.Direction = playerView.transform.right;
 		}
 
 		private void CreateWeapon(int playerEntityId, ISharedData sharedData, IHasWeaponSpawnRoot playerWeaponSpawnRoot)
@@ -97,50 +85,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity = _world.NewEntity();
 			return player;
 		}
-		
-		private static void AddSpeedComponent(EcsEntity entity, IMovementConfig movementConfig)
-		{
-			ref var speedComponent = ref entity.Add<SpeedComponent>();
-			speedComponent.Speed = movementConfig.StartSpeed;
-		}
-		
+
 		private static void AddPlayerComponent(EcsEntity entity, IPlayerConfig playerConfig)
 		{
 			ref var playerComponent = ref entity.Add<PlayerComponent>();
 			playerComponent.ConfigId = playerConfig.Id;
 		}
-		
-		private void AddMovementComponent(EcsEntity entity)
-		{
-			entity.Add<MovementComponent>();
-		}
-		
-		private static void AddRigidbodyComponent(EcsEntity entity, PlayerView player)
-		{
-			ref var rigidbodyComponent = ref entity.Add<RigidbodyComponent>();
-			rigidbodyComponent.Rigidbody = player.Rigidbody2D;
-		}
-		
-		private static void AddTransformComponent(EcsEntity entity, PlayerView player)
-		{
-			ref var rigidbodyComponent = ref entity.Add<TransformComponent>();
-			rigidbodyComponent.Transform = player.transform;
-		}
-		
-		private static HealthComponent AddHealthComponent(EcsEntity entity, IPlayerConfig config)
-		{
-			ref var healthComponent = ref entity.Add<HealthComponent>();
-			healthComponent.CurrentHealth = config.StartHealth;
-			healthComponent.MaxHealth = config.StartHealth;
-			return healthComponent;
-		}
 
 		private void AddExperienceComponent(EcsEntity entity, IPlayerLevelConfig levelConfig, IPlayerModel playerModel)
 		{
-			ref var exp = ref entity.Add<ExperienceComponent>();
-			exp.Value = 0;
-			exp.MaxValue = levelConfig.ExperienceToNextLevel;
-			exp.Level = 0;
+			ref var exp = ref entity.AddExperienceComponent(0, levelConfig.ExperienceToNextLevel, 0);
 
 			var data = playerModel.ToData();
 			data.Experience = exp.Value;
@@ -148,17 +102,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			
 			playerModel.Update(data);
 		}
-		
-		private static void AddProfileExperienceComponent(EcsEntity entity)
-		{
-			entity.Add<ProfileExperienceComponent>();
-		}
-		
-		private static void AddGoldComponent(EcsEntity entity)
-		{
-			entity.Add<GoldComponent>();
-		}
-		
+
 		private static void UpdatePlayerModel(ISharedData sharedData, HealthComponent healthComponent)
 		{
 			var playerModel = sharedData.GameModel.PlayerModel;
@@ -166,13 +110,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			playerData.Health = healthComponent.CurrentHealth;
 			playerData.MaxHealth = healthComponent.MaxHealth;
 			playerModel.Update(playerData);
-		}
-		
-		private static void AddToSharedMapEntityWithColliders(PlayerView player, SharedData sharedData, EcsEntity entity)
-		{
-			var attachedColliders = new Collider2D[player.Rigidbody2D.attachedColliderCount];
-			
-			player.Rigidbody2D.GetAttachedColliders(attachedColliders);
 		}
 	}
 }

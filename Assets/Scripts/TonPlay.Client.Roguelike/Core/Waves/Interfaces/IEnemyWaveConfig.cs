@@ -1,6 +1,6 @@
-namespace TonPlay.Roguelike.Client.Core.Waves.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Waves.Interfaces
 {
-	public interface IWaveConfig
+	public interface IEnemyWaveConfig
 	{
 		string Id { get; }
 		string EnemyId { get; }

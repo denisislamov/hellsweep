@@ -1,5 +1,6 @@
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
+using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
@@ -35,5 +36,7 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
 		
 		ISkillConfigProvider SkillsConfigProvider { get; }
+		
+		KdTreeStorage CollectablesKdTreeStorage { get; }
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataStructures.ViliWonka.KDTree;
@@ -8,6 +9,7 @@ using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
@@ -60,6 +62,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					var position = new Vector2(size.x * x, size.y * y);
 
 					var view = Object.Instantiate(prefab, _blocksRoot);
+					view.gameObject.name = string.Format("{0} (entity: {1})", view.gameObject.name, blockEntity.Id);
 
 					ref var boxSize = ref blockEntity.Add<BoxSizeComponent>();
 					boxSize.Size = _locationConfig.BlockSize;

@@ -16,11 +16,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.End(); 
 			var pool = world.GetPool<ApplyCollectableComponent>();
 			var collectablePool = world.GetPool<CollectableComponent>();
-			
-			var profileExperiencePool = world.GetPool<ApplyProfileExperienceCollectableComponent>();
-			var experiencePool = world.GetPool<ApplyExperienceCollectableComponent>();
-			var healthPool = world.GetPool<ApplyHealthCollectableComponent>();
-			var goldPool = world.GetPool<ApplyGoldCollectableComponent>();
+
+			var applyProfileExperiencePool = world.GetPool<ApplyProfileExperienceCollectableComponent>();
+			var applyExperiencePool = world.GetPool<ApplyExperienceCollectableComponent>();
+			var applyHealthPool = world.GetPool<ApplyHealthCollectableComponent>();
+			var applyMagnetPool = world.GetPool<ApplyMagnetCollectableComponent>();
+			var applyGoldPool = world.GetPool<ApplyGoldCollectableComponent>();
 
 			foreach (var entityId in filter)
 			{
@@ -30,16 +31,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				switch (collectable.Type)
 				{
 					case CollectableType.Experience:
-						ApplyExperience(experiencePool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
+						ApplyExperience(applyExperiencePool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
 						break;
 					case CollectableType.Gold:
-						ApplyGold(goldPool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
+						ApplyGold(applyGoldPool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
 						break;
 					case CollectableType.ProfileExperience:
-						ApplyProfileExperience(profileExperiencePool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
+						ApplyProfileExperience(applyProfileExperiencePool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
 						break;
 					case CollectableType.Health:
-						ApplyHealth(healthPool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
+						ApplyHealth(applyHealthPool, collectable.Value, component.AppliedEntityId, component.CollectableEntityId);
+						break;
+					case CollectableType.Magnet:
+						ApplyMagnet(applyMagnetPool, component.AppliedEntityId, component.CollectableEntityId);
 						break;
 				}
 
@@ -108,6 +112,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var exp = ref pool.Add(entityId);
 				exp.Value += value;
 				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+			}
+		}
+		
+		private void ApplyMagnet(
+			EcsPool<ApplyMagnetCollectableComponent> applyPool,
+			int entityId,
+			int collectableEntityId)
+		{
+			if (applyPool.Has(entityId))
+			{
+				ref var exp = ref applyPool.Get(entityId);
+				exp.CollectableEntityIds.Add(collectableEntityId);
+			}
+			else
+			{
+				ref var exp = ref applyPool.Add(entityId);
+				exp.CollectableEntityIds = new HashSet<int>() { collectableEntityId };
 			}
 		}
 	}

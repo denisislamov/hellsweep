@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fa98c1bace43adbc664d5872aaf00d, type: 3}
+  m_Name: MagnetCollectableConfig
+  m_EditorClassIdentifier: 
+  _id: magnet
+  _value: 1
+  _prefab: {fileID: 4365870026961852721, guid: a96ebddef1c3a43489e40f0aa03193f8, type: 3}
+  _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
+  _poolSize: 128
+  _layer: 9
+  _magnetRadius: 15
+  _timeToStart: 1
+  _activeTime: 1.5

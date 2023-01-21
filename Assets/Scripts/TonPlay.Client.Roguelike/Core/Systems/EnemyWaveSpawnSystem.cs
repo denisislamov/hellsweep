@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
@@ -10,7 +11,6 @@ using TonPlay.Roguelike.Client.Core.Enemies.Views;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
@@ -22,7 +22,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private readonly KdTreeStorage _kdTreeStorage;
 
 		private ICompositeViewPool _pool;
-		private ILevelWaveConfigProvider _wavesConfigProvider;
+		private ILevelEnemyWaveConfigProvider _enemyWavesConfigProvider;
 		private IEnemyConfigProvider _enemyConfigProvider;
 		private ISharedData _sharedData;
 
@@ -38,10 +38,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var playerPosition = sharedData.PlayerPositionProvider.Position;
 
 			_pool = sharedData.CompositeViewPool;
-			_wavesConfigProvider = sharedData.WavesConfigProvider;
+			_enemyWavesConfigProvider = sharedData.EnemyWavesConfigProvider;
 			_enemyConfigProvider = sharedData.EnemyConfigProvider;
 
-			var allWaves = _wavesConfigProvider.AllWaves;
+			var allWaves = _enemyWavesConfigProvider.AllWaves;
 			var totalEnemies = 0;
 
 			var maxSpawnedQuantityPerPrefab = new Dictionary<EnemyView, int>();
@@ -100,7 +100,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				var timespan = TimeSpan.FromSeconds(time.Time);
 
-				var currentWavesConfigs = _wavesConfigProvider.Get(timespan.Ticks);
+				var currentWavesConfigs = _enemyWavesConfigProvider.Get(timespan.Ticks);
 				if (currentWavesConfigs == null)
 				{
 					break;
@@ -154,7 +154,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 		}
 
-		private void CreateEnemy(EcsWorld world, Vector2 playerPosition, IEnemyConfig enemyConfig, IWaveConfig waveConfig)
+		private void CreateEnemy(EcsWorld world, Vector2 playerPosition, IEnemyConfig enemyConfig, IEnemyWaveConfig enemyWaveConfig)
 		{
 			var entity = world.NewEntity();
 
@@ -182,7 +182,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			ref var viewProviderComponent = ref entity.Add<ViewProviderComponent>();
 			viewProviderComponent.View = enemyView.gameObject;
 
-			AddEnemyComponent(entity, enemyConfig, waveConfig);
+			AddEnemyComponent(entity, enemyConfig, enemyWaveConfig);
 			AddMovementComponent(entity);
 			AddLayerComponent(entity, enemyView);
 			AddStickToLocationBlockComponent(entity);
@@ -220,11 +220,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.Add<MovementComponent>();
 		}
 
-		private static void AddEnemyComponent(EcsEntity entity, IEnemyConfig enemyConfig, IWaveConfig waveConfig)
+		private static void AddEnemyComponent(EcsEntity entity, IEnemyConfig enemyConfig, IEnemyWaveConfig enemyWaveConfig)
 		{
 			ref var enemy = ref entity.Add<EnemyComponent>();
 			enemy.ConfigId = enemyConfig.Id;
-			enemy.WaveId = waveConfig.Id;
+			enemy.WaveId = enemyWaveConfig.Id;
 		}
 
 		private void AddLayerComponent(EcsEntity entity, EnemyView enemyView)

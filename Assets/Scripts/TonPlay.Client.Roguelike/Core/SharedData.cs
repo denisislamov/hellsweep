@@ -1,6 +1,8 @@
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
+using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
@@ -10,7 +12,6 @@ using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using Zenject;
 
@@ -36,10 +37,11 @@ namespace TonPlay.Client.Roguelike.Core
 		
 		public ICollectableConfigProvider CollectablesConfigProvider { get; }
 
-		public ILevelWaveConfigProvider WavesConfigProvider { get; }
+		public ILevelEnemyWaveConfigProvider EnemyWavesConfigProvider { get; }
 		
 		public ISkillConfigProvider SkillsConfigProvider { get; }
-		
+		public KdTreeStorage CollectablesKdTreeStorage { get; private set; }
+
 		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
 
 		public SharedData(
@@ -48,21 +50,22 @@ namespace TonPlay.Client.Roguelike.Core
 			IWeaponConfigProvider weaponConfigProvider,
 			IGameModelProvider gameModelProvider, 
 			ICollisionConfigProvider collisionConfigProvider, 
-			ILevelWaveConfigProvider wavesConfigProvider, 
+			ILevelEnemyWaveConfigProvider enemyWavesConfigProvider, 
 			ICollectableConfigProvider collectablesConfigProvider, 
 			ISkillConfigProvider skillsConfigProvider, 
-			IPlayersLevelsConfigProvider playersLevelsConfigProvider)
+			IPlayersLevelsConfigProvider playersLevelsConfigProvider,
+			ICompositeViewPool compositeViewPool)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
 			WeaponConfigProvider = weaponConfigProvider;
 			CollisionConfigProvider = collisionConfigProvider;
-			WavesConfigProvider = wavesConfigProvider;
+			EnemyWavesConfigProvider = enemyWavesConfigProvider;
 			CollectablesConfigProvider = collectablesConfigProvider;
 			SkillsConfigProvider = skillsConfigProvider;
 			PlayersLevelsConfigProvider = playersLevelsConfigProvider;
 			GameModel = gameModelProvider.Get();
-			CompositeViewPool = new CompositeViewPool();
+			CompositeViewPool = compositeViewPool;
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)
@@ -73,6 +76,11 @@ namespace TonPlay.Client.Roguelike.Core
 		public void SetPlayerWeapon(string weaponId)
 		{
 			PlayerWeaponId = weaponId;
+		}
+
+		public void SetCollectablesKdTreeStorage(KdTreeStorage kdTreeStorage)
+		{
+			CollectablesKdTreeStorage = kdTreeStorage;
 		}
 
 		public class Factory : PlaceholderFactory<SharedData>

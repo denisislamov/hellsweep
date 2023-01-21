@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
@@ -23,8 +24,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var apply = ref applyPool.Get(entityId);
 				ref var health = ref healthPool.Get(entityId);
 
-				health.CurrentHealth += apply.Value;
-				health.CurrentHealth %= health.MaxHealth;
+				health.CurrentHealth = Mathf.Clamp(health.CurrentHealth + apply.Value, 0f, health.MaxHealth);
 
 				foreach (var collectableEntityId in apply.CollectableEntityIds)
 				{
