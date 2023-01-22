@@ -7,6 +7,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 
 			var filter = world.Filter<WeaponComponent>().Inc<TransformComponent>().End();
@@ -26,6 +29,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 					transform.Transform.right = rotation.Direction;
 				}
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

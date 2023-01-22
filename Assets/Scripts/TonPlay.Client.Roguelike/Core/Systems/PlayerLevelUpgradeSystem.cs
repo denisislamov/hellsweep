@@ -41,6 +41,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<PlayerComponent>()
@@ -66,6 +69,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					upgradeEvent.Count--;
 				}
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 
 		private IEnumerable<SkillName> GenerateSkillsToUpgrade()

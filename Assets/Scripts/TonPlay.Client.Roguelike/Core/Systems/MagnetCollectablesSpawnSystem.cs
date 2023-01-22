@@ -35,6 +35,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<ISharedData>();
 			
@@ -52,6 +55,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var position = Random.onUnitSphere.ToVector2XY() * distance + sharedData.PlayerPositionProvider.Position;
 
 			_collectableEntityFactory.Create(world, _collectableConfigs[randomIndex], position);
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion			
 		}
 	}
 }

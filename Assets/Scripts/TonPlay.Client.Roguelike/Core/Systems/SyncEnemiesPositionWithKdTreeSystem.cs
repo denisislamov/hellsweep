@@ -19,6 +19,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var tree = _storage.KdTree;
 			
@@ -32,6 +35,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			tree.Rebuild();
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 		
 		private static Vector3 GetActualPosition(EcsWorld world, int entityId)

@@ -8,6 +8,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<SpeedComponent>()
@@ -26,6 +29,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 				speed.Speed += acceleration.Acceleration * Time.deltaTime;
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

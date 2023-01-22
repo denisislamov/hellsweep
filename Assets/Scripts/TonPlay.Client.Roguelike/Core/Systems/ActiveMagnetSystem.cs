@@ -27,6 +27,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 
 			var filter = world
@@ -78,7 +81,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					activeMagnetPool.Del(entityId);
 				}
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
+		
 		private void MagnetNearCollectables(
 			int appliedEntityId,
 			ICollection<int> magnetizableCollectableCollection,

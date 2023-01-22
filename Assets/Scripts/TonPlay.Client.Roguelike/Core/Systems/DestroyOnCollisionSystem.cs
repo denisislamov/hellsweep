@@ -8,6 +8,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world.Filter<HasCollidedComponent>()
 							  .Inc<DestroyOnCollisionComponent>()
@@ -20,6 +23,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			{
 				pool.AddOrGet(entityId);
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 	}
 }

@@ -10,6 +10,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ApplyCollectableComponent>()
@@ -49,6 +52,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				world.DelEntity(entityId);
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 		
 		private void ApplyHealth(EcsPool<ApplyHealthCollectableComponent> pool, float value, int entityId, int collectableEntityId)

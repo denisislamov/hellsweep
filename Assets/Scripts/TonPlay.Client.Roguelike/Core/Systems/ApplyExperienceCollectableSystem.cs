@@ -17,6 +17,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ApplyExperienceCollectableComponent>()
@@ -51,6 +54,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				applyPool.Del(entityId);
 			}
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 		
 		private static void AddUpgradeEvent(EcsPool<LevelUpgradeEvent> levelUpgradeEventPool, int entityId)

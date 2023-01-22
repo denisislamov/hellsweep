@@ -97,6 +97,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var world = systems.GetWorld();
 			var filter = world.Filter<LocationComponent>().End();
 			var blockPool = world.GetPool<LocationBlockComponent>();
@@ -186,6 +189,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			_kdTreeStorage.KdTree.Rebuild();
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 		}
 
 		private void MoveBlocksRow(
