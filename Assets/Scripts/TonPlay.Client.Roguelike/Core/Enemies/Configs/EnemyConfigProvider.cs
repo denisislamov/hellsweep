@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
@@ -10,9 +12,9 @@ using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Enemies.Configs
+namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 {
-	[CreateAssetMenu(fileName = nameof(EnemyConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(EnemyConfigProvider))]
+	[CreateAssetMenu(fileName = nameof(EnemyConfigProvider), menuName = AssetMenuConstants.ENEMIES_CONFIGS + nameof(EnemyConfigProvider))]
 	public class EnemyConfigProvider : ScriptableObject, IEnemyConfigProvider
 	{
 		[SerializeField]
@@ -29,44 +31,6 @@ namespace TonPlay.Roguelike.Client.Core.Enemies.Configs
 			}
 			
 			return _configs.FirstOrDefault(config => config.Id == id);
-		}
-		
-		[Serializable]
-		private class EnemyConfig : IEnemyConfig
-		{
-			[SerializeField]
-			private string _id;
-		
-			[SerializeField]
-			private EnemyView _prefab;
-
-			[SerializeField]
-			private int _health;
-			
-			[SerializeField]
-			private int _damageOnCollision;
-			
-			[SerializeField]
-			private CollisionAreaConfig _collisionAreaConfig;
-			
-			[SerializeField]
-			private MovementConfig _movementConfig;
-			
-			[SerializeField]
-			private List<string> _collectablesIdsOnDeath;
-
-			public string Id => _id;
-		
-			public EnemyView Prefab => _prefab;
-			
-			public int StartHealth => _health;
-			
-			public int DamageOnCollision => _damageOnCollision;
-			
-			public IMovementConfig MovementConfig => _movementConfig;
-
-			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
-			public IReadOnlyList<string> CollectablesIdsOnDeath => _collectablesIdsOnDeath;
 		}
 	}
 }

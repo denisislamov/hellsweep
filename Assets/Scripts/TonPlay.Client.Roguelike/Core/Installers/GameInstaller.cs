@@ -53,6 +53,7 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 			Container.Bind<ExperienceCollectablesEntityFactory>().To<ExperienceCollectablesEntityFactory>().AsSingle();
 			Container.Bind<HealthCollectablesEntityFactory>().To<HealthCollectablesEntityFactory>().AsSingle();
 			Container.Bind<MagnetCollectablesEntityFactory>().To<MagnetCollectablesEntityFactory>().AsSingle();
+			Container.Bind<BombCollectablesEntityFactory>().To<BombCollectablesEntityFactory>().AsSingle();
 		}
 	}
 }

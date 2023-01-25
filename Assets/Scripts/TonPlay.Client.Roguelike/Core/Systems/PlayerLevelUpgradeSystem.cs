@@ -11,6 +11,7 @@ using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
@@ -61,12 +62,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				while (upgradeEvent.Count > 0)
 				{
-					SetGamePauseState(true);
+					upgradeEvent.Count--;
 
 					var skillsToUpgrade = GenerateSkillsToUpgrade();
-					ShowSkillChoiceScreen(skillsToUpgrade, entityId);
 
-					upgradeEvent.Count--;
+					if (skillsToUpgrade.Count == 0)
+					{
+						Debug.LogWarning("There's no skills to upgrade.");
+						break;
+					}
+					
+					SetGamePauseState(true);
+
+					ShowSkillChoiceScreen(skillsToUpgrade, entityId);
 				}
 			}
 #region Profiling End
@@ -74,7 +82,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #endregion 
 		}
 
-		private IEnumerable<SkillName> GenerateSkillsToUpgrade()
+		private IReadOnlyList<SkillName> GenerateSkillsToUpgrade()
 		{
 			var skills = _skillsConfigProvider.All;
 			var skillsModel = _gameModel.PlayerModel.SkillsModel;

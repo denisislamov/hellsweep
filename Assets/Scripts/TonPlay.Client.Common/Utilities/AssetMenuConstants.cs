@@ -16,6 +16,8 @@ namespace TonPlay.Roguelike.Client.Utilities
 		
 		public const string CORE_CONFIGS = CONFIGS + "Core/";
 		
+		public const string ENEMIES_CONFIGS = CORE_CONFIGS + "Enemies/";
+		
 		public const string WEAPONS_CONFIGS = CORE_CONFIGS + "Weapons/";
 		
 		public const string COLLISION_AREAS_CONFIGS = CORE_CONFIGS + "Collision Areas/";

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Interfaces;
@@ -10,15 +12,10 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 {
 	public class ProjectileExplodeOnMoveDistanceSystem : IEcsRunSystem
 	{
-		private readonly IOverlapExecutor _overlapExecutor;
 		private readonly int _layerMask;
 
-		private KDQuery _query = new KDQuery();
-		private List<int> _overlappedEntities = new List<int>();
-
-		public ProjectileExplodeOnMoveDistanceSystem(IOverlapExecutor overlapExecutor)
+		public ProjectileExplodeOnMoveDistanceSystem()
 		{
-			_overlapExecutor = overlapExecutor;
 			_layerMask = LayerMask.GetMask("Enemy");
 		}
 		
@@ -39,7 +36,6 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			var destroyPool = world.GetPool<DestroyComponent>();
 			var explodePool = world.GetPool<ExplodeOnMoveDistanceComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
-			var applyDamagePool = world.GetPool<ApplyDamageComponent>();
 
 			foreach (var entityId in filter)
 			{
@@ -48,23 +44,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 				if (Vector2.Distance(position.Position, explodeOnMove.StartPosition) >= explodeOnMove.DistanceToExplode)
 				{
-					var count = _overlapExecutor.Overlap(_query, position.Position, explodeOnMove.CollisionConfig, ref _overlappedEntities, _layerMask);
-					for (var i = 0; i < count; i++)
-					{
-						var enemyEntityId = _overlappedEntities[i];
-						if (applyDamagePool.Has(enemyEntityId))
-						{
-							ref var applyDamage = ref applyDamagePool.Get(enemyEntityId);
-							applyDamage.Damage += explodeOnMove.Damage;
-						}
-						else
-						{
-							ref var applyDamage = ref applyDamagePool.Add(enemyEntityId);
-							applyDamage.Damage += explodeOnMove.Damage;
-						}
-					}
-					
-					_overlappedEntities.Clear();
+					var explosionEntity = world.NewEntity();
+					explosionEntity.AddPositionComponent(position.Position);
+					explosionEntity.AddExplosionComponent(explodeOnMove.Damage, explodeOnMove.CollisionConfig, _layerMask);
 
 					destroyPool.Add(entityId);
 				}

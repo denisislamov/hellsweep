@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Views;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 {
 	public interface IEnemyConfig
 	{
@@ -19,6 +19,6 @@ namespace TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces
 		
 		ICollisionAreaConfig CollisionAreaConfig { get; }
 		
-		IReadOnlyList<string> CollectablesIdsOnDeath { get; }
+		IItemDrop<string>[] RandomCollectableDrops { get; }
 	}
 }

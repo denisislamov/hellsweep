@@ -25,6 +25,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var applyHealthPool = world.GetPool<ApplyHealthCollectableComponent>();
 			var applyMagnetPool = world.GetPool<ApplyMagnetCollectableComponent>();
 			var applyGoldPool = world.GetPool<ApplyGoldCollectableComponent>();
+			var applyBombPool = world.GetPool<ApplyBombCollectableComponent>();
 
 			foreach (var entityId in filter)
 			{
@@ -47,6 +48,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						break;
 					case CollectableType.Magnet:
 						ApplyMagnet(applyMagnetPool, component.AppliedEntityId, component.CollectableEntityId);
+						break;
+					case CollectableType.Bomb:
+						ApplyBomb(applyBombPool, component.AppliedEntityId, component.CollectableEntityId);
 						break;
 				}
 
@@ -123,6 +127,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		
 		private void ApplyMagnet(
 			EcsPool<ApplyMagnetCollectableComponent> applyPool,
+			int entityId,
+			int collectableEntityId)
+		{
+			if (applyPool.Has(entityId))
+			{
+				ref var exp = ref applyPool.Get(entityId);
+				exp.CollectableEntityIds.Add(collectableEntityId);
+			}
+			else
+			{
+				ref var exp = ref applyPool.Add(entityId);
+				exp.CollectableEntityIds = new HashSet<int>() { collectableEntityId };
+			}
+		}
+		
+		private void ApplyBomb(
+			EcsPool<ApplyBombCollectableComponent> applyPool,
 			int entityId,
 			int collectableEntityId)
 		{

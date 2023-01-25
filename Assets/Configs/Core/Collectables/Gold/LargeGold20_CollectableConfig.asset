@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699cb52e858a4622b00f6fc5a1427522, type: 3}
-  m_Name: ProfileExperienceCollectableConfig
+  m_Script: {fileID: 11500000, guid: 26cdd00fc1c947d3a15f8d5b521945a8, type: 3}
+  m_Name: LargeGold20_CollectableConfig
   m_EditorClassIdentifier: 
-  _id: profile_exp_5
-  _value: 5
-  _prefab: {fileID: 7310924750116568597, guid: bea338402de294052a7cc1c4bd75c872, type: 3}
+  _id: large_gold_20
+  _value: 20
+  _prefab: {fileID: 6293467483275004161, guid: 520e61fafdcb94f9b949481f2f4f5eb7, type: 3}
   _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
-  _poolSize: 64
   _layer: 9

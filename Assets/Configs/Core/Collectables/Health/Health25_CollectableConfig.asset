@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cdd00fc1c947d3a15f8d5b521945a8, type: 3}
-  m_Name: SmallGoldCollectableConfig
+  m_Script: {fileID: 11500000, guid: f03b50953ec6410b9539d2f563ca76a5, type: 3}
+  m_Name: Health25_CollectableConfig
   m_EditorClassIdentifier: 
-  _id: small_gold_5
-  _value: 5
-  _prefab: {fileID: 607793011748542998, guid: 53e98c4ba6769440f8cd212d90de1a7c, type: 3}
+  _id: health_25
+  _value: 25
+  _prefab: {fileID: 3242398055451124318, guid: 0b879a81a2a9641349ebb2f4387d34ce, type: 3}
   _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
+  _poolSize: 128
   _layer: 9

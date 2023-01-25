@@ -104,6 +104,7 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new GoldCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new HealthCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
+						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigProvider))
 				;
 
@@ -114,6 +115,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
 							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))
+							.Add(new PrepareToExplodeCollectedBombsSystem())
 							.Add(new StickEaseMovementToEntityPositionSystem())
 							.Add(new EaseMovementSystem())
 							.Add(new WeaponFireSystem())
@@ -131,7 +133,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new TransformMovementSystem())
 							.Add(new UpdatePlayerModelSystem())
 							.Add(new ProjectileCollisionSystem(_overlapExecutor))
-							.Add(new ProjectileExplodeOnMoveDistanceSystem(_overlapExecutor))
+							.Add(new ProjectileExplodeOnMoveDistanceSystem())
+							.Add(new ExplosionSystem(_overlapExecutor))
 							.Add(new GameOverSystem());
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
@@ -159,7 +162,8 @@ namespace TonPlay.Client.Roguelike.Core
 								 .Add(new ApplyExperienceCollectableSystem())
 								 .Add(new ApplyGoldCollectableSystem())
 								 .Add(new ApplyHealthCollectableSystem())
-								 .Add(new ApplyMagnetCollectableSystem());
+								 .Add(new ApplyMagnetCollectableSystem())
+								 .Add(new ApplyBombCollectableSystem());
 
 			_spawnSystems.Init();
 			_collectablesSystem.Init();

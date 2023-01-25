@@ -9,12 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f03b50953ec6410b9539d2f563ca76a5, type: 3}
-  m_Name: HealthCollectableConfig
+  m_Script: {fileID: 11500000, guid: 729e80b630b846bda4a804aea1d530ef, type: 3}
+  m_Name: BombCollectableConfig
   m_EditorClassIdentifier: 
-  _id: health_25
-  _value: 25
-  _prefab: {fileID: 3242398055451124318, guid: 0b879a81a2a9641349ebb2f4387d34ce, type: 3}
+  _id: bomb
+  _value: 1
+  _prefab: {fileID: 2685475919636787761, guid: 1683571d431d84d0a830ad3643f54da7, type: 3}
   _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
   _poolSize: 128
   _layer: 9
+  _explodeCollisionAreaConfig: {fileID: 11400000, guid: 069ed1a8152d84ec9840bd5093e759e3, type: 2}
+  _timeToExplode: 0.75
+  _damage: 25
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128

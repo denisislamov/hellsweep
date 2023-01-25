@@ -1,7 +1,7 @@
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct ApplyDamageComponent
 	{
-		public int Damage;
+		public float Damage;
 	}
 }

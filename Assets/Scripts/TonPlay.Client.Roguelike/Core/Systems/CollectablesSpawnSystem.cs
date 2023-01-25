@@ -40,7 +40,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			foreach (var config in _collectablesConfigProvider.AllCollectables)
 			{
-				maxSpawnedQuantityPerPrefab.Add(config.Prefab, config.PoolSize);
+				if (!maxSpawnedQuantityPerPrefab.ContainsKey(config.Prefab))
+				{
+					maxSpawnedQuantityPerPrefab.Add(config.Prefab, 0);
+				}
+
+				maxSpawnedQuantityPerPrefab[config.Prefab] += config.PoolSize;
 
 				total += config.PoolSize;
 			}

@@ -17,6 +17,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 
 		public CollectablesEntityFactory(
 			ISharedData sharedData,
+			BombCollectablesEntityFactory bombCollectablesEntityFactory,
 			GoldCollectablesEntityFactory goldCollectablesEntityFactory,
 			HealthCollectablesEntityFactory healthCollectablesEntityFactory,
 			MagnetCollectablesEntityFactory magnetCollectablesEntityFactory,
@@ -26,6 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			_sharedData = sharedData;
 			_factories = new Dictionary<CollectableType, ICollectableEntityFactory>()
 			{
+				[CollectableType.Bomb] = bombCollectablesEntityFactory,
 				[CollectableType.Gold] = goldCollectablesEntityFactory,
 				[CollectableType.Health] = healthCollectablesEntityFactory,
 				[CollectableType.Magnet] = magnetCollectablesEntityFactory,

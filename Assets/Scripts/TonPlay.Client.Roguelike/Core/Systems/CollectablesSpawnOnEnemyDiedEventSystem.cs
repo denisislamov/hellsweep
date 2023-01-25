@@ -1,3 +1,4 @@
+using System.Linq;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -35,9 +36,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var diedEnemy = ref diedEnemyPool.Get(entityId);
 
-				var collectables = diedEnemy.EnemyConfig.CollectablesIdsOnDeath;
+				var collectables = diedEnemy.EnemyConfig
+											.RandomCollectableDrops
+											.Select(_ => _.Drop())
+											.Where(_ => !string.IsNullOrEmpty(_))
+											.ToArray();
 
-				if (collectables == null || collectables.Count == 0)
+				if (collectables.Length == 0)
 				{
 					world.DelEntity(entityId);
 					continue;

@@ -1,18 +1,19 @@
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
+using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class PlayerMovementInputSystem : IEcsRunSystem, IEcsInitSystem
+	public class PlayerMovementInputSystem : IEcsRunSystem, IEcsInitSystem, IEcsDestroySystem
 	{
-		private InputControls _inputControls;
+		private DefaultInputActions _inputControls;
 		
 		public void Init(EcsSystems systems)
 		{
-			_inputControls = new InputControls();
+			_inputControls = new DefaultInputActions();
 			_inputControls.Player.Enable();
-			_inputControls.Player.Movement.Enable();
+			_inputControls.Player.Move.Enable();
 		}
 		
 		public void Run(EcsSystems systems)
@@ -20,7 +21,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 #region Profiling Begin
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
-			var movementVector = _inputControls.Player.Movement.ReadValue<Vector2>();
+			var movementVector = _inputControls.Player.Move.ReadValue<Vector2>();
 			
 			var world = systems.GetWorld();
 			var filter = world.Filter<PlayerComponent>().Inc<MovementComponent>().End();
@@ -40,7 +41,13 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			}
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+#endregion
+		}
+		
+		public void Destroy(EcsSystems systems)
+		{
+			_inputControls.Disable();
+			_inputControls.Dispose();
 		}
 	}
 }

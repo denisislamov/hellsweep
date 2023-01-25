@@ -21,14 +21,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #endregion
 			var world = systems.GetWorld();
 			var tree = _storage.KdTree;
-			
-			for (var i = 0; i < _storage.KdTreePositionIndexToEntityIdMap.Length; i++) 
+
+			foreach (var kvp in _storage.KdTreeEntityIdToPositionIndexMap)
 			{
-				var entityId = _storage.KdTreePositionIndexToEntityIdMap[i];
+				var entityId = kvp.Key;
+				var index = kvp.Value;
 				
 				if (entityId == EcsEntity.DEFAULT_ID) continue;
 
-				tree.Points[i] = GetActualPosition(world, entityId);
+				tree.Points[index] = GetActualPosition(world, entityId);
 			}
 
 			tree.Rebuild();

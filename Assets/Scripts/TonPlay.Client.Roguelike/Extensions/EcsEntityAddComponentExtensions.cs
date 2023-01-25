@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -71,6 +72,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 		
+		public static ref BombCollectableComponent AddBombCollectableComponent(this EcsEntity entity, IBombCollectableConfig config)
+		{
+			ref var component = ref entity.Add<BombCollectableComponent>();
+			component.Config = config;
+			return ref component;
+		}
+		
 		public static ref SkillsComponent AddSkillsComponent(this EcsEntity entity)
 		{
 			ref var skillsComponent = ref entity.Add<SkillsComponent>();
@@ -134,6 +142,15 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref MagnetizableComponent AddMagnetizableComponent(this EcsEntity entity)
 		{
 			return ref entity.Add<MagnetizableComponent>();
+		}
+		
+		public static ref ExplosionComponent AddExplosionComponent(this EcsEntity entity, float damage, ICollisionAreaConfig collisionAreaConfig, int layerMask)
+		{
+			ref var explosion = ref entity.Add<ExplosionComponent>();
+			explosion.CollisionAreaConfig = collisionAreaConfig;
+			explosion.Damage = damage;
+			explosion.LayerMask = layerMask;
+			return ref explosion;
 		}
 	}
 }
