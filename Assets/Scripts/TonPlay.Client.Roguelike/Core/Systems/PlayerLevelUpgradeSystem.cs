@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice;
@@ -51,9 +53,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.Inc<LevelUpgradeEvent>()
 						.Inc<SkillsComponent>()
 						.Exc<DeadComponent>()
+						.Exc<OpenedUIComponent>()
 						.End();
 
 			var levelUpgradeEventPool = world.GetPool<LevelUpgradeEvent>();
+			var openedUiPool = world.GetPool<OpenedUIComponent>();
 
 			foreach (var entityId in filter)
 			{
@@ -72,6 +76,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						break;
 					}
 					
+					openedUiPool.Add(entityId);
+
 					SetGamePauseState(true);
 
 					ShowSkillChoiceScreen(skillsToUpgrade, entityId);
@@ -119,6 +125,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		private void SkillChosenHandler(SkillName updatedSkill, int entityId)
 		{
+			var openedUiPool = _world.GetPool<OpenedUIComponent>();
+			openedUiPool.Del(entityId);
+			
 			UpgradeChosenSkill(updatedSkill, entityId);
 			SetGamePauseState(false);
 		}

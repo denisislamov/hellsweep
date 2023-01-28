@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;

@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Extensions;
+using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Layers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
     public class UIService : IUIService
     {
@@ -51,6 +53,21 @@ namespace TonPlay.Roguelike.Client.UI.UIService
             _layeredServices[screen.RootLayer.GetType()].Close(screen, isEmbedded);
         }
         
+        public void CloseAll(IScreenLayer layer = null)
+        {
+            if (layer is null)
+            {
+                foreach (var kvp in _layeredServices)
+                {
+                    kvp.Value.CloseAll();
+                }
+            }
+            else
+            {
+                _layeredServices[layer.GetType()].CloseAll();
+            }
+        }
+
         public Transform GetScreensRoot(IScreenLayer screenLayer = null)
         {
             if (screenLayer is null)

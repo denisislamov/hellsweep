@@ -40,6 +40,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 						.WithArguments(ScreenPrefab);
 
 			subContainer.BindFactory<IMainMenuView, IMainMenuScreenContext, MainMenuPresenter, MainMenuPresenter.Factory>();
+			subContainer.BindFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter, ProfileBarPresenter.Factory>();
 		}
 	}
 }

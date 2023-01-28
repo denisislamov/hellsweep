@@ -1,5 +1,6 @@
 using System;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
@@ -135,7 +136,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ProjectileCollisionSystem(_overlapExecutor))
 							.Add(new ProjectileExplodeOnMoveDistanceSystem())
 							.Add(new ExplosionSystem(_overlapExecutor))
-							.Add(new GameOverSystem());
+							.Add(new GameOverSystem(_uiService));
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
 			   .Add(new RPGSkillSystem());

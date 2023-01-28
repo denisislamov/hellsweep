@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.Core.Collectables.Config;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;

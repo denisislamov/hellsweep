@@ -1,9 +1,9 @@
-using System;
 using System.Linq;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using Object = UnityEngine.Object;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	public class DefaultClosingScreenStrategy : IClosingScreenStrategy
 	{

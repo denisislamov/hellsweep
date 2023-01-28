@@ -53,6 +53,7 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
 			for (var i = 0; i < _activeLevelsImages.Length; i++)
 			{
 				_activeLevelsImages[i].gameObject.SetActive(level - i - 1 >= 0);
+				_activeLevelsImages[i].color = Color.white;
 			}
 		}
 		

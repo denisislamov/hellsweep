@@ -1,6 +1,8 @@
+using TonPlay.Client.Roguelike.Models.Interfaces;
+
 namespace TonPlay.Client.Roguelike.Core.Models.Data
 {
-	public class GameData
+	public class GameData : IData
 	{
 		public float GameTime { get; set; }
 		

@@ -1,3 +1,5 @@
+using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;

@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;

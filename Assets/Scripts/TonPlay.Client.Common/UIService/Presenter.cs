@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	public class Presenter<TView, TContext> : IPresenter<TView, TContext>
 		where TView : IView
@@ -43,6 +43,10 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		
 		public virtual void Dispose()
 		{
+			foreach (var presenter in Presenters)
+			{
+				presenter.Dispose();
+			}
 		}
 	}
 }

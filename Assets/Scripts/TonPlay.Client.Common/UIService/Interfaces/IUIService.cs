@@ -1,6 +1,7 @@
+using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
+namespace TonPlay.Client.Common.UIService.Interfaces
 {
 	public interface IUIService
 	{
@@ -9,6 +10,8 @@ namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
 			where TScreen : IScreen;
 		
 		void Close(IScreen screen, bool isEmbedded = false);
+
+		void CloseAll(IScreenLayer layer = null);
 		
 		Transform GetScreensRoot(IScreenLayer layer = null);
 	}

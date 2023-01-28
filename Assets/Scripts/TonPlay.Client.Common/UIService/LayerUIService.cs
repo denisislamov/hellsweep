@@ -1,7 +1,9 @@
+using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	public class LayerUIService : IUIService
 	{
@@ -11,17 +13,19 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		private readonly IOpeningScreenStrategy _embeddedOpeningStrategy;
 		private readonly IClosingScreenStrategy _defaultClosingStrategy;
 		private readonly IClosingScreenStrategy _embeddedClosingStrategy;
+		
+		private readonly ScreenStack _screenStack;
 
 		public LayerUIService(IScreenFactoryFacade screenFactoryFacade, IScreenLayer layer, Transform rootTransform)
 		{
 			_rootTransform = rootTransform;
 			
-			IScreenStack screenStack = new ScreenStack();
+			_screenStack = new ScreenStack();
 			
-			_defaultOpeningStrategy = new DefaultOpeningScreenStrategy(screenFactoryFacade, layer, rootTransform, screenStack);
-			_embeddedOpeningStrategy = new EmbeddedOpeningScreenStrategy(screenFactoryFacade, layer, screenStack);
-			_defaultClosingStrategy = new DefaultClosingScreenStrategy(screenStack);
-			_embeddedClosingStrategy = new EmbeddedClosingScreenStrategy(screenStack);
+			_defaultOpeningStrategy = new DefaultOpeningScreenStrategy(screenFactoryFacade, layer, rootTransform, _screenStack);
+			_embeddedOpeningStrategy = new EmbeddedOpeningScreenStrategy(screenFactoryFacade, layer, _screenStack);
+			_defaultClosingStrategy = new DefaultClosingScreenStrategy(_screenStack);
+			_embeddedClosingStrategy = new EmbeddedClosingScreenStrategy(_screenStack);
 		}
 		
 		public void Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
@@ -38,6 +42,14 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 			closingScreenStrategy.Close(screen);
 		}
 		
+		public void CloseAll(IScreenLayer layer = null)
+		{
+			while(_screenStack.Peek() != null)
+			{
+				Close(_screenStack.Peek());
+			}
+		}
+
 		public Transform GetScreensRoot(IScreenLayer layer = null)
 		{
 			return _rootTransform;

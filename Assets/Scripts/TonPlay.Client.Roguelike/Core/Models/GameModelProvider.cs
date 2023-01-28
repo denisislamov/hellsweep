@@ -1,7 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Models
+namespace TonPlay.Client.Roguelike.Core.Models
 {
 	internal class GameModelProvider : IGameModelProvider, IGameModelSetter
 	{

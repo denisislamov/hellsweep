@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	public class ScreenStack : IScreenStack
 	{

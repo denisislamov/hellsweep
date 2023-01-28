@@ -1,3 +1,5 @@
+using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 using Zenject;
@@ -15,6 +17,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			_uiServiceInstaller.InstallBindings();
 			
 			Container.BindInterfacesTo<SceneService.SceneService>().AsSingle();
+
+			Container.BindInterfacesTo<ProfileLoadingService>().AsSingle();
 		}
 	}
 }

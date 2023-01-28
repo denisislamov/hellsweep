@@ -8,7 +8,9 @@ namespace TonPlay.Roguelike.Client.Utilities
 		
 		public const string SERVICE_INSTALLERS = INSTALLERS + "Services/";
 		
-		public const string SCREENS_INSTALLERS = INSTALLERS + "Screens/";
+		public const string UI_INSTALLERS = INSTALLERS + "UI/";
+
+		public const string SCREENS_INSTALLERS = UI_INSTALLERS + "Screens/";
 		
 		public const string CORE_INSTALLERS = INSTALLERS + "Core/";
 		

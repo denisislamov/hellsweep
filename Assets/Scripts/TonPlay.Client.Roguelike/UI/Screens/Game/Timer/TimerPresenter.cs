@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Views;
 using TonPlay.Roguelike.Client.UI.UIService;

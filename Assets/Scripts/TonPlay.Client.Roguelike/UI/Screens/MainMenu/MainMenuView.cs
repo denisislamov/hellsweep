@@ -1,15 +1,20 @@
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 {
 	public class MainMenuView : View, IMainMenuView
 	{
 		[SerializeField]
-		private Button _playButton;
+		private ButtonView _playButton;
+		
+		[SerializeField]
+		private ProfileBarView _profileBarView;
 
-		public Button PlayButton => _playButton;
+		public IButtonView PlayButton => _playButton;
+		public IProfileBarView ProfileBarView => _profileBarView;
 	}
 }

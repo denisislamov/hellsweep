@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		{
 			_cached.GameTime = _gameTime.Value;
 			_cached.Paused = _paused.Value;
-			_cached.DeadEnemies = _cached.DeadEnemies;
+			_cached.DeadEnemies = _deadEnemiesCount.Value;
 
 			_cached.PlayerData = _playerModel.ToData();
 			return _cached;

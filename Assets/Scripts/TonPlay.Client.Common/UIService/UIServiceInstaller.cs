@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Layers;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 using Zenject;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	[CreateAssetMenu(fileName = nameof(UIServiceInstaller), menuName = AssetMenuConstants.SERVICE_INSTALLERS + nameof(UIServiceInstaller))]
 	public class UIServiceInstaller : ScriptableObjectInstaller<UIServiceInstaller>
@@ -15,6 +17,9 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 
 		[SerializeField]
 		private ScreenInstaller[] _screenInstallers;
+
+		[SerializeField]
+		private ButtonsInstaller _buttonsInstaller;
 
 		public override void InstallBindings()
 		{
@@ -45,6 +50,9 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 				subContainer.Inject(screenInstaller);
 				screenInstaller.InstallBindings();
 			}
+			
+			subContainer.Inject(_buttonsInstaller);
+			_buttonsInstaller.InstallBindings();
 		}
 	}
 }
