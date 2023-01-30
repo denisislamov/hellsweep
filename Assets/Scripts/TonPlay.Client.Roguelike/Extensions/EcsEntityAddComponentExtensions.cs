@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
@@ -151,6 +152,38 @@ namespace TonPlay.Client.Roguelike.Extensions
 			explosion.Damage = damage;
 			explosion.LayerMask = layerMask;
 			return ref explosion;
+		}
+		
+		public static ref SpinAroundEntityPositionComponent AddSpinAroundEntityPositionComponent(this EcsEntity entity, int spinAroundEntityId, float radius, float lastAngle)
+		{
+			ref var component = ref entity.Add<SpinAroundEntityPositionComponent>();
+			component.SpinAroundEntityId = spinAroundEntityId;
+			component.Radius = radius;
+			component.LastAngle = lastAngle;
+			return ref component;
+		}
+		
+		public static ref GuardianProjectileComponent AddGuardianProjectileComponent(this EcsEntity entity, float leftTime)
+		{
+			ref var component = ref entity.Add<GuardianProjectileComponent>();
+			component.ActiveLeftTime = leftTime;
+			return ref component;
+		}
+		
+		public static ref CollisionComponent AddCollisionComponent(this EcsEntity entity, ICollisionAreaConfig collisionAreaConfig, int layerMask)
+		{
+			ref var component = ref entity.Add<CollisionComponent>();
+			component.CollisionAreaConfig = collisionAreaConfig;
+			component.LayerMask = layerMask;
+			return ref component;
+		}
+		
+		public static ref DamageOnDistanceChangeComponent AddDamageOnDistanceChangeComponent(this EcsEntity entity, float damage, Vector2 lastDamagePosition)
+		{
+			ref var component = ref entity.Add<DamageOnDistanceChangeComponent>();
+			component.LastDamagePosition = lastDamagePosition;
+			component.Damage = damage;
+			return ref component;
 		}
 	}
 }

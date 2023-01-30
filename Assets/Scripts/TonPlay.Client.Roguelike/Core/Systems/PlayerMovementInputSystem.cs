@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
@@ -30,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			foreach (var entityId in filter) {
 				ref var movementComponent = ref movementComponents.Get(entityId);
-				movementComponent.Vector = movementVector;
+				movementComponent.Direction = movementVector;
 
 				ref var rotationComponent = ref rotationComponents.Get(entityId);
 				

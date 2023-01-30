@@ -1,8 +1,9 @@
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 using Zenject;
-using Screen = TonPlay.Roguelike.Client.UI.UIService.Screen;
+using Screen = TonPlay.Client.Common.UIService.Screen;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 {

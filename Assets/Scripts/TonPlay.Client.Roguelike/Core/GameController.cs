@@ -119,6 +119,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new PrepareToExplodeCollectedBombsSystem())
 							.Add(new StickEaseMovementToEntityPositionSystem())
 							.Add(new EaseMovementSystem())
+							.Add(new SpinAroundEntityPositionMovementSystem())
 							.Add(new WeaponFireSystem())
 							.Add(new WeaponFireBlockSystem())
 							.Add(new WeaponFireBlockSystem())
@@ -139,7 +140,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new GameOverSystem(_uiService));
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
-			   .Add(new RPGSkillSystem());
+			   .Add(new RPGSkillSystem())
+			   .Add(new GuardianSkillSystem(_overlapExecutor));
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())

@@ -40,7 +40,7 @@ namespace TonPlay.Roguelike.Client.Core.Weapons
 			projectileAcceleration.Acceleration = config.MovementConfig.Acceleration;
 			projectileRotation.Direction = direction;
 			projectilePosition.Position = position;
-			projectileMovement.Vector = projectileRotation.Direction;
+			projectileMovement.Direction = projectileRotation.Direction;
 			projectileTransform.Transform = projectileView.transform;
 			projectileViewPoolObject.ViewPoolObject = poolObject;
 

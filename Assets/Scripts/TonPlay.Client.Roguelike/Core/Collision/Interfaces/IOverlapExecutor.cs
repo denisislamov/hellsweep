@@ -3,7 +3,7 @@ using DataStructures.ViliWonka.KDTree;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Collision.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 {
 	public interface IOverlapExecutor
 	{

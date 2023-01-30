@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 				var speed = speedComponents.Has(entityId) ? speedComponents.Get(entityId).Speed : 1f;
 				
-				var targetPosition = positionComponent.Position + movementComponent.Vector * speed * Time.deltaTime;
+				var targetPosition = positionComponent.Position + movementComponent.Direction * speed * Time.deltaTime;
 
 				if (lerpComponents.Has(entityId))
 				{

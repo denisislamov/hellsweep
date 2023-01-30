@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
@@ -73,7 +75,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
 
-				movementComponent.Vector = CombineMovementDirection(separateVector, movementVector).normalized;
+				movementComponent.Direction = CombineMovementDirection(separateVector, movementVector).normalized;
 
 				_neighborsEntityIds.Clear();
 			}

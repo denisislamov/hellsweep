@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: GuardianProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 774865417117150263, guid: 22a788ae8bfb54427be144c25caecc7a, type: 3}
+  _movementConfig:
+    _startSpeed: 0
+    _acceleration: 0
+  _properties: []

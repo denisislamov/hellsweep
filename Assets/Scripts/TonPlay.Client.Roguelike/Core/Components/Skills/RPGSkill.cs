@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core.Components.Skills
+namespace TonPlay.Client.Roguelike.Core.Components.Skills
 {
 	public struct RPGSkill
 	{

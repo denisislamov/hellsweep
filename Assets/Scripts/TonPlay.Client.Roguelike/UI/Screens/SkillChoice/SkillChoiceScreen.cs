@@ -1,9 +1,10 @@
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 using Zenject;
-using Screen = TonPlay.Roguelike.Client.UI.UIService.Screen;
+using Screen = TonPlay.Client.Common.UIService.Screen;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 {

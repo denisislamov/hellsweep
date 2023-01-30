@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct MovementComponent
 	{
-		public Vector2 Vector;
+		public Vector2 Direction;
 	}
 }

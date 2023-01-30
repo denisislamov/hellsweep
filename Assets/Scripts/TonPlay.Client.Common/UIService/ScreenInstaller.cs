@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using Screen = TonPlay.Client.Common.UIService.Screen;
 
 namespace TonPlay.Roguelike.Client.UI.UIService
 {

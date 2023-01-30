@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
@@ -30,9 +31,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 				var speed = speedComponents.Has(entityId) ? speedComponents.Get(entityId).Speed : 1f;
 
-				if (movementComponent.Vector.sqrMagnitude > 0)
+				if (movementComponent.Direction.sqrMagnitude > 0)
 				{
-					rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Vector * (speed * Time.deltaTime));
+					rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Direction * (speed * Time.deltaTime));
 				}
 			}
 #region Profiling End
