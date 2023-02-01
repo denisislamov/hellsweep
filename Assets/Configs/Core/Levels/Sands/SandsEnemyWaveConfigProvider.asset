@@ -28,7 +28,7 @@ MonoBehaviour:
         _seconds: 2
     _startTiming:
       _minutes: 0
-      _seconds: 5
+      _seconds: 0
   - _waves:
     - _id: 2_ghost
       _enemyId: ghost

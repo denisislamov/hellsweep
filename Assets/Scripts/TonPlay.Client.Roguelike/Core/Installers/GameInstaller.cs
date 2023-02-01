@@ -3,6 +3,7 @@ using TonPlay.Client.Roguelike.Core;
 using TonPlay.Client.Roguelike.Core.Collectables;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Skills.Config;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Interfaces;

@@ -120,11 +120,12 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new StickEaseMovementToEntityPositionSystem())
 							.Add(new EaseMovementSystem())
 							.Add(new SpinAroundEntityPositionMovementSystem())
+							.Add(new SyncRotationWithMovementSystem())
 							.Add(new WeaponFireSystem())
-							.Add(new WeaponFireBlockSystem())
 							.Add(new WeaponFireBlockSystem())
 							.Add(new WeaponRotationSystem())
 							.Add(new WeaponPositionSystem())
+							.Add(new DamageOnDistanceChangeSystem(_overlapExecutor))
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
 							.Add(new BasicEnemyMovementTargetSystem(_overlapExecutor))
@@ -132,7 +133,9 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ApplyDamageSystem())
 							.Add(new PlayerLevelUpgradeSystem(_uiService))
 							.Add(new AccelerationSystem())
+							.Add(new InvertMovementAxisOnSpeedInversionSystem())
 							.Add(new TransformMovementSystem())
+							.Add(new TransformRotationSystem())
 							.Add(new UpdatePlayerModelSystem())
 							.Add(new ProjectileCollisionSystem(_overlapExecutor))
 							.Add(new ProjectileExplodeOnMoveDistanceSystem())
@@ -141,7 +144,8 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
 			   .Add(new RPGSkillSystem())
-			   .Add(new GuardianSkillSystem(_overlapExecutor));
+			   .Add(new GuardianSkillSystem())
+			   .Add(new BrickSkillSystem());
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())
@@ -149,6 +153,7 @@ namespace TonPlay.Client.Roguelike.Core
 								 .Add(new RigidbodyPositionSystem());
 
 			_destroySystems = new EcsSystems(_world, _sharedData)
+							 .Add(new DestroyIfDistanceExceededSystem())
 							 .Add(new DestroyOnTimerSystem())
 							 .Add(new DestroyOnCollisionSystem())
 							 .Add(new DestroyPoolObjectSystem())

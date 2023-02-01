@@ -185,5 +185,26 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.Damage = damage;
 			return ref component;
 		}
+		
+		public static ref BrickProjectileComponent AddBrickProjectileComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<BrickProjectileComponent>();
+			return ref component;
+		}
+		
+		public static ref InvertMovementAxisOnSpeedInversionComponent AddInvertMovementAxisOnSpeedInversionComponent(this EcsEntity entity, bool invertX, bool  invertY)
+		{
+			ref var component = ref entity.Add<InvertMovementAxisOnSpeedInversionComponent>();
+			component.AxisX = invertX;
+			component.AxisY = invertY;
+			return ref component;
+		}
+		
+		public static ref SyncRotationWithPositionDifferenceComponent AddSyncRotationWithPositionDifferenceComponent(this EcsEntity entity, Vector2 position)
+		{
+			ref var component = ref entity.Add<SyncRotationWithPositionDifferenceComponent>();
+			component.LastPosition = position;
+			return ref component;
+		}
 	}
 }

@@ -1,21 +1,15 @@
-using System.Collections.Generic;
-using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Utilities;
-using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
-using TonPlay.Roguelike.Client.Core.Weapons;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 
@@ -23,21 +17,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
 	public class GuardianSkillSystem  : IEcsInitSystem, IEcsRunSystem
 	{
-		private readonly IOverlapExecutor _overlapExecutor;
-
-		private KDQuery _query = new KDQuery();
-		private List<int> _overlappedEntities = new List<int>();
-
 		private EcsWorld _world;
 		private IGuardianSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
-
-		public GuardianSkillSystem(IOverlapExecutor overlapExecutor)
-		{
-			_overlapExecutor = overlapExecutor;
-		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -56,7 +40,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		{
 			AddSkillComponentIfDoesntExist();
 			TrySpawnProjectile();
-			TryToDamageAroundProjectiles();
 			TryDestroyProjectiles();
 		}
 		
@@ -80,62 +63,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				{
 					destroyPool.Add(entityId);
 				}
-			}
-		}
-
-		private void TryToDamageAroundProjectiles()
-		{
-			var filter = _world
-						.Filter<DamageOnDistanceChangeComponent>()
-						.Inc<PositionComponent>()
-						.Inc<CollisionComponent>()
-						.Exc<DestroyComponent>()
-						.Exc<InactiveComponent>()
-						.End();
-
-			var damageOnDistancePool = _world.GetPool<DamageOnDistanceChangeComponent>();
-			var positionPool = _world.GetPool<PositionComponent>();
-			var collisionPool = _world.GetPool<CollisionComponent>();
-			var applyDamagePool = _world.GetPool<ApplyDamageComponent>();
-
-			foreach (var entityId in filter)
-			{
-				ref var damageOnDistance = ref damageOnDistancePool.Get(entityId);
-				ref var collision = ref collisionPool.Get(entityId);
-				ref var position = ref positionPool.Get(entityId);
-				
-				var collisionArea = (ICircleCollisionAreaConfig)collision.CollisionAreaConfig;
-
-				if (Vector2.Distance(damageOnDistance.LastDamagePosition, position.Position) < collisionArea.Radius)
-				{
-					continue;
-				}
-				
-				damageOnDistance.LastDamagePosition = position.Position;
-
-				var count = _overlapExecutor.Overlap(
-					_query,
-					position.Position, 
-					collision.CollisionAreaConfig, 
-					ref _overlappedEntities, 
-					collision.LayerMask);
-					
-				for (int i = 0; i < count; i++)
-				{
-					var overlappedEntityId = _overlappedEntities[i];
-					if (applyDamagePool.Has(overlappedEntityId))
-					{
-						ref var applyDamage = ref applyDamagePool.Get(overlappedEntityId);
-						applyDamage.Damage += damageOnDistance.Damage;
-					}
-					else
-					{
-						ref var applyDamage = ref applyDamagePool.Add(overlappedEntityId);
-						applyDamage.Damage = damageOnDistance.Damage;
-					}
-				}
-				
-				_overlappedEntities.Clear();
 			}
 		}
 

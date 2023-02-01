@@ -1,8 +1,9 @@
 using System;
+using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Skills.Config
+namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	public abstract class SkillConfig : ScriptableObject, ISkillConfig
 	{

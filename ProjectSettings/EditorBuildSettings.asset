@@ -14,4 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Sands.unity
     guid: 41e156ad036384221acf8a33cd471ea6
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: fdd2500000fd547a6a2daa9554ba81f8, type: 2}

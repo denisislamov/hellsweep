@@ -1,12 +1,13 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons
+namespace TonPlay.Client.Roguelike.Core.Weapons
 {
 	internal static class ProjectileSpawner
 	{
@@ -67,6 +68,14 @@ namespace TonPlay.Roguelike.Client.Core.Weapons
 				projectileDamageOnCollision.Damage = damageOnCollisionProjectileConfigProperty.Damage;
 				projectileCollision.CollisionAreaConfig = damageOnCollisionProjectileConfigProperty.CollisionAreaConfig;
 				projectileCollision.LayerMask = collisionLayerMask;
+			}
+			
+			if (config.TryGetProperty<IDestroyIfRadiusExceededProjectileConfigProperty>(out var destroyIfRadiusExceededProjectileConfigProperty))
+			{
+				ref var destroyIfDistanceExceededComponent = ref projectileEntity.Add<DestroyIfDistanceExceededComponent>();
+
+				destroyIfDistanceExceededComponent.Distance = destroyIfRadiusExceededProjectileConfigProperty.Distance;
+				destroyIfDistanceExceededComponent.StartPosition = position;
 			}
 
 			return projectileEntity;

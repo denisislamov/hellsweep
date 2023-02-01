@@ -1,8 +1,9 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 using Time = UnityEngine.Time;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class AccelerationSystem : IEcsRunSystem
 	{
@@ -26,7 +27,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			{
 				ref var speed = ref speedPool.Get(entityId);
 				ref var acceleration = ref accelerationPool.Get(entityId);
-
+				
 				speed.Speed += acceleration.Acceleration * Time.deltaTime;
 			}
 #region Profiling End
