@@ -1,7 +1,7 @@
-using System;
+using TonPlay.Roguelike.Client.Core.Skills;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
 	public interface ISkillConfig
 	{
@@ -12,13 +12,13 @@ namespace TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces
 		string Title { get; }
 		
 		string Description { get; }
+
+		bool ExcludeFromInitialDrop { get;}
 		
 		Sprite Icon { get; }
 		
 		int MaxLevel { get; }
 		
 		SkillName[] Evolutions { get; }
-
-		Type ComponentType { get; }
 	}
 }

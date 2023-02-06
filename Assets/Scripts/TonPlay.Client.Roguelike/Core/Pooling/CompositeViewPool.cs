@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling
+namespace TonPlay.Client.Roguelike.Core.Pooling
 {
 	public class CompositeViewPool : ICompositeViewPool
 	{
@@ -13,7 +13,8 @@ namespace TonPlay.Roguelike.Client.Core.Pooling
 		{
 			if (_pools.ContainsKey(viewPoolIdentity.Id))
 			{
-				throw new NotSupportedException();
+				((IViewPool<T>)_pools[viewPoolIdentity.Id]).IncreaseSize(count);
+				return;
 			}
 			
 			_pools.Add(viewPoolIdentity.Id, new ViewPool<T>(prefab, count));

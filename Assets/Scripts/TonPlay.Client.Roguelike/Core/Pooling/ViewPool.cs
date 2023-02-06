@@ -1,19 +1,25 @@
 using System;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling
+namespace TonPlay.Client.Roguelike.Core.Pooling
 {
 	public class ViewPool<T> : IViewPool<T> where T : Component
 	{
+		private readonly T _prefab;
 		private readonly Vector3 _spawnPosition = Vector3.one * -100000f;
-		private readonly IViewPoolObject<T>[] _pool;
+		
+		private IViewPoolObject<T>[] _pool;
 		
 		private int _pointer = 0;
-		
+
 		public ViewPool(T prefab, int size = 32)
 		{
+			_prefab = prefab;
+			
 			if (size == 0)
 			{
 				throw new NotSupportedException();
@@ -23,10 +29,7 @@ namespace TonPlay.Roguelike.Client.Core.Pooling
 
 			for (int i = 0; i < size; i++)
 			{
-				var obj = Instantiate(prefab);
-				var transform = obj.transform;
-				transform.position = _spawnPosition;
-				obj.gameObject.SetActive(false);
+				var obj = CreateObject(prefab);
 
 				_pool[i] = new ViewPoolObject<T>(this, obj);
 			}
@@ -63,6 +66,30 @@ namespace TonPlay.Roguelike.Client.Core.Pooling
 		{
 			obj.transform.position = _spawnPosition;
 			obj.gameObject.SetActive(false);
+		}
+		
+		public void IncreaseSize(int count)
+		{
+			var currentSize = _pool.Length;
+			
+			Array.Resize(ref _pool, currentSize + count);
+
+			for (int i = 0; i < count; i++)
+			{
+				var obj = CreateObject(_prefab);
+
+				_pool[i + currentSize] = new ViewPoolObject<T>(this, obj);
+			}
+		}
+
+		private T CreateObject(T prefab)
+		{
+			var obj = Instantiate(prefab);
+			var transform = obj.transform;
+			transform.position = _spawnPosition;
+			obj.gameObject.SetActive(false);
+
+			return obj;
 		}
 	}
 }

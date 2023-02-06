@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Skills;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
+using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 {
 	[CreateAssetMenu(fileName = nameof(WeaponConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(WeaponConfigProvider))]
 	public class WeaponConfigProvider : ScriptableObject, IWeaponConfigProvider
@@ -15,34 +17,20 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
 		
 		public IWeaponConfig Get(string id)
 		{
-			return _configs.First(config => config.Id == id);
+			return _configs.First(config => config.ItemId == id);
 		}
 		
 		[Serializable]
 		private class WeaponConfig : IWeaponConfig
 		{
 			[SerializeField]
-			private string _id;
+			private string _itemId;
 		
 			[SerializeField]
-			private WeaponView _prefab;
+			private SkillName _skillName;
 
-			[SerializeField]
-			private ProjectileConfig _projectileConfig;
-			
-			[SerializeField]
-			private float _fireDelay;
-			
-			[SerializeField]
-			private WeaponFireType _fireType;
-
-			public string Id => _id;
-		
-			public WeaponView Prefab => _prefab;
-			public float FireDelay => _fireDelay;
-			public WeaponFireType FireType => _fireType;
-
-			public IProjectileConfig GetProjectileConfig() => _projectileConfig;
+			public string ItemId => _itemId;
+			public SkillName SkillName => _skillName;
 		}
 	}
 }

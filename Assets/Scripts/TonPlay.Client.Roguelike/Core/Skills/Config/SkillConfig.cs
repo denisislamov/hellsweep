@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		private Sprite _icon;
 
 		[SerializeField]
+		private bool _excludeFromInitialDrop;
+
+		[SerializeField]
 		private int _maxLevel;
 		
 		[SerializeField]
@@ -28,11 +32,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public abstract SkillName SkillName { get; }
 		
-		public abstract Type ComponentType { get; }
-		
 		public SkillType SkillType => _skillType;
 		public string Title => _title;
 		public string Description => _description;
+		public bool ExcludeFromInitialDrop => _excludeFromInitialDrop;
 		public Sprite Icon => _icon;
 		public int MaxLevel => _maxLevel;
 		public SkillName[] Evolutions => _evolutions;

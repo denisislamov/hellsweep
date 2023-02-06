@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core
+namespace TonPlay.Client.Roguelike.Core
 {
 	public enum WeaponFireType
 	{

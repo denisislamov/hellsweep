@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.Core;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views.Interfaces;
 

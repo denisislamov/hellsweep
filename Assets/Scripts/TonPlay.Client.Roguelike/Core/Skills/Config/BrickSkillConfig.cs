@@ -44,8 +44,6 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.Brick;
 		
-		public override Type ComponentType => typeof(GuardianSkill);
-		
 		public IBrickSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 

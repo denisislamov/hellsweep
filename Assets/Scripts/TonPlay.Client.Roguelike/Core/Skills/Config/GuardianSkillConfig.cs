@@ -32,8 +32,6 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		
 		public override SkillName SkillName => SkillName.Guardian;
 		
-		public override Type ComponentType => typeof(GuardianSkill);
-		
 		public IGuardianSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 

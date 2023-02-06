@@ -45,6 +45,6 @@ MonoBehaviour:
     _cooldown: 2
     _damage: 100
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
-  _timeToReachDistance: 1
-  _distanceToThrow: 6
+  _timeToReachDistance: 0.5
+  _distanceToThrow: 4
   _delayBetweenSpawn: 0.25

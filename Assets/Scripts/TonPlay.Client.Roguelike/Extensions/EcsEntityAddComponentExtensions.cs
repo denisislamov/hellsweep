@@ -3,6 +3,8 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
+using TonPlay.Client.Roguelike.Core.Effects.Revolver;
+using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
@@ -204,6 +206,43 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var component = ref entity.Add<SyncRotationWithPositionDifferenceComponent>();
 			component.LastPosition = position;
+			return ref component;
+		}
+		
+		public static ref ForcefieldDeviceEffectComponent AddForcefieldDeviceEffectComponent(this EcsEntity entity, int parentEntityId)
+		{
+			ref var component = ref entity.Add<ForcefieldDeviceEffectComponent>();
+			component.ParentEntityId = parentEntityId;
+			return ref component;
+		}
+		
+		public static ref SyncPositionWithAnotherEntityComponent AddSyncPositionWithAnotherEntityComponent(this EcsEntity entity, int parentEntityId)
+		{
+			ref var component = ref entity.Add<SyncPositionWithAnotherEntityComponent>();
+			component.ParentEntityId = parentEntityId;
+			return ref component;
+		}
+		
+		public static ref SyncRotationWithAnotherEntityComponent AddSyncRotationWithAnotherEntityComponent(this EcsEntity entity, int parentEntityId)
+		{
+			ref var component = ref entity.Add<SyncRotationWithAnotherEntityComponent>();
+			component.ParentEntityId = parentEntityId;
+			return ref component;
+		}
+		
+		public static ref RevolverSightEffectComponent AddRevolverSightEffectComponent(this EcsEntity entity, RevolverSightEffect effect, int parentEntityId)
+		{
+			ref var component = ref entity.Add<RevolverSightEffectComponent>();
+			component.Effect = effect;
+			component.ParentEntityId = parentEntityId;
+			return ref component;
+		}
+		
+		public static ref CrossbowSightEffectComponent AddCrossbowSightEffectComponent(this EcsEntity entity, CrossbowSightEffect effect, int parentEntityId)
+		{
+			ref var component = ref entity.Add<CrossbowSightEffectComponent>();
+			component.Effect = effect;
+			component.ParentEntityId = parentEntityId;
 			return ref component;
 		}
 	}

@@ -6,6 +6,7 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -96,6 +97,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var availableSkills = skills
 								 .Where(config => !skillsModel.SkillLevels.ContainsKey(config.SkillName)
 												  || skillsModel.SkillLevels[config.SkillName] < config.MaxLevel)
+								 .Where(config => !config.ExcludeFromInitialDrop || 
+												  (skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] > 0))
 								 .ToList();
 
 			var choiceAmount = Math.Min(MAX_SKILLS_TO_CHOICE, availableSkills.Count);

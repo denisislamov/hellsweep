@@ -16,7 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 
 		IBrickSkillLevelConfig GetLevelConfig(int level);
 	}
-	
+
 	public interface IBrickSkillLevelConfig 
 	{
 		int Quantity { get; }
@@ -27,5 +27,4 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		
 		ICollisionAreaConfig CollisionAreaConfig { get; }
 	}
-
 }

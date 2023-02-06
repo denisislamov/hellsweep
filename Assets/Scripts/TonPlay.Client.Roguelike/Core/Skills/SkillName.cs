@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core.Skills
+namespace TonPlay.Client.Roguelike.Core.Skills
 {
 	public enum SkillName
 	{
@@ -28,5 +28,8 @@ namespace TonPlay.Roguelike.Client.Core.Skills
 		KogaNinjaScroll,
 		LightningEmitter,
 		ForcefieldDevice,
+		Revolver,
+		Crossbow,
+		Katana,
 	}
 }

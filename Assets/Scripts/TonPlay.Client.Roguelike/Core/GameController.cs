@@ -85,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core
 					_collectablesKdTreeStorage
 				});
 
-			_sharedData.SetPlayerWeapon("bow");
+			_sharedData.SetPlayerWeapon("crossbow");
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 
 			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
@@ -121,10 +121,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new EaseMovementSystem())
 							.Add(new SpinAroundEntityPositionMovementSystem())
 							.Add(new SyncRotationWithMovementSystem())
-							.Add(new WeaponFireSystem())
-							.Add(new WeaponFireBlockSystem())
-							.Add(new WeaponRotationSystem())
-							.Add(new WeaponPositionSystem())
+							.Add(new SyncPositionWithAnotherEntitySystem())
+							.Add(new SyncRotationWithAnotherEntitySystem())
 							.Add(new DamageOnDistanceChangeSystem(_overlapExecutor))
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
@@ -145,7 +143,10 @@ namespace TonPlay.Client.Roguelike.Core
 			_skillsSystems = new EcsSystems(_world, _sharedData)
 			   .Add(new RPGSkillSystem())
 			   .Add(new GuardianSkillSystem())
-			   .Add(new BrickSkillSystem());
+			   .Add(new BrickSkillSystem())
+			   .Add(new ForcefieldDeviceSkillSystem(_overlapExecutor))
+			   .Add(new RevolverSkillSystem(_overlapExecutor))
+			   .Add(new CrossbowSkillSystem());
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())

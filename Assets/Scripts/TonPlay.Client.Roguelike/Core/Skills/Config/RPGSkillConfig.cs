@@ -29,8 +29,6 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		public override SkillName SkillName => SkillName.RPG;
 		
-		public override Type ComponentType => typeof(RPGSkill);
-		
 		public IRPGSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 

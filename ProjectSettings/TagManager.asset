@@ -47,3 +47,6 @@ TagManager:
   - name: Weapon
     uniqueID: 2794948335
     locked: 0
+  - name: GameUI
+    uniqueID: 1688531341
+    locked: 0

@@ -48,10 +48,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			sharedData.SetPlayerPositionProvider(player);
 			
-			CreateWeapon(entity.Id, sharedData, player);
+			CreateWeapon(entity.Id, sharedData);
 		}
 
-		private void CreateWeapon(int playerEntityId, ISharedData sharedData, IHasWeaponSpawnRoot playerWeaponSpawnRoot)
+		private void CreateWeapon(int playerEntityId, ISharedData sharedData)
 		{
 			if (string.IsNullOrEmpty(sharedData.PlayerWeaponId))
 			{
@@ -59,24 +59,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			var config = sharedData.WeaponConfigProvider.Get(sharedData.PlayerWeaponId);
-			var projectileConfig = config.GetProjectileConfig();
 
-			var view = Object.Instantiate(config.Prefab, playerWeaponSpawnRoot.WeaponSpawnRoot);
-			view.transform.localPosition = Vector3.zero;
-
-			var entity = _world.NewEntity();
+			var skillsPool = _world.GetPool<SkillsComponent>();
+			ref var playerSkills = ref skillsPool.Get(playerEntityId);
 			
-			ref var component = ref entity.Add<WeaponComponent>();
-			ref var transform = ref entity.Add<TransformComponent>();
-			component.FireDelay = config.FireDelay;
-			component.FireType = config.FireType;
-			component.OwnerEntityId = playerEntityId;
-			component.WeaponConfigId = config.Id;
-			component.ProjectileIdentity = new ProjectileConfigViewPoolIdentity(projectileConfig);
-			transform.Transform = view.transform;
-
-			
-			sharedData.CompositeViewPool.Add(component.ProjectileIdentity, projectileConfig.PrefabView, 128);
+			playerSkills.Levels.Add(config.SkillName, 1);
 		}
 
 		private PlayerView CreateViewAndEntity(IPlayerConfig config, out EcsEntity entity)

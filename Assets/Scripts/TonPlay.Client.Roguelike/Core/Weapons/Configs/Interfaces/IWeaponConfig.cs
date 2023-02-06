@@ -1,18 +1,14 @@
-using TonPlay.Roguelike.Client.Core.Player.Views;
+using TonPlay.Client.Roguelike.Core.Skills;
+using TonPlay.Roguelike.Client.Core.Skills;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 {
 	public interface IWeaponConfig
 	{
-		string Id { get; }
+		string ItemId { get; }
 		
-		WeaponView Prefab { get; }
-		
-		float FireDelay { get; }
-		
-		WeaponFireType FireType { get; }
-
-		IProjectileConfig GetProjectileConfig();
+		SkillName SkillName { get; }
 	}
 }
