@@ -15,7 +15,8 @@ MonoBehaviour:
   _id: cyclope
   _prefab: {fileID: 2141320536056758984, guid: 5f7ce176d7a4a41fe999f34cd955db7a, type: 3}
   _health: 15
-  _damageOnCollision: 10
+  _damageProviderOnCollision:
+    damage: 10
   _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
   _movementConfig:
     _startSpeed: 3

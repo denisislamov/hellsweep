@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Skills.Config;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;

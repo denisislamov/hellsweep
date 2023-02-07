@@ -135,7 +135,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			entity.AddSpinAroundEntityPositionComponent(playerEntityId, levelConfig.Radius, angle);
 			entity.AddGuardianProjectileComponent(levelConfig.ActiveTime);
 			entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, collisionLayerMask);
-			entity.AddDamageOnDistanceChangeComponent(levelConfig.Damage, Vector2.one * 10000f);
+			entity.AddDamageOnDistanceChangeComponent(levelConfig.DamageProvider, Vector2.one * 10000f);
 
 			ref var speed = ref speedPool.Get(entity.Id);
 			speed.Speed = levelConfig.Speed;

@@ -33,6 +33,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 							  .Inc<PositionComponent>()
 							  .Inc<CollisionComponent>()
 							  .Exc<InactiveComponent>()
+							  .Exc<BlockDamageOnCollisionComponent>()
 							  .End();
 			
 			var collisionPool = world.GetPool<CollisionComponent>();
@@ -60,12 +61,12 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 					if (applyDamagePool.Has(overlappedEntityId))
 					{
 						ref var applyDamage = ref applyDamagePool.Get(overlappedEntityId);
-						applyDamage.Damage += damage.Damage;
+						applyDamage.Damage += damage.DamageProvider.Damage;
 					}
 					else
 					{
 						ref var applyDamage = ref applyDamagePool.Add(overlappedEntityId);
-						applyDamage.Damage = damage.Damage;
+						applyDamage.Damage = damage.DamageProvider.Damage;
 					}
 				}
 

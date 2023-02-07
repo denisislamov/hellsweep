@@ -65,12 +65,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					if (applyDamagePool.Has(overlappedEntityId))
 					{
 						ref var applyDamage = ref applyDamagePool.Get(overlappedEntityId);
-						applyDamage.Damage += damageOnDistance.Damage;
+						applyDamage.Damage += damageOnDistance.DamageProvider.Damage;
 					}
 					else
 					{
 						ref var applyDamage = ref applyDamagePool.Add(overlappedEntityId);
-						applyDamage.Damage = damageOnDistance.Damage;
+						applyDamage.Damage = damageOnDistance.DamageProvider.Damage;
 					}
 				}
 				

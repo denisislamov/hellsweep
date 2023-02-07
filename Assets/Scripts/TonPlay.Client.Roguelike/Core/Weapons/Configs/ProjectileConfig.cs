@@ -1,14 +1,13 @@
 using System.Linq;
-using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons.Configs
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 {
 	[CreateAssetMenu(fileName = nameof(ProjectileConfig), menuName = AssetMenuConstants.PROJECTILE_CONFIGS + nameof(ProjectileConfig))]
 	internal class ProjectileConfig : ScriptableObject, IProjectileConfig

@@ -4,6 +4,8 @@ using System.Linq;
 using TonPlay.Client.Roguelike.Core.Drops;
 using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
@@ -28,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		private int _health;
 
 		[SerializeField]
-		private int _damageOnCollision;
+		private DamageProvider _damageProviderOnCollision;
 
 		[SerializeField]
 		private CollisionAreaConfig _collisionAreaConfig;
@@ -47,7 +49,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 
 		public int StartHealth => _health;
 
-		public int DamageOnCollision => _damageOnCollision;
+		public IDamageProvider DamageProvider => _damageProviderOnCollision;
 
 		public IMovementConfig MovementConfig => _movementConfig;
 

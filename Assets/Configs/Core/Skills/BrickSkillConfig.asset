@@ -16,6 +16,7 @@ MonoBehaviour:
   _title: Brick
   _description: Brick desk
   _icon: {fileID: -3343314994187460452, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _excludeFromInitialDrop: 0
   _maxLevel: 5
   _evolutions: 
   _projectileConfig: {fileID: 11400000, guid: 620448e3e8c054581806332fe6c818c9, type: 2}
@@ -23,27 +24,32 @@ MonoBehaviour:
   - _level: 1
     _quantity: 1
     _cooldown: 2
-    _damage: 100
+    _damageProvider:
+      damage: 1
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 2
     _quantity: 2
     _cooldown: 2
-    _damage: 100
+    _damageProvider:
+      damage: 2
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 3
     _quantity: 3
     _cooldown: 2
-    _damage: 100
+    _damageProvider:
+      damage: 3
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 4
     _quantity: 4
     _cooldown: 2
-    _damage: 100
+    _damageProvider:
+      damage: 4
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 5
     _quantity: 5
     _cooldown: 2
-    _damage: 100
+    _damageProvider:
+      damage: 5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   _timeToReachDistance: 0.5
   _distanceToThrow: 4

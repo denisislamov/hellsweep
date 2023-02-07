@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
@@ -62,7 +64,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			private float _cooldown;
 			
 			[SerializeField]
-			private float _damage;
+			private DamageProvider _damageProvider;
 			
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
@@ -71,8 +73,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			public int Quantity => _quantity;
 			public float Cooldown => _cooldown;
-			public float Damage => _damage;
-			
+			public IDamageProvider DamageProvider => _damageProvider;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 		}
 	}

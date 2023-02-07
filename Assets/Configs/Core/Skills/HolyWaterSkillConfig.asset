@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee8adbe976f43059f8390c93228f56f, type: 3}
+  m_Name: HolyWaterSkillConfig
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _title: Holy Water
+  _description: Holy Water desc
+  _icon: {fileID: 814206652599902320, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _excludeFromInitialDrop: 0
+  _maxLevel: 5
+  _evolutions: 
+  _bottleProjectileConfig: {fileID: 11400000, guid: 4661b7d4dcfd84e62a648cd62c9c43b4, type: 2}
+  _damagingAreaProjectileConfig: {fileID: 11400000, guid: 916225109ac6f445dad4b83f4d86f9ef, type: 2}
+  _collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _delayBetweenThrowingProjectiles: 0.1
+  _levelConfigs:
+  - _level: 1
+    _quantity: 1
+    _cooldown: 3.5
+    _damageProvider:
+      damage: 1
+  - _level: 2
+    _quantity: 2
+    _cooldown: 3.5
+    _damageProvider:
+      damage: 2
+  - _level: 3
+    _quantity: 3
+    _cooldown: 3.5
+    _damageProvider:
+      damage: 2
+  - _level: 4
+    _quantity: 4
+    _cooldown: 3.5
+    _damageProvider:
+      damage: 3
+  - _level: 5
+    _quantity: 5
+    _cooldown: 3.5
+    _damageProvider:
+      damage: 3

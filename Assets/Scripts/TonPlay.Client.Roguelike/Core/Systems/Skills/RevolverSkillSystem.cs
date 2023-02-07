@@ -158,7 +158,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var collisionPool = _world.GetPool<CollisionComponent>();
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
-			damageOnCollision.Damage = levelSkillConfig.Damage;
+			damageOnCollision.DamageProvider = levelSkillConfig.DamageProvider;
 			
 			collisionPool.AddOrGet(entity.Id);
 		}

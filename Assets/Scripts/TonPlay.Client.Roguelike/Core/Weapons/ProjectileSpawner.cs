@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
@@ -11,7 +12,13 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 {
 	internal static class ProjectileSpawner
 	{
-		public static EcsEntity SpawnProjectile(EcsWorld world, IViewPoolObject<ProjectileView> poolObject, IProjectileConfig config, Vector2 position, Vector2 direction, int collisionLayerMask)
+		public static EcsEntity SpawnProjectile(
+			EcsWorld world, 
+			IViewPoolObject<ProjectileView> poolObject, 
+			IProjectileConfig config, 
+			Vector2 position, 
+			Vector2 direction, 
+			int collisionLayerMask)
 		{
 			var projectileView = poolObject.Object;
 			var projectileEntity = world.NewEntity();
@@ -32,9 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			ref var projectileSpeed = ref projectileEntity.Add<SpeedComponent>();
 			ref var projectileAcceleration = ref projectileEntity.Add<AccelerationComponent>();
 			ref var projectileViewPoolObject = ref projectileEntity.Add<ViewPoolObjectComponent>();
-
-			projectileEntity.Add<DestroyOnCollisionComponent>();
-
+			
 			projectileViewProviderComponent.View = projectileView.gameObject;
 			projectileComponent.Config = config;
 			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
@@ -63,10 +68,23 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			if (config.TryGetProperty<IDamageOnCollisionProjectileConfigProperty>(out var damageOnCollisionProjectileConfigProperty))
 			{
 				ref var projectileDamageOnCollision = ref projectileEntity.Add<DamageOnCollisionComponent>();
+				projectileDamageOnCollision.DamageProvider = damageOnCollisionProjectileConfigProperty.DamageProvider;
+			}
+			
+			if (config.TryGetProperty<IDestroyOnCollisionProjectileConfigProperty>(out var destroyOnCollisionProjectileConfigProperty))
+			{
+				projectileEntity.Add<DestroyOnCollisionComponent>();
+			}
+			
+			if (config.TryGetProperty<IBlockDamageOnCollisionProjectileConfigProperty>(out var blockDamageOnCollisionProjectileConfigProperty))
+			{
+				projectileEntity.Add<BlockDamageOnCollisionComponent>();
+			}
+			
+			if (config.TryGetProperty<ICollisionProjectileConfigProperty>(out var collisionProjectileConfigProperty))
+			{
 				ref var projectileCollision = ref projectileEntity.Add<CollisionComponent>();
-
-				projectileDamageOnCollision.Damage = damageOnCollisionProjectileConfigProperty.Damage;
-				projectileCollision.CollisionAreaConfig = damageOnCollisionProjectileConfigProperty.CollisionAreaConfig;
+				projectileCollision.CollisionAreaConfig = collisionProjectileConfigProperty.CollisionAreaConfig;
 				projectileCollision.LayerMask = collisionLayerMask;
 			}
 			
@@ -76,6 +94,13 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 
 				destroyIfDistanceExceededComponent.Distance = destroyIfRadiusExceededProjectileConfigProperty.Distance;
 				destroyIfDistanceExceededComponent.StartPosition = position;
+			}
+			
+			if (config.TryGetProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>(out var spawnProjectileOnDestroyProjectileConfigProperty))
+			{
+				projectileEntity.AddSpawnProjectileOnDestroyComponent(
+					spawnProjectileOnDestroyProjectileConfigProperty.ProjectileConfig,
+					spawnProjectileOnDestroyProjectileConfigProperty.CollisionLayerMask);
 			}
 
 			return projectileEntity;

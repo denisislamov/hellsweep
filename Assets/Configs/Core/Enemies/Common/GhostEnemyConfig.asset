@@ -15,7 +15,8 @@ MonoBehaviour:
   _id: ghost
   _prefab: {fileID: 9169473473442074980, guid: dfa7176ef7e924ff4a9dca80d7201b6e, type: 3}
   _health: 2
-  _damageOnCollision: 1
+  _damageProviderOnCollision:
+    damage: 1
   _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
   _movementConfig:
     _startSpeed: 2

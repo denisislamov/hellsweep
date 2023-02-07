@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: HolyWaterProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 2459005052050874630, guid: 0e6cde3c9b1ea4f8e9ad5a629ae2b5df, type: 3}
+  _movementConfig:
+    _startSpeed: 0
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: b2a140862ec5f47c29869e596ef4c97c, type: 2}
+  - {fileID: 11400000, guid: 6c900309b9c5a4d758ddeaf70feec2af, type: 2}
+  - {fileID: 11400000, guid: 00ed5d262c5f949bcb777f8ccbb8cabb, type: 2}

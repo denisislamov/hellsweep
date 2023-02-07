@@ -5,11 +5,14 @@ using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Skills;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Skills;
+using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using UniRx;
 using UnityEngine;
 
@@ -180,11 +183,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 		
-		public static ref DamageOnDistanceChangeComponent AddDamageOnDistanceChangeComponent(this EcsEntity entity, float damage, Vector2 lastDamagePosition)
+		public static ref DamageOnDistanceChangeComponent AddDamageOnDistanceChangeComponent(this EcsEntity entity, IDamageProvider damageProvider, Vector2 lastDamagePosition)
 		{
 			ref var component = ref entity.Add<DamageOnDistanceChangeComponent>();
 			component.LastDamagePosition = lastDamagePosition;
-			component.Damage = damage;
+			component.DamageProvider = damageProvider;
 			return ref component;
 		}
 		
@@ -243,6 +246,35 @@ namespace TonPlay.Client.Roguelike.Extensions
 			ref var component = ref entity.Add<CrossbowSightEffectComponent>();
 			component.Effect = effect;
 			component.ParentEntityId = parentEntityId;
+			return ref component;
+		}
+		
+		public static ref BottleOfHolyWaterProjectileComponent AddBottleOfHolyWaterProjectileComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<BottleOfHolyWaterProjectileComponent>();
+			return ref component;
+		}
+		
+		public static ref PrepareToSpawnAfterTimerComponent AddPrepareToSpawnAfterTimerComponent(this EcsEntity entity, float seconds)
+		{
+			ref var component = ref entity.Add<PrepareToSpawnAfterTimerComponent>();
+			component.TimeLeft = seconds;
+			return ref component;
+		}
+		
+		public static ref PrepareToSpawnBottleOfHolyWaterProjectileComponent AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(this EcsEntity entity, IHolyWaterSkillLevelConfig config, int layer)
+		{
+			ref var component = ref entity.Add<PrepareToSpawnBottleOfHolyWaterProjectileComponent>();
+			component.Config = config;
+			component.Layer = layer;
+			return ref component;
+		}
+		
+		public static ref SpawnProjectileOnDestroyComponent AddSpawnProjectileOnDestroyComponent(this EcsEntity entity, IProjectileConfig config, int layer)
+		{
+			ref var component = ref entity.Add<SpawnProjectileOnDestroyComponent>();
+			component.ProjectileConfig = config;
+			component.CollisionLayerMask = layer;
 			return ref component;
 		}
 	}

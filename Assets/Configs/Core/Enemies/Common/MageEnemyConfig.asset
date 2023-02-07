@@ -15,7 +15,8 @@ MonoBehaviour:
   _id: mage
   _prefab: {fileID: 5109476924477383283, guid: 5296a6b7114494c8e89c817bcfdeeab6, type: 3}
   _health: 3
-  _damageOnCollision: 3
+  _damageProviderOnCollision:
+    damage: 2
   _collisionAreaConfig: {fileID: 11400000, guid: cfc087b2c9eaf4a2d9392314666f8a2e, type: 2}
   _movementConfig:
     _startSpeed: 3

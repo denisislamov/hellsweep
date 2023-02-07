@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;
@@ -46,7 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			private int _level;
 			
 			[SerializeField]
-			private float _damage;
+			private DamageProvider _damageProvider;
 			
 			[SerializeField]
 			private float _shootDelay;
@@ -61,7 +63,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			private CollisionAreaConfig _collisionAreaConfig;
 
 			public int Level => _level;
-			public float Damage => _damage;
+			public IDamageProvider DamageProvider => _damageProvider;
 			public float ShootDelay => _shootDelay;
 			public float FieldOfView => _fieldOfView;
 			public int CollisionLayerMask => _collisionLayerMask.value;

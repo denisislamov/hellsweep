@@ -19,3 +19,5 @@ MonoBehaviour:
   _properties:
   - {fileID: 11400000, guid: c4c16eee8bb89487db2989f1babd01ea, type: 2}
   - {fileID: 11400000, guid: 3f539d2cde2f043e39884ded7d338612, type: 2}
+  - {fileID: 11400000, guid: f0ec125a0553c4227b4c69d5edbbff4a, type: 2}
+  - {fileID: 11400000, guid: f3af008a9df28412d976d3a479969ce7, type: 2}

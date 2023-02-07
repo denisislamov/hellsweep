@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: BottleOfHolyWaterProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 4055023789228189116, guid: cbdf9ec84563d4492931ab4a25e56b73, type: 3}
+  _movementConfig:
+    _startSpeed: 3
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 0cce1407ad67e455283c9c2f52c32a86, type: 2}
+  - {fileID: 11400000, guid: f7242c0b74d9f43c9922292aaf38c481, type: 2}
+  - {fileID: 11400000, guid: cb68f70baa91249e592173dd05e02493, type: 2}
+  - {fileID: 11400000, guid: 5c041cc194cd74f8785c4308070843b1, type: 2}

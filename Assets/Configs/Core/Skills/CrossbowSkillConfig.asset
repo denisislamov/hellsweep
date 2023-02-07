@@ -24,26 +24,31 @@ MonoBehaviour:
   _levelConfigs:
   - _level: 1
     _projectileQuantity: 3
-    _damage: 1
+    _damageProvider:
+      damage: 1
     _shootDelay: 1
     _fieldOfView: 30
   - _level: 2
     _projectileQuantity: 6
-    _damage: 1
+    _damageProvider:
+      damage: 2
     _shootDelay: 1
     _fieldOfView: 45
   - _level: 3
     _projectileQuantity: 9
-    _damage: 1
+    _damageProvider:
+      damage: 3
     _shootDelay: 1
     _fieldOfView: 60
   - _level: 4
     _projectileQuantity: 12
-    _damage: 1
+    _damageProvider:
+      damage: 4
     _shootDelay: 1
     _fieldOfView: 75
   - _level: 5
     _projectileQuantity: 15
-    _damage: 1
+    _damageProvider:
+      damage: 5
     _shootDelay: 1
     _fieldOfView: 90

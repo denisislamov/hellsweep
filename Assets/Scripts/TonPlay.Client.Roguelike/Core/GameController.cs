@@ -144,6 +144,7 @@ namespace TonPlay.Client.Roguelike.Core
 			   .Add(new RPGSkillSystem())
 			   .Add(new GuardianSkillSystem())
 			   .Add(new BrickSkillSystem())
+			   .Add(new HolyWaterSkillSystem())
 			   .Add(new ForcefieldDeviceSkillSystem(_overlapExecutor))
 			   .Add(new RevolverSkillSystem(_overlapExecutor))
 			   .Add(new CrossbowSkillSystem());
@@ -163,6 +164,7 @@ namespace TonPlay.Client.Roguelike.Core
 							 .Add(new ClearDeadEnemiesFromKdTreeSystem(_enemyKdTreeStorage))
 							 .Add(new ClearDestroyedCollectablesFromKdTreeSystem(_collectablesKdTreeStorage))
 							 .Add(new ClearDeadEntityDataSystem())
+							 .Add(new SpawnProjectileOnDestroySystem())
 							 .Add(new DestroyEntitySystem());
 
 			_collectablesSystem = new EcsSystems(_world, _sharedData)

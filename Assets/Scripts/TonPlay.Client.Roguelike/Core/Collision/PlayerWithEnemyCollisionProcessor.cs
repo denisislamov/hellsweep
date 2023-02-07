@@ -51,12 +51,12 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			if (applyDamageComponents.Has(playerEntityId))
 			{
 				ref var playerApplyDamageComponent = ref applyDamageComponents.Get(playerEntityId);
-				playerApplyDamageComponent.Damage += damageComponent.Damage;
+				playerApplyDamageComponent.Damage += damageComponent.DamageProvider.Damage;
 			}
 			else
 			{
 				ref var playerApplyDamageComponent = ref applyDamageComponents.Add(playerEntityId);
-				playerApplyDamageComponent.Damage = damageComponent.Damage;
+				playerApplyDamageComponent.Damage = damageComponent.DamageProvider.Damage;
 			}
 		}
 	}

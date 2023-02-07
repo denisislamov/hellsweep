@@ -120,7 +120,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
 			entity.AddBrickProjectileComponent();
 			entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, collisionLayerMask);
-			entity.AddDamageOnDistanceChangeComponent(levelConfig.Damage, Vector2.one*10000f);
+			entity.AddDamageOnDistanceChangeComponent(levelConfig.DamageProvider, Vector2.one*10000f);
 			entity.AddInvertMovementAxisOnSpeedInversionComponent(true, false);
 			entity.AddSyncRotationWithPositionDifferenceComponent(position - direction);
 

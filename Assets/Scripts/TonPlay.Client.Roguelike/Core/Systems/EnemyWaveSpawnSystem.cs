@@ -261,7 +261,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private static void AddDamageOnCollisionComponent(EcsEntity entity, IEnemyConfig config)
 		{
 			ref var damageOnCollisionComponent = ref entity.Add<DamageOnCollisionComponent>();
-			damageOnCollisionComponent.Damage = config.DamageOnCollision;
+			damageOnCollisionComponent.DamageProvider = config.DamageProvider;
 		}
 
 		private static void AddHealthComponent(EcsEntity entity, IEnemyConfig config)
