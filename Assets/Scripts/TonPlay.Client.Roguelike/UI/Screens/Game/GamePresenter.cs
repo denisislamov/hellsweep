@@ -4,10 +4,6 @@ using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.UI.UIService;
-using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Game

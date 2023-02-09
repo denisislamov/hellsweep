@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -275,6 +275,26 @@ namespace TonPlay.Client.Roguelike.Extensions
 			ref var component = ref entity.Add<SpawnProjectileOnDestroyComponent>();
 			component.ProjectileConfig = config;
 			component.CollisionLayerMask = layer;
+			return ref component;
+		}
+		
+		public static ref KatanaSplashProjectileComponent AddKatanaSplashProjectileComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<KatanaSplashProjectileComponent>();
+			return ref component;
+		}
+		
+		public static ref MoveInLocalSpaceOfEntityComponent AddMoveInLocalSpaceOfEntityComponent(this EcsEntity entity, int entityId)
+		{
+			ref var component = ref entity.Add<MoveInLocalSpaceOfEntityComponent>();
+			component.EntityId = entityId;
+			return ref component;
+		}
+		
+		public static ref LocalPositionComponent AddLocalPositionComponent(this EcsEntity entity, Vector2 position)
+		{
+			ref var component = ref entity.Add<LocalPositionComponent>();
+			component.Position = position;
 			return ref component;
 		}
 	}

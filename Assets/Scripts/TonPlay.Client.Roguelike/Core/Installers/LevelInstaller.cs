@@ -1,13 +1,11 @@
 using TonPlay.Client.Roguelike.Core.Collectables.Config;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collectables.Config;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Enemies.Configs;
-using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Levels.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -15,7 +13,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace TonPlay.Roguelike.Client.Core.Installers
+namespace TonPlay.Client.Roguelike.Core.Installers
 {
 	[CreateAssetMenu(fileName = nameof(LevelInstaller), menuName = AssetMenuConstants.CORE_INSTALLERS + nameof(LevelInstaller))]
 	public class LevelInstaller : ScriptableObjectInstaller<LevelInstaller>

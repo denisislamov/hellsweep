@@ -13,6 +13,8 @@ namespace TonPlay.Client.Roguelike.Installers
 		
 		public override void InstallBindings()
 		{
+			SignalBusInstaller.Install(Container);
+
 			Container.Inject(_uiServiceInstaller);
 			_uiServiceInstaller.InstallBindings();
 			

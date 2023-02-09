@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Signals;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.Profiling;
 
@@ -15,7 +16,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #endregion
 			var sharedData = systems.GetShared<ISharedData>();
 			var world = systems.GetWorld();
-			var filter = world.Filter<HealthComponent>().Inc<ApplyDamageComponent>().Exc<DeadComponent>().End();
+			
+			var filter = world
+						.Filter<HealthComponent>()
+						.Inc<ApplyDamageComponent>()
+						.Exc<DeadComponent>()
+						.End();
+			
 			var healthComponents = world.GetPool<HealthComponent>();
 			var applyDamageComponents = world.GetPool<ApplyDamageComponent>();
 			var deadPool = world.GetPool<DeadComponent>();

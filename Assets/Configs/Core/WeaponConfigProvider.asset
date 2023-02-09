@@ -17,3 +17,5 @@ MonoBehaviour:
     _skillName: 26
   - _itemId: crossbow
     _skillName: 27
+  - _itemId: katana
+    _skillName: 28

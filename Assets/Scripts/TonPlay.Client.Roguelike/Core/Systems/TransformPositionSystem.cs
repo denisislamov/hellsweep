@@ -1,7 +1,8 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class TransformPositionSystem : IEcsRunSystem
 	{
@@ -11,8 +12,11 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
 			var world = systems.GetWorld();
-			var transformComponents = world.GetPool<TransformComponent>();
-			var positionComponents = world.GetPool<PositionComponent>();
+			var transformPool = world.GetPool<TransformComponent>();
+			var positionPool = world.GetPool<PositionComponent>();
+			var moveInLocalSpacePool = world.GetPool<MoveInLocalSpaceOfEntityComponent>();
+			var localPositionPool = world.GetPool<LocalPositionComponent>();
+			
 			var filter = world.Filter<TransformComponent>()
 							  .Exc<RigidbodyComponent>()
 							  .Exc<CameraComponent>()
@@ -22,16 +26,26 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			foreach (var entityId in filter)
 			{
-				ref var transformComponent = ref transformComponents.Get(entityId);
+				ref var transformComponent = ref transformPool.Get(entityId);
 				
-				if (!positionComponents.Has(entityId))
+				if (!positionPool.Has(entityId))
 				{
-					ref var positionComponent = ref positionComponents.Add(entityId);
+					ref var positionComponent = ref positionPool.Add(entityId);
 					positionComponent.Position = transformComponent.Transform.position;
 				}
 				else
 				{
-					ref var positionComponent = ref positionComponents.Get(entityId);
+					ref var positionComponent = ref positionPool.Get(entityId);
+
+					if (moveInLocalSpacePool.Has(entityId) && localPositionPool.Has(entityId))
+					{
+						ref var moveInLocalSpaceComponent = ref moveInLocalSpacePool.Get(entityId);
+						ref var localPositionComponent = ref localPositionPool.Get(entityId);
+						ref var parentPositionComponent = ref positionPool.Get(moveInLocalSpaceComponent.EntityId);
+
+						positionComponent.Position = parentPositionComponent.Position + localPositionComponent.Position;
+					}
+					
 					transformComponent.Transform.position = positionComponent.Position;
 				}
 			}

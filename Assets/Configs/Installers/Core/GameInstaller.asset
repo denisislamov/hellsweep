@@ -16,3 +16,4 @@ MonoBehaviour:
   _weaponConfigProvider: {fileID: 11400000, guid: 5f004192ab17a499ea9bb59b4d5ff7fb, type: 2}
   _collisionConfigProvider: {fileID: 11400000, guid: 3b002c0e8b08a48d7b8ed7b21999895f, type: 2}
   _skillConfigProvider: {fileID: 11400000, guid: 03bd7816bb333457db6d5a2ac1ed953e, type: 2}
+  _damageText3DView: {fileID: 6263064686755085122, guid: e9b7f8f2ca5c14c1e93a680b67b65891, type: 3}

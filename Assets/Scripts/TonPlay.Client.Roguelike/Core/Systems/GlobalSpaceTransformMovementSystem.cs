@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class TransformMovementSystem : IEcsRunSystem
+	public class GlobalSpaceTransformMovementSystem : IEcsRunSystem
 	{
 		public void Run(EcsSystems systems)
 		{
@@ -16,6 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var filter = world.Filter<MovementComponent>()
 							  .Inc<PositionComponent>()
 							  .Inc<TransformComponent>()
+							  .Exc<MoveInLocalSpaceOfEntityComponent>()
 							  .Exc<RigidbodyComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<InactiveComponent>()

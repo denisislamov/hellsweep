@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
-using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces

@@ -18,6 +18,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	[CreateAssetMenu(fileName = nameof(GameScreenInstaller), menuName = AssetMenuConstants.SCREENS_INSTALLERS + nameof(GameScreenInstaller))]
 	public class GameScreenInstaller : ScreenInstaller
 	{
+		[SerializeField]
+		private Canvas _pooledItemsContainerPrefab;
+		
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
@@ -47,13 +50,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 						.AsCached()
 						.WithArguments(ScreenPrefab);
 
-			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>();
+			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>().FromNew();
 			
-			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>();
+			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>().FromNew();
 			
-			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>();
+			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>().FromNew();
 			
-			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>();
+			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>().FromNew();
 		}
 	}
 }

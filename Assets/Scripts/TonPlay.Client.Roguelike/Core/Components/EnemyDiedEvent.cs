@@ -1,5 +1,4 @@
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Components

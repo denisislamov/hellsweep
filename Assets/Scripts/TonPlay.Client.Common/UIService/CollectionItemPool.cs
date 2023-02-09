@@ -1,8 +1,9 @@
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService.Utilities;
 using UnityEngine;
 using Zenject;
 
-namespace TonPlay.Roguelike.Client.UI.UIService.Utilities
+namespace TonPlay.Client.Common.UIService
 {
 	public class CollectionItemPool<TItemContract, TItem> : MonoMemoryPool<TItem>, ICollectionItemPool<TItemContract>
 		where TItemContract : ICollectionItemView

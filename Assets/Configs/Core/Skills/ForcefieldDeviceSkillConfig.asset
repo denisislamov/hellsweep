@@ -16,6 +16,7 @@ MonoBehaviour:
   _title: Forcefield Device
   _description: Forcefield Device desc
   _icon: {fileID: 2361400332195943735, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _excludeFromInitialDrop: 0
   _maxLevel: 5
   _evolutions: 
   _effectView: {fileID: 3858035125394894992, guid: 81bb45633e34a49a68957b62055148dd, type: 3}

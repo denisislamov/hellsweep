@@ -1,4 +1,4 @@
-using TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Roguelike.Client.Core.Components

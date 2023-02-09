@@ -49,6 +49,8 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			projectileMovement.Direction = projectileRotation.Direction;
 			projectileTransform.Transform = projectileView.transform;
 			projectileViewPoolObject.ViewPoolObject = poolObject;
+			
+			projectileEntity.AddLocalPositionComponent(Vector2.zero);
 
 			if (config.TryGetProperty<IDestroyOnTimerProjectileConfigProperty>(out var destroyOnTimerProjectileConfigProperty))
 			{

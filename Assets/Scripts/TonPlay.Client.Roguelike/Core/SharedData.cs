@@ -1,11 +1,12 @@
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
-using TonPlay.Roguelike.Client.Core.Enemies.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
@@ -40,7 +41,12 @@ namespace TonPlay.Client.Roguelike.Core
 		public ILevelEnemyWaveConfigProvider EnemyWavesConfigProvider { get; }
 		
 		public ISkillConfigProvider SkillsConfigProvider { get; }
+		
 		public KdTreeStorage CollectablesKdTreeStorage { get; private set; }
+		
+		public SignalBus SignalBus { get; }
+		
+		public DamageTextView DamageTextViewPrefab { get; }
 
 		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
 
@@ -54,7 +60,9 @@ namespace TonPlay.Client.Roguelike.Core
 			ICollectableConfigProvider collectablesConfigProvider, 
 			ISkillConfigProvider skillsConfigProvider, 
 			IPlayersLevelsConfigProvider playersLevelsConfigProvider,
-			ICompositeViewPool compositeViewPool)
+			ICompositeViewPool compositeViewPool, 
+			SignalBus signalBus, 
+			DamageTextView damageTextViewPrefab)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
@@ -66,6 +74,8 @@ namespace TonPlay.Client.Roguelike.Core
 			PlayersLevelsConfigProvider = playersLevelsConfigProvider;
 			GameModel = gameModelProvider.Get();
 			CompositeViewPool = compositeViewPool;
+			SignalBus = signalBus;
+			DamageTextViewPrefab = damageTextViewPrefab;
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)

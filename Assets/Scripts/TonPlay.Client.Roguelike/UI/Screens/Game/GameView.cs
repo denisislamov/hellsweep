@@ -1,4 +1,3 @@
-using TMPro;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
@@ -23,7 +22,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 
 		[SerializeField]
 		private MatchScoreView _matchScoreView;
-
+		
 		public IProgressBarView HealthProgressBarView => _healthProgressBarView;
 		
 		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;

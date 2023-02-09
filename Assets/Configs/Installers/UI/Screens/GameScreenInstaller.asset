@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: GameScreenInstaller
   m_EditorClassIdentifier: 
   _screen: {fileID: 1818020633504093282, guid: 48601b50d303b4214a568fc652f1e066, type: 3}
+  _damageTextView: {fileID: 5066512597483918461, guid: da747967ed8d74421ae3fbb6ddde5c9f, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 7891257684163152712, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}

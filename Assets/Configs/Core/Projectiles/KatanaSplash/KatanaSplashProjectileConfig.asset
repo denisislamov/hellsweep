@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: KatanaSplashProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 6258205587800816442, guid: a0747987a18664e10a3e847f8053e712, type: 3}
+  _movementConfig:
+    _startSpeed: 30
+    _acceleration: -30
+  _properties:
+  - {fileID: 11400000, guid: 2d21733c39051436baeb6412bac2cad1, type: 2}
+  - {fileID: 11400000, guid: ab5bcde763c1b4391afb2bd254eeae8d, type: 2}
+  - {fileID: 11400000, guid: 9eb6451c8a2bf43a98046cc73bd494c2, type: 2}

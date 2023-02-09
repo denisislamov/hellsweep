@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core.Collision.CollisionAreas.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces
 {
 	public interface ICircleCollisionAreaConfig : ICollisionAreaConfig
 	{

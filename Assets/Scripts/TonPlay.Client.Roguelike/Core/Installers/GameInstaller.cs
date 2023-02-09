@@ -5,6 +5,7 @@ using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling;
 using TonPlay.Client.Roguelike.Core.Skills.Config;
+using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
@@ -19,6 +20,7 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace TonPlay.Roguelike.Client.Core.Installers
@@ -39,6 +41,9 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 		[SerializeField]
 		private SkillConfigProvider _skillConfigProvider;
 
+		[FormerlySerializedAs("_damageText3DView")] [SerializeField]
+		private DamageTextView damageTextView;
+
 		public override void InstallBindings()
 		{
 			Container.BindFactory<SharedData, SharedData.Factory>().AsSingle();
@@ -57,6 +62,8 @@ namespace TonPlay.Roguelike.Client.Core.Installers
 			Container.Bind<HealthCollectablesEntityFactory>().To<HealthCollectablesEntityFactory>().AsSingle();
 			Container.Bind<MagnetCollectablesEntityFactory>().To<MagnetCollectablesEntityFactory>().AsSingle();
 			Container.Bind<BombCollectablesEntityFactory>().To<BombCollectablesEntityFactory>().AsSingle();
+
+			Container.Bind<DamageTextView>().FromInstance(damageTextView).AsSingle();
 		}
 	}
 }
