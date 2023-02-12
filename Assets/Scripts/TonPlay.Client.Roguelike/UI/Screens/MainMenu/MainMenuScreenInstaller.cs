@@ -1,4 +1,6 @@
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -38,9 +40,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 						.To<MainMenuScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-
+			
 			subContainer.BindFactory<IMainMenuView, IMainMenuScreenContext, MainMenuPresenter, MainMenuPresenter.Factory>();
 			subContainer.BindFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter, ProfileBarPresenter.Factory>();
+			subContainer.BindFactory<ILocationSliderView, ILocationSliderContext, LocationSliderPresenter, LocationSliderPresenter.Factory>();
 		}
 	}
 }

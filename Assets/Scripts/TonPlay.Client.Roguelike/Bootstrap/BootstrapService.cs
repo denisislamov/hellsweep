@@ -28,7 +28,7 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 			Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.MainThread;
 #endif
 
-			Application.targetFrameRate = 30;
+			//Application.targetFrameRate = 30;
 
 			await _profileLoadingService.Load();
 			

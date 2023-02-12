@@ -6,6 +6,7 @@ using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -22,10 +23,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		private readonly ISceneService _sceneService;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly ProfileBarPresenter.Factory _profileBarPresenterFactory;
+		private readonly LocationSliderPresenter.Factory _locationSliderPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly ILocationConfigStorage _locationConfigStorage;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
-		
+
 		public MainMenuPresenter(
 			IMainMenuView view, 
 			IMainMenuScreenContext context,
@@ -33,17 +36,30 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			ISceneService sceneService,
 			IButtonPresenterFactory buttonPresenterFactory,
 			ProfileBarPresenter.Factory profileBarPresenterFactory,
-			IMetaGameModelProvider metaGameModelProvider) 
+			LocationSliderPresenter.Factory locationSliderPresenterFactory,
+			IMetaGameModelProvider metaGameModelProvider,
+			ILocationConfigStorageSelector locationConfigStorageSelector) 
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_sceneService = sceneService;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_profileBarPresenterFactory = profileBarPresenterFactory;
+			_locationSliderPresenterFactory = locationSliderPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 
+			_locationConfigStorage = locationConfigStorageSelector;
+			
 			AddNestedButtonPresenter();
 			AddNestedProfileBarPresenter();
+			AddNestedLocationSliderPresenter(locationConfigStorageSelector);
+		}
+		
+		private void AddNestedLocationSliderPresenter(ILocationConfigStorageSelector selector)
+		{
+			var presenter = _locationSliderPresenterFactory.Create(View.LocationSliderView, new LocationSliderContext(selector));
+			
+			Presenters.Add(presenter);
 		}
 
 		public override void Dispose()
@@ -83,7 +99,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			
 			balanceModel.Update(data);
 			
-			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.Level_Sands).ContinueWith(() =>
+			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfigStorage.Current.SceneName).ContinueWith(() =>
 			{
 				_uiService.Close(Context.Screen);
 				_sceneService.UnloadAdditiveSceneByNameAsync(SceneName.MainMenu);

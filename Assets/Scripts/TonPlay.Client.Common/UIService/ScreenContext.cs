@@ -1,8 +1,9 @@
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
-	public class ScreenContext
+	public class ScreenContext : IScreenContext
 	{
 		private IScreen _screen;
 

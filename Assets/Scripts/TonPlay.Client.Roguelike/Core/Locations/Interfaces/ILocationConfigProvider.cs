@@ -2,6 +2,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 {
 	public interface ILocationConfigProvider
 	{
-		ILocationConfig Get();
+		ILocationConfig Get(string id);
+		
+		ILocationConfig[] Configs { get; }
 	}
 }

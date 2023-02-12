@@ -45,6 +45,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			if (_spawnTimeLeft > 0)
 			{
+#region Profiling End
+				UnityEngine.Profiling.Profiler.EndSample();
+#endregion 
 				return;
 			}
 			

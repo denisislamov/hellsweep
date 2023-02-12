@@ -13,8 +13,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class BasicEnemyMovementTargetSystem : IEcsInitSystem, IEcsRunSystem
 	{
-		private const float FIELD_OF_VIEW = 120f;
-		
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		private ISharedData _sharedData;
@@ -87,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		private static Vector2 CombineMovementDirection(Vector2 separateVector, Vector2 movementVector)
 		{
-			return separateVector*10f + movementVector*0.1f;
+			return separateVector * 0.5f + movementVector * 0.5f;
 		}
 
 		private Vector2 SeparateWithNeighbors(
@@ -114,8 +112,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					separateVector += oppositeDirection;
 				}
-
-				Debug.DrawLine(position, neighborPosition, Color.red, Time.deltaTime);
 			}
 			return separateVector;
 		}
@@ -128,11 +124,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				collisionAreaConfig,
 				ref cachedNeighborsEntityIds,
 				_neighborsLayer);
-		}
-
-		private bool IsInFieldOfView(Vector2 position, Vector2 targetPosition)
-		{
-			return Vector2.Angle(position, targetPosition) < FIELD_OF_VIEW;
 		}
 	}
 }

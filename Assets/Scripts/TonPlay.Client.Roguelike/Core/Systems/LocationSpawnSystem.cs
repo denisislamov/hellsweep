@@ -6,6 +6,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
@@ -20,11 +21,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private readonly KdTreeStorage _kdTreeStorage;
 		private readonly HashSet<int> _movedBlockEntityIds;
 
-		public LocationSpawnSystem(Transform blocksRoot, ILocationConfigProvider locationConfigProvider)
+		public LocationSpawnSystem(Transform blocksRoot, ILocationConfigStorage locationConfigStorage)
 		{
 			_blocksRoot = blocksRoot;
 			_kdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Default"));
-			_locationConfig = locationConfigProvider.Get();
+			_locationConfig = locationConfigStorage.Current;
 			_movedBlockEntityIds = new HashSet<int>();
 		}
 

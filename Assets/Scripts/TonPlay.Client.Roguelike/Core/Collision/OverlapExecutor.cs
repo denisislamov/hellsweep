@@ -26,6 +26,9 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 
 		public int Overlap(KDQuery query, Vector2 position, ICollisionAreaConfig collisionAreaConfig, ref List<int> entities, int layerMask)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endregion
 			var inactivePool = _world.GetPool<InactiveComponent>();
 			var deadPool = _world.GetPool<DeadComponent>();
 			var usedPool = _world.GetPool<UsedComponent>();
@@ -76,11 +79,6 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 					var rect = new Rect(position - sourceRect.center, sourceRect.size);
 					var radius = Mathf.Max(sourceRect.max.magnitude, sourceRect.min.magnitude);
 
-					Debug.DrawLine(new Vector3(rect.xMin, rect.yMin), new Vector3(rect.xMax, rect.yMin), Color.red, Time.deltaTime);
-					Debug.DrawLine(new Vector3(rect.xMin, rect.yMin), new Vector3(rect.xMin, rect.yMax), Color.red, Time.deltaTime);
-					Debug.DrawLine(new Vector3(rect.xMax, rect.yMax), new Vector3(rect.xMax, rect.yMin), Color.red, Time.deltaTime);
-					Debug.DrawLine(new Vector3(rect.xMax, rect.yMax), new Vector3(rect.xMin, rect.yMax), Color.red, Time.deltaTime);
-					
 					query.Radius(kdTreeStorage.KdTree, position, radius, _results);
 					
 					for (var j = 0; j < _results.Count; j++)
@@ -117,6 +115,10 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 
 				_results.Clear();
 			}
+			
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 
 			return entities.Count;
 		}

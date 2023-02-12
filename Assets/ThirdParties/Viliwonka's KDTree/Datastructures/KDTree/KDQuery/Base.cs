@@ -45,6 +45,8 @@ namespace DataStructures.ViliWonka.KDTree {
         protected Heap.MinHeap<KDQueryNode>  minHeap; //heap for k-nearest
         protected int count = 0;             // size of queue
         protected int queryIndex = 0;        // current index at stack
+        private readonly KDQueryNode[] pool;
+        private int lastPoolIndex;
 
         /// <summary>
         /// Returns initialized node from stack that also acts as a pool
@@ -52,13 +54,15 @@ namespace DataStructures.ViliWonka.KDTree {
         /// </summary>
         /// <returns>Reference to pooled node</returns>
         private KDQueryNode PushGetQueue() {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushGetQueue");
+#endregion
             KDQueryNode node = null;
 
             if (count < queueArray.Length) {
 
                 if (queueArray[count] == null)
-                    queueArray[count] = node = new KDQueryNode();
+                    queueArray[count] = node = pool[++lastPoolIndex % pool.Length];
                 else
                     node = queueArray[count];
             }
@@ -66,23 +70,34 @@ namespace DataStructures.ViliWonka.KDTree {
 
                 // automatic resize of pool
                 Array.Resize(ref queueArray, queueArray.Length * 2);
-                node = queueArray[count] = new KDQueryNode();
+                node = queueArray[count] = pool[++lastPoolIndex % pool.Length];
             }
 
             count++;
+			
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 
             return node;
         }
 
         protected void PushToQueue(KDNode node, Vector3 tempClosestPoint) {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToQueue");
+#endregion
             var queryNode = PushGetQueue();
             queryNode.node = node;
             queryNode.tempClosestPoint = tempClosestPoint;
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
         }
 
         protected void PushToHeap(KDNode node, Vector3 tempClosestPoint, Vector3 queryPosition) {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToHeap");
+#endregion
             var queryNode = PushGetQueue();
             queryNode.node = node;
             queryNode.tempClosestPoint = tempClosestPoint;
@@ -90,6 +105,9 @@ namespace DataStructures.ViliWonka.KDTree {
             float sqrDist = Vector3.SqrMagnitude(tempClosestPoint - queryPosition);
             queryNode.distance = sqrDist;
             minHeap.PushObj(queryNode, sqrDist);
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
         }
 
         protected int LeftToProcess {
@@ -102,33 +120,66 @@ namespace DataStructures.ViliWonka.KDTree {
         // just gets unprocessed node from stack
         // increases queryIndex
         protected KDQueryNode PopFromQueue() {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PopFromQueue");
+#endregion
             var node = queueArray[queryIndex];
             queryIndex++;
+			
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 
             return node;
         }
 
         protected KDQueryNode PopFromHeap() {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PopFromHeap");
+#endregion
             KDQueryNode heapNode = minHeap.PopObj();
 
             queueArray[queryIndex]= heapNode;
             queryIndex++;
+			
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 
             return heapNode;
         }
 
         protected void Reset() {
-
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.Reset");
+#endregion
             count = 0;
             queryIndex = 0;
             minHeap.Clear();
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
         }
 
         public KDQuery(int queryNodesContainersInitialSize = 2048) {
+#region Profiling Begin
+            UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.Construct");
+#endregion
             queueArray = new KDQueryNode[queryNodesContainersInitialSize];
             minHeap = new Heap.MinHeap<KDQueryNode>(queryNodesContainersInitialSize);
+            
+            pool = new KDQueryNode[queryNodesContainersInitialSize];
+            for (int i = 0; i < pool.Length; i++)
+            {
+                pool[i] = new KDQueryNode()
+                {
+                    poolIndex = i
+                };
+            }
+            lastPoolIndex = 0;
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
         }
 
     }

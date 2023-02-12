@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Common.UIService.Interfaces;
 
 namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
 {

@@ -21,14 +21,18 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		[SerializeField]
 		private string _defaultConfigId;
 		
+		
+		private Dictionary<string, EnemyConfig> _map;
+		private Dictionary<string, EnemyConfig> Map => _map ??= _configs.ToDictionary(config => config.Id, config => config);
+
 		public IEnemyConfig Get(string id = default)
 		{
-			if (string.IsNullOrEmpty(id))
+			if (string.IsNullOrEmpty(id) || !Map.ContainsKey(id))
 			{
 				id = _defaultConfigId;
 			}
-			
-			return _configs.FirstOrDefault(config => config.Id == id);
+
+			return Map[id];
 		}
 	}
 }

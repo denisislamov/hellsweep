@@ -49,35 +49,81 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 54bfd800ac1754f97b6a5e9a921778e5, type: 3}
+  - {fileID: 21300000, guid: 4754f820bf67944a3a864453fe145f74, type: 3}
+  - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
   - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
+  - {fileID: 21300000, guid: d47bab522d11846668dbdbe0422890c3, type: 3}
+  - {fileID: 21300000, guid: 6e144172d12ee43fa9dc7ed38cd8fecc, type: 3}
   - {fileID: 21300000, guid: e9ccee82ac1024dc99be2f71add15e63, type: 3}
+  - {fileID: 21300000, guid: 73b636b206e194048a8cb3d091e3ae0e, type: 3}
+  - {fileID: 21300000, guid: b07b23c2d66cf420795672b35b056d3b, type: 3}
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
+  - {fileID: 21300000, guid: ff37e0145e7d34880b8d9074902b67a5, type: 3}
+  - {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
+  - {fileID: 21300000, guid: c4bf3d14b3d1140319f250df7a62f603, type: 3}
+  - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
+  - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
+  - {fileID: 21300000, guid: d3af0d466fa194b1e8789ac92cb748e8, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
+  - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
+  - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
+  - {fileID: 21300000, guid: 8d8d3189083974811b4d62305911b2ee, type: 3}
   - {fileID: 21300000, guid: 9cc526f9f18464c93b544cc506a5d219, type: 3}
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
+  - {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
+  - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
+  - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
+  - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
+  - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
+  - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
+  - {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
   m_PackedSpriteNamesToIndex:
+  - MainMenu_Background_Skulls_01a
+  - TitleBackgroundTexture_02
+  - SliderBackground_01
   - Button
   - RectangleRounded16
+  - BackgroundSidebarActive_01
+  - SubTitleBackgroundTexture_02
   - RevolverSight_01a
+  - TitleBackgroundTexture_05
+  - HeaderBarBackground_01a
   - RectangleHalfRounded32
   - RectangleHalfRounded8
+  - SubTitleBackgroundTexture_03
+  - Icons_Battle_01a
+  - SubTitleBackground_01
+  - CircleDonut_01a
+  - SubTitleBackgroundTexture_01
+  - Icons_Settings_01a
   - joystick_background_01a
+  - BackgroundSidebarInactive_01
+  - TitleBackgroundTexture_01
   - joystick_01a
+  - BackgroundTab_01a
   - Title holder
   - CrossLine_01a
   - Rectangle
+  - Icons_Power_01a
   - RectangleRounded32
+  - SubTitleBackgroundTexture_02-1
+  - CircleAvatar_01a
+  - SmallButton_01a
+  - TitleBackgroundTexture_04
   - Star
+  - TitleBackgroundTexture_03
   - RectangleRounded8
   - RectangleHalfRounded16
+  - Icons_Coin_01a
   m_RenderDataMap: {}
   m_Tag: CommonSpriteAtlas
   m_IsVariant: 0

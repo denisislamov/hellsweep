@@ -12,7 +12,5 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 		void SetEnergyText(string text);
 
 		void SetGoldText(string text);
-		
-		void SetNicknameText(string text);
 	}
 }

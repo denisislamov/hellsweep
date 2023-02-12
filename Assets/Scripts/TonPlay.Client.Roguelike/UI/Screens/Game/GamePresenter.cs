@@ -1,5 +1,6 @@
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
@@ -13,6 +14,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private readonly ProgressBarPresenter.Factory _progressBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
+		private readonly DebugPresenter.Factory _debugPresenterFactory;
 		private readonly IGameModelProvider _gameModelProvider;
 
 		public GamePresenter(
@@ -21,18 +23,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			ProgressBarPresenter.Factory progressBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
 			TimerPresenter.Factory timerPresenterFactory,
+			DebugPresenter.Factory debugPresenterFactory,
 			IGameModelProvider gameModelProvider) 
 			: base(view, context)
 		{
 			_progressBarPresenterFactory = progressBarPresenterFactory;
 			_matchScorePresenter = matchScorePresenter;
 			_timerPresenterFactory = timerPresenterFactory;
+			_debugPresenterFactory = debugPresenterFactory;
 			_gameModelProvider = gameModelProvider;
 
 			AddHealthBarPresenter();
 			AddExperienceBarPresenter();
 			AddMatchScorePresenter();
 			AddTimerPresenter();
+			AddDebugPresenter();
 		}
 		
 		private void AddMatchScorePresenter()
@@ -72,6 +77,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			var presenter = _timerPresenterFactory.Create(
 				View.TimerView, 
 				new TimerContext(gameModel.GameTime));
+			
+			Presenters.Add(presenter);
+		}
+		
+		private void AddDebugPresenter()
+		{
+			var presenter = _debugPresenterFactory.Create(
+				View.DebugView, 
+				ScreenContext.Empty);
 			
 			Presenters.Add(presenter);
 		}

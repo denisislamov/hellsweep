@@ -1,3 +1,4 @@
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 

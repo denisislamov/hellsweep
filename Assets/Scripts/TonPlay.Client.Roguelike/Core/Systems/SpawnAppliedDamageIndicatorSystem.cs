@@ -53,9 +53,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					position.Position += SPAWN_OFFSET + Random.insideUnitCircle;
 					
 					var view = poolObject.Object;
-					view.SetText(spawnEvent.Damage.ToString("F0"));
 					view.Position = position.Position;
 					view.Color = Color.white;
+					view.SetText(spawnEvent.Damage.ToString("F0"));
 
 					ref var indicator = ref indicatorPool.Add(entityId);
 					indicator.View = view;

@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
@@ -30,6 +31,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private readonly ISceneService _sceneService;
 		private readonly IUIService _uiService;
 		private readonly IProfileConfigProvider _profileConfigProvider;
+		private readonly ILocationConfigStorage _locationConfigStorage;
 		private bool _loading;
 
 		public DefeatGamePresenter(
@@ -41,7 +43,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			IButtonPresenterFactory buttonPresenterFactory,
 			ISceneService sceneService,
 			IUIService uiService,
-			IProfileConfigProvider profileConfigProvider)
+			IProfileConfigProvider profileConfigProvider,
+			ILocationConfigStorage locationConfigStorage)
 			: base(view, context)
 		{
 			_timerPresenterFactory = timerPresenterFactory;
@@ -51,6 +54,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_sceneService = sceneService;
 			_uiService = uiService;
 			_profileConfigProvider = profileConfigProvider;
+			_locationConfigStorage = locationConfigStorage;
 
 			InitView();
 			AddTimerPresenter();
@@ -118,24 +122,41 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		
 		private void UpdateProfileModel()
 		{
-			var profileModel = _metaGameModelProvider.Get().ProfileModel;
-			var gameModel = _gameModelProvider.Get();
+			var metagameModel = _metaGameModelProvider.Get();
+			
+			var locationsModel = metagameModel.LocationsModel;
+			var locationsData = locationsModel.ToData();
 
-			var data = profileModel.ToData();
-			data.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
-			data.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
-
-			while(data.Experience >= data.MaxExperience)
+			if (!locationsData.Locations.ContainsKey(_locationConfigStorage.Current.Id))
 			{
-				data.Level++;
-				data.Experience -= data.MaxExperience;
-
-				var config = _profileConfigProvider.Get(data.Level);
-				data.MaxExperience = config.ExperienceToLevelUp;
-				data.BalanceData.Energy += 5;
+				locationsData.Locations.Add(
+					_locationConfigStorage.Current.Id, 
+					new LocationData(){ Id = _locationConfigStorage.Current.Id });
 			}
 			
-			profileModel.Update(data);
+			var locationData = locationsData.Locations[_locationConfigStorage.Current.Id];
+			
+			var profileModel = metagameModel.ProfileModel;
+			var gameModel = _gameModelProvider.Get();
+
+			var profileData = profileModel.ToData();
+			
+			profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
+			profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
+			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+
+			while(profileData.Experience >= profileData.MaxExperience)
+			{
+				profileData.Level++;
+				profileData.Experience -= profileData.MaxExperience;
+
+				var config = _profileConfigProvider.Get(profileData.Level);
+				profileData.MaxExperience = config.ExperienceToLevelUp;
+				profileData.BalanceData.Energy += 5;
+			}
+			
+			profileModel.Update(profileData);
+			locationsModel.Update(locationsData);
 		}
 
 		internal class Factory : PlaceholderFactory<IDefeatGameView, IDefeatGameScreenContext, DefeatGamePresenter>

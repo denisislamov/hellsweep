@@ -1,3 +1,6 @@
+using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
+using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
@@ -51,12 +54,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 						.WithArguments(ScreenPrefab);
 
 			subContainer.BindFactory<IGameView, IGameScreenContext, GamePresenter, GamePresenter.Factory>().FromNew();
-			
 			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>().FromNew();
-			
 			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>().FromNew();
-			
 			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>().FromNew();
+			subContainer.BindFactory<IDebugView, IScreenContext, DebugPresenter, DebugPresenter.Factory>().FromNew();
 		}
 	}
 }

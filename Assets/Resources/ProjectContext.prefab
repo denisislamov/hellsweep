@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _profileConfigProvider: {fileID: 11400000, guid: 1bbd6c8fc652e4521934d41ea33bf8a0, type: 2}
+  _locationConfigProvider: {fileID: 11400000, guid: f06b0b73840c3454288b0d1854380c88, type: 2}
 --- !u!114 &9141338410627678188
 MonoBehaviour:
   m_ObjectHideFlags: 0

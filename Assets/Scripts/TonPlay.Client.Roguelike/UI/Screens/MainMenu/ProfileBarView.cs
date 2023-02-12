@@ -19,10 +19,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		private TextMeshProUGUI _goldText;
 
 		[SerializeField]
-		private TextMeshProUGUI _nicknameText;
-		
-		[SerializeField]
-		private ProgressBarView _experienceProgressBarView;
+		private FillImageProgressBarView _experienceProgressBarView;
 
 		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;
 
@@ -39,11 +36,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		public void SetGoldText(string text)
 		{
 			_goldText.SetText(text);
-		}
-		
-		public void SetNicknameText(string text)
-		{
-			_nicknameText.SetText(text);
 		}
 	}
 }

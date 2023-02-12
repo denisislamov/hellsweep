@@ -31,15 +31,6 @@ namespace DataStructures.ViliWonka.KDTree {
         public KDNode node;
         public Vector3 tempClosestPoint;
         public float distance;
-
-        public KDQueryNode() {
-
-        }
-
-        public KDQueryNode(KDNode node, Vector3 tempClosestPoint) {
-            this.node = node;
-            this.tempClosestPoint = tempClosestPoint;
-        }
-
+        public int poolIndex;
     }
 }

@@ -47,7 +47,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 											   .End();
 
 			var magnetizableCollectableRawEntitiesArray = magnetizableCollectableFilter.GetRawEntities();
-			var magnetizableCollectableHashSet = magnetizableCollectableRawEntitiesArray.ToHashSet();
+
+			HashSet<int> magnetizableCollectableHashSet = null;
 
 			var positionPool = world.GetPool<PositionComponent>();
 			var magnetToEntityPool = world.GetPool<MagnetisedToEntityComponent>();
@@ -58,6 +59,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			foreach (var entityId in filter)
 			{
+				magnetizableCollectableHashSet ??= magnetizableCollectableRawEntitiesArray.ToHashSet();
+				
 				ref var activeMagnet = ref activeMagnetPool.Get(entityId);
 
 				magnetizableCollectableHashSet.ExceptWith(activeMagnet.ExcludeEntityIds);

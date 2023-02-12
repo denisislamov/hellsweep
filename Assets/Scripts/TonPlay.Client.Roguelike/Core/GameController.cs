@@ -10,6 +10,7 @@ using TonPlay.Client.Roguelike.Core.Systems;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -51,8 +52,8 @@ namespace TonPlay.Client.Roguelike.Core
 		private KdTreeStorage _collectablesKdTreeStorage;
 
 		private OverlapExecutor _overlapExecutor;
-		private ILocationConfigProvider _locationConfigProvider;
 		private ICollectableEntityFactory _collectablesEntityFactory;
+		private ILocationConfigStorage _locationConfigStorage;
 
 		private bool _inited;
 
@@ -63,11 +64,11 @@ namespace TonPlay.Client.Roguelike.Core
 			IUIService uiService,
 			OverlapExecutor.Factory overlapExecutorFactory,
 			SharedData.Factory sharedDataFactory,
-			ILocationConfigProvider locationConfigProvider,
+			ILocationConfigStorage locationConfigStorage,
 			CollectablesEntityFactory.Factory collectablesEntityFactoryFactory)
 		{
 			_uiService = uiService;
-			_locationConfigProvider = locationConfigProvider;
+			_locationConfigStorage = locationConfigStorage;
 
 			CreateGameModel(gameModelSetter);
 
@@ -106,7 +107,7 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new HealthCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
-						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigProvider))
+						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage))
 				;
 
 			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
