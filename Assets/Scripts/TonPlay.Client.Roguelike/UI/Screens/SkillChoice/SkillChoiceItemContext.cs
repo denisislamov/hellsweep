@@ -2,7 +2,6 @@ using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 
@@ -17,6 +16,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 		public int MaxLevel { get; }
 		public SkillType SkillType { get; }
 		public SkillName SkillName { get; }
+		public Color Color { get; }
+		public Sprite LevelIcon { get; }
 		public Action<SkillName> ClickedCallback { get; }
 		
 		public SkillChoiceItemContext(
@@ -27,6 +28,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			Sprite icon, 
 			int currentLevel, 
 			int maxLevel, 
+			Color color,
+			Sprite levelIcon,
 			Action<SkillName> clickedCallback)
 		{
 			SkillName = skillName;
@@ -37,6 +40,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			CurrentLevel = currentLevel;
 			MaxLevel = maxLevel;
 			ClickedCallback = clickedCallback;
+			LevelIcon = levelIcon;
+			Color = color;
 		}
 	}
 }

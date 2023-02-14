@@ -1,4 +1,5 @@
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Views;
@@ -10,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces
 	{
 		IProgressBarView HealthProgressBarView { get; }
 		
-		IProgressBarView ExperienceProgressBarView { get; }
+		ILevelProgressBarView LevelProgressBarView { get; }
 		
 		ITimerView TimerView { get; }
 

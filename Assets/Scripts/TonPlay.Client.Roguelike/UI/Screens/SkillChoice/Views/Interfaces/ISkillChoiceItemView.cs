@@ -3,7 +3,7 @@ using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views.Interfaces
+namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces
 {
 	public interface ISkillChoiceItemView : ICollectionItemView
 	{
@@ -20,5 +20,11 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views.Interfaces
 		void SetNextLevel(int level);
 
 		void SetMaxLevel(int level);
+
+		void SetBackgroundColor(Color color);
+		
+		void SetTitleTextColor(Color color);
+		
+		void SetLevelIcon(Sprite icon);
 	}
 }

@@ -2,6 +2,9 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Views;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
@@ -58,6 +61,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>().FromNew();
 			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>().FromNew();
 			subContainer.BindFactory<IDebugView, IScreenContext, DebugPresenter, DebugPresenter.Factory>().FromNew();
+			subContainer.BindFactory<ILevelProgressBarView, ILevelProgressBarContext, LevelProgressBarPresenter, LevelProgressBarPresenter.Factory>().FromNew();
 		}
 	}
 }

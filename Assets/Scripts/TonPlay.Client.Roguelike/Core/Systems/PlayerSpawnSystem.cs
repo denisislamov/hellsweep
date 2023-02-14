@@ -12,7 +12,6 @@ using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Player.Views.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
-using TonPlay.Roguelike.Client.Core.Skills;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

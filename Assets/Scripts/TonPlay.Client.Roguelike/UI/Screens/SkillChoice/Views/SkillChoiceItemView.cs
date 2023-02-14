@@ -1,13 +1,14 @@
 using System;
 using DG.Tweening;
 using TMPro;
+using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
+namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 {
 	public class SkillChoiceItemView : CollectionItemView, ISkillChoiceItemView
 	{
@@ -25,6 +26,9 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
 		
 		[SerializeField]
 		private Image[] _backgroundLevelsImages;
+
+		[SerializeField]
+		private Image[] _colorBackgroundImages;
 
 		[SerializeField]
 		private Button _button;
@@ -71,9 +75,30 @@ namespace TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views
 		
 		public void SetMaxLevel(int level)
 		{
-			for (var i = 0; i < _activeLevelsImages.Length; i++)
+			for (var i = 0; i < _backgroundLevelsImages.Length; i++)
 			{
 				_backgroundLevelsImages[i].gameObject.SetActive(level - i - 1>= 0);
+			}
+		}
+		
+		public void SetBackgroundColor(Color color)
+		{
+			for (var i = 0; i < _colorBackgroundImages.Length; i++)
+			{
+				_colorBackgroundImages[i].color = color;
+			}
+		}
+		
+		public void SetTitleTextColor(Color color)
+		{
+			_title.color = color;
+		}
+		
+		public void SetLevelIcon(Sprite icon)
+		{
+			for (var i = 0; i < _activeLevelsImages.Length; i++)
+			{
+				_activeLevelsImages[i].sprite = icon;
 			}
 		}
 

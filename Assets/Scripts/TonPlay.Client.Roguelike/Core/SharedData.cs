@@ -1,6 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
@@ -12,7 +13,6 @@ using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using Zenject;
 

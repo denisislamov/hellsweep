@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;

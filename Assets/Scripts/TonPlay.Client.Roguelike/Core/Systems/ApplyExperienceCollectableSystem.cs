@@ -38,10 +38,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				exp.Value += apply.Value;
 
-				if (exp.Value >= exp.MaxValue)
+				while (exp.Value >= exp.MaxValue)
 				{
 					exp.Level++;
-					exp.Value %= exp.MaxValue;
+					exp.Value -= exp.MaxValue;
 					exp.MaxValue = _playersLevelsConfigProvider.Get(exp.Level).ExperienceToNextLevel;
 
 					AddUpgradeEvent(levelUpgradeEventPool, entityId);

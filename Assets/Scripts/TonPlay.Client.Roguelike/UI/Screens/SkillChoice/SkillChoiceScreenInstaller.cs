@@ -1,10 +1,15 @@
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
+using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills.Config;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views;
+using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views;
+using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
@@ -78,6 +83,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			   .FromNew();
 
 			subContainer.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
+			
+			subContainer.BindFactory<ILevelProgressBarView, ILevelProgressBarContext, LevelProgressBarPresenter, LevelProgressBarPresenter.Factory>().FromNew();
+			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>().FromNew();
 		}
 	}
 }

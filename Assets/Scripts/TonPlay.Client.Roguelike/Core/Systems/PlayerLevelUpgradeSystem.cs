@@ -7,13 +7,11 @@ using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,11 +21,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		private const int MAX_SKILLS_TO_CHOICE = 3;
 
+		public const int MAX_DEFENCE_SKILLS = 6;
+		public const int MAX_UTILITY_SKILLS = 6;
+
 		private readonly IUIService _uiService;
 
 		private IGameModel _gameModel;
 		private ISkillConfigProvider _skillsConfigProvider;
 		private EcsWorld _world;
+		private IPlayersLevelsConfigProvider _playersLevelsConfigProvider;
 
 		public PlayerLevelUpgradeSystem(IUIService uiService)
 		{
@@ -41,12 +43,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			_world = systems.GetWorld();
 			_gameModel = sharedData.GameModel;
 			_skillsConfigProvider = sharedData.SkillsConfigProvider;
+			_playersLevelsConfigProvider = sharedData.PlayersLevelsConfigProvider;
 		}
 
 		public void Run(EcsSystems systems)
 		{
 #region Profiling Begin
+
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+
 #endregion
 			var world = systems.GetWorld();
 			var filter = world
@@ -76,7 +81,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						Debug.LogWarning("There's no skills to upgrade.");
 						break;
 					}
-					
+
 					openedUiPool.Add(entityId);
 
 					SetGamePauseState(true);
@@ -85,21 +90,26 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				}
 			}
 #region Profiling End
+
 			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+
+#endregion
 		}
 
 		private IReadOnlyList<SkillName> GenerateSkillsToUpgrade()
 		{
 			var skills = _skillsConfigProvider.All;
 			var skillsModel = _gameModel.PlayerModel.SkillsModel;
+			var defenceSkillsCount = skillsModel.SkillLevels.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Defence || _skillsConfigProvider.Get(_.Key).SkillType == SkillType.UltimateDefence);
+			var utilitySkillsCount = skillsModel.SkillLevels.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Utility);
 
-			var availableSkills = skills
-								 .Where(config => !skillsModel.SkillLevels.ContainsKey(config.SkillName)
-												  || skillsModel.SkillLevels[config.SkillName] < config.MaxLevel)
-								 .Where(config => !config.ExcludeFromInitialDrop || 
-												  (skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] > 0))
-								 .ToList();
+			var availableSkillsEnumerable = skills
+										   .Where(config => (!skillsModel.SkillLevels.ContainsKey(config.SkillName) && !IsLimitedBySkillType(config, defenceSkillsCount, utilitySkillsCount))
+															|| (skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] < config.MaxLevel))
+										   .Where(config => !config.ExcludeFromInitialDrop ||
+															(skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] > 0));
+
+			var availableSkills = availableSkillsEnumerable.ToList();
 
 			var choiceAmount = Math.Min(MAX_SKILLS_TO_CHOICE, availableSkills.Count);
 
@@ -113,6 +123,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			return result;
+		}
+
+		private bool IsLimitedBySkillType(ISkillConfig config, int defenceSkillsCount, int utilitySkillsCount)
+		{
+			switch (config.SkillType)
+			{
+				case SkillType.Defence when defenceSkillsCount == MAX_DEFENCE_SKILLS:
+				case SkillType.UltimateDefence when defenceSkillsCount == MAX_DEFENCE_SKILLS:
+				case SkillType.Utility when utilitySkillsCount == MAX_UTILITY_SKILLS:
+					return true;
+				default:
+					return false;
+			}
 		}
 
 		private void ShowSkillChoiceScreen(
@@ -130,7 +153,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var openedUiPool = _world.GetPool<OpenedUIComponent>();
 			openedUiPool.Del(entityId);
-			
+
 			UpgradeChosenSkill(updatedSkill, entityId);
 			SetGamePauseState(false);
 		}
@@ -139,7 +162,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			ref var skills = ref skillsPool.Get(entityId);
-			
+
 			if (!skills.Levels.ContainsKey(updatedSkill))
 			{
 				skills.Levels.Add(updatedSkill, 0);

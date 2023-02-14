@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Models.Data;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
 using UniRx;
 
 namespace TonPlay.Client.Roguelike.Core.Models
@@ -24,6 +24,11 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		public void Update(SkillsData data)
 		{
 			_skillLevels = data.SkillLevels;
+
+			if (data.Level != _level.Value)
+			{
+				_level.SetValueAndForceNotify(data.Level);
+			}
 			
 			_updated.OnNext(Unit.Default);
 		}

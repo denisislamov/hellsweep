@@ -1,7 +1,6 @@
 using System;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
-using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine;
 
@@ -23,6 +22,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces
 		
 		SkillName SkillName { get; }
 		
+		Color Color { get; }
+		
+		Sprite LevelIcon { get; }
+
 		Action<SkillName> ClickedCallback { get; }
 	}
 }

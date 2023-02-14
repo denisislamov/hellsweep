@@ -1,6 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces

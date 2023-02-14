@@ -1,5 +1,6 @@
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;

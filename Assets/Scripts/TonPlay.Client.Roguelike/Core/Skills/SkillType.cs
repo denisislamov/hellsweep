@@ -1,8 +1,9 @@
-namespace TonPlay.Roguelike.Client.Core.Skills
+namespace TonPlay.Client.Roguelike.Core.Skills
 {
 	public enum SkillType
 	{
 		Defence,
-		Utility
+		Utility,
+		UltimateDefence
 	}
 }

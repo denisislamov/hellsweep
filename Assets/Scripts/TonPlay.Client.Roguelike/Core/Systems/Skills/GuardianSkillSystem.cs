@@ -10,7 +10,6 @@ using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 

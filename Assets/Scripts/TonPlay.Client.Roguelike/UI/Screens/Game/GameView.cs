@@ -1,6 +1,8 @@
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Views;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views;
@@ -8,6 +10,7 @@ using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Views;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Game
 {
@@ -17,7 +20,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private ProgressBarView _healthProgressBarView;
 		
 		[SerializeField]
-		private ProgressBarView _experienceProgressBarView;
+		private LevelProgressBarView _levelProgressBarView;
 		
 		[SerializeField]
 		private TimerView _timerView;
@@ -30,7 +33,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 
 		public IProgressBarView HealthProgressBarView => _healthProgressBarView;
 		
-		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;
+		public ILevelProgressBarView LevelProgressBarView => _levelProgressBarView;
 		
 		public ITimerView TimerView => _timerView;
 		

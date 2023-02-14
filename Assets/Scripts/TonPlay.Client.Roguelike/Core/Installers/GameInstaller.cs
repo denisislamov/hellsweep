@@ -1,31 +1,24 @@
 using Leopotam.EcsLite;
-using TonPlay.Client.Roguelike.Core;
 using TonPlay.Client.Roguelike.Core.Collectables;
-using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
-using TonPlay.Client.Roguelike.Core.Locations;
-using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling;
 using TonPlay.Client.Roguelike.Core.Skills.Config;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
-using TonPlay.Roguelike.Client.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills.Config;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace TonPlay.Roguelike.Client.Core.Installers
+namespace TonPlay.Client.Roguelike.Core.Installers
 {
 	
 	[CreateAssetMenu(fileName = nameof(GameInstaller), menuName = AssetMenuConstants.CORE_INSTALLERS + nameof(GameInstaller))]

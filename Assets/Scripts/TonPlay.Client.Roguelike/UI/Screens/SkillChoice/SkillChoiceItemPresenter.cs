@@ -1,6 +1,7 @@
 using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.Screens.SkillChoice.Views.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UniRx;
@@ -44,6 +45,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			View.SetCurrentLevel(Context.CurrentLevel);
 			View.SetMaxLevel(Context.MaxLevel);
 			View.SetNextLevel(nextLevel);
+			View.SetBackgroundColor(Context.Color);
+			View.SetTitleTextColor(Context.Color);
+			View.SetLevelIcon(Context.LevelIcon);
 		}
 		
 		internal class Factory : PlaceholderFactory<ISkillChoiceItemView, ISkillChoiceItemContext, SkillChoiceItemPresenter>

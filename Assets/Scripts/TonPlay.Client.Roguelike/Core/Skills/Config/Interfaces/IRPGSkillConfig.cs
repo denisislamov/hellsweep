@@ -1,4 +1,3 @@
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces

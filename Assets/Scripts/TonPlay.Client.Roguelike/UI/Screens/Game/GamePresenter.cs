@@ -2,6 +2,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
@@ -11,6 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 {
 	internal class GamePresenter : Presenter<IGameView, IGameScreenContext>
 	{
+		private readonly LevelProgressBarPresenter.Factory _levelProgressBarPresenterFactory;
 		private readonly ProgressBarPresenter.Factory _progressBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
@@ -20,6 +22,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		public GamePresenter(
 			IGameView view, 
 			IGameScreenContext context,
+			LevelProgressBarPresenter.Factory levelProgressBarPresenterFactory,
 			ProgressBarPresenter.Factory progressBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
 			TimerPresenter.Factory timerPresenterFactory,
@@ -27,6 +30,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			IGameModelProvider gameModelProvider) 
 			: base(view, context)
 		{
+			_levelProgressBarPresenterFactory = levelProgressBarPresenterFactory;
 			_progressBarPresenterFactory = progressBarPresenterFactory;
 			_matchScorePresenter = matchScorePresenter;
 			_timerPresenterFactory = timerPresenterFactory;
@@ -64,9 +68,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private void AddExperienceBarPresenter()
 		{
 			var playerModel = _gameModelProvider.Get().PlayerModel;
-			var presenter = _progressBarPresenterFactory.Create(
-				View.ExperienceProgressBarView, 
-				new ProgressBarContext(playerModel.Experience, playerModel.MaxExperience));
+			var presenter = _levelProgressBarPresenterFactory.Create(
+				View.LevelProgressBarView, 
+				new LevelProgressBarContext(playerModel.SkillsModel.Level, playerModel.Experience, playerModel.MaxExperience));
 			
 			Presenters.Add(presenter);
 		}

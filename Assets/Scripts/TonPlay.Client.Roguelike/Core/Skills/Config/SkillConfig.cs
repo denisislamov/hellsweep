@@ -1,7 +1,5 @@
 using System;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Skills;
-using TonPlay.Roguelike.Client.Core.Skills.Config.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
