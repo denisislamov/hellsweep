@@ -51,6 +51,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 54bfd800ac1754f97b6a5e9a921778e5, type: 3}
   - {fileID: 21300000, guid: 4754f820bf67944a3a864453fe145f74, type: 3}
+  - {fileID: 21300000, guid: 6eaf12a05b55e416eb6b3e1582b87fcf, type: 3}
   - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
   - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
@@ -82,6 +83,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 47c98149c6f4d4e389f44d4bc692724e, type: 3}
   - {fileID: 21300000, guid: 1b36d879d3da7480e8c6f740f0ff47a4, type: 3}
   - {fileID: 21300000, guid: 8d8d3189083974811b4d62305911b2ee, type: 3}
+  - {fileID: 21300000, guid: 768cace996f4c483c9e35817368edbcc, type: 3}
   - {fileID: 21300000, guid: 9cc526f9f18464c93b544cc506a5d219, type: 3}
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
@@ -96,10 +98,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
+  - {fileID: 21300000, guid: a1703c2fd8bbc44d5bd84907afdb3590, type: 3}
   - {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
   m_PackedSpriteNamesToIndex:
   - MainMenu_Background_Skulls_01a
   - TitleBackgroundTexture_02
+  - GameLabelPanel_01a
   - SliderBackground_01
   - Button
   - RectangleRounded16
@@ -131,6 +135,7 @@ SpriteAtlas:
   - Particle_01b
   - SkillChoiceSubtitle_01a
   - BackgroundTab_01a
+  - Icons_Coin_02a
   - Title holder
   - CrossLine_01a
   - Rectangle
@@ -145,6 +150,7 @@ SpriteAtlas:
   - TitleBackgroundTexture_03
   - RectangleRounded8
   - RectangleHalfRounded16
+  - Icons_Kills_01a
   - Icons_Coin_01a
   m_RenderDataMap: {}
   m_Tag: CommonSpriteAtlas
