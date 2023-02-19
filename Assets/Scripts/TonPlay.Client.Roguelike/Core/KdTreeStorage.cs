@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
-using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core
+namespace TonPlay.Client.Roguelike.Core
 {
 	public class KdTreeStorage
 	{

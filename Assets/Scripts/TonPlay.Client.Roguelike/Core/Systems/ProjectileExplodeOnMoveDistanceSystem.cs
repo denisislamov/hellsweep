@@ -1,14 +1,10 @@
-using System.Collections.Generic;
-using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
-using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class ProjectileExplodeOnMoveDistanceSystem : IEcsRunSystem
 	{
@@ -46,7 +42,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 				{
 					var explosionEntity = world.NewEntity();
 					explosionEntity.AddPositionComponent(position.Position);
-					explosionEntity.AddExplosionComponent(explodeOnMove.Damage, explodeOnMove.CollisionConfig, _layerMask);
+					explosionEntity.AddExplosionComponent(explodeOnMove.DamageProvider, explodeOnMove.CollisionConfig, _layerMask);
+					explosionEntity.AddStackTryApplyDamageComponent();
+					explosionEntity.AddBlockApplyDamageTimerComponent();
 
 					destroyPool.Add(entityId);
 				}

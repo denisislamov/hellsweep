@@ -20,13 +20,17 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			Vector2 direction, 
 			int collisionLayerMask)
 		{
+#region Profiling Begin
+			UnityEngine.Profiling.Profiler.BeginSample("TonPlay.Client.Roguelike.Core.Weapons.ProjectileSpawner.SpawnProjectile");
+#endregion
 			var projectileView = poolObject.Object;
 			var projectileEntity = world.NewEntity();
 			var projectileViewTransform = projectileView.transform;
 
 			var gameObject = projectileView.gameObject;
-			gameObject.name = string.Format("{0} (entity: {1})", config.PrefabView.gameObject.name, projectileEntity.Id.ToString());
 
+			direction = direction.normalized;
+			
 			projectileViewTransform.position = position;
 			projectileViewTransform.right = direction;
 
@@ -51,59 +55,88 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			projectileViewPoolObject.ViewPoolObject = poolObject;
 			
 			projectileEntity.AddLocalPositionComponent(Vector2.zero);
+			projectileEntity.AddStackTryApplyDamageComponent();
+			projectileEntity.AddBlockApplyDamageTimerComponent();
 
-			if (config.TryGetProperty<IDestroyOnTimerProjectileConfigProperty>(out var destroyOnTimerProjectileConfigProperty))
+			if (config.HasProperty<IDestroyOnTimerProjectileConfigProperty>())
 			{
+				var destroyOnTimerProjectileConfigProperty = config.GetProperty<IDestroyOnTimerProjectileConfigProperty>();
+					
 				ref var projectileDestroyOnTimer = ref projectileEntity.Add<DestroyOnTimerComponent>();
 				projectileDestroyOnTimer.TimeLeft = destroyOnTimerProjectileConfigProperty.Timer;
 			}
 			
-			if (config.TryGetProperty<IExplodeOnMoveDistanceProjectileConfigProperty>(out var explodeOnMoveDistanceProjectileConfigProperty))
+			if (config.HasProperty<IExplodeOnMoveDistanceProjectileConfigProperty>())
 			{
+				var explodeOnMoveDistanceProjectileConfigProperty = config.GetProperty<IExplodeOnMoveDistanceProjectileConfigProperty>();
+				
 				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnMoveDistanceComponent>();
 				explodeOnMoveDistance.CollisionConfig = explodeOnMoveDistanceProjectileConfigProperty.ExplodeCollisionAreaConfig;
 				explodeOnMoveDistance.DistanceToExplode = explodeOnMoveDistanceProjectileConfigProperty.Distance;
 				explodeOnMoveDistance.StartPosition = position;
-				explodeOnMoveDistance.Damage = explodeOnMoveDistanceProjectileConfigProperty.Damage;
+				explodeOnMoveDistance.DamageProvider = explodeOnMoveDistanceProjectileConfigProperty.DamageProvider;
+			}
+			
+			if (config.HasProperty<IExplodeOnCollisionProjectileConfigProperty>())
+			{
+				var projectileConfigProperty = config.GetProperty<IExplodeOnCollisionProjectileConfigProperty>();
+				
+				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnCollisionComponent>();
+				explodeOnMoveDistance.CollisionConfig = projectileConfigProperty.ExplodeCollisionAreaConfig;
+				explodeOnMoveDistance.DamageProvider = projectileConfigProperty.DamageProvider;
 			}
 
-			if (config.TryGetProperty<IDamageOnCollisionProjectileConfigProperty>(out var damageOnCollisionProjectileConfigProperty))
+			if (config.HasProperty<IDamageOnCollisionProjectileConfigProperty>())
 			{
+				var damageOnCollisionProjectileConfigProperty = config.GetProperty<IDamageOnCollisionProjectileConfigProperty>();
+
 				ref var projectileDamageOnCollision = ref projectileEntity.Add<DamageOnCollisionComponent>();
 				projectileDamageOnCollision.DamageProvider = damageOnCollisionProjectileConfigProperty.DamageProvider;
 			}
 			
-			if (config.TryGetProperty<IDestroyOnCollisionProjectileConfigProperty>(out var destroyOnCollisionProjectileConfigProperty))
+			if (config.HasProperty<IDestroyOnCollisionProjectileConfigProperty>())
 			{
 				projectileEntity.Add<DestroyOnCollisionComponent>();
 			}
 			
-			if (config.TryGetProperty<IBlockDamageOnCollisionProjectileConfigProperty>(out var blockDamageOnCollisionProjectileConfigProperty))
+			if (config.HasProperty<IBlockDamageOnCollisionProjectileConfigProperty>())
 			{
 				projectileEntity.Add<BlockDamageOnCollisionComponent>();
 			}
 			
-			if (config.TryGetProperty<ICollisionProjectileConfigProperty>(out var collisionProjectileConfigProperty))
+			if (config.HasProperty<ICollisionProjectileConfigProperty>())
 			{
+				var collisionProjectileConfigProperty = config.GetProperty<ICollisionProjectileConfigProperty>();
+
 				ref var projectileCollision = ref projectileEntity.Add<CollisionComponent>();
 				projectileCollision.CollisionAreaConfig = collisionProjectileConfigProperty.CollisionAreaConfig;
 				projectileCollision.LayerMask = collisionLayerMask;
+				
+				projectileEntity.AddHasCollidedComponent();
 			}
 			
-			if (config.TryGetProperty<IDestroyIfRadiusExceededProjectileConfigProperty>(out var destroyIfRadiusExceededProjectileConfigProperty))
+			if (config.HasProperty<IDestroyIfRadiusExceededProjectileConfigProperty>())
 			{
+				var destroyIfRadiusExceededProjectileConfigProperty = config.GetProperty<IDestroyIfRadiusExceededProjectileConfigProperty>();
+
 				ref var destroyIfDistanceExceededComponent = ref projectileEntity.Add<DestroyIfDistanceExceededComponent>();
 
 				destroyIfDistanceExceededComponent.Distance = destroyIfRadiusExceededProjectileConfigProperty.Distance;
 				destroyIfDistanceExceededComponent.StartPosition = position;
 			}
 			
-			if (config.TryGetProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>(out var spawnProjectileOnDestroyProjectileConfigProperty))
+			if (config.HasProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>())
 			{
+				var spawnProjectileOnDestroyProjectileConfigProperty = config.GetProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>();
+
 				projectileEntity.AddSpawnProjectileOnDestroyComponent(
 					spawnProjectileOnDestroyProjectileConfigProperty.ProjectileConfig,
 					spawnProjectileOnDestroyProjectileConfigProperty.CollisionLayerMask);
 			}
+			
+#region Profiling End
+			UnityEngine.Profiling.Profiler.EndSample();
+#endregion
 
 			return projectileEntity;
 		}

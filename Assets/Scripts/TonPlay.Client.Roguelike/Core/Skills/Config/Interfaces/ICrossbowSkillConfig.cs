@@ -4,16 +4,14 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface ICrossbowSkillConfig : ISkillConfig
+	public interface ICrossbowSkillConfig : ISkillConfig<ICrossbowLevelSkillConfig>
 	{
 		CrossbowSightEffect SightEffectView { get; }
 		
 		IProjectileConfig ProjectileConfig { get; }
-
-		ICrossbowLevelSkillConfig GetLevelConfig(int level);
 	}
 	
-	public interface ICrossbowLevelSkillConfig
+	public interface ICrossbowLevelSkillConfig : ISkillLevelConfig
 	{
 		IDamageProvider DamageProvider { get; }
 

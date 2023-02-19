@@ -4,14 +4,12 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IGuardianSkillConfig : ISkillConfig
+	public interface IGuardianSkillConfig : ISkillConfig<IGuardianSkillLevelConfig>
 	{
 		IProjectileConfig ProjectileConfig { get; }
-		
-		IGuardianSkillLevelConfig GetLevelConfig(int level);
 	}
 	
-	public interface IGuardianSkillLevelConfig 
+	public interface IGuardianSkillLevelConfig : ISkillLevelConfig
 	{
 		int Quantity { get; }
 		

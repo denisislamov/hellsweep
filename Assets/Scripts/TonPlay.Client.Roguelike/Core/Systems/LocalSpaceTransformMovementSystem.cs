@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
@@ -25,14 +26,21 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var positionPool = world.GetPool<LocalPositionComponent>();
 			var lerpPool = world.GetPool<LerpTransformComponent>();
 			var speedPool = world.GetPool<SpeedComponent>();
+			var applyForcePool = world.GetPool<ApplyForceComponent>();
 
 			foreach (var entityId in filter) {
 				ref var movementComponent = ref movementPool.Get(entityId);
 				ref var positionComponent = ref positionPool.Get(entityId);
 
+				var applyForce = new ApplyForceComponent();
+
+				applyForcePool.TryGet(entityId, ref applyForce);
+
 				var speed = speedPool.Has(entityId) ? speedPool.Get(entityId).Speed : 1f;
 				
-				var targetPosition = positionComponent.Position + movementComponent.Direction * speed * Time.deltaTime;
+				var targetPosition = positionComponent.Position 
+									 + movementComponent.Direction * speed * Time.deltaTime 
+									 + applyForce.Force * Time.deltaTime;
 
 				if (lerpPool.Has(entityId))
 				{

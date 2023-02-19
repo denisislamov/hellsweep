@@ -3,7 +3,7 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IHolyWaterSkillConfig : ISkillConfig
+	public interface IHolyWaterSkillConfig : ISkillConfig<IHolyWaterSkillLevelConfig>
 	{
 		IProjectileConfig BottleProjectileConfig { get; }
 		
@@ -12,11 +12,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		float DelayBetweenThrowingProjectiles { get; }
 		
 		int CollisionLayerMask { get; }
-
-		IHolyWaterSkillLevelConfig GetLevelConfig(int level);
 	}
 	
-	public interface IHolyWaterSkillLevelConfig 
+	public interface IHolyWaterSkillLevelConfig : ISkillLevelConfig
 	{
 		int Quantity { get; }
 		

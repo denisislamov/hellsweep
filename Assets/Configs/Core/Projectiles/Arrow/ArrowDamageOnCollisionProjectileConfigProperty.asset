@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: ArrowDamageOnCollisionProjectileConfigProperty
   m_EditorClassIdentifier: 
   _damageProvider:
+    damageSource: 1
     damage: 1
+    rate: 5

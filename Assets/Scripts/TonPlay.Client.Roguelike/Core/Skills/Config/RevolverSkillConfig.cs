@@ -15,7 +15,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(RevolverSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(RevolverSkillConfig))]
-	public class RevolverSkillConfig : SkillConfig, IRevolverSkillConfig
+	public class RevolverSkillConfig : SkillConfig<IRevolverLevelSkillConfig>, IRevolverSkillConfig
 	{
 		[Header("Revolver")]
 		[SerializeField]
@@ -36,7 +36,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.Revolver;
 		
-		public IRevolverLevelSkillConfig GetLevelConfig(int level) => 
+		public override IRevolverLevelSkillConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -46,6 +46,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
+			
+			[SerializeField]
+			private string _description;
 			
 			[SerializeField]
 			private DamageProvider _damageProvider;
@@ -68,6 +71,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float FieldOfView => _fieldOfView;
 			public int CollisionLayerMask => _collisionLayerMask.value;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			public string Description => _description;
 		}
 	}
 }

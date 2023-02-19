@@ -5,6 +5,8 @@ using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -74,12 +76,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
 
-					CreateProjectile(position.Position, layer);
+					for (int i = 0; i < levelConfig.ProjectileQuantity; i++)
+					{
+						CreateProjectile(position.Position, layer, levelConfig.DamageProvider);
+					}
 				}
 			}
 		}
 		
-		private void CreateProjectile(Vector2 position, int layer)
+		private void CreateProjectile(Vector2 position, int layer, IDamageProvider levelDamageProvider)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -97,6 +102,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			transform.right = direction;
 
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, position, direction, collisionLayerMask);
+			
+			ref var explodeOnCollision = ref entity.AddOrGet<ExplodeOnCollisionComponent>();
+			ref var explodeOnMoveDistance = ref entity.AddOrGet<ExplodeOnMoveDistanceComponent>();
+			
+			explodeOnCollision.DamageProvider = levelDamageProvider;
+			explodeOnMoveDistance.DamageProvider = levelDamageProvider;
 		}
 		
 		private Vector2 GetRandomDirection()

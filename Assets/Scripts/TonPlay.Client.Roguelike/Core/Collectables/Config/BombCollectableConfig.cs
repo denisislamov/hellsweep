@@ -1,5 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Collectables.Config;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
@@ -18,7 +20,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 		private float _timeToExplode;
 		
 		[SerializeField]
-		private float _damage;
+		private DamageProvider _damageProvider;
 		
 		[SerializeField]
 		private LayerMask _layerMask;
@@ -28,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 		public ICollisionAreaConfig CollisionAreaConfig => _explodeCollisionAreaConfig;
 		
 		public float TimeToExplode => _timeToExplode;
-		public float Damage => _damage;
+		public IDamageProvider DamageProvider => _damageProvider;
 		public int LayerMask => _layerMask.value;
 	}
 }

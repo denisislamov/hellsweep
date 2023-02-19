@@ -42,7 +42,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						
 						var explosionEntity = world.NewEntity();
 						explosionEntity.AddPositionComponent(position.Position);
-						explosionEntity.AddExplosionComponent(prepareBomb.Item2.Damage, prepareBomb.Item2.CollisionAreaConfig, prepareBomb.Item2.LayerMask);
+						explosionEntity.AddExplosionComponent(
+							prepareBomb.Item2.DamageProvider, 
+							prepareBomb.Item2.CollisionAreaConfig, 
+							prepareBomb.Item2.LayerMask);
+						explosionEntity.AddStackTryApplyDamageComponent();
+						explosionEntity.AddBlockApplyDamageTimerComponent();
 					}
 				}
 

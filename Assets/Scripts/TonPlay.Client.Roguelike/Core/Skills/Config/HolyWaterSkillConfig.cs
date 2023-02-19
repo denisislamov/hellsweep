@@ -4,15 +4,13 @@ using System.Linq;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(HolyWaterSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(HolyWaterSkillConfig))]
-	public class HolyWaterSkillConfig : SkillConfig, IHolyWaterSkillConfig
+	public class HolyWaterSkillConfig : SkillConfig<IHolyWaterSkillLevelConfig>, IHolyWaterSkillConfig
 	{
 		[Header("Holy Water")]
 		[SerializeField]
@@ -43,7 +41,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		
 		public int CollisionLayerMask => _collisionLayerMask.value;
 
-		public IHolyWaterSkillLevelConfig GetLevelConfig(int level) => 
+		public override IHolyWaterSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -54,6 +52,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			[SerializeField]
 			private int _level;
 			
+			[SerializeField]
+			private string _description;
+
 			[SerializeField]
 			private int _quantity;
 			
@@ -70,6 +71,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float Cooldown => _cooldown;
 			
 			public IDamageProvider DamageProvider => _damageProvider;
+			public string Description => _description;
 		}
 	}
 }

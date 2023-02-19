@@ -131,20 +131,22 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			transform.position = spawnPosition;
 
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
+			
 			entity.AddSpinAroundEntityPositionComponent(playerEntityId, levelConfig.Radius, angle);
 			entity.AddGuardianProjectileComponent(levelConfig.ActiveTime);
-			entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, collisionLayerMask);
-			entity.AddDamageOnDistanceChangeComponent(levelConfig.DamageProvider, Vector2.one * 10000f);
-
+			
+			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
 			ref var speed = ref speedPool.Get(entity.Id);
-			speed.Speed = levelConfig.Speed;
+			
+			speed.Speed = GetSpeed(levelConfig);
+			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 
 			if (movementPool.Has(entity.Id))
 			{
 				movementPool.Del(entity.Id);
 			}
 		}
-		
+
 		private Vector2 GetRandomDirection()
 		{
 			return Random.insideUnitCircle;
@@ -171,5 +173,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
+		
+		private static float GetSpeed(IGuardianSkillLevelConfig levelConfig) => levelConfig.Speed;
 	}
 }

@@ -1,7 +1,8 @@
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 {
 	public interface IProjectileConfig
 	{
@@ -9,6 +10,10 @@ namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
 
 		IMovementConfig MovementConfig { get; }
 		
-		bool TryGetProperty<T>(out T property) where T : IProjectileConfigProperty;
+		IViewPoolIdentity Identity { get; }
+
+		bool HasProperty<T>() where T : IProjectileConfigProperty;
+		
+		T GetProperty<T>() where T : IProjectileConfigProperty;
 	}
 }

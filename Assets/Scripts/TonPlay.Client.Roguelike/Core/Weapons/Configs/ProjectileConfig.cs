@@ -1,6 +1,9 @@
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling.Identities;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
@@ -20,30 +23,51 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		
 		[SerializeField]
 		private ProjectileConfigProperty[] _properties;
+		
+		private IViewPoolIdentity _identity;
 
 		public ProjectileView PrefabView => _prefab;
 		public IMovementConfig MovementConfig => _movementConfig;
-		
-		public bool TryGetProperty<T>(out T property) where T : IProjectileConfigProperty
+		public IViewPoolIdentity Identity => _identity ??= new ProjectileConfigViewPoolIdentity(this);
+
+		public bool HasProperty<T>() where T : IProjectileConfigProperty
 		{
 			if (_properties is null)
 			{
-				property = default(T);
 				return false;
+			}
+
+			for (var i = 0; i < _properties.Length; i++)
+			{
+				var propertyConfig = _properties[i];
+
+				if (propertyConfig is T typedConfig)
+				{
+					return true;
+				}
 			}
 			
-			var result = _properties
-						.Select(_ => (IProjectileConfigProperty) _)
-						.FirstOrDefault(_ => _ is T);
-
-			if (result is null)
+			return false;
+		}
+		
+		public T GetProperty<T>() where T : IProjectileConfigProperty
+		{
+			if (_properties is null)
 			{
-				property = default(T);
-				return false;
+				return default(T);
 			}
 
-			property = (T) result;
-			return true;
+			for (var i = 0; i < _properties.Length; i++)
+			{
+				var propertyConfig = _properties[i];
+
+				if (propertyConfig is T typedConfig)
+				{
+					return typedConfig;
+				}
+			}
+			
+			return default(T);
 		}
 	}
 }

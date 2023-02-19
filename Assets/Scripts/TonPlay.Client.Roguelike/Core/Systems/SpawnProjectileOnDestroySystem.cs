@@ -44,7 +44,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					var entity = ProjectileSpawner.SpawnProjectile(world, poolObject, config, position.Position, Random.onUnitSphere, component.CollisionLayerMask);
 					
-					if (component.ProjectileConfig.TryGetProperty<IInheritDamageOnCollisionProjectileConfigProperty>(out var property) && 
+					if (component.ProjectileConfig.HasProperty<IInheritDamageOnCollisionProjectileConfigProperty>() && 
 						damageOnCollisionPool.Has(entityId))
 					{
 						ref var parentDamage = ref damageOnCollisionPool.Get(entityId);

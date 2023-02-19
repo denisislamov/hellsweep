@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
@@ -56,12 +57,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Filter<SkillsComponent>()
 						.Inc<ForcefieldDeviceSkill>()
 						.Inc<PositionComponent>()
+						.Inc<StackTryApplyDamageComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
-			var applyDamagePool = _world.GetPool<ApplyDamageComponent>();
+			var stackTryApplyDamagePool = _world.GetPool<StackTryApplyDamageComponent>();
+
+			var overlapPools = OverlapPools.Create(_world);
 
 			foreach (var entityId in filter)
 			{
@@ -71,13 +75,24 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var level = skills.Levels[SkillName.ForcefieldDevice];
 				var levelConfig = _config.GetLevelConfig(level);
 
-				var count = _overlapExecutor.Overlap(_query, position.Position, levelConfig.CollisionAreaConfig, ref _overlappedEntities, levelConfig.CollisionLayerMask);
+				var count = _overlapExecutor.Overlap(
+					_query, 
+					position.Position, 
+					levelConfig.CollisionAreaConfig, 
+					ref _overlappedEntities, 
+					levelConfig.CollisionLayerMask,
+					overlapPools);
+				
 				for (var i = 0; i < count; i++)
 				{
 					var overlappedEntityId = _overlappedEntities[i];
 
-					ref var applyDamage = ref applyDamagePool.AddOrGet(overlappedEntityId);
-					applyDamage.Damage += levelConfig.Damage;
+					ref var stack = ref stackTryApplyDamagePool.Get(entityId);
+					stack.Stack.Push(new TryApplyDamageComponent()
+					{
+						DamageProvider = levelConfig.DamageProvider,
+						VictimEntityId = overlappedEntityId,
+					});
 				}
 				
 				_overlappedEntities.Clear();
@@ -111,7 +126,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				if (Math.Abs(requiredSqrMagnitude - currentSqrMagnitude) > 0.0001f)
 				{
-					effectTransform.Transform.localScale = Vector3.one * levelConfig.Size * 2f;
+					effectTransform.Transform.localScale = Vector3.one*(levelConfig.Size*2f);
 				}
 			}
 		}

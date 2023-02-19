@@ -23,35 +23,47 @@ MonoBehaviour:
   _sightEffectView: {fileID: 6990741885976343381, guid: 1dff8014ce5c542229ae6a84b7542d17, type: 3}
   _levelConfigs:
   - _level: 1
+    _description: Revolver desc lvl 1
     _damageProvider:
-      damage: 1
+      damageSource: 17
+      damage: 10
+      rate: 1
     _shootDelay: 0.5
-    _fieldOfView: 50
+    _fieldOfView: 80
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
   - _level: 2
+    _description: Revolver desc lvl 2
     _damageProvider:
-      damage: 2
+      damageSource: 17
+      damage: 20
+      rate: 1
     _shootDelay: 0.4
-    _fieldOfView: 60
+    _fieldOfView: 80
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
   - _level: 3
+    _description: Revolver desc lvl 3
     _damageProvider:
-      damage: 3
+      damageSource: 17
+      damage: 30
+      rate: 1
     _shootDelay: 0.3
-    _fieldOfView: 70
+    _fieldOfView: 80
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
   - _level: 4
+    _description: Revolver desc lvl 4
     _damageProvider:
-      damage: 4
+      damageSource: 17
+      damage: 40
+      rate: 1
     _shootDelay: 0.25
     _fieldOfView: 80
     _collisionLayerMask:
@@ -59,10 +71,13 @@ MonoBehaviour:
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
   - _level: 5
+    _description: Revolver desc lvl 5
     _damageProvider:
-      damage: 5
+      damageSource: 17
+      damage: 50
+      rate: 1
     _shootDelay: 0.25
-    _fieldOfView: 90
+    _fieldOfView: 80
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128

@@ -1,5 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables;
+using TonPlay.Client.Roguelike.Core.Collision;
+using TonPlay.Client.Roguelike.Core.Collision.Config;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling;
 using TonPlay.Client.Roguelike.Core.Skills.Config;

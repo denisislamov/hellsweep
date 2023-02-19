@@ -6,16 +6,14 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IRevolverSkillConfig : ISkillConfig
+	public interface IRevolverSkillConfig : ISkillConfig<IRevolverLevelSkillConfig>
 	{
 		RevolverSightEffect SightEffectView { get; }
 		
 		IProjectileConfig ProjectileConfig { get; }
-
-		IRevolverLevelSkillConfig GetLevelConfig(int level);
 	}
 
-	public interface IRevolverLevelSkillConfig
+	public interface IRevolverLevelSkillConfig : ISkillLevelConfig
 	{
 		IDamageProvider DamageProvider { get; }
 		

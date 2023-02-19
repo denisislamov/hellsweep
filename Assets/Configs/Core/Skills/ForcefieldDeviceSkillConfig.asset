@@ -22,35 +22,55 @@ MonoBehaviour:
   _effectView: {fileID: 3858035125394894992, guid: 81bb45633e34a49a68957b62055148dd, type: 3}
   _levelConfigs:
   - _level: 1
-    _damage: 15
+    _description: Forcefield Device desc lvl 1
+    _damageProvider:
+      damageSource: 16
+      damage: 120
+      rate: 0.25
     _size: 1
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 46cbc76a7ec884b53ae7da7dc7290e73, type: 2}
   - _level: 2
-    _damage: 20
+    _description: Forcefield Device desc lvl 2
+    _damageProvider:
+      damageSource: 16
+      damage: 180
+      rate: 0.25
     _size: 2
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4831f027961cd4720b867da033f47fb2, type: 2}
   - _level: 3
-    _damage: 15
+    _description: Forcefield Device desc lvl 3
+    _damageProvider:
+      damageSource: 16
+      damage: 240
+      rate: 0.25
     _size: 3
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: a8f8dca68f3094968ab502214fcb0757, type: 2}
   - _level: 4
-    _damage: 15
+    _description: Forcefield Device desc lvl 4
+    _damageProvider:
+      damageSource: 16
+      damage: 270
+      rate: 0.25
     _size: 4
     _collisionLayerMask:
       serializedVersion: 2
       m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 2be1fc2d8164c443d840e8276692bbee, type: 2}
   - _level: 5
-    _damage: 15
+    _description: Forcefield Device desc lvl 5
+    _damageProvider:
+      damageSource: 16
+      damage: 300
+      rate: 0.25
     _size: 5
     _collisionLayerMask:
       serializedVersion: 2

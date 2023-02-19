@@ -22,47 +22,62 @@ MonoBehaviour:
   _projectileConfig: {fileID: 11400000, guid: bfac6040a69f04972946bc3c28919ae5, type: 2}
   _levelConfigs:
   - _level: 1
+    _description: Guardian desc lvl 1
     _quantity: 2
-    _speed: 0.25
-    _activeTime: 6
-    _cooldown: 3
+    _speed: 0.55
+    _activeTime: 4
+    _cooldown: 4
     _damageProvider:
-      damage: 1
-    _radius: 1.5
-    _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
-  - _level: 2
-    _quantity: 3
-    _speed: 0.35
-    _activeTime: 7
-    _cooldown: 3
-    _damageProvider:
-      damage: 2
+      damageSource: 8
+      damage: 60
+      rate: 0.5
     _radius: 2
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
-  - _level: 3
-    _quantity: 4
-    _speed: 0.45
-    _activeTime: 8
-    _cooldown: 3
+  - _level: 2
+    _description: Guardian desc lvl 2
+    _quantity: 3
+    _speed: 0.6
+    _activeTime: 5
+    _cooldown: 2.5
     _damageProvider:
-      damage: 3
-    _radius: 2.5
-    _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
-  - _level: 4
-    _quantity: 5
-    _speed: 0.55
-    _activeTime: 9
-    _cooldown: 3
-    _damageProvider:
-      damage: 4
+      damageSource: 8
+      damage: 72
+      rate: 0.5
     _radius: 3
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
+  - _level: 3
+    _description: Guardian desc lvl 3
+    _quantity: 4
+    _speed: 0.7
+    _activeTime: 5
+    _cooldown: 2
+    _damageProvider:
+      damageSource: 8
+      damage: 84
+      rate: 0.5
+    _radius: 4
+    _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
+  - _level: 4
+    _description: Guardian desc lvl 4
+    _quantity: 5
+    _speed: 0.8
+    _activeTime: 5
+    _cooldown: 2
+    _damageProvider:
+      damageSource: 8
+      damage: 96
+      rate: 0.5
+    _radius: 5
+    _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
   - _level: 5
+    _description: Guardian desc lvl 5
     _quantity: 6
-    _speed: 0.65
-    _activeTime: 10
+    _speed: 0.9
+    _activeTime: 5
     _cooldown: 3
     _damageProvider:
-      damage: 5
-    _radius: 3.5
+      damageSource: 8
+      damage: 108
+      rate: 0.5
+    _radius: 6
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}

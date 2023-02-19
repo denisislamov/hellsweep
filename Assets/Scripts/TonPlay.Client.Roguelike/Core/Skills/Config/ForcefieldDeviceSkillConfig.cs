@@ -4,6 +4,8 @@ using System.Linq;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Effects;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
@@ -11,7 +13,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(ForcefieldDeviceSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(ForcefieldDeviceSkillConfig))]
-	public class ForcefieldDeviceSkillConfig : SkillConfig, IForcefieldDeviceSkillConfig
+	public class ForcefieldDeviceSkillConfig : SkillConfig<IForcefieldDeviceSkillLevelConfig>, IForcefieldDeviceSkillConfig
 	{
 		[Header("Forcefield Device")]
 
@@ -29,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public EffectView EffectView => _effectView;
 		
-		public IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) => 
+		public override IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -41,7 +43,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			private int _level;
 			
 			[SerializeField]
-			private float _damage;
+			private string _description;
+
+			[SerializeField]
+			private DamageProvider _damageProvider;
 			
 			[SerializeField]
 			private float _size;
@@ -54,13 +59,15 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			public int Level => _level;
 
-			public float Damage => _damage;
+			public IDamageProvider DamageProvider => _damageProvider;
 			
 			public float Size => _size;
 
 			public int CollisionLayerMask => _collisionLayerMask.value;
 
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			
+			public string Description => _description;
 		}
 	}
 }

@@ -22,15 +22,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #endregion
 			var world = systems.GetWorld();
 			var tree = _storage.KdTree;
+			var positionPool = world.GetPool<PositionComponent>();
 
-			foreach (var kvp in _storage.KdTreeEntityIdToPositionIndexMap)
+			for (var index = 0; index < _storage.KdTreePositionIndexToEntityIdMap.Length; index++)
 			{
-				var entityId = kvp.Key;
-				var index = kvp.Value;
-				
-				if (entityId == EcsEntity.DEFAULT_ID) continue;
+				var entityId = _storage.KdTreePositionIndexToEntityIdMap[index];
 
-				tree.Points[index] = GetActualPosition(world, entityId);
+				if (entityId == EcsEntity.DEFAULT_ID || !world.IsEntityAlive(entityId)) continue;
+
+				tree.Points[index] = GetActualPosition(positionPool, entityId);
 			}
 
 			tree.Rebuild();
@@ -39,10 +39,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #endregion 
 		}
 		
-		private static Vector3 GetActualPosition(EcsWorld world, int entityId)
+		private static Vector3 GetActualPosition(EcsPool<PositionComponent> positionPool, int entityId)
 		{
-			var positionPool = world.GetPool<PositionComponent>();
-			
 			ref var position = ref positionPool.Get(entityId);
 			return position.Position;
 		}

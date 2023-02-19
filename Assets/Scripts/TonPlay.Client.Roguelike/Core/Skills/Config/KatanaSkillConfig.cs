@@ -4,14 +4,13 @@ using System.Linq;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(KatanaSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(KatanaSkillConfig))]
-	public class KatanaSkillConfig : SkillConfig, IKatanaSkillConfig
+	public class KatanaSkillConfig : SkillConfig<IKatanaLevelSkillConfig>, IKatanaSkillConfig
 	{
 		[Header("Katana")]
 		[SerializeField]
@@ -28,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.Katana;
 		
-		public IKatanaLevelSkillConfig GetLevelConfig(int level) => 
+		public override IKatanaLevelSkillConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -39,6 +38,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			[SerializeField]
 			private int _level;
 			
+			[SerializeField]
+			private string _description;
+
 			[SerializeField]
 			private int _projectileQuantity;
 
@@ -60,6 +62,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float Cooldown => _cooldown;
 			public float ShootDelay => _shootDelay;
 			public Vector2 SpawnOffset => _spawnOffset;
+			public string Description => _description;
 		}
 	}
 }

@@ -23,32 +23,47 @@ MonoBehaviour:
   _sightEffectView: {fileID: 1168634816455927670, guid: de36ee5b5e34543be8a0651a766eaac6, type: 3}
   _levelConfigs:
   - _level: 1
+    _description: Crossbow desc lvl 1
     _projectileQuantity: 3
     _damageProvider:
-      damage: 1
-    _shootDelay: 1
-    _fieldOfView: 30
+      damageSource: 18
+      damage: 20
+      rate: 1
+    _shootDelay: 0.4
+    _fieldOfView: 45
   - _level: 2
+    _description: Crossbow desc lvl 2
     _projectileQuantity: 6
     _damageProvider:
-      damage: 2
-    _shootDelay: 1
+      damageSource: 18
+      damage: 40
+      rate: 1
+    _shootDelay: 0.4
     _fieldOfView: 45
   - _level: 3
+    _description: Crossbow desc lvl 3
     _projectileQuantity: 9
     _damageProvider:
-      damage: 3
-    _shootDelay: 1
-    _fieldOfView: 60
+      damageSource: 18
+      damage: 60
+      rate: 1
+    _shootDelay: 0.4
+    _fieldOfView: 45
   - _level: 4
+    _description: Crossbow desc lvl 4
     _projectileQuantity: 12
     _damageProvider:
-      damage: 4
-    _shootDelay: 1
-    _fieldOfView: 75
+      damageSource: 18
+      damage: 80
+      rate: 1
+    _shootDelay: 0.4
+    _fieldOfView: 45
   - _level: 5
+    _description: Crossbow desc lvl 5
     _projectileQuantity: 15
     _damageProvider:
-      damage: 5
-    _shootDelay: 1
-    _fieldOfView: 90
+      damageSource: 18
+      damage: 100
+      rate: 1
+    _shootDelay: 0.4
+    _fieldOfView: 45

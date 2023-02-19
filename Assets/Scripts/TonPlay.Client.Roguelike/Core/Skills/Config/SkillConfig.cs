@@ -37,5 +37,18 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public Sprite Icon => _icon;
 		public int MaxLevel => _maxLevel;
 		public SkillName[] Evolutions => _evolutions;
+		public abstract string GetLevelDescription(int level);
+	}
+	
+	public abstract class SkillConfig<T> : 
+		SkillConfig where T : ISkillLevelConfig
+	{
+		public abstract T GetLevelConfig(int level);
+
+		public override string GetLevelDescription(int level)
+		{
+			var config = GetLevelConfig(level);
+			return config.Description;
+		}
 	}
 }

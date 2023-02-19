@@ -14,7 +14,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(CrossbowSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(CrossbowSkillConfig))]
-	public class CrossbowSkillConfig : SkillConfig, ICrossbowSkillConfig
+	public class CrossbowSkillConfig : SkillConfig<ICrossbowLevelSkillConfig>, ICrossbowSkillConfig
 	{
 		[Header("Crossbow")]
 		[SerializeField]
@@ -35,7 +35,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.Crossbow;
 		
-		public ICrossbowLevelSkillConfig GetLevelConfig(int level) => 
+		public override ICrossbowLevelSkillConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -45,6 +45,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
+			
+			[SerializeField]
+			private string _description;
 			
 			[SerializeField]
 			private int _projectileQuantity;
@@ -57,12 +60,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			
 			[SerializeField]
 			private float _fieldOfView;
-			
+
 			public int Level => _level;
 			public int ProjectileQuantity => _projectileQuantity;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public float ShootDelay => _shootDelay;
 			public float FieldOfView => _fieldOfView;
+			public string Description => _description;
 		}
 	}
 }

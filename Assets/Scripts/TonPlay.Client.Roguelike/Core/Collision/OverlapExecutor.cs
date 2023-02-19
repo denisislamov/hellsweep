@@ -3,13 +3,11 @@ using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
-using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace TonPlay.Roguelike.Client.Core.Collision
+namespace TonPlay.Client.Roguelike.Core.Collision
 {
 	public class OverlapExecutor : IOverlapExecutor
 	{
@@ -24,15 +22,22 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 			_kdTreeStorages = kdTreeStorages;
 		}
 
-		public int Overlap(KDQuery query, Vector2 position, ICollisionAreaConfig collisionAreaConfig, ref List<int> entities, int layerMask)
+		public int Overlap(
+			KDQuery query, 
+			Vector2 position, 
+			ICollisionAreaConfig collisionAreaConfig, 
+			ref List<int> entities, 
+			int layerMask,
+			IOverlapPools pools)
 		{
 #region Profiling Begin
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
-			var inactivePool = _world.GetPool<InactiveComponent>();
-			var deadPool = _world.GetPool<DeadComponent>();
-			var usedPool = _world.GetPool<UsedComponent>();
-			var layerPool = _world.GetPool<LayerComponent>();
+			var inactivePool = pools.InactivePool;
+			var deadPool = pools.DeadPool;
+			var usedPool = pools.UsedPool;
+			var layerPool = pools.LayerPool;
+			var destroyPool = pools.DestroyPool;
 
 			for (var i = 0; i < _kdTreeStorages.Length; i++)
 			{
@@ -52,12 +57,13 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 						var index = _results[j];
 						var entityId = kdTreeStorage.KdTreePositionIndexToEntityIdMap[index];
 
-						if (entityId == EcsEntity.DEFAULT_ID)
+						if (entityId == EcsEntity.DEFAULT_ID || !_world.IsEntityAlive(entityId))
 						{
 							continue;
 						}
 
 						if (!layerPool.Has(entityId) ||
+							destroyPool.Has(entityId) ||
 							inactivePool.Has(entityId) ||
 							deadPool.Has(entityId) ||
 							usedPool.Has(entityId))
@@ -86,12 +92,13 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 						var index = _results[j];
 						var entityId = kdTreeStorage.KdTreePositionIndexToEntityIdMap[index];
 
-						if (entityId == EcsEntity.DEFAULT_ID)
+						if (entityId == EcsEntity.DEFAULT_ID || !_world.IsEntityAlive(entityId))
 						{
 							continue;
 						}
 
 						if (!layerPool.Has(entityId) ||
+							destroyPool.Has(entityId) ||
 							inactivePool.Has(entityId) ||
 							deadPool.Has(entityId) ||
 							usedPool.Has(entityId))

@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 	{
 		float Distance { get; }
 		
-		int Damage { get; }
+		IDamageProvider DamageProvider { get; }
 
 		ICollisionAreaConfig ExplodeCollisionAreaConfig { get; }
 	}

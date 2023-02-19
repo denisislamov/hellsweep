@@ -1,18 +1,17 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Effects;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IForcefieldDeviceSkillConfig : ISkillConfig
+	public interface IForcefieldDeviceSkillConfig : ISkillConfig<IForcefieldDeviceSkillLevelConfig>
 	{
 		EffectView EffectView { get; }
-		
-		IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level);
 	}
 
-	public interface IForcefieldDeviceSkillLevelConfig 
+	public interface IForcefieldDeviceSkillLevelConfig  : ISkillLevelConfig
 	{
-		float Damage { get; }
+		IDamageProvider DamageProvider { get; }
 		
 		float Size { get; }
 

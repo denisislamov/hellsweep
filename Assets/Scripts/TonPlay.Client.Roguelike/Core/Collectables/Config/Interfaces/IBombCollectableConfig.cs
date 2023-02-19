@@ -1,4 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces
 {
@@ -8,7 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces
 		
 		float TimeToExplode { get; }
 		
-		float Damage { get; }
+		IDamageProvider DamageProvider { get; }
 		
 		int LayerMask { get; }
 	}

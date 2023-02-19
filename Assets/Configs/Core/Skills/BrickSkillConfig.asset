@@ -22,34 +22,49 @@ MonoBehaviour:
   _projectileConfig: {fileID: 11400000, guid: 620448e3e8c054581806332fe6c818c9, type: 2}
   _levelConfigs:
   - _level: 1
+    _description: Brick desc lvl 1
     _quantity: 1
     _cooldown: 2
     _damageProvider:
-      damage: 1
+      damageSource: 4
+      damage: 240
+      rate: 0.5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 2
+    _description: Brick desc lvl 2
     _quantity: 2
     _cooldown: 2
     _damageProvider:
-      damage: 2
+      damageSource: 4
+      damage: 360
+      rate: 0.5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 3
+    _description: Brick desc lvl 3
     _quantity: 3
     _cooldown: 2
     _damageProvider:
-      damage: 3
+      damageSource: 4
+      damage: 480
+      rate: 0.5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 4
+    _description: Brick desc lvl 4
     _quantity: 4
     _cooldown: 2
     _damageProvider:
-      damage: 4
+      damageSource: 4
+      damage: 600
+      rate: 0.5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   - _level: 5
+    _description: Brick desc lvl 5
     _quantity: 5
     _cooldown: 2
     _damageProvider:
-      damage: 5
+      damageSource: 4
+      damage: 720
+      rate: 0.5
     _collisionAreaConfig: {fileID: 11400000, guid: 3269713b6570e48009f7c3e22a6bc140, type: 2}
   _timeToReachDistance: 0.5
   _distanceToThrow: 4

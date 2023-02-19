@@ -4,7 +4,7 @@ using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IBrickSkillConfig : ISkillConfig
+	public interface IBrickSkillConfig : ISkillConfig<IBrickSkillLevelConfig>
 	{
 		IProjectileConfig ProjectileConfig { get; }
 		
@@ -13,11 +13,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		float DistanceToThrow { get; }
 		
 		float DelayBetweenSpawn { get; }
-
-		IBrickSkillLevelConfig GetLevelConfig(int level);
 	}
 
-	public interface IBrickSkillLevelConfig 
+	public interface IBrickSkillLevelConfig : ISkillLevelConfig
 	{
 		int Quantity { get; }
 		

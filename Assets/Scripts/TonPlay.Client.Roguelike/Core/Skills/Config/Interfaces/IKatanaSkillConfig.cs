@@ -1,19 +1,14 @@
-using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
-using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 {
-	public interface IKatanaSkillConfig : ISkillConfig
+	public interface IKatanaSkillConfig : ISkillConfig<IKatanaLevelSkillConfig>
 	{
 		IProjectileConfig ProjectileConfig { get; }
-
-		IKatanaLevelSkillConfig GetLevelConfig(int level);
 	}
 
-	public interface IKatanaLevelSkillConfig
+	public interface IKatanaLevelSkillConfig : ISkillLevelConfig
 	{
 		int ProjectileQuantity { get; }
 

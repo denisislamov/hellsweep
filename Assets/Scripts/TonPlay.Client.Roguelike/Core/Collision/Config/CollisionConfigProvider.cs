@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Collision.Config
+namespace TonPlay.Client.Roguelike.Core.Collision.Config
 {
 	[CreateAssetMenu(fileName = nameof(CollisionConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(CollisionConfigProvider))]
 	public class CollisionConfigProvider : ScriptableObject, ICollisionConfigProvider
@@ -11,8 +13,12 @@ namespace TonPlay.Roguelike.Client.Core.Collision.Config
 		[SerializeField]
 		private CollisionConfig[] _configs;
 
-		public ICollisionConfig Get(int layer) => _configs.FirstOrDefault(_ => _.Layer == layer);
-		
+		private Dictionary<int, CollisionConfig> _map;
+
+		private Dictionary<int, CollisionConfig> Map => _map ??= _configs.ToDictionary(_ => _.Layer, _ => _);
+
+		public ICollisionConfig Get(int layer) => Map.ContainsKey(layer) ? Map[layer] : null;
+
 		[Serializable]
 		private class CollisionConfig : ICollisionConfig
 		{

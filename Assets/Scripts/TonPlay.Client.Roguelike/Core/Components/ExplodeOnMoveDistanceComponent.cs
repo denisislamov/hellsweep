@@ -1,12 +1,13 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct ExplodeOnMoveDistanceComponent
 	{
 		public Vector2 StartPosition;
-		public int Damage;
+		public IDamageProvider DamageProvider;
 		public float DistanceToExplode;
 		public ICollisionAreaConfig CollisionConfig;
 	}

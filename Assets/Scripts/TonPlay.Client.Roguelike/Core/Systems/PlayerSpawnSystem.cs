@@ -20,6 +20,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	public class PlayerSpawnSystem : IEcsInitSystem
 	{
 		private EcsWorld _world;
+		
+		private readonly KdTreeStorage _kdTreeStorage;
+		
+		public PlayerSpawnSystem(KdTreeStorage kdTreeStorage)
+		{
+			_kdTreeStorage = kdTreeStorage;
+		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -31,7 +38,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var player = CreateViewAndEntity(spawnConfig, out var entity);
 			
 			AddPlayerComponent(entity, spawnConfig);
+			entity.AddLayerComponent(LayerMask.NameToLayer("Player"));
 			entity.AddMovementComponent();
+			entity.AddPositionComponent(player.Position);
 			entity.AddRotationComponent(player.transform.right.ToVector2XY());
 			entity.AddRigidbodyComponent(player.Rigidbody2D);
 			entity.AddSkillsComponent();
@@ -40,6 +49,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddSpeedComponent(spawnConfig.MovementConfig);
 			entity.AddGoldComponent();
 			entity.AddProfileExperienceComponent();
+			entity.AddStackTryApplyDamageComponent();
+			entity.AddBlockApplyDamageTimerComponent();
 
 			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
 			
@@ -48,6 +59,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			sharedData.SetPlayerPositionProvider(player);
 			
 			CreateWeapon(entity.Id, sharedData);
+			
+			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(1);
+			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(1);
+
+			_kdTreeStorage.KdTree.Build(new Vector3[] { player.Position });
+			
+			var treeIndex = FindFreeTreeIndex();
+			
+			_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Add(entity.Id, treeIndex);
+			_kdTreeStorage.KdTreePositionIndexToEntityIdMap[treeIndex] = entity.Id;
 		}
 
 		private void CreateWeapon(int playerEntityId, ISharedData sharedData)
@@ -96,6 +117,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			playerData.Health = healthComponent.CurrentHealth;
 			playerData.MaxHealth = healthComponent.MaxHealth;
 			playerModel.Update(playerData);
+		}
+		
+		private int FindFreeTreeIndex()
+		{
+			var freeTreeIndex = -1;
+			for (var i = 0; i < _kdTreeStorage.KdTreePositionIndexToEntityIdMap.Length; i++)
+			{
+				if (_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.ContainsKey(_kdTreeStorage.KdTreePositionIndexToEntityIdMap[i]))
+				{
+					continue;
+				}
+
+				freeTreeIndex = i;
+
+				break;
+			}
+			return freeTreeIndex;
 		}
 	}
 }

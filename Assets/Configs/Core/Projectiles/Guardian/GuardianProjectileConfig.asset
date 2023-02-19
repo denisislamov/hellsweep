@@ -16,4 +16,6 @@ MonoBehaviour:
   _movementConfig:
     _startSpeed: 0
     _acceleration: 0
-  _properties: []
+  _properties:
+  - {fileID: 11400000, guid: ebb2a9e9a5f544de4ba4d9521a8862a5, type: 2}
+  - {fileID: 11400000, guid: 250ebcb1826d44c0895b99fded993194, type: 2}

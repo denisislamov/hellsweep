@@ -32,7 +32,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var applyDamage = ref applyDamageComponents.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				
-				//sharedData.SignalBus.Fire(new AppliedDamageSignal(applyDamage.Damage, position.Position));
 				var entity = world.NewEntity();
 				ref var spawnAppliedDamageIndicatorEvent = ref entity.Add<SpawnAppliedDamageIndicatorEvent>();
 				ref var indicatorPosition = ref entity.Add<PositionComponent>();

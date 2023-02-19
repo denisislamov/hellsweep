@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: KatanaSplashDamageOnCollisionProjectileConfigProperty
   m_EditorClassIdentifier: 
   _damageProvider:
+    damageSource: 19
     damage: 0
+    rate: 1.5

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f46e03a6ab4f9484d3a89f95ad2e91, type: 3}
   m_Name: RPGExplodeOnMoveDistanceProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _distance: 4
+  _distance: 8
   _explodeCollisionAreConfig: {fileID: 11400000, guid: b9abbf0eebfae4325bfa867aa2661544, type: 2}
-  _damage: 25
+  _damage:
+    damageSource: 2
+    damage: 2
+    rate: 0

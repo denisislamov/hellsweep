@@ -1,6 +1,6 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 {
 	public interface IExplodeOnTimerProjectileConfigProperty : IProjectileConfigProperty
 	{

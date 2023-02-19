@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
@@ -43,6 +44,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 								   .Inc<PositionComponent>()
 								   .Inc<SpeedComponent>()
 								   .Inc<MovementComponent>()
+								   .Inc<CollisionComponent>()
 								   .Exc<DeadComponent>()
 								   .End();
 			var playerFilter = world.Filter<PlayerComponent>().Inc<PositionComponent>().End();
@@ -50,6 +52,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var enemyComponents = world.GetPool<EnemyComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
 			var movementComponents = world.GetPool<MovementComponent>();
+			var collisionComponents = world.GetPool<CollisionComponent>();
+
+			var overlapPools = OverlapPools.Create(world);
 
 			var playerPosition = Vector2.zero;
 			foreach (var entityId in playerFilter)
@@ -63,13 +68,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var enemyComponent = ref enemyComponents.Get(entityId);
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
+				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
 				var movementVector = (playerPosition - position).normalized;
 
-				var collisionAreaConfig = _sharedData.EnemyConfigProvider.Get(enemyComponent.ConfigId).CollisionAreaConfig;
+				var collisionAreaConfig = collisionComponent.CollisionAreaConfig;
 
-				GetNeighbors(ref _neighborsEntityIds, position, collisionAreaConfig);
+				GetNeighbors(ref _neighborsEntityIds, position, collisionAreaConfig, overlapPools);
 
 				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
 
@@ -116,14 +122,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			return separateVector;
 		}
 
-		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionAreaConfig collisionAreaConfig)
+		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionAreaConfig collisionAreaConfig, IOverlapPools overlapPools)
 		{
 			_overlapExecutor.Overlap(
 				_query,
 				position, 
 				collisionAreaConfig,
 				ref cachedNeighborsEntityIds,
-				_neighborsLayer);
+				_neighborsLayer,
+				overlapPools);
 		}
 	}
 }

@@ -13,7 +13,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(GuardianSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(GuardianSkillConfig))]
-	public class GuardianSkillConfig : SkillConfig, IGuardianSkillConfig
+	public class GuardianSkillConfig : SkillConfig<IGuardianSkillLevelConfig>, IGuardianSkillConfig
 	{
 		[Header("Guardian")]
 		[SerializeField]
@@ -29,8 +29,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		
 		public override SkillName SkillName => SkillName.Guardian;
-		
-		public IGuardianSkillLevelConfig GetLevelConfig(int level) => 
+
+		public override IGuardianSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -40,6 +40,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
+			
+			[SerializeField]
+			private string _description;
 			
 			[SerializeField]
 			private int _quantity;
@@ -72,6 +75,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float Radius => _radius;
 			
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			public string Description => _description;
 		}
 	}
 }

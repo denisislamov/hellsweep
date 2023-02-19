@@ -117,13 +117,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
 			entity.AddBrickProjectileComponent();
-			entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, collisionLayerMask);
-			entity.AddDamageOnDistanceChangeComponent(levelConfig.DamageProvider, Vector2.one*10000f);
 			entity.AddInvertMovementAxisOnSpeedInversionComponent(true, false);
 			entity.AddSyncRotationWithPositionDifferenceComponent(position - direction);
 
+			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
 			ref var speed = ref speedPool.AddOrGet(entity.Id);
 			ref var acceleration = ref accelerationPool.AddOrGet(entity.Id);
+
+			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 
 			speed.Speed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
 						  /_config.TimeToReachDistance;

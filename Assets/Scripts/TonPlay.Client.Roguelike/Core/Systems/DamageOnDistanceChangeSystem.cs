@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
@@ -33,9 +35,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.End();
 
 			var damageOnDistancePool = world.GetPool<DamageOnDistanceChangeComponent>();
+			var blockDamagePerRatePool = world.GetPool<DamageOnDistanceChangeComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
 			var collisionPool = world.GetPool<CollisionComponent>();
-			var applyDamagePool = world.GetPool<ApplyDamageComponent>();
+			var stackTryApplyDamagePool = world.GetPool<StackTryApplyDamageComponent>();
+			var overlapPools = OverlapPools.Create(world);
 
 			foreach (var entityId in filter)
 			{
@@ -57,21 +61,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					position.Position, 
 					collision.CollisionAreaConfig, 
 					ref _overlappedEntities, 
-					collision.LayerMask);
-					
+					collision.LayerMask,
+					overlapPools);
+
 				for (int i = 0; i < count; i++)
 				{
 					var overlappedEntityId = _overlappedEntities[i];
-					if (applyDamagePool.Has(overlappedEntityId))
+					
+					ref var stack = ref stackTryApplyDamagePool.Get(entityId);
+					stack.Stack.Push(new TryApplyDamageComponent()
 					{
-						ref var applyDamage = ref applyDamagePool.Get(overlappedEntityId);
-						applyDamage.Damage += damageOnDistance.DamageProvider.Damage;
-					}
-					else
-					{
-						ref var applyDamage = ref applyDamagePool.Add(overlappedEntityId);
-						applyDamage.Damage = damageOnDistance.DamageProvider.Damage;
-					}
+						DamageProvider = damageOnDistance.DamageProvider,
+						VictimEntityId = overlappedEntityId,
+					});
 				}
 				
 				_overlappedEntities.Clear();

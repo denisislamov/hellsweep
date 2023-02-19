@@ -13,7 +13,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Skills.Config
 {
 	[CreateAssetMenu(fileName = nameof(BrickSkillConfig), menuName = AssetMenuConstants.SKILLS_CONFIGS + nameof(BrickSkillConfig))]
-	public class BrickSkillConfig : SkillConfig, IBrickSkillConfig
+	public class BrickSkillConfig : SkillConfig<IBrickSkillLevelConfig>, IBrickSkillConfig
 	{
 		[Header("Brick")]
 		[SerializeField]
@@ -41,8 +41,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public float DelayBetweenSpawn => _delayBetweenSpawn;
 
 		public override SkillName SkillName => SkillName.Brick;
-		
-		public IBrickSkillLevelConfig GetLevelConfig(int level) => 
+
+		public override IBrickSkillLevelConfig GetLevelConfig(int level) => 
 			!Map.ContainsKey(level) 
 				? null 
 				: Map[level];
@@ -53,6 +53,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			[SerializeField]
 			private int _level;
 			
+			[SerializeField]
+			private string _description;
+
 			[SerializeField]
 			private int _quantity;
 			
@@ -71,6 +74,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float Cooldown => _cooldown;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			public string Description => _description;
 		}
 	}
 }

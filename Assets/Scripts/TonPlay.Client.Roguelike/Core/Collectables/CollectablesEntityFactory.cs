@@ -40,7 +40,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 		{
 			var entity = _factories[config.Type].Create(world, config, position);
 			
-			if (entity is null || entity.Id == EcsEntity.DEFAULT_ID)
+			if (entity is null || entity.Id == EcsEntity.DEFAULT_ID || !world.IsEntityAlive(entity.Id))
 			{
 				return entity;
 			}

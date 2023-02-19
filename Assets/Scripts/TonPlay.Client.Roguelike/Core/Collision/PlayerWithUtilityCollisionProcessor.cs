@@ -1,11 +1,9 @@
-using System;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Components;
 
-namespace TonPlay.Roguelike.Client.Core.Collision
+namespace TonPlay.Client.Roguelike.Core.Collision
 {
 	public class PlayerWithUtilityCollisionProcessor : ICollisionProcessor
 	{
@@ -29,7 +27,7 @@ namespace TonPlay.Roguelike.Client.Core.Collision
 				playerEntityId = entityId;
 			}
 
-			if (playerEntityId == EcsEntity.DEFAULT_ID)
+			if (playerEntityId == EcsEntity.DEFAULT_ID || !_ecsWorld.IsEntityAlive(playerEntityId))
 			{
 				return;
 			}

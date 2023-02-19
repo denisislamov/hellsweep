@@ -10,8 +10,6 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		
 		string Title { get; }
 		
-		string Description { get; }
-
 		bool ExcludeFromInitialDrop { get;}
 		
 		Sprite Icon { get; }
@@ -19,5 +17,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		int MaxLevel { get; }
 		
 		SkillName[] Evolutions { get; }
+
+		string GetLevelDescription(int level);
+	}
+	
+	public interface ISkillConfig<out T> : ISkillConfig
+		where T : ISkillLevelConfig
+	{
+		T GetLevelConfig(int level);
 	}
 }

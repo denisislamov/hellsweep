@@ -20,7 +20,10 @@ MonoBehaviour:
   _layer: 9
   _explodeCollisionAreaConfig: {fileID: 11400000, guid: 069ed1a8152d84ec9840bd5093e759e3, type: 2}
   _timeToExplode: 0.75
-  _damage: 25
+  _damageProvider:
+    damageSource: 0
+    damage: 3000
+    rate: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 128

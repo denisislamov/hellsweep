@@ -1,8 +1,7 @@
-using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
-using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Roguelike.Client.Core.Enemies.Views;
-using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
+using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 {
@@ -14,12 +13,12 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 		
 		int StartHealth { get; }
 		
-		IDamageProvider DamageProvider { get; }
-		
-		IMovementConfig MovementConfig { get; }
-		
-		ICollisionAreaConfig CollisionAreaConfig { get; }
-		
 		IItemDrop<string>[] RandomCollectableDrops { get; }
+		
+		IViewPoolIdentity Identity { get; }
+
+		bool HasProperty<T>() where T : IEnemyPropertyConfig;
+		
+		T GetProperty<T>() where T : IEnemyPropertyConfig;
 	}
 }

@@ -11,5 +11,17 @@ namespace Leopotam.EcsLite.Extensions
 			
 			return ref pool.Add(entity);
 		}
+		
+		
+		public static bool TryGet<T>(this EcsPool<T> pool, int entity, ref T result) where T : struct
+		{
+			if (pool.Has(entity))
+			{
+				result = ref pool.Get(entity);
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

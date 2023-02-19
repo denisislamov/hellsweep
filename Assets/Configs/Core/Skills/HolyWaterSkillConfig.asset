@@ -27,27 +27,42 @@ MonoBehaviour:
   _delayBetweenThrowingProjectiles: 0.1
   _levelConfigs:
   - _level: 1
-    _quantity: 1
-    _cooldown: 3.5
-    _damageProvider:
-      damage: 1
-  - _level: 2
+    _description: Holy Water desc lvl 1
     _quantity: 2
     _cooldown: 3.5
     _damageProvider:
-      damage: 2
-  - _level: 3
+      damageSource: 6
+      damage: 48
+      rate: 0.25
+  - _level: 2
+    _description: Holy Water desc lvl 2
     _quantity: 3
     _cooldown: 3.5
     _damageProvider:
-      damage: 2
-  - _level: 4
+      damageSource: 6
+      damage: 60
+      rate: 0.25
+  - _level: 3
+    _description: Holy Water desc lvl 3
     _quantity: 4
     _cooldown: 3.5
     _damageProvider:
-      damage: 3
-  - _level: 5
+      damageSource: 6
+      damage: 72
+      rate: 0.25
+  - _level: 4
+    _description: Holy Water desc lvl 4
     _quantity: 5
     _cooldown: 3.5
     _damageProvider:
-      damage: 3
+      damageSource: 6
+      damage: 84
+      rate: 0.25
+  - _level: 5
+    _description: Holy Water desc lvl 5
+    _quantity: 6
+    _cooldown: 3.5
+    _damageProvider:
+      damageSource: 6
+      damage: 96
+      rate: 0.25

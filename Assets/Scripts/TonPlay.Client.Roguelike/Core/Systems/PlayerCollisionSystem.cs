@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -51,7 +52,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var positionComponents = world.GetPool<PositionComponent>();
 			var playerComponents = world.GetPool<PlayerComponent>();
 			var layerComponents = world.GetPool<LayerComponent>();
-			
+			var overlapPools = OverlapPools.Create(world);
+
 			foreach (var playerEntityId in filter)
 			{
 				ref var positionComponent = ref positionComponents.Get(playerEntityId);
@@ -64,7 +66,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					positionComponent.Position, 
 					collisionAreaConfig,
 					ref _overlappedEntities,
-					_overlapLayerMask);
+					_overlapLayerMask,
+					overlapPools);
 				
 				for (var i = 0; i < collisionsCount; i++)
 				{

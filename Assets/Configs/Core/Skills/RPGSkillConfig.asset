@@ -16,17 +16,48 @@ MonoBehaviour:
   _title: RPG
   _description: RPG description
   _icon: {fileID: 197835442617683054, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _excludeFromInitialDrop: 0
   _maxLevel: 5
   _evolutions: 
   _projectileConfig: {fileID: 11400000, guid: 5ef15c66e0719426d82ef024ae17d916, type: 2}
   _levelConfigs:
   - _level: 1
+    _description: RPG desc lvl 1
     _delay: 5
+    _projectileQuantity: 1
+    _damageProvider:
+      damageSource: 2
+      damage: 240
+      rate: 0.25
   - _level: 2
+    _description: RPG desc lvl 2
     _delay: 3
+    _projectileQuantity: 1
+    _damageProvider:
+      damageSource: 2
+      damage: 480
+      rate: 0.25
   - _level: 3
+    _description: RPG desc lvl 3
     _delay: 2
+    _projectileQuantity: 1
+    _damageProvider:
+      damageSource: 2
+      damage: 480
+      rate: 0.25
   - _level: 4
+    _description: RPG desc lvl 4
     _delay: 1
+    _projectileQuantity: 2
+    _damageProvider:
+      damageSource: 2
+      damage: 720
+      rate: 0.25
   - _level: 5
+    _description: RPG desc lvl 5
     _delay: 0.5
+    _projectileQuantity: 3
+    _damageProvider:
+      damageSource: 2
+      damage: 720
+      rate: 0.25

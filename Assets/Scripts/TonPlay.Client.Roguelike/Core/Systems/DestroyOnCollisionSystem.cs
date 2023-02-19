@@ -3,7 +3,7 @@ using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class DestroyOnCollisionSystem : IEcsRunSystem
 	{
@@ -18,11 +18,17 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 							  .Exc<InactiveComponent>()
 							  .End();
 
+			var hasCollidedPool = world.GetPool<HasCollidedComponent>();
 			var pool = world.GetPool<DestroyComponent>();
 
 			foreach (var entityId in filter)
 			{
-				pool.AddOrGet(entityId);
+				ref var hasCollided = ref hasCollidedPool.Get(entityId);
+
+				if (hasCollided.CollidedEntityIds.Count > 0)
+				{
+					pool.AddOrGet(entityId);
+				}
 			}
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();

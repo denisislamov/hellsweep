@@ -1,0 +1,33 @@
+namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
+{
+	public enum DamageSource
+	{
+		Explosion,
+		BodyCollision,
+		RPG,
+		Kunai,
+		Brick,
+		HEFuel,
+		Molotov,
+		OilBond,
+		Guardian,
+		ExoBracer,
+		Boomerang,
+		DrillShot,
+		SoccerBall,
+		TypeADrone,
+		TypeBDrone,
+		LightningEmitter,
+		ForcefieldDevice,
+		Revolver,
+		Crossbow,
+		Katana,
+		Enemy_Basic,
+		Enemy_FastDog,
+		Enemy_Shooter,
+		Enemy_Kamikadze,
+		Enemy_Boss_Shooter,
+		Enemy_Boss_Worm,
+		Enemy_Boss_Butcher
+	}
+}

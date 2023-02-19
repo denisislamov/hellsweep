@@ -46,12 +46,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 				var config = _skillConfigProvider.Get(skillName);
 				var presentationConfig = _skillConfigProvider.PresentationConfig;
 				var skillsModel = _gameModelProvider.Get().PlayerModel.SkillsModel;
+				var currentLevel = GetCurrentSkillLevel(skillsModel, skillName);
 
 				var skillType = config.SkillType;
 				var title = $"{config.Title} {GetCurrentSkillTypeIconText(config.SkillType, presentationConfig)}";
-				var description = config.Description;
+				var description = config.GetLevelDescription(currentLevel + 1);
 				var icon = config.Icon;
-				var currentLevel = GetCurrentSkillLevel(skillsModel, skillName);
 				var maxLevel = config.MaxLevel;
 				var color = GetCurrentSkillTypeColor(config.SkillType, presentationConfig);
 				var levelIcon = GetCurrentSkillTypeLevelIcon(config.SkillType, presentationConfig);

@@ -1,7 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
-using TonPlay.Client.Roguelike.Signals;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.Profiling;
 

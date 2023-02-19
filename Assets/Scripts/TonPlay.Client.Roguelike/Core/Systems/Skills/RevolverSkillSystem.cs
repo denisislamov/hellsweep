@@ -4,6 +4,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
@@ -74,7 +75,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var deadPool = _world.GetPool<DeadComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var rotationPool = _world.GetPool<RotationComponent>();
-
+			
 			foreach (var entityId in filter)
 			{
 				ref var effect = ref effectPool.Get(entityId);
@@ -110,6 +111,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var positionPool = _world.GetPool<PositionComponent>();
 			var rotationPool = _world.GetPool<RotationComponent>();
 
+			var overlapPools = OverlapPools.Create(_world);
+
 			foreach (var entityId in filter)
 			{
 				ref var position = ref positionPool.Get(entityId);
@@ -130,12 +133,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
 
-					CreateProjectile(position.Position, rotation.Direction, layer, levelConfig);
+					CreateProjectile(position.Position, rotation.Direction, layer, levelConfig, overlapPools);
 				}
 			}
 		}
 		
-		private void CreateProjectile(Vector2 position, Vector2 revolverDirection, int layer, IRevolverLevelSkillConfig levelSkillConfig)
+		private void CreateProjectile(Vector2 position, Vector2 revolverDirection, int layer, IRevolverLevelSkillConfig levelSkillConfig, IOverlapPools overlapPools)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -144,7 +147,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			}
 
 			var view = poolObject.Object;
-			var direction = GetProjectileDirection(position, revolverDirection, levelSkillConfig);
+			var direction = GetProjectileDirection(position, revolverDirection, levelSkillConfig, overlapPools);
 			
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
@@ -162,10 +165,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			collisionPool.AddOrGet(entity.Id);
 		}
 		
-		private Vector3 GetProjectileDirection(Vector2 position, Vector2 revolverDirection, IRevolverLevelSkillConfig levelSkillConfig)
+		private Vector3 GetProjectileDirection(Vector2 position, Vector2 revolverDirection, IRevolverLevelSkillConfig levelSkillConfig, IOverlapPools overlapPools)
 		{
 			var positionPool = _world.GetPool<PositionComponent>();
-			var targetsQuantity = _overlapExecutor.Overlap(_query, position, levelSkillConfig.CollisionAreaConfig, ref _overlappedEntities, levelSkillConfig.CollisionLayerMask);
+			var targetsQuantity = _overlapExecutor.Overlap(
+				_query, 
+				position, 
+				levelSkillConfig.CollisionAreaConfig, 
+				ref _overlappedEntities, 
+				levelSkillConfig.CollisionLayerMask,
+				overlapPools);
+			
 			if (targetsQuantity > 0)
 			{
 				var currentCachedTargetEntityIdx = 0;
