@@ -55,11 +55,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					var view = poolObject.Object;
 					view.Position = position.Position;
 					view.Color = Color.white;
-					view.SetText(spawnEvent.Damage.ToString("F0"));
+					view.SetText(Mathf.RoundToInt(spawnEvent.Damage));
 
 					ref var indicator = ref indicatorPool.Add(entityId);
 					indicator.View = view;
-					indicator.FadeOutColor = new Color(1f, 1f, 1f, 0f);
+					indicator.FadeOutColor = new Color32(255, 255, 255, 0);
 					indicator.FadeOutTime = FADE_OUT_TIME;
 					
 					ref var destroyOnTimer = ref destroyOnTimerPool.Add(entityId);

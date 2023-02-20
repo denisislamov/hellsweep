@@ -1,9 +1,9 @@
 using Leopotam.EcsLite;
-using TonPlay.Roguelike.Client.Core.Enemies.Views.Interfaces;
+using TonPlay.Client.Roguelike.Core.Enemies.Views.Interfaces;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Enemies.Views
+namespace TonPlay.Client.Roguelike.Core.Enemies.Views
 {
 	public abstract class EnemyView : MonoBehaviour, IEnemyView, IEntityIdProvider
 	{

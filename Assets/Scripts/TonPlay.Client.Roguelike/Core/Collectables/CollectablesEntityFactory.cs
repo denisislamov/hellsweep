@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using UnityEngine;
@@ -44,6 +45,10 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			{
 				return entity;
 			}
+
+			entity.AddCollisionComponent(config.CollisionAreaConfig, config.CollisionLayerMask);
+			entity.AddHasCollidedComponent();
+			entity.AddLayerComponent(config.Layer);
 
 			var kdTreeStorage = _sharedData.CollectablesKdTreeStorage;
 			var freeTreeIndex = FindFreeTreeIndex(kdTreeStorage);

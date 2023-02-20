@@ -8,5 +8,9 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	[CreateAssetMenu(fileName = nameof(DestroyOnCollisionProjectileConfigProperty), menuName = AssetMenuConstants.PROJECTILE_PROPERTIES_CONFIGS + nameof(DestroyOnCollisionProjectileConfigProperty))]
 	public class DestroyOnCollisionProjectileConfigProperty : ProjectileConfigProperty, IDestroyOnCollisionProjectileConfigProperty
 	{
+		[SerializeField]
+		private LayerMask _layerMask;
+		
+		public int LayerMask => _layerMask.value;
 	}
 }

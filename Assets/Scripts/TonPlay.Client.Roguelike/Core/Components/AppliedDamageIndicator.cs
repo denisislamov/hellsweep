@@ -7,6 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Components
 	{
 		public DamageTextView View;
 		public float FadeOutTime;
-		public Color FadeOutColor;
+		public Color32 FadeOutColor;
 	}
 }

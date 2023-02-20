@@ -57,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			projectileEntity.AddLocalPositionComponent(Vector2.zero);
 			projectileEntity.AddStackTryApplyDamageComponent();
 			projectileEntity.AddBlockApplyDamageTimerComponent();
+			projectileEntity.AddLayerComponent(config.Layer);
 
 			if (config.HasProperty<IDestroyOnTimerProjectileConfigProperty>())
 			{
@@ -96,12 +97,20 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			
 			if (config.HasProperty<IDestroyOnCollisionProjectileConfigProperty>())
 			{
-				projectileEntity.Add<DestroyOnCollisionComponent>();
+				var property = config.GetProperty<IDestroyOnCollisionProjectileConfigProperty>();
+				ref var component = ref projectileEntity.Add<DestroyOnCollisionComponent>();
+				component.LayerMask = property.LayerMask;
 			}
 			
 			if (config.HasProperty<IBlockDamageOnCollisionProjectileConfigProperty>())
 			{
 				projectileEntity.Add<BlockDamageOnCollisionComponent>();
+			}
+			
+			if (config.HasProperty<IDestroyOnReceiveDamageProjectileConfigProperty>())
+			{
+				var property = config.GetProperty<IDestroyOnReceiveDamageProjectileConfigProperty>();
+				ref var component = ref projectileEntity.Add<DestroyOnReceiveDamageComponent>();
 			}
 			
 			if (config.HasProperty<ICollisionProjectileConfigProperty>())

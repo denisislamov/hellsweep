@@ -193,6 +193,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 			ref var component = ref entity.Add<CollisionComponent>();
 			component.CollisionAreaConfig = collisionAreaConfig;
 			component.LayerMask = layerMask;
+
+			if (collisionAreaConfig.DoNotInitiateCollisionOverlap)
+			{
+				entity.Add<DoNotInitiateCollisionOverlap>();
+			}
+			
 			return ref component;
 		}
 
@@ -370,6 +376,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var component = ref entity.Add<BlockApplyDamageTimerComponent>();
 			component.Blocked = new Dictionary<string, Dictionary<int, ReactiveProperty<float>>>();
+			return ref component;
+		}
+		
+		public static ref ShowAppliedDamageIndicatorComponent AddShowAppliedDamageIndicatorComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<ShowAppliedDamageIndicatorComponent>();
 			return ref component;
 		}
 	}

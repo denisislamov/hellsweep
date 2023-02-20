@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5681c7f1f5a3448493da17f59c27000d, type: 3}
   m_Name: MageFireDestroyOnCollisionProjectileConfigProperty
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1088

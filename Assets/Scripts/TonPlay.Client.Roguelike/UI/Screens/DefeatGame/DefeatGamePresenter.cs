@@ -151,7 +151,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 				profileData.Experience -= profileData.MaxExperience;
 
 				var config = _profileConfigProvider.Get(profileData.Level);
-				profileData.MaxExperience = config.ExperienceToLevelUp;
+				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += 5;
 			}
 			

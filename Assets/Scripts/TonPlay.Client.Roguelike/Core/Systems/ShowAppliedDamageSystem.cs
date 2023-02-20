@@ -19,6 +19,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			
 			var filter = world
 									 .Filter<ApplyDamageComponent>()
+									 .Inc<ShowAppliedDamageIndicatorComponent>()
 									 .Inc<PositionComponent>()
 									 .Exc<DeadComponent>()
 									 .Exc<PlayerComponent>()

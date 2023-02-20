@@ -32,11 +32,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var world = systems.GetWorld();
 			
-			_overlapLayerMask = LayerMask.GetMask("Enemy", "Utility");
+			_overlapLayerMask = LayerMask.GetMask("Utility");
 			
 			_layersCollisionProcessors = new Dictionary<int, ICollisionProcessor>()
 			{
-				[LayerMask.NameToLayer("Enemy")] = new PlayerWithEnemyCollisionProcessor(world),
 				[LayerMask.NameToLayer("Utility")] = new PlayerWithUtilityCollisionProcessor(world)
 			};
 		}

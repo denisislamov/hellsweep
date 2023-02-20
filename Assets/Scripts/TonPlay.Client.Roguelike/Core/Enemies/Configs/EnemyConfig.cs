@@ -6,7 +6,7 @@ using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
-using TonPlay.Roguelike.Client.Core.Enemies.Views;
+using TonPlay.Client.Roguelike.Core.Enemies.Views;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -19,6 +19,9 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 	{
 		[SerializeField]
 		private string _id;
+		
+		[SerializeField]
+		private EnemyType _enemyType;
 
 		[SerializeField]
 		private EnemyView _prefab;
@@ -37,6 +40,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		private IViewPoolIdentity _identity;
 
 		public string Id => _id;
+		public EnemyType EnemyType => _enemyType;
 
 		public EnemyView Prefab => _prefab;
 

@@ -1,4 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -16,7 +17,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties
 		
 		[SerializeField]
 		private LayerMask _layerMask;
-
+		
 		public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 		public int LayerMask => _layerMask.value;
 	}

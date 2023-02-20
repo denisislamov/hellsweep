@@ -1,4 +1,5 @@
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Pooling.Identities;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
@@ -23,12 +24,16 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		
 		[SerializeField]
 		private ProjectileConfigProperty[] _properties;
+
+		[SerializeField, Layer]
+		private int _layer;
 		
 		private IViewPoolIdentity _identity;
 
 		public ProjectileView PrefabView => _prefab;
 		public IMovementConfig MovementConfig => _movementConfig;
 		public IViewPoolIdentity Identity => _identity ??= new ProjectileConfigViewPoolIdentity(this);
+		public int Layer => _layer;
 
 		public bool HasProperty<T>() where T : IProjectileConfigProperty
 		{

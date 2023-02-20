@@ -1,7 +1,9 @@
+using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.UI;
+using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
@@ -28,6 +30,8 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		IGameModel GameModel { get; }
 
 		IPositionProvider PlayerPositionProvider { get; }
+		
+		ILevelEnemyWaveConfigProvider EnemyWavesConfigProvider { get; }
 
 		string PlayerWeaponId { get; }
 		
@@ -44,5 +48,9 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		SignalBus SignalBus { get; }
 		
 		DamageTextView DamageTextViewPrefab { get; }
+		
+		EcsWorld World { get; }
+		
+		DiContainer Container { get; }
 	}
 }

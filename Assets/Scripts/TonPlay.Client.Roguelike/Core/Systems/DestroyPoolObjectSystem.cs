@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
 			var world = systems.GetWorld();
-			var filter = world.Filter<DestroyComponent>().Inc<ViewPoolObjectComponent>().End();
+			var filter = world.Filter<DestroyComponent>().Inc<ViewPoolObjectComponent>().Exc<GameNonPoolObject>().End();
 			var pool = world.GetPool<ViewPoolObjectComponent>();
 
 			foreach (var entityId in filter)

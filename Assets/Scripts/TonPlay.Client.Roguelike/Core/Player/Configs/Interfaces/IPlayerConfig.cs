@@ -2,7 +2,7 @@ using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 
-namespace TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces
 {
 	public interface IPlayerConfig
 	{
@@ -15,5 +15,7 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces
 		int StartHealth { get; }
 		
 		IMovementConfig MovementConfig { get; }
+		
+		int CollisionAreaMask { get; }
 	}
 }

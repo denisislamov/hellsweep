@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
@@ -19,12 +20,13 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 
 		public IEnumerable<IEnemyWaveConfig> AllWaves => _waveConfigs.SelectMany(_ => _.Waves);
 
-		public IEnumerable<IEnemyWaveConfig> Get(long ticks)
+		public IEnemyWaveGroupConfig Get(long ticks)
 		{
 			if (_sortedWaveConfigs == null || _sortedWaveConfigs.Count != _waveConfigs.Count)
 			{
 				_sortedWaveConfigs = _waveConfigs.ToList();
 				Sort();
+				SetNextForEachGroup();
 			}
 
 			EnemyWaveGroupConfig next = null;
@@ -40,16 +42,29 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 
 				if (ticks < current.StartTimingTicks)
 				{
-					return _emptyList;
+					return null;
 				}
 
 				if (next == default(EnemyWaveGroupConfig) || next.StartTimingTicks > ticks)
 				{
-					return current.Waves;
+					return current;
 				}
 			}
 
-			return _emptyList;
+			return null;
+		}
+		
+		private void SetNextForEachGroup()
+		{
+			for (var i = 0; i < _sortedWaveConfigs.Count; i++)
+			{
+				var group = _sortedWaveConfigs[i];
+
+				if (i + 1 < _sortedWaveConfigs.Count)
+				{
+					group.SetNext(_sortedWaveConfigs[i + 1]);
+				}
+			}
 		}
 
 		private void Sort()
@@ -58,17 +73,23 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 		}
 
 		[Serializable]
-		private class EnemyWaveGroupConfig
+		private class EnemyWaveGroupConfig : IEnemyWaveGroupConfig
 		{
 			[SerializeField]
 			private List<EnemyWaveConfig> _waves;
 			
 			[SerializeField]
 			private TimingConfig _startTiming;
+			
+			private IEnemyWaveGroupConfig _next;
 
 			public long StartTimingTicks => _startTiming.GetTimeSpan().Ticks;
 
 			public IEnumerable<EnemyWaveConfig> Waves => _waves;
+
+			public IEnemyWaveGroupConfig Next() => _next;
+
+			public void SetNext(IEnemyWaveGroupConfig next) => _next = next;
 		}
 	}
 }

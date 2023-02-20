@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Enemies.Views.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Enemies.Views.Interfaces
 {
 	public interface IEnemyView
 	{

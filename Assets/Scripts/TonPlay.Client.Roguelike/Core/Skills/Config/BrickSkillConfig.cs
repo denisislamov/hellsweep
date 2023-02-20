@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;

@@ -1,30 +1,27 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Enemies;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
+using TonPlay.Client.Roguelike.Core.Enemies.Views;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Components;
-using TonPlay.Roguelike.Client.Core.Enemies.Views;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
-namespace TonPlay.Client.Roguelike.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 {
 	public class EnemyWaveSpawnSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		public const int PREPARE_BEFORE_BOSS_SPAWN_SECONDS = 10;
 		private const int PROJECTILE_COUNT_PER_ENEMY = 8;
 
 		private readonly KdTreeStorage _kdTreeStorage;
@@ -129,7 +126,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				var timespan = TimeSpan.FromSeconds(time.Time);
 
-				var currentWavesConfigs = _enemyWavesConfigProvider.Get(timespan.Ticks);
+				var currentWavesConfigs = _enemyWavesConfigProvider.Get(timespan.Ticks)?.Waves;
 				if (currentWavesConfigs == null)
 				{
 					break;
@@ -202,9 +199,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			var enemyView = poolObject.Object;
-			var randomPosition = CreateRandomPosition(playerPosition);
+			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType);
 			
-			enemyView.transform.position = randomPosition;
+			enemyView.transform.position = spawnPosition;
 			
 			_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Add(entity.Id, freeTreeIndex);
 			_kdTreeStorage.KdTreePositionIndexToEntityIdMap[freeTreeIndex] = entity.Id;
@@ -220,7 +217,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			AddLayerComponent(entity, enemyView);
 			AddStickToLocationBlockComponent(entity);
 			AddTransformComponent(entity, enemyView);
-			AddPositionComponent(entity, randomPosition);
+			AddPositionComponent(entity, spawnPosition);
+			AddTypedEnemyComponent(entity, enemyConfig.EnemyType);
 
 			var lerpTransformComponent = AddLerpTransformComponent(entity);
 
@@ -230,6 +228,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			
 			entity.AddStackTryApplyDamageComponent();
 			entity.AddBlockApplyDamageTimerComponent();
+			entity.AddShowAppliedDamageIndicatorComponent();
 
 			if (enemyConfig.HasProperty<IShootProjectileAtPlayerEnemyPropertyConfig>())
 			{
@@ -281,7 +280,30 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				entity.AddDestroyOnCollisionComponent();
 			}
+			
+			if (enemyConfig.HasProperty<IPerformActionsOnSpawnEnemyPropertyConfig>())
+			{
+				var propertyConfig = enemyConfig.GetProperty<IPerformActionsOnSpawnEnemyPropertyConfig>();
+				
+				for (var i = 0; i < propertyConfig.Actions.Length; i++)
+				{
+					var action = propertyConfig.Actions[i];
+					action.Execute(entity.Id, _sharedData);
+				}
+			}
 		}
+		
+		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type)
+		{
+			switch (type)
+			{
+				case EnemyType.Boss:
+					return playerPosition + Vector2.up * 4;
+				default:
+					return CreateRandomPosition(playerPosition);
+			}
+		}
+
 		private int FindFreeTreeIndex()
 		{
 			for (var i = 0; i < _kdTreeStorage.KdTreePositionIndexToEntityIdMap.Length; i++)
@@ -296,6 +318,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 			
 			return -1;
+		}
+		
+		private void AddTypedEnemyComponent(EcsEntity entity, EnemyType type)
+		{
+			switch (type)
+			{
+				case EnemyType.Boss:
+					entity.Add<BossEnemy>();
+					return;
+				default:
+					entity.Add<RegularEnemy>();
+					return;
+			}
 		}
 
 		private void AddMovementComponent(EcsEntity entity)

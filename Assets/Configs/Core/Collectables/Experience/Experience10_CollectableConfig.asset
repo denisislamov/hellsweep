@@ -18,3 +18,6 @@ MonoBehaviour:
   _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
   _poolSize: 128
   _layer: 9
+  _collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0

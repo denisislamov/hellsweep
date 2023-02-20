@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: BossShooterEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: boss_shooter
+  _enemyType: 1
+  _prefab: {fileID: 3859152423040865116, guid: d1774aa2b0598405089a53de198bf329, type: 3}
+  _health: 4000
+  _collectablesIdsOnDeath: []
+  _propertyConfigs:
+  - {fileID: 11400000, guid: abbefe5c83b924a9896cd12625054a6b, type: 2}
+  - {fileID: 11400000, guid: 62da7ea520e7d45a7bec32d00bee492b, type: 2}
+  - {fileID: 11400000, guid: 7fb4fd3102f414833b6f9c347dab8357, type: 2}
+  - {fileID: 11400000, guid: a5d7af2f62f3e436b99f668c87528880, type: 2}
+  - {fileID: 11400000, guid: fd5c6a9c53f7546509531c91cbc8742c, type: 2}
+  - {fileID: 11400000, guid: 47c7c3536b99040099970ea73f85cdf8, type: 2}

@@ -38,7 +38,6 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			entity.AddCollectableComponent(config);
 			entity.AddPositionComponent(position);
 			entity.AddViewProviderComponent(gameObject);
-			entity.AddLayerComponent(gameObject.layer);
 			entity.AddPoolObjectComponent(poolObject);
 			entity.AddMagnetizableComponent();
 

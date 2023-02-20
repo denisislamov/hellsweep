@@ -33,6 +33,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 							  .Inc<PositionComponent>()
 							  .Inc<CollisionComponent>()
 							  .Exc<InactiveComponent>()
+							  .Exc<DoNotInitiateCollisionOverlap>()
 							  .End();
 			
 			var collisionPool = world.GetPool<CollisionComponent>();

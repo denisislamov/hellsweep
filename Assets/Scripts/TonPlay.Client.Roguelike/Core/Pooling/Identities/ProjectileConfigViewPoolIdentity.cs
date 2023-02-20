@@ -1,8 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling.Identities
+namespace TonPlay.Client.Roguelike.Core.Pooling.Identities
 {
 	public class ProjectileConfigViewPoolIdentity : IViewPoolIdentity
 	{

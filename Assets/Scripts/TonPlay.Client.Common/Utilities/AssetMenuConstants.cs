@@ -14,6 +14,8 @@ namespace TonPlay.Roguelike.Client.Utilities
 		
 		public const string CORE_INSTALLERS = INSTALLERS + "Core/";
 		
+		public const string ACTIONS = ROOT + "Actions/";
+		
 		public const string CONFIGS = ROOT + "Configs/";
 		
 		public const string CORE_CONFIGS = CONFIGS + "Core/";

@@ -1,4 +1,4 @@
-using TonPlay.Roguelike.Client.Core.Enemies.Views;
+using TonPlay.Client.Roguelike.Core.Enemies.Views;
 
 namespace TonPlay.Roguelike.Client.Core.Enemies.BasicEnemy
 {

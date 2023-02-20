@@ -45,7 +45,7 @@ MonoBehaviour:
     - _id: 2_mage
       _enemyId: mage
       _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 200
+      _maxSpawnedQuantity: 40
       _spawnQuantityPerRate: 5
       _spawnRate:
         _minutes: 0
@@ -56,36 +56,96 @@ MonoBehaviour:
   - _waves:
     - _id: 3_cyclope
       _enemyId: cyclope
-      _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 100
-      _spawnQuantityPerRate: 10
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 5
     - _id: 3_crab
       _enemyId: crab
-      _enemiesQuantity: 5000
+      _enemiesQuantity: 50000
       _maxSpawnedQuantity: 300
-      _spawnQuantityPerRate: 10
+      _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 5
     - _id: 3_ghost
       _enemyId: ghost
       _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 300
-      _spawnQuantityPerRate: 10
+      _maxSpawnedQuantity: 500
+      _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 5
     - _id: 3_mage
       _enemyId: mage
-      _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 300
-      _spawnQuantityPerRate: 10
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 50
+      _spawnQuantityPerRate: 50
       _spawnRate:
         _minutes: 0
         _seconds: 5
     _startTiming:
       _minutes: 1
       _seconds: 45
+  - _waves:
+    - _id: boss_shooter
+      _enemyId: boss_shooter
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    _startTiming:
+      _minutes: 5
+      _seconds: 0
+  - _waves:
+    - _id: 3_cyclope
+      _enemyId: cyclope
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 500
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    - _id: 3_crab
+      _enemyId: crab
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    - _id: 3_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 400
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    - _id: 3_mage
+      _enemyId: mage
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 50
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    _startTiming:
+      _minutes: 5
+      _seconds: 1
+  - _waves:
+    - _id: boss_shooter
+      _enemyId: boss_shooter
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+    _startTiming:
+      _minutes: 10
+      _seconds: 0

@@ -16,8 +16,8 @@ MonoBehaviour:
   - _layer: 10
     _layerMask:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 2176
   - _layer: 11
     _layerMask:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 1088

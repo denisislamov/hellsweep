@@ -11,5 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 		EcsPool<UsedComponent> UsedPool { get; }
 		EcsPool<LayerComponent> LayerPool { get; }
 		EcsPool<DestroyComponent> DestroyPool { get; }
+		EcsPool<PositionComponent> PositionPool { get; }
+		EcsPool<CollisionComponent> CollisionPool { get; }
 	}
 }

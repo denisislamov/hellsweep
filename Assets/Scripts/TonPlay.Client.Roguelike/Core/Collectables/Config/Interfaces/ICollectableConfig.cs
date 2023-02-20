@@ -18,5 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces
 		int Layer { get; }
 		
 		int PoolSize { get; }
+		
+		int CollisionLayerMask { get; }
 	}
 }

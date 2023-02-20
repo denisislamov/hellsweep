@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Waves.Interfaces
 {
@@ -6,6 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Waves.Interfaces
 	{
 		IEnumerable<IEnemyWaveConfig> AllWaves { get; }
 		
-		IEnumerable<IEnemyWaveConfig> Get(long ticks);
+		IEnemyWaveGroupConfig Get(long ticks);
 	}
 }

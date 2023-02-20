@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
@@ -49,6 +50,10 @@ namespace TonPlay.Client.Roguelike.Core
 		public DamageTextView DamageTextViewPrefab { get; }
 
 		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
+		
+		public EcsWorld World { get; private set; }
+		
+		public DiContainer Container { get; private set; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
@@ -62,7 +67,8 @@ namespace TonPlay.Client.Roguelike.Core
 			IPlayersLevelsConfigProvider playersLevelsConfigProvider,
 			ICompositeViewPool compositeViewPool, 
 			SignalBus signalBus, 
-			DamageTextView damageTextViewPrefab)
+			DamageTextView damageTextViewPrefab,
+			DiContainer container)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
@@ -76,6 +82,7 @@ namespace TonPlay.Client.Roguelike.Core
 			CompositeViewPool = compositeViewPool;
 			SignalBus = signalBus;
 			DamageTextViewPrefab = damageTextViewPrefab;
+			Container = container;
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)
@@ -93,6 +100,11 @@ namespace TonPlay.Client.Roguelike.Core
 			CollectablesKdTreeStorage = kdTreeStorage;
 		}
 
+		public void SetWorld(EcsWorld world)
+		{
+			World = world;
+		}
+		
 		public class Factory : PlaceholderFactory<SharedData>
 		{
 		}
