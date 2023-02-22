@@ -41,7 +41,7 @@ MonoBehaviour:
     _size: 2
     _collisionLayerMask:
       serializedVersion: 2
-      m_Bits: 2176
+      m_Bits: 128
     _collisionAreaConfig: {fileID: 11400000, guid: 4831f027961cd4720b867da033f47fb2, type: 2}
   - _level: 3
     _description: Forcefield Device desc lvl 3
