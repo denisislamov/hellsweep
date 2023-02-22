@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GhostCircleCollisionAreaConfig
   m_EditorClassIdentifier: 
   _doNotInitiateCollisionOverlap: 0
-  _radius: 0.45
+  _radius: 0.4

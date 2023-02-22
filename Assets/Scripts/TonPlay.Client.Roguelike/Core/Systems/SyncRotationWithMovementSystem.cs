@@ -21,7 +21,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var position = ref positionPool.Get(entityId);
 				ref var syncRotationWithPosition = ref syncRotationWithPositionPool.Get(entityId);
 
-				rotation.Direction = (position.Position - syncRotationWithPosition.LastPosition).normalized;
+				rotation.Direction = (position.Position - syncRotationWithPosition.LastPosition);
+				rotation.Direction.Normalize();
+				
 				syncRotationWithPosition.LastPosition = Vector2.Lerp(syncRotationWithPosition.LastPosition, position.Position, Time.deltaTime * 5);
 				
 				Debug.DrawRay(position.Position, rotation.Direction, Color.red, Time.deltaTime);

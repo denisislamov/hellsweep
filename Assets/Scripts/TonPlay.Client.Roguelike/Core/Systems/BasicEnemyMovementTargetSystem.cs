@@ -71,7 +71,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
-				var movementVector = (playerPosition - position).normalized;
+				var movementVector = (playerPosition - position);
+				movementVector.Normalize();
 
 				var collisionAreaConfig = collisionComponent.CollisionAreaConfig;
 
@@ -79,7 +80,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
 
-				movementComponent.Direction = CombineMovementDirection(separateVector, movementVector).normalized;
+				movementComponent.Direction = CombineMovementDirection(separateVector, movementVector);
+				movementComponent.Direction.Normalize();
 
 				_neighborsEntityIds.Clear();
 			}

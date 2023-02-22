@@ -28,10 +28,10 @@ namespace DataStructures.ViliWonka.KDTree {
 
     public struct KDBounds {
 
-        public Vector3 min;
-        public Vector3 max;
+        public Vector2 min;
+        public Vector2 max;
 
-        public Vector3 size {
+        public Vector2 size {
 
             get {
                 return max - min;
@@ -50,7 +50,7 @@ namespace DataStructures.ViliWonka.KDTree {
         }
 
         
-        public Vector3 ClosestPoint(Vector3 point) {
+        public Vector2 ClosestPoint(Vector2 point) {
 
             // X axis
             if(point.x < min.x) point.x = min.x;
@@ -61,11 +61,6 @@ namespace DataStructures.ViliWonka.KDTree {
             if(point.y < min.y) point.y = min.y;
             else 
             if(point.y > max.y) point.y = max.y;
-            
-            // Z axis
-            if(point.z < min.z) point.z = min.z;
-            else 
-            if(point.z > max.z) point.z = max.z;
             
             return point;
         }

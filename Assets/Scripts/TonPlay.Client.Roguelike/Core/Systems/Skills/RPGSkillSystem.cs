@@ -19,11 +19,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
 	public class RPGSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		private readonly KdTreeStorage _kdTreeStorage;
 		private EcsWorld _world;
 		private IRPGSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
+		
+		public RPGSkillSystem(KdTreeStorage kdTreeStorage)
+		{
+			_kdTreeStorage = kdTreeStorage;
+		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -109,6 +115,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			
 			explodeOnCollision.DamageProvider = levelDamageProvider;
 			explodeOnMoveDistance.DamageProvider = levelDamageProvider;
+			
+			_kdTreeStorage.AddEntity(entity.Id, position);
 		}
 		
 		private Vector2 GetRandomDirection()

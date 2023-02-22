@@ -27,9 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			var projectileEntity = world.NewEntity();
 			var projectileViewTransform = projectileView.transform;
 
-			var gameObject = projectileView.gameObject;
-
-			direction = direction.normalized;
+			direction.Normalize();
 			
 			projectileViewTransform.position = position;
 			projectileViewTransform.right = direction;

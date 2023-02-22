@@ -16,7 +16,7 @@ MonoBehaviour:
   _value: 10
   _prefab: {fileID: 7397804992388197930, guid: d547e9350f9384ba99704a6aa9563508, type: 3}
   _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
-  _poolSize: 128
+  _poolSize: 512
   _layer: 9
   _collisionLayerMask:
     serializedVersion: 2

@@ -104,7 +104,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(totalEnemies);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(totalEnemies);
 			
-			_kdTreeStorage.KdTree.Build(new Vector3[totalEnemies]);
+			_kdTreeStorage.KdTree.Build(new Vector2[totalEnemies]);
 
 			_sharedData = sharedData;
 		}
@@ -191,21 +191,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			}
 			
 			var entity = world.NewEntity();
-			var freeTreeIndex = FindFreeTreeIndex();
-
-			if (_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.ContainsKey(entity.Id))
-			{
-				_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Remove(entity.Id);
-			}
+			
 
 			var enemyView = poolObject.Object;
 			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType);
 			
 			enemyView.transform.position = spawnPosition;
 			
-			_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Add(entity.Id, freeTreeIndex);
-			_kdTreeStorage.KdTreePositionIndexToEntityIdMap[freeTreeIndex] = entity.Id;
-			_kdTreeStorage.KdTree.Points[freeTreeIndex] = enemyView.transform.position;
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
+			
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 
 			enemyView.SetEntityId(entity.Id);
 
@@ -303,22 +298,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					return CreateRandomPosition(playerPosition);
 			}
 		}
-
-		private int FindFreeTreeIndex()
-		{
-			for (var i = 0; i < _kdTreeStorage.KdTreePositionIndexToEntityIdMap.Length; i++)
-			{
-				var entityId = _kdTreeStorage.KdTreePositionIndexToEntityIdMap[i];
-				if (_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.ContainsKey(entityId))
-				{
-					continue;
-				}
-
-				return i;
-			}
-			
-			return -1;
-		}
 		
 		private void AddTypedEnemyComponent(EcsEntity entity, EnemyType type)
 		{
@@ -363,7 +342,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			if (distanceToPlayer < 15f)
 			{
-				var direction = (randomPosition - playerPosition).normalized;
+				var direction = (randomPosition - playerPosition);
+				direction.Normalize();
 				randomPosition = playerPosition + direction*Random.Range(15f, 45f);
 			}
 			return randomPosition;

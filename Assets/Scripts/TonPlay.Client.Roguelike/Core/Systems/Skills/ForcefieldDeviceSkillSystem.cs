@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
@@ -22,8 +23,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 	public class ForcefieldDeviceSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly IOverlapExecutor _overlapExecutor;
-		private List<int> _overlappedEntities = new List<int>();
 		private readonly KDQuery _query = new KDQuery();
+		private readonly KdTreeStorage _playerProjectilesKdTreeStorage;
+
+		private readonly int _playerProjectilesLayer;
+		private readonly int _enemyProjectilesLayer;
+
+		private List<int> _overlappedEntities = new List<int>();
 
 		private EcsWorld _world;
 		private IForcefieldDeviceSkillConfig _config;
@@ -31,9 +37,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
 
-		public ForcefieldDeviceSkillSystem(IOverlapExecutor overlapExecutor)
+		public ForcefieldDeviceSkillSystem(IOverlapExecutor overlapExecutor, KdTreeStorage playerProjectilesKdTreeStorage)
 		{
 			_overlapExecutor = overlapExecutor;
+			_playerProjectilesKdTreeStorage = playerProjectilesKdTreeStorage;
+
+			_playerProjectilesLayer = LayerMask.NameToLayer("PlayerProjectile");
+			_enemyProjectilesLayer = LayerMask.NameToLayer("EnemyProjectile");
 		}
 
 		public void Init(EcsSystems systems)
@@ -41,7 +51,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (IForcefieldDeviceSkillConfig) _sharedData.SkillsConfigProvider.Get(SkillName.ForcefieldDevice);
+			_config = (IForcefieldDeviceSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.ForcefieldDevice);
 		}
 
 		public void Run(EcsSystems systems)
@@ -49,8 +59,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			AddSkillComponentIfDoesntExist();
 			ApplyDamageToCollidedEntities();
 			SyncEffectSize();
+			SyncEffectLevelWithOwner();
 		}
-		
+
 		private void ApplyDamageToCollidedEntities()
 		{
 			var filter = _world
@@ -75,6 +86,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var level = skills.Levels[SkillName.ForcefieldDevice];
 				var levelConfig = _config.GetLevelConfig(level);
 
+				//it's to prevent double damage applying for upgraded forcefield
+				if (LayerMaskExt.ContainsLayer(levelConfig.CollisionLayerMask, _enemyProjectilesLayer))
+				{
+					continue;
+				}
+
 				var count = _overlapExecutor.Overlap(
 					_query, 
 					position.Position, 
@@ -98,7 +115,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				_overlappedEntities.Clear();
 			}
 		}
-		
+
 		private void SyncEffectSize()
 		{
 			var filter = _world
@@ -159,21 +176,123 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private EcsEntity CreateEffect(Vector2 position, int parentEntityId, float size)
 		{
 			var entity = _world.NewEntity();
 			var effect = Object.Instantiate(_config.EffectView);
 			var transform = effect.transform;
+			var level = 0;
+
 			transform.position = position;
-			transform.localScale = Vector3.one * size;
+			transform.localScale = Vector3.one*size;
 
 			entity.AddPositionComponent(position);
 			entity.AddTransformComponent(effect.transform);
-			entity.AddForcefieldDeviceEffectComponent(parentEntityId);
+			entity.AddForcefieldDeviceEffectComponent(parentEntityId, level);
 			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId);
 
 			return entity;
+		}
+
+		private void SyncEffectLevelWithOwner()
+		{
+			var filter = _world.Filter<ForcefieldDeviceEffectComponent>().Inc<PositionComponent>().End();
+			var skillsPool = _world.GetPool<SkillsComponent>();
+			var forceFieldPool = _world.GetPool<ForcefieldDeviceEffectComponent>();
+			var positionPool = _world.GetPool<PositionComponent>();
+
+			foreach (var effectEntityIdx in filter)
+			{
+				ref var forceField = ref forceFieldPool.Get(effectEntityIdx);
+				ref var position = ref positionPool.Get(effectEntityIdx);
+				ref var skills = ref skillsPool.Get(forceField.ParentEntityId);
+
+				if (skills.Levels[_config.SkillName] == forceField.Level)
+				{
+					continue;
+				}
+
+				forceField.Level = skills.Levels[_config.SkillName];
+
+				var levelConfig = _config.GetLevelConfig(forceField.Level);
+
+				//this code below is a real true bullshit, i know, i hope we will deal with it a lil bit later
+				var entity = new EcsEntity(_world, effectEntityIdx);
+
+				if (LayerMaskExt.ContainsLayer(levelConfig.CollisionLayerMask, _enemyProjectilesLayer))
+				{
+					if (!entity.Has<BlockApplyDamageTimerComponent>())
+					{
+						entity.AddBlockApplyDamageTimerComponent();
+					}
+
+					if (!entity.Has<StackTryApplyDamageComponent>())
+					{
+						entity.AddStackTryApplyDamageComponent();
+					}
+
+					if (!entity.Has<LayerComponent>())
+					{
+						entity.AddLayerComponent(_playerProjectilesLayer);
+					}
+					
+					if (!entity.Has<CollisionComponent>())
+					{
+						entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, levelConfig.CollisionLayerMask);
+						entity.AddHasCollidedComponent();
+						entity.AddDamageOnCollisionComponent(levelConfig.DamageProvider);
+					}
+					else
+					{
+						ref var collision = ref entity.Get<CollisionComponent>();
+						collision.CollisionAreaConfig = levelConfig.CollisionAreaConfig;
+						collision.LayerMask = levelConfig.CollisionLayerMask;
+
+						ref var damageOnCollision = ref entity.Get<DamageOnCollisionComponent>();
+						damageOnCollision.DamageProvider = levelConfig.DamageProvider;
+					}
+
+					if (!entity.Has<KdTreeElementComponent>())
+					{
+						var treeIndex = _playerProjectilesKdTreeStorage.AddEntity(entity.Id, position.Position);
+
+						entity.AddKdTreeElementComponent(_playerProjectilesKdTreeStorage, treeIndex);
+						entity.AddDrawDebugKdTreePositionComponent();
+					}
+				}
+				else
+				{
+					if (entity.Has<BlockApplyDamageTimerComponent>())
+					{
+						entity.Del<BlockApplyDamageTimerComponent>();
+					}
+
+					if (entity.Has<StackTryApplyDamageComponent>())
+					{
+						entity.Del<StackTryApplyDamageComponent>();
+					}
+
+					if (entity.Has<LayerComponent>())
+					{
+						entity.Del<LayerComponent>();
+					}
+
+					if (entity.Has<KdTreeElementComponent>())
+					{
+						_playerProjectilesKdTreeStorage.RemoveEntity(entity.Id);
+						
+						entity.Del<KdTreeElementComponent>();
+					}
+					
+					if (entity.Has<CollisionComponent>())
+					{
+						entity.Del<CollisionComponent>();
+						entity.Del<HasCollidedComponent>();
+						entity.Del<DamageOnCollisionComponent>();
+					}
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,6 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Components;
 
@@ -16,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var positionPool = world.GetPool<PositionComponent>();
 			var moveInLocalSpacePool = world.GetPool<MoveInLocalSpaceOfEntityComponent>();
 			var localPositionPool = world.GetPool<LocalPositionComponent>();
-			
+
 			var filter = world.Filter<TransformComponent>()
 							  .Exc<RigidbodyComponent>()
 							  .Exc<CameraComponent>()
@@ -27,16 +29,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var transformComponent = ref transformPool.Get(entityId);
+				ref var positionComponent = ref positionPool.AddOrGet(entityId);
 				
 				if (!positionPool.Has(entityId))
 				{
-					ref var positionComponent = ref positionPool.Add(entityId);
 					positionComponent.Position = transformComponent.Transform.position;
 				}
 				else
 				{
-					ref var positionComponent = ref positionPool.Get(entityId);
-
 					if (moveInLocalSpacePool.Has(entityId) && localPositionPool.Has(entityId))
 					{
 						ref var moveInLocalSpaceComponent = ref moveInLocalSpacePool.Get(entityId);

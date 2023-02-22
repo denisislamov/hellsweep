@@ -44,11 +44,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var collision = ref collisionPool.Get(entityId);
-				ref var position = ref positionPool.Get(entityId);
-				ref var hasCollided = ref hasCollidedPool.Get(entityId);
 
-				hasCollided.CollidedEntityIds.Clear();
+				if (collision.CollisionAreaConfig.DoNotInitiateCollisionOverlap)
+				{
+					continue;
+				}
 				
+				ref var hasCollided = ref hasCollidedPool.Get(entityId);
+				ref var position = ref positionPool.Get(entityId);
+				
+				hasCollided.CollidedEntityIds.Clear();
+
 				_overlapExecutor.Overlap(
 					_query,
 					position.Position, 

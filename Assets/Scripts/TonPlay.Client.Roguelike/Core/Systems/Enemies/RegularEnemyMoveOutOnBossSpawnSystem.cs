@@ -65,7 +65,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				ref var position = ref positionPool.Get(entityId);
 				ref var movement = ref movementPool.Get(entityId);
 
-				movement.Direction = (position.Position - playerPosition.Position).normalized;
+				movement.Direction = (position.Position - playerPosition.Position);
+				movement.Direction.Normalize();
 			}
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();

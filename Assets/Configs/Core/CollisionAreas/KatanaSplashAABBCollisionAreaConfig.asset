@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541d399bbf8e46a0a0bb0b72ce388852, type: 3}
   m_Name: KatanaSplashAABBCollisionAreaConfig
   m_EditorClassIdentifier: 
+  _doNotInitiateCollisionOverlap: 0
   _rect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 4
-    height: 1.5
+    height: 2

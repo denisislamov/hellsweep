@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
@@ -244,10 +245,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref ForcefieldDeviceEffectComponent AddForcefieldDeviceEffectComponent(this EcsEntity entity, int parentEntityId)
+		public static ref ForcefieldDeviceEffectComponent AddForcefieldDeviceEffectComponent(this EcsEntity entity, int parentEntityId, int level)
 		{
 			ref var component = ref entity.Add<ForcefieldDeviceEffectComponent>();
 			component.ParentEntityId = parentEntityId;
+			component.Level = level;
 			return ref component;
 		}
 
@@ -382,6 +384,20 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref ShowAppliedDamageIndicatorComponent AddShowAppliedDamageIndicatorComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<ShowAppliedDamageIndicatorComponent>();
+			return ref component;
+		}
+		
+		public static ref KdTreeElementComponent AddKdTreeElementComponent(this EcsEntity entity, KdTreeStorage kdTreeStorage, int treeIndex)
+		{
+			ref var component = ref entity.Add<KdTreeElementComponent>();
+			component.TreeIndex = treeIndex;
+			component.Storage = kdTreeStorage;
+			return ref component;
+		}
+		
+		public static ref DrawDebugKdTreePositionComponent AddDrawDebugKdTreePositionComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<DrawDebugKdTreePositionComponent>();
 			return ref component;
 		}
 	}

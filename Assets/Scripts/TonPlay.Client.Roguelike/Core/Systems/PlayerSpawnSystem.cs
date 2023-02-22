@@ -45,7 +45,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddRotationComponent(player.transform.right.ToVector2XY());
 			entity.AddRigidbodyComponent(player.Rigidbody2D);
 			entity.AddSkillsComponent();
-			entity.AddCollisionComponent(spawnConfig.CollisionAreaConfig, spawnConfig.CollisionAreaMask);
+			entity.AddCollisionComponent(
+				spawnConfig.CollisionAreaConfig, 
+				spawnConfig.CollisionAreaMask);
 			
 			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
 			entity.AddSpeedComponent(spawnConfig.MovementConfig);
@@ -64,13 +66,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(1);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(1);
+			
+			_kdTreeStorage.KdTree.Build(new Vector2[] { player.Position });
 
-			_kdTreeStorage.KdTree.Build(new Vector3[] { player.Position });
-			
-			var treeIndex = FindFreeTreeIndex();
-			
-			_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Add(entity.Id, treeIndex);
-			_kdTreeStorage.KdTreePositionIndexToEntityIdMap[treeIndex] = entity.Id;
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, player.Position);
+
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 		}
 
 		private void CreateWeapon(int playerEntityId, ISharedData sharedData)
@@ -119,23 +120,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			playerData.Health = healthComponent.CurrentHealth;
 			playerData.MaxHealth = healthComponent.MaxHealth;
 			playerModel.Update(playerData);
-		}
-		
-		private int FindFreeTreeIndex()
-		{
-			var freeTreeIndex = -1;
-			for (var i = 0; i < _kdTreeStorage.KdTreePositionIndexToEntityIdMap.Length; i++)
-			{
-				if (_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.ContainsKey(_kdTreeStorage.KdTreePositionIndexToEntityIdMap[i]))
-				{
-					continue;
-				}
-
-				freeTreeIndex = i;
-
-				break;
-			}
-			return freeTreeIndex;
 		}
 	}
 }

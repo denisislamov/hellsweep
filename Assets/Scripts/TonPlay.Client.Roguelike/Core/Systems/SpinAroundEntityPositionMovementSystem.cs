@@ -1,6 +1,8 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
@@ -29,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var position = ref positionPool.Get(entityId);
 				ref var spinAroundPosition = ref positionPool.Get(spin.SpinAroundEntityId);
 
-				var dir = Vector2.right.normalized.Rotate(spin.LastAngle);
+				var dir = Vector2.right.Rotate(spin.LastAngle);
 				var angleDiff = -speed.Speed * Time.deltaTime * 360f % 360f % -360f;
 				var nextAngle = spin.LastAngle + angleDiff;
 				

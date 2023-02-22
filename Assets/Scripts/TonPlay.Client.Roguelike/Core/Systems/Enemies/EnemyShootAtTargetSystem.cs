@@ -47,7 +47,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				}
 
 				ref var targetPosition = ref positionPool.Get(target.EntityId);
+				
 				var direction = targetPosition.Position - position.Position;
+				direction.Normalize();
 				
 				var sqrMinDistance = shoot.MinDistanceTargetToShoot * shoot.MinDistanceTargetToShoot;
 				var sqrMaxDistance = shoot.MaxDistanceTargetToShoot * shoot.MaxDistanceTargetToShoot;
@@ -71,7 +73,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					poolObject, 
 					shoot.ProjectileConfig, 
 					position.Position, 
-					direction.normalized, 
+					direction, 
 					collisionLayerMask);
 
 				shoot.TimeLeft = shoot.Rate;

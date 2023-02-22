@@ -29,6 +29,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		private const int MAX_TARGET_QUANTITY = 6;
 
 		private readonly IOverlapExecutor _overlapExecutor;
+		private readonly KdTreeStorage _kdTreeStorage;
+		
 		private List<int> _overlappedEntities = new List<int>();
 		private readonly KDQuery _query = new KDQuery();
 		private readonly int[] _cachedTargetEntityIds = new int[MAX_TARGET_QUANTITY];
@@ -39,9 +41,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
 
-		public RevolverSkillSystem(IOverlapExecutor overlapExecutor)
+		public RevolverSkillSystem(IOverlapExecutor overlapExecutor, KdTreeStorage kdTreeStorage)
 		{
 			_overlapExecutor = overlapExecutor;
+			_kdTreeStorage = kdTreeStorage;
 		}
 
 		public void Init(EcsSystems systems)
@@ -162,6 +165,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			damageOnCollision.DamageProvider = levelSkillConfig.DamageProvider;
+
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, position);
+
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 			
 			collisionPool.AddOrGet(entity.Id);
 		}

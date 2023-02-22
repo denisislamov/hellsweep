@@ -42,7 +42,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					ref var bomb = ref bombPool.Get(collectableEntityId);
 					
 					prepare.Bombs.Add((bomb.Config.TimeToExplode, bomb.Config));
-					prepare.Bombs.Add((bomb.Config.TimeToExplode, bomb.Config));
 					
 					destroyPool.Add(collectableEntityId);
 				}

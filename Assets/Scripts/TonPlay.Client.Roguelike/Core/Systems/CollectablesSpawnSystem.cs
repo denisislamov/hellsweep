@@ -58,7 +58,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(total);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(total);
 			
-			_kdTreeStorage.KdTree.Build(new Vector3[total]);
+			_kdTreeStorage.KdTree.Build(new Vector2[total]);
 
 			_sharedData = sharedData;
 #region Profiling End

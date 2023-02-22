@@ -28,7 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 
 		public override CollectableType Type => CollectableType.Bomb;
 		
-		public ICollisionAreaConfig CollisionAreaConfig => _explodeCollisionAreaConfig;
+		public ICollisionAreaConfig ExplodeCollisionAreaConfig => _explodeCollisionAreaConfig;
 		
 		public float TimeToExplode => _timeToExplode;
 		public IDamageProvider DamageProvider => _damageProvider;

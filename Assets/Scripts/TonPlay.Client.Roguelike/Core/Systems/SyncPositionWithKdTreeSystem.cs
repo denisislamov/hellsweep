@@ -23,31 +23,31 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 #region Profiling Begin
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
-			var world = systems.GetWorld();
-			var tree = _storage.KdTree;
-			var positionPool = world.GetPool<PositionComponent>();
-			
-			for (var i = 0; i < _storage.KdTreePositionIndexToEntityIdMap.Length; i++) 
-			{
-				var entityId = _storage.KdTreePositionIndexToEntityIdMap[i];
-				
-				if (entityId == EcsEntity.DEFAULT_ID || !world.IsEntityAlive(entityId)) continue;
-
-				if (!positionPool.Has(entityId))
-				{
-					if (_storage.KdTreeEntityIdToPositionIndexMap.ContainsKey(entityId))
-					{
-						_storage.KdTreeEntityIdToPositionIndexMap.Remove(entityId);
-					}
-
-					_storage.KdTreePositionIndexToEntityIdMap[i] = EcsEntity.DEFAULT_ID;
-					continue;
-				}
-				
-				tree.Points[i] = GetActualPosition(positionPool, entityId);
-			}
-
-			tree.Rebuild();
+			// var world = systems.GetWorld();
+			// var tree = _storage.KdTree;
+			// var positionPool = world.GetPool<PositionComponent>();
+			//
+			// for (var i = 0; i < _storage.KdTreePositionIndexToEntityIdMap.Length; i++) 
+			// {
+			// 	var entityId = _storage.KdTreePositionIndexToEntityIdMap[i];
+			// 	
+			// 	if (entityId == EcsEntity.DEFAULT_ID || !world.IsEntityAlive(entityId)) continue;
+			//
+			// 	if (!positionPool.Has(entityId))
+			// 	{
+			// 		if (_storage.KdTreeEntityIdToPositionIndexMap.ContainsKey(entityId))
+			// 		{
+			// 			_storage.KdTreeEntityIdToPositionIndexMap.Remove(entityId);
+			// 		}
+			//
+			// 		_storage.KdTreePositionIndexToEntityIdMap[i] = EcsEntity.DEFAULT_ID;
+			// 		continue;
+			// 	}
+			// 	
+			// 	tree.Points[i] = GetActualPosition(positionPool, entityId);
+			// }
+			//
+			// tree.Rebuild();
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();
 #endregion 

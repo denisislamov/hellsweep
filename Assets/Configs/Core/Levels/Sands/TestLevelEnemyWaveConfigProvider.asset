@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveConfigs:
   - _waves:
-    - _id: mage
-      _enemyId: mage
+    - _id: mage_test
+      _enemyId: mage_test
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 50
-      _spawnQuantityPerRate: 50
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
       _spawnRate:
         _minutes: 0
         _seconds: 5

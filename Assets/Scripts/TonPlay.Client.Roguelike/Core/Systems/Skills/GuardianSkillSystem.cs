@@ -18,11 +18,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
 	public class GuardianSkillSystem  : IEcsInitSystem, IEcsRunSystem
 	{
+		private readonly KdTreeStorage _kdTreeStorage;
+
 		private EcsWorld _world;
 		private IGuardianSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
+
+		public GuardianSkillSystem(KdTreeStorage kdTreeStorage)
+		{
+			_kdTreeStorage = kdTreeStorage;
+		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -135,6 +142,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			
 			entity.AddSpinAroundEntityPositionComponent(playerEntityId, levelConfig.Radius, angle);
 			entity.AddGuardianProjectileComponent(levelConfig.ActiveTime);
+			
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
+
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
+			entity.AddDrawDebugKdTreePositionComponent();
 			
 			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
 			ref var speed = ref speedPool.Get(entity.Id);

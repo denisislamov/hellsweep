@@ -42,7 +42,7 @@ namespace DataStructures.ViliWonka.KDTree {
         /// <param name="k">Max number of points</param>
         /// <param name="resultIndices">List where resulting indices will be stored</param>
         /// <param name="resultDistances">Optional list where resulting distances will be stored</param>
-        public void KNearest(KDTree tree, Vector3 queryPosition, int k, List<int> resultIndices, List<float> resultDistances = null) {
+        public void KNearest(KDTree tree, Vector2 queryPosition, int k, List<int> resultIndices, List<float> resultDistances = null) {
 
             // pooled heap arrays
             KSmallestHeap<int> kHeap;
@@ -58,7 +58,7 @@ namespace DataStructures.ViliWonka.KDTree {
             kHeap.Clear();
             Reset();
 
-            Vector3[] points = tree.Points;
+            Vector2[] points = tree.Points;
             int[] permutation = tree.Permutation;
 
             ///Biggest Smallest Squared Radius
@@ -66,7 +66,7 @@ namespace DataStructures.ViliWonka.KDTree {
 
             var rootNode = tree.RootNode;
 
-            Vector3 rootClosestPoint = rootNode.bounds.ClosestPoint(queryPosition);
+            Vector2 rootClosestPoint = rootNode.bounds.ClosestPoint(queryPosition);
 
             PushToHeap(rootNode, rootClosestPoint, queryPosition);
 
@@ -76,7 +76,7 @@ namespace DataStructures.ViliWonka.KDTree {
             int partitionAxis;
             float partitionCoord;
 
-            Vector3 tempClosestPoint;
+            Vector2 tempClosestPoint;
 
             // searching
             while(minHeap.Count > 0) {
@@ -136,7 +136,10 @@ namespace DataStructures.ViliWonka.KDTree {
 
                         int index = permutation[i];
 
-                        sqrDist = Vector3.SqrMagnitude(points[index] - queryPosition);
+                        var diffX = points[index].x - queryPosition.x;
+                        var diffY = points[index].y - queryPosition.y;
+                        
+                        sqrDist = diffX * diffX + diffY * diffY;
 
                         if(sqrDist <= BSSR) {
 

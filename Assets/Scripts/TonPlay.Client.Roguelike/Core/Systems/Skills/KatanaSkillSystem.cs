@@ -21,11 +21,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
 	public class KatanaSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		private readonly KdTreeStorage _kdTreeStorage;
+		
 		private EcsWorld _world;
 		private IKatanaSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private ISharedData _sharedData;
 		private ProjectileConfigViewPoolIdentity _poolIdentity;
+		
+		public KatanaSkillSystem(KdTreeStorage kdTreeStorage)
+		{
+			_kdTreeStorage = kdTreeStorage;
+		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -121,6 +128,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
 			entity.AddKatanaSplashProjectileComponent();
 			entity.AddMoveInLocalSpaceOfEntityComponent(entityId);
+
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
+
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			damageOnCollision.DamageProvider = levelConfig.DamageProvider;

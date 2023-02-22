@@ -58,34 +58,34 @@ MonoBehaviour:
       _enemyId: cyclope
       _enemiesQuantity: 50000
       _maxSpawnedQuantity: 200
-      _spawnQuantityPerRate: 100
+      _spawnQuantityPerRate: 200
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_crab
       _enemyId: crab
       _enemiesQuantity: 50000
       _maxSpawnedQuantity: 300
-      _spawnQuantityPerRate: 100
+      _spawnQuantityPerRate: 300
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_ghost
       _enemyId: ghost
       _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 500
-      _spawnQuantityPerRate: 100
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 200
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_mage
       _enemyId: mage
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 50
-      _spawnQuantityPerRate: 50
+      _maxSpawnedQuantity: 30
+      _spawnQuantityPerRate: 30
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 1
     _startTiming:
       _minutes: 1
       _seconds: 45
@@ -109,7 +109,7 @@ MonoBehaviour:
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_crab
       _enemyId: crab
       _enemiesQuantity: 50000
@@ -117,15 +117,15 @@ MonoBehaviour:
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_ghost
       _enemyId: ghost
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 400
+      _maxSpawnedQuantity: 100
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     - _id: 3_mage
       _enemyId: mage
       _enemiesQuantity: 50000
@@ -133,7 +133,7 @@ MonoBehaviour:
       _spawnQuantityPerRate: 50
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 0
     _startTiming:
       _minutes: 5
       _seconds: 1

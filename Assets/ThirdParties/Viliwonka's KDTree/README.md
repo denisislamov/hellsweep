@@ -27,7 +27,7 @@ First you need some array of points.
 Example:
 
 ```cs
-Vector3[] pointCloud = new Vector3[10000];
+Vector2[] pointCloud = new Vector2[10000];
 
 for(int i = 0; i < pointCloud.Length; i++)
 	pointCloud[i] = Random.insideUnitSphere;
@@ -58,8 +58,8 @@ Such rebuilding will be with zero GC impact.
 
 Other functions for rebuilding (data will be copied from array/list, not reference!).
 ```cs
-public void Build(Vector3[] newPoints, int maxPointsPerLeafNode = -1);
-public void Build(List<Vector3> newPoints, int maxPointsPerLeafNode = -1);
+public void Build(Vector2[] newPoints, int maxPointsPerLeafNode = -1);
+public void Build(List<Vector2> newPoints, int maxPointsPerLeafNode = -1);
 ```
 
 #### Querying
@@ -100,7 +100,7 @@ If you wish to do something with query results, then use it like this:
 ```cs
 for(int i = 0; i < results.Count; i++) {
 	
-	Vector3 p = pointCloud[results[i]];
+	Vector2 p = pointCloud[results[i]];
 	Draw(p);
 }
 ```

@@ -14,6 +14,7 @@ using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Systems;
 using UnityEngine;
@@ -56,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private ILocationConfigStorage _locationConfigStorage;
 
 		private bool _inited;
+		private KdTreeStorage[] _storages;
 
 		[Inject]
 		public void Construct(
@@ -83,22 +85,22 @@ namespace TonPlay.Client.Roguelike.Core
 			_collectablesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Utility"));
 			_playerProjectilesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("PlayerProjectile"));
 
-			_playerProjectilesKdTreeStorage.CreateEntityIdToKdTreeIndexMap(128);
-			_playerProjectilesKdTreeStorage.CreateKdTreeIndexToEntityIdMap(128);
-			_playerProjectilesKdTreeStorage.KdTree.Build(new Vector3[128]);
+			_storages = new KdTreeStorage[]
+			{
+				_enemyKdTreeStorage,
+				_playersKdTreeStorage,
+				_collectablesKdTreeStorage,
+				_playerProjectilesKdTreeStorage
+			};
+
+			_playerProjectilesKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT);
+			_playerProjectilesKdTreeStorage.CreateKdTreeIndexToEntityIdMap(RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT);
+			_playerProjectilesKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT]);
 
 			_sharedData = sharedDataFactory.Create();
-			_overlapExecutor = overlapExecutorFactory.Create(
-				_world,
-				new KdTreeStorage[]
-				{
-					_enemyKdTreeStorage,
-					_playersKdTreeStorage,
-					_collectablesKdTreeStorage,
-					_playerProjectilesKdTreeStorage
-				});
+			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
 
-			_sharedData.SetPlayerWeapon("katana");
+			_sharedData.SetPlayerWeapon("revolver");
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 			_sharedData.SetWorld(_world);
 
@@ -123,12 +125,6 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage));
-
-			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
-										.Add(new SyncPositionWithKdTreeSystem(_enemyKdTreeStorage))
-										.Add(new SyncPositionWithKdTreeSystem(_playerProjectilesKdTreeStorage))
-										.Add(new SyncPlayerPositionWithKdTreeSystem(_playersKdTreeStorage))
-										.Add(new SyncCollectablesPositionWithKdTreeSystem(_collectablesKdTreeStorage));
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
@@ -166,18 +162,23 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new TryApplyDamageSystem())
 							.Add(new ShowAppliedDamageSystem())
 							.Add(new SpawnAppliedDamageIndicatorSystem())
+							.Add(new DrawDebugKdTreePositionSystem())
 							.Add(new GameOverSystem(_uiService))
 							;
+			
+			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
+										.Add(new UpdateKdTreeElementPositionSystem())
+										.Add(new RebuildKdTreeSystem(_storages));
 
 			_skillsSystems = new EcsSystems(_world, _sharedData)
-							.Add(new RPGSkillSystem())
-							.Add(new GuardianSkillSystem())
-							.Add(new BrickSkillSystem())
+							.Add(new RPGSkillSystem(_playerProjectilesKdTreeStorage))
+							.Add(new GuardianSkillSystem(_playerProjectilesKdTreeStorage))
+							.Add(new BrickSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new HolyWaterSkillSystem())
-							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor))
-							.Add(new RevolverSkillSystem(_overlapExecutor))
-							.Add(new CrossbowSkillSystem())
-							.Add(new KatanaSkillSystem());
+							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
+							.Add(new RevolverSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
+							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
+							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage));
 
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())
@@ -195,10 +196,9 @@ namespace TonPlay.Client.Roguelike.Core
 							 .Add(new DestroyNonPoolGameObjectSystem())
 							 .Add(new ClearUsedEventsSystem())
 							 .Add(new ClearHasCollidedComponentsSystem())
-							 .Add(new ClearDeadEnemiesFromKdTreeSystem(_enemyKdTreeStorage))
-							 .Add(new ClearDestroyedCollectablesFromKdTreeSystem(_collectablesKdTreeStorage))
 							 .Add(new ClearDeadEntityDataSystem())
 							 .Add(new SpawnProjectileOnDestroySystem())
+							 .Add(new ClearDestroyedOrDeadElementsFromKdTreeSystem())
 							 .Add(new DestroyEntitySystem());
 
 			_collectablesSystem = new EcsSystems(_world, _sharedData)

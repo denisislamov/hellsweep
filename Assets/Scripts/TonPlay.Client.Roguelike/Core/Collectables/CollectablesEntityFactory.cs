@@ -51,30 +51,12 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			entity.AddLayerComponent(config.Layer);
 
 			var kdTreeStorage = _sharedData.CollectablesKdTreeStorage;
-			var freeTreeIndex = FindFreeTreeIndex(kdTreeStorage);
 
-			kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Add(entity.Id, freeTreeIndex);
-			kdTreeStorage.KdTreePositionIndexToEntityIdMap[freeTreeIndex] = entity.Id;
-			kdTreeStorage.KdTree.Points[freeTreeIndex] = position;
+			var treeIndex = kdTreeStorage.AddEntity(entity.Id, position);
+			
+			entity.AddKdTreeElementComponent(kdTreeStorage, treeIndex);
 
 			return entity;
-		}
-
-		private int FindFreeTreeIndex(KdTreeStorage kdTreeStorage)
-		{
-			var freeTreeIndex = -1;
-			for (var i = 0; i < kdTreeStorage.KdTreePositionIndexToEntityIdMap.Length; i++)
-			{
-				if (kdTreeStorage.KdTreeEntityIdToPositionIndexMap.ContainsKey(kdTreeStorage.KdTreePositionIndexToEntityIdMap[i]))
-				{
-					continue;
-				}
-
-				freeTreeIndex = i;
-
-				break;
-			}
-			return freeTreeIndex;
 		}
 
 		public class Factory : PlaceholderFactory<ISharedData, CollectablesEntityFactory>

@@ -146,5 +146,11 @@ namespace Leopotam.EcsLite {
             var pool = _world.GetPool<T>();
             return ref pool.Get(Id);
         }
+        
+        public void Del<T>() where T : struct
+        {
+            var pool = _world.GetPool<T>();
+            pool.Del(Id);
+        }
     }
 }

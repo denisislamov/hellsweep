@@ -62,31 +62,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.Exc<OpenedUIComponent>()
 						.End();
 
-			var levelUpgradeEventPool = world.GetPool<LevelUpgradeEvent>();
-			var openedUiPool = world.GetPool<OpenedUIComponent>();
-
 			foreach (var entityId in filter)
 			{
-				ref var upgradeEvent = ref levelUpgradeEventPool.Get(entityId);
-				upgradeEvent.Used = true;
-
-				while (upgradeEvent.Count > 0)
+				if (!TryGenerateSkillsToUpgradeAndShowScreen(entityId))
 				{
-					upgradeEvent.Count--;
-
-					var skillsToUpgrade = GenerateSkillsToUpgrade();
-
-					if (skillsToUpgrade.Count == 0)
-					{
-						Debug.LogWarning("There's no skills to upgrade.");
-						break;
-					}
-
-					openedUiPool.Add(entityId);
-
-					SetGamePauseState(true);
-
-					ShowSkillChoiceScreen(skillsToUpgrade, entityId);
+					break;
 				}
 			}
 #region Profiling End
@@ -95,19 +75,53 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 #endregion
 		}
-
-		private IReadOnlyList<SkillName> GenerateSkillsToUpgrade()
+		private bool TryGenerateSkillsToUpgradeAndShowScreen(int entityId)
 		{
+			var levelUpgradeEventPool = _world.GetPool<LevelUpgradeEvent>();
+			var openedUiPool = _world.GetPool<OpenedUIComponent>();
+			
+			ref var upgradeEvent = ref levelUpgradeEventPool.Get(entityId);
+			upgradeEvent.Used = true;
+
+			if (upgradeEvent.Count <= 0)
+			{
+				return false;
+			}
+
+			upgradeEvent.Count--;
+			
+
+			var skillsToUpgrade = GenerateSkillsToUpgrade(entityId);
+
+			if (skillsToUpgrade.Count == 0)
+			{
+				Debug.LogWarning("There's no skills to upgrade.");
+				return false;
+			}
+
+			openedUiPool.Add(entityId);
+
+			SetGamePauseState(true);
+
+			ShowSkillChoiceScreen(skillsToUpgrade, entityId);
+			
+			return true;
+		}
+
+		private IReadOnlyList<SkillName> GenerateSkillsToUpgrade(int entityId)
+		{
+			var skillsPool = _world.GetPool<SkillsComponent>();
 			var skills = _skillsConfigProvider.All;
-			var skillsModel = _gameModel.PlayerModel.SkillsModel;
-			var defenceSkillsCount = skillsModel.SkillLevels.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Defence || _skillsConfigProvider.Get(_.Key).SkillType == SkillType.UltimateDefence);
-			var utilitySkillsCount = skillsModel.SkillLevels.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Utility);
+			ref var entitySkillsComponent = ref skillsPool.Get(entityId);
+			var entitySkills = entitySkillsComponent.Levels;
+			var defenceSkillsCount = entitySkills.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Defence || _skillsConfigProvider.Get(_.Key).SkillType == SkillType.UltimateDefence);
+			var utilitySkillsCount = entitySkills.Count(_ => _skillsConfigProvider.Get(_.Key).SkillType == SkillType.Utility);
 
 			var availableSkillsEnumerable = skills
-										   .Where(config => (!skillsModel.SkillLevels.ContainsKey(config.SkillName) && !IsLimitedBySkillType(config, defenceSkillsCount, utilitySkillsCount))
-															|| (skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] < config.MaxLevel))
+										   .Where(config => (!entitySkills.ContainsKey(config.SkillName) && !IsLimitedBySkillType(config, defenceSkillsCount, utilitySkillsCount))
+															|| (entitySkills.ContainsKey(config.SkillName) && entitySkills[config.SkillName] < config.MaxLevel))
 										   .Where(config => !config.ExcludeFromInitialDrop ||
-															(skillsModel.SkillLevels.ContainsKey(config.SkillName) && skillsModel.SkillLevels[config.SkillName] > 0));
+															(entitySkills.ContainsKey(config.SkillName) && entitySkills[config.SkillName] > 0));
 
 			var availableSkills = availableSkillsEnumerable.ToList();
 
@@ -152,10 +166,43 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private void SkillChosenHandler(SkillName updatedSkill, int entityId)
 		{
 			var openedUiPool = _world.GetPool<OpenedUIComponent>();
+			var levelUpgradeEventPool = _world.GetPool<LevelUpgradeEvent>();
+			
 			openedUiPool.Del(entityId);
 
 			UpgradeChosenSkill(updatedSkill, entityId);
 			SetGamePauseState(false);
+			SyncPlayerSkillsModel(entityId);
+			
+			ref var upgradeEvent = ref levelUpgradeEventPool.Get(entityId);
+			if (upgradeEvent.Count > 0)
+			{
+				TryGenerateSkillsToUpgradeAndShowScreen(entityId);
+			}
+		}
+		
+		private void SyncPlayerSkillsModel(int entityId)
+		{
+			var playerPool = _world.GetPool<PlayerComponent>();
+			if (playerPool.Has(entityId))
+			{
+				var skillsPool = _world.GetPool<SkillsComponent>();
+				ref var skills = ref skillsPool.Get(entityId);
+				
+				var skillsData = _gameModel.PlayerModel.SkillsModel.ToData();
+
+				foreach (var kvp in skills.Levels)
+				{
+					if (!skillsData.SkillLevels.ContainsKey(kvp.Key))
+					{
+						skillsData.SkillLevels.Add(kvp.Key, 0);
+					}
+
+					skillsData.SkillLevels[kvp.Key] = kvp.Value;
+				}
+				
+				_gameModel.PlayerModel.SkillsModel.Update(skillsData);
+			}
 		}
 
 		private void UpgradeChosenSkill(SkillName updatedSkill, int entityId)

@@ -30,7 +30,6 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			var view = poolObject.Object;
 
 			var gameObject = view.gameObject;
-			gameObject.name = string.Format("{0} (entity: {1})", config.Prefab.gameObject.name, entity.Id.ToString());
 
 			view.transform.position = position;
 			

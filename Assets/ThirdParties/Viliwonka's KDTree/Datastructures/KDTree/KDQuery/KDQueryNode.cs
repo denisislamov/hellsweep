@@ -29,7 +29,7 @@ namespace DataStructures.ViliWonka.KDTree {
     public class KDQueryNode {
 
         public KDNode node;
-        public Vector3 tempClosestPoint;
+        public Vector2 tempClosestPoint;
         public float distance;
         public int poolIndex;
     }

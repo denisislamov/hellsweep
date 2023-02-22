@@ -1,8 +1,10 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Components;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class RigidbodyPositionSystem : IEcsRunSystem
 	{
@@ -12,8 +14,9 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
 #endregion
 			var world = systems.GetWorld();
-			var rigidbodyComponents = world.GetPool<RigidbodyComponent>();
-			var positionComponents = world.GetPool<PositionComponent>();
+			var rigidbodyPool = world.GetPool<RigidbodyComponent>();
+			var positionPool = world.GetPool<PositionComponent>();
+			
 			var filter = world.Filter<RigidbodyComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<InactiveComponent>()
@@ -21,18 +24,12 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 
 			foreach (var entityId in filter)
 			{
-				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
+				ref var rigidbodyComponent = ref rigidbodyPool.Get(entityId);
+				ref var positionComponent = ref positionPool.AddOrGet(entityId);
+
+				var position = rigidbodyComponent.Rigidbody.position;
 				
-				if (!positionComponents.Has(entityId))
-				{
-					ref var positionComponent = ref positionComponents.Add(entityId);
-					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
-				}
-				else
-				{
-					ref var positionComponent = ref positionComponents.Get(entityId);
-					positionComponent.Position = rigidbodyComponent.Rigidbody.position;
-				}
+				positionComponent.Position = position;
 			}
 #region Profiling End
 			UnityEngine.Profiling.Profiler.EndSample();

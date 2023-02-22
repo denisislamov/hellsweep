@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7953f5c68f804000a41ab7b623beeefc, type: 3}
   m_Name: ForcefieldDevice_Level_4_CircleCollisionAreaConfig
   m_EditorClassIdentifier: 
-  _radius: 4
+  _doNotInitiateCollisionOverlap: 0
+  _radius: 3.75

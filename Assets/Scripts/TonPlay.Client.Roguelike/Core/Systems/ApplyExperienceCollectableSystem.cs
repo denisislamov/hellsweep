@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -42,7 +43,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					exp.Level++;
 					exp.Value -= exp.MaxValue;
-					exp.MaxValue = _playersLevelsConfigProvider.Get(exp.Level).ExperienceToNextLevel;
+					exp.MaxValue = _playersLevelsConfigProvider.Get(exp.Level)?.ExperienceToNextLevel ?? float.MaxValue;
 
 					AddUpgradeEvent(levelUpgradeEventPool, entityId);
 				}

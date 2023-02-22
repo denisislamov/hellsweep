@@ -36,8 +36,8 @@ namespace DataStructures.ViliWonka.KDTree {
 
         public KDNode RootNode { get; private set; }
 
-        public Vector3[] Points { get { return points; } } // points on which kd-tree will build on. This array will stay unchanged when re/building kdtree!
-        private Vector3[] points;
+        public Vector2[] Points { get { return points; } } // points on which kd-tree will build on. This array will stay unchanged when re/building kdtree!
+        private Vector2[] points;
 
         public int[] Permutation { get { return permutation; } } // index aray, that will be permuted
         private int[] permutation;
@@ -52,7 +52,7 @@ namespace DataStructures.ViliWonka.KDTree {
         public KDTree(int maxPointsPerLeafNode = 32) {
 
             Count       = 0;
-            points      = new Vector3[0];
+            points      = new Vector2[0];
             permutation = new     int[0];
 
             kdNodesStack = new KDNode[64];
@@ -60,7 +60,7 @@ namespace DataStructures.ViliWonka.KDTree {
             this.maxPointsPerLeafNode = maxPointsPerLeafNode;
         }
 
-        public KDTree(Vector3[] points, int maxPointsPerLeafNode = 32) {
+        public KDTree(Vector2[] points, int maxPointsPerLeafNode = 32) {
 
             this.points = points;
             this.permutation = new int[points.Length];
@@ -73,7 +73,7 @@ namespace DataStructures.ViliWonka.KDTree {
             Rebuild();
         }
 
-        public void Build(Vector3[] newPoints, int maxPointsPerLeafNode = -1) {
+        public void Build(Vector2[] newPoints, int maxPointsPerLeafNode = -1) {
 
             SetCount(newPoints.Length);
 
@@ -84,7 +84,7 @@ namespace DataStructures.ViliWonka.KDTree {
             Rebuild(maxPointsPerLeafNode);
         }
 
-        public void Build(List<Vector3> newPoints, int maxPointsPerLeafNode = -1) {
+        public void Build(List<Vector2> newPoints, int maxPointsPerLeafNode = -1) {
 
             SetCount(newPoints.Count);
 
@@ -164,11 +164,11 @@ namespace DataStructures.ViliWonka.KDTree {
         /// <summary>
         /// For calculating root node bounds
         /// </summary>
-        /// <returns>Boundary of all Vector3 points</returns>
+        /// <returns>Boundary of all Vector2 points</returns>
         KDBounds MakeBounds() {
 
-            Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-            Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            Vector2 max = new Vector2(float.MinValue, float.MinValue);
+            Vector2 min = new Vector2(float.MaxValue, float.MaxValue);
 
             int even = Count & ~1; // calculate even Length
 
@@ -213,24 +213,6 @@ namespace DataStructures.ViliWonka.KDTree {
                     if (points[i1].y > max.y)
                         max.y = points[i1].y;
                 }
-
-                // Z Coords
-                if (points[i0].z > points[i1].z) {
-                    // i0 is bigger, i1 is smaller
-                    if (points[i1].z < min.z)
-                        min.z = points[i1].z;
-
-                    if (points[i0].z > max.z)
-                        max.z = points[i0].z;
-                }
-                else {
-                    // i1 is smaller, i0 is bigger
-                    if (points[i0].z < min.z)
-                        min.z = points[i0].z;
-
-                    if (points[i1].z > max.z)
-                        max.z = points[i1].z;
-                }
             }
 
             // if array was odd, calculate also min/max for the last element
@@ -247,12 +229,6 @@ namespace DataStructures.ViliWonka.KDTree {
 
                 if (max.y < points[even].y)
                     max.y = points[even].y;
-                // Z
-                if (min.z > points[even].z)
-                    min.z = points[even].z;
-
-                if (max.z < points[even].z)
-                    max.z = points[even].z;
             }
 
             KDBounds b = new KDBounds();
@@ -272,7 +248,7 @@ namespace DataStructures.ViliWonka.KDTree {
 
             // center of bounding box
             KDBounds parentBounds = parent.bounds;
-            Vector3 parentBoundsSize = parentBounds.size;
+            Vector2 parentBoundsSize = parentBounds.size;
 
             // Find axis where bounds are largest
             int splitAxis = 0;
@@ -281,10 +257,6 @@ namespace DataStructures.ViliWonka.KDTree {
             if (axisSize < parentBoundsSize.y) {
                 splitAxis = 1;
                 axisSize = parentBoundsSize.y;
-            }
-
-            if (axisSize < parentBoundsSize.z) {
-                splitAxis = 2;
             }
 
             // Our axis min-max bounds
@@ -301,7 +273,7 @@ namespace DataStructures.ViliWonka.KDTree {
             int splittingIndex = Partition(parent.start, parent.end, splitPivot, splitAxis);
 
             // Negative / Left node
-            Vector3 negMax = parentBounds.max;
+            Vector2 negMax = parentBounds.max;
             negMax[splitAxis] = splitPivot;
 
             KDNode negNode = GetKDNode();
@@ -312,7 +284,7 @@ namespace DataStructures.ViliWonka.KDTree {
             parent.negativeChild = negNode;
 
             // Positive / Right node
-            Vector3 posMin = parentBounds.min;
+            Vector2 posMin = parentBounds.min;
             posMin[splitAxis] = splitPivot;
 
             KDNode posNode = GetKDNode();

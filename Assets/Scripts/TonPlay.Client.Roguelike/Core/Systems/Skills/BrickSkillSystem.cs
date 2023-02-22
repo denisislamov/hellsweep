@@ -24,11 +24,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
 	public class BrickSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		private readonly KdTreeStorage _kdTreeStorage;
 		private EcsWorld _world;
 		private IBrickSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
+		
+		public BrickSkillSystem(KdTreeStorage kdTreeStorage)
+		{
+			_kdTreeStorage = kdTreeStorage;
+		}
 
 		public void Init(EcsSystems systems)
 		{
@@ -129,6 +135,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			speed.Speed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
 						  /_config.TimeToReachDistance;
+			
+			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
+
+			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
+			entity.AddDrawDebugKdTreePositionComponent();
 		}
 
 		private Vector2 GetRandomDirection()

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: CyclopeEnemyConfig
   m_EditorClassIdentifier: 
   _id: cyclope
+  _enemyType: 0
   _prefab: {fileID: 2141320536056758984, guid: 5f7ce176d7a4a41fe999f34cd955db7a, type: 3}
   _health: 700
   _collectablesIdsOnDeath:
-  - _collectableId: exp_10
+  - _collectableId: exp_1
     _weight: 1
   - _collectableId: profile_exp_5
     _weight: 1

@@ -82,7 +82,7 @@ namespace DataStructures.ViliWonka.KDTree {
             return node;
         }
 
-        protected void PushToQueue(KDNode node, Vector3 tempClosestPoint) {
+        protected void PushToQueue(KDNode node, Vector2 tempClosestPoint) {
 #region Profiling Begin
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToQueue");
 #endregion
@@ -94,7 +94,7 @@ namespace DataStructures.ViliWonka.KDTree {
 #endregion
         }
 
-        protected void PushToHeap(KDNode node, Vector3 tempClosestPoint, Vector3 queryPosition) {
+        protected void PushToHeap(KDNode node, Vector2 tempClosestPoint, Vector2 queryPosition) {
 #region Profiling Begin
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToHeap");
 #endregion
@@ -102,7 +102,9 @@ namespace DataStructures.ViliWonka.KDTree {
             queryNode.node = node;
             queryNode.tempClosestPoint = tempClosestPoint;
 
-            float sqrDist = Vector3.SqrMagnitude(tempClosestPoint - queryPosition);
+			var diffX = tempClosestPoint.x - queryPosition.x;
+			var diffY = tempClosestPoint.y - queryPosition.y;
+			var sqrDist = diffX * diffX + diffY * diffY;
             queryNode.distance = sqrDist;
             minHeap.PushObj(queryNode, sqrDist);
 #region Profiling End

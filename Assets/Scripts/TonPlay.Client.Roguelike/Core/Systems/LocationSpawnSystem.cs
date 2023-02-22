@@ -38,7 +38,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var matrix = _locationConfig.BlocksPrefabsMatrix;
 			var matrixSize = matrix.Sum(_ => _.Count);
 
-			var positions = new Vector3[matrixSize];
+			var positions = new Vector2[matrixSize];
 
 			var locationEntity = world.NewEntity();
 
@@ -63,7 +63,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					var position = new Vector2(size.x * x, size.y * y);
 
 					var view = Object.Instantiate(prefab, _blocksRoot);
-					view.gameObject.name = string.Format("{0} (entity: {1})", view.gameObject.name, blockEntity.Id);
 
 					ref var boxSize = ref blockEntity.Add<BoxSizeComponent>();
 					boxSize.Size = _locationConfig.BlockSize;
@@ -131,7 +130,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 					diff = lastNearestId - currentNearestId;
 					
-					var vector2 = new Vector2(diff.x, diff.y).normalized;
+					var vector2 = new Vector2(diff.x, diff.y);
+					vector2.Normalize();
+					
 					diff = new Vector2Int(Mathf.RoundToInt(vector2.x), Mathf.RoundToInt(vector2.y));
 				}
 
