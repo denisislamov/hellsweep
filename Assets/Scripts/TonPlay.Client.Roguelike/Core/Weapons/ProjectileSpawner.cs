@@ -13,22 +13,21 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 	internal static class ProjectileSpawner
 	{
 		public static EcsEntity SpawnProjectile(
-			EcsWorld world, 
-			IViewPoolObject<ProjectileView> poolObject, 
-			IProjectileConfig config, 
-			Vector2 position, 
-			Vector2 direction, 
+			EcsWorld world,
+			IViewPoolObject<ProjectileView> poolObject,
+			IProjectileConfig config,
+			Vector2 position,
+			Vector2 direction,
 			int collisionLayerMask)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample("TonPlay.Client.Roguelike.Core.Weapons.ProjectileSpawner.SpawnProjectile");
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("TonPlay.Client.Roguelike.Core.Weapons.ProjectileSpawner.SpawnProjectile");
+
 			var projectileView = poolObject.Object;
 			var projectileEntity = world.NewEntity();
 			var projectileViewTransform = projectileView.transform;
 
 			direction.Normalize();
-			
+
 			projectileViewTransform.position = position;
 			projectileViewTransform.right = direction;
 
@@ -41,7 +40,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			ref var projectileSpeed = ref projectileEntity.Add<SpeedComponent>();
 			ref var projectileAcceleration = ref projectileEntity.Add<AccelerationComponent>();
 			ref var projectileViewPoolObject = ref projectileEntity.Add<ViewPoolObjectComponent>();
-			
+
 			projectileViewProviderComponent.View = projectileView.gameObject;
 			projectileComponent.Config = config;
 			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
@@ -51,7 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			projectileMovement.Direction = projectileRotation.Direction;
 			projectileTransform.Transform = projectileView.transform;
 			projectileViewPoolObject.ViewPoolObject = poolObject;
-			
+
 			projectileEntity.AddLocalPositionComponent(Vector2.zero);
 			projectileEntity.AddStackTryApplyDamageComponent();
 			projectileEntity.AddBlockApplyDamageTimerComponent();
@@ -60,26 +59,26 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			if (config.HasProperty<IDestroyOnTimerProjectileConfigProperty>())
 			{
 				var destroyOnTimerProjectileConfigProperty = config.GetProperty<IDestroyOnTimerProjectileConfigProperty>();
-					
+
 				ref var projectileDestroyOnTimer = ref projectileEntity.Add<DestroyOnTimerComponent>();
 				projectileDestroyOnTimer.TimeLeft = destroyOnTimerProjectileConfigProperty.Timer;
 			}
-			
+
 			if (config.HasProperty<IExplodeOnMoveDistanceProjectileConfigProperty>())
 			{
 				var explodeOnMoveDistanceProjectileConfigProperty = config.GetProperty<IExplodeOnMoveDistanceProjectileConfigProperty>();
-				
+
 				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnMoveDistanceComponent>();
 				explodeOnMoveDistance.CollisionConfig = explodeOnMoveDistanceProjectileConfigProperty.ExplodeCollisionAreaConfig;
 				explodeOnMoveDistance.DistanceToExplode = explodeOnMoveDistanceProjectileConfigProperty.Distance;
 				explodeOnMoveDistance.StartPosition = position;
 				explodeOnMoveDistance.DamageProvider = explodeOnMoveDistanceProjectileConfigProperty.DamageProvider;
 			}
-			
+
 			if (config.HasProperty<IExplodeOnCollisionProjectileConfigProperty>())
 			{
 				var projectileConfigProperty = config.GetProperty<IExplodeOnCollisionProjectileConfigProperty>();
-				
+
 				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnCollisionComponent>();
 				explodeOnMoveDistance.CollisionConfig = projectileConfigProperty.ExplodeCollisionAreaConfig;
 				explodeOnMoveDistance.DamageProvider = projectileConfigProperty.DamageProvider;
@@ -92,25 +91,25 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				ref var projectileDamageOnCollision = ref projectileEntity.Add<DamageOnCollisionComponent>();
 				projectileDamageOnCollision.DamageProvider = damageOnCollisionProjectileConfigProperty.DamageProvider;
 			}
-			
+
 			if (config.HasProperty<IDestroyOnCollisionProjectileConfigProperty>())
 			{
 				var property = config.GetProperty<IDestroyOnCollisionProjectileConfigProperty>();
 				ref var component = ref projectileEntity.Add<DestroyOnCollisionComponent>();
 				component.LayerMask = property.LayerMask;
 			}
-			
+
 			if (config.HasProperty<IBlockDamageOnCollisionProjectileConfigProperty>())
 			{
 				projectileEntity.Add<BlockDamageOnCollisionComponent>();
 			}
-			
+
 			if (config.HasProperty<IDestroyOnReceiveDamageProjectileConfigProperty>())
 			{
 				var property = config.GetProperty<IDestroyOnReceiveDamageProjectileConfigProperty>();
 				ref var component = ref projectileEntity.Add<DestroyOnReceiveDamageComponent>();
 			}
-			
+
 			if (config.HasProperty<ICollisionProjectileConfigProperty>())
 			{
 				var collisionProjectileConfigProperty = config.GetProperty<ICollisionProjectileConfigProperty>();
@@ -118,10 +117,10 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				ref var projectileCollision = ref projectileEntity.Add<CollisionComponent>();
 				projectileCollision.CollisionAreaConfig = collisionProjectileConfigProperty.CollisionAreaConfig;
 				projectileCollision.LayerMask = collisionLayerMask;
-				
+
 				projectileEntity.AddHasCollidedComponent();
 			}
-			
+
 			if (config.HasProperty<IDestroyIfRadiusExceededProjectileConfigProperty>())
 			{
 				var destroyIfRadiusExceededProjectileConfigProperty = config.GetProperty<IDestroyIfRadiusExceededProjectileConfigProperty>();
@@ -131,7 +130,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				destroyIfDistanceExceededComponent.Distance = destroyIfRadiusExceededProjectileConfigProperty.Distance;
 				destroyIfDistanceExceededComponent.StartPosition = position;
 			}
-			
+
 			if (config.HasProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>())
 			{
 				var spawnProjectileOnDestroyProjectileConfigProperty = config.GetProperty<ISpawnProjectileOnDestroyProjectileConfigProperty>();
@@ -140,10 +139,8 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 					spawnProjectileOnDestroyProjectileConfigProperty.ProjectileConfig,
 					spawnProjectileOnDestroyProjectileConfigProperty.CollisionLayerMask);
 			}
-			
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 
 			return projectileEntity;
 		}

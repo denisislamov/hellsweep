@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	{
 		[SerializeField]
 		private GameView _view;
-		
+
 		[Inject]
 		private void Construct(GamePresenter.Factory factory)
 		{

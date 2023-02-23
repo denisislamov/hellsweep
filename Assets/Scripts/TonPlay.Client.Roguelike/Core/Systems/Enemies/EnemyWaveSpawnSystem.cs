@@ -81,12 +81,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				if (config.HasProperty<IShootProjectileAtPlayerEnemyPropertyConfig>())
 				{
 					var shootProjectileAtPlayerEnemyPropertyConfig = config.GetProperty<IShootProjectileAtPlayerEnemyPropertyConfig>();
-					
+
 					if (!maxSpawnedQuantityOfProjectiles.ContainsKey(shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig))
 					{
 						maxSpawnedQuantityOfProjectiles.Add(shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig, 0);
 					}
-					
+
 					maxSpawnedQuantityOfProjectiles[shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig] += waveConfig.MaxSpawnedQuantity;
 				}
 			}
@@ -95,15 +95,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			{
 				_pool.Add(kvp.Key.Identity, kvp.Key.Prefab, kvp.Value);
 			}
-			
+
 			foreach (var kvp in maxSpawnedQuantityOfProjectiles)
 			{
-				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value * PROJECTILE_COUNT_PER_ENEMY);
+				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value*PROJECTILE_COUNT_PER_ENEMY);
 			}
 
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(totalEnemies);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(totalEnemies);
-			
+
 			_kdTreeStorage.KdTree.Build(new Vector2[totalEnemies]);
 
 			_sharedData = sharedData;
@@ -111,9 +111,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var gameFilter = world.Filter<GameComponent>().Inc<GameTimeComponent>().Inc<WavesDataComponent>().End();
 			var timePool = world.GetPool<GameTimeComponent>();
@@ -178,9 +176,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					wavesData.WavesTimeLeftToNextSpawn[waveConfig.Id] = waveConfig.SpawnTickRate;
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void CreateEnemy(EcsWorld world, Vector2 playerPosition, IEnemyConfig enemyConfig, IEnemyWaveConfig enemyWaveConfig)
@@ -189,17 +185,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			{
 				return;
 			}
-			
+
 			var entity = world.NewEntity();
-			
+
 
 			var enemyView = poolObject.Object;
 			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType);
-			
+
 			enemyView.transform.position = spawnPosition;
-			
+
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
-			
+
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 
 			enemyView.SetEntityId(entity.Id);
@@ -220,7 +216,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			AddHealthComponent(entity, enemyConfig);
 
 			AddPoolObjectComponent(entity, poolObject);
-			
+
 			entity.AddStackTryApplyDamageComponent();
 			entity.AddBlockApplyDamageTimerComponent();
 			entity.AddShowAppliedDamageIndicatorComponent();
@@ -229,13 +225,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			{
 				var shootProjectileAtPlayerEnemyPropertyConfig = enemyConfig.GetProperty<IShootProjectileAtPlayerEnemyPropertyConfig>();
 				var playerEntities = world.Filter<PlayerComponent>().End();
-				
+
 				foreach (var playerEntityIdx in playerEntities)
 				{
 					entity.AddOrUpdateEnemyTargetComponent(playerEntityIdx);
 					break;
 				}
-				
+
 				entity.AddShootProjectileAtTargetComponent(
 					shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig,
 					shootProjectileAtPlayerEnemyPropertyConfig.Layer,
@@ -243,43 +239,43 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					shootProjectileAtPlayerEnemyPropertyConfig.MinDistanceToTargetToShoot,
 					shootProjectileAtPlayerEnemyPropertyConfig.MaxDistanceToTargetToShoot);
 			}
-			
+
 			if (enemyConfig.HasProperty<IMoveOnPlayerEnemyPropertyConfig>())
 			{
 				var playerEntities = world.Filter<PlayerComponent>().End();
-				
+
 				foreach (var playerEntityIdx in playerEntities)
 				{
 					entity.AddOrUpdateEnemyTargetComponent(playerEntityIdx);
 					break;
 				}
-				
+
 				var moveOnPlayerEnemyPropertyConfig = enemyConfig.GetProperty<IMoveOnPlayerEnemyPropertyConfig>();
 				entity.AddSpeedComponent(moveOnPlayerEnemyPropertyConfig.MovementConfig);
 			}
-			
+
 			if (enemyConfig.HasProperty<ICollisionEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<ICollisionEnemyPropertyConfig>();
 				entity.AddCollisionComponent(propertyConfig.CollisionAreaConfig, propertyConfig.LayerMask);
 				entity.AddHasCollidedComponent();
 			}
-			
+
 			if (enemyConfig.HasProperty<IDamageOnCollisionEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<IDamageOnCollisionEnemyPropertyConfig>();
 				entity.AddDamageOnCollisionComponent(propertyConfig.DamageProvider);
 			}
-			
+
 			if (enemyConfig.HasProperty<IDestroyOnCollisionEnemyPropertyConfig>())
 			{
 				entity.AddDestroyOnCollisionComponent();
 			}
-			
+
 			if (enemyConfig.HasProperty<IPerformActionsOnSpawnEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<IPerformActionsOnSpawnEnemyPropertyConfig>();
-				
+
 				for (var i = 0; i < propertyConfig.Actions.Length; i++)
 				{
 					var action = propertyConfig.Actions[i];
@@ -287,18 +283,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				}
 			}
 		}
-		
+
 		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type)
 		{
 			switch (type)
 			{
 				case EnemyType.Boss:
-					return playerPosition + Vector2.up * 4;
+					return playerPosition + Vector2.up*4;
 				default:
 					return CreateRandomPosition(playerPosition);
 			}
 		}
-		
+
 		private void AddTypedEnemyComponent(EcsEntity entity, EnemyType type)
 		{
 			switch (type)

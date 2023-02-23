@@ -15,11 +15,11 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 		private CollectableConfig[] _configs;
 
 		private Dictionary<string, ICollectableConfig> _map;
-		
+
 		public IEnumerable<ICollectableConfig> AllCollectables => _configs;
 
-		private Dictionary<string, ICollectableConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ICollectableConfig) _);
-		
+		private Dictionary<string, ICollectableConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ICollectableConfig)_);
+
 		public ICollectableConfig Get(string id)
 		{
 			return Map.ContainsKey(id) ? Map[id] : null;

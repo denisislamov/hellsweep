@@ -13,18 +13,18 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private WeaponConfig[] _configs;
-		
+
 		public IWeaponConfig Get(string id)
 		{
 			return _configs.First(config => config.ItemId == id);
 		}
-		
+
 		[Serializable]
 		private class WeaponConfig : IWeaponConfig
 		{
 			[SerializeField]
 			private string _itemId;
-		
+
 			[SerializeField]
 			private SkillName _skillName;
 

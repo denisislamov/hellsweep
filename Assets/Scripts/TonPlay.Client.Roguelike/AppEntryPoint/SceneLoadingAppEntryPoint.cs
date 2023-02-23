@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 		private readonly ISceneService _sceneService;
 		private readonly string _sceneName;
 
-		public SceneLoadingAppEntryPoint(ISceneService sceneService, string sceneName) 
+		public SceneLoadingAppEntryPoint(ISceneService sceneService, string sceneName)
 		{
 			_sceneService = sceneService;
 			_sceneName = sceneName;

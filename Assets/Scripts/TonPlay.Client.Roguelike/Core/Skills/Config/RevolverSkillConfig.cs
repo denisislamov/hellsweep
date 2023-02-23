@@ -21,13 +21,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		[Header("Revolver")]
 		[SerializeField]
 		private ProjectileConfig _projectileConfig;
-		
+
 		[SerializeField]
 		private RevolverSightEffect _sightEffectView;
-		
+
 		[SerializeField]
 		private LevelConfig[] _levelConfigs;
-		
+
 		private Dictionary<int, LevelConfig> _map;
 
 		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
@@ -36,10 +36,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 
 		public override SkillName SkillName => SkillName.Revolver;
-		
-		public override IRevolverLevelSkillConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+
+		public override IRevolverLevelSkillConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -47,22 +47,22 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
-			
+
 			[SerializeField]
 			private DamageProvider _damageProvider;
-			
+
 			[SerializeField]
 			private float _shootDelay;
-			
+
 			[SerializeField]
 			private float _fieldOfView;
-			
+
 			[SerializeField]
 			private LayerMask _collisionLayerMask;
-			
+
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
 

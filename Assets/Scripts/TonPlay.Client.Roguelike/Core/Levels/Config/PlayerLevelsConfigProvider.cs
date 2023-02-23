@@ -12,8 +12,8 @@ namespace TonPlay.Roguelike.Client.Core.Levels.Config
 
 		public IPlayerLevelConfig Get(int level)
 		{
-			return level < _levelConfigs.Length 
-				? _levelConfigs[level] 
+			return level < _levelConfigs.Length
+				? _levelConfigs[level]
 				: null;
 		}
 	}

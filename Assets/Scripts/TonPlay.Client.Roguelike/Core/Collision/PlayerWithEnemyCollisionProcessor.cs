@@ -13,12 +13,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 		{
 			_ecsWorld = ecsWorld;
 		}
-		
+
 		public void Process(ref int utilityEntityId)
 		{
-// #region Profiling Begin
-// 			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-// #endregion
+// TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 // 			var players = 
 // 				_ecsWorld.Filter<PlayerComponent>()
 // 						 .Inc<HealthComponent>()
@@ -36,13 +34,11 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 // 			}
 //
 // 			AddApplyDamageComponentToPlayer(utilityEntityId, playerEntityId);
-// #region Profiling End
-// 			UnityEngine.Profiling.Profiler.EndSample();
-// #endregion
+// TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
-		
+
 		private void AddApplyDamageComponentToPlayer(
-			int enemyEntityId, 
+			int enemyEntityId,
 			int playerEntityId)
 		{
 			// var damageDataComponents = _ecsWorld.GetPool<DamageOnCollisionComponent>();

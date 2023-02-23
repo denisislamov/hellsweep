@@ -13,12 +13,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 		{
 			_ecsWorld = ecsWorld;
 		}
-		
+
 		public void Process(ref int utilityEntityId)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var players = _ecsWorld.Filter<PlayerComponent>().Inc<HealthComponent>().End();
 
 			var playerEntityId = EcsEntity.DEFAULT_ID;
@@ -33,13 +31,11 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			}
 
 			AddCollidedWithUtilityComponentToPlayer(utilityEntityId, playerEntityId);
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
-		
+
 		private void AddCollidedWithUtilityComponentToPlayer(
-			int utilityEntityId, 
+			int utilityEntityId,
 			int playerEntityId)
 		{
 			var collectablePool = _ecsWorld.GetPool<CollectableComponent>();

@@ -31,27 +31,28 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Init(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
-			
+
 			_overlapLayerMask = LayerMask.GetMask("Utility");
-			
+
 			_layersCollisionProcessors = new Dictionary<int, ICollisionProcessor>()
 			{
 				[LayerMask.NameToLayer("Utility")] = new PlayerWithUtilityCollisionProcessor(world)
 			};
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<ISharedData>();
 			var filter = world.Filter<PlayerComponent>().Inc<PositionComponent>().Exc<DeadComponent>().End();
 			var positionComponents = world.GetPool<PositionComponent>();
 			var playerComponents = world.GetPool<PlayerComponent>();
 			var layerComponents = world.GetPool<LayerComponent>();
-			var overlapPools = OverlapPools.Create(world);
+
+			var overlapParams = OverlapParams.Create(world);
+			overlapParams.SetFilter(overlapParams.CreateDefaultFilterMask().End());
+			overlapParams.Build();
 
 			foreach (var playerEntityId in filter)
 			{
@@ -59,15 +60,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var playerComponent = ref playerComponents.Get(playerEntityId);
 
 				var collisionAreaConfig = sharedData.PlayerConfigProvider.Get(playerComponent.ConfigId).CollisionAreaConfig;
-				
+
 				var collisionsCount = _overlapExecutor.Overlap(
 					_query,
-					positionComponent.Position, 
+					positionComponent.Position,
 					collisionAreaConfig,
 					ref _overlappedEntities,
 					_overlapLayerMask,
-					overlapPools);
-				
+					overlapParams);
+
 				for (var i = 0; i < collisionsCount; i++)
 				{
 					var overlappedEntityId = _overlappedEntities[i];
@@ -77,7 +78,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						Debug.LogWarning($"{overlappedEntityId} doesn't have {nameof(LayerComponent)}");
 						continue;
 					}
-					
+
 					ref var collidedRigidbodyLayer = ref layerComponents.Get(overlappedEntityId);
 
 					if (_layersCollisionProcessors.ContainsKey(collidedRigidbodyLayer.Layer))
@@ -85,12 +86,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						_layersCollisionProcessors[collidedRigidbodyLayer.Layer].Process(ref overlappedEntityId);
 					}
 				}
-				
+
 				_overlappedEntities.Clear();
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

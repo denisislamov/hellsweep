@@ -9,15 +9,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore
 	{
 		[SerializeField]
 		private TextMeshProUGUI _goldText;
-		
+
 		[SerializeField]
 		private TextMeshProUGUI _deadEnemiesText;
-		
+
 		public void SetGoldText(string text)
 		{
 			_goldText.SetText(text);
 		}
-		
+
 		public void SetDeadEnemiesText(string text)
 		{
 			_deadEnemiesText.SetText(text);

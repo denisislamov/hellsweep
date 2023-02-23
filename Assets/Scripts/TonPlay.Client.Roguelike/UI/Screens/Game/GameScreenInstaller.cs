@@ -26,31 +26,31 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	{
 		[SerializeField]
 		private Canvas _pooledItemsContainerPrefab;
-		
+
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
-			
+
 			Bind(subContainer);
-			
+
 			Container.Bind<IScreenFactory<IGameScreenContext, GameScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
-			
+
 			Container.Bind<IScreenFactory<GameScreenContext, GameScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
 		}
-		
+
 		private void Bind(DiContainer subContainer)
 		{
 			subContainer.Bind<IScreenFactory<IGameScreenContext, GameScreen>>()
 						.To<GameScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-			
+
 			subContainer.Bind<IScreenFactory<GameScreenContext, GameScreen>>()
 						.To<GameScreen.Factory>()
 						.AsCached()

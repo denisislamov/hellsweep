@@ -37,7 +37,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var block = ref blockPool.Get(entityId);
 				foreach (var damageSourceToDict in block.Blocked)
 				{
-					
+
 				}
 
 				for (var i = 0; i < _damageSources.Length; i++)
@@ -50,7 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					}
 
 					var entitiesToTimerDict = block.Blocked[damageSource];
-					
+
 					foreach (var entityIdToTimer in entitiesToTimerDict)
 					{
 						entitiesToTimerDict[entityIdToTimer.Key]
@@ -67,7 +67,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						var removeEntityId = _stacks[damageSource].Pop();
 						block.Blocked[damageSource].Remove(removeEntityId);
 					}
-					
+
 					_stacks[damageSource].Clear();
 				}
 			}

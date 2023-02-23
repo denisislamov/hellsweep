@@ -8,9 +8,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar
 	public class ProgressBarContext : ScreenContext, IProgressBarContext
 	{
 		public IReadOnlyReactiveProperty<float> MaxValue { get; }
-		
+
 		public IReadOnlyReactiveProperty<float> CurrentValue { get; }
-		
+
 		public ProgressBarContext(IReadOnlyReactiveProperty<float> currentValue, IReadOnlyReactiveProperty<float> maxValue)
 		{
 			CurrentValue = currentValue;

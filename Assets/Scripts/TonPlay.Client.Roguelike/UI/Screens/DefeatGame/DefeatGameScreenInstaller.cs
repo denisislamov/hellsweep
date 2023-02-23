@@ -16,27 +16,27 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
-			
+
 			Bind(subContainer);
-			
+
 			Container.Bind<IScreenFactory<IDefeatGameScreenContext, DefeatGameScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
-			
+
 			Container.Bind<IScreenFactory<DefeatGameScreenContext, DefeatGameScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
 		}
-		
+
 		private void Bind(DiContainer subContainer)
 		{
 			subContainer.Bind<IScreenFactory<DefeatGameScreenContext, DefeatGameScreen>>()
 						.To<DefeatGameScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-			
+
 			subContainer.Bind<IScreenFactory<IDefeatGameScreenContext, DefeatGameScreen>>()
 						.To<DefeatGameScreen.Factory>()
 						.AsCached()

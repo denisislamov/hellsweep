@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly ReactiveProperty<int> _gold = new ReactiveProperty<int>();
 		private readonly ReactiveProperty<int> _energy = new ReactiveProperty<int>();
 		private readonly ReactiveProperty<int> _maxEnergy = new ReactiveProperty<int>();
-		
+
 		public IReadOnlyReactiveProperty<int> Gold => _gold;
 		public IReadOnlyReactiveProperty<int> Energy => _energy;
 		public IReadOnlyReactiveProperty<int> MaxEnergy => _maxEnergy;
@@ -22,18 +22,18 @@ namespace TonPlay.Client.Roguelike.Models
 			{
 				_gold.SetValueAndForceNotify(data.Gold);
 			}
-			
+
 			if (data.Energy != _energy.Value)
 			{
 				_energy.SetValueAndForceNotify(data.Energy);
 			}
-			
+
 			if (data.MaxEnergy != _maxEnergy.Value)
 			{
 				_maxEnergy.SetValueAndForceNotify(data.MaxEnergy);
 			}
 		}
-		
+
 		public BalanceData ToData()
 		{
 			_cached.Gold = Gold.Value;

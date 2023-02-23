@@ -33,7 +33,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 				return ref entity.Add<T>();
 			}
 		}
-		
+
 		public static ref ViewPoolObjectComponent AddPoolObjectComponent(this EcsEntity entity, IViewPoolObject viewPoolObject)
 		{
 			ref var viewPoolObjectComponent = ref entity.Add<ViewPoolObjectComponent>();
@@ -199,7 +199,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 			{
 				entity.Add<DoNotInitiateCollisionOverlap>();
 			}
-			
+
 			return ref component;
 		}
 
@@ -210,14 +210,14 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.DamageProvider = damageProvider;
 			return ref component;
 		}
-		
+
 		public static ref DamageOnCollisionComponent AddDamageOnCollisionComponent(this EcsEntity entity, IDamageProvider damageProvider)
 		{
 			ref var component = ref entity.Add<DamageOnCollisionComponent>();
 			component.DamageProvider = damageProvider;
 			return ref component;
 		}
-		
+
 		public static ref DestroyOnCollisionComponent AddDestroyOnCollisionComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<DestroyOnCollisionComponent>();
@@ -335,7 +335,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref ShootProjectileAtTargetComponent AddShootProjectileAtTargetComponent(
 			this EcsEntity entity,
 			IProjectileConfig projectileConfig,
-			int layer, 
+			int layer,
 			float rate,
 			float minDistanceTargetToShoot,
 			float maxDistanceTargetToShoot)
@@ -358,7 +358,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.EntityId = entityId;
 			return ref component;
 		}
-		
+
 		public static ref HasCollidedComponent AddHasCollidedComponent(
 			this EcsEntity entity)
 		{
@@ -366,7 +366,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.CollidedEntityIds = new List<int>();
 			return ref component;
 		}
-		
+
 		public static ref StackTryApplyDamageComponent AddStackTryApplyDamageComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<StackTryApplyDamageComponent>();
@@ -380,13 +380,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.Blocked = new Dictionary<string, Dictionary<int, ReactiveProperty<float>>>();
 			return ref component;
 		}
-		
+
 		public static ref ShowAppliedDamageIndicatorComponent AddShowAppliedDamageIndicatorComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<ShowAppliedDamageIndicatorComponent>();
 			return ref component;
 		}
-		
+
 		public static ref KdTreeElementComponent AddKdTreeElementComponent(this EcsEntity entity, KdTreeStorage kdTreeStorage, int treeIndex)
 		{
 			ref var component = ref entity.Add<KdTreeElementComponent>();
@@ -394,7 +394,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.Storage = kdTreeStorage;
 			return ref component;
 		}
-		
+
 		public static ref DrawDebugKdTreePositionComponent AddDrawDebugKdTreePositionComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<DrawDebugKdTreePositionComponent>();

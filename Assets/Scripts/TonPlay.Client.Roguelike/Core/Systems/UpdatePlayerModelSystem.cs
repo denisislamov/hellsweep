@@ -10,9 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<PlayerComponent>()
 							  .Inc<HealthComponent>()
@@ -31,7 +29,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var playerModel = systems.GetShared<SharedData>()?.GameModel?.PlayerModel;
 
 			if (playerModel is null) return;
-			
+
 			var playerData = playerModel.ToData();
 
 			foreach (var entityId in filter)
@@ -71,7 +69,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					playerData.MatchProfileGainModel.Gold = Mathf.RoundToInt(gold.Value);
 				}
-				
+
 				if (Math.Abs(playerData.MatchProfileGainModel.ProfileExperience - profileExp.Value) > 0.0001f)
 				{
 					playerData.MatchProfileGainModel.ProfileExperience = profileExp.Value;
@@ -85,16 +83,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					if (!playerData.SkillsData.SkillLevels.ContainsKey(skillName))
 					{
 						playerData.SkillsData.SkillLevels.Add(skillName, value);
-					} 
-						
+					}
+
 					playerData.SkillsData.SkillLevels[skillName] = value;
 				}
 			}
-			
+
 			playerModel.Update(playerData);
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

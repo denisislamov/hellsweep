@@ -31,13 +31,13 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 
 			EnemyWaveGroupConfig next = null;
 			EnemyWaveGroupConfig current = null;
-			
+
 			for (int i = 0; i < _sortedWaveConfigs.Count; i++)
 			{
 				current = _sortedWaveConfigs[i];
 
-				next = i + 1 < _sortedWaveConfigs.Count 
-					? _sortedWaveConfigs[i + 1] 
+				next = i + 1 < _sortedWaveConfigs.Count
+					? _sortedWaveConfigs[i + 1]
 					: default;
 
 				if (ticks < current.StartTimingTicks)
@@ -53,7 +53,7 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 
 			return null;
 		}
-		
+
 		private void SetNextForEachGroup()
 		{
 			for (var i = 0; i < _sortedWaveConfigs.Count; i++)
@@ -77,10 +77,10 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 		{
 			[SerializeField]
 			private List<EnemyWaveConfig> _waves;
-			
+
 			[SerializeField]
 			private TimingConfig _startTiming;
-			
+
 			private IEnemyWaveGroupConfig _next;
 
 			public long StartTimingTicks => _startTiming.GetTimeSpan().Ticks;

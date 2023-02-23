@@ -10,14 +10,14 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		private readonly PlayerModel _playerModel = new PlayerModel();
 		private readonly ReactiveProperty<float> _gameTime = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<bool> _paused = new ReactiveProperty<bool>();
-		
+
 		private readonly GameData _cached = new GameData();
 		private readonly ReactiveProperty<int> _deadEnemiesCount = new ReactiveProperty<int>();
 
 		public IPlayerModel PlayerModel => _playerModel;
-		
+
 		public IReadOnlyReactiveProperty<float> GameTime => _gameTime;
-		
+
 		public IReadOnlyReactiveProperty<bool> Paused => _paused;
 		public IReadOnlyReactiveProperty<int> DeadEnemiesCount => _deadEnemiesCount;
 
@@ -26,10 +26,10 @@ namespace TonPlay.Client.Roguelike.Core.Models
 			_gameTime.SetValueAndForceNotify(data.GameTime);
 			_paused.SetValueAndForceNotify(data.Paused);
 			_deadEnemiesCount.SetValueAndForceNotify(data.DeadEnemies);
-			
+
 			_playerModel.Update(data.PlayerData);
 		}
-		
+
 		public GameData ToData()
 		{
 			_cached.GameTime = _gameTime.Value;

@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		public IReadOnlyDictionary<SkillName, int> SkillLevels => _skillLevels;
 		public IReadOnlyReactiveProperty<int> Level => _level;
 		public IObservable<Unit> Updated => _updated;
-		
+
 		public void Update(SkillsData data)
 		{
 			_skillLevels = data.SkillLevels;
@@ -29,10 +29,10 @@ namespace TonPlay.Client.Roguelike.Core.Models
 			{
 				_level.SetValueAndForceNotify(data.Level);
 			}
-			
+
 			_updated.OnNext(Unit.Default);
 		}
-		
+
 		public SkillsData ToData()
 		{
 			_data.SkillLevels = _skillLevels.ToDictionary(_ => _.Key, _ => _.Value);

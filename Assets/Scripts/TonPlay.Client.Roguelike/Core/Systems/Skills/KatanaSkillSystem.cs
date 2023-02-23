@@ -22,13 +22,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 	public class KatanaSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly KdTreeStorage _kdTreeStorage;
-		
+
 		private EcsWorld _world;
 		private IKatanaSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private ISharedData _sharedData;
 		private ProjectileConfigViewPoolIdentity _poolIdentity;
-		
+
 		public KatanaSkillSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
@@ -87,7 +87,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					{
 						var dirX = rotation.Direction.x > 0 ? 1 : -1;
 						var mainDirection = new Vector2(dirX, 0);
-						
+
 						skill.SpawnQuantity = levelConfig.ProjectileQuantity;
 						skill.SelectedDirection = mainDirection;
 					}
@@ -95,9 +95,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
-					
-					var direction = skill.SelectedDirection * ((levelConfig.ProjectileQuantity - skill.SpawnQuantity) % 2 == 0 ? 1 : -1);
-					
+
+					var direction = skill.SelectedDirection*((levelConfig.ProjectileQuantity - skill.SpawnQuantity)%2 == 0 ? 1 : -1);
+
 					CreateThrowableProjectile(position.Position, direction, entityId, layer, levelConfig);
 
 					skill.SpawnQuantity--;
@@ -135,10 +135,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			damageOnCollision.DamageProvider = levelConfig.DamageProvider;
-			
+
 			ref var localPosition = ref localPositionPool.AddOrGet(entity.Id);
-			localPosition.Position = levelConfig.SpawnOffset * direction;
-			
+			localPosition.Position = levelConfig.SpawnOffset*direction;
+
 			var transform = view.transform;
 			transform.position = spawnPosition + localPosition.Position;
 		}

@@ -8,21 +8,21 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 	{
 		IProjectileConfig ProjectileConfig { get; }
 	}
-	
+
 	public interface IGuardianSkillLevelConfig : ISkillLevelConfig
 	{
 		int Quantity { get; }
-		
+
 		float Speed { get; }
-		
+
 		float ActiveTime { get; }
-		
+
 		float Cooldown { get; }
-		
+
 		IDamageProvider DamageProvider { get; }
-		
+
 		float Radius { get; }
-		
+
 		ICollisionAreaConfig CollisionAreaConfig { get; }
 	}
 }

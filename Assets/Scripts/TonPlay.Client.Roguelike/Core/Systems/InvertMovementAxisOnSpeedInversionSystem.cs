@@ -10,9 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<SpeedComponent>()
@@ -35,15 +33,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				if (Math.Abs(Mathf.Sign(invert.PreviousSpeed) - Mathf.Sign(speed.Speed)) > 0.1f)
 				{
 					movement.Direction = new Vector2(
-						movement.Direction.x * (invert.AxisX ? -1 : 1), 
-						movement.Direction.y * (invert.AxisY ? -1 : 1));
+						movement.Direction.x*(invert.AxisX ? -1 : 1),
+						movement.Direction.y*(invert.AxisY ? -1 : 1));
 				}
 
 				invert.PreviousSpeed = speed.Speed;
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

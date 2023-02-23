@@ -9,9 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<MovementComponent>()
 							  .Inc<PositionComponent>()
@@ -24,7 +22,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var speedComponents = world.GetPool<SpeedComponent>();
 			var rigidbodyComponents = world.GetPool<RigidbodyComponent>();
 
-			foreach (var entityId in filter) {
+			foreach (var entityId in filter)
+			{
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var positionComponent = ref positionComponents.Get(entityId);
 				ref var rigidbodyComponent = ref rigidbodyComponents.Get(entityId);
@@ -33,12 +32,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				if (movementComponent.Direction.sqrMagnitude > 0)
 				{
-					rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Direction * (speed * Time.deltaTime));
+					rigidbodyComponent.Rigidbody.MovePosition(rigidbodyComponent.Rigidbody.position + movementComponent.Direction*(speed*Time.deltaTime));
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

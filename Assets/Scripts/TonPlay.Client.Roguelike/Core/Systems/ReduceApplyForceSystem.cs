@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var forcible = ref forciblePool.Get(entityId);
 				ref var applyForce = ref applyForcePool.Get(entityId);
 
-				applyForce.Force -= applyForce.Force * (forcible.ReduceForceRate * Time.deltaTime);
+				applyForce.Force -= applyForce.Force*(forcible.ReduceForceRate*Time.deltaTime);
 			}
 		}
 	}

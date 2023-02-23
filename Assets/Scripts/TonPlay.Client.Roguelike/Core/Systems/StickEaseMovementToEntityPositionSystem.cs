@@ -9,9 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<EaseMovementComponent>()
@@ -32,14 +30,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					continue;
 				}
-				
+
 				ref var position = ref positionPool.Get(stick.EntityId);
 
 				easeMovement.ToPosition = position.Position;
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

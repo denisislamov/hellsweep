@@ -14,7 +14,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		private const double UPDATE_RATE_IN_SECONDS = 0.2f;
 
 		private readonly char[] _chars = new[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-		
+
 		private readonly StringBuilder _stringBuilder;
 
 		private IDisposable _updateHandler;
@@ -23,12 +23,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		private int _frameCounter;
 
 		public DebugPresenter(
-			IDebugView view, 
-			IScreenContext context) 
+			IDebugView view,
+			IScreenContext context)
 			: base(view, context)
 		{
 			_stringBuilder = new StringBuilder();
-			
+
 			AddSubscription();
 		}
 
@@ -36,7 +36,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		{
 			_updateHandler?.Dispose();
 			_timerHandler?.Dispose();
-			
+
 			base.Dispose();
 		}
 
@@ -44,7 +44,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		{
 			_updateHandler = Observable.EveryUpdate().Subscribe((unit) => UpdateHandler());
 		}
-		
+
 		private void UpdateHandler()
 		{
 			if (_deltaCounter < UPDATE_RATE_IN_SECONDS)
@@ -53,22 +53,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 				_frameCounter += 1;
 				return;
 			}
-			
+
 			_stringBuilder.Clear();
-			
-			var framerate = 1f /(_deltaCounter / _frameCounter);
+
+			var framerate = 1f/(_deltaCounter/_frameCounter);
 
 			if (float.IsInfinity(framerate)) return;
 
 			while (framerate >= 1)
 			{
-				var digit = Mathf.RoundToInt((int) framerate) % 10;
-				
+				var digit = Mathf.RoundToInt((int)framerate)%10;
+
 				_stringBuilder.Insert(0, _chars[digit]);
 
 				framerate /= 10;
 			}
-			
+
 			View.SetFramerateText(_stringBuilder.ToString());
 
 			_deltaCounter = 0f;

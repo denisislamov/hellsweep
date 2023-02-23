@@ -21,9 +21,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	public class PlayerSpawnSystem : IEcsInitSystem
 	{
 		private EcsWorld _world;
-		
+
 		private readonly KdTreeStorage _kdTreeStorage;
-		
+
 		public PlayerSpawnSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
@@ -32,12 +32,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Init(EcsSystems systems)
 		{
 			_world = systems.GetWorld();
-			
+
 			var sharedData = systems.GetShared<SharedData>();
 			var spawnConfig = sharedData.PlayerConfigProvider.Get();
-			
+
 			var player = CreateViewAndEntity(spawnConfig, out var entity);
-			
+
 			AddPlayerComponent(entity, spawnConfig);
 			entity.AddLayerComponent(LayerMask.NameToLayer("Player"));
 			entity.AddMovementComponent();
@@ -46,9 +46,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddRigidbodyComponent(player.Rigidbody2D);
 			entity.AddSkillsComponent();
 			entity.AddCollisionComponent(
-				spawnConfig.CollisionAreaConfig, 
+				spawnConfig.CollisionAreaConfig,
 				spawnConfig.CollisionAreaMask);
-			
+
 			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
 			entity.AddSpeedComponent(spawnConfig.MovementConfig);
 			entity.AddGoldComponent();
@@ -57,17 +57,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddBlockApplyDamageTimerComponent();
 
 			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
-			
+
 			UpdatePlayerModel(sharedData, healthComponent);
 
 			sharedData.SetPlayerPositionProvider(player);
-			
+
 			CreateWeapon(entity.Id, sharedData);
-			
+
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(1);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(1);
-			
-			_kdTreeStorage.KdTree.Build(new Vector2[] { player.Position });
+
+			_kdTreeStorage.KdTree.Build(new Vector2[] {player.Position});
 
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, player.Position);
 
@@ -85,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			ref var playerSkills = ref skillsPool.Get(playerEntityId);
-			
+
 			playerSkills.Levels.Add(config.SkillName, 1);
 		}
 
@@ -109,7 +109,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var data = playerModel.ToData();
 			data.Experience = exp.Value;
 			data.MaxExperience = exp.MaxValue;
-			
+
 			playerModel.Update(data);
 		}
 

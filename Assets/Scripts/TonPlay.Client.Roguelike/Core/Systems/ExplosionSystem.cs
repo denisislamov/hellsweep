@@ -29,15 +29,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var positionPool = world.GetPool<PositionComponent>();
 			var explosionPool = world.GetPool<ExplosionComponent>();
 			var applyDamagePool = world.GetPool<ApplyDamageComponent>();
-			var overlapPools = OverlapPools.Create(world);
-			
+
+			var overlapParams = OverlapParams.Create(world);
+			overlapParams.SetFilter(overlapParams.CreateDefaultFilterMask().End());
+			overlapParams.Build();
+
 			foreach (var entityId in filter)
 			{
 				ref var position = ref positionPool.Get(entityId);
 				ref var explosion = ref explosionPool.Get(entityId);
 
 				var count = _overlapExecutor.Overlap(
-					_query, position.Position, explosion.CollisionAreaConfig, ref _overlappedEntities, explosion.LayerMask, overlapPools);
+					_query, position.Position, explosion.CollisionAreaConfig, ref _overlappedEntities, explosion.LayerMask, overlapParams);
 
 				for (var i = 0; i < count; i++)
 				{

@@ -18,26 +18,26 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 	{
 		[SerializeField]
 		private PlayerConfig[] _configs;
-		
+
 		[SerializeField]
 		private string _defaultConfigId;
-		
+
 		public IPlayerConfig Get(string id = default)
 		{
 			if (string.IsNullOrEmpty(id))
 			{
 				id = _defaultConfigId;
 			}
-			
+
 			return _configs.FirstOrDefault(config => config.Id == id);
 		}
-		
+
 		[Serializable]
 		private class PlayerConfig : IPlayerConfig
 		{
 			[SerializeField]
 			private string _id;
-		
+
 			[SerializeField]
 			private PlayerView _prefab;
 
@@ -46,7 +46,7 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
-			
+
 			[SerializeField]
 			private LayerMask _collisionAreaMask;
 
@@ -54,15 +54,15 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 			private MovementConfig _movementConfig;
 
 			public string Id => _id;
-		
+
 			public PlayerView Prefab => _prefab;
 
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 
 			public int StartHealth => _health;
-			
+
 			public IMovementConfig MovementConfig => _movementConfig;
-			
+
 			public int CollisionAreaMask => _collisionAreaMask.value;
 		}
 	}

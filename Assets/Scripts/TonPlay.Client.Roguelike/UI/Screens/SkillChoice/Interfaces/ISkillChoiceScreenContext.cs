@@ -9,7 +9,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces
 	public interface ISkillChoiceScreenContext : IScreenContext
 	{
 		IEnumerable<SkillName> SkillsToUpgrade { get; }
-		
+
 		Action<SkillName> SkillChosenCallback { get; }
 	}
 }

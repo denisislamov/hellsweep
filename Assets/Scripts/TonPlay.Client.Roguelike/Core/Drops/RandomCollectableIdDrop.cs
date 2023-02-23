@@ -16,7 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Drops
 		public string Drop()
 		{
 			var random = Random.Range(0, 1f);
-			return random <= _config.Weight ? _config.CollectableId : null;		
+			return random <= _config.Weight ? _config.CollectableId : null;
 		}
 	}
 }

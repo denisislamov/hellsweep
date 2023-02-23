@@ -7,9 +7,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<EventComponent>().Inc<UsedEventComponent>().End();
 
@@ -17,9 +15,7 @@ namespace TonPlay.Roguelike.Client.Core.Systems
 			{
 				world.DelEntity(entityId);
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var indicator = ref indicatorPool.Get(entityId);
 
-				indicator.View.Color = Color32.Lerp(indicator.View.Color, indicator.FadeOutColor, Time.deltaTime / indicator.FadeOutTime);
+				indicator.View.Color = Color32.Lerp(indicator.View.Color, indicator.FadeOutColor, Time.deltaTime/indicator.FadeOutTime);
 			}
 		}
 	}

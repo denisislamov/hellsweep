@@ -20,11 +20,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				var element = elementPool.Get(entityId);
 				var index = element.Storage.KdTreeEntityIdToPositionIndexMap[entityId];
 				var position = element.Storage.KdTree.Points[index];
-				
+
 				DrawCircle(0.5f, position, Color.black);
 			}
 		}
-		
+
 		private void DrawCircle(float radius, Vector2 position, Color color)
 		{
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING

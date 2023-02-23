@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 	{
 		private readonly ButtonPresenterFactoryContextVisitor _factoryContextVisitor;
 		public CompositeButtonPresenter(
-			IButtonView view, 
+			IButtonView view,
 			ICompositeButtonContext context,
 			ButtonPresenterFactoryContextVisitor.Factory factoryContextVisitorFactory) : base(view, context)
 		{
@@ -19,20 +19,20 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 
 			AddNestedPresenters();
 		}
-		
+
 		private void AddNestedPresenters()
 		{
 			for (var index = 0; index < Context.ButtonContexts.Count; index++)
 			{
 				var buttonContext = Context.ButtonContexts[index];
-				
+
 				buttonContext.Accept(_factoryContextVisitor);
 			}
 
 			for (var index = 0; index < _factoryContextVisitor.Presenters.Count; index++)
 			{
 				var buttonPresenter = _factoryContextVisitor.Presenters[index];
-				
+
 				Presenters.Add(buttonPresenter);
 			}
 		}

@@ -328,7 +328,6 @@ namespace Leopotam.EcsLite {
             return itemsCount;
         }
         
-        [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public bool IsEntityAlive (int entity) {
             return IsEntityAliveInternal(entity);
         }

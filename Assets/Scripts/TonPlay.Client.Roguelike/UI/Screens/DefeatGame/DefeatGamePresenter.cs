@@ -110,42 +110,42 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_uiService.CloseAll(new DefaultScreenLayer());
 
 			UpdateProfileModel();
-			
+
 			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu).ContinueWith(() =>
 			{
 				_sceneService.UnloadAdditiveSceneByNameAsync(SceneName.Level_Sands);
 				_loading = false;
-				
+
 				_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
 			});
 		}
-		
+
 		private void UpdateProfileModel()
 		{
 			var metagameModel = _metaGameModelProvider.Get();
-			
+
 			var locationsModel = metagameModel.LocationsModel;
 			var locationsData = locationsModel.ToData();
 
 			if (!locationsData.Locations.ContainsKey(_locationConfigStorage.Current.Id))
 			{
 				locationsData.Locations.Add(
-					_locationConfigStorage.Current.Id, 
-					new LocationData(){ Id = _locationConfigStorage.Current.Id });
+					_locationConfigStorage.Current.Id,
+					new LocationData() {Id = _locationConfigStorage.Current.Id});
 			}
-			
+
 			var locationData = locationsData.Locations[_locationConfigStorage.Current.Id];
-			
+
 			var profileModel = metagameModel.ProfileModel;
 			var gameModel = _gameModelProvider.Get();
 
 			var profileData = profileModel.ToData();
-			
+
 			profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
 			profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
 			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
 
-			while(profileData.Experience >= profileData.MaxExperience)
+			while (profileData.Experience >= profileData.MaxExperience)
 			{
 				profileData.Level++;
 				profileData.Experience -= profileData.MaxExperience;
@@ -154,7 +154,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += 5;
 			}
-			
+
 			profileModel.Update(profileData);
 			locationsModel.Update(locationsData);
 		}

@@ -23,13 +23,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 		private ReactiveProperty<float> _fakeExperience = new ReactiveProperty<float>(1f);
 
 		public SkillChoicePresenter(
-			ISkillChoiceView view, 
+			ISkillChoiceView view,
 			ISkillChoiceScreenContext context,
 			IGameModelProvider gameModelProvider,
 			SkillChoiceCollectionPresenter.Factory collectionPresenterFactory,
 			LevelProgressBarPresenter.Factory levelProgressBarPresenterFactory,
 			IUIService uiService,
-			ISkillConfigProvider skillConfigProvider) 
+			ISkillConfigProvider skillConfigProvider)
 			: base(view, context)
 		{
 			_gameModelProvider = gameModelProvider;
@@ -42,7 +42,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			AddNestedLevelProgressBarPresenter();
 			InitCurrentSkillViews();
 		}
-		
+
 		private void InitCurrentSkillViews()
 		{
 			var gameModel = _gameModelProvider.Get();
@@ -77,7 +77,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 					}
 				}
 			}
-			
+
 			for (var i = defenceSkillsCount; i < PlayerLevelUpgradeSystem.MAX_DEFENCE_SKILLS; i++)
 			{
 				View.DefenceCurrentSkillViews[i].SetColor(new Color(1f, 1f, 1f, 0f));
@@ -93,25 +93,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			var presenter = _collectionPresenterFactory.Create(
 				View.CollectionView,
 				new SkillChoiceCollectionContext(Context.SkillsToUpgrade, SkillClickedHandler));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddNestedLevelProgressBarPresenter()
 		{
 			var playerModel = _gameModelProvider.Get().PlayerModel;
-			
+
 			var presenter = _levelProgressBarPresenterFactory.Create(
-				View.LevelProgressBarView, 
+				View.LevelProgressBarView,
 				new LevelProgressBarContext(playerModel.SkillsModel.Level, _fakeExperience, _fakeExperience));
-			
+
 			Presenters.Add(presenter);
 		}
 
 		private void SkillClickedHandler(SkillName skillName)
 		{
 			_uiService.Close(Context.Screen);
-			
+
 			Context.SkillChosenCallback?.Invoke(skillName);
 		}
 

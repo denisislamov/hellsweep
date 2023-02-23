@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Actions
 {
-	[CreateAssetMenu(fileName = nameof(DespawnArenaAction), 
+	[CreateAssetMenu(fileName = nameof(DespawnArenaAction),
 		menuName = AssetMenuConstants.ACTIONS + nameof(DespawnArenaAction))]
 	public class DespawnArenaAction : ScriptableAction
 	{

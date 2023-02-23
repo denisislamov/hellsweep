@@ -10,11 +10,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 	public class SkillChoiceCollectionContext : ScreenContext, ISkillChoiceCollectionContext
 	{
 		public IEnumerable<SkillName> Skills { get; }
-		
+
 		public Action<SkillName> SkillClickedCallback { get; }
 
 		public SkillChoiceCollectionContext(
-			IEnumerable<SkillName> skills, 
+			IEnumerable<SkillName> skills,
 			Action<SkillName> skillClickedCallback)
 		{
 			Skills = skills;

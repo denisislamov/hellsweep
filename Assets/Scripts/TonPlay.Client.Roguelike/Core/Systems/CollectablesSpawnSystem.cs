@@ -26,12 +26,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Init(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<SharedData>();
- 
+
 			_pool = sharedData.CompositeViewPool;
 			_collectablesConfigProvider = sharedData.CollectablesConfigProvider;
 
@@ -57,13 +55,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(total);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(total);
-			
+
 			_kdTreeStorage.KdTree.Build(new Vector2[total]);
 
 			_sharedData = sharedData;
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

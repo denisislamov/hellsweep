@@ -12,10 +12,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 	{
 		[SerializeField]
 		private ButtonView _playButton;
-		
+
 		[SerializeField]
 		private ProfileBarView _profileBarView;
-		
+
 		[SerializeField]
 		private LocationSliderView _locationSliderView;
 

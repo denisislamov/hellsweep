@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.UI
 
 		[SerializeField]
 		private Transform _transform;
-		
+
 		private Color32? _color;
 
 		public Color32 Color
@@ -27,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.UI
 				{
 					return;
 				}
-				
+
 				for (int i = 0; i < _text.textInfo.characterCount; ++i)
 				{
 					var meshIndex = _text.textInfo.characterInfo[i].materialReferenceIndex;
@@ -38,7 +38,7 @@ namespace TonPlay.Client.Roguelike.Core.UI
 					vertexColors[vertexIndex + 2] = value;
 					vertexColors[vertexIndex + 3] = value;
 				}
-				
+
 				_text.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
 			}
 		}

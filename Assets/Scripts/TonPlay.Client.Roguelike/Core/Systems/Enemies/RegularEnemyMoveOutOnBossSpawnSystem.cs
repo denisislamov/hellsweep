@@ -12,9 +12,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample("TonPlay.Client.Roguelike.Core.Systems.Enemies.RegularEnemyMoveOutOnBossSpawnSystem");
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<ISharedData>();
 			var wavesConfigProvider = sharedData.EnemyWavesConfigProvider;
@@ -43,9 +41,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				 !nextWaveHasBoss.Value ||
 				 secondsDifference > EnemyWaveSpawnSystem.PREPARE_BEFORE_BOSS_SPAWN_SECONDS))
 			{
-#region Profiling End
-				UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return;
 			}
 
@@ -68,9 +64,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				movement.Direction = (position.Position - playerPosition.Position);
 				movement.Direction.Normalize();
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

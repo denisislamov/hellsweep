@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 	{
 		private IDisposable _subscription;
 		public ClickableButtonPresenter(
-			IButtonView view, 
+			IButtonView view,
 			IClickableButtonContext context) : base(view, context)
 		{
 			AddSubscription();
@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		public override void Dispose()
 		{
 			_subscription?.Dispose();
-			
+
 			base.Dispose();
 		}
 

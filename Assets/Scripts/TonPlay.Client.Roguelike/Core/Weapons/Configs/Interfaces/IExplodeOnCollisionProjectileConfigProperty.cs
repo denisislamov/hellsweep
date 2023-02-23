@@ -5,7 +5,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 	public interface IExplodeOnCollisionProjectileConfigProperty : IProjectileConfigProperty
 	{
 		IDamageProvider DamageProvider { get; }
-		
+
 		ICollisionAreaConfig ExplodeCollisionAreaConfig { get; }
 	}
 }

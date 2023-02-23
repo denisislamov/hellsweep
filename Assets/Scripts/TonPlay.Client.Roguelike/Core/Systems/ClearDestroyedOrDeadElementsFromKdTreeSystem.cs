@@ -8,13 +8,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var pool = world.GetPool<KdTreeElementComponent>();
 			var filter = world.Filter<KdTreeElementComponent>().Inc<DestroyComponent>().End();
-			
+
 			foreach (var entityId in filter)
 			{
 				ref var treeElement = ref pool.Get(entityId);
@@ -22,15 +20,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			filter = world.Filter<KdTreeElementComponent>().Inc<DeadComponent>().End();
-			
+
 			foreach (var entityId in filter)
 			{
 				ref var treeElement = ref pool.Get(entityId);
 				treeElement.Storage.RemoveEntity(entityId);
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

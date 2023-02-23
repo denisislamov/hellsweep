@@ -10,25 +10,25 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 	{
 		[SerializeField]
 		private string _defenceIconText;
-		
+
 		[SerializeField]
 		private string _utilityIconText;
-		
+
 		[SerializeField]
 		private Color _defenceColor;
-		
+
 		[SerializeField]
 		private Color _utilityColor;
-		
+
 		[SerializeField]
 		private Color _ultimateDefenceColor;
-		
+
 		[SerializeField]
 		private Sprite _defenceLevelIcon;
-		
+
 		[SerializeField]
 		private Sprite _utilityLevelIcon;
-		
+
 		[SerializeField]
 		private Sprite _ultimateDefenceLevelIcon;
 

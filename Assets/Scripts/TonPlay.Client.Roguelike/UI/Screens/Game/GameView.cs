@@ -18,25 +18,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	{
 		[SerializeField]
 		private ProgressBarView _healthProgressBarView;
-		
+
 		[SerializeField]
 		private LevelProgressBarView _levelProgressBarView;
-		
+
 		[SerializeField]
 		private TimerView _timerView;
 
 		[SerializeField]
 		private MatchScoreView _matchScoreView;
-		
+
 		[SerializeField]
 		private DebugView _debugView;
 
 		public IProgressBarView HealthProgressBarView => _healthProgressBarView;
-		
+
 		public ILevelProgressBarView LevelProgressBarView => _levelProgressBarView;
-		
+
 		public ITimerView TimerView => _timerView;
-		
+
 		public IMatchScoreView MatchScoreView => _matchScoreView;
 
 		public IDebugView DebugView => _debugView;

@@ -19,15 +19,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 		public Color Color { get; }
 		public Sprite LevelIcon { get; }
 		public Action<SkillName> ClickedCallback { get; }
-		
+
 		public SkillChoiceItemContext(
 			SkillName skillName,
-			SkillType skillType, 
-			string title, 
-			string description, 
-			Sprite icon, 
-			int currentLevel, 
-			int maxLevel, 
+			SkillType skillType,
+			string title,
+			string description,
+			Sprite icon,
+			int currentLevel,
+			int maxLevel,
 			Color color,
 			Sprite levelIcon,
 			Action<SkillName> clickedCallback)

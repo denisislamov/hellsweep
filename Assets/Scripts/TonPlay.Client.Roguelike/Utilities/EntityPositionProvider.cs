@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 	{
 		private readonly EcsPool<PositionComponent> _positionPool;
 		private readonly int _entityId;
-		
+
 		public EntityPositionProvider(EcsPool<PositionComponent> positionPool, int entityId)
 		{
 			_positionPool = positionPool;

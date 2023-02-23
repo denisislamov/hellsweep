@@ -16,20 +16,20 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 	{
 		[SerializeField]
 		private CollisionAreaConfig _explodeCollisionAreaConfig;
-		
+
 		[SerializeField]
 		private float _timeToExplode;
-		
+
 		[SerializeField]
 		private DamageProvider _damageProvider;
-		
+
 		[SerializeField]
 		private LayerMask _layerMask;
 
 		public override CollectableType Type => CollectableType.Bomb;
-		
+
 		public ICollisionAreaConfig ExplodeCollisionAreaConfig => _explodeCollisionAreaConfig;
-		
+
 		public float TimeToExplode => _timeToExplode;
 		public IDamageProvider DamageProvider => _damageProvider;
 		public int LayerMask => _layerMask.value;

@@ -10,13 +10,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces
 	public interface IGameView : IView
 	{
 		IProgressBarView HealthProgressBarView { get; }
-		
+
 		ILevelProgressBarView LevelProgressBarView { get; }
-		
+
 		ITimerView TimerView { get; }
 
 		IMatchScoreView MatchScoreView { get; }
-		
+
 		IDebugView DebugView { get; }
 	}
 }

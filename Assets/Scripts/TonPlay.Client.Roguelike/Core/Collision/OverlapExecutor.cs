@@ -5,6 +5,7 @@ using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
@@ -31,20 +32,9 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			ICollisionAreaConfig collisionAreaConfig,
 			ref List<int> entities,
 			int layerMask,
-			IOverlapPools pools)
+			IOverlapParams overlapParams)
 		{
-#region Profiling Begin
-
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-
-#endregion
-			var inactivePool = pools.InactivePool;
-			var deadPool = pools.DeadPool;
-			var usedPool = pools.UsedPool;
-			var layerPool = pools.LayerPool;
-			var destroyPool = pools.DestroyPool;
-			// var positionPool = pools.PositionPool;
-			var collisionPool = pools.CollisionPool;
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.Overlap");
 
 			for (var i = 0; i < _kdTreeStorages.Length; i++)
 			{
@@ -77,64 +67,81 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				}
 
 				query.Radius(kdTreeStorage.KdTree, position, radius + RoguelikeConstants.Core.Collision.OVERLAP_MIN_RADIUS, _results);
-				
+
 				for (var j = 0; j < _results.Count; j++)
 				{
 					var index = _results[j];
 					var entityId = kdTreeStorage.KdTreePositionIndexToEntityIdMap[index];
 
-					if (entityId == EcsEntity.DEFAULT_ID || !_world.IsEntityAlive(entityId))
-					{
+					// if (!EntityIsAlive(entityId))
+					// 	continue;
+
+					if (!IsFilteredEntity(overlapParams, entityId))
 						continue;
-					}
 
-					if (!layerPool.Has(entityId) ||
-						destroyPool.Has(entityId) ||
-						inactivePool.Has(entityId) ||
-						deadPool.Has(entityId) ||
-						usedPool.Has(entityId))
-					{
-						continue;
-					}
+					// ref var layer = ref overlapParams.LayerPool.Get(entityId);
+					//
+					// if (!LayerMaskExt.ContainsLayer(layerMask, layer.Layer))
+					// {
+					// 	continue;
+					// }
 
-					ref var layer = ref layerPool.Get(entityId);
-
-					if (!LayerMaskExt.ContainsLayer(layerMask, layer.Layer))
-					{
-						continue;
-					}
-
-					if (!collisionPool.Has(entityId))
-					{
-						continue;
-					}
-
-					ref var collision = ref collisionPool.Get(entityId);
+					ref var collision = ref overlapParams.CollisionPool.Get(entityId);
 					var entityPosition = kdTreeStorage.KdTree.Points[index];
 
 					if (IsIntersected(collisionAreaConfig, collision.CollisionAreaConfig, position, entityPosition))
 					{
 						entities.Add(entityId);
 					}
-
-					// if (IsIntersected(collisionAreaConfig, position, entityPosition))
-					// {
-					// 	entities.Add(entityId);
-					// }
-					//
-					// entities.Add(entityId);
 				}
 
 				_results.Clear();
 			}
 
-#region Profiling End
-
-			UnityEngine.Profiling.Profiler.EndSample();
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 
 			return entities.Count;
+		}
+
+		private bool IsFilteredEntity(IOverlapParams overlapParams, int entityId)
+		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.IsFilteredEntity");
+
+			var isFilteredEntity = overlapParams.FilteredEntities.Contains(entityId);
+			
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+			return isFilteredEntity;
+		}
+
+		private bool EntityIsAlive(int entityId)
+		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.EntityIsAlive");
+
+			if (entityId == EcsEntity.DEFAULT_ID || !_world.IsEntityAlive(entityId))
+			{
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+				return false;
+			}
+
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+			return true;
+		}
+
+		private static bool CheckForComponents(EcsPool<LayerComponent> layerPool, int entityId, EcsPool<DestroyComponent> destroyPool, EcsPool<InactiveComponent> inactivePool, EcsPool<DeadComponent> deadPool, EcsPool<UsedComponent> usedPool)
+		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.CheckForComponents");
+			if (!layerPool.Has(entityId) ||
+				destroyPool.Has(entityId) ||
+				inactivePool.Has(entityId) ||
+				deadPool.Has(entityId) ||
+				usedPool.Has(entityId))
+			{
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+				return true;
+			}
+
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+			return false;
 		}
 
 		/*private bool IsIntersected(
@@ -164,6 +171,8 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			Vector2 positionA,
 			Vector2 positionB)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.IsIntersected");
+
 			var circleA = areaA as ICircleCollisionAreaConfig;
 			var circleB = areaB as ICircleCollisionAreaConfig;
 
@@ -175,14 +184,16 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			{
 				var diffX = positionB.x - positionA.x;
 				var diffY = positionB.y - positionA.y;
-				var sqrMagnitude = diffX * diffX + diffY * diffY;
+				var sqrMagnitude = diffX*diffX + diffY*diffY;
 				var combinedRadius = circleA.Radius + circleB.Radius;
-				var sqrMaxDistance = combinedRadius * combinedRadius;
+				var sqrMaxDistance = combinedRadius*combinedRadius;
 
 				var result = sqrMagnitude < sqrMaxDistance;
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
 				DrawCircle(circleB, positionB, !result ? Color.green : Color.red);
 #endif
+
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
 			}
 
@@ -201,6 +212,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				DrawRect(aabbB.Rect, positionB, !result ? Color.green : Color.red);
 				DrawCircle(circleA, positionA, !result ? Color.green : Color.red);
 #endif
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
 			}
 
@@ -219,6 +231,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				DrawRect(aabbA.Rect, positionA, !result ? Color.green : Color.red);
 				DrawCircle(circleB, positionB, !result ? Color.green : Color.red);
 #endif
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
 			}
 
@@ -231,6 +244,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
 				DrawRect(bRect, bRect.position, !result ? Color.green : Color.red);
 #endif
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
 			}
 

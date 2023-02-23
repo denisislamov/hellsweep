@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 	{
 		[SerializeField]
 		private SkillConfig[] _skillConfigs;
-		
+
 		[SerializeField]
 		private SkillPresentationConfig _presentationConfig;
 

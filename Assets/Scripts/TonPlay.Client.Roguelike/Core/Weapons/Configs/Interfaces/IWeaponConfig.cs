@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 	public interface IWeaponConfig
 	{
 		string ItemId { get; }
-		
+
 		SkillName SkillName { get; }
 	}
 }

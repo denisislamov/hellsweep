@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.Models
 	public class LocationsModel : ILocationsModel
 	{
 		private readonly LocationsData _cached = new LocationsData();
-		
+
 		private Dictionary<string, ILocationModel> _locations = new Dictionary<string, ILocationModel>();
 
 		public IReadOnlyDictionary<string, ILocationModel> Locations => _locations;
@@ -21,7 +21,7 @@ namespace TonPlay.Client.Roguelike.Models
 				{
 					_locations.Add(kvp.Key, new LocationModel());
 				}
-				
+
 				_locations[kvp.Key].Update(kvp.Value);
 			}
 
@@ -33,7 +33,7 @@ namespace TonPlay.Client.Roguelike.Models
 				}
 			}
 		}
-		
+
 		public LocationsData ToData()
 		{
 			_cached.Locations = _locations.ToDictionary(_ => _.Key, _ => _.Value.ToData());

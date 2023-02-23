@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 			_appEntryPoint = appEntryPoint;
 			_profileLoadingService = profileLoadingService;
 		}
-		
+
 		public async UniTask Bootstrap()
 		{
 #if UNITY_WEBGL
@@ -30,10 +30,10 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 			Application.targetFrameRate = -1;
 
 			await _profileLoadingService.Load();
-			
+
 			await _appEntryPoint.ProcessEntrance();
 		}
-		
+
 		public void Initialize()
 		{
 			Bootstrap().Forget();

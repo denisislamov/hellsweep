@@ -7,11 +7,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces
 	public interface ISkillChoiceView : IView
 	{
 		ISkillChoiceCollectionView CollectionView { get; }
-		
+
 		ILevelProgressBarView LevelProgressBarView { get; }
-		
+
 		ISkillChoiceCurrentSkillView[] DefenceCurrentSkillViews { get; }
-		
+
 		ISkillChoiceCurrentSkillView[] UtilityCurrentSkillViews { get; }
 	}
 }

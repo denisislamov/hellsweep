@@ -11,9 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ApplyBombCollectableComponent>()
@@ -27,7 +25,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var apply = ref applyPool.Get(entityId);
-				
+
 				if (!preparePool.Has(entityId))
 				{
 					preparePool.Add(entityId);
@@ -40,17 +38,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				foreach (var collectableEntityId in apply.CollectableEntityIds)
 				{
 					ref var bomb = ref bombPool.Get(collectableEntityId);
-					
+
 					prepare.Bombs.Add((bomb.Config.TimeToExplode, bomb.Config));
-					
+
 					destroyPool.Add(collectableEntityId);
 				}
 
 				applyPool.Del(entityId);
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

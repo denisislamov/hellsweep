@@ -22,35 +22,35 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		IPlayerConfigProvider PlayerConfigProvider { get; }
 
 		IEnemyConfigProvider EnemyConfigProvider { get; }
-		
+
 		IWeaponConfigProvider WeaponConfigProvider { get; }
-		
+
 		ICollisionConfigProvider CollisionConfigProvider { get; }
 
 		IGameModel GameModel { get; }
 
 		IPositionProvider PlayerPositionProvider { get; }
-		
+
 		ILevelEnemyWaveConfigProvider EnemyWavesConfigProvider { get; }
 
 		string PlayerWeaponId { get; }
-		
+
 		ICompositeViewPool CompositeViewPool { get; }
-		
+
 		ICollectableConfigProvider CollectablesConfigProvider { get; }
-		
+
 		IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
-		
+
 		ISkillConfigProvider SkillsConfigProvider { get; }
-		
+
 		KdTreeStorage CollectablesKdTreeStorage { get; }
-		
+
 		SignalBus SignalBus { get; }
-		
+
 		DamageTextView DamageTextViewPrefab { get; }
-		
+
 		EcsWorld World { get; }
-		
+
 		DiContainer Container { get; }
 	}
 }

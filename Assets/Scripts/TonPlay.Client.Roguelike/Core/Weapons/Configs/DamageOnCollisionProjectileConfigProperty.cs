@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private DamageProvider _damageProvider;
-		
+
 		public IDamageProvider DamageProvider => _damageProvider;
 	}
 }

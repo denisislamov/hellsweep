@@ -14,16 +14,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 	{
 		[SerializeField]
 		private TextMeshProUGUI _title;
-		
+
 		[SerializeField]
 		private TextMeshProUGUI _description;
-		
+
 		[SerializeField]
 		private Image _icon;
 
 		[SerializeField]
 		private Image[] _activeLevelsImages;
-		
+
 		[SerializeField]
 		private Image[] _backgroundLevelsImages;
 
@@ -41,17 +41,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 		{
 			_title.SetText(text);
 		}
-		
+
 		public void SetDescriptionText(string text)
 		{
 			_description.SetText(text);
 		}
-		
+
 		public void SetIcon(Sprite icon)
 		{
 			_icon.sprite = icon;
 		}
-		
+
 		public void SetCurrentLevel(int level)
 		{
 			for (var i = 0; i < _activeLevelsImages.Length; i++)
@@ -60,7 +60,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 				_activeLevelsImages[i].color = Color.white;
 			}
 		}
-		
+
 		public void SetNextLevel(int level)
 		{
 			var activeImage = _activeLevelsImages[level - 1];
@@ -72,15 +72,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 			_sequence.Append(activeImage.DOColor(new Color(1, 1, 1, 0), 0.5f));
 			_sequence.SetLoops(-1);
 		}
-		
+
 		public void SetMaxLevel(int level)
 		{
 			for (var i = 0; i < _backgroundLevelsImages.Length; i++)
 			{
-				_backgroundLevelsImages[i].gameObject.SetActive(level - i - 1>= 0);
+				_backgroundLevelsImages[i].gameObject.SetActive(level - i - 1 >= 0);
 			}
 		}
-		
+
 		public void SetBackgroundColor(Color color)
 		{
 			for (var i = 0; i < _colorBackgroundImages.Length; i++)
@@ -88,12 +88,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 				_colorBackgroundImages[i].color = color;
 			}
 		}
-		
+
 		public void SetTitleTextColor(Color color)
 		{
 			_title.color = color;
 		}
-		
+
 		public void SetLevelIcon(Sprite icon)
 		{
 			for (var i = 0; i < _activeLevelsImages.Length; i++)

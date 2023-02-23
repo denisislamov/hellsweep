@@ -55,7 +55,9 @@ namespace DataStructures.ViliWonka.KDTree {
         /// <returns>Reference to pooled node</returns>
         private KDQueryNode PushGetQueue() {
 #region Profiling Begin
+#if ENABLE_PROFILING
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushGetQueue");
+#endif
 #endregion
             KDQueryNode node = null;
 
@@ -76,7 +78,9 @@ namespace DataStructures.ViliWonka.KDTree {
             count++;
 			
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
 
             return node;
@@ -84,19 +88,25 @@ namespace DataStructures.ViliWonka.KDTree {
 
         protected void PushToQueue(KDNode node, Vector2 tempClosestPoint) {
 #region Profiling Begin
+#if ENABLE_PROFILE_SAMPLES
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToQueue");
+#endif
 #endregion
             var queryNode = PushGetQueue();
             queryNode.node = node;
             queryNode.tempClosestPoint = tempClosestPoint;
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
         }
 
         protected void PushToHeap(KDNode node, Vector2 tempClosestPoint, Vector2 queryPosition) {
 #region Profiling Begin
+#if ENABLE_PROFILE_SAMPLES
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PushToHeap");
+#endif
 #endregion
             var queryNode = PushGetQueue();
             queryNode.node = node;
@@ -108,7 +118,9 @@ namespace DataStructures.ViliWonka.KDTree {
             queryNode.distance = sqrDist;
             minHeap.PushObj(queryNode, sqrDist);
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
         }
 
@@ -123,13 +135,17 @@ namespace DataStructures.ViliWonka.KDTree {
         // increases queryIndex
         protected KDQueryNode PopFromQueue() {
 #region Profiling Begin
+#if ENABLE_PROFILING
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PopFromQueue");
+#endif
 #endregion
             var node = queueArray[queryIndex];
             queryIndex++;
 			
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
 
             return node;
@@ -137,7 +153,9 @@ namespace DataStructures.ViliWonka.KDTree {
 
         protected KDQueryNode PopFromHeap() {
 #region Profiling Begin
+#if ENABLE_PROFILING
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.PopFromHeap");
+#endif
 #endregion
             KDQueryNode heapNode = minHeap.PopObj();
 
@@ -145,7 +163,9 @@ namespace DataStructures.ViliWonka.KDTree {
             queryIndex++;
 			
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
 
             return heapNode;
@@ -153,19 +173,25 @@ namespace DataStructures.ViliWonka.KDTree {
 
         protected void Reset() {
 #region Profiling Begin
+#if ENABLE_PROFILING
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.Reset");
+#endif
 #endregion
             count = 0;
             queryIndex = 0;
             minHeap.Clear();
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
         }
 
         public KDQuery(int queryNodesContainersInitialSize = 2048) {
 #region Profiling Begin
+#if ENABLE_PROFILE_SAMPLES
             UnityEngine.Profiling.Profiler.BeginSample("KDQuery.Base.Construct");
+#endif
 #endregion
             queueArray = new KDQueryNode[queryNodesContainersInitialSize];
             minHeap = new Heap.MinHeap<KDQueryNode>(queryNodesContainersInitialSize);
@@ -180,7 +206,9 @@ namespace DataStructures.ViliWonka.KDTree {
             }
             lastPoolIndex = 0;
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
 			UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
         }
 

@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 	{
 		private IDisposable _subscription;
 		public ReactiveTextButtonPresenter(
-			IButtonView view, 
+			IButtonView view,
 			IReactiveTextButtonContext context) : base(view, context)
 		{
 			AddSubscription();
@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		public override void Dispose()
 		{
 			_subscription?.Dispose();
-			
+
 			base.Dispose();
 		}
 
@@ -28,7 +28,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		{
 			_subscription = Context.Text.Subscribe(text => ChangeViewText());
 		}
-		
+
 		private void ChangeViewText()
 		{
 			View.SetText(Context.Text.Value);

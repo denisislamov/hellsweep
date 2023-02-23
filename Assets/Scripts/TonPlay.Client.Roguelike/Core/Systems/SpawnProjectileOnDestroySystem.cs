@@ -18,9 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
- #region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var pool = systems.GetShared<ISharedData>().CompositeViewPool;
 			var world = systems.GetWorld();
 			var filter = world
@@ -28,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.Inc<SpawnProjectileOnDestroyComponent>()
 						.Inc<PositionComponent>()
 						.End();
-			
+
 			var spawnPool = world.GetPool<SpawnProjectileOnDestroyComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
 			var damageOnCollisionPool = world.GetPool<DamageOnCollisionComponent>();
@@ -44,8 +42,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				if (pool.TryGet<ProjectileView>(poolIdentity, out var poolObject))
 				{
 					var entity = ProjectileSpawner.SpawnProjectile(world, poolObject, config, position.Position, Random.onUnitSphere, component.CollisionLayerMask);
-					
-					if (component.ProjectileConfig.HasProperty<IInheritDamageOnCollisionProjectileConfigProperty>() && 
+
+					if (component.ProjectileConfig.HasProperty<IInheritDamageOnCollisionProjectileConfigProperty>() &&
 						damageOnCollisionPool.Has(entityId))
 					{
 						ref var parentDamage = ref damageOnCollisionPool.Get(entityId);
@@ -54,9 +52,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					}
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

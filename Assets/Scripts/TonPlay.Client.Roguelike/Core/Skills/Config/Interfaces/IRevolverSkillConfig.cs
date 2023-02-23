@@ -9,14 +9,14 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 	public interface IRevolverSkillConfig : ISkillConfig<IRevolverLevelSkillConfig>
 	{
 		RevolverSightEffect SightEffectView { get; }
-		
+
 		IProjectileConfig ProjectileConfig { get; }
 	}
 
 	public interface IRevolverLevelSkillConfig : ISkillLevelConfig
 	{
 		IDamageProvider DamageProvider { get; }
-		
+
 		float ShootDelay { get; }
 
 		float FieldOfView { get; }

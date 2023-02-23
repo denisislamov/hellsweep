@@ -15,7 +15,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 
 		[SerializeField]
 		private TextMeshProUGUI _text;
-		
+
 		[SerializeField]
 		private GameObject[] _activatableObjects;
 
@@ -26,13 +26,13 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 				base.Show();
 				return;
 			}
-			
+
 			for (var i = 0; i < _activatableObjects.Length; i++)
 			{
 				_activatableObjects[i].gameObject.SetActive(true);
 			}
 		}
-		
+
 		public override void Hide()
 		{
 			if (_activatableObjects.Length == 0)
@@ -40,7 +40,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 				base.Hide();
 				return;
 			}
-			
+
 			for (var i = 0; i < _activatableObjects.Length; i++)
 			{
 				_activatableObjects[i].gameObject.SetActive(false);
@@ -48,7 +48,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		}
 
 		public IObservable<Unit> OnClick => _button.OnClickAsObservable();
-		
+
 		public void SetText(string text)
 		{
 			_text.SetText(text);

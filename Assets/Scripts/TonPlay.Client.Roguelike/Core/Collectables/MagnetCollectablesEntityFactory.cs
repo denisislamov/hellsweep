@@ -39,7 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			entity.AddViewProviderComponent(gameObject);
 			entity.AddPoolObjectComponent(poolObject);
 			entity.AddStickToLocationBlockComponent();
-			entity.AddMagnetCollectableComponent((IMagnetCollectableConfig) config);
+			entity.AddMagnetCollectableComponent((IMagnetCollectableConfig)config);
 			entity.AddMagnetizableComponent();
 
 			return entity;

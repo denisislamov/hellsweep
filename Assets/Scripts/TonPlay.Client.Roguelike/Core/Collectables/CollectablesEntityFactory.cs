@@ -40,7 +40,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 		public EcsEntity Create(EcsWorld world, ICollectableConfig config, Vector2 position)
 		{
 			var entity = _factories[config.Type].Create(world, config, position);
-			
+
 			if (entity is null || entity.Id == EcsEntity.DEFAULT_ID || !world.IsEntityAlive(entity.Id))
 			{
 				return entity;
@@ -53,7 +53,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			var kdTreeStorage = _sharedData.CollectablesKdTreeStorage;
 
 			var treeIndex = kdTreeStorage.AddEntity(entity.Id, position);
-			
+
 			entity.AddKdTreeElementComponent(kdTreeStorage, treeIndex);
 
 			return entity;

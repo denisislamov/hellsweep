@@ -22,16 +22,16 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core.Installers
 {
-	
+
 	[CreateAssetMenu(fileName = nameof(GameInstaller), menuName = AssetMenuConstants.CORE_INSTALLERS + nameof(GameInstaller))]
 	public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
 	{
 		[SerializeField]
 		private PlayerConfigProvider _playerConfigProvider;
-		
+
 		[SerializeField]
 		private WeaponConfigProvider _weaponConfigProvider;
-		
+
 		[SerializeField]
 		private CollisionConfigProvider _collisionConfigProvider;
 
@@ -51,7 +51,7 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 			Container.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
 
 			Container.Bind<ICompositeViewPool>().To<CompositeViewPool>().AsSingle();
-			
+
 			Container.BindFactory<ISharedData, CollectablesEntityFactory, CollectablesEntityFactory.Factory>().AsSingle();
 			Container.Bind<GoldCollectablesEntityFactory>().To<GoldCollectablesEntityFactory>().AsSingle();
 			Container.Bind<ProfileExperienceCollectablesEntityFactory>().To<ProfileExperienceCollectablesEntityFactory>().AsSingle();

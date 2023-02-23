@@ -14,7 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private const float FADE_OUT_TIME = 0.75f;
 		private const float MOVE_SPEED = 1f;
 		private readonly Vector2 SPAWN_OFFSET = new Vector2(0, 0.25f);
-		
+
 		private ISharedData _sharedData;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
@@ -28,7 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			_pool = _sharedData.CompositeViewPool;
 			_pool.Add(_poolIdentity, _sharedData.DamageTextViewPrefab, 256);
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
@@ -51,7 +51,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				if (_pool.TryGet<DamageTextView>(_poolIdentity, out var poolObject))
 				{
 					position.Position += SPAWN_OFFSET + Random.insideUnitCircle;
-					
+
 					var view = poolObject.Object;
 					view.Position = position.Position;
 					view.Color = Color.white;
@@ -61,23 +61,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					indicator.View = view;
 					indicator.FadeOutColor = new Color32(255, 255, 255, 0);
 					indicator.FadeOutTime = FADE_OUT_TIME;
-					
+
 					ref var destroyOnTimer = ref destroyOnTimerPool.Add(entityId);
 					destroyOnTimer.TimeLeft = indicator.FadeOutTime;
-					
+
 					ref var movement = ref movementPool.Add(entityId);
 					movement.Direction = Vector2.up;
-					
+
 					ref var speed = ref speedPool.Add(entityId);
 					speed.Speed = MOVE_SPEED;
-					
+
 					ref var poolObjectComponent = ref poolObjectPool.Add(entityId);
 					poolObjectComponent.ViewPoolObject = poolObject;
 
 					ref var transformComponent = ref transformPool.Add(entityId);
 					transformComponent.Transform = view.transform;
 				}
-				
+
 				spawnPool.Del(entityId);
 			}
 		}

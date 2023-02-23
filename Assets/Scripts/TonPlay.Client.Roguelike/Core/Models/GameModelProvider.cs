@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		{
 			return _gameModel;
 		}
-		
+
 		public void Set(IGameModel gameModel)
 		{
 			_gameModel = gameModel;

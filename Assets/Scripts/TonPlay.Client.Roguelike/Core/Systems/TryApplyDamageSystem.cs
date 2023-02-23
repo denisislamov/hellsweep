@@ -13,18 +13,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var sharedData = systems.GetShared<ISharedData>();
 			var world = systems.GetWorld();
-			
+
 			var filter = world
 						.Filter<StackTryApplyDamageComponent>()
 						.Inc<BlockApplyDamageTimerComponent>()
 						.Exc<DeadComponent>()
 						.End();
-			
+
 			var stackPool = world.GetPool<StackTryApplyDamageComponent>();
 			var applyPool = world.GetPool<ApplyDamageComponent>();
 			var blockPool = world.GetPool<BlockApplyDamageTimerComponent>();
@@ -52,7 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					{
 						continue;
 					}
-					
+
 					if (!block.Blocked.ContainsKey(tryApply.DamageProvider.DamageSource))
 					{
 						block.Blocked.Add(tryApply.DamageProvider.DamageSource, new Dictionary<int, ReactiveProperty<float>>());
@@ -66,9 +64,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					block.Blocked[tryApply.DamageProvider.DamageSource][tryApply.VictimEntityId].SetValueAndForceNotify(tryApply.DamageProvider.Rate);
 				}
 			}
-#region Profiling End
-			Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

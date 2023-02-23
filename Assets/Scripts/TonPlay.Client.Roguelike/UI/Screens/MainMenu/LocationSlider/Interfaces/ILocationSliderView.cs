@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider.Interfaces
 	public interface ILocationSliderView : IView
 	{
 		IButtonView LeftButton { get; }
-		
+
 		IButtonView RightButton { get; }
 
 		void SetTitleText(string text);

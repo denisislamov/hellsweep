@@ -14,7 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Drops
 		private float _weight;
 
 		public string CollectableId => _collectableId;
-			
+
 		public float Weight => _weight;
 	}
 }

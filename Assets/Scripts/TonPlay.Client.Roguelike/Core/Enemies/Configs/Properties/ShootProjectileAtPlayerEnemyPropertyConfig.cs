@@ -16,10 +16,10 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties
 
 		[SerializeField, Layer]
 		private int _layer;
-		
+
 		[SerializeField]
 		private float _minDistanceToTargetToShoot;
-		
+
 		[SerializeField]
 		private float _maxDistanceToTargetToShoot;
 
@@ -27,13 +27,13 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties
 		private ProjectileConfig _projectileConfig;
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
-		
+
 		public float ShootRateInSeconds => _shootRateInSeconds;
-		
+
 		public int Layer => _layer;
-		
+
 		public float MinDistanceToTargetToShoot => _minDistanceToTargetToShoot;
-		
+
 		public float MaxDistanceToTargetToShoot => _maxDistanceToTargetToShoot;
 	}
 }

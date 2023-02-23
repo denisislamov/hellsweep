@@ -10,18 +10,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var sharedData = systems.GetShared<ISharedData>();
 			var world = systems.GetWorld();
-			
+
 			var filter = world
 						.Filter<HealthComponent>()
 						.Inc<ApplyDamageComponent>()
 						.Exc<DeadComponent>()
 						.End();
-			
+
 			var healthComponents = world.GetPool<HealthComponent>();
 			var applyDamageComponents = world.GetPool<ApplyDamageComponent>();
 			var deadPool = world.GetPool<DeadComponent>();
@@ -45,7 +43,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					{
 						ref var position = ref positionPool.Get(entityId);
 						ref var enemy = ref enemyPool.Get(entityId);
-					
+
 						ref var diedEvent = ref world.NewEntity().Add<EnemyDiedEvent>();
 						diedEvent.Position = position.Position;
 						diedEvent.EnemyConfig = sharedData.EnemyConfigProvider.Get(enemy.ConfigId);
@@ -60,9 +58,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			sharedData.GameModel.Update(gameModelData);
-#region Profiling End
-			Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

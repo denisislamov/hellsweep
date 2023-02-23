@@ -22,12 +22,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 		private readonly SkillChoiceItemPresenter.Factory _itemPresenterFactory;
 
 		public SkillChoiceCollectionPresenter(
-			ICollectionView<ISkillChoiceItemView> view, 
-			ISkillChoiceCollectionContext screenContext, 
+			ICollectionView<ISkillChoiceItemView> view,
+			ISkillChoiceCollectionContext screenContext,
 			ICollectionItemPool<ISkillChoiceItemView> itemPool,
 			ISkillConfigProvider skillConfigProvider,
 			IGameModelProvider gameModelProvider,
-			SkillChoiceItemPresenter.Factory itemPresenterFactory) 
+			SkillChoiceItemPresenter.Factory itemPresenterFactory)
 			: base(view, screenContext, itemPool)
 		{
 			_skillConfigProvider = skillConfigProvider;
@@ -59,13 +59,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 				var view = Add();
 
 				var context = new SkillChoiceItemContext(
-					skillName, 
-					skillType, 
-					title, 
-					description, 
-					icon, 
-					currentLevel, 
-					maxLevel, 
+					skillName,
+					skillType,
+					title,
+					description,
+					icon,
+					currentLevel,
+					maxLevel,
 					color,
 					levelIcon,
 					Context.SkillClickedCallback)
@@ -78,11 +78,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			}
 		}
 
-		private static int GetCurrentSkillLevel(ISkillsModel skillsModel, SkillName skillName) => 
-			skillsModel.SkillLevels.ContainsKey(skillName) 
-				? skillsModel.SkillLevels[skillName] 
+		private static int GetCurrentSkillLevel(ISkillsModel skillsModel, SkillName skillName) =>
+			skillsModel.SkillLevels.ContainsKey(skillName)
+				? skillsModel.SkillLevels[skillName]
 				: 0;
-		
+
 		private static Sprite GetCurrentSkillTypeLevelIcon(SkillType skillType, ISkillPresentationConfig presentationConfig)
 		{
 			switch (skillType)
@@ -97,7 +97,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 
 			return null;
 		}
-		
+
 		private static Color GetCurrentSkillTypeColor(SkillType skillType, ISkillPresentationConfig presentationConfig)
 		{
 			switch (skillType)
@@ -112,7 +112,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 
 			return Color.white;
 		}
-		
+
 		private static string GetCurrentSkillTypeIconText(SkillType skillType, ISkillPresentationConfig presentationConfig)
 		{
 			switch (skillType)

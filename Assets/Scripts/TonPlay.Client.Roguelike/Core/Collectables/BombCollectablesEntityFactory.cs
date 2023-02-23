@@ -39,7 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			entity.AddViewProviderComponent(gameObject);
 			entity.AddPoolObjectComponent(poolObject);
 			entity.AddStickToLocationBlockComponent();
-			entity.AddBombCollectableComponent((IBombCollectableConfig) config);
+			entity.AddBombCollectableComponent((IBombCollectableConfig)config);
 
 			return entity;
 		}

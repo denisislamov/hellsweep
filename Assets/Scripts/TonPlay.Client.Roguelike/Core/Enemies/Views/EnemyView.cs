@@ -9,14 +9,14 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Views
 	{
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
-		
+
 		[SerializeField]
 		private Collider2D _collider;
-		
+
 		private int? _entityId;
 
 		public Collider2D Collider2D => _collider;
-		
+
 		public Rigidbody2D Rigidbody2D => _rigidbody;
 
 		public int EntityId => _entityId ?? EcsEntity.DEFAULT_ID;

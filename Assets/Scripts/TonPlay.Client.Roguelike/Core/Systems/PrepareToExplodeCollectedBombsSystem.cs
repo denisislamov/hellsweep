@@ -12,9 +12,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<PrepareToExplodeCollectedBombsComponent>()
@@ -29,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var position = ref positionPool.Get(entityId);
 
 				var explodedBombs = new List<(float, IBombCollectableConfig)>();
-				
+
 				for (var index = 0; index < prepare.Bombs.Count; index++)
 				{
 					var prepareBomb = prepare.Bombs[index];
@@ -39,12 +37,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					if (prepare.Bombs[index].Item1 <= 0)
 					{
 						explodedBombs.Add(prepareBomb);
-						
+
 						var explosionEntity = world.NewEntity();
 						explosionEntity.AddPositionComponent(position.Position);
 						explosionEntity.AddExplosionComponent(
-							prepareBomb.Item2.DamageProvider, 
-							prepareBomb.Item2.ExplodeCollisionAreaConfig, 
+							prepareBomb.Item2.DamageProvider,
+							prepareBomb.Item2.ExplodeCollisionAreaConfig,
 							prepareBomb.Item2.LayerMask);
 						explosionEntity.AddStackTryApplyDamageComponent();
 						explosionEntity.AddBlockApplyDamageTimerComponent();
@@ -55,7 +53,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					prepare.Bombs.Remove(explodedBomb);
 				}
-				
+
 				explodedBombs.Clear();
 
 				if (prepare.Bombs.Count == 0)
@@ -63,9 +61,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					preparePool.Del(entityId);
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

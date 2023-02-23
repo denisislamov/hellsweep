@@ -32,13 +32,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var spinAroundPosition = ref positionPool.Get(spin.SpinAroundEntityId);
 
 				var dir = Vector2.right.Rotate(spin.LastAngle);
-				var angleDiff = -speed.Speed * Time.deltaTime * 360f % 360f % -360f;
+				var angleDiff = -speed.Speed*Time.deltaTime*360f%360f%-360f;
 				var nextAngle = spin.LastAngle + angleDiff;
-				
+
 				var nextDir = dir.Rotate(angleDiff);
 
 				position.Position = spinAroundPosition.Position +
-									nextDir * spin.Radius;
+									nextDir*spin.Radius;
 
 				spin.LastAngle = nextAngle;
 			}

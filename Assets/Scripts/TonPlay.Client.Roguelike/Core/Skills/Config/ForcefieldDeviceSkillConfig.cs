@@ -17,7 +17,6 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 	public class ForcefieldDeviceSkillConfig : SkillConfig<IForcefieldDeviceSkillLevelConfig>, IForcefieldDeviceSkillConfig
 	{
 		[Header("Forcefield Device")]
-
 		[SerializeField]
 		private EffectView _effectView;
 
@@ -31,10 +30,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public override SkillName SkillName => SkillName.ForcefieldDevice;
 
 		public EffectView EffectView => _effectView;
-		
-		public override IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+
+		public override IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -42,13 +41,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
 
 			[SerializeField]
 			private DamageProvider _damageProvider;
-			
+
 			[SerializeField]
 			private float _size;
 
@@ -61,13 +60,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public int Level => _level;
 
 			public IDamageProvider DamageProvider => _damageProvider;
-			
+
 			public float Size => _size;
 
 			public int CollisionLayerMask => _collisionLayerMask.value;
 
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
-			
+
 			public string Description => _description;
 		}
 	}

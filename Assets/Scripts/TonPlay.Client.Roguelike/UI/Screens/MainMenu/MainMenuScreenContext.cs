@@ -6,6 +6,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 {
 	public class MainMenuScreenContext : ScreenContext, IMainMenuScreenContext
 	{
-		
+
 	}
 }

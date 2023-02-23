@@ -10,13 +10,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Views
 	{
 		[SerializeField]
 		private TextMeshProUGUI _levelText;
-		
+
 		[SerializeField]
 		private GameObject[] _stripes;
 
 		public void SetSize(float size)
 		{
-			var flooredSize = Mathf.FloorToInt(size * _stripes.Length);
+			var flooredSize = Mathf.FloorToInt(size*_stripes.Length);
 
 			for (var i = 1; i <= _stripes.Length; i++)
 			{
@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Views
 				}
 			}
 		}
-		
+
 		public void SetLevelText(string text)
 		{
 			_levelText.SetText(text);

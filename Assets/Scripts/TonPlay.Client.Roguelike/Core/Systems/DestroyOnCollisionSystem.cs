@@ -9,9 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<HasCollidedComponent>()
 							  .Inc<DestroyOnCollisionComponent>()
@@ -43,11 +41,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					}
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
-		
+
 		private static bool DoesLayerMaskContainsLayer(int layerMask, int layer)
 		{
 			return (layerMask & (1 << layer)) != 0;

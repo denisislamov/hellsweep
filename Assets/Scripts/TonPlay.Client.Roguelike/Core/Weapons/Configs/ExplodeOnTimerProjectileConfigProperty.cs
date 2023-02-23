@@ -14,7 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private float _timer;
-		
+
 		[SerializeField]
 		private CollisionAreaConfig _explodeCollisionAreConfig;
 

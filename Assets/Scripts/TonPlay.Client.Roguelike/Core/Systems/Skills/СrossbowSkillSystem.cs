@@ -26,13 +26,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 	public class CrossbowSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly KdTreeStorage _kdTreeStorage;
-		
+
 		private EcsWorld _world;
 		private ICrossbowSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
-		
+
 		public CrossbowSkillSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
@@ -43,10 +43,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (ICrossbowSkillConfig) _sharedData.SkillsConfigProvider.Get(SkillName.Crossbow);
-			
+			_config = (ICrossbowSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.Crossbow);
+
 			_poolIdentity = new ProjectileConfigViewPoolIdentity(_config.ProjectileConfig);
-			
+
 			_pool = _sharedData.CompositeViewPool;
 			_pool.Add(_poolIdentity, _config.ProjectileConfig.PrefabView, 16);
 		}
@@ -57,7 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			TrySpawnProjectile();
 			SyncSightEffectWithSkillLevel();
 		}
-		
+
 		private void SyncSightEffectWithSkillLevel()
 		{
 			var filter = _world
@@ -79,13 +79,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				{
 					continue;
 				}
-				
+
 				ref var rotation = ref rotationPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(effect.ParentEntityId);
 
 				var level = skills.Levels[SkillName.Crossbow];
 				var levelConfig = _config.GetLevelConfig(level);
-				
+
 				SetEffectFieldOfView(effect.Effect, levelConfig.FieldOfView, rotation.Direction);
 			}
 		}
@@ -115,18 +115,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				var level = skills.Levels[SkillName.Crossbow];
 				var levelConfig = _config.GetLevelConfig(level);
-				
+
 				skill.TimeLeft -= Time.deltaTime;
 
 				if (skill.TimeLeft <= 0)
 				{
 					skill.TimeLeft = levelConfig.ShootDelay;
-					
+
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
 
-					var angleStep = levelConfig.FieldOfView / (levelConfig.ProjectileQuantity - 1);
+					var angleStep = levelConfig.FieldOfView/(levelConfig.ProjectileQuantity - 1);
 					for (var idx = 0; idx < levelConfig.ProjectileQuantity; idx++)
 					{
 						CreateProjectile(idx, position.Position, rotation.Direction, angleStep, layer, levelConfig);
@@ -134,7 +134,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private void CreateProjectile(int idx, Vector2 position, Vector2 crossbowDirection, float angleStep, int layer, ICrossbowLevelSkillConfig levelSkillConfig)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
@@ -143,10 +143,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				return;
 			}
 
-			var halfFieldOfView = levelSkillConfig.FieldOfView * 0.5f;
+			var halfFieldOfView = levelSkillConfig.FieldOfView*0.5f;
 			var view = poolObject.Object;
-			var direction = crossbowDirection.Rotate(-halfFieldOfView + angleStep * idx);
-			
+			var direction = crossbowDirection.Rotate(-halfFieldOfView + angleStep*idx);
+
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
 			var transform = view.transform;
@@ -159,13 +159,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			damageOnCollision.DamageProvider = levelSkillConfig.DamageProvider;
-			
+
 			collisionPool.AddOrGet(entity.Id);
-			
+
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, position);
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 		}
-		
+
 		private void AddSkillComponentIfDoesntExist()
 		{
 			var filter = _world
@@ -193,14 +193,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private EcsEntity CreateEffect(Vector2 position, int parentEntityId, float fieldOfView)
 		{
 			var entity = _world.NewEntity();
 			var effect = Object.Instantiate(_config.SightEffectView);
 			var transform = effect.transform;
 			var right = transform.right;
-			
+
 			transform.position = position;
 
 			SetEffectFieldOfView(effect, fieldOfView, right);
@@ -214,11 +214,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			return entity;
 		}
-		
+
 		private static void SetEffectFieldOfView(CrossbowSightEffect effect, float fieldOfView, Vector3 right)
 		{
-			effect.SetLeftBorderDirection(right.ToVector2XY().Rotate(fieldOfView * -0.5f));
-			effect.SetRightBorderDirection(right.ToVector2XY().Rotate(fieldOfView * 0.5f));
+			effect.SetLeftBorderDirection(right.ToVector2XY().Rotate(fieldOfView*-0.5f));
+			effect.SetRightBorderDirection(right.ToVector2XY().Rotate(fieldOfView*0.5f));
 		}
 	}
 }

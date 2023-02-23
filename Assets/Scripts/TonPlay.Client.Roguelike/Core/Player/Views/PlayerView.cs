@@ -12,7 +12,7 @@ namespace TonPlay.Roguelike.Client.Core.Player.Views
 		private Transform _weaponSpawnRoot;
 
 		public Rigidbody2D Rigidbody2D => _rigidbody;
-		
+
 		public Vector2 Position => _rigidbody.position;
 
 		public Transform WeaponSpawnRoot => _weaponSpawnRoot;

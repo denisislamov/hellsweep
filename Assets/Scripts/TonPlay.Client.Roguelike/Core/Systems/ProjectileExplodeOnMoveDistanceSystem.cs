@@ -14,12 +14,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			_layerMask = LayerMask.GetMask("Enemy");
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ProjectileComponent>()
@@ -49,9 +47,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					destroyPool.Add(entityId);
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

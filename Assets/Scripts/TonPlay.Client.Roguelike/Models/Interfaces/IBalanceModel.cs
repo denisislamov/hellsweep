@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IReadOnlyReactiveProperty<int> Gold { get; }
 
 		IReadOnlyReactiveProperty<int> Energy { get; }
-		
+
 		IReadOnlyReactiveProperty<int> MaxEnergy { get; }
 	}
 }

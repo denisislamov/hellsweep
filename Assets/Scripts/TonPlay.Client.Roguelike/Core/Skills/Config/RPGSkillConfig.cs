@@ -16,7 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		[Header("RPG")]
 		[SerializeField]
 		private ProjectileConfig _projectileConfig;
-		
+
 		[SerializeField]
 		private LevelConfig[] _levelConfigs;
 
@@ -26,10 +26,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		public override SkillName SkillName => SkillName.RPG;
-		
-		public override IRPGSkillLevelConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+
+		public override IRPGSkillLevelConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -37,16 +37,16 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
 
 			[SerializeField]
 			private float _delay;
-			
+
 			[SerializeField]
 			private int _projectileQuantity;
-			
+
 			[SerializeField]
 			private DamageProvider _damageProvider;
 

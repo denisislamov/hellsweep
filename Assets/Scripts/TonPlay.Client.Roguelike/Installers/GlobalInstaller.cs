@@ -19,18 +19,18 @@ namespace TonPlay.Client.Roguelike.Installers
 
 		[SerializeField]
 		private LocationConfigProvider _locationConfigProvider;
-		
+
 		public override void InstallBindings()
 		{
 			SignalsInstaller.Install(Container);
-			
+
 			Container.BindInterfacesTo<BootstrapService>().AsSingle();
 			Container.BindInterfacesTo<GameModelProvider>().AsSingle();
 			Container.BindInterfacesTo<MetaGameModelProvider>().AsSingle();
-			
+
 			Container.Bind<ILocationConfigProvider>().FromInstance(_locationConfigProvider).AsSingle();
 			Container.Bind<IProfileConfigProvider>().FromInstance(_profileConfigProvider).AsSingle();
-			
+
 			Container.BindInterfacesTo<LocationConfigStorage>().AsSingle();
 		}
 	}

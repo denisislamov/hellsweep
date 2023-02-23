@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
-	public class GuardianSkillSystem  : IEcsInitSystem, IEcsRunSystem
+	public class GuardianSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly KdTreeStorage _kdTreeStorage;
 
@@ -34,23 +34,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		public void Init(EcsSystems systems)
 		{
 			_sharedData = systems.GetShared<ISharedData>();
-			
+
 			_world = systems.GetWorld();
-			_config = (IGuardianSkillConfig) _sharedData.SkillsConfigProvider.Get(SkillName.Guardian);
+			_config = (IGuardianSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.Guardian);
 
 			_poolIdentity = new ProjectileConfigViewPoolIdentity(_config.ProjectileConfig);
-			
+
 			_pool = _sharedData.CompositeViewPool;
 			_pool.Add(_poolIdentity, _config.ProjectileConfig.PrefabView, 16);
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
 			AddSkillComponentIfDoesntExist();
 			TrySpawnProjectile();
 			TryDestroyProjectiles();
 		}
-		
+
 		private void TryDestroyProjectiles()
 		{
 			var filter = _world
@@ -96,28 +96,28 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				var level = skills.Levels[_config.SkillName];
 				var levelConfig = _config.GetLevelConfig(level);
-				
+
 				skill.RefreshLeftTime -= Time.deltaTime;
 
 				if (skill.RefreshLeftTime <= 0)
 				{
 					skill.RefreshLeftTime = levelConfig.Cooldown + levelConfig.ActiveTime;
-					
+
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
 
-					var angleInterval = 360f / levelConfig.Quantity;
+					var angleInterval = 360f/levelConfig.Quantity;
 					for (var i = 0; i < levelConfig.Quantity; i++)
 					{
-						var spawnAngle = angleInterval * i;
+						var spawnAngle = angleInterval*i;
 
 						CreateProjectile(position.Position, spawnAngle, layer, entityId, levelConfig);
 					}
 				}
 			}
 		}
-		
+
 		private void CreateProjectile(Vector2 position, float angle, int layer, int playerEntityId, IGuardianSkillLevelConfig levelConfig)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
@@ -126,12 +126,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				return;
 			}
 			var view = poolObject.Object;
-			
+
 			var speedPool = _world.GetPool<SpeedComponent>();
 			var movementPool = _world.GetPool<MovementComponent>();
 
 			var direction = GetRandomDirection();
-			var spawnPosition = position + Vector2.right.Rotate(angle) * levelConfig.Radius;
+			var spawnPosition = position + Vector2.right.Rotate(angle)*levelConfig.Radius;
 
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
@@ -139,18 +139,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			transform.position = spawnPosition;
 
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
-			
+
 			entity.AddSpinAroundEntityPositionComponent(playerEntityId, levelConfig.Radius, angle);
 			entity.AddGuardianProjectileComponent(levelConfig.ActiveTime);
-			
+
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
 
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 			entity.AddDrawDebugKdTreePositionComponent();
-			
+
 			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
 			ref var speed = ref speedPool.Get(entity.Id);
-			
+
 			speed.Speed = GetSpeed(levelConfig);
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 
@@ -186,7 +186,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private static float GetSpeed(IGuardianSkillLevelConfig levelConfig) => levelConfig.Speed;
 	}
 }

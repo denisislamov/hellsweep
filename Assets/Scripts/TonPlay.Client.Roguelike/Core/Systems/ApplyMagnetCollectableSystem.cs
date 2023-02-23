@@ -11,9 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ApplyMagnetCollectableComponent>()
@@ -44,9 +42,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				while (collectableEntityIds.Count > 0)
 				{
 					var collectableEntityId = collectableEntityIds.Pop();
-					
-					if (!magnetCollectableHashSet.Contains(collectableEntityId) || 
-						destroyPool.Has(collectableEntityId) || 
+
+					if (!magnetCollectableHashSet.Contains(collectableEntityId) ||
+						destroyPool.Has(collectableEntityId) ||
 						!magnetCollectablePool.Has(collectableEntityId))
 					{
 						continue;
@@ -67,17 +65,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						ref var activeMagnet = ref activeMagnetPool.Add(appliedEntityId);
 						activeMagnet.TimeLeft += config.ActiveTime;
 						activeMagnet.MagnetRadius = config.MagnetRadius;
-						activeMagnet.ExcludeEntityIds = new HashSet<int>() { collectableEntityId };
+						activeMagnet.ExcludeEntityIds = new HashSet<int>() {collectableEntityId};
 					}
 				}
-				
+
 				apply.CollectableEntityIds.Clear();
 
 				applyPool.Del(appliedEntityId);
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

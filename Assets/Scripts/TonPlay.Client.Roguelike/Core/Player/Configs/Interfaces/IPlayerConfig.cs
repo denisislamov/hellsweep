@@ -7,15 +7,15 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces
 	public interface IPlayerConfig
 	{
 		string Id { get; }
-		
+
 		PlayerView Prefab { get; }
-		
+
 		ICollisionAreaConfig CollisionAreaConfig { get; }
-		
+
 		int StartHealth { get; }
-		
+
 		IMovementConfig MovementConfig { get; }
-		
+
 		int CollisionAreaMask { get; }
 	}
 }

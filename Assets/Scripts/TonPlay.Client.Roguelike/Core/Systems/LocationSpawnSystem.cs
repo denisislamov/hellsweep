@@ -57,10 +57,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				for (var col = 0; col < matrix[row].Count; col++)
 				{
 					var blockEntity = world.NewEntity();
-					var x = col - matrix[row].Count / 2;
-					var y = row - matrix.Count / 2;
+					var x = col - matrix[row].Count/2;
+					var y = row - matrix.Count/2;
 					var prefab = matrix[row][col];
-					var position = new Vector2(size.x * x, size.y * y);
+					var position = new Vector2(size.x*x, size.y*y);
 
 					var view = Object.Instantiate(prefab, _blocksRoot);
 
@@ -91,15 +91,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			var playerPosition = systems.GetShared<ISharedData>().PlayerPositionProvider.Position;
 			var nearestToPlayer = FindNearestBlockEntityId(playerPosition);
-			
+
 			location.LastNearestBlockToPlayerEntityId = nearestToPlayer;
 		}
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<LocationComponent>().End();
 			var blockPool = world.GetPool<LocationBlockComponent>();
@@ -108,7 +106,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var playerPosition = systems.GetShared<ISharedData>().PlayerPositionProvider.Position;
 
 			var nearestBlockEntityId = FindNearestBlockEntityId(playerPosition);
-			
+
 			foreach (var entityId in filter)
 			{
 				ref var location = ref locationPool.Get(entityId);
@@ -117,7 +115,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					continue;
 				}
-				
+
 				ref var lastNearest = ref blockPool.Get(location.LastNearestBlockToPlayerEntityId);
 				ref var currentNearest = ref blockPool.Get(nearestBlockEntityId);
 
@@ -129,10 +127,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					var lastNearestId = lastNearest.Id - currentNearest.Id;
 
 					diff = lastNearestId - currentNearestId;
-					
+
 					var vector2 = new Vector2(diff.x, diff.y);
 					vector2.Normalize();
-					
+
 					diff = new Vector2Int(Mathf.RoundToInt(vector2.x), Mathf.RoundToInt(vector2.y));
 				}
 
@@ -167,11 +165,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					{
 						continue;
 					}
-					
+
 					ref var nearestBlockPosition = ref positionPool.Get(nearestBlockEntityId);
-					
+
 					var index = _kdTreeStorage.KdTreeEntityIdToPositionIndexMap[nearestBlockEntityId];
-					
+
 					var oldPosition = _kdTreeStorage.KdTree.Points[index];
 					var currentPosition = nearestBlockPosition.Position;
 					var diff = new Vector2(currentPosition.x - oldPosition.x, currentPosition.y - oldPosition.y);
@@ -179,7 +177,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					position.Position += diff;
 				}
 			}
-			
+
 			_movedBlockEntityIds.Clear();
 
 			filter = world.Filter<LocationBlockComponent>().Inc<PositionComponent>().End();
@@ -191,9 +189,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			_kdTreeStorage.KdTree.Rebuild();
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void MoveBlocksRow(
@@ -265,7 +261,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var newNeighborPosition = ref positionPool.Get(newNeighborBlockEntityId);
 
 				targetPosition.Position = newNeighborPosition.Position + new Vector2(blockSize.x*diff.x, blockSize.y*diff.y);
-				
+
 				movedBlockEntityIds.Add(targetBlockEntityId);
 
 				if (diff.x < 0)

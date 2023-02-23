@@ -27,9 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 
 			var filter = world
@@ -60,35 +58,33 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				magnetizableCollectableHashSet ??= magnetizableCollectableRawEntitiesArray.ToHashSet();
-				
+
 				ref var activeMagnet = ref activeMagnetPool.Get(entityId);
 
 				magnetizableCollectableHashSet.ExceptWith(activeMagnet.ExcludeEntityIds);
-				
+
 				MagnetNearCollectables(
-					entityId, 
-					magnetizableCollectableHashSet, 
-					magnetToEntityPool, 
-					positionPool, 
+					entityId,
+					magnetizableCollectableHashSet,
+					magnetToEntityPool,
+					positionPool,
 					destroyPool,
 					stickEaseMovementToEntityPool,
 					easeMovementPool,
 					ref activeMagnet);
-				
+
 				magnetizableCollectableHashSet.UnionWith(activeMagnet.ExcludeEntityIds);
 
 				activeMagnet.TimeLeft -= Time.deltaTime;
-				
+
 				if (activeMagnet.TimeLeft <= 0)
 				{
 					activeMagnetPool.Del(entityId);
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
-		
+
 		private void MagnetNearCollectables(
 			int appliedEntityId,
 			ICollection<int> magnetizableCollectableCollection,

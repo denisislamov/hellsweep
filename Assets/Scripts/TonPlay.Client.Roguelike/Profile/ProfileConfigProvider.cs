@@ -15,22 +15,22 @@ namespace TonPlay.Client.Roguelike.Profile
 		public IProfileConfig Get(int level)
 		{
 			if (level - 1 >= _configs.Count) return null;
-			
+
 			var config = _configs[level - 1];
 			config.level = level;
-			
+
 			return _configs[level - 1];
 		}
-		
+
 		[Serializable]
 		private class ProfileConfig : IProfileConfig
 		{
 			[HideInInspector]
 			public int level;
-			
+
 			[SerializeField]
 			private float _experienceToLevelUp;
-			
+
 			[SerializeField]
 			private int _maxEnergy;
 

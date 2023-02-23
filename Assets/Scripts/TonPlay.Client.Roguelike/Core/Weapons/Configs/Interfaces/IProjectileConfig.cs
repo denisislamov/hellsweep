@@ -9,13 +9,13 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 		ProjectileView PrefabView { get; }
 
 		IMovementConfig MovementConfig { get; }
-		
+
 		IViewPoolIdentity Identity { get; }
-		
+
 		int Layer { get; }
 
 		bool HasProperty<T>() where T : IProjectileConfigProperty;
-		
+
 		T GetProperty<T>() where T : IProjectileConfigProperty;
 	}
 }

@@ -48,11 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<PlayerComponent>()
@@ -69,17 +65,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					break;
 				}
 			}
-#region Profiling End
-
-			UnityEngine.Profiling.Profiler.EndSample();
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 		private bool TryGenerateSkillsToUpgradeAndShowScreen(int entityId)
 		{
 			var levelUpgradeEventPool = _world.GetPool<LevelUpgradeEvent>();
 			var openedUiPool = _world.GetPool<OpenedUIComponent>();
-			
+
 			ref var upgradeEvent = ref levelUpgradeEventPool.Get(entityId);
 			upgradeEvent.Used = true;
 
@@ -89,7 +81,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			}
 
 			upgradeEvent.Count--;
-			
+
 
 			var skillsToUpgrade = GenerateSkillsToUpgrade(entityId);
 
@@ -104,7 +96,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			SetGamePauseState(true);
 
 			ShowSkillChoiceScreen(skillsToUpgrade, entityId);
-			
+
 			return true;
 		}
 
@@ -167,20 +159,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var openedUiPool = _world.GetPool<OpenedUIComponent>();
 			var levelUpgradeEventPool = _world.GetPool<LevelUpgradeEvent>();
-			
+
 			openedUiPool.Del(entityId);
 
 			UpgradeChosenSkill(updatedSkill, entityId);
 			SetGamePauseState(false);
 			SyncPlayerSkillsModel(entityId);
-			
+
 			ref var upgradeEvent = ref levelUpgradeEventPool.Get(entityId);
 			if (upgradeEvent.Count > 0)
 			{
 				TryGenerateSkillsToUpgradeAndShowScreen(entityId);
 			}
 		}
-		
+
 		private void SyncPlayerSkillsModel(int entityId)
 		{
 			var playerPool = _world.GetPool<PlayerComponent>();
@@ -188,7 +180,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				var skillsPool = _world.GetPool<SkillsComponent>();
 				ref var skills = ref skillsPool.Get(entityId);
-				
+
 				var skillsData = _gameModel.PlayerModel.SkillsModel.ToData();
 
 				foreach (var kvp in skills.Levels)
@@ -200,7 +192,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 					skillsData.SkillLevels[kvp.Key] = kvp.Value;
 				}
-				
+
 				_gameModel.PlayerModel.SkillsModel.Update(skillsData);
 			}
 		}

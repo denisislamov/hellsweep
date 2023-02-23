@@ -19,7 +19,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		[Header("Guardian")]
 		[SerializeField]
 		private ProjectileConfig _projectileConfig;
-		
+
 		[SerializeField]
 		private LevelConfig[] _levelConfigs;
 
@@ -28,12 +28,12 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
-		
+
 		public override SkillName SkillName => SkillName.Guardian;
 
-		public override IGuardianSkillLevelConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+		public override IGuardianSkillLevelConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -41,28 +41,28 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
-			
+
 			[SerializeField]
 			private int _quantity;
-			
+
 			[SerializeField]
 			private float _speed;
-			
+
 			[SerializeField]
 			private float _activeTime;
-			
+
 			[SerializeField]
 			private float _cooldown;
-			
+
 			[SerializeField]
 			private DamageProvider _damageProvider;
-			
+
 			[SerializeField]
 			private float _radius;
-			
+
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
 
@@ -74,7 +74,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public float Cooldown => _cooldown;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public float Radius => _radius;
-			
+
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 			public string Description => _description;
 		}

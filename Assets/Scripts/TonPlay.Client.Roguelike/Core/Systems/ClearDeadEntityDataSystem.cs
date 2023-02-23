@@ -9,9 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<ISharedData>();
 
@@ -21,7 +19,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			var damageOnCollisionPool = world.GetPool<DamageOnCollisionComponent>();
 			var collisionPool = world.GetPool<CollisionComponent>();
-			
+
 			foreach (var entityId in filter)
 			{
 				if (damageOnCollisionPool.Has(entityId))
@@ -34,9 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					collisionPool.Del(entityId);
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

@@ -11,9 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<MovementComponent>()
 							  .Inc<PositionComponent>()
@@ -29,7 +27,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var speedComponents = world.GetPool<SpeedComponent>();
 			var applyForceComponents = world.GetPool<ApplyForceComponent>();
 
-			foreach (var entityId in filter) {
+			foreach (var entityId in filter)
+			{
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var positionComponent = ref positionComponents.Get(entityId);
 
@@ -38,10 +37,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				applyForceComponents.TryGet(entityId, ref applyForce);
 
 				var speed = speedComponents.Has(entityId) ? speedComponents.Get(entityId).Speed : 1f;
-				
-				var targetPosition = positionComponent.Position 
-									 + movementComponent.Direction * speed * Time.deltaTime 
-									 + applyForce.Force * Time.deltaTime;
+
+				var targetPosition = positionComponent.Position
+									 + movementComponent.Direction*speed*Time.deltaTime
+									 + applyForce.Force*Time.deltaTime;
 
 				if (lerpComponents.Has(entityId))
 				{
@@ -53,9 +52,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					positionComponent.Position = targetPosition;
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

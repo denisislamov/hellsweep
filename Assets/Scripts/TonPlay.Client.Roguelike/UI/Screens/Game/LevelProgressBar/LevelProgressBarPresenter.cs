@@ -13,13 +13,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar
 	{
 		private readonly ProgressBarPresenter.Factory _progressBarPresenterFactory;
 		private readonly IGameModelProvider _gameModelProvider;
-		
+
 		private IDisposable _subscription;
 
 		public LevelProgressBarPresenter(
-			ILevelProgressBarView view, 
+			ILevelProgressBarView view,
 			ILevelProgressBarContext context,
-			ProgressBarPresenter.Factory progressBarPresenterFactory) 
+			ProgressBarPresenter.Factory progressBarPresenterFactory)
 			: base(view, context)
 		{
 			_progressBarPresenterFactory = progressBarPresenterFactory;
@@ -39,22 +39,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar
 		{
 			View.SetLevelText(Context.Level.Value.ToString());
 		}
-		
+
 		private void AddLevelSubscription()
 		{
 			_subscription?.Dispose();
-			
+
 			_subscription = Context.Level.Subscribe(level => UpdateLevelView());
 		}
 
 		private void AddNestedProgressBarPresenter()
 		{
-			var presenter = _progressBarPresenterFactory.Create(View, 
+			var presenter = _progressBarPresenterFactory.Create(View,
 				new ProgressBarContext(Context.Value, Context.MaxValue));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		internal class Factory : PlaceholderFactory<ILevelProgressBarView, ILevelProgressBarContext, LevelProgressBarPresenter>
 		{
 		}

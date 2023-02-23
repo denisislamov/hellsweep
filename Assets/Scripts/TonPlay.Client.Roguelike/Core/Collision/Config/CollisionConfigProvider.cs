@@ -24,7 +24,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Config
 		{
 			[SerializeField, Layer]
 			private int _layer;
-			
+
 			[SerializeField]
 			private LayerMask _layerMask;
 

@@ -5,7 +5,7 @@ namespace TonPlay.Client.Roguelike.Models.Data
 	public class MetaGameData : IData
 	{
 		public ProfileData ProfileData { get; set; }
-		
+
 		public LocationsData LocationsData { get; set; }
 	}
 }

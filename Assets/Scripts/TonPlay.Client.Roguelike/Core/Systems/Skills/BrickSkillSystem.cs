@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
-		
+
 		public BrickSkillSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
@@ -90,7 +90,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					{
 						skill.SpawnQuantity = levelConfig.Quantity;
 					}
-					
+
 					CreateProjectile(position.Position, layer, levelConfig);
 
 					skill.SpawnQuantity--;
@@ -135,7 +135,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			speed.Speed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
 						  /_config.TimeToReachDistance;
-			
+
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
 
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);

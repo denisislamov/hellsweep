@@ -13,10 +13,10 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private float _distance;
-		
+
 		[SerializeField]
 		private CollisionAreaConfig _explodeCollisionAreConfig;
-		
+
 		[SerializeField]
 		private DamageProvider _damage;
 

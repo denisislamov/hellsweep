@@ -8,20 +8,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 
 			var filter = world.Filter<SyncPositionWithAnotherEntityComponent>().Inc<PositionComponent>().Exc<InactiveComponent>().End();
-			
+
 			var syncPool = world.GetPool<SyncPositionWithAnotherEntityComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
 
 			foreach (var entityId in filter)
 			{
 				ref var sync = ref syncPool.Get(entityId);
-				
+
 				if (positionPool.Has(sync.ParentEntityId))
 				{
 					ref var position = ref positionPool.Get(entityId);
@@ -29,9 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					position.Position = parentPosition.Position;
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

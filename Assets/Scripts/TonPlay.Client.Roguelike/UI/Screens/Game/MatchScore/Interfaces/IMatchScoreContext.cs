@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces
 	public interface IMatchScoreContext : IScreenContext
 	{
 		IReadOnlyReactiveProperty<int> Gold { get; }
-		
+
 		IReadOnlyReactiveProperty<int> DeadEnemies { get; }
 	}
 }

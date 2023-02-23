@@ -11,14 +11,14 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 	{
 		[SerializeField]
 		private LocationConfig[] _configs;
-		
+
 		private Dictionary<string, ILocationConfig> _map;
 
-		private IReadOnlyDictionary<string, ILocationConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ILocationConfig) _);
+		private IReadOnlyDictionary<string, ILocationConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ILocationConfig)_);
 
-		public ILocationConfig Get(string id) => 
-			!Map.ContainsKey(id) 
-				? default(ILocationConfig) 
+		public ILocationConfig Get(string id) =>
+			!Map.ContainsKey(id)
+				? default(ILocationConfig)
 				: Map[id];
 
 		public ILocationConfig[] Configs => _configs;

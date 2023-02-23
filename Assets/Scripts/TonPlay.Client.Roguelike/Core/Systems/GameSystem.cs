@@ -27,11 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 
 			var filter = world.Filter<GameComponent>().Inc<GameTimeComponent>().End();
@@ -50,11 +46,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				UpdateGameModelTime(ref time);
 			}
-#region Profiling End
-
-			UnityEngine.Profiling.Profiler.EndSample();
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void UpdateGameModelTime(ref GameTimeComponent component)

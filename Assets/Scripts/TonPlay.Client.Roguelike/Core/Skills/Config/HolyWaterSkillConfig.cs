@@ -15,16 +15,16 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		[Header("Holy Water")]
 		[SerializeField]
 		private ProjectileConfig _bottleProjectileConfig;
-		
+
 		[SerializeField]
 		private ProjectileConfig _damagingAreaProjectileConfig;
-		
+
 		[SerializeField]
 		private LayerMask _collisionLayerMask;
-		
+
 		[SerializeField]
 		private float _delayBetweenThrowingProjectiles;
-		
+
 		[SerializeField]
 		private LevelConfig[] _levelConfigs;
 
@@ -36,14 +36,14 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public IProjectileConfig BottleProjectileConfig => _bottleProjectileConfig;
 		public IProjectileConfig DamagingAreaProjectileConfig => _damagingAreaProjectileConfig;
-		
+
 		public float DelayBetweenThrowingProjectiles => _delayBetweenThrowingProjectiles;
-		
+
 		public int CollisionLayerMask => _collisionLayerMask.value;
 
-		public override IHolyWaterSkillLevelConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+		public override IHolyWaterSkillLevelConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -51,25 +51,25 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
 
 			[SerializeField]
 			private int _quantity;
-			
+
 			[SerializeField]
 			private float _cooldown;
-			
+
 			[SerializeField]
 			private DamageProvider _damageProvider;
 
 			public int Level => _level;
-			
+
 			public int Quantity => _quantity;
-			
+
 			public float Cooldown => _cooldown;
-			
+
 			public IDamageProvider DamageProvider => _damageProvider;
 			public string Description => _description;
 		}

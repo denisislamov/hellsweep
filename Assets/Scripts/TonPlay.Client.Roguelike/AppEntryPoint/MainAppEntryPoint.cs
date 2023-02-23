@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 	{
 		private readonly IUIService _uiService;
 		public MainAppEntryPoint(
-			ISceneService sceneService, 
+			ISceneService sceneService,
 			string sceneName,
 			IUIService uiService) : base(sceneService, sceneName)
 		{
@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 		public override async UniTask ProcessEntrance()
 		{
 			await base.ProcessEntrance();
-			
+
 			_uiService.Open<MainMenuScreen, MainMenuScreenContext>(new MainMenuScreenContext());
 		}
 	}

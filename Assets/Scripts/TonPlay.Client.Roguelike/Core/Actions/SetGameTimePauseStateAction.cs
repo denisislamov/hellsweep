@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Actions
 {
-	[CreateAssetMenu(fileName = nameof(SetGameTimePauseStateAction), 
+	[CreateAssetMenu(fileName = nameof(SetGameTimePauseStateAction),
 		menuName = AssetMenuConstants.ACTIONS + nameof(SetGameTimePauseStateAction))]
 	public class SetGameTimePauseStateAction : ScriptableAction
 	{
 		[SerializeField]
 		private bool _state;
-		
+
 		public override void Execute(int callerEntityIdx, ISharedData sharedData)
 		{
 			var world = sharedData.World;

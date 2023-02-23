@@ -6,7 +6,7 @@ namespace TonPlay.Client.Roguelike.Core.Waves.Interfaces
 	public interface ILevelEnemyWaveConfigProvider
 	{
 		IEnumerable<IEnemyWaveConfig> AllWaves { get; }
-		
+
 		IEnemyWaveGroupConfig Get(long ticks);
 	}
 }

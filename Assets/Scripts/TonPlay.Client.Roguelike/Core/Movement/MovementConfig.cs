@@ -9,7 +9,7 @@ namespace TonPlay.Roguelike.Client.Core.Movement
 	{
 		[SerializeField]
 		private float _startSpeed;
-		
+
 		[SerializeField]
 		private float _acceleration;
 

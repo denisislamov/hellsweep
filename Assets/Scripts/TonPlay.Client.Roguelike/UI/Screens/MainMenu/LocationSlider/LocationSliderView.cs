@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 	{
 		[SerializeField]
 		private ButtonView _leftButton;
-		
+
 		[SerializeField]
 		private ButtonView _rightButton;
 
@@ -35,12 +35,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 		{
 			_titleText.SetText(text);
 		}
-		
+
 		public void SetSubtitleText(string text)
 		{
 			_subtitleText.SetText(text);
 		}
-		
+
 		public void SetIcon(Sprite sprite)
 		{
 			_icon.sprite = sprite;

@@ -9,13 +9,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces
 	public interface IDefeatGameView : IView
 	{
 		ITimerView TimerView { get; }
-		
+
 		IButtonView ConfirmButtonView { get; }
 
 		void SetTitleText(string text);
-		
+
 		void SetNewRecordText(string text);
-		
+
 		void SetNewRecordActiveState(bool state);
 
 		void SetLevelTitleText(string text);

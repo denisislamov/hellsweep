@@ -16,19 +16,19 @@ namespace TonPlay.Client.Roguelike.Profile
 			_configProvider = configProvider;
 			_metaGameModelProvider = metaGameModelProvider;
 		}
-		
+
 		public async UniTask Load()
 		{
 			var config = _configProvider.Get(1);
 			var metaGameModel = _metaGameModelProvider.Get();
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
-			
+
 			data.Level = config.Level;
 			data.MaxExperience = config.ExperienceToLevelUp;
 			data.BalanceData.Energy = config.MaxEnergy;
 			data.BalanceData.MaxEnergy = config.MaxEnergy;
-			
+
 			model.Update(data);
 		}
 	}

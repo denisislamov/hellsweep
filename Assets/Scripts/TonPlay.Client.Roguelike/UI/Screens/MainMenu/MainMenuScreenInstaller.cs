@@ -15,32 +15,32 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
-			
+
 			Bind(subContainer);
-			
+
 			Container.Bind<IScreenFactory<IMainMenuScreenContext, MainMenuScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
-			
+
 			Container.Bind<IScreenFactory<MainMenuScreenContext, MainMenuScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
 		}
-		
+
 		private void Bind(DiContainer subContainer)
 		{
 			subContainer.Bind<IScreenFactory<IMainMenuScreenContext, MainMenuScreen>>()
 						.To<MainMenuScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-			
+
 			subContainer.Bind<IScreenFactory<MainMenuScreenContext, MainMenuScreen>>()
 						.To<MainMenuScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-			
+
 			subContainer.BindFactory<IMainMenuView, IMainMenuScreenContext, MainMenuPresenter, MainMenuPresenter.Factory>();
 			subContainer.BindFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter, ProfileBarPresenter.Factory>();
 			subContainer.BindFactory<ILocationSliderView, ILocationSliderContext, LocationSliderPresenter, LocationSliderPresenter.Factory>();

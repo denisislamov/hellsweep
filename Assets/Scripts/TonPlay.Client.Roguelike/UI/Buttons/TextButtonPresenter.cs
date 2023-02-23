@@ -10,12 +10,12 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 	public class TextButtonPresenter : Presenter<IButtonView, ITextButtonContext>, IButtonPresenter
 	{
 		public TextButtonPresenter(
-			IButtonView view, 
+			IButtonView view,
 			ITextButtonContext context) : base(view, context)
 		{
 			ChangeViewText();
 		}
-		
+
 		private void ChangeViewText()
 		{
 			View.SetText(Context.Text);

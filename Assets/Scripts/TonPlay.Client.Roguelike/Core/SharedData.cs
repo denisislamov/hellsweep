@@ -24,49 +24,49 @@ namespace TonPlay.Client.Roguelike.Core
 		public IPlayerConfigProvider PlayerConfigProvider { get; }
 
 		public IEnemyConfigProvider EnemyConfigProvider { get; }
-		
+
 		public IWeaponConfigProvider WeaponConfigProvider { get; }
-		
+
 		public ICollisionConfigProvider CollisionConfigProvider { get; }
 
 		public IGameModel GameModel { get; }
 
 		public IPositionProvider PlayerPositionProvider { get; private set; }
-		
+
 		public string PlayerWeaponId { get; private set; }
-		
+
 		public ICompositeViewPool CompositeViewPool { get; }
-		
+
 		public ICollectableConfigProvider CollectablesConfigProvider { get; }
 
 		public ILevelEnemyWaveConfigProvider EnemyWavesConfigProvider { get; }
-		
+
 		public ISkillConfigProvider SkillsConfigProvider { get; }
-		
+
 		public KdTreeStorage CollectablesKdTreeStorage { get; private set; }
-		
+
 		public SignalBus SignalBus { get; }
-		
+
 		public DamageTextView DamageTextViewPrefab { get; }
 
 		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
-		
+
 		public EcsWorld World { get; private set; }
-		
+
 		public DiContainer Container { get; private set; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
 			IEnemyConfigProvider enemyConfigProvider,
 			IWeaponConfigProvider weaponConfigProvider,
-			IGameModelProvider gameModelProvider, 
-			ICollisionConfigProvider collisionConfigProvider, 
-			ILevelEnemyWaveConfigProvider enemyWavesConfigProvider, 
-			ICollectableConfigProvider collectablesConfigProvider, 
-			ISkillConfigProvider skillsConfigProvider, 
+			IGameModelProvider gameModelProvider,
+			ICollisionConfigProvider collisionConfigProvider,
+			ILevelEnemyWaveConfigProvider enemyWavesConfigProvider,
+			ICollectableConfigProvider collectablesConfigProvider,
+			ISkillConfigProvider skillsConfigProvider,
 			IPlayersLevelsConfigProvider playersLevelsConfigProvider,
-			ICompositeViewPool compositeViewPool, 
-			SignalBus signalBus, 
+			ICompositeViewPool compositeViewPool,
+			SignalBus signalBus,
 			DamageTextView damageTextViewPrefab,
 			DiContainer container)
 		{
@@ -104,7 +104,7 @@ namespace TonPlay.Client.Roguelike.Core
 		{
 			World = world;
 		}
-		
+
 		public class Factory : PlaceholderFactory<SharedData>
 		{
 		}

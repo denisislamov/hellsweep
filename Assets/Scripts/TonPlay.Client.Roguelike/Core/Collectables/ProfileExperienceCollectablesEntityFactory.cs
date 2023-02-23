@@ -32,7 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			var gameObject = view.gameObject;
 
 			view.transform.position = position;
-			
+
 			entity.AddTransformComponent(gameObject.transform);
 			entity.AddCollectableComponent(config);
 			entity.AddPositionComponent(position);

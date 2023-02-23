@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private LayerMask _layerMask;
-		
+
 		public int LayerMask => _layerMask.value;
 	}
 }

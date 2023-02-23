@@ -76,7 +76,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var positionPool = _world.GetPool<PositionComponent>();
 			var stackTryApplyDamagePool = _world.GetPool<StackTryApplyDamageComponent>();
 
-			var overlapPools = OverlapPools.Create(_world);
+			var overlapParams = OverlapParams.Create(_world);
+			overlapParams.SetFilter(overlapParams.CreateDefaultFilterMask().End());
+			overlapParams.Build();
 
 			foreach (var entityId in filter)
 			{
@@ -93,13 +95,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 
 				var count = _overlapExecutor.Overlap(
-					_query, 
-					position.Position, 
-					levelConfig.CollisionAreaConfig, 
-					ref _overlappedEntities, 
+					_query,
+					position.Position,
+					levelConfig.CollisionAreaConfig,
+					ref _overlappedEntities,
 					levelConfig.CollisionLayerMask,
-					overlapPools);
-				
+					overlapParams);
+
 				for (var i = 0; i < count; i++)
 				{
 					var overlappedEntityId = _overlappedEntities[i];
@@ -111,7 +113,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						VictimEntityId = overlappedEntityId,
 					});
 				}
-				
+
 				_overlappedEntities.Clear();
 			}
 		}
@@ -138,7 +140,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var level = skills.Levels[SkillName.ForcefieldDevice];
 				var levelConfig = _config.GetLevelConfig(level);
 
-				var requiredSqrMagnitude = levelConfig.Size * levelConfig.Size;
+				var requiredSqrMagnitude = levelConfig.Size*levelConfig.Size;
 				var currentSqrMagnitude = effectTransform.Transform.localScale.sqrMagnitude;
 
 				if (Math.Abs(requiredSqrMagnitude - currentSqrMagnitude) > 0.0001f)
@@ -236,7 +238,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					{
 						entity.AddLayerComponent(_playerProjectilesLayer);
 					}
-					
+
 					if (!entity.Has<CollisionComponent>())
 					{
 						entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, levelConfig.CollisionLayerMask);
@@ -281,10 +283,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					if (entity.Has<KdTreeElementComponent>())
 					{
 						_playerProjectilesKdTreeStorage.RemoveEntity(entity.Id);
-						
+
 						entity.Del<KdTreeElementComponent>();
 					}
-					
+
 					if (entity.Has<CollisionComponent>())
 					{
 						entity.Del<CollisionComponent>();

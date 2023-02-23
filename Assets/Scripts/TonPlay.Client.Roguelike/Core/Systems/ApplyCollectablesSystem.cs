@@ -10,13 +10,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<ApplyCollectableComponent>()
-						.End(); 
+						.End();
 			var pool = world.GetPool<ApplyCollectableComponent>();
 			var collectablePool = world.GetPool<CollectableComponent>();
 
@@ -56,11 +54,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				world.DelEntity(entityId);
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
-		
+
 		private void ApplyHealth(EcsPool<ApplyHealthCollectableComponent> pool, float value, int entityId, int collectableEntityId)
 		{
 			if (pool.Has(entityId))
@@ -124,7 +120,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
 			}
 		}
-		
+
 		private void ApplyMagnet(
 			EcsPool<ApplyMagnetCollectableComponent> applyPool,
 			int entityId,
@@ -138,10 +134,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			else
 			{
 				ref var exp = ref applyPool.Add(entityId);
-				exp.CollectableEntityIds = new HashSet<int>() { collectableEntityId };
+				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
 			}
 		}
-		
+
 		private void ApplyBomb(
 			EcsPool<ApplyBombCollectableComponent> applyPool,
 			int entityId,
@@ -155,7 +151,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			else
 			{
 				ref var exp = ref applyPool.Add(entityId);
-				exp.CollectableEntityIds = new HashSet<int>() { collectableEntityId };
+				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
 			}
 		}
 	}

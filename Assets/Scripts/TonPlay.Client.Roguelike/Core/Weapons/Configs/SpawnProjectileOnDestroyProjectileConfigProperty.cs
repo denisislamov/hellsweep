@@ -11,12 +11,12 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private ProjectileConfig _projectileConfig;
-		
+
 		[SerializeField]
 		private LayerMask _collisionLayerMask;
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
-		
+
 		public int CollisionLayerMask => _collisionLayerMask.value;
 	}
 }

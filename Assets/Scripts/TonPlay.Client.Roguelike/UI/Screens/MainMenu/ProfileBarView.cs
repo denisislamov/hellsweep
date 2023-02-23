@@ -11,10 +11,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 	{
 		[SerializeField]
 		private TextMeshProUGUI _levelText;
-		
+
 		[SerializeField]
 		private TextMeshProUGUI _energyText;
-		
+
 		[SerializeField]
 		private TextMeshProUGUI _goldText;
 
@@ -27,12 +27,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		{
 			_levelText.SetText(text);
 		}
-		
+
 		public void SetEnergyText(string text)
 		{
 			_energyText.SetText(text);
 		}
-		
+
 		public void SetGoldText(string text)
 		{
 			_goldText.SetText(text);

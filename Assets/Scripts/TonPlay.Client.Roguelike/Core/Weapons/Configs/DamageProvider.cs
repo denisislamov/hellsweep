@@ -9,7 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		public DamageSource damageSource;
 
 		public float damage;
-		
+
 		public float rate;
 
 		private string _damageSource;
@@ -17,7 +17,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		public string DamageSource => string.IsNullOrEmpty(_damageSource) ?
 			_damageSource = damageSource.ToString() :
 			_damageSource;
-		
+
 		public float Damage => damage;
 		public float Rate => rate;
 	}

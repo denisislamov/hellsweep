@@ -8,19 +8,19 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 	public interface IEnemyConfig
 	{
 		public string Id { get; }
-		
+
 		public EnemyType EnemyType { get; }
-		
+
 		public EnemyView Prefab { get; }
-		
+
 		int StartHealth { get; }
-		
+
 		IItemDrop<string>[] RandomCollectableDrops { get; }
-		
+
 		IViewPoolIdentity Identity { get; }
 
 		bool HasProperty<T>() where T : IEnemyPropertyConfig;
-		
+
 		T GetProperty<T>() where T : IEnemyPropertyConfig;
 	}
 }

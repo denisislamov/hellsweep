@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.Core.Pooling.Interfaces
 		IViewPoolObject<T> Get();
 
 		void Release(T obj);
-		
+
 		void IncreaseSize(int count);
 	}
 }

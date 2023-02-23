@@ -6,16 +6,14 @@ using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.Profiling;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
-{ 
+{
 	public class DamageOnCollisionSystem : IEcsRunSystem
 	{
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 
 			var filter = world.Filter<DamageOnCollisionComponent>()
@@ -24,7 +22,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 							  .Exc<InactiveComponent>()
 							  .Exc<BlockDamageOnCollisionComponent>()
 							  .End();
-			
+
 			var damagePool = world.GetPool<DamageOnCollisionComponent>();
 			var stackTryApplyDamagePool = world.GetPool<StackTryApplyDamageComponent>();
 			var hasCollidedPool = world.GetPool<HasCollidedComponent>();
@@ -33,13 +31,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var hasCollided = ref hasCollidedPool.Get(entityId);
 				ref var damage = ref damagePool.Get(entityId);
-				
+
 				var count = hasCollided.CollidedEntityIds.Count;
-				
+
 				for (int i = 0; i < count; i++)
 				{
 					var overlappedEntityId = hasCollided.CollidedEntityIds[i];
-					
+
 					ref var stack = ref stackTryApplyDamagePool.Get(entityId);
 					stack.Stack.Push(new TryApplyDamageComponent()
 					{
@@ -48,9 +46,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					});
 				}
 			}
-#region Profiling End
-			Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

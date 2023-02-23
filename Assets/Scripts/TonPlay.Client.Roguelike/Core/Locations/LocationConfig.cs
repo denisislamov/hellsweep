@@ -12,13 +12,13 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 	{
 		[SerializeField]
 		private string _id;
-				
+
 		[SerializeField]
 		private string _title;
-				
+
 		[SerializeField]
 		private Sprite _icon;
-		
+
 		[SerializeField]
 		private SceneName _sceneName;
 
@@ -32,8 +32,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		public string Title => _title;
 		public Sprite Icon => _icon;
 		public Vector2 BlockSize => _blockSize;
-		
-		public IReadOnlyList<IReadOnlyList<LocationBlockView>> BlocksPrefabsMatrix => 
+
+		public IReadOnlyList<IReadOnlyList<LocationBlockView>> BlocksPrefabsMatrix =>
 			_blocksMatrix.Select(_ => _.Prefabs).ToList();
 		public SceneName SceneName => _sceneName;
 

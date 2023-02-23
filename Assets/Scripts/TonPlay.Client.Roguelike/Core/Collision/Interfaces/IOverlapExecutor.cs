@@ -8,11 +8,11 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 	public interface IOverlapExecutor
 	{
 		public int Overlap(
-			KDQuery query, 
-			Vector2 position, 
-			ICollisionAreaConfig collisionAreaConfig, 
-			ref List<int> entities, 
+			KDQuery query,
+			Vector2 position,
+			ICollisionAreaConfig collisionAreaConfig,
+			ref List<int> entities,
 			int layerMask,
-			IOverlapPools pools);
+			IOverlapParams overlapParams);
 	}
 }

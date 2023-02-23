@@ -38,7 +38,9 @@ namespace DataStructures.ViliWonka.KDTree {
         /// <param name="resultIndices">Initialized list, cleared.</param>
         public void Radius(KDTree tree, Vector2 queryPosition, float queryRadius, List<int> resultIndices) {
 #region Profiling Begin
+#if ENABLE_PROFILE_SAMPLES
             UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
+#endif
 #endregion
             Reset();
 
@@ -137,7 +139,9 @@ namespace DataStructures.ViliWonka.KDTree {
             }
             
 #region Profiling End
+#if ENABLE_PROFILE_SAMPLES
             UnityEngine.Profiling.Profiler.EndSample();
+#endif
 #endregion
         }
 

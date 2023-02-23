@@ -19,16 +19,16 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		[Header("Brick")]
 		[SerializeField]
 		private ProjectileConfig _projectileConfig;
-		
+
 		[SerializeField]
 		private LevelConfig[] _levelConfigs;
-		
+
 		[SerializeField]
 		private float _timeToReachDistance;
-		
+
 		[SerializeField]
 		private float _distanceToThrow;
-		
+
 		[SerializeField]
 		private float _delayBetweenSpawn;
 
@@ -43,9 +43,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.Brick;
 
-		public override IBrickSkillLevelConfig GetLevelConfig(int level) => 
-			!Map.ContainsKey(level) 
-				? null 
+		public override IBrickSkillLevelConfig GetLevelConfig(int level) =>
+			!Map.ContainsKey(level)
+				? null
 				: Map[level];
 
 		[Serializable]
@@ -53,19 +53,19 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			[SerializeField]
 			private int _level;
-			
+
 			[SerializeField]
 			private string _description;
 
 			[SerializeField]
 			private int _quantity;
-			
+
 			[SerializeField]
 			private float _cooldown;
-			
+
 			[SerializeField]
 			private DamageProvider _damageProvider;
-			
+
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
 

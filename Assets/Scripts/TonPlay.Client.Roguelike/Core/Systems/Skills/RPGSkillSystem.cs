@@ -25,7 +25,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
-		
+
 		public RPGSkillSystem(KdTreeStorage kdTreeStorage)
 		{
 			_kdTreeStorage = kdTreeStorage;
@@ -34,22 +34,22 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 		public void Init(EcsSystems systems)
 		{
 			_sharedData = systems.GetShared<ISharedData>();
-			
+
 			_world = systems.GetWorld();
-			_config = (IRPGSkillConfig) _sharedData.SkillsConfigProvider.Get(SkillName.RPG);
+			_config = (IRPGSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.RPG);
 
 			_poolIdentity = new ProjectileConfigViewPoolIdentity(_config.ProjectileConfig);
-			
+
 			_pool = _sharedData.CompositeViewPool;
 			_pool.Add(_poolIdentity, _config.ProjectileConfig.PrefabView, 16);
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
 			AddSkillComponentIfDoesntExist();
 			TrySpawnProjectile();
 		}
-		
+
 		private void TrySpawnProjectile()
 		{
 			var filter = _world
@@ -72,13 +72,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				var level = skills.Levels[SkillName.RPG];
 				var levelConfig = _config.GetLevelConfig(level);
-				
+
 				rpg.TimeLeft -= Time.deltaTime;
 
 				if (rpg.TimeLeft <= 0)
 				{
 					rpg.TimeLeft = levelConfig.Delay;
-					
+
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
 						: LayerMask.NameToLayer("EnemyProjectile");
@@ -90,7 +90,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private void CreateProjectile(Vector2 position, int layer, IDamageProvider levelDamageProvider)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
@@ -101,7 +101,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			var view = poolObject.Object;
 			var direction = GetRandomDirection();
-			
+
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
 			var transform = view.transform;
@@ -109,16 +109,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			transform.right = direction;
 
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, position, direction, collisionLayerMask);
-			
+
 			ref var explodeOnCollision = ref entity.AddOrGet<ExplodeOnCollisionComponent>();
 			ref var explodeOnMoveDistance = ref entity.AddOrGet<ExplodeOnMoveDistanceComponent>();
-			
+
 			explodeOnCollision.DamageProvider = levelDamageProvider;
 			explodeOnMoveDistance.DamageProvider = levelDamageProvider;
-			
+
 			_kdTreeStorage.AddEntity(entity.Id, position);
 		}
-		
+
 		private Vector2 GetRandomDirection()
 		{
 			return Random.insideUnitCircle;

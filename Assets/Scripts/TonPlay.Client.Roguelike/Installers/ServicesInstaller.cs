@@ -10,14 +10,14 @@ namespace TonPlay.Client.Roguelike.Installers
 	{
 		[SerializeField]
 		private UIServiceInstaller _uiServiceInstaller;
-		
+
 		public override void InstallBindings()
 		{
 			SignalBusInstaller.Install(Container);
 
 			Container.Inject(_uiServiceInstaller);
 			_uiServiceInstaller.InstallBindings();
-			
+
 			Container.BindInterfacesTo<SceneService.SceneService>().AsSingle();
 
 			Container.BindInterfacesTo<ProfileLoadingService>().AsSingle();

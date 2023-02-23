@@ -32,38 +32,38 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 
 		[SerializeField]
 		private SkillConfigProvider _skillConfigProvider;
-		
+
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
-			
+
 			Bind(subContainer);
-			
+
 			Container.Bind<IScreenFactory<ISkillChoiceScreenContext, SkillChoiceScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
-			
+
 			Container.Bind<IScreenFactory<SkillChoiceScreenContext, SkillChoiceScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
 		}
-		
+
 		private void Bind(DiContainer subContainer)
 		{
 			subContainer.Bind<IScreenFactory<ISkillChoiceScreenContext, SkillChoiceScreen>>()
 						.To<SkillChoiceScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
-			
+
 			subContainer.Bind<IScreenFactory<SkillChoiceScreenContext, SkillChoiceScreen>>()
 						.To<SkillChoiceScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
 
 			subContainer.BindFactory<ISkillChoiceView, ISkillChoiceScreenContext, SkillChoicePresenter, SkillChoicePresenter.Factory>();
-			
+
 			var screenHolder = subContainer.Resolve<IUIService>();
 			var embeddingRoot = screenHolder.GetScreensRoot(new DefaultScreenLayer());
 			var pooledItemsContainer = Instantiate(_pooledItemsContainerPrefab, embeddingRoot);
@@ -73,17 +73,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 					ICollectionItemPool<ISkillChoiceItemView>>()
 			   .FromComponentInNewPrefab(_itemPrefab)
 			   .UnderTransform(pooledItemsContainer.transform);
-			
+
 			subContainer
 			   .BindFactory<ISkillChoiceCollectionView, ISkillChoiceCollectionContext, SkillChoiceCollectionPresenter, SkillChoiceCollectionPresenter.Factory>()
 			   .FromNew();
-			
+
 			subContainer
 			   .BindFactory<ISkillChoiceItemView, ISkillChoiceItemContext, SkillChoiceItemPresenter, SkillChoiceItemPresenter.Factory>()
 			   .FromNew();
 
 			subContainer.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
-			
+
 			subContainer.BindFactory<ILevelProgressBarView, ILevelProgressBarContext, LevelProgressBarPresenter, LevelProgressBarPresenter.Factory>().FromNew();
 			subContainer.BindFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter, ProgressBarPresenter.Factory>().FromNew();
 		}

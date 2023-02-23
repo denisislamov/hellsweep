@@ -4,7 +4,7 @@ namespace TonPlay.Roguelike.Client.Core.Pooling.Interfaces
 	{
 		void Release();
 	}
-	
+
 	public interface IViewPoolObject<out T> : IViewPoolObject
 	{
 		T Object { get; }

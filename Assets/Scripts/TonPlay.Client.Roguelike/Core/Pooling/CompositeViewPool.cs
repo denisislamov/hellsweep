@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 	public class CompositeViewPool : ICompositeViewPool
 	{
 		private readonly Dictionary<string, object> _pools = new Dictionary<string, object>(8);
-		
+
 		public void Add<T>(IViewPoolIdentity viewPoolIdentity, T prefab, int count = 32) where T : Component
 		{
 			if (_pools.ContainsKey(viewPoolIdentity.Id))
@@ -16,10 +16,10 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 				((IViewPool<T>)_pools[viewPoolIdentity.Id]).IncreaseSize(count);
 				return;
 			}
-			
+
 			_pools.Add(viewPoolIdentity.Id, new ViewPool<T>(prefab, count));
 		}
-		
+
 		public bool TryGet<T>(IViewPoolIdentity viewPoolIdentity, out IViewPoolObject<T> result) where T : Component
 		{
 			if (!_pools.ContainsKey(viewPoolIdentity.Id))
@@ -31,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 			result = ((IViewPool<T>)_pools[viewPoolIdentity.Id]).Get();
 			return true;
 		}
-		
+
 		public bool TryRelease<T>(IViewPoolIdentity viewPoolIdentity, T obj) where T : Component
 		{
 			if (!_pools.ContainsKey(viewPoolIdentity.Id))

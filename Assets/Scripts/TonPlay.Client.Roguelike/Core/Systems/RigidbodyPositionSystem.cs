@@ -10,13 +10,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var rigidbodyPool = world.GetPool<RigidbodyComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
-			
+
 			var filter = world.Filter<RigidbodyComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<InactiveComponent>()
@@ -28,12 +26,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var positionComponent = ref positionPool.AddOrGet(entityId);
 
 				var position = rigidbodyComponent.Rigidbody.position;
-				
+
 				positionComponent.Position = position;
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

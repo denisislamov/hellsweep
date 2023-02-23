@@ -12,10 +12,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		[SerializeField]
 		private string _title;
-		
+
 		[SerializeField]
 		private string _description;
-		
+
 		[SerializeField]
 		private Sprite _icon;
 
@@ -24,12 +24,12 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		[SerializeField]
 		private int _maxLevel;
-		
+
 		[SerializeField]
 		private SkillName[] _evolutions;
 
 		public abstract SkillName SkillName { get; }
-		
+
 		public SkillType SkillType => _skillType;
 		public string Title => _title;
 		public string Description => _description;
@@ -39,8 +39,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public SkillName[] Evolutions => _evolutions;
 		public abstract string GetLevelDescription(int level);
 	}
-	
-	public abstract class SkillConfig<T> : 
+
+	public abstract class SkillConfig<T> :
 		SkillConfig where T : ISkillLevelConfig
 	{
 		public abstract T GetLevelConfig(int level);

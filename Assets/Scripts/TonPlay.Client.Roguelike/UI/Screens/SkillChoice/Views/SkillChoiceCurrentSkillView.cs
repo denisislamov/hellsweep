@@ -14,7 +14,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 		{
 			_iconImage.color = color;
 		}
-		
+
 		public void SetIcon(Sprite icon)
 		{
 			_iconImage.sprite = icon;

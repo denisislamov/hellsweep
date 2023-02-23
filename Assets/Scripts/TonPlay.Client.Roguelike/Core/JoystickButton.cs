@@ -85,7 +85,7 @@ namespace TonPlay.Roguelike.Client.Core
 
 			var distance = Vector2.Distance(holderPositionInHandleAnchor, pointerPositionInHandleAnchor);
 			var clampedDistance = Mathf.Clamp(distance, 0, maxDistance);
-			
+
 			var direction = (pointerPositionInHandleAnchor - holderPositionInHandleAnchor);
 			direction.Normalize();
 

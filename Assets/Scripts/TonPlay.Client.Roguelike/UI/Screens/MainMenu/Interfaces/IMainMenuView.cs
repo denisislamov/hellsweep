@@ -8,9 +8,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 	public interface IMainMenuView : IView
 	{
 		IButtonView PlayButton { get; }
-		
+
 		IProfileBarView ProfileBarView { get; }
-		
+
 		ILocationSliderView LocationSliderView { get; }
 	}
 }

@@ -12,13 +12,13 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 	{
 		[SerializeField]
 		private string _id;
-		
+
 		[SerializeField]
 		private float _value;
-		
+
 		[SerializeField]
 		private CollectableView _prefab;
-		
+
 		[SerializeField]
 		private CollisionAreaConfig _collisionAreaConfig;
 
@@ -27,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 
 		[SerializeField, Layer]
 		private int _layer;
-		
+
 		[SerializeField]
 		private LayerMask _collisionLayerMask;
 

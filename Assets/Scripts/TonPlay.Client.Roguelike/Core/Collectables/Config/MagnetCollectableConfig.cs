@@ -11,14 +11,14 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 	{
 		[SerializeField]
 		private float _magnetRadius;
-		
+
 		[SerializeField]
 		private float _timeToStart;
-		
+
 		[SerializeField]
 		private float _activeTime;
 		public override CollectableType Type => CollectableType.Magnet;
-		
+
 		public float MagnetRadius => _magnetRadius;
 		public float TimeToStart => _timeToStart;
 		public float ActiveTime => _activeTime;

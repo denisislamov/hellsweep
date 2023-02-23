@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private float _distance;
-		
+
 		public float Distance => _distance;
 	}
 }

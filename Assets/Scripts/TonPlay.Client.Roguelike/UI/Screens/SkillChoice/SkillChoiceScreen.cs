@@ -13,7 +13,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 	{
 		[SerializeField]
 		private SkillChoiceView _view;
-		
+
 		[Inject]
 		private void Construct(SkillChoicePresenter.Factory factory)
 		{

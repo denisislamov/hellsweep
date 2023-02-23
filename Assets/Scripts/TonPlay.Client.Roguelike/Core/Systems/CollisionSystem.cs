@@ -16,17 +16,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		private KDQuery _query = new KDQuery();
-		
+
 		public CollisionSystem(IOverlapExecutor overlapExecutor)
 		{
 			_overlapExecutor = overlapExecutor;
 		}
-		
+
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 
 			var filter = world.Filter<HasCollidedComponent>()
@@ -35,11 +33,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 							  .Exc<InactiveComponent>()
 							  .Exc<DoNotInitiateCollisionOverlap>()
 							  .End();
-			
+
 			var collisionPool = world.GetPool<CollisionComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
 			var hasCollidedPool = world.GetPool<HasCollidedComponent>();
-			var overlapPools = OverlapPools.Create(world);
+
+			var overlapParams = OverlapParams.Create(world);
+			overlapParams.SetFilter(overlapParams.CreateDefaultFilterMask().End());
 
 			foreach (var entityId in filter)
 			{
@@ -49,23 +49,21 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					continue;
 				}
-				
+
 				ref var hasCollided = ref hasCollidedPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
-				
+
 				hasCollided.CollidedEntityIds.Clear();
 
 				_overlapExecutor.Overlap(
 					_query,
-					position.Position, 
-					collision.CollisionAreaConfig, 
-					ref hasCollided.CollidedEntityIds, 
+					position.Position,
+					collision.CollisionAreaConfig,
+					ref hasCollided.CollidedEntityIds,
 					collision.LayerMask,
-					overlapPools);
+					overlapParams);
 			}
-#region Profiling End
-			Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

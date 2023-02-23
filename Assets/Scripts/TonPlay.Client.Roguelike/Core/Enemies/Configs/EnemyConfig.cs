@@ -19,7 +19,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 	{
 		[SerializeField]
 		private string _id;
-		
+
 		[SerializeField]
 		private EnemyType _enemyType;
 
@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 
 		[SerializeField]
 		private EnemyPropertyConfig[] _propertyConfigs;
-		
+
 		private IItemDrop<string>[] _randomCollectablesDrop;
 		private Dictionary<Type, IEnemyPropertyConfig> _enemyPropertyConfigMap;
 		private IViewPoolIdentity _identity;
@@ -65,10 +65,10 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 					return true;
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		public T GetProperty<T>() where T : IEnemyPropertyConfig
 		{
 			if (_propertyConfigs is null)
@@ -85,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 					return typedConfig;
 				}
 			}
-			
+
 			return default(T);
 		}
 	}

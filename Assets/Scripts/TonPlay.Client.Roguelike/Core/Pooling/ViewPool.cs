@@ -10,21 +10,21 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 	public class ViewPool<T> : IViewPool<T> where T : Component
 	{
 		private readonly T _prefab;
-		private readonly Vector3 _spawnPosition = Vector3.one * -100000f;
-		
+		private readonly Vector3 _spawnPosition = Vector3.one*-100000f;
+
 		private IViewPoolObject<T>[] _pool;
-		
+
 		private int _pointer = 0;
 
 		public ViewPool(T prefab, int size = 32)
 		{
 			_prefab = prefab;
-			
+
 			if (size == 0)
 			{
 				throw new NotSupportedException();
 			}
-			
+
 			_pool = new IViewPoolObject<T>[size];
 
 			for (int i = 0; i < size; i++)
@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 				_pool[i] = new ViewPoolObject<T>(this, obj);
 			}
 		}
-		
+
 		private T Instantiate(T prefab)
 		{
 			var obj = Object.Instantiate(prefab);
@@ -58,20 +58,20 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 
 			var obj = _pool[_pointer];
 			obj.Object.gameObject.SetActive(true);
-			
+
 			return obj;
 		}
-		
+
 		public void Release(T obj)
 		{
 			obj.transform.position = _spawnPosition;
 			obj.gameObject.SetActive(false);
 		}
-		
+
 		public void IncreaseSize(int count)
 		{
 			var currentSize = _pool.Length;
-			
+
 			Array.Resize(ref _pool, currentSize + count);
 
 			for (int i = 0; i < count; i++)

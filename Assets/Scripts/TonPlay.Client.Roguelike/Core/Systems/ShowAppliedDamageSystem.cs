@@ -11,20 +11,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var sharedData = systems.GetShared<ISharedData>();
 			var world = systems.GetWorld();
-			
+
 			var filter = world
-									 .Filter<ApplyDamageComponent>()
-									 .Inc<ShowAppliedDamageIndicatorComponent>()
-									 .Inc<PositionComponent>()
-									 .Exc<DeadComponent>()
-									 .Exc<PlayerComponent>()
-									 .End();
-			
+						.Filter<ApplyDamageComponent>()
+						.Inc<ShowAppliedDamageIndicatorComponent>()
+						.Inc<PositionComponent>()
+						.Exc<DeadComponent>()
+						.Exc<PlayerComponent>()
+						.End();
+
 			var applyDamageComponents = world.GetPool<ApplyDamageComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
 
@@ -32,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var applyDamage = ref applyDamageComponents.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
-				
+
 				var entity = world.NewEntity();
 				ref var spawnAppliedDamageIndicatorEvent = ref entity.Add<SpawnAppliedDamageIndicatorEvent>();
 				ref var indicatorPosition = ref entity.Add<PositionComponent>();
@@ -40,9 +38,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				spawnAppliedDamageIndicatorEvent.Damage = applyDamage.Damage;
 				indicatorPosition.Position = position.Position;
 			}
-#region Profiling End
-			Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

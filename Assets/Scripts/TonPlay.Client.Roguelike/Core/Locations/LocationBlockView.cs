@@ -7,9 +7,9 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 	{
 		[SerializeField]
 		private BoxCollider2D _sizeBoxCollider;
-		
+
 		public Vector2 Size => _sizeBoxCollider.size;
-		
+
 		public void SetPosition(Vector2 position)
 		{
 			transform.position = position;

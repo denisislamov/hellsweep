@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 	{
 		[SerializeField]
 		private MainMenuView _view;
-		
+
 		[Inject]
 		private void Construct(MainMenuPresenter.Factory factory)
 		{

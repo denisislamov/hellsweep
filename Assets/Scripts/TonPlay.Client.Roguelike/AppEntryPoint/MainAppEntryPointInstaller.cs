@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 	{
 		[SerializeField]
 		private string _entrySceneName;
-        
+
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<MainAppEntryPoint>()
@@ -16,7 +16,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 					 .AsSingle()
 					 .NonLazy();
 		}
-		
+
 		private void InstallEntryPoint(DiContainer container)
 		{
 			container.BindInterfacesAndSelfTo<MainAppEntryPoint>().AsSingle();

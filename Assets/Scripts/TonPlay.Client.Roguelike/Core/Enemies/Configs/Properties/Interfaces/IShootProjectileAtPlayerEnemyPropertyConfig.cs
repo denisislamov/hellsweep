@@ -6,13 +6,13 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces
 	public interface IShootProjectileAtPlayerEnemyPropertyConfig : IEnemyPropertyConfig
 	{
 		IProjectileConfig ProjectileConfig { get; }
-		
+
 		float ShootRateInSeconds { get; }
-		
+
 		int Layer { get; }
-		
+
 		float MinDistanceToTargetToShoot { get; }
-		
+
 		float MaxDistanceToTargetToShoot { get; }
 	}
 }

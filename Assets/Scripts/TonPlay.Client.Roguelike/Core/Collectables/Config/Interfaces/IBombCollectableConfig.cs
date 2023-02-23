@@ -6,11 +6,11 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces
 	public interface IBombCollectableConfig : ICollectableConfig
 	{
 		ICollisionAreaConfig ExplodeCollisionAreaConfig { get; }
-		
+
 		float TimeToExplode { get; }
-		
+
 		IDamageProvider DamageProvider { get; }
-		
+
 		int LayerMask { get; }
 	}
 }

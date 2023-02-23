@@ -16,11 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<EnemyComponent>().Inc<DeadComponent>().End();
 
@@ -35,11 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				_kdTreeStorage.KdTreePositionIndexToEntityIdMap[treeIndex] = EcsEntity.DEFAULT_ID;
 				_kdTreeStorage.KdTreeEntityIdToPositionIndexMap.Remove(entityId);
 			}
-#region Profiling End
-
-			UnityEngine.Profiling.Profiler.EndSample();
-
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

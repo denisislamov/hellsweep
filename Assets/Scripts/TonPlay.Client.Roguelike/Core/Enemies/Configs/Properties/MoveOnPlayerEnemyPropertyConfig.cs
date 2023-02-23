@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties
 	{
 		[SerializeField]
 		private MovementConfig _movementConfig;
-		
+
 		public IMovementConfig MovementConfig => _movementConfig;
 	}
 }

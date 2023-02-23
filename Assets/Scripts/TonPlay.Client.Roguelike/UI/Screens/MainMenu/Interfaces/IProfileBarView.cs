@@ -8,7 +8,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 		IProgressBarView ExperienceProgressBarView { get; }
 
 		void SetLevelText(string text);
-		
+
 		void SetEnergyText(string text);
 
 		void SetGoldText(string text);

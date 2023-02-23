@@ -9,9 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<RotationComponent>()
 							  .Inc<TransformComponent>()
@@ -22,15 +20,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var rotationComponents = world.GetPool<RotationComponent>();
 			var transformComponents = world.GetPool<TransformComponent>();
 
-			foreach (var entityId in filter) {
+			foreach (var entityId in filter)
+			{
 				ref var rotation = ref rotationComponents.Get(entityId);
 				ref var transform = ref transformComponents.Get(entityId);
 
 				transform.Transform.right = rotation.Direction;
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

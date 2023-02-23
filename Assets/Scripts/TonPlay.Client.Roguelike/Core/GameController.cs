@@ -107,7 +107,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
 
 			sharedDataProvider.SetSharedData(_sharedData);
-			
+
 			Initialize();
 		}
 
@@ -164,8 +164,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new SpawnAppliedDamageIndicatorSystem())
 							.Add(new DrawDebugKdTreePositionSystem())
 							.Add(new GameOverSystem(_uiService))
-							;
-			
+				;
+
 			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
 										.Add(new UpdateKdTreeElementPositionSystem())
 										.Add(new RebuildKdTreeSystem(_storages));

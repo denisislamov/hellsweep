@@ -9,21 +9,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
-			
+
 			var filter = world.Filter<EnemyComponent>().Inc<DeadComponent>().End();
 			var gameFilter = world.Filter<GameComponent>().Inc<GameTimeComponent>().Inc<WavesDataComponent>().End();
-			
+
 			var enemyPool = world.GetPool<EnemyComponent>();
 			var deadEnemiesPool = world.GetPool<WavesDataComponent>();
 
 			foreach (var gameEntityId in gameFilter)
 			{
 				ref var wavesData = ref deadEnemiesPool.Get(gameEntityId);
-				
+
 				foreach (var entityId in filter)
 				{
 					ref var enemy = ref enemyPool.Get(entityId);
@@ -32,9 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					wavesData.WavesEnemiesSpawnedAmount[enemy.WaveId]--;
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

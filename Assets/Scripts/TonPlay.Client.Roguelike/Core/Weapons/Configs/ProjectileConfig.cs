@@ -21,13 +21,13 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 
 		[SerializeField]
 		private MovementConfig _movementConfig;
-		
+
 		[SerializeField]
 		private ProjectileConfigProperty[] _properties;
 
 		[SerializeField, Layer]
 		private int _layer;
-		
+
 		private IViewPoolIdentity _identity;
 
 		public ProjectileView PrefabView => _prefab;
@@ -51,10 +51,10 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 					return true;
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		public T GetProperty<T>() where T : IProjectileConfigProperty
 		{
 			if (_properties is null)
@@ -71,7 +71,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 					return typedConfig;
 				}
 			}
-			
+
 			return default(T);
 		}
 	}

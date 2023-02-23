@@ -5,7 +5,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 	public interface ISpawnProjectileOnDestroyProjectileConfigProperty : IProjectileConfigProperty
 	{
 		IProjectileConfig ProjectileConfig { get; }
-		
+
 		int CollisionLayerMask { get; }
 	}
 }

@@ -7,13 +7,13 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties
 {
 	[CreateAssetMenu(
-		fileName = nameof(PerformActionsOnSpawnEnemyPropertyConfig), 
+		fileName = nameof(PerformActionsOnSpawnEnemyPropertyConfig),
 		menuName = AssetMenuConstants.ENEMIES_PROPERTIES_CONFIGS + nameof(PerformActionsOnSpawnEnemyPropertyConfig))]
 	public class PerformActionsOnSpawnEnemyPropertyConfig : EnemyPropertyConfig, IPerformActionsOnSpawnEnemyPropertyConfig
 	{
 		[SerializeField]
 		private ScriptableAction[] _actions;
-		
+
 		public IAction[] Actions => _actions;
 	}
 }

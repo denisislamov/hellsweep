@@ -15,7 +15,7 @@ namespace TonPlay.Client.Roguelike.Models
 			ProfileModel.Update(data.ProfileData);
 			LocationsModel.Update(data.LocationsData);
 		}
-		
+
 		public MetaGameData ToData()
 		{
 			_cached.ProfileData = ProfileModel.ToData();

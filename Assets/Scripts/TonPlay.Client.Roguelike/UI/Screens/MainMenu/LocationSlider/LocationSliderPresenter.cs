@@ -24,11 +24,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 		private IButtonPresenter _rightButtonPresenter;
 
 		public LocationSliderPresenter(
-			ILocationSliderView view, 
+			ILocationSliderView view,
 			ILocationSliderContext context,
 			IButtonPresenterFactory buttonPresenterFactory,
 			ILocationConfigProvider locationConfigProvider,
-			IMetaGameModelProvider metaGameModelProvider) 
+			IMetaGameModelProvider metaGameModelProvider)
 			: base(view, context)
 		{
 			_buttonPresenterFactory = buttonPresenterFactory;
@@ -43,14 +43,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 		public override void Show()
 		{
 			base.Show();
-			
+
 			RefreshView();
 		}
 
 		public override void Dispose()
 		{
 			_compositeDisposables.Dispose();
-			
+
 			base.Dispose();
 		}
 
@@ -59,17 +59,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			var presenter = _buttonPresenterFactory.Create(View.LeftButton,
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(() => OnSliderButtonClickHandler(-1))));
-			
+
 			Presenters.Add(presenter);
 
 			_leftButtonPresenter = presenter;
-			
+
 			presenter = _buttonPresenterFactory.Create(View.RightButton,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(() => OnSliderButtonClickHandler(+1))));
-			
+				   .Add(new ClickableButtonContext(() => OnSliderButtonClickHandler(+ 1))));
+
 			Presenters.Add(presenter);
-			
+
 			_rightButtonPresenter = presenter;
 		}
 
@@ -85,11 +85,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			{
 				_currentLocationConfigIndex = _locationConfigProvider.Configs.Length - 1;
 			}
-			
+
 			SelectLocation(_currentLocationConfigIndex);
 			RefreshView();
 		}
-		
+
 		private void RefreshView()
 		{
 			if (_currentLocationConfigIndex == 0)
@@ -100,7 +100,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			{
 				_leftButtonPresenter.Show();
 			}
-			
+
 			if (_currentLocationConfigIndex >= _locationConfigProvider.Configs.Length - 1)
 			{
 				_rightButtonPresenter.Hide();
@@ -114,7 +114,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			var locationsModel = _metaGameModelProvider.Get().LocationsModel;
 			var model = locationsModel.Locations.ContainsKey(config.Id) ? locationsModel.Locations[config.Id] : new LocationModel();
 			var longestSurvivedTime = TimeSpan.FromMilliseconds(model.LongestSurvivedMillis.Value);
-			
+
 			View.SetIcon(config.Icon);
 			View.SetTitleText(config.Title);
 			View.SetSubtitleText($"Longest Survived: {longestSurvivedTime:mm}m {longestSurvivedTime:ss}s");

@@ -12,10 +12,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 	internal class SkillChoiceItemPresenter : Presenter<ISkillChoiceItemView, ISkillChoiceItemContext>
 	{
 		private IDisposable _disposable;
-		
+
 		public SkillChoiceItemPresenter(
-			ISkillChoiceItemView view, 
-			ISkillChoiceItemContext context) 
+			ISkillChoiceItemView view,
+			ISkillChoiceItemContext context)
 			: base(view, context)
 		{
 			InitView();
@@ -35,10 +35,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 
 		private void InitView()
 		{
-			var nextLevel = Context.CurrentLevel + 1 <= Context.MaxLevel 
-				? Context.CurrentLevel + 1 
+			var nextLevel = Context.CurrentLevel + 1 <= Context.MaxLevel
+				? Context.CurrentLevel + 1
 				: Context.MaxLevel;
-			
+
 			View.SetIcon(Context.Icon);
 			View.SetTitleText(Context.Title);
 			View.SetDescriptionText(Context.Description);
@@ -49,7 +49,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			View.SetTitleTextColor(Context.Color);
 			View.SetLevelIcon(Context.LevelIcon);
 		}
-		
+
 		internal class Factory : PlaceholderFactory<ISkillChoiceItemView, ISkillChoiceItemContext, SkillChoiceItemPresenter>
 		{
 		}

@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 	{
 		[SerializeField]
 		private float _timer;
-		
+
 		public float Timer => _timer;
 	}
 }

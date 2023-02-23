@@ -8,7 +8,7 @@ namespace TonPlay.Roguelike.Client.Core
 		private int _entityId;
 
 		public int EntityId => _entityId;
-		
+
 		public void SetEntityId(int entityId)
 		{
 			_entityId = entityId;

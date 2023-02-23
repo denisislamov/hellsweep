@@ -20,17 +20,17 @@ namespace TonPlay.Client.Roguelike.SceneService
 		{
 			return SceneManager.LoadSceneAsync(sceneName.ToString()).ToUniTask();
 		}
-		
+
 		public UniTask LoadSingleSceneWithZenjectByNameAsync(SceneName name, Action<DiContainer> extraBindings = null)
 		{
 			return _zenjectSceneLoader.LoadSceneAsync(name.ToString(), LoadSceneMode.Single, extraBindings).ToUniTask();
 		}
-		
+
 		public UniTask UnloadAdditiveSceneByNameAsync(SceneName sceneName)
 		{
 			return SceneManager.UnloadSceneAsync(sceneName.ToString()).ToUniTask();
 		}
-		
+
 		public UniTask LoadAdditiveSceneWithZenjectByNameAsync(SceneName name, Action<DiContainer> extraBindings = null)
 		{
 			return _zenjectSceneLoader.LoadSceneAsync(name.ToString(), LoadSceneMode.Additive, extraBindings).ToUniTask();

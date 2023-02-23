@@ -10,9 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var transformPool = world.GetPool<TransformComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
@@ -30,7 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var transformComponent = ref transformPool.Get(entityId);
 				ref var positionComponent = ref positionPool.AddOrGet(entityId);
-				
+
 				if (!positionPool.Has(entityId))
 				{
 					positionComponent.Position = transformComponent.Transform.position;
@@ -45,13 +43,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 						positionComponent.Position = parentPositionComponent.Position + localPositionComponent.Position;
 					}
-					
+
 					transformComponent.Transform.position = positionComponent.Position;
 				}
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion 
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

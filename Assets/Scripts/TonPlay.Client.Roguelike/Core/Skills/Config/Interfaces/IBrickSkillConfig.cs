@@ -7,22 +7,22 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 	public interface IBrickSkillConfig : ISkillConfig<IBrickSkillLevelConfig>
 	{
 		IProjectileConfig ProjectileConfig { get; }
-		
+
 		float TimeToReachDistance { get; }
-		
+
 		float DistanceToThrow { get; }
-		
+
 		float DelayBetweenSpawn { get; }
 	}
 
 	public interface IBrickSkillLevelConfig : ISkillLevelConfig
 	{
 		int Quantity { get; }
-		
+
 		float Cooldown { get; }
-		
+
 		IDamageProvider DamageProvider { get; }
-		
+
 		ICollisionAreaConfig CollisionAreaConfig { get; }
 	}
 }

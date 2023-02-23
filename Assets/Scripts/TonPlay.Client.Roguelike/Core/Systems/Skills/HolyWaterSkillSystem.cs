@@ -33,7 +33,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (IHolyWaterSkillConfig) _sharedData.SkillsConfigProvider.Get(SkillName.Molotov);
+			_config = (IHolyWaterSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.Molotov);
 
 			_throwablePoolIdentity = new ProjectileConfigViewPoolIdentity(_config.BottleProjectileConfig);
 			_areaPoolIdentity = new ProjectileConfigViewPoolIdentity(_config.DamagingAreaProjectileConfig);

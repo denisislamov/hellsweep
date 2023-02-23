@@ -22,9 +22,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces
 		void SetMaxLevel(int level);
 
 		void SetBackgroundColor(Color color);
-		
+
 		void SetTitleTextColor(Color color);
-		
+
 		void SetLevelIcon(Sprite icon);
 	}
 }

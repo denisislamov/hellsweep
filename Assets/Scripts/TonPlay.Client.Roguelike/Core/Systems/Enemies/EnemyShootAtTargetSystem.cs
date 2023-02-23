@@ -14,9 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 	{
 		public void Run(EcsSystems systems)
 		{
-#region Profiling Begin
-			UnityEngine.Profiling.Profiler.BeginSample(GetType().FullName);
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<EnemyComponent>()
@@ -40,20 +38,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				ref var position = ref positionPool.Get(entityId);
 				ref var target = ref targetPool.Get(entityId);
 				ref var shoot = ref shootPool.Get(entityId);
-				
+
 				if (deadPool.Has(target.EntityId) || !positionPool.Has(target.EntityId))
 				{
 					continue;
 				}
 
 				ref var targetPosition = ref positionPool.Get(target.EntityId);
-				
+
 				var direction = targetPosition.Position - position.Position;
 				direction.Normalize();
-				
-				var sqrMinDistance = shoot.MinDistanceTargetToShoot * shoot.MinDistanceTargetToShoot;
-				var sqrMaxDistance = shoot.MaxDistanceTargetToShoot * shoot.MaxDistanceTargetToShoot;
-				
+
+				var sqrMinDistance = shoot.MinDistanceTargetToShoot*shoot.MinDistanceTargetToShoot;
+				var sqrMaxDistance = shoot.MaxDistanceTargetToShoot*shoot.MaxDistanceTargetToShoot;
+
 				shoot.TimeLeft -= Time.deltaTime;
 
 				if (shoot.TimeLeft > 0 || direction.sqrMagnitude < sqrMinDistance || direction.sqrMagnitude > sqrMaxDistance)
@@ -65,22 +63,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				{
 					continue;
 				}
-				
+
 				var collisionLayerMask = collisionConfigProvider.Get(shoot.Layer)?.LayerMask ?? 0;
 
 				var projectile = ProjectileSpawner.SpawnProjectile(
-					world, 
-					poolObject, 
-					shoot.ProjectileConfig, 
-					position.Position, 
-					direction, 
+					world,
+					poolObject,
+					shoot.ProjectileConfig,
+					position.Position,
+					direction,
 					collisionLayerMask);
 
 				shoot.TimeLeft = shoot.Rate;
 			}
-#region Profiling End
-			UnityEngine.Profiling.Profiler.EndSample();
-#endregion
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

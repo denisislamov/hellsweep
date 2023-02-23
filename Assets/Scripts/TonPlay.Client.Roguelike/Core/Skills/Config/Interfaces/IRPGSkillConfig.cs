@@ -6,13 +6,13 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 	{
 		IProjectileConfig ProjectileConfig { get; }
 	}
-	
+
 	public interface IRPGSkillLevelConfig : ISkillLevelConfig
 	{
 		float Delay { get; }
-		
+
 		int ProjectileQuantity { get; }
-		
+
 		IDamageProvider DamageProvider { get; }
 	}
 }

@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar
 
 		public LevelProgressBarContext(
 			IReadOnlyReactiveProperty<int> level,
-			IReadOnlyReactiveProperty<float> value, 
+			IReadOnlyReactiveProperty<float> value,
 			IReadOnlyReactiveProperty<float> maxValue)
 		{
 			Level = level;

@@ -10,16 +10,16 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 	{
 		[SerializeField]
 		private string _id;
-		
+
 		[SerializeField]
 		private string _enemyId;
 
 		[SerializeField]
 		private int _enemiesQuantity;
-		
+
 		[SerializeField]
 		private int _maxSpawnedQuantity;
-		
+
 		[SerializeField]
 		private int _spawnQuantityPerRate;
 

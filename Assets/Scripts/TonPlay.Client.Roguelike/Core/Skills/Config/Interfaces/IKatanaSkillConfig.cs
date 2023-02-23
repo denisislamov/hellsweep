@@ -13,11 +13,11 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		int ProjectileQuantity { get; }
 
 		IDamageProvider DamageProvider { get; }
-		
+
 		float Cooldown { get; }
 
 		float ShootDelay { get; }
-		
+
 		Vector2 SpawnOffset { get; }
 	}
 }

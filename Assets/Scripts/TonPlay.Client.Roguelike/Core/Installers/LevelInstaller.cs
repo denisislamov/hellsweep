@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 	{
 		[SerializeField]
 		private EnemyConfigProvider _enemyConfigProvider;
-		
+
 		[FormerlySerializedAs("_levelWaveConfigProvider")] [SerializeField]
 		private LevelEnemyWaveConfigProvider levelEnemyWaveConfigProvider;
 

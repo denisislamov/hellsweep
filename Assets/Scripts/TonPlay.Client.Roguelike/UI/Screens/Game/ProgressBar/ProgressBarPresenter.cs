@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar
 	internal class ProgressBarPresenter : Presenter<IProgressBarView, IProgressBarContext>
 	{
 		private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
-		
+
 		public ProgressBarPresenter(IProgressBarView view, IProgressBarContext context) : base(view, context)
 		{
 			InitView();
@@ -22,10 +22,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar
 			_compositeDisposable?.Dispose();
 			base.Dispose();
 		}
-		
+
 		private void InitView()
 		{
-			ChangeListener(Context.CurrentValue.Value / Context.MaxValue.Value);
+			ChangeListener(Context.CurrentValue.Value/Context.MaxValue.Value);
 		}
 
 		private void AddSubscription()
@@ -36,7 +36,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar
 
 		private void ChangeListener(float value)
 		{
-			View.SetSize(Context.CurrentValue.Value / Context.MaxValue.Value);
+			View.SetSize(Context.CurrentValue.Value/Context.MaxValue.Value);
 		}
 
 		internal class Factory : PlaceholderFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter>

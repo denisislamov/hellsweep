@@ -9,7 +9,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore
 	{
 		public IReadOnlyReactiveProperty<int> Gold { get; }
 		public IReadOnlyReactiveProperty<int> DeadEnemies { get; }
-		
+
 		public MatchScoreContext(IReadOnlyReactiveProperty<int> gold, IReadOnlyReactiveProperty<int> deadEnemies)
 		{
 			Gold = gold;

@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
 		public MainMenuPresenter(
-			IMainMenuView view, 
+			IMainMenuView view,
 			IMainMenuScreenContext context,
 			IUIService uiService,
 			ISceneService sceneService,
@@ -38,7 +38,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			ProfileBarPresenter.Factory profileBarPresenterFactory,
 			LocationSliderPresenter.Factory locationSliderPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			ILocationConfigStorageSelector locationConfigStorageSelector) 
+			ILocationConfigStorageSelector locationConfigStorageSelector)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -49,23 +49,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_metaGameModelProvider = metaGameModelProvider;
 
 			_locationConfigStorage = locationConfigStorageSelector;
-			
+
 			AddNestedButtonPresenter();
 			AddNestedProfileBarPresenter();
 			AddNestedLocationSliderPresenter(locationConfigStorageSelector);
 		}
-		
+
 		private void AddNestedLocationSliderPresenter(ILocationConfigStorageSelector selector)
 		{
 			var presenter = _locationSliderPresenterFactory.Create(View.LocationSliderView, new LocationSliderContext(selector));
-			
+
 			Presenters.Add(presenter);
 		}
 
 		public override void Dispose()
 		{
 			_compositeDisposables.Dispose();
-			
+
 			base.Dispose();
 		}
 
@@ -74,14 +74,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			var presenter = _buttonPresenterFactory.Create(View.PlayButton,
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(OnPlayButtonClickHandler)));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddNestedProfileBarPresenter()
 		{
 			var presenter = _profileBarPresenterFactory.Create(View.ProfileBarView, new ProfileBarContext());
-			
+
 			Presenters.Add(presenter);
 		}
 
@@ -96,9 +96,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			}
 
 			data.Energy -= ENERGY_TO_START;
-			
+
 			balanceModel.Update(data);
-			
+
 			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfigStorage.Current.SceneName).ContinueWith(() =>
 			{
 				_uiService.Close(Context.Screen);

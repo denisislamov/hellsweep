@@ -9,10 +9,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		EffectView EffectView { get; }
 	}
 
-	public interface IForcefieldDeviceSkillLevelConfig  : ISkillLevelConfig
+	public interface IForcefieldDeviceSkillLevelConfig : ISkillLevelConfig
 	{
 		IDamageProvider DamageProvider { get; }
-		
+
 		float Size { get; }
 
 		int CollisionLayerMask { get; }
