@@ -31,6 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<SpawnAppliedDamageIndicatorEvent>().Inc<PositionComponent>().End();
 
@@ -80,6 +81,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				spawnPool.Del(entityId);
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();;
 		}
 	}
 }

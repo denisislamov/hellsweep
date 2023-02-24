@@ -252,6 +252,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				var moveOnPlayerEnemyPropertyConfig = enemyConfig.GetProperty<IMoveOnPlayerEnemyPropertyConfig>();
 				entity.AddSpeedComponent(moveOnPlayerEnemyPropertyConfig.MovementConfig);
+				entity.AddMoveToTargetComponent();
 			}
 
 			if (enemyConfig.HasProperty<ICollisionEnemyPropertyConfig>())

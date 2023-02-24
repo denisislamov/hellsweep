@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using TonPlay.Client.Common.Utilities;
 
 namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct ApplyGoldCollectableComponent
 	{
 		public float Value;
-		public HashSet<int> CollectableEntityIds;
+		public SimpleIntHashSet CollectableEntityIds;
 	}
 }

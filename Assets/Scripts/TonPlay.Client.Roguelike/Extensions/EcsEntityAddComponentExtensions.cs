@@ -400,5 +400,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			ref var component = ref entity.Add<DrawDebugKdTreePositionComponent>();
 			return ref component;
 		}
+		
+		public static ref MoveToTargetComponent AddMoveToTargetComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<MoveToTargetComponent>();
+			return ref component;
+		}
 	}
 }

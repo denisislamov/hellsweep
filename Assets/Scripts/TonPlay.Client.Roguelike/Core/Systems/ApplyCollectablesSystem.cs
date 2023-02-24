@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Components;
@@ -69,7 +70,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var exp = ref pool.Add(entityId);
 				exp.Value += value;
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet(8);
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 
@@ -85,7 +87,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var exp = ref pool.Add(entityId);
 				exp.Value += value;
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet(8);
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 
@@ -101,7 +104,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var exp = ref pool.Add(entityId);
 				exp.Value += value;
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet(8);
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 
@@ -117,7 +121,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var exp = ref pool.Add(entityId);
 				exp.Value += value;
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet(32);
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 
@@ -134,7 +139,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			else
 			{
 				ref var exp = ref applyPool.Add(entityId);
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet();
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 
@@ -151,7 +157,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			else
 			{
 				ref var exp = ref applyPool.Add(entityId);
-				exp.CollectableEntityIds = new HashSet<int>() {collectableEntityId};
+				exp.CollectableEntityIds = new SimpleIntHashSet();
+				exp.CollectableEntityIds.Add(collectableEntityId);
 			}
 		}
 	}

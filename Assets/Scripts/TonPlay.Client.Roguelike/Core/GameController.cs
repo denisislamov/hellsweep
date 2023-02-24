@@ -16,7 +16,6 @@ using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Components;
-using TonPlay.Roguelike.Client.Core.Systems;
 using UnityEngine;
 using Zenject;
 
@@ -139,7 +138,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new DamageOnDistanceChangeSystem(_overlapExecutor))
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
-							.Add(new BasicEnemyMovementTargetSystem(_overlapExecutor))
+							.Add(new EnemyMovementToTargetSystem())
+							.Add(new EnemyMovementAroundEnemiesSystem(_overlapExecutor))
 							.Add(new EnemyShootAtTargetSystem())
 							.Add(new PlayerCollisionSystem(_overlapExecutor))
 							.Add(new FadeColorAppliedDamageIndicatorSystem())

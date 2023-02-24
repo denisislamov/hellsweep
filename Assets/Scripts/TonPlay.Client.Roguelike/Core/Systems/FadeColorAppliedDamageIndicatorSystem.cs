@@ -18,6 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<AppliedDamageIndicator>().End();
 			var indicatorPool = world.GetPool<AppliedDamageIndicator>();
@@ -28,6 +29,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				indicator.View.Color = Color32.Lerp(indicator.View.Color, indicator.FadeOutColor, Time.deltaTime/indicator.FadeOutTime);
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

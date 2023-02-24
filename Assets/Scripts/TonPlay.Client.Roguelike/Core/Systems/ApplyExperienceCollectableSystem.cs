@@ -33,6 +33,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var apply = ref applyPool.Get(entityId);
+
+				if (apply.CollectableEntityIds.Count <= 0)
+				{
+					continue;
+				}
+				
 				ref var exp = ref expPool.Get(entityId);
 
 				exp.Value += apply.Value;
@@ -51,7 +57,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					destroyPool.Add(collectableEntityId);
 				}
 
-				applyPool.Del(entityId);
+				apply.CollectableEntityIds.Clear();
+				apply.Value = 0f;
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}

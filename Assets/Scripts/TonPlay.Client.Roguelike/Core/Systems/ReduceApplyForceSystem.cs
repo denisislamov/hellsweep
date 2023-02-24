@@ -8,6 +8,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<ApplyForceComponent>().Inc<ForcibleComponent>().End();
 			var forciblePool = world.GetPool<ForcibleComponent>();
@@ -20,6 +21,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				applyForce.Force -= applyForce.Force*(forcible.ReduceForceRate*Time.deltaTime);
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

@@ -9,6 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<DrawDebugKdTreePositionComponent>()
 							  .Inc<KdTreeElementComponent>()
@@ -23,6 +24,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				DrawCircle(0.5f, position, Color.black);
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void DrawCircle(float radius, Vector2 position, Color color)

@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Run(EcsSystems systems)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
-			;
+			
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<SpeedComponent>()

@@ -51,8 +51,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			AddSkillComponentIfDoesntExist();
 			TrySpawnProjectile();
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void TrySpawnProjectile()

@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Roguelike.Client.Core.Components;
 
-namespace TonPlay.Roguelike.Client.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class ClearUsedEventsSystem : IEcsRunSystem
 	{

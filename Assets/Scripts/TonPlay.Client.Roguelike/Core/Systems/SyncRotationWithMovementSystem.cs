@@ -9,6 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world.Filter<SyncRotationWithPositionDifferenceComponent>().Inc<RotationComponent>().Inc<PositionComponent>().End();
 			var rotationPool = world.GetPool<RotationComponent>();
@@ -25,9 +26,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				rotation.Direction.Normalize();
 
 				syncRotationWithPosition.LastPosition = Vector2.Lerp(syncRotationWithPosition.LastPosition, position.Position, Time.deltaTime*5);
-
-				Debug.DrawRay(position.Position, rotation.Direction, Color.red, Time.deltaTime);
 			}
+			
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

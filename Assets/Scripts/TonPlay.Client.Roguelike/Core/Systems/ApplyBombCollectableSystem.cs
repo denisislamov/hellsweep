@@ -26,6 +26,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var apply = ref applyPool.Get(entityId);
 
+				if (apply.CollectableEntityIds.Count <= 0)
+				{
+					continue;
+				}
+
 				if (!preparePool.Has(entityId))
 				{
 					preparePool.Add(entityId);
@@ -44,7 +49,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					destroyPool.Add(collectableEntityId);
 				}
 
-				applyPool.Del(entityId);
+				apply.CollectableEntityIds.Clear();
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}

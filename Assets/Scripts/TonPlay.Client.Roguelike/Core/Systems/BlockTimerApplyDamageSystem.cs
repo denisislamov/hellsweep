@@ -25,6 +25,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		public void Run(EcsSystems systems)
 		{
+			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<BlockApplyDamageTimerComponent>()
@@ -35,11 +36,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var block = ref blockPool.Get(entityId);
-				foreach (var damageSourceToDict in block.Blocked)
-				{
-
-				}
-
+				
 				for (var i = 0; i < _damageSources.Length; i++)
 				{
 					var damageSource = _damageSources[i];
@@ -71,6 +68,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					_stacks[damageSource].Clear();
 				}
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

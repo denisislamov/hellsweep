@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class BasicEnemyMovementTargetSystem : IEcsInitSystem, IEcsRunSystem
+	public class EnemyMovementAroundEnemiesSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private readonly IOverlapExecutor _overlapExecutor;
 
@@ -22,7 +22,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		private KDQuery _query = new KDQuery();
 
-		public BasicEnemyMovementTargetSystem(IOverlapExecutor overlapExecutor)
+		public EnemyMovementAroundEnemiesSystem(IOverlapExecutor overlapExecutor)
 		{
 			_overlapExecutor = overlapExecutor;
 		}
@@ -70,8 +70,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
-				var movementVector = (playerPosition - position);
-				movementVector.Normalize();
 
 				var collisionAreaConfig = collisionComponent.CollisionAreaConfig;
 
@@ -79,7 +77,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
 
-				movementComponent.Direction = CombineMovementDirection(separateVector, movementVector);
+				movementComponent.Direction = CombineMovementDirection(separateVector, movementComponent.Direction);
 				movementComponent.Direction.Normalize();
 
 				_neighborsEntityIds.Clear();
@@ -90,7 +88,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		private static Vector2 CombineMovementDirection(Vector2 separateVector, Vector2 movementVector)
 		{
-			return separateVector*0.5f + movementVector*0.5f;
+			return separateVector*0.75f + movementVector*0.25f;
 		}
 
 		private Vector2 SeparateWithNeighbors(
