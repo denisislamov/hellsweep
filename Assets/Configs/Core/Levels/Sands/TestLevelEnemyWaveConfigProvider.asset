@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveConfigs:
   - _waves:
-    - _id: mage_test
-      _enemyId: mage_test
-      _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 1
-      _spawnQuantityPerRate: 1
+    - _id: crab
+      _enemyId: crab
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 25
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 10
+      _waveSpawnType: 1
     _startTiming:
       _minutes: 0
       _seconds: 0

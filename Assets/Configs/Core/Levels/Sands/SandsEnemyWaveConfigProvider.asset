@@ -39,16 +39,16 @@ MonoBehaviour:
     - _id: 2_crab
       _enemyId: crab
       _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 200
-      _spawnQuantityPerRate: 20
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 25
       _spawnRate:
         _minutes: 0
-        _seconds: 5
-      _waveSpawnType: 0
+        _seconds: 10
+      _waveSpawnType: 1
     - _id: 2_mage
       _enemyId: mage
-      _enemiesQuantity: 5000
-      _maxSpawnedQuantity: 40
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 15
       _spawnQuantityPerRate: 5
       _spawnRate:
         _minutes: 0
@@ -71,10 +71,10 @@ MonoBehaviour:
       _enemyId: crab
       _enemiesQuantity: 5000
       _maxSpawnedQuantity: 200
-      _spawnQuantityPerRate: 200
+      _spawnQuantityPerRate: 25
       _spawnRate:
         _minutes: 0
-        _seconds: 30
+        _seconds: 15
       _waveSpawnType: 1
     - _id: 3_ghost
       _enemyId: ghost
@@ -118,13 +118,13 @@ MonoBehaviour:
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
-        _seconds: 5
+        _seconds: 10
       _waveSpawnType: 1
     - _id: 4_crab
       _enemyId: crab
       _enemiesQuantity: 5000
       _maxSpawnedQuantity: 100
-      _spawnQuantityPerRate: 100
+      _spawnQuantityPerRate: 50
       _spawnRate:
         _minutes: 0
         _seconds: 30

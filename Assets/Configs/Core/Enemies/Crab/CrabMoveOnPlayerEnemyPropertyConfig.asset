@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CrabMoveOnPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _movementConfig:
-    _startSpeed: 8
+    _startSpeed: 12
     _acceleration: 0
