@@ -71,6 +71,41 @@ namespace TonPlay.Client.Common.Utilities
 			
 			return false;
 		}
+		
+		public bool Remove(int value)
+		{
+			var hash = value < 0 ? value * -1 : value;
+			var bucketIndex = hash % (_size - 1);
+			var bucket = _buckets[bucketIndex];
+			var slotIndex = bucket;
+
+			var previousSlotIndex = -1;
+			while (slotIndex != -1)
+			{
+				var slot = _slots[slotIndex];
+				
+				if (slot.value == value)
+				{
+					if (previousSlotIndex == -1)
+					{
+						_buckets[bucketIndex] = -1;
+					}
+					else
+					{
+						_slots[_buckets[previousSlotIndex]].next = -1;
+					}
+					
+					return true;
+				}
+				
+				if (slot.next == -1) break;
+				
+				previousSlotIndex = slotIndex;
+				slotIndex = slot.next;
+			}
+
+			return false;
+		}
 
 		public void Clear()
 		{

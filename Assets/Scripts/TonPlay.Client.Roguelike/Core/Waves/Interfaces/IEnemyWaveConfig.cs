@@ -8,5 +8,6 @@ namespace TonPlay.Client.Roguelike.Core.Waves.Interfaces
 		int SpawnQuantityPerRate { get; }
 		long SpawnTickRate { get; }
 		int MaxSpawnedQuantity { get; }
+		WaveSpawnType WaveSpawnType { get; }
 	}
 }

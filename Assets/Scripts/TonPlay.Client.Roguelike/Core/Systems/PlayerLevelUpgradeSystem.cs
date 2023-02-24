@@ -10,7 +10,6 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice;
 using TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;

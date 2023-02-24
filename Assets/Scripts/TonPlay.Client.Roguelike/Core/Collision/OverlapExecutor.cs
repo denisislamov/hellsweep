@@ -7,7 +7,6 @@ using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Utilities;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 using Zenject;
 

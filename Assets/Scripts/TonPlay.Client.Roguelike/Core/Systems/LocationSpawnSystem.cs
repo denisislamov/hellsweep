@@ -8,7 +8,6 @@ using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Roguelike.Client.Core;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

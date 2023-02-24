@@ -7,7 +7,6 @@ using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CrabEnemyConfig
   m_EditorClassIdentifier: 
   _id: crab
+  _enemyType: 0
   _prefab: {fileID: 8459442970995604013, guid: 2882d39bb72a94d329d933fc78f002d1, type: 3}
   _health: 10
   _collectablesIdsOnDeath:
@@ -22,3 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24c0d629d5eb2483d852fcd3808d16f2, type: 2}
   - {fileID: 11400000, guid: f8ebb384bcd25400190bcafc7ac55372, type: 2}
   - {fileID: 11400000, guid: 722c4d87168af46f1a400570be2c5026, type: 2}
+  - {fileID: 11400000, guid: 3e9264c662c6447a080e7a2cc18c4445, type: 2}

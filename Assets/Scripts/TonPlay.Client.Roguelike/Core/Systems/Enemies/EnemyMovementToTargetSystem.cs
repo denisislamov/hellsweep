@@ -2,10 +2,9 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
-using TonPlay.Roguelike.Client.Core.Components;
-using UnityEngine;
+using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties;
 
-namespace TonPlay.Client.Roguelike.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 {
 	public class EnemyMovementToTargetSystem : IEcsInitSystem, IEcsRunSystem
 	{
@@ -24,8 +23,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 								   .Inc<EnemyTargetComponent>()
 								   .Inc<EnemyComponent>()
 								   .Inc<PositionComponent>()
-								   .Inc<SpeedComponent>()
 								   .Inc<MovementComponent>()
+								   .Exc<RotateMovementDirectionToTargetWhenDistanceExceededComponent>()
+								   .Exc<DeadComponent>()
 								   .End();
 
 			var positionPool = world.GetPool<PositionComponent>();

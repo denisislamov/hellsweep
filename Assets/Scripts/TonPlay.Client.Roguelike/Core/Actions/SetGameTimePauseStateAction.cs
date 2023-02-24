@@ -1,7 +1,6 @@
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
 using TonPlay.Client.Roguelike.Core.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 

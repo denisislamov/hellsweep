@@ -1,14 +1,9 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Client.Roguelike.Utilities;
-using TonPlay.Roguelike.Client.Core;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
@@ -19,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 		private readonly List<int> _nearCollectables = new List<int>();
 		private readonly KdTreeStorage _kdTreeStorage;
+		private readonly SimpleIntHashSet _cachedHashSet = new SimpleIntHashSet();
 
 		public ActiveMagnetSystem(KdTreeStorage kdTreeStorage)
 		{
@@ -44,53 +40,52 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 											   .Exc<DestroyComponent>()
 											   .End();
 
-			var magnetizableCollectableRawEntitiesArray = magnetizableCollectableFilter.GetRawEntities();
-
-			HashSet<int> magnetizableCollectableHashSet = null;
-
+			magnetizableCollectableFilter.GetRawEntities().ToCachedSimpleIntHashSet(_cachedHashSet);
+			
 			var positionPool = world.GetPool<PositionComponent>();
 			var magnetToEntityPool = world.GetPool<MagnetisedToEntityComponent>();
 			var activeMagnetPool = world.GetPool<ActiveMagnetComponent>();
-			var destroyPool = world.GetPool<DestroyComponent>();
 			var stickEaseMovementToEntityPool = world.GetPool<StickEaseMovementToEntityPositionComponent>();
 			var easeMovementPool = world.GetPool<EaseMovementComponent>();
 
 			foreach (var entityId in filter)
 			{
-				magnetizableCollectableHashSet ??= magnetizableCollectableRawEntitiesArray.ToHashSet();
-
 				ref var activeMagnet = ref activeMagnetPool.Get(entityId);
 
-				magnetizableCollectableHashSet.ExceptWith(activeMagnet.ExcludeEntityIds);
+				if (activeMagnet.TimeLeft <= 0.01f)
+				{
+					continue;
+				}
+
+				foreach (var excludeEntityId in activeMagnet.ExcludeEntityIds)
+				{
+					_cachedHashSet.Remove(excludeEntityId);
+				}
 
 				MagnetNearCollectables(
 					entityId,
-					magnetizableCollectableHashSet,
+					_cachedHashSet,
 					magnetToEntityPool,
 					positionPool,
-					destroyPool,
 					stickEaseMovementToEntityPool,
 					easeMovementPool,
 					ref activeMagnet);
 
-				magnetizableCollectableHashSet.UnionWith(activeMagnet.ExcludeEntityIds);
+				foreach (var excludeEntityId in activeMagnet.ExcludeEntityIds)
+				{
+					_cachedHashSet.Add(excludeEntityId);
+				}
 
 				activeMagnet.TimeLeft -= Time.deltaTime;
-
-				if (activeMagnet.TimeLeft <= 0)
-				{
-					activeMagnetPool.Del(entityId);
-				}
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private void MagnetNearCollectables(
 			int appliedEntityId,
-			ICollection<int> magnetizableCollectableCollection,
+			SimpleIntHashSet magnetizableCollectableCollection,
 			EcsPool<MagnetisedToEntityComponent> magnetToEntityPool,
 			EcsPool<PositionComponent> positionPool,
-			EcsPool<DestroyComponent> destroyPool,
 			EcsPool<StickEaseMovementToEntityPositionComponent> stickEaseMovementToEntityPool,
 			EcsPool<EaseMovementComponent> easeMovementPool,
 			ref ActiveMagnetComponent activeMagnet)

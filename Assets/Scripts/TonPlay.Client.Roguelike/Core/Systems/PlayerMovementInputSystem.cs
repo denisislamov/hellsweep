@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
 

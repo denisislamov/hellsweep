@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
@@ -164,11 +165,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					var spawnQuantity = maxEnemiesSpawnedQuantity - wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id];
 					spawnQuantity = Mathf.Clamp(spawnQuantity, 0, waveConfig.SpawnQuantityPerRate);
 
+					var spawnPosition = CreateRandomPosition(_sharedData.PlayerPositionProvider.Position);
+					
 					for (var i = 0; i < spawnQuantity; i++)
 					{
 						var enemyConfig = _enemyConfigProvider.Get(waveConfig.EnemyId);
 
-						CreateEnemy(world, _sharedData.PlayerPositionProvider.Position, enemyConfig, waveConfig);
+						CreateEnemy(world, _sharedData.PlayerPositionProvider.Position, enemyConfig, waveConfig, spawnPosition);
 
 						wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id]++;
 					}
@@ -179,7 +182,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
-		private void CreateEnemy(EcsWorld world, Vector2 playerPosition, IEnemyConfig enemyConfig, IEnemyWaveConfig enemyWaveConfig)
+		private void CreateEnemy(
+			EcsWorld world, 
+			Vector2 playerPosition, 
+			IEnemyConfig enemyConfig, 
+			IEnemyWaveConfig enemyWaveConfig, 
+			Vector2 randomizedWavePosition)
 		{
 			if (!_pool.TryGet<EnemyView>(enemyConfig.Identity, out var poolObject))
 			{
@@ -190,7 +198,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 
 			var enemyView = poolObject.Object;
-			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType);
+			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType, enemyWaveConfig.WaveSpawnType, randomizedWavePosition);
 
 			enemyView.transform.position = spawnPosition;
 
@@ -283,10 +291,26 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					action.Execute(entity.Id, _sharedData);
 				}
 			}
+			
+			if (enemyConfig.HasProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>())
+			{
+				var propertyConfig = enemyConfig.GetProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>();
+				var targetPosition = world.GetPool<PositionComponent>().Get(entity.Get<EnemyTargetComponent>().EntityId);
+				var position = spawnPosition.ToVector2XY();
+				var direction = targetPosition.Position - position;
+				direction.Normalize();
+				entity.AddRotateMovementInTargetDirectionWhenDistanceExceededComponent(propertyConfig.Distance, direction);
+			}
 		}
 
-		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type)
+		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type, WaveSpawnType waveSpawnType, Vector2 randomizedWaveSpawnPosition)
 		{
+			switch (waveSpawnType)
+			{
+				case WaveSpawnType.Group:
+					return randomizedWaveSpawnPosition + Random.insideUnitCircle * 3f;
+			}
+			
 			switch (type)
 			{
 				case EnemyType.Boss:

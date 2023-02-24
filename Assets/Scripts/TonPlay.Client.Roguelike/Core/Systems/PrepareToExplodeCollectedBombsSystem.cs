@@ -3,7 +3,6 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems

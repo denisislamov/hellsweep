@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-using TonPlay.Roguelike.Client.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {

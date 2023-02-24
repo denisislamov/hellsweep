@@ -5,7 +5,6 @@ using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {

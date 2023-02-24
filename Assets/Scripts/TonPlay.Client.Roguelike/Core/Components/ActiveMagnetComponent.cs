@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Common.Utilities;
 
 namespace TonPlay.Client.Roguelike.Core.Components
 {
@@ -6,6 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Components
 	{
 		public float MagnetRadius;
 		public float TimeLeft;
-		public HashSet<int> ExcludeEntityIds;
+		public SimpleIntHashSet ExcludeEntityIds;
 	}
 }

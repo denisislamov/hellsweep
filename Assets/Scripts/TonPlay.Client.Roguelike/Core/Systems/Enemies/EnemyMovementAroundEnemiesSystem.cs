@@ -6,11 +6,9 @@ using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 
-namespace TonPlay.Client.Roguelike.Core.Systems
+namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 {
 	public class EnemyMovementAroundEnemiesSystem : IEcsInitSystem, IEcsRunSystem
 	{

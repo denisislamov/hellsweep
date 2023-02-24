@@ -10,7 +10,6 @@ using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -404,6 +403,14 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref MoveToTargetComponent AddMoveToTargetComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<MoveToTargetComponent>();
+			return ref component;
+		}
+		
+		public static ref RotateMovementDirectionToTargetWhenDistanceExceededComponent AddRotateMovementInTargetDirectionWhenDistanceExceededComponent(this EcsEntity entity, float distance, Vector2 direction)
+		{
+			ref var component = ref entity.Add<RotateMovementDirectionToTargetWhenDistanceExceededComponent>();
+			component.Distance = distance;
+			component.CachedDirection = direction;
 			return ref component;
 		}
 	}

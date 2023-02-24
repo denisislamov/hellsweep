@@ -3,7 +3,6 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 using UniRx;
 using UnityEngine.Profiling;
 

@@ -1,8 +1,6 @@
-using TonPlay.Client.Roguelike.Core;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Views.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Components
+namespace TonPlay.Client.Roguelike.Core.Components
 {
 	public struct WeaponComponent
 	{

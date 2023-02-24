@@ -4,7 +4,6 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Roguelike.Client.Core.Components;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
@@ -78,7 +77,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						ref var activeMagnet = ref activeMagnetPool.Add(appliedEntityId);
 						activeMagnet.TimeLeft += config.ActiveTime;
 						activeMagnet.MagnetRadius = config.MagnetRadius;
-						activeMagnet.ExcludeEntityIds = new HashSet<int>() {collectableEntityId};
+						activeMagnet.ExcludeEntityIds = new SimpleIntHashSet(collectableEntityId);
+						activeMagnet.ExcludeEntityIds.Add(collectableEntityId);
 					}
 				}
 

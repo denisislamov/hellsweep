@@ -4,6 +4,7 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision;
+using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models;
@@ -15,7 +16,6 @@ using TonPlay.Client.Roguelike.UI.Screens.Game;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.Utilities;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine;
 using Zenject;
 
@@ -139,6 +139,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new TransformPositionSystem())
 							.Add(new CameraMovementSystem())
 							.Add(new EnemyMovementToTargetSystem())
+							.Add(new EnemyRotateMovementDirectionToTargetWhenDistanceExceededSystem())
+							.Add(new RegularEnemyMoveOutOnBossSpawnSystem())
 							.Add(new EnemyMovementAroundEnemiesSystem(_overlapExecutor))
 							.Add(new EnemyShootAtTargetSystem())
 							.Add(new PlayerCollisionSystem(_overlapExecutor))
@@ -147,7 +149,6 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new PlayerLevelUpgradeSystem(_uiService))
 							.Add(new AccelerationSystem())
 							.Add(new InvertMovementAxisOnSpeedInversionSystem())
-							.Add(new RegularEnemyMoveOutOnBossSpawnSystem())
 							.Add(new LocalSpaceTransformMovementSystem())
 							.Add(new GlobalSpaceTransformMovementSystem())
 							.Add(new ReduceApplyForceSystem())

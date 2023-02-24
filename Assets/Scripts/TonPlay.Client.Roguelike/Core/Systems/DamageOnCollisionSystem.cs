@@ -2,7 +2,6 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Roguelike.Client.Core.Components;
 using UnityEngine.Profiling;
 
 namespace TonPlay.Client.Roguelike.Core.Systems

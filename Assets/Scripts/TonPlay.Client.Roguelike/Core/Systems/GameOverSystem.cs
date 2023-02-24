@@ -4,7 +4,6 @@ using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
-using TonPlay.Roguelike.Client.Core.Components;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
