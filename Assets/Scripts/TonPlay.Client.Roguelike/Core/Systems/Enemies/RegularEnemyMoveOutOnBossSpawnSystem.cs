@@ -32,14 +32,23 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 						  .Get(timespan.Ticks)
 						  .Next();
 
-			var secondsDifference = TimeSpan.FromTicks(nextWave?.StartTimingTicks ?? 0 - timespan.Ticks).TotalSeconds;
+			var nextWaveTimeSpan = TimeSpan.FromTicks(nextWave?.StartTimingTicks ?? 0);
 
-			var nextWaveHasBoss = nextWave?.Waves.Any(_ => enemyConfigProvider.Get(_.EnemyId).EnemyType == EnemyType.Boss);
+			var secondsDifference = (nextWaveTimeSpan - timespan).TotalSeconds;
+
+			var nextWaveHasBoss = false;
+			for (var i = 0; i < nextWave?.Waves?.Count; i++)
+			{
+				if (enemyConfigProvider.Get(nextWave.Waves[i].EnemyId).EnemyType == EnemyType.Boss)
+				{
+					nextWaveHasBoss = true;
+					break;
+				}
+			}
 
 			if (!bossExists &&
-				(!nextWaveHasBoss.HasValue ||
-				 !nextWaveHasBoss.Value ||
-				 secondsDifference > EnemyWaveSpawnSystem.PREPARE_BEFORE_BOSS_SPAWN_SECONDS))
+				!nextWaveHasBoss ||
+				secondsDifference > EnemyWaveSpawnSystem.PREPARE_BEFORE_BOSS_SPAWN_SECONDS)
 			{
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return;

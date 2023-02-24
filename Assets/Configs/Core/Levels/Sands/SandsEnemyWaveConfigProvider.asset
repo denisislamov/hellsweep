@@ -57,16 +57,16 @@ MonoBehaviour:
     - _id: 3_cyclope
       _enemyId: cyclope
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 200
-      _spawnQuantityPerRate: 200
+      _maxSpawnedQuantity: 150
+      _spawnQuantityPerRate: 150
       _spawnRate:
         _minutes: 0
         _seconds: 0
     - _id: 3_crab
       _enemyId: crab
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 300
-      _spawnQuantityPerRate: 300
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 200
       _spawnRate:
         _minutes: 0
         _seconds: 0
@@ -102,23 +102,23 @@ MonoBehaviour:
       _minutes: 5
       _seconds: 0
   - _waves:
-    - _id: 3_cyclope
+    - _id: 4_cyclope
       _enemyId: cyclope
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 500
+      _maxSpawnedQuantity: 300
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 0
-    - _id: 3_crab
+    - _id: 4_crab
       _enemyId: crab
       _enemiesQuantity: 50000
-      _maxSpawnedQuantity: 200
+      _maxSpawnedQuantity: 100
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 0
-    - _id: 3_ghost
+    - _id: 4_ghost
       _enemyId: ghost
       _enemiesQuantity: 50000
       _maxSpawnedQuantity: 100
@@ -126,17 +126,25 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 0
-    - _id: 3_mage
+    - _id: 4_mage
       _enemyId: mage
-      _enemiesQuantity: 50000
+      _enemiesQuantity: 150
       _maxSpawnedQuantity: 50
       _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 1
+        _seconds: 20
+    - _id: 4_tier2_cyclope
+      _enemyId: tier2_cyclope
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
         _seconds: 0
     _startTiming:
       _minutes: 5
-      _seconds: 1
+      _seconds: 2
   - _waves:
     - _id: boss_shooter
       _enemyId: boss_shooter

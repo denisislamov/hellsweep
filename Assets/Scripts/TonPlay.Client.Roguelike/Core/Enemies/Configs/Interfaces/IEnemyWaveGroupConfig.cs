@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 	{
 		long StartTimingTicks { get; }
 
-		IEnumerable<EnemyWaveConfig> Waves { get; }
+		IReadOnlyList<EnemyWaveConfig> Waves { get; }
 
 		IEnemyWaveGroupConfig Next();
 	}

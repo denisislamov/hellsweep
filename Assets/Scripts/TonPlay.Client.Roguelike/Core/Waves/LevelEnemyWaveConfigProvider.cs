@@ -85,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 
 			public long StartTimingTicks => _startTiming.GetTimeSpan().Ticks;
 
-			public IEnumerable<EnemyWaveConfig> Waves => _waves;
+			public IReadOnlyList<EnemyWaveConfig> Waves => _waves;
 
 			public IEnemyWaveGroupConfig Next() => _next;
 
