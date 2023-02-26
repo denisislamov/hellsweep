@@ -19,6 +19,8 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 			foreach (var entityId in filter)
 			{
+				sharedData.ArenasKdTreeStorage.RemoveEntity(entityId);
+
 				destroyPool.AddOrGet(entityId);
 			}
 		}

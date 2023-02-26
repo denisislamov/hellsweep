@@ -48,22 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 #endif
 				//query.KNearest(kdTreeStorage.KdTree, position, RoguelikeConstants.Core.Collision.OVERLAP_K_NEAREST_COUNT, _results);
 
-				var radius = 0f;
-
-				switch (collisionAreaConfig)
-				{
-					case ICircleCollisionAreaConfig circleCollisionAreaConfig:
-					{
-						radius = circleCollisionAreaConfig.Radius;
-						break;
-					}
-					case IAABBCollisionAreaConfig aabbCollisionAreaConfig:
-					{
-						var sourceRect = aabbCollisionAreaConfig.Rect;
-						radius = Mathf.Max(sourceRect.max.magnitude, sourceRect.min.magnitude);
-						break;
-					}
-				}
+				var radius = GetOverlapRadius(collisionAreaConfig);
 
 				query.Radius(kdTreeStorage.KdTree, position, radius + RoguelikeConstants.Core.Collision.OVERLAP_MIN_RADIUS, _results);
 
@@ -100,6 +85,45 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 
 			return entities.Count;
+		}
+		
+		private static float GetOverlapRadius(ICollisionAreaConfig collisionAreaConfig)
+		{
+			var radius = 0f;
+
+			switch (collisionAreaConfig)
+			{
+				case ICircleCollisionAreaConfig circleCollisionAreaConfig:
+				{
+					radius = circleCollisionAreaConfig.Radius;
+					break;
+				}
+				case IAABBCollisionAreaConfig aabbCollisionAreaConfig:
+				{
+					var sourceRect = aabbCollisionAreaConfig.Rect;
+					radius = Mathf.Max(sourceRect.max.magnitude, sourceRect.min.magnitude);
+					break;
+				}
+				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig:
+				{
+					var maxRadius = 0f;
+					for (var index = 0; index < compositeCollisionAreaConfig.CollisionAreaConfigs.Count; index++)
+					{
+						var innerConfig = compositeCollisionAreaConfig.CollisionAreaConfigs[index];
+						var distanceToInnerConfig = (innerConfig.Position - compositeCollisionAreaConfig.Position).SqrMagnitude(); 
+						var innerConfigRadius = GetOverlapRadius(innerConfig) + distanceToInnerConfig;
+
+						if (maxRadius < innerConfigRadius)
+						{
+							maxRadius = innerConfigRadius;
+						}
+					}
+					radius = maxRadius;
+					break;
+				}
+			}
+			
+			return radius;
 		}
 
 		private bool IsFilteredEntity(IOverlapParams overlapParams, int entityId)
@@ -178,6 +202,9 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			var aabbA = areaA as IAABBCollisionAreaConfig;
 			var aabbB = areaB as IAABBCollisionAreaConfig;
 
+			var compositeA = areaA as ICompositeCollisionAreaConfig;
+			var compositeB = areaB as ICompositeCollisionAreaConfig;
+
 			if (circleA != null &&
 				circleB != null)
 			{
@@ -245,6 +272,32 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
+			}
+
+			if (compositeA != null)
+			{
+				for (var i = 0; i < compositeA.CollisionAreaConfigs.Count; i++)
+				{
+					var innerAreaA = compositeA.CollisionAreaConfigs[i];
+					
+					if (IsIntersected(innerAreaA, areaB, positionA, positionB))
+						return true;
+				}
+
+				return false;
+			}
+			
+			if (compositeB != null)
+			{
+				for (var i = 0; i < compositeB.CollisionAreaConfigs.Count; i++)
+				{
+					var innerAreaB = compositeB.CollisionAreaConfigs[i];
+					
+					if (IsIntersected(areaA, innerAreaB, positionA, positionB))
+						return true;
+				}
+
+				return false;
 			}
 
 			return false;

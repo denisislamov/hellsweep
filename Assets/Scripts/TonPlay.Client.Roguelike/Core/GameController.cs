@@ -50,6 +50,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private KdTreeStorage _playersKdTreeStorage;
 		private KdTreeStorage _collectablesKdTreeStorage;
 		private KdTreeStorage _playerProjectilesKdTreeStorage;
+		private KdTreeStorage _arenasKdTreeStorage;
 
 		private OverlapExecutor _overlapExecutor;
 		private ICollectableEntityFactory _collectablesEntityFactory;
@@ -83,24 +84,31 @@ namespace TonPlay.Client.Roguelike.Core
 			_playersKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Player"));
 			_collectablesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Utility"));
 			_playerProjectilesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("PlayerProjectile"));
+			_arenasKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Arena"));
 
 			_storages = new KdTreeStorage[]
 			{
 				_enemyKdTreeStorage,
 				_playersKdTreeStorage,
 				_collectablesKdTreeStorage,
-				_playerProjectilesKdTreeStorage
+				_playerProjectilesKdTreeStorage,
+				_arenasKdTreeStorage
 			};
 
 			_playerProjectilesKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT);
 			_playerProjectilesKdTreeStorage.CreateKdTreeIndexToEntityIdMap(RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT);
 			_playerProjectilesKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT]);
+			
+			_arenasKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.ARENA_MAX_COUNT);
+			_arenasKdTreeStorage.CreateKdTreeIndexToEntityIdMap(RoguelikeConstants.Core.ARENA_MAX_COUNT);
+			_arenasKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.ARENA_MAX_COUNT]);
 
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
 
 			_sharedData.SetPlayerWeapon("revolver");
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
+			_sharedData.SetArenasKdTreeStorage(_arenasKdTreeStorage);
 			_sharedData.SetWorld(_world);
 
 			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
@@ -159,6 +167,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ProjectileExplodeOnMoveDistanceSystem())
 							.Add(new ProjectileExplodeOnCollisionSystem())
 							.Add(new ExplosionSystem(_overlapExecutor))
+							.Add(new BossShooterRicochetProjectileOffTheArenaSystem())
 							.Add(new BlockTimerApplyDamageSystem())
 							.Add(new TryApplyDamageSystem())
 							.Add(new ShowAppliedDamageSystem())

@@ -33,7 +33,8 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 			var view = Instantiate(_arenaView);
 			var transform = view.transform;
-			transform.position = callerPosition.Position;
+			var position = callerPosition.Position;
+			transform.position = position;
 
 			var entity = world.NewEntity();
 
@@ -43,7 +44,9 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 			entity.AddCollisionComponent(_collisionAreaConfig, _layerMask);
 			entity.AddLayerComponent(_layer);
 			entity.AddHasCollidedComponent();
-			entity.AddPositionComponent(transform.position);
+			entity.AddPositionComponent(position);
+
+			sharedData.ArenasKdTreeStorage.AddEntity(entity.Id, position);
 
 			ref var nonPoolObj = ref entity.Add<GameNonPoolObject>();
 			nonPoolObj.GameObject = view.gameObject;

@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66d2051a24d8461a8f45c273916a19ab, type: 3}
-  m_Name: BossShooterRicochetOffTheArenaProjectileConfigProperty
+  m_Script: {fileID: 11500000, guid: b754800226a443cd8aba8b48c2c0664e, type: 3}
+  m_Name: BossShooterDestroyOnTimerProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _collisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
+  _timer: 5

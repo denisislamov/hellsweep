@@ -44,6 +44,8 @@ namespace TonPlay.Client.Roguelike.Core
 		public ISkillConfigProvider SkillsConfigProvider { get; }
 
 		public KdTreeStorage CollectablesKdTreeStorage { get; private set; }
+		
+		public KdTreeStorage ArenasKdTreeStorage { get; private set; }
 
 		public SignalBus SignalBus { get; }
 
@@ -98,6 +100,11 @@ namespace TonPlay.Client.Roguelike.Core
 		public void SetCollectablesKdTreeStorage(KdTreeStorage kdTreeStorage)
 		{
 			CollectablesKdTreeStorage = kdTreeStorage;
+		}
+		
+		public void SetArenasKdTreeStorage(KdTreeStorage kdTreeStorage)
+		{
+			ArenasKdTreeStorage = kdTreeStorage;
 		}
 
 		public void SetWorld(EcsWorld world)

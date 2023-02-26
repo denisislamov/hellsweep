@@ -44,6 +44,8 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		ISkillConfigProvider SkillsConfigProvider { get; }
 
 		KdTreeStorage CollectablesKdTreeStorage { get; }
+		
+		KdTreeStorage ArenasKdTreeStorage { get; }
 
 		SignalBus SignalBus { get; }
 
