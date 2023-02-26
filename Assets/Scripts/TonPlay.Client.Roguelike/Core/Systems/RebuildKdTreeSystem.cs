@@ -6,7 +6,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 	{
 		private readonly KdTreeStorage[] _storages;
 
-		private int _lastStorageIndex = -1;
+		//private int _lastStorageIndex = -1;
 
 		public RebuildKdTreeSystem(params KdTreeStorage[] storages)
 		{
@@ -16,11 +16,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Run(EcsSystems systems)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
-			_lastStorageIndex++;
-			_lastStorageIndex %= _storages.Length;
-			var storage = _storages[_lastStorageIndex++];
-			if (storage.Changed)
+			for (var i = 0; i < _storages.Length; i++)
 			{
+				var storage = _storages[i];
 				storage.Rebuild();
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();

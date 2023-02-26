@@ -413,5 +413,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.CachedDirection = direction;
 			return ref component;
 		}
+		
+		public static ref RicochetOffTheArenaComponent AddRicochetOffTheArenaComponent(this EcsEntity entity, int layerMask)
+		{
+			ref var component = ref entity.Add<RicochetOffTheArenaComponent>();
+			component.LayerMask = layerMask;
+			return ref component;
+		}
 	}
 }

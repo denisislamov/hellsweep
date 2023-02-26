@@ -171,7 +171,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					{
 						var enemyConfig = _enemyConfigProvider.Get(waveConfig.EnemyId);
 
-						CreateEnemy(world, _sharedData.PlayerPositionProvider.Position, enemyConfig, waveConfig, spawnPosition);
+						CreateEnemy(
+							world, 
+							_sharedData.PlayerPositionProvider.Position, 
+							enemyConfig, 
+							waveConfig, 
+							spawnPosition,
+							spawnQuantity);
 
 						wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id]++;
 					}
@@ -187,7 +193,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			Vector2 playerPosition, 
 			IEnemyConfig enemyConfig, 
 			IEnemyWaveConfig enemyWaveConfig, 
-			Vector2 randomizedWavePosition)
+			Vector2 randomizedWavePosition,
+			int groupSize)
 		{
 			if (!_pool.TryGet<EnemyView>(enemyConfig.Identity, out var poolObject))
 			{
@@ -198,7 +205,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 
 			var enemyView = poolObject.Object;
-			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType, enemyWaveConfig.WaveSpawnType, randomizedWavePosition);
+			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType, enemyWaveConfig.WaveSpawnType, randomizedWavePosition, groupSize);
 
 			enemyView.transform.position = spawnPosition;
 
@@ -303,12 +310,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			}
 		}
 
-		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type, WaveSpawnType waveSpawnType, Vector2 randomizedWaveSpawnPosition)
+		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type, WaveSpawnType waveSpawnType, Vector2 randomizedWaveSpawnPosition, int groupSize)
 		{
 			switch (waveSpawnType)
 			{
 				case WaveSpawnType.Group:
-					return randomizedWaveSpawnPosition + Random.insideUnitCircle * 3f;
+				{
+					var minRandomSize = 3f;
+					var dynamicRandomSize = groupSize / 125f;
+					var randomSize = dynamicRandomSize > minRandomSize ? dynamicRandomSize : minRandomSize;
+					return randomizedWaveSpawnPosition + Random.insideUnitCircle * randomSize;
+				}
 			}
 			
 			switch (type)

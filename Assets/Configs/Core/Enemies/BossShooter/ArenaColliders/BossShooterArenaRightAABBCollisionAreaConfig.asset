@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b807fc41bf3d470299d9291052677c28, type: 3}
-  m_Name: CollisionConfigProvider
+  m_Script: {fileID: 11500000, guid: 541d399bbf8e46a0a0bb0b72ce388852, type: 3}
+  m_Name: BossShooterArenaRightAABBCollisionAreaConfig
   m_EditorClassIdentifier: 
-  _configs:
-  - _layer: 10
-    _layerMask:
-      serializedVersion: 2
-      m_Bits: 2176
-  - _layer: 11
-    _layerMask:
-      serializedVersion: 2
-      m_Bits: 5184
+  _position: {x: 8.4, y: 0}
+  _doNotInitiateCollisionOverlap: 1
+  _rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 17.8

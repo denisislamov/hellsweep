@@ -6,7 +6,13 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 	internal abstract class CollisionAreaConfig : ScriptableObject, ICollisionAreaConfig
 	{
 		[SerializeField]
+		private Vector2 _position;
+		
+		[SerializeField]
 		private bool _doNotInitiateCollisionOverlap;
+		
+		public Vector2 Position => _position;
+		
 		public bool DoNotInitiateCollisionOverlap => _doNotInitiateCollisionOverlap;
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
@@ -12,11 +13,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 {
 	public class EnemyMovementAroundEnemiesSystem : IEcsInitSystem, IEcsRunSystem
 	{
+		private const int MAX_NEIGHBORS_CHECK_AMOUNT = 250;
+		private const int MAX_FRAMES_CHECK_DELAY = 4;
+		
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		private ISharedData _sharedData;
 		private List<int> _neighborsEntityIds;
 		private int _neighborsLayer;
+		private int _lastCheckedPart;
+
+		private Stack<int> _debugStack = new Stack<int>();
 
 		private KDQuery _query = new KDQuery();
 
@@ -44,9 +51,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 										   .Inc<SpeedComponent>()
 										   .Inc<MovementComponent>()
 										   .End();
-			var playerFilter = world.Filter<PlayerComponent>().Inc<PositionComponent>().End();
 
-			var enemyComponents = world.GetPool<EnemyComponent>();
 			var positionComponents = world.GetPool<PositionComponent>();
 			var movementComponents = world.GetPool<MovementComponent>();
 			var collisionComponents = world.GetPool<CollisionComponent>();
@@ -54,46 +59,62 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			overlapParams.SetFilter(enemyFilter);
 			overlapParams.Build();
 
-			var playerPosition = Vector2.zero;
-			foreach (var entityId in playerFilter)
-			{
-				ref var positionComponent = ref positionComponents.Get(entityId);
-				playerPosition = positionComponent.Position;
-			}
+			var entitiesCount = enemyFilter.GetEntitiesCount();
+			var maxDynamicNeighborsCheckAmount = enemyFilter.GetEntitiesCount() / MAX_FRAMES_CHECK_DELAY;
+			var maxNeighborsCheckAmount = maxDynamicNeighborsCheckAmount > MAX_NEIGHBORS_CHECK_AMOUNT ?
+				maxDynamicNeighborsCheckAmount:
+				MAX_NEIGHBORS_CHECK_AMOUNT;
+			
+			var maxParts = entitiesCount / maxNeighborsCheckAmount + 1;
 
-			foreach (var entityId in enemyFilter)
+			_lastCheckedPart = ++_lastCheckedPart % maxParts;
+
+			var startIndex = _lastCheckedPart * maxNeighborsCheckAmount;
+			var lastIndex = (_lastCheckedPart + 1) * maxNeighborsCheckAmount;
+
+			lastIndex = lastIndex > entitiesCount ? entitiesCount : lastIndex;
+
+			var entitiesRaw = enemyFilter.GetRawEntities();
+
+			_debugStack.Clear();
+			
+			for (var currentIndex = startIndex; currentIndex < lastIndex; currentIndex++)
 			{
+				var entityId = entitiesRaw[currentIndex];
+				
+				_debugStack.Push(entityId);
+				
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
 				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
 
-				var collisionAreaConfig = collisionComponent.CollisionAreaConfig;
+				var collisionAreaConfig = collisionComponent.CollisionAreaConfig as ICircleCollisionAreaConfig;
 
 				GetNeighbors(ref _neighborsEntityIds, position, collisionAreaConfig, overlapParams);
 
-				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId);
+				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId, collisionAreaConfig?.Radius ?? 0);
 
 				movementComponent.Direction = CombineMovementDirection(separateVector, movementComponent.Direction);
 				movementComponent.Direction.Normalize();
 
 				_neighborsEntityIds.Clear();
 			}
-
+			
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private static Vector2 CombineMovementDirection(Vector2 separateVector, Vector2 movementVector)
 		{
-			return separateVector*0.75f + movementVector*0.25f;
+			return separateVector * 0.66f + movementVector * 0.33f;
 		}
 
-		private Vector2 SeparateWithNeighbors(
-			ref List<int> neighborsEntityIds,
-			EcsPool<PositionComponent> positionComponents,
-			Vector2 position,
-			int excludeEntityId)
+		private Vector2 SeparateWithNeighbors(ref List<int> neighborsEntityIds,
+											  EcsPool<PositionComponent> positionComponents,
+											  Vector2 position,
+											  int excludeEntityId, 
+											  float radius)
 		{
 			var separateVector = Vector2.zero;
 			for (var i = 0; i < neighborsEntityIds.Count; i++)

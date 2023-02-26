@@ -189,7 +189,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 				var result = sqrMagnitude < sqrMaxDistance;
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawCircle(circleB, positionB, !result ? Color.green : Color.red);
+				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red);
 #endif
 
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
@@ -206,10 +206,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 						aabbB.Rect.size.y + 2*circleA.Radius)
 				);
 
-				var result = RectContains(rect, positionB, positionA);
+				var result = RectContains(rect, positionB + aabbB.Position, positionA + circleA.Position);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawRect(aabbB.Rect, positionB, !result ? Color.green : Color.red);
-				DrawCircle(circleA, positionA, !result ? Color.green : Color.red);
+				DrawRect(aabbB.Rect, positionB + aabbB.Position, !result ? Color.green : Color.red);
+				DrawCircle(circleA, positionA + circleA.Position, !result ? Color.green : Color.red);
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
@@ -225,10 +225,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 						aabbA.Rect.size.y + 2*circleB.Radius)
 				);
 
-				var result = RectContains(rect, positionA, positionB);
+				var result = RectContains(rect, positionA + aabbA.Position, positionB + circleB.Position);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawRect(aabbA.Rect, positionA, !result ? Color.green : Color.red);
-				DrawCircle(circleB, positionB, !result ? Color.green : Color.red);
+				DrawRect(aabbA.Rect, positionA + aabbA.Position, !result ? Color.green : Color.red);
+				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red);
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
@@ -236,8 +236,8 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 			if (aabbA != null && aabbB != null)
 			{
-				var aRect = new Rect(positionA, aabbA.Rect.size);
-				var bRect = new Rect(positionB, aabbB.Rect.size);
+				var aRect = new Rect(positionA + aabbA.Position, aabbA.Rect.size);
+				var bRect = new Rect(positionB + aabbB.Position, aabbB.Rect.size);
 
 				var result = aRect.Overlaps(bRect);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
@@ -267,11 +267,20 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			switch (collisionAreaConfig)
 			{
 				case IAABBCollisionAreaConfig aabbCollisionAreaConfig:
-					DrawRect(aabbCollisionAreaConfig.Rect, position, color);
+					DrawRect(aabbCollisionAreaConfig.Rect, position + aabbCollisionAreaConfig.Position, color);
 					return;
 				case ICircleCollisionAreaConfig circleCollisionAreaConfig:
-					DrawCircle(circleCollisionAreaConfig, position, color);
+					DrawCircle(circleCollisionAreaConfig, position + circleCollisionAreaConfig.Position, color);
 					return;
+				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig:
+				{
+					for (var i = 0; i < compositeCollisionAreaConfig.CollisionAreaConfigs.Count; i++)
+					{
+						var area = compositeCollisionAreaConfig.CollisionAreaConfigs[i];
+						DrawCollisionArea(area, position + compositeCollisionAreaConfig.Position, color);
+					}
+					return;
+				}
 			}
 
 		}

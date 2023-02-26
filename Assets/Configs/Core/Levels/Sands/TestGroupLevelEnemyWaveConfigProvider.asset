@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e2b6a361bee4fcd87ae8d2ded9578c0, type: 3}
-  m_Name: TestLevelEnemyWaveConfigProvider
+  m_Name: TestGroupLevelEnemyWaveConfigProvider
   m_EditorClassIdentifier: 
   _waveConfigs:
   - _waves:
-    - _id: boss_shooter
-      _enemyId: boss_shooter
-      _enemiesQuantity: 5
-      _maxSpawnedQuantity: 1
-      _spawnQuantityPerRate: 1
+    - _id: crab
+      _enemyId: crab
+      _enemiesQuantity: 20000
+      _maxSpawnedQuantity: 2000
+      _spawnQuantityPerRate: 2000
       _spawnRate:
         _minutes: 0
-        _seconds: 10
-      _waveSpawnType: 0
+        _seconds: 5
+      _waveSpawnType: 1
     _startTiming:
       _minutes: 0
-      _seconds: 2
+      _seconds: 0

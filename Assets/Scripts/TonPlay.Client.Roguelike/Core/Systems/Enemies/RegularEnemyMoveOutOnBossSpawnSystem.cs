@@ -28,9 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			var timespan = TimeSpan.FromSeconds(time.Time);
 
-			var nextWave = wavesConfigProvider
-						  .Get(timespan.Ticks)
-						  .Next();
+			var nextWave = wavesConfigProvider.Get(timespan.Ticks)?.Next();
 
 			var nextWaveTimeSpan = TimeSpan.FromTicks(nextWave?.StartTimingTicks ?? 0);
 

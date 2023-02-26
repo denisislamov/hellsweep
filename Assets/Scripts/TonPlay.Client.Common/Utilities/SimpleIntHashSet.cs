@@ -92,7 +92,7 @@ namespace TonPlay.Client.Common.Utilities
 					}
 					else
 					{
-						_slots[_buckets[previousSlotIndex]].next = -1;
+						_slots[previousSlotIndex].next = -1;
 					}
 					
 					return true;

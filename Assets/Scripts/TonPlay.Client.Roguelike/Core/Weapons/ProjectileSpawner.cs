@@ -138,6 +138,12 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 					spawnProjectileOnDestroyProjectileConfigProperty.ProjectileConfig,
 					spawnProjectileOnDestroyProjectileConfigProperty.CollisionLayerMask);
 			}
+			
+			if (config.HasProperty<IRicochetOffTheArenaProjectileConfigProperty>())
+			{
+				var property = config.GetProperty<IRicochetOffTheArenaProjectileConfigProperty>();
+				projectileEntity.AddRicochetOffTheArenaComponent(property.CollisionLayerMask);
+			}
 
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 
