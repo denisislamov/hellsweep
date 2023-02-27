@@ -1,0 +1,9 @@
+.app_container__yhzPe .app_unityWrapper__H6ubE{align-items:center;background:#131314;display:flex;height:100%;justify-content:center;left:0;position:absolute;top:0;width:100%}.app_container__yhzPe .app_unityWrapper__H6ubE .app_loadingBar__VgRkG{background:#272734;border-radius:5px;height:10px;left:0;overflow:hidden;right:0;width:400px}.app_container__yhzPe .app_unityWrapper__H6ubE .app_loadingBar__VgRkG .app_loadingBarFill__Qsoc5{background-image:linear-gradient(90deg,#131314,#74cae7,#7361ce,#8f35a8);border-radius:5px;height:6px;margin:2px;transition:width .3s ease-out}.app_container__yhzPe .app_unityWrapper__H6ubE canvas{height:100%;width:100%}body *{font-family:Arial,Helvetica,sans-serif}
+body button{background-color:#fff;border:1px solid #ccc;border-radius:5px;cursor:pointer;margin:10px;padding:10px}body button:hover{background-color:#ccc}
+@media (orientation:landscape) {
+    .app_container__yhzPe .app_unityWrapper__H6ubE canvas {
+        width: 56.25vh;
+        height: 100vh;
+    }
+}
+/*# sourceMappingURL=main.4176884f.css.map*/

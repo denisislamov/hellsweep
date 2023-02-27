@@ -73,4 +73,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Webgl build template
+/BuildTemplate/Game/*
+/BuildTemplate/webgl/unitybuilds/*
+/BuildTemplate/webgl/unitybuild/*
+/BuildTemplate/webgl/StreamingAssets/*
+
 .DS_Store

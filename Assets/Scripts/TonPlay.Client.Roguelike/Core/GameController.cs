@@ -145,7 +145,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new SyncRotationWithAnotherEntitySystem())
 							.Add(new DamageOnDistanceChangeSystem(_overlapExecutor))
 							.Add(new TransformPositionSystem())
-							.Add(new CameraMovementSystem())
+							.Add(new SmoothCameraMovementFollowSystem())
+							.Add(new CameraShakeAndFollowSystem())
 							.Add(new EnemyMovementToTargetSystem())
 							.Add(new EnemyRotateMovementDirectionToTargetWhenDistanceExceededSystem())
 							.Add(new RegularEnemyMoveOutOnBossSpawnSystem())
@@ -170,6 +171,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new BossShooterRicochetProjectileOffTheArenaSystem())
 							.Add(new BlockTimerApplyDamageSystem())
 							.Add(new TryApplyDamageSystem())
+							.Add(new ApplyCameraShakeSystem())
 							.Add(new ShowAppliedDamageSystem())
 							.Add(new SpawnAppliedDamageIndicatorSystem())
 							.Add(new DrawDebugKdTreePositionSystem())
@@ -278,6 +280,7 @@ namespace TonPlay.Client.Roguelike.Core
 		{
 			var cameraEntityId = _world.NewEntity();
 			cameraEntityId.Add<CameraComponent>();
+			cameraEntityId.Add<CameraShakeComponent>();
 			ref var cameraTransformComponent = ref cameraEntityId.Add<TransformComponent>();
 			cameraTransformComponent.Transform = _camera.transform;
 		}

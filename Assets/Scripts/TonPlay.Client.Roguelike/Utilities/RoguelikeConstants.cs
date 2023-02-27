@@ -12,6 +12,12 @@ namespace TonPlay.Client.Roguelike.Utilities
 			{
 				public const int OVERLAP_MIN_RADIUS = 10;
 			}
+			
+			public class Camera
+			{
+				public const float CAMERA_SHAKE_TIME = 0.25f;
+				public const float CAMERA_SHAKE_RADIUS = 0.15f;
+			}
 		}
 	}
 }
