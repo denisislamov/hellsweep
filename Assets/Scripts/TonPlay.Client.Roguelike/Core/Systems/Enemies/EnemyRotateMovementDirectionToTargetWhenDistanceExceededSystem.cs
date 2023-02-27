@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			
 			var world = systems.GetWorld();
 			var enemyFilter = world.Filter<RotateMovementDirectionToTargetWhenDistanceExceededComponent>()
-								   .Inc<EnemyTargetComponent>()
+								   .Inc<TargetComponent>()
 								   .Inc<EnemyComponent>()
 								   .Inc<PositionComponent>()
 								   .Inc<MovementComponent>()
@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			var positionPool = world.GetPool<PositionComponent>();
 			var movementPool = world.GetPool<MovementComponent>();
-			var targetPool = world.GetPool<EnemyTargetComponent>();
+			var targetPool = world.GetPool<TargetComponent>();
 			var rotateMovementPool = world.GetPool<RotateMovementDirectionToTargetWhenDistanceExceededComponent>();
 			
 			foreach (var entityId in enemyFilter)

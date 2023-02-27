@@ -228,6 +228,16 @@ namespace TonPlay.Client.Roguelike.Extensions
 			ref var component = ref entity.Add<BrickProjectileComponent>();
 			return ref component;
 		}
+		
+		public static ref DrillShotProjectileComponent AddDrillShotProjectileComponent(this EcsEntity entity, int creatorEntityId, IDrillShotSkillConfig config, IDrillShotSkillLevelConfig levelConfig)
+		{
+			ref var component = ref entity.Add<DrillShotProjectileComponent>();
+			component.CreatorEntityId = creatorEntityId;
+			component.Config = config;
+			component.LevelConfig = levelConfig;
+			component.LastInsideRectState = true;
+			return ref component;
+		}
 
 		public static ref InvertMovementAxisOnSpeedInversionComponent AddInvertMovementAxisOnSpeedInversionComponent(this EcsEntity entity, bool invertX, bool invertY)
 		{
@@ -349,11 +359,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref EnemyTargetComponent AddOrUpdateEnemyTargetComponent(
+		public static ref TargetComponent AddOrUpdateEnemyTargetComponent(
 			this EcsEntity entity,
 			int entityId)
 		{
-			ref var component = ref entity.AddOrGet<EnemyTargetComponent>();
+			ref var component = ref entity.AddOrGet<TargetComponent>();
 			component.EntityId = entityId;
 			return ref component;
 		}

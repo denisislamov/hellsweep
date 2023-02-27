@@ -69,6 +69,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9d59f234a6c8145469f6827027ec1ae0, type: 3}
   - {fileID: -3154963133287660859, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
   - {fileID: 2305930069447662853, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
+  - {fileID: 21300000, guid: 2bbac415e3f194c9cb424313092e7f66, type: 3}
   - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
@@ -96,6 +97,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
   - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
+  - {fileID: 21300000, guid: 191bdd6e24b874cab9daed40a1173849, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
   - {fileID: 21300000, guid: a1703c2fd8bbc44d5bd84907afdb3590, type: 3}
@@ -121,6 +123,7 @@ SpriteAtlas:
   - Particle_01a
   - SkillChoiceSkillsIcons_01a_1
   - SkillChoiceSkillsIcons_01a_0
+  - Icon_Skill_SilverBar_01a
   - CircleDonut_01a
   - SkillLevelPoint_01b
   - SubTitleBackgroundTexture_01
@@ -148,6 +151,7 @@ SpriteAtlas:
   - TitleBackgroundTexture_04
   - Star
   - TitleBackgroundTexture_03
+  - Icon_Skill_HolyWater_01a
   - RectangleRounded8
   - RectangleHalfRounded16
   - Icons_Kills_01a

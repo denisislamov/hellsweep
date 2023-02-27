@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541d399bbf8e46a0a0bb0b72ce388852, type: 3}
-  m_Name: KatanaSplashAABBCollisionAreaConfig
+  m_Script: {fileID: 11500000, guid: b754800226a443cd8aba8b48c2c0664e, type: 3}
+  m_Name: DrillShotDestroyOnTimerProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0}
-  _doNotInitiateCollisionOverlap: 0
-  _rect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 3
-    height: 1.8
+  _timer: 5

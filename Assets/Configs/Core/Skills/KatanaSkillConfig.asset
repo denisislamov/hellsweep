@@ -50,7 +50,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.33333334
-    _spawnOffset: {x: 2, y: 0}
+    _spawnOffset: {x: 1, y: 0}
   - _level: 4
     _description: Katana desc lvl 4
     _projectileQuantity: 4
@@ -60,7 +60,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.25
-    _spawnOffset: {x: 2, y: 0}
+    _spawnOffset: {x: 1, y: 0}
   - _level: 5
     _description: Katana desc lvl 5
     _projectileQuantity: 5
@@ -70,4 +70,4 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.2
-    _spawnOffset: {x: 2, y: 0}
+    _spawnOffset: {x: 1, y: 0}

@@ -1,6 +1,6 @@
 namespace TonPlay.Client.Roguelike.Core.Components.Enemies
 {
-	public struct EnemyTargetComponent
+	public struct TargetComponent
 	{
 		public int EntityId;
 	}

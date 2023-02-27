@@ -106,7 +106,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
 
-			_sharedData.SetPlayerWeapon("revolver");
+			_sharedData.SetPlayerWeapon("katana");
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 			_sharedData.SetArenasKdTreeStorage(_arenasKdTreeStorage);
 			_sharedData.SetWorld(_world);
@@ -184,6 +184,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new RPGSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new GuardianSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new BrickSkillSystem(_playerProjectilesKdTreeStorage))
+							.Add(new DrillShotSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new HolyWaterSkillSystem())
 							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new RevolverSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))

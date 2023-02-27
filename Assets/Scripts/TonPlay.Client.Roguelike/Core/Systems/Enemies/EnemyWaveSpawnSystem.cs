@@ -302,7 +302,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			if (enemyConfig.HasProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>();
-				var targetPosition = world.GetPool<PositionComponent>().Get(entity.Get<EnemyTargetComponent>().EntityId);
+				var targetPosition = world.GetPool<PositionComponent>().Get(entity.Get<TargetComponent>().EntityId);
 				var position = spawnPosition.ToVector2XY();
 				var direction = targetPosition.Position - position;
 				direction.Normalize();

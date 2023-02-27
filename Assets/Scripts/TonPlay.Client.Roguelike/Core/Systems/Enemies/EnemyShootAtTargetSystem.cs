@@ -17,14 +17,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			var world = systems.GetWorld();
 			var filter = world
 						.Filter<EnemyComponent>()
-						.Inc<EnemyTargetComponent>()
+						.Inc<TargetComponent>()
 						.Inc<ShootProjectileAtTargetComponent>()
 						.Inc<PositionComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
 			var positionPool = world.GetPool<PositionComponent>();
-			var targetPool = world.GetPool<EnemyTargetComponent>();
+			var targetPool = world.GetPool<TargetComponent>();
 			var shootPool = world.GetPool<ShootProjectileAtTargetComponent>();
 			var deadPool = world.GetPool<DeadComponent>();
 

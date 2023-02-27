@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: DrillShotProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7924030291408555319, guid: ffb469ccfcad944b2a2d210e33eeb8a8, type: 3}
+  _movementConfig:
+    _startSpeed: 8
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: df54a614ce9614f389937da6a1526b04, type: 2}
+  - {fileID: 11400000, guid: a80ce0f15032c4fdea6e9e91a07c5058, type: 2}
+  - {fileID: 11400000, guid: 358ed0fd94be443ea818afc92e0684f6, type: 2}
+  _layer: 10
