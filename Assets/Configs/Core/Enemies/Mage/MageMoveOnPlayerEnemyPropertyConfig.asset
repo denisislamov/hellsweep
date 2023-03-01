@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MageMoveOnPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _movementConfig:
-    _startSpeed: 3
+    _startSpeed: 1.5
     _acceleration: 0

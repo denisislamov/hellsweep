@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CyclopeMoveOnPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _movementConfig:
-    _startSpeed: 4
+    _startSpeed: 2
     _acceleration: 0

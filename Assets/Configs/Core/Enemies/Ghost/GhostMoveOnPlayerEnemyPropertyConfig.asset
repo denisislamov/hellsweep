@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GhostMoveOnPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _movementConfig:
-    _startSpeed: 2
+    _startSpeed: 1
     _acceleration: 0
