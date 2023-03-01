@@ -59,6 +59,7 @@ SpriteAtlas:
   - {fileID: -3235371458999267484, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: -7627676611242036744, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: 3891984500605121009, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 21300000, guid: 053a3334afd374b9fbbfbdd19a5cf3a5, type: 3}
   - {fileID: 21300000, guid: 5174a7b7c7ffe4aedb7e05576cf188a1, type: 3}
   - {fileID: 21300000, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 21300000, guid: d04b5438c76f347d28e58da51e5305cf, type: 3}
@@ -424,6 +425,7 @@ SpriteAtlas:
   - Energy_Shield_2
   - Energy_Shield_3
   - Energy_Shield_8
+  - Diamond_01a
   - HolyWaterProjectile_01a
   - KatanaSplash_01a
   - Katana_01a

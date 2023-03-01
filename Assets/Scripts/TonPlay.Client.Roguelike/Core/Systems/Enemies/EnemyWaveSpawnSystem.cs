@@ -90,6 +90,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 					maxSpawnedQuantityOfProjectiles[shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig] += waveConfig.MaxSpawnedQuantity;
 				}
+				
+				if (config.HasProperty<ICanSpawnProjectileEnemyPropertyConfig>())
+				{
+					var propertyConfig = config.GetProperty<ICanSpawnProjectileEnemyPropertyConfig>();
+
+					if (!maxSpawnedQuantityOfProjectiles.ContainsKey(propertyConfig.ProjectileConfig))
+					{
+						maxSpawnedQuantityOfProjectiles.Add(propertyConfig.ProjectileConfig, 0);
+					}
+
+					maxSpawnedQuantityOfProjectiles[propertyConfig.ProjectileConfig] += propertyConfig.PooledCount;
+				}
 			}
 
 			foreach (var kvp in maxSpawnedQuantityPerConfig)
@@ -222,11 +234,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			AddMovementComponent(entity);
 			AddLayerComponent(entity, enemyView);
 			AddStickToLocationBlockComponent(entity);
-			AddTransformComponent(entity, enemyView);
 			AddPositionComponent(entity, spawnPosition);
 			AddTypedEnemyComponent(entity, enemyConfig.EnemyType);
 
-			var lerpTransformComponent = AddLerpTransformComponent(entity);
+			entity.AddTransformComponent(enemyView.transform);
+
+			if (enemyView.Rigidbody2D != null)
+			{
+				entity.AddRigidbodyComponent(enemyView.Rigidbody2D);
+			}
 
 			AddHealthComponent(entity, enemyConfig);
 
@@ -406,12 +422,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 		{
 			ref var positionComponent = ref entity.Add<PositionComponent>();
 			positionComponent.Position = randomPosition;
-		}
-
-		private static void AddTransformComponent(EcsEntity entity, EnemyView enemy)
-		{
-			ref var transformComponent = ref entity.Add<TransformComponent>();
-			transformComponent.Transform = enemy.transform;
 		}
 
 		private static void AddPoolObjectComponent(EcsEntity entity, IViewPoolObject viewPoolObject)

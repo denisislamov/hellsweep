@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: BossWormEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: boss_worm
+  _enemyType: 1
+  _prefab: {fileID: 8115066223926428980, guid: e41e2546564af4ff7b52d46fc1d3ccc1, type: 3}
+  _health: 20000
+  _collectablesIdsOnDeath: []
+  _propertyConfigs:
+  - {fileID: 11400000, guid: b8ca049976b7a4871b0a067c7a19eb41, type: 2}
+  - {fileID: 11400000, guid: 686505fc91e6840c985a23447de1a30a, type: 2}
+  - {fileID: 11400000, guid: 21f0e2cfd246547f3a9c4c2678b82252, type: 2}
+  - {fileID: 11400000, guid: 1d8a8be31252b4321b28b456d62bdaf8, type: 2}
+  - {fileID: 11400000, guid: 828cbd65a2aa44032a4af8ce4d6d13fb, type: 2}

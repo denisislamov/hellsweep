@@ -130,24 +130,24 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var insideRect = RectContains(zone, zonePosition, drillShotPosition);
 				
 				
-				var leftDownCorner = new Vector2(
-					zonePosition.x + zone.width  * -0.5f,
-					zonePosition.y + zone.height * -0.5f);
-			
-				var leftUpCorner = new Vector2(
-					zonePosition.x + zone.width  * -0.5f,
-					zonePosition.y + zone.height * 0.5f);
-			
-				var rightDownCorner = new Vector2(
-					zonePosition.x + zone.width  * 0.5f,
-					zonePosition.y + zone.height * -0.5f);
-			
-				var rightUpCorner = new Vector2(
-					zonePosition.x + zone.width  * 0.5f,
-					zonePosition.y + zone.height * 0.5f);
-				
-				Debug.DrawLine(leftUpCorner, rightDownCorner, Color.green, Time.deltaTime);
-				Debug.DrawLine(leftDownCorner, rightUpCorner, Color.green, Time.deltaTime);
+				// var leftDownCorner = new Vector2(
+				// 	zonePosition.x + zone.width  * -0.5f,
+				// 	zonePosition.y + zone.height * -0.5f);
+				//
+				// var leftUpCorner = new Vector2(
+				// 	zonePosition.x + zone.width  * -0.5f,
+				// 	zonePosition.y + zone.height * 0.5f);
+				//
+				// var rightDownCorner = new Vector2(
+				// 	zonePosition.x + zone.width  * 0.5f,
+				// 	zonePosition.y + zone.height * -0.5f);
+				//
+				// var rightUpCorner = new Vector2(
+				// 	zonePosition.x + zone.width  * 0.5f,
+				// 	zonePosition.y + zone.height * 0.5f);
+				//
+				// Debug.DrawLine(leftUpCorner, rightDownCorner, Color.green, Time.deltaTime);
+				// Debug.DrawLine(leftDownCorner, rightUpCorner, Color.green, Time.deltaTime);
 
 				if (insideRect)
 				{
@@ -169,8 +169,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var closestPoint = bounds.ClosestPoint(drillShotPosition).ToVector2XY();
 				var boundNormal = closestPoint - drillShotPosition;
 
-				Debug.DrawLine(closestPoint, drillShotPosition, Color.red, Time.deltaTime);
-				Debug.DrawRay(drillShotPosition, boundNormal, Color.blue, Time.deltaTime);
+				// Debug.DrawLine(closestPoint, drillShotPosition, Color.red, Time.deltaTime);
+				// Debug.DrawRay(drillShotPosition, boundNormal, Color.blue, Time.deltaTime);
 
 				var dot = Vector2.Dot(movement.Direction, boundNormal);
 

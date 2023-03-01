@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5955307caa4547d5a3b01ce0669e27d9, type: 3}
+  m_Name: BossWormArenaCompositeCollisionAreaConfig
+  m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0}
+  _doNotInitiateCollisionOverlap: 0
+  _collisionAreaConfigs:
+  - {fileID: 11400000, guid: 161394d4c4daa45718a9e0975b4199bd, type: 2}
+  - {fileID: 11400000, guid: 9afb8bfbf23a24fb59448595b018cce6, type: 2}
+  - {fileID: 11400000, guid: c1224c5bbcb44465ba33536283e855a0, type: 2}
+  - {fileID: 11400000, guid: 57884f0bee91b42af9de9c426c664881, type: 2}

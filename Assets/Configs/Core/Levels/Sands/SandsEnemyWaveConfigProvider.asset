@@ -154,14 +154,14 @@ MonoBehaviour:
       _spawnQuantityPerRate: 100
       _spawnRate:
         _minutes: 0
-        _seconds: 0
+        _seconds: 10
       _waveSpawnType: 0
     _startTiming:
-      _minutes: 5
-      _seconds: 2
+      _minutes: 6
+      _seconds: 0
   - _waves:
-    - _id: boss_shooter
-      _enemyId: boss_shooter
+    - _id: boss_worm
+      _enemyId: boss_worm
       _enemiesQuantity: 1
       _maxSpawnedQuantity: 1
       _spawnQuantityPerRate: 1

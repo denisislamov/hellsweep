@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveConfigs:
   - _waves:
-    - _id: mage_test
-      _enemyId: mage_test
+    - _id: boss_worm
+      _enemyId: boss_worm
       _enemiesQuantity: 5
       _maxSpawnedQuantity: 1
       _spawnQuantityPerRate: 1
