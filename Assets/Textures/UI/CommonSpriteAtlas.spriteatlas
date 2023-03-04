@@ -92,16 +92,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
-  - {fileID: 21300000, guid: e1b72e1d183154b7ea826dd2506b1ba7, type: 3}
   - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
   - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
+  - {fileID: 21300000, guid: eaf26e2e2321d4eea866a94ab65f7c82, type: 3}
   - {fileID: 21300000, guid: 191bdd6e24b874cab9daed40a1173849, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
   - {fileID: 21300000, guid: a1703c2fd8bbc44d5bd84907afdb3590, type: 3}
   - {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
+  - {fileID: 21300000, guid: bc8ab47f213464d30b6f3602eb11f98a, type: 3}
   m_PackedSpriteNamesToIndex:
   - MainMenu_Background_Skulls_01a
   - TitleBackgroundTexture_02
@@ -146,16 +147,17 @@ SpriteAtlas:
   - RectangleRounded32
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a
-  - SkillChoiceCurrentSkillPlace_01a
   - SmallButton_01a
   - TitleBackgroundTexture_04
   - Star
   - TitleBackgroundTexture_03
+  - Background_Items_01a
   - Icon_Skill_HolyWater_01a
   - RectangleRounded8
   - RectangleHalfRounded16
   - Icons_Kills_01a
   - Icons_Coin_01a
+  - IconPlacementBackgroundBordered_01a
   m_RenderDataMap: {}
   m_Tag: CommonSpriteAtlas
   m_IsVariant: 0

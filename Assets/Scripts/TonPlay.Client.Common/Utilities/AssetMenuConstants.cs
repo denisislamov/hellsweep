@@ -18,6 +18,8 @@ namespace TonPlay.Roguelike.Client.Utilities
 		
 		public const string CONFIGS = ROOT + "Configs/";
 		
+		public const string UI_CONFIGS = CONFIGS + "UI/";
+		
 		public const string CORE_CONFIGS = CONFIGS + "Core/";
 		
 		public const string ENEMIES_CONFIGS = CORE_CONFIGS + "Enemies/";

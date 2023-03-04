@@ -1,5 +1,6 @@
 using System;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Views;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
@@ -11,6 +12,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces
 		ITimerView TimerView { get; }
 
 		IButtonView ConfirmButtonView { get; }
+		
+		IRewardItemCollectionView RewardItemCollectionView { get; }
 
 		void SetTitleText(string text);
 
@@ -23,9 +26,5 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces
 		void SetBestTimeText(string text);
 
 		void SetKilledEnemiesCountText(string text);
-
-		void SetGainedGoldText(string text);
-
-		void SetGainedProfileExperienceText(string text);
 	}
 }

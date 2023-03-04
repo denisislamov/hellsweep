@@ -11,6 +11,7 @@ using TonPlay.Client.Roguelike.Core.Models;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Core.Systems;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies;
+using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
@@ -39,7 +40,8 @@ namespace TonPlay.Client.Roguelike.Core
 		private EcsSystems _skillsSystems;
 		private EcsSystems _syncKdTreePositionSystems;
 		private EcsSystems _bossWormSystems;
-		
+		private EcsSystems _bossButcherSystems;
+
 		private IDisposable _updateCycle;
 		private IDisposable _fixedUpdateCycle;
 		private IDisposable _initTimer;
@@ -185,6 +187,10 @@ namespace TonPlay.Client.Roguelike.Core
 			   .Add(new BossWormTankStateSystem())
 			   .Add(new BossWormShootStateSystem());
 
+			_bossButcherSystems = new EcsSystems(_world, _sharedData)
+								 .Add(new BossButcherFollowStateSystem())
+								 .Add(new BossButcherTankStateSystem());
+
 			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
 										.Add(new UpdateKdTreeElementPositionSystem())
 										.Add(new RebuildKdTreeSystem(_storages));
@@ -234,6 +240,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_collectablesSystem.Init();
 			_updateSystems.Init();
 			_bossWormSystems.Init();
+			_bossButcherSystems.Init();
 			_syncKdTreePositionSystems.Init();
 			_skillsSystems.Init();
 			_fixedUpdateSystems.Init();
@@ -256,6 +263,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_spawnSystems?.Run();
 			_updateSystems?.Run();
 			_bossWormSystems?.Run();
+			_bossButcherSystems?.Run();
 			_syncKdTreePositionSystems?.Run();
 			_skillsSystems?.Run();
 			_collectablesSystem?.Run();

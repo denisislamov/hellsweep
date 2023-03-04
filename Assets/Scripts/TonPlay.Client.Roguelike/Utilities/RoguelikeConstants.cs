@@ -18,6 +18,12 @@ namespace TonPlay.Client.Roguelike.Utilities
 				public const float CAMERA_SHAKE_TIME = 0.25f;
 				public const float CAMERA_SHAKE_RADIUS = 0.15f;
 			}
+			
+			public class Rewards
+			{
+				public const string COINS_ID = "coins";
+				public const string PROFILE_EXPERIENCE_ID = "profile_experience";
+			}
 		}
 	}
 }

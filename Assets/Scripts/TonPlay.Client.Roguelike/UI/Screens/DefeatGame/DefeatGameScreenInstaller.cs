@@ -1,3 +1,5 @@
+using TonPlay.Client.Roguelike.UI.Rewards;
+using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Interfaces;
@@ -13,6 +15,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 	[CreateAssetMenu(fileName = nameof(DefeatGameScreenInstaller), menuName = AssetMenuConstants.SCREENS_INSTALLERS + nameof(DefeatGameScreenInstaller))]
 	public class DefeatGameScreenInstaller : ScreenInstaller
 	{
+		[SerializeField]
+		private RewardItemView _rewardItemPrefab;
+		
+		[SerializeField]
+		private RewardPresentationProvider _rewardPresentationProvider;
+		
+		[SerializeField]
+		private GameObject _pooledItemsContainerPrefab;
+
 		public override void InstallBindings()
 		{
 			var subContainer = Container.CreateSubContainer();
@@ -44,6 +55,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 
 			subContainer.BindFactory<IDefeatGameView, IDefeatGameScreenContext, DefeatGamePresenter, DefeatGamePresenter.Factory>();
 			subContainer.BindFactory<ITimerView, ITimerContext, TimerPresenter, TimerPresenter.Factory>();
+
+			var rewardsInstaller = new RewardsInstaller(_rewardItemPrefab, _rewardPresentationProvider, _pooledItemsContainerPrefab);
+			subContainer.Inject(rewardsInstaller);
+			
+			rewardsInstaller.InstallBindings();
 		}
 	}
 }

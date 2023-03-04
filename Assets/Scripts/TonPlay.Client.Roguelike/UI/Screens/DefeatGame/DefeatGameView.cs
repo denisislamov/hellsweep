@@ -1,6 +1,8 @@
 using TMPro;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Rewards;
+using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Views;
 using TonPlay.Roguelike.Client.UI.UIService;
@@ -30,16 +32,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private TextMeshProUGUI _killedEnemiesText;
 
 		[SerializeField]
-		private TextMeshProUGUI _gainedGoldText;
-
-		[SerializeField]
-		private TextMeshProUGUI _gainedProfileExperienceText;
+		private RewardItemCollectionView _rewardItemCollectionView;
 
 		[SerializeField]
 		private ButtonView _confirmButtonView;
 
+		[SerializeField]
+		private GameObject[] _newRecordObjects;
+
 		public ITimerView TimerView => _timerView;
 		public IButtonView ConfirmButtonView => _confirmButtonView;
+		public IRewardItemCollectionView RewardItemCollectionView => _rewardItemCollectionView;
 
 		public void SetTitleText(string text)
 		{
@@ -53,7 +56,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 
 		public void SetNewRecordActiveState(bool state)
 		{
-			_newRecordText.gameObject.SetActive(state);
+			for (var i = 0; i < _newRecordObjects.Length; i++)
+			{
+				var newRecordObject = _newRecordObjects[i];
+				
+				newRecordObject.SetActive(state);
+			}
 		}
 
 		public void SetLevelTitleText(string text)
@@ -69,16 +77,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		public void SetKilledEnemiesCountText(string text)
 		{
 			_killedEnemiesText.SetText(text);
-		}
-
-		public void SetGainedGoldText(string text)
-		{
-			_gainedGoldText.SetText(text);
-		}
-
-		public void SetGainedProfileExperienceText(string text)
-		{
-			_gainedProfileExperienceText.SetText(text);
 		}
 	}
 }

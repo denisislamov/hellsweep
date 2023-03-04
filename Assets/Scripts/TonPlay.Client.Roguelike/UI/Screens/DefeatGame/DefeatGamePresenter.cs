@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
@@ -10,12 +11,13 @@ using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Rewards;
+using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
-using TonPlay.Roguelike.Client.UI.UIService;
-using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.UI.UIService.Layers;
 using TonPlay.Roguelike.Client.Utilities;
 using Zenject;
@@ -32,6 +34,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private readonly IUIService _uiService;
 		private readonly IProfileConfigProvider _profileConfigProvider;
 		private readonly ILocationConfigStorage _locationConfigStorage;
+		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
 		private bool _loading;
 
 		public DefeatGamePresenter(
@@ -44,7 +47,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			ISceneService sceneService,
 			IUIService uiService,
 			IProfileConfigProvider profileConfigProvider,
-			ILocationConfigStorage locationConfigStorage)
+			ILocationConfigStorage locationConfigStorage,
+			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory)
 			: base(view, context)
 		{
 			_timerPresenterFactory = timerPresenterFactory;
@@ -55,10 +59,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_uiService = uiService;
 			_profileConfigProvider = profileConfigProvider;
 			_locationConfigStorage = locationConfigStorage;
+			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
 
 			InitView();
 			AddTimerPresenter();
 			AddButtonPresenter();
+			AddRewardItemCollectionPresenter();
 		}
 
 		private void InitView()
@@ -66,17 +72,33 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			var metaGameModel = _metaGameModelProvider.Get();
 			var gameModel = _gameModelProvider.Get();
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
+			var longestSurvivedMillis =
+				metaGameModel.LocationsModel.Locations.ContainsKey(_locationConfigStorage.Current.Id)
+					? metaGameModel.LocationsModel.Locations[_locationConfigStorage.Current.Id].LongestSurvivedMillis.Value
+					: 0d;
 
-			var time = TimeSpan.FromSeconds(gameModel.GameTime.Value);
+			var longestSurvivedTimeSpan = TimeSpan.FromMilliseconds(longestSurvivedMillis);
+			var currentSurvivedTimeSpan = TimeSpan.FromSeconds(gameModel.GameTime.Value);
+
+			var hasReachedNewRecord = currentSurvivedTimeSpan > longestSurvivedTimeSpan;
+
+			if (hasReachedNewRecord)
+			{
+				longestSurvivedTimeSpan = currentSurvivedTimeSpan;
+			}
 
 			View.SetTitleText("Defeat");
-			View.SetBestTimeText($"Best: {time:mm\\:ss}");
-			View.SetNewRecordText("New record!");
-			View.SetNewRecordActiveState(true);
-			View.SetGainedGoldText(string.Format("<sprite name=\"items_spriteatlas_16x16_122\">{0}", gainModel.Gold.Value.ToString()));
-			View.SetGainedProfileExperienceText(string.Format("<sprite name=\"items_spriteatlas_16x16_155\">{0}", gainModel.ProfileExperience.Value.ToString(CultureInfo.CurrentCulture)));
-			View.SetLevelTitleText("Level 1");
-			View.SetKilledEnemiesCountText(string.Format("<sprite name=\"items_spriteatlas_16x16_301\">{0}", gameModel.DeadEnemiesCount));
+			View.SetBestTimeText($"Best: {longestSurvivedTimeSpan:mm\\:ss}");
+
+			if (hasReachedNewRecord)
+			{
+				View.SetNewRecordText("NEW RECORD");
+			}
+			
+			View.SetNewRecordActiveState(hasReachedNewRecord);
+			
+			View.SetLevelTitleText(_locationConfigStorage.Current.Title);
+			View.SetKilledEnemiesCountText(string.Format("Enemies defeated: <size=150%>{0}</size>", gameModel.DeadEnemiesCount));
 		}
 
 		private void AddTimerPresenter()
@@ -96,6 +118,29 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 				   .Add(new ClickableButtonContext(ConfirmButtonClickHandler))
 				   .Add(new TextButtonContext("Confirm")));
 
+			Presenters.Add(presenter);
+		}
+		
+		private void AddRewardItemCollectionPresenter()
+		{
+			var rewardList = new List<IRewardData>();
+			var gameModel = _gameModelProvider.Get();
+			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
+
+			if (gainModel.Gold.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.COINS_ID, gainModel.Gold.Value));
+			}
+			
+			if (gainModel.ProfileExperience.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int) gainModel.ProfileExperience.Value));
+			}
+			
+			var presenter = _rewardItemCollectionPresenterFactory.Create(
+				View.RewardItemCollectionView, 
+				new RewardItemCollectionContext(rewardList));
+			
 			Presenters.Add(presenter);
 		}
 

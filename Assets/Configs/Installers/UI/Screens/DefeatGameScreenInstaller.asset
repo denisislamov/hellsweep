@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: DefeatGameScreenInstaller
   m_EditorClassIdentifier: 
   _screen: {fileID: 2639136834863156475, guid: 74eb3f71619af4df085764527d6ea580, type: 3}
+  _rewardItemPrefab: {fileID: 3036578125915894430, guid: 3141f9bd49fa745ddaac48a1e409c59c, type: 3}
+  _rewardPresentationProvider: {fileID: 11400000, guid: 60f1cf15bd254435e8f57ad6878f7da0, type: 2}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}
