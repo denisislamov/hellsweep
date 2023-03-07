@@ -14,5 +14,7 @@ namespace TonPlay.Client.Common.Network
 		private int _port;
 
 		public string Address => string.Format("{0}:{1}/", _baseAddress, _port.ToString());
+
+		public string BaseAddress => string.Format("{0}/", _baseAddress);
 	}
 }

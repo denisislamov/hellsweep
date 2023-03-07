@@ -23,7 +23,7 @@ namespace TonPlay.Client.Common.Network
 			: this(basePath, timeout, null, decorators)
 		{
 		}
-
+		
 		public NetworkClient(string basePath, TimeSpan timeout, IProgress<float> progress, params IAsyncDecorator[] decorators)
 		{
 			_next = InvokeRecursive; // setup delegate
@@ -55,6 +55,13 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 
+		public async UniTask<T> GetAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.GET, _basePath, path, requestHeaders, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)
 		{
 			var data = JsonUtility.ToJson(context.Value);
@@ -62,11 +69,14 @@ namespace TonPlay.Client.Common.Network
 
 			using (var req = _mapRequests[context.RequestType].Invoke(_basePath + context.Path, formData))
 			{
-				var header = context.GetRawHeaders();
-				if (header != null)
+				Debug.LogFormat("_basePath + context.Path {0}", _basePath + context.Path);
+				var headers = context.GetRawHeaders();
+
+				if (headers != null)
 				{
-					foreach (var item in header)
+					foreach (var item in headers)
 					{
+						Debug.LogFormat("header: {0} , {1}", item.Key, item.Value);
 						req.SetRequestHeader(item.Key, item.Value);
 					}
 				}
