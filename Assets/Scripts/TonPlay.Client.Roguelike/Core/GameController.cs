@@ -212,6 +212,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new FitnessGuideSkillSystem())
 							.Add(new EnergyDrinkSkillSystem())
+							.Add(new SportShoesSkillSystem())
 							 ;
 
 			_animationSystems = new EcsSystems(_world, _sharedData)

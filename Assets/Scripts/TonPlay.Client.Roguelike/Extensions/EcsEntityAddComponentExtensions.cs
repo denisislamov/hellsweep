@@ -122,6 +122,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var speedComponent = ref entity.Add<SpeedComponent>();
 			speedComponent.Speed = movementConfig.StartSpeed;
+			speedComponent.InitialSpeed = movementConfig.StartSpeed;
 			return ref speedComponent;
 		}
 

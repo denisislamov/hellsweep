@@ -7,10 +7,10 @@ using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 {
-	public class FitnessGuideSkillSystem : IEcsInitSystem, IEcsRunSystem
+	public class SportShoesSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private EcsWorld _world;
-		private IFitnessGuideSkillConfig _config;
+		private ISportShoesSkillConfig _config;
 		private ISharedData _sharedData;
 
 		public void Init(EcsSystems systems)
@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (IFitnessGuideSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.FitnessGuide);
+			_config = (ISportShoesSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.SportShoes);
 		}
 
 		public void Run(EcsSystems systems)
@@ -34,12 +34,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Filter<SkillsComponent>()
 						.Inc<HealthComponent>()
 						.Exc<DeadComponent>()
-						.Exc<FitnessGuideSkill>()
+						.Exc<SportShoesSkill>()
 						.End();
 
 			var skillsPool = _world.GetPool<SkillsComponent>();
-			var skillPool = _world.GetPool<FitnessGuideSkill>();
-			var healthPool = _world.GetPool<HealthComponent>();
+			var skillPool = _world.GetPool<SportShoesSkill>();
+			var speedPool = _world.GetPool<SpeedComponent>();
 
 			foreach (var entityId in filter)
 			{
@@ -48,18 +48,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				if (skills.Levels.ContainsKey(_config.SkillName) && skills.Levels[_config.SkillName] > 0)
 				{
 					ref var skill = ref skillPool.Add(entityId);
-					ref var health = ref healthPool.Get(entityId);
+					ref var speed = ref speedPool.Get(entityId);
 					
 					skill.Level = skills.Levels[_config.SkillName];
 					
-					UpgradeHealth(ref health, skill);
+					UpgradeSpeed(ref speed, skill);
 				}
 			}
 
 			filter = _world
 					.Filter<SkillsComponent>()
-					.Inc<FitnessGuideSkill>()
-					.Inc<HealthComponent>()
+					.Inc<SportShoesSkill>()
+					.Inc<SpeedComponent>()
 					.Exc<DeadComponent>()
 					.End();
 
@@ -67,24 +67,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			{
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
-				ref var health = ref healthPool.Get(entityId);
+				ref var speed = ref speedPool.Get(entityId);
 
 				if (skills.Levels.ContainsKey(_config.SkillName) && skills.Levels[_config.SkillName] != skill.Level)
 				{
 					skill.Level = skills.Levels[_config.SkillName];
 
-					UpgradeHealth(ref health, skill);
+					UpgradeSpeed(ref speed, skill);
 				}
 			}
 		}
 		
-		private void UpgradeHealth(ref HealthComponent health, FitnessGuideSkill skill)
+		private void UpgradeSpeed(ref SpeedComponent speed, SportShoesSkill skill)
 		{
-			var previousMaxHealth = health.MaxHealth;
-			var upgradedMaxHealth = health.InitialMaxHealth * _config.GetLevelConfig(skill.Level).MultiplierValue;
-			var diff = upgradedMaxHealth - previousMaxHealth;
-			health.MaxHealth = upgradedMaxHealth;
-			health.CurrentHealth += diff;
+			speed.Speed = speed.InitialSpeed * _config.GetLevelConfig(skill.Level).MultiplierValue;
 		}
 	}
 }
