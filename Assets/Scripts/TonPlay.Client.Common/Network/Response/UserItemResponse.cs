@@ -1,7 +1,7 @@
 namespace TonPlay.Client.Common.Network
 {
     [System.Serializable]
-    public class UserItemModel 
+    public class UserItemResponse 
     {
         public string id;
         public string name;

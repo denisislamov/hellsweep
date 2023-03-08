@@ -16,7 +16,7 @@ namespace TonPlay.Client.Common.Network
     }
 
     [System.Serializable]
-    public class UserSummaryModel
+    public class UserSummaryResponse
     {
         public string id;
         public string identifier;
