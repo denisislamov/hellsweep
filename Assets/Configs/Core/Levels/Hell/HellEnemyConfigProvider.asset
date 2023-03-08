@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96aa717d6cb409f8a912d1a010edb9b, type: 3}
+  m_Name: HellEnemyConfigProvider
+  m_EditorClassIdentifier: 
+  _configs:
+  - {fileID: 11400000, guid: 28a6d0b4d10ff45b7a8df0d6f8487bf8, type: 2}
+  - {fileID: 11400000, guid: 0b83f310b0baa41a8bf1fb40c64518f0, type: 2}
+  - {fileID: 11400000, guid: 0b83fb7a0769643c2ba616264e7a03a2, type: 2}
+  - {fileID: 11400000, guid: 706a83c07b5f14d22a3dd29e10c02075, type: 2}
+  - {fileID: 11400000, guid: c873d135f76f746ceb4323cf9bb35aee, type: 2}
+  - {fileID: 11400000, guid: 992a1955ea3394d328c9b82e153acf42, type: 2}
+  - {fileID: 11400000, guid: 748a4c0d962254d52bb74fb2c40bc5e2, type: 2}
+  - {fileID: 11400000, guid: 6e4898cc7be494dac98e341605e3903c, type: 2}
+  - {fileID: 11400000, guid: 7e90c4bc0d9b8406d88359a1a0600f66, type: 2}
+  - {fileID: 11400000, guid: 119538348d8cf4151a84a3a30e5d0e11, type: 2}
+  - {fileID: 11400000, guid: b4ce3a4bcefc64283910bc570dacc086, type: 2}
+  - {fileID: 11400000, guid: 8667209932e374344966c7e773c9b960, type: 2}
+  - {fileID: 11400000, guid: 88eb913f9a78845359a775e95c0c929e, type: 2}
+  - {fileID: 11400000, guid: c2885847ad1af41ddbb3470eb43bbc5b, type: 2}
+  - {fileID: 11400000, guid: 83ebbb9131dcb4daa9b28299ed81a1fa, type: 2}
+  - {fileID: 11400000, guid: c66facb1c16e04c99b2dbda7195fb7c4, type: 2}
+  _defaultConfigId: ghost

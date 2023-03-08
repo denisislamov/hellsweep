@@ -1,4 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Views;
 

@@ -4,6 +4,7 @@ using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Core.Player.Views;
 using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;
@@ -48,12 +49,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				spawnConfig.CollisionAreaConfig,
 				spawnConfig.CollisionAreaMask);
 
+			entity.AddAnimatorComponent(player.Animator);
+			entity.AddBloodAnimatorComponent(player.BloodAnimator);
+			entity.AddAnimationsComponent(player.AttackAnimationDuration);
+			entity.AddSpriteRenderersComponent(player.SpriteRenderers);
+			
 			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
 			entity.AddSpeedComponent(spawnConfig.MovementConfig);
 			entity.AddGoldComponent();
 			entity.AddProfileExperienceComponent();
 			entity.AddStackTryApplyDamageComponent();
 			entity.AddBlockApplyDamageTimerComponent();
+			entity.Add<FlipSpriteInRotationDirectionComponent>();
 
 			AddExperienceComponent(entity, sharedData.PlayersLevelsConfigProvider.Get(0), sharedData.GameModel.PlayerModel);
 

@@ -4,6 +4,7 @@ using System.Globalization;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -35,6 +36,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private readonly IProfileConfigProvider _profileConfigProvider;
 		private readonly ILocationConfigStorage _locationConfigStorage;
 		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
+		private readonly IMatchProvider _matchProvider;
 		private bool _loading;
 
 		public DefeatGamePresenter(
@@ -48,7 +50,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			IUIService uiService,
 			IProfileConfigProvider profileConfigProvider,
 			ILocationConfigStorage locationConfigStorage,
-			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory)
+			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory,
+			IMatchProvider matchProvider)
 			: base(view, context)
 		{
 			_timerPresenterFactory = timerPresenterFactory;
@@ -60,6 +63,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_profileConfigProvider = profileConfigProvider;
 			_locationConfigStorage = locationConfigStorage;
 			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
+			_matchProvider = matchProvider;
 
 			InitView();
 			AddTimerPresenter();
@@ -94,9 +98,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			{
 				View.SetNewRecordText("NEW RECORD");
 			}
-			
+
 			View.SetNewRecordActiveState(hasReachedNewRecord);
-			
+
 			View.SetLevelTitleText(_locationConfigStorage.Current.Title);
 			View.SetKilledEnemiesCountText(string.Format("Enemies defeated: <size=150%>{0}</size>", gameModel.DeadEnemiesCount));
 		}
@@ -120,7 +124,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddRewardItemCollectionPresenter()
 		{
 			var rewardList = new List<IRewardData>();
@@ -131,16 +135,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			{
 				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.COINS_ID, gainModel.Gold.Value));
 			}
-			
+
 			if (gainModel.ProfileExperience.Value > 0)
 			{
-				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int) gainModel.ProfileExperience.Value));
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int)gainModel.ProfileExperience.Value));
 			}
-			
+
 			var presenter = _rewardItemCollectionPresenterFactory.Create(
-				View.RewardItemCollectionView, 
+				View.RewardItemCollectionView,
 				new RewardItemCollectionContext(rewardList));
-			
+
 			Presenters.Add(presenter);
 		}
 
@@ -154,54 +158,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_loading = true;
 			_uiService.CloseAll(new DefaultScreenLayer());
 
-			UpdateProfileModel();
-
-			_sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu).ContinueWith(() =>
-			{
-				_sceneService.UnloadAdditiveSceneByNameAsync(SceneName.Level_Sands);
-				_loading = false;
-
-				_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
-			});
-		}
-
-		private void UpdateProfileModel()
-		{
-			var metagameModel = _metaGameModelProvider.Get();
-
-			var locationsModel = metagameModel.LocationsModel;
-			var locationsData = locationsModel.ToData();
-
-			if (!locationsData.Locations.ContainsKey(_locationConfigStorage.Current.Id))
-			{
-				locationsData.Locations.Add(
-					_locationConfigStorage.Current.Id,
-					new LocationData() {Id = _locationConfigStorage.Current.Id});
-			}
-
-			var locationData = locationsData.Locations[_locationConfigStorage.Current.Id];
-
-			var profileModel = metagameModel.ProfileModel;
-			var gameModel = _gameModelProvider.Get();
-
-			var profileData = profileModel.ToData();
-
-			profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
-			profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
-			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
-
-			while (profileData.Experience >= profileData.MaxExperience)
-			{
-				profileData.Level++;
-				profileData.Experience -= profileData.MaxExperience;
-
-				var config = _profileConfigProvider.Get(profileData.Level);
-				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
-				profileData.BalanceData.Energy += 5;
-			}
-
-			profileModel.Update(profileData);
-			locationsModel.Update(locationsData);
+			_matchProvider.Current.Finish();
 		}
 
 		internal class Factory : PlaceholderFactory<IDefeatGameView, IDefeatGameScreenContext, DefeatGamePresenter>

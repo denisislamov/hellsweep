@@ -430,5 +430,33 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.LayerMask = layerMask;
 			return ref component;
 		}
+		
+		public static ref AnimatorComponent AddAnimatorComponent(this EcsEntity entity, Animator animator)
+		{
+			ref var component = ref entity.Add<AnimatorComponent>();
+			component.Animator = animator;
+			return ref component;
+		}
+		
+		public static ref BloodAnimatorComponent AddBloodAnimatorComponent(this EcsEntity entity, Animator animator)
+		{
+			ref var component = ref entity.Add<BloodAnimatorComponent>();
+			component.Animator = animator;
+			return ref component;
+		}
+		
+		public static ref AnimationsComponent AddAnimationsComponent(this EcsEntity entity, float attackDuration)
+		{
+			ref var component = ref entity.Add<AnimationsComponent>();
+			component.AttackDuration = attackDuration;
+			return ref component;
+		}
+		
+		public static ref SpriteRenderersComponent AddSpriteRenderersComponent(this EcsEntity entity, SpriteRenderer[] renderers)
+		{
+			ref var component = ref entity.Add<SpriteRenderersComponent>();
+			component.SpriteRenderers = renderers;
+			return ref component;
+		}
 	}
 }

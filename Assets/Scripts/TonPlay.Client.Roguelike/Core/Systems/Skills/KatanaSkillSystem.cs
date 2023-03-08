@@ -69,6 +69,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
 			var rotationPool = _world.GetPool<RotationComponent>();
+			var attackPool = _world.GetPool<AttackEvent>();
 
 			foreach (var entityId in filter)
 			{
@@ -82,29 +83,45 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				skill.RefreshLeftTime -= Time.deltaTime;
 
-				if (skill.RefreshLeftTime <= 0)
+				if (skill.RefreshLeftTime > 0)
 				{
-					if (skill.SpawnQuantity == 0)
-					{
-						var dirX = rotation.Direction.x > 0 ? 1 : -1;
-						var mainDirection = new Vector2(dirX, 0);
+					continue;
+				}
+				
+				attackPool.Add(entityId);
+				
+				skill.PrepareAttackTime -= Time.deltaTime;
 
-						skill.SpawnQuantity = levelConfig.ProjectileQuantity;
-						skill.SelectedDirection = mainDirection;
-					}
+				if (skill.PrepareAttackTime > 0)
+				{
+					continue;
+				}
+				
+				if (skill.SpawnQuantity == 0)
+				{
+					var dirX = rotation.Direction.x > 0 ? 1 : -1;
+					var mainDirection = new Vector2(dirX, 0);
 
-					var layer = playerPool.Has(entityId)
-						? LayerMask.NameToLayer("PlayerProjectile")
-						: LayerMask.NameToLayer("EnemyProjectile");
+					skill.SpawnQuantity = levelConfig.ProjectileQuantity;
+					skill.SelectedDirection = mainDirection;
+				}
 
-					var direction = skill.SelectedDirection*((levelConfig.ProjectileQuantity - skill.SpawnQuantity)%2 == 0 ? 1 : -1);
+				var layer = playerPool.Has(entityId)
+					? LayerMask.NameToLayer("PlayerProjectile")
+					: LayerMask.NameToLayer("EnemyProjectile");
 
-					CreateThrowableProjectile(position.Position, direction, entityId, layer, levelConfig);
+				var direction = skill.SelectedDirection * ((levelConfig.ProjectileQuantity - skill.SpawnQuantity)%2 == 0 ? 1 : -1);
 
-					skill.SpawnQuantity--;
-					skill.RefreshLeftTime = skill.SpawnQuantity == 0
-						? levelConfig.Cooldown
-						: levelConfig.ShootDelay;
+				CreateThrowableProjectile(position.Position, direction, entityId, layer, levelConfig);
+					
+				skill.SpawnQuantity--;
+				skill.RefreshLeftTime = skill.SpawnQuantity == 0
+					? levelConfig.Cooldown - levelConfig.PrepareAttackTiming
+					: levelConfig.ShootDelay;
+
+				if (skill.SpawnQuantity == 0)
+				{
+					skill.PrepareAttackTime = levelConfig.PrepareAttackTiming;
 				}
 			}
 		}

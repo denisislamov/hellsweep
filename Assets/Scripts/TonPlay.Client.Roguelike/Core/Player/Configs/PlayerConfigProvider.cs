@@ -3,6 +3,7 @@ using System.Linq;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;

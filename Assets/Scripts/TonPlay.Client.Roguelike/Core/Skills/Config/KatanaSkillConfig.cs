@@ -52,6 +52,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			[SerializeField]
 			private float _shootDelay;
+			
+			[SerializeField]
+			private float _prepareAttackTiming;
 
 			[SerializeField]
 			private Vector2 _spawnOffset;
@@ -60,6 +63,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public int ProjectileQuantity => _projectileQuantity;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public float Cooldown => _cooldown;
+			public float PrepareAttackTiming => _prepareAttackTiming;
 			public float ShootDelay => _shootDelay;
 			public Vector2 SpawnOffset => _spawnOffset;
 			public string Description => _description;

@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b6a361bee4fcd87ae8d2ded9578c0, type: 3}
+  m_Name: HellEnemyWaveConfigProvider
+  m_EditorClassIdentifier: 
+  _waveConfigs:
+  - _waves:
+    - _id: 1
+      _enemyId: ghost
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 20
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 0
+      _seconds: 0
+  - _waves:
+    - _id: 2_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 20
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+    - _id: 2_crab
+      _enemyId: crab
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 25
+      _spawnRate:
+        _minutes: 0
+        _seconds: 10
+      _waveSpawnType: 1
+    - _id: 2_mage
+      _enemyId: mage
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 15
+      _spawnQuantityPerRate: 5
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 0
+      _seconds: 45
+  - _waves:
+    - _id: 3_cyclope
+      _enemyId: cyclope
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 150
+      _spawnQuantityPerRate: 150
+      _spawnRate:
+        _minutes: 0
+        _seconds: 0
+      _waveSpawnType: 0
+    - _id: 3_crab
+      _enemyId: crab
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 25
+      _spawnRate:
+        _minutes: 0
+        _seconds: 15
+      _waveSpawnType: 1
+    - _id: 3_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 200
+      _spawnQuantityPerRate: 200
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+    - _id: 3_mage
+      _enemyId: mage
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 15
+      _spawnQuantityPerRate: 15
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 1
+      _seconds: 45
+  - _waves:
+    - _id: boss_shooter
+      _enemyId: boss_shooter
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 5
+      _seconds: 0
+  - _waves:
+    - _id: 5_cyclope
+      _enemyId: cyclope
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 300
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 10
+      _waveSpawnType: 1
+    - _id: 5_crab_tier2
+      _enemyId: crab_tier2
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 0
+        _seconds: 30
+      _waveSpawnType: 1
+    - _id: 5_ghost_tier2
+      _enemyId: ghost_tier2
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+    - _id: 5_mage_tier2
+      _enemyId: mage_tier2
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 50
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 1
+        _seconds: 20
+      _waveSpawnType: 0
+    - _id: 5_cyclope_tier2
+      _enemyId: cyclope_tier2
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 10
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 5
+      _seconds: 2
+  - _waves:
+    - _id: boss_worm
+      _enemyId: boss_worm
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 10
+      _seconds: 0
+  - _waves:
+    - _id: 7_cyclope_tier2
+      _enemyId: cyclope_tier2
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 300
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 10
+      _waveSpawnType: 1
+    - _id: 7_crab_tier3
+      _enemyId: crab_tier3
+      _enemiesQuantity: 5000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 0
+        _seconds: 30
+      _waveSpawnType: 1
+    - _id: 7_ghost_tier3
+      _enemyId: ghost_tier3
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+    - _id: 7_mage_tier3
+      _enemyId: mage_tier3
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 50
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 1
+        _seconds: 20
+      _waveSpawnType: 0
+    - _id: 7_cyclope_tier3
+      _enemyId: cyclope_tier3
+      _enemiesQuantity: 50000
+      _maxSpawnedQuantity: 100
+      _spawnQuantityPerRate: 50
+      _spawnRate:
+        _minutes: 0
+        _seconds: 10
+      _waveSpawnType: 1
+    _startTiming:
+      _minutes: 10
+      _seconds: 2
+  - _waves:
+    - _id: boss_butcher
+      _enemyId: boss_butcher
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnQuantityPerRate: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+    _startTiming:
+      _minutes: 15
+      _seconds: 0

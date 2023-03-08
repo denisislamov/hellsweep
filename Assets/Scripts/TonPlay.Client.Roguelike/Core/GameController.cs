@@ -35,6 +35,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private EcsSystems _updateSystems;
 		private EcsSystems _collectablesSystem;
 		private EcsSystems _fixedUpdateSystems;
+		private EcsSystems _animationSystems;
 		private EcsSystems _spawnSystems;
 		private EcsSystems _destroySystems;
 		private EcsSystems _skillsSystems;
@@ -180,6 +181,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new SpawnAppliedDamageIndicatorSystem())
 							.Add(new DrawDebugKdTreePositionSystem())
 							.Add(new GameOverSystem(_uiService))
+							.Add(new VictorySystem(_uiService))
 				;
 
 			_bossWormSystems = new EcsSystems(_world, _sharedData)
@@ -206,6 +208,12 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage));
 
+			_animationSystems = new EcsSystems(_world, _sharedData)
+							   .Add(new AttackAnimationAnimatorSystem())
+							   .Add(new RunAnimationAnimatorSystem())
+							   .Add(new RunBloodAnimationAnimatorSystem())
+							   .Add(new FlipSpriteInRotationDirectionSystem());
+
 			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
 								 .Add(new PlayerMovementInputSystem())
 								 .Add(new RigidbodyMovementSystem())
@@ -221,6 +229,7 @@ namespace TonPlay.Client.Roguelike.Core
 							 .Add(new DestroyPoolObjectSystem())
 							 .Add(new DestroyNonPoolGameObjectSystem())
 							 .Add(new ClearUsedEventsSystem())
+							 .Add(new ClearAttackEventsSystem())
 							 .Add(new ClearHasCollidedComponentsSystem())
 							 .Add(new ClearDeadEntityDataSystem())
 							 .Add(new SpawnProjectileOnDestroySystem())
@@ -243,6 +252,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_bossButcherSystems.Init();
 			_syncKdTreePositionSystems.Init();
 			_skillsSystems.Init();
+			_animationSystems.Init();
 			_fixedUpdateSystems.Init();
 			_destroySystems.Init();
 
@@ -266,6 +276,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_bossButcherSystems?.Run();
 			_syncKdTreePositionSystems?.Run();
 			_skillsSystems?.Run();
+			_animationSystems?.Run();
 			_collectablesSystem?.Run();
 			_destroySystems?.Run();
 		}
@@ -282,9 +293,15 @@ namespace TonPlay.Client.Roguelike.Core
 			_updateCycle?.Dispose();
 			_fixedUpdateCycle?.Dispose();
 
-			_updateSystems?.Destroy();
-			_fixedUpdateSystems?.Destroy();
 			_spawnSystems?.Destroy();
+			_updateSystems?.Destroy();
+			_bossWormSystems?.Destroy();
+			_bossButcherSystems?.Destroy();
+			_syncKdTreePositionSystems?.Destroy();
+			_skillsSystems?.Destroy();
+			_animationSystems?.Destroy();
+			_collectablesSystem?.Destroy();
+			_destroySystems?.Destroy();
 		}
 
 		private void CreateGameModel(IGameModelSetter gameModelSetter)

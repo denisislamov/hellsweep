@@ -7,5 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Components.Skills
 		public int SpawnQuantity;
 		public float RefreshLeftTime;
 		public Vector2 SelectedDirection;
+		public float PrepareAttackTime;
 	}
 }

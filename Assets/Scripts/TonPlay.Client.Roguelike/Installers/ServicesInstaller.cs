@@ -1,4 +1,5 @@
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
@@ -21,6 +22,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.BindInterfacesTo<SceneService.SceneService>().AsSingle();
 
 			Container.BindInterfacesTo<ProfileLoadingService>().AsSingle();
+			
+			MatchInstaller.Install(Container);
 		}
 	}
 }

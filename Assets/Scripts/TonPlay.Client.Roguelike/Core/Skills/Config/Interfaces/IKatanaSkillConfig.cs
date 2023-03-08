@@ -16,6 +16,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 
 		float Cooldown { get; }
 
+		float PrepareAttackTiming { get; }
+
 		float ShootDelay { get; }
 
 		Vector2 SpawnOffset { get; }

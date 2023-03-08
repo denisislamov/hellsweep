@@ -19,6 +19,23 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 		private readonly List<IEnemyWaveConfig> _emptyList;
 
 		public IEnumerable<IEnemyWaveConfig> AllWaves => _waveConfigs.SelectMany(_ => _.Waves);
+		
+		public IEnemyWaveGroupConfig Last
+		{
+			get
+			{
+				if (_sortedWaveConfigs == null || _sortedWaveConfigs.Count != _waveConfigs.Count)
+				{
+					_sortedWaveConfigs = _waveConfigs.ToList();
+					Sort();
+					SetNextForEachGroup();
+				}
+
+				if (_sortedWaveConfigs.Count <= 0) return null;
+
+				return _sortedWaveConfigs[_sortedWaveConfigs.Count - 1];
+			}
+		}
 
 		public IEnemyWaveGroupConfig Get(long ticks)
 		{

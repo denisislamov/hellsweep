@@ -1,9 +1,9 @@
-namespace TonPlay.Roguelike.Client.Utilities
+namespace TonPlay.Client.Common.Utilities
 {
 	public enum SceneName
 	{
 		Bootstrap,
 		MainMenu,
-		Level_Sands
+		Level_Hell
 	}
 }

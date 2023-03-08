@@ -2,6 +2,12 @@ namespace TonPlay.Client.Roguelike.Utilities
 {
 	public static class RoguelikeConstants
 	{
+		public static class Meta
+		{
+			public const int MATCH_ENERGY_PRICE_BASE = 5;
+			public const int INCREASE_ENERGY_PER_GAINED_LEVEL = 5;
+		}
+		
 		public static class Core
 		{
 			public const int PLAYER_PROJECTILES_MAX_COUNT = 64;

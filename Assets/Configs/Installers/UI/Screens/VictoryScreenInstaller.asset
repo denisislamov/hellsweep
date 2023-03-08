@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4d6556361740dc82d86fefdf6358cf, type: 3}
+  m_Name: VictoryScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 1738349766052267046, guid: 394d9416af10a43958ff650b10f86404, type: 3}
+  _rewardItemPrefab: {fileID: 3036578125915894430, guid: 3141f9bd49fa745ddaac48a1e409c59c, type: 3}
+  _rewardPresentationProvider: {fileID: 11400000, guid: 60f1cf15bd254435e8f57ad6878f7da0, type: 2}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}

@@ -30,6 +30,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0
+    _prepareAttackTiming: 0.3
     _spawnOffset: {x: 2, y: 0}
   - _level: 2
     _description: Katana desc lvl 2
@@ -40,6 +41,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.5
+    _prepareAttackTiming: 0.3
     _spawnOffset: {x: 2, y: 0}
   - _level: 3
     _description: Katana desc lvl 3
@@ -50,6 +52,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.33333334
+    _prepareAttackTiming: 0.3
     _spawnOffset: {x: 1, y: 0}
   - _level: 4
     _description: Katana desc lvl 4
@@ -60,6 +63,7 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.25
+    _prepareAttackTiming: 0.3
     _spawnOffset: {x: 1, y: 0}
   - _level: 5
     _description: Katana desc lvl 5
@@ -70,4 +74,5 @@ MonoBehaviour:
       rate: 1
     _cooldown: 1
     _shootDelay: 0.2
+    _prepareAttackTiming: 0.3
     _spawnOffset: {x: 1, y: 0}
