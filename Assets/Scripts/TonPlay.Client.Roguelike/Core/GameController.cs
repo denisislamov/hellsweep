@@ -34,6 +34,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private EcsWorld _world;
 		private EcsSystems _updateSystems;
 		private EcsSystems _collectablesSystem;
+		private EcsSystems _changeHealthSystem;
 		private EcsSystems _fixedUpdateSystems;
 		private EcsSystems _animationSystems;
 		private EcsSystems _spawnSystems;
@@ -209,6 +210,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new FitnessGuideSkillSystem())
+							.Add(new EnergyDrinkSkillSystem())
 							 ;
 
 			_animationSystems = new EcsSystems(_world, _sharedData)
@@ -221,6 +223,18 @@ namespace TonPlay.Client.Roguelike.Core
 								 .Add(new PlayerMovementInputSystem())
 								 .Add(new RigidbodyMovementSystem())
 								 .Add(new RigidbodyPositionSystem());
+			
+			_collectablesSystem = new EcsSystems(_world, _sharedData)
+								 .Add(new ApplyCollectablesSystem())
+								 .Add(new ApplyProfileExperienceCollectableSystem())
+								 .Add(new ApplyExperienceCollectableSystem())
+								 .Add(new ApplyGoldCollectableSystem())
+								 .Add(new ApplyHealthCollectableSystem())
+								 .Add(new ApplyMagnetCollectableSystem())
+								 .Add(new ApplyBombCollectableSystem());
+			
+			_changeHealthSystem = new EcsSystems(_world, _sharedData)
+			   .Add(new ChangeHealthSystem());
 
 			_destroySystems = new EcsSystems(_world, _sharedData)
 							 .Add(new UpdateWaveDataOnEnemyDeathSystem())
@@ -239,17 +253,9 @@ namespace TonPlay.Client.Roguelike.Core
 							 .Add(new ClearDestroyedOrDeadElementsFromKdTreeSystem())
 							 .Add(new DestroyEntitySystem());
 
-			_collectablesSystem = new EcsSystems(_world, _sharedData)
-								 .Add(new ApplyCollectablesSystem())
-								 .Add(new ApplyProfileExperienceCollectableSystem())
-								 .Add(new ApplyExperienceCollectableSystem())
-								 .Add(new ApplyGoldCollectableSystem())
-								 .Add(new ApplyHealthCollectableSystem())
-								 .Add(new ApplyMagnetCollectableSystem())
-								 .Add(new ApplyBombCollectableSystem());
-
 			_spawnSystems.Init();
 			_collectablesSystem.Init();
+			_changeHealthSystem.Init();
 			_updateSystems.Init();
 			_bossWormSystems.Init();
 			_bossButcherSystems.Init();
@@ -281,6 +287,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_skillsSystems?.Run();
 			_animationSystems?.Run();
 			_collectablesSystem?.Run();
+			_changeHealthSystem?.Run();
 			_destroySystems?.Run();
 		}
 
@@ -304,6 +311,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_skillsSystems?.Destroy();
 			_animationSystems?.Destroy();
 			_collectablesSystem?.Destroy();
+			_changeHealthSystem?.Destroy();
 			_destroySystems?.Destroy();
 		}
 

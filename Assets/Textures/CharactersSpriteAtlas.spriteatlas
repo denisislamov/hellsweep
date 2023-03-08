@@ -143,6 +143,19 @@ SpriteAtlas:
   - {fileID: -9013092975189028523, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
   - {fileID: -4620389919649047664, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
   - {fileID: -1239736475690029715, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
+  - {fileID: 4814030500404972278, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 8543802333891433136, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -5103160606041522264, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -8776335070605681934, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 1516664611306871350, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -2989458008836894382, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 8314969314454885894, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 2073894357608704033, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -4399472222026683176, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 8508218635702732339, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -3007315342532210545, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: 1817352529255261425, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
+  - {fileID: -6227059679640597427, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
   m_PackedSpriteNamesToIndex:
   - tanjiro_shadow
   - splash_stay_attack_52_52_3
@@ -238,6 +251,19 @@ SpriteAtlas:
   - char_stay_24_24_13
   - char_stay_24_24_12
   - char_stay_24_24_14
+  - ghost_fly_12
+  - ghost_fly_10
+  - ghost_fly_11
+  - ghost_fly_9
+  - ghost_fly_8
+  - ghost_fly_7
+  - ghost_fly_6
+  - ghost_fly_5
+  - ghost_fly_4
+  - ghost_fly_3
+  - ghost_fly_2
+  - ghost_fly_1
+  - ghost_fly_0
   m_RenderDataMap: {}
   m_Tag: CharactersSpriteAtlas
   m_IsVariant: 0

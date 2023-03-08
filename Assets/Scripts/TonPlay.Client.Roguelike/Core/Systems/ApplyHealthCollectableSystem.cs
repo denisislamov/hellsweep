@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						.Exc<DeadComponent>()
 						.End();
 			var applyPool = world.GetPool<ApplyHealthCollectableComponent>();
-			var healthPool = world.GetPool<HealthComponent>();
 			var destroyPool = world.GetPool<DestroyComponent>();
+			var changeHealthPool = world.GetPool<ChangeHealthEvent>();
 
 			foreach (var entityId in filter)
 			{
@@ -28,9 +29,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					continue;
 				}
 				
-				ref var health = ref healthPool.Get(entityId);
-
-				health.CurrentHealth = Mathf.Clamp(health.CurrentHealth + apply.Value, 0f, health.MaxHealth);
+				ref var changeHealth = ref changeHealthPool.AddOrGet(entityId);
+				changeHealth.DifferenceValue += apply.Value;
 
 				foreach (var collectableEntityId in apply.CollectableEntityIds)
 				{
