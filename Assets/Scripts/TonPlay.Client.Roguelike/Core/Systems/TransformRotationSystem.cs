@@ -12,6 +12,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var world = systems.GetWorld();
 			var filter = world.Filter<RotationComponent>()
 							  .Inc<TransformComponent>()
+							  .Exc<IgnoreTransformRotation>()
 							  .Exc<RigidbodyComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<InactiveComponent>()

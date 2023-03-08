@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
-  m_Name: GhostTier3EnemyConfig
+  m_Name: BatTier3EnemyConfig
   m_EditorClassIdentifier: 
-  _id: ghost_tier3
+  _id: bat_tier3
   _enemyType: 0
   _prefab: {fileID: 9169473473442074980, guid: dfa7176ef7e924ff4a9dca80d7201b6e, type: 3}
   _health: 30

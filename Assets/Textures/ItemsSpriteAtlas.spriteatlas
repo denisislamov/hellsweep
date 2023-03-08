@@ -63,6 +63,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5174a7b7c7ffe4aedb7e05576cf188a1, type: 3}
   - {fileID: 21300000, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 21300000, guid: d04b5438c76f347d28e58da51e5305cf, type: 3}
+  - {fileID: 21300000, guid: 4ca4dce88402043e7ad8efc3676a6f8c, type: 3}
   - {fileID: -589365598807618618, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 8094855776873440288, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: -7633015410158308657, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
@@ -414,6 +415,7 @@ SpriteAtlas:
   - {fileID: -6153423947956068894, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 1619102860599000169, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 21300000, guid: 8fd4107b764e24fafbcfb95cbdff9e4d, type: 3}
+  - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
   m_PackedSpriteNamesToIndex:
   - Equipment
   - Energy_Shield_4
@@ -429,6 +431,7 @@ SpriteAtlas:
   - HolyWaterProjectile_01a
   - KatanaSplash_01a
   - Katana_01a
+  - Diamond_01c
   - items_spriteatlas_16x16_143
   - items_spriteatlas_16x16_142
   - items_spriteatlas_16x16_141
@@ -780,6 +783,7 @@ SpriteAtlas:
   - items_spriteatlas_16x16_291
   - items_spriteatlas_16x16_290
   - Power
+  - Diamond_01b
   m_RenderDataMap: {}
   m_Tag: ItemsSpriteAtlas
   m_IsVariant: 0

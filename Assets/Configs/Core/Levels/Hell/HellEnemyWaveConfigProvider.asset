@@ -15,7 +15,7 @@ MonoBehaviour:
   _waveConfigs:
   - _waves:
     - _id: 1
-      _enemyId: ghost
+      _enemyId: bat
       _enemiesQuantity: 100
       _maxSpawnedQuantity: 100
       _spawnQuantityPerRate: 20
@@ -27,8 +27,8 @@ MonoBehaviour:
       _minutes: 0
       _seconds: 0
   - _waves:
-    - _id: 2_ghost
-      _enemyId: ghost
+    - _id: 2_bat
+      _enemyId: bat
       _enemiesQuantity: 5000
       _maxSpawnedQuantity: 200
       _spawnQuantityPerRate: 20
@@ -76,8 +76,8 @@ MonoBehaviour:
         _minutes: 0
         _seconds: 15
       _waveSpawnType: 1
-    - _id: 3_ghost
-      _enemyId: ghost
+    - _id: 3_bat
+      _enemyId: bat
       _enemiesQuantity: 5000
       _maxSpawnedQuantity: 200
       _spawnQuantityPerRate: 200
@@ -129,8 +129,8 @@ MonoBehaviour:
         _minutes: 0
         _seconds: 30
       _waveSpawnType: 1
-    - _id: 5_ghost_tier2
-      _enemyId: ghost_tier2
+    - _id: 5_bat_tier2
+      _enemyId: bat_tier2
       _enemiesQuantity: 50000
       _maxSpawnedQuantity: 100
       _spawnQuantityPerRate: 100
@@ -191,8 +191,8 @@ MonoBehaviour:
         _minutes: 0
         _seconds: 30
       _waveSpawnType: 1
-    - _id: 7_ghost_tier3
-      _enemyId: ghost_tier3
+    - _id: 7_bat_tier3
+      _enemyId: bat_tier3
       _enemiesQuantity: 50000
       _maxSpawnedQuantity: 100
       _spawnQuantityPerRate: 100

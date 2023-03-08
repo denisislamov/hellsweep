@@ -111,6 +111,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 			rotationComponent.Direction = direction;
 			return ref rotationComponent;
 		}
+		
+		public static ref SyncRotationWithMovementDirectionComponent AddSyncRotationWithMovementDirectionComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<SyncRotationWithMovementDirectionComponent>();
+			return ref component;
+		}
 
 		public static ref SpeedComponent AddSpeedComponent(this EcsEntity entity, IMovementConfig movementConfig)
 		{

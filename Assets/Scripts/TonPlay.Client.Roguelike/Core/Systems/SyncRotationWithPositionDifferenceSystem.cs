@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class SyncRotationWithMovementSystem : IEcsRunSystem
+	public class SyncRotationWithPositionDifferenceSystem : IEcsRunSystem
 	{
 		public void Run(EcsSystems systems)
 		{

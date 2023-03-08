@@ -244,6 +244,21 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				entity.AddRigidbodyComponent(enemyView.Rigidbody2D);
 			}
 
+			if (enemyView.SpriteRenderers != null)
+			{
+				entity.AddSpriteRenderersComponent(enemyView.SpriteRenderers);
+			}
+
+			if (enemyView.Animator != null)
+			{
+				entity.AddAnimatorComponent(enemyView.Animator);
+			}
+			
+			entity.Add<FlipSpriteInRotationDirectionComponent>();
+			entity.Add<IgnoreTransformRotation>();
+			entity.AddRotationComponent(Vector2.zero);
+			entity.AddSyncRotationWithMovementDirectionComponent();
+
 			AddHealthComponent(entity, enemyConfig);
 
 			AddPoolObjectComponent(entity, poolObject);
