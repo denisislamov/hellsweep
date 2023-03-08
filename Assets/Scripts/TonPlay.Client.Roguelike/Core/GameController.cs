@@ -207,7 +207,9 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new RevolverSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
-							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage));
+							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage))
+							.Add(new FitnessGuideSkillSystem())
+							 ;
 
 			_animationSystems = new EcsSystems(_world, _sharedData)
 							   .Add(new AttackAnimationAnimatorSystem())

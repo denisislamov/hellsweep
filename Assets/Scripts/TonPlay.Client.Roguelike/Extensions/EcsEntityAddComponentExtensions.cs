@@ -141,6 +141,7 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var healthComponent = ref entity.Add<HealthComponent>();
 			healthComponent.CurrentHealth = startHealth;
+			healthComponent.InitialMaxHealth = maxHealth;
 			healthComponent.MaxHealth = maxHealth;
 			return ref healthComponent;
 		}

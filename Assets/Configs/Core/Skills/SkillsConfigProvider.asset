@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a51b55d4bcbf47559a498079f86ef51, type: 2}
   - {fileID: 11400000, guid: 273e9f2619a8b4d41b3439bd25c03859, type: 2}
   - {fileID: 11400000, guid: 75c95684902e347c8a573c5ea8b7e701, type: 2}
+  - {fileID: 11400000, guid: 4da2dfabac7a44b83aef58c765a31ced, type: 2}
   _presentationConfig:
     _defenceIconText: <sprite index=0>
     _utilityIconText: <sprite index=1>
