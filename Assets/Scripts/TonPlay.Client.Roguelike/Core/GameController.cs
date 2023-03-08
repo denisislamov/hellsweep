@@ -161,6 +161,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new EnemyShootAtTargetSystem())
 							.Add(new PlayerCollisionSystem(_overlapExecutor))
 							.Add(new FadeColorAppliedDamageIndicatorSystem())
+							.Add(new RoninOyoroiSkillSystem()) // - we might refactor it later, now it's here to reduce applied damage
 							.Add(new ApplyDamageSystem())
 							.Add(new PlayerLevelUpgradeSystem(_uiService))
 							.Add(new AccelerationSystem())

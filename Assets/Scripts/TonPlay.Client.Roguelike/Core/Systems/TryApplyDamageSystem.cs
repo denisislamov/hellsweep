@@ -42,6 +42,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						continue;
 					}
 
+					if (!world.IsEntityAlive(tryApply.VictimEntityId))
+					{
+						continue;
+					}
+
 					ref var applyDamage = ref applyPool.AddOrGet(tryApply.VictimEntityId);
 					applyDamage.Damage += tryApply.DamageProvider.Damage;
 

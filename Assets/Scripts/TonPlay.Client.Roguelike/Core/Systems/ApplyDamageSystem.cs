@@ -11,7 +11,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Run(EcsSystems systems)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
-			var sharedData = systems.GetShared<ISharedData>();
 			var world = systems.GetWorld();
 
 			var filter = world
@@ -22,12 +21,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			var changeHealthPool = world.GetPool<ChangeHealthEvent>();
 			var applyDamageComponents = world.GetPool<ApplyDamageComponent>();
-			var deadPool = world.GetPool<DeadComponent>();
-			var enemyPool = world.GetPool<EnemyComponent>();
-			var positionPool = world.GetPool<PositionComponent>();
-			var destroyPool = world.GetPool<DestroyComponent>();
-
-			var gameModelData = sharedData.GameModel.ToData();
 
 			foreach (var entityId in filter)
 			{
@@ -37,9 +30,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				applyDamageComponents.Del(entityId);
 			}
-
-			sharedData.GameModel.Update(gameModelData);
-			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

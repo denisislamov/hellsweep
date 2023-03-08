@@ -55,6 +55,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					}
 				}
 			}
+			
+			sharedData.GameModel.Update(gameModelData);
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
