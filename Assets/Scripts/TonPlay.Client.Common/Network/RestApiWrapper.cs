@@ -106,54 +106,54 @@ namespace TonPlay.Client.Common.Network
         [Space(10)]
         [Header("--------- User ---------")]
        
-        [SerializeField] private UserXpResponse _userXpModel;
+        [SerializeField] private UserXpResponse _userXpResponse;
         [ContextMenu("GetUserXp")]
         public async UniTask<UserXpResponse> GetUserXp()
         {
-            _userXpModel = new UserXpResponse();
-            var getTask = _networkClient.GetAsync<UserXpResponse>("v1/user/xp", _headers, _userXpModel);
+            _userXpResponse = new UserXpResponse();
+            var getTask = _networkClient.GetAsync<UserXpResponse>("v1/user/xp", _headers, _userXpResponse);
 
             var result = await getTask;
-            _userXpModel = result;
+            _userXpResponse = result;
 
             return result;
         }
 
-        [SerializeField] private UserSummaryResponse _userSummaryModel;
+        [SerializeField] private UserSummaryResponse _userSummaryResponse;
         [ContextMenu("GetUserSummary")]
         public async UniTask<UserSummaryResponse> GetUserSummary()
         {
-            _userSummaryModel = new UserSummaryResponse();
-            var getTask = _networkClient.GetAsync<UserSummaryResponse>("v1/user/summary", _headers, _userSummaryModel);
+            _userSummaryResponse = new UserSummaryResponse();
+            var getTask = _networkClient.GetAsync<UserSummaryResponse>("v1/user/summary", _headers, _userSummaryResponse);
 
             var result = await getTask;
-            _userSummaryModel = result;
+            _userSummaryResponse = result;
             
             return result;
         }
 
-        [SerializeField] private UserItemsResponse _userItemsModel;
+        [SerializeField] private UserItemsResponse _userItemsResponse;
         [ContextMenu("GetUserItems")]
         public async UniTask<UserItemsResponse> GetUserItems()
         {
-            _userItemsModel = new UserItemsResponse();
-            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/items", _headers, _userItemsModel);
+            _userItemsResponse = new UserItemsResponse();
+            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/items", _headers, _userItemsResponse);
 
             var result = await getTask;
-            _userItemsModel = result;
+            _userItemsResponse = result;
             
             return result;
         }
 
-        [SerializeField] private UserBalanceResponse _userBalanceModel;
+        [SerializeField] private UserBalanceResponse _userBalanceResponse;
         [ContextMenu("GetUserBalance")]
         public async UniTask<UserBalanceResponse> GetUserBalance()
         {
-            _userBalanceModel = new UserBalanceResponse();
-            var getTask = _networkClient.GetAsync<UserBalanceResponse>("v1/user/balance", _headers, _userBalanceModel);
+            _userBalanceResponse = new UserBalanceResponse();
+            var getTask = _networkClient.GetAsync<UserBalanceResponse>("v1/user/balance", _headers, _userBalanceResponse);
 
             var result = await getTask;
-            _userBalanceModel = result;
+            _userBalanceResponse = result;
 
             return result;
         }
