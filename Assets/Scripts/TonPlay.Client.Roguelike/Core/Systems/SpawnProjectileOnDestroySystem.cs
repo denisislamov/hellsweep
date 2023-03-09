@@ -61,7 +61,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						skillDurationMultiplierPool.Has(projectile.CreatorEntityId))
 					{
 						ref var skillDurationMultiplier = ref skillDurationMultiplierPool.Get(projectile.CreatorEntityId);
-						ref var destroyOnTimer = ref destroyOnTimerPool.AddOrGet(projectile.CreatorEntityId);
+						ref var destroyOnTimer = ref destroyOnTimerPool.AddOrGet(entity.Id);
 						destroyOnTimer.TimeLeft *= skillDurationMultiplier.Value;
 					}
 				}

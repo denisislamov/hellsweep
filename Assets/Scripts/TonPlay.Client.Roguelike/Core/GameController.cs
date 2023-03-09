@@ -140,7 +140,7 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage))
-						   .Add(new SpawnExperienceCollectablesToGainFirstLevelSystem(_collectablesEntityFactory));
+						   .Add(new SpawnExperienceCollectablesToGainFirstLevelsSystem(_collectablesEntityFactory));
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
@@ -217,6 +217,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new EnergyDrinkSkillSystem())
 							.Add(new SportShoesSkillSystem())
 							.Add(new HiPowerBulletSkillSystem())
+							.Add(new ExoBracerSkillSystem())
 							 ;
 
 			_animationSystems = new EcsSystems(_world, _sharedData)

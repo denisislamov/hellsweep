@@ -13,6 +13,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 			public const int PLAYER_PROJECTILES_MAX_COUNT = 64;
 			public const int ARENA_MAX_COUNT = 1;
 			public const float REQUIRED_POSITION_CHANGED_DIFF = 0.00001f;
+			public const int AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP = 1;
 
 			public class Collision
 			{

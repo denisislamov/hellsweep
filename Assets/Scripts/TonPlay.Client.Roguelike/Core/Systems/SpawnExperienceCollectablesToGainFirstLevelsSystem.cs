@@ -2,15 +2,16 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Utilities;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
-	public class SpawnExperienceCollectablesToGainFirstLevelSystem : IEcsInitSystem
+	public class SpawnExperienceCollectablesToGainFirstLevelsSystem : IEcsInitSystem
 	{
 		private readonly ICollectableEntityFactory _collectablesEntityFactory;
 		
-		public SpawnExperienceCollectablesToGainFirstLevelSystem(ICollectableEntityFactory collectablesEntityFactory)
+		public SpawnExperienceCollectablesToGainFirstLevelsSystem(ICollectableEntityFactory collectablesEntityFactory)
 		{
 			_collectablesEntityFactory = collectablesEntityFactory;
 		}
@@ -21,14 +22,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var sharedData = systems.GetShared<ISharedData>();
 
 			var initialExperienceCollectable = sharedData.CollectablesConfigProvider.InitialExperienceCollectableForFirstLevel;
-			var requiredExperienceAmount = sharedData.PlayersLevelsConfigProvider.Get(0);
 
-			var spawnCollectablesCount = Mathf.FloorToInt(requiredExperienceAmount.ExperienceToNextLevel / initialExperienceCollectable.Value);
-			for (var i = 0; i < spawnCollectablesCount; i++)
+			for (var level = 0; level < RoguelikeConstants.Core.AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP; level++)
 			{
-				var position = GeneratePosition(sharedData);
+				var requiredExperienceAmount = sharedData.PlayersLevelsConfigProvider.Get(level);
+				var spawnCollectablesCount = Mathf.FloorToInt(requiredExperienceAmount.ExperienceToNextLevel / initialExperienceCollectable.Value);
 				
-				_collectablesEntityFactory.Create(world, initialExperienceCollectable, position);
+				for (var i = 0; i < spawnCollectablesCount; i++)
+				{
+					var position = GeneratePosition(sharedData);
+				
+					_collectablesEntityFactory.Create(world, initialExperienceCollectable, position);
+				}
 			}
 		}
 		

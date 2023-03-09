@@ -22,10 +22,10 @@ MonoBehaviour:
   _levelConfigs:
   - _level: 1
     _description: Exo-Bracer desc lvl 1
-    _multiplierValue: 5
+    _multiplierValue: 1.1
   - _level: 2
     _description: Exo-Bracer desc lvl 2
-    _multiplierValue: 25
+    _multiplierValue: 1.2
   - _level: 3
     _description: Exo-Bracer desc lvl 3
     _multiplierValue: 1.3
