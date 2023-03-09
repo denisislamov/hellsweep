@@ -26,6 +26,7 @@ MonoBehaviour:
     _speed: 8
     _quantity: 1
     _cooldown: 5
+    _activeTime: 5
     _damageProvider:
       damageSource: 11
       damage: 120
@@ -36,6 +37,7 @@ MonoBehaviour:
     _speed: 8
     _quantity: 2
     _cooldown: 5
+    _activeTime: 5
     _damageProvider:
       damageSource: 11
       damage: 120
@@ -46,6 +48,7 @@ MonoBehaviour:
     _speed: 12
     _quantity: 2
     _cooldown: 5
+    _activeTime: 5
     _damageProvider:
       damageSource: 11
       damage: 120
@@ -56,6 +59,7 @@ MonoBehaviour:
     _speed: 16
     _quantity: 2
     _cooldown: 5
+    _activeTime: 5
     _damageProvider:
       damageSource: 11
       damage: 160
@@ -66,6 +70,7 @@ MonoBehaviour:
     _speed: 16
     _quantity: 3
     _cooldown: 5
+    _activeTime: 5
     _damageProvider:
       damageSource: 11
       damage: 160

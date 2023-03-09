@@ -30,6 +30,7 @@ MonoBehaviour:
     _description: Holy Water desc lvl 1
     _quantity: 2
     _cooldown: 3.5
+    _activeTime: 3
     _damageProvider:
       damageSource: 6
       damage: 48
@@ -38,6 +39,7 @@ MonoBehaviour:
     _description: Holy Water desc lvl 2
     _quantity: 3
     _cooldown: 3.5
+    _activeTime: 3
     _damageProvider:
       damageSource: 6
       damage: 60
@@ -46,6 +48,7 @@ MonoBehaviour:
     _description: Holy Water desc lvl 3
     _quantity: 4
     _cooldown: 3.5
+    _activeTime: 3
     _damageProvider:
       damageSource: 6
       damage: 72
@@ -54,6 +57,7 @@ MonoBehaviour:
     _description: Holy Water desc lvl 4
     _quantity: 5
     _cooldown: 3.5
+    _activeTime: 3
     _damageProvider:
       damageSource: 6
       damage: 84
@@ -62,6 +66,7 @@ MonoBehaviour:
     _description: Holy Water desc lvl 5
     _quantity: 6
     _cooldown: 3.5
+    _activeTime: 3
     _damageProvider:
       damageSource: 6
       damage: 96

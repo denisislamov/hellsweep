@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Extensions;
-using TonPlay.Client.Common.Utilities;
-using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -17,14 +12,14 @@ using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
 	public class DrillShotSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private const float CHECK_DELAY = 0.2f;
-		
+
 		private readonly KdTreeStorage _kdTreeStorage;
-		
+
 		private EcsWorld _world;
 		private IDrillShotSkillConfig _config;
 		private ICompositeViewPool _pool;
@@ -64,6 +59,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Filter<DrillShotSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<DamageMultiplierComponent>()
+						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
@@ -71,15 +68,21 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
+			var skillDurationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
+				ref var skillDurationMultiplier = ref skillDurationMultiplierPool.Get(entityId);
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
 
 				var level = skills.Levels[_config.SkillName];
 				var levelConfig = _config.GetLevelConfig(level);
+
+				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
 
 				skill.RefreshLeftTime -= Time.deltaTime;
 
@@ -94,11 +97,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						skill.SpawnQuantity = levelConfig.Quantity;
 					}
 
-					CreateProjectile(position.Position, layer, levelConfig, entityId);
+					var duration = levelConfig.ActiveTime * skillDurationMultiplier.Value;
+					
+					CreateProjectile(position.Position, layer, levelConfig, entityId, duration);
 
 					skill.SpawnQuantity--;
 					skill.RefreshLeftTime = skill.SpawnQuantity == 0
-						? levelConfig.Cooldown
+						? levelConfig.Cooldown + duration
 						: _config.DelayBetweenSpawn;
 				}
 			}
@@ -128,8 +133,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var zone = new Rect(zonePosition, drillShot.Config.FlyingZone.size);
 
 				var insideRect = RectContains(zone, zonePosition, drillShotPosition);
-				
-				
+
+
 				// var leftDownCorner = new Vector2(
 				// 	zonePosition.x + zone.width  * -0.5f,
 				// 	zonePosition.y + zone.height * -0.5f);
@@ -164,7 +169,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				ref var movement = ref movementPool.Get(entityId);
 				ref var rotation = ref rotationPool.Get(entityId);
-				
+
 				var bounds = new Bounds(zonePosition, zone.size);
 				var closestPoint = bounds.ClosestPoint(drillShotPosition).ToVector2XY();
 				var boundNormal = closestPoint - drillShotPosition;
@@ -178,7 +183,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				{
 					continue;
 				}
-				
+
 				movement.Direction = new Vector2(
 					boundNormal.x != 0 ? -movement.Direction.x : movement.Direction.x,
 					boundNormal.y != 0 ? -movement.Direction.y : movement.Direction.y);
@@ -186,7 +191,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			}
 		}
 
-		private void CreateProjectile(Vector2 position, int layer, IDrillShotSkillLevelConfig levelConfig, int creatorEntityId)
+		private void CreateProjectile(
+			Vector2 position,
+			int layer,
+			IDrillShotSkillLevelConfig levelConfig,
+			int creatorEntityId,
+			float duration)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -207,8 +217,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			entity.AddDrillShotProjectileComponent(creatorEntityId, _config, levelConfig);
 
 			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
+			ref var destroyOnTimerComponent = ref entity.Get<DestroyOnTimerComponent>();
 			ref var speed = ref entity.AddOrGet<SpeedComponent>();
 
+			destroyOnTimerComponent.TimeLeft = duration;
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 			speed.Speed = levelConfig.Speed;
 
@@ -244,7 +256,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				}
 			}
 		}
-		
+
 		private bool RectContains(Rect rect, Vector2 rectPosition, Vector2 dotPosition)
 		{
 			var xMin = rectPosition.x + rect.size.x*-0.5f;

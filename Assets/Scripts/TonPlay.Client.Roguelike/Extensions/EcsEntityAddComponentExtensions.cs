@@ -9,6 +9,7 @@ using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Effects.Revolver;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Systems;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
@@ -313,11 +314,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref PrepareToSpawnBottleOfHolyWaterProjectileComponent AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(this EcsEntity entity, IHolyWaterSkillLevelConfig config, int layer)
+		public static ref PrepareToSpawnBottleOfHolyWaterProjectileComponent AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(
+			this EcsEntity entity, IHolyWaterSkillLevelConfig config, int layer, int creatorEntityId)
 		{
 			ref var component = ref entity.Add<PrepareToSpawnBottleOfHolyWaterProjectileComponent>();
 			component.Config = config;
 			component.Layer = layer;
+			component.CreatorEntityId = creatorEntityId;
 			return ref component;
 		}
 
@@ -464,6 +467,20 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var component = ref entity.Add<SpriteRenderersComponent>();
 			component.SpriteRenderers = renderers;
+			return ref component;
+		}
+		
+		public static ref DamageMultiplierComponent AddDamageMultiplierComponent(this EcsEntity entity, float value)
+		{
+			ref var component = ref entity.Add<DamageMultiplierComponent>();
+			component.Value = value;
+			return ref component;
+		}
+		
+		public static ref SkillDurationMultiplierComponent AddSkillDurationMultiplierComponent(this EcsEntity entity, float value)
+		{
+			ref var component = ref entity.Add<SkillDurationMultiplierComponent>();
+			component.Value = value;
 			return ref component;
 		}
 	}

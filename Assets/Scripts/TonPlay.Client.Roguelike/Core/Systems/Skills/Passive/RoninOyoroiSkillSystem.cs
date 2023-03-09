@@ -6,7 +6,7 @@ using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 {
 	public class RoninOyoroiSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{

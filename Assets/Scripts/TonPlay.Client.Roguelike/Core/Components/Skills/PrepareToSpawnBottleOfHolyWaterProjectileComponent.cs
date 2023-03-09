@@ -6,5 +6,6 @@ namespace TonPlay.Client.Roguelike.Core.Components.Skills
 	{
 		public IHolyWaterSkillLevelConfig Config;
 		public int Layer;
+		public int CreatorEntityId;
 	}
 }

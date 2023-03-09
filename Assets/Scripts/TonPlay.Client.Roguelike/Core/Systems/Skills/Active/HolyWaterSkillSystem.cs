@@ -1,4 +1,3 @@
-using System;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Utilities;
@@ -10,13 +9,12 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
 	public class HolyWaterSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
@@ -57,6 +55,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Filter<HolyWaterSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<DamageMultiplierComponent>()
+						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
@@ -64,9 +64,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
+			var durationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
+				ref var durationMultiplier = ref durationMultiplierPool.Get(entityId);
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
@@ -74,11 +78,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var level = skills.Levels[_config.SkillName];
 				var levelConfig = _config.GetLevelConfig(level);
 
+				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
+				
 				skill.RefreshLeftTime -= Time.deltaTime;
 
 				if (skill.RefreshLeftTime <= 0)
 				{
-					skill.RefreshLeftTime = levelConfig.Cooldown;
+					var duration = levelConfig.ActiveTime * durationMultiplier.Value;
+					skill.RefreshLeftTime = levelConfig.Cooldown + duration;
 
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
@@ -95,7 +102,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 						entity.AddBottleOfHolyWaterProjectileComponent();
 						entity.AddPrepareToSpawnAfterTimerComponent(_config.DelayBetweenThrowingProjectiles);
-						entity.AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(levelConfig, layer);
+						entity.AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(levelConfig, layer, entityId);
 						entity.AddRotationComponent(direction);
 						entity.AddPositionComponent(position.Position);
 					}
@@ -128,14 +135,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				if (timer.TimeLeft <= 0)
 				{
-					CreateThrowableProjectile(position.Position, rotation.Direction, prepare.Layer, prepare.Config);
+					CreateThrowableProjectile(position.Position, rotation.Direction, prepare.Layer, prepare.Config, prepare.CreatorEntityId);
 
 					_world.DelEntity(entityId);
 				}
 			}
 		}
 
-		private void CreateThrowableProjectile(Vector2 position, Vector2 direction, int layer, IHolyWaterSkillLevelConfig levelConfig)
+		private void CreateThrowableProjectile(
+			Vector2 position, 
+			Vector2 direction, 
+			int layer, 
+			IHolyWaterSkillLevelConfig levelConfig, 
+			int creatorEntityId)
 		{
 			if (!_pool.TryGet<ProjectileView>(_throwablePoolIdentity, out var poolObject))
 			{
@@ -153,10 +165,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var transform = view.transform;
 			transform.position = spawnPosition;
 
-			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.BottleProjectileConfig, spawnPosition, direction, collisionLayerMask);
+			var entity = ProjectileSpawner.SpawnProjectile(
+				_world, poolObject, _config.BottleProjectileConfig, spawnPosition, direction, collisionLayerMask, creatorEntityId);
 			entity.AddBottleOfHolyWaterProjectileComponent();
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
+			
 			damageOnCollision.DamageProvider = levelConfig.DamageProvider;
 		}
 

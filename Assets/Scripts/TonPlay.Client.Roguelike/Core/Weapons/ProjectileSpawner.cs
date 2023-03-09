@@ -17,7 +17,8 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			IProjectileConfig config,
 			Vector2 position,
 			Vector2 direction,
-			int collisionLayerMask)
+			int collisionLayerMask,
+			int creatorEntityId = EcsEntity.DEFAULT_ID)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("TonPlay.Client.Roguelike.Core.Weapons.ProjectileSpawner.SpawnProjectile");
 
@@ -42,6 +43,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 
 			projectileViewProviderComponent.View = projectileView.gameObject;
 			projectileComponent.Config = config;
+			projectileComponent.CreatorEntityId = creatorEntityId;
 			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
 			projectileAcceleration.Acceleration = config.MovementConfig.Acceleration;
 			projectileRotation.Direction = direction;

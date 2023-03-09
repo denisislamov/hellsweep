@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
@@ -7,7 +8,6 @@ using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Roguelike.Client.Core;
-using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Models.Interfaces;

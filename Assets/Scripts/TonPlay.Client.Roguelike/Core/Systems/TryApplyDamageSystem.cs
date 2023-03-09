@@ -48,7 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					}
 
 					ref var applyDamage = ref applyPool.AddOrGet(tryApply.VictimEntityId);
-					applyDamage.Damage += tryApply.DamageProvider.Damage;
+					applyDamage.Damage += tryApply.DamageProvider.Damage * tryApply.DamageProvider.DamageMultiplier;
 
 					if (tryApply.DamageProvider.Rate < 0.000001f)
 					{

@@ -14,6 +14,8 @@ using TonPlay.Client.Roguelike.Core.Systems.Enemies;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
+using TonPlay.Client.Roguelike.Core.Systems.Skills.Active;
+using TonPlay.Client.Roguelike.Core.Systems.Skills.Passive;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -137,7 +139,8 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new HealthCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
-						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage));
+						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage))
+						   .Add(new SpawnExperienceCollectablesToGainFirstLevelSystem(_collectablesEntityFactory));
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
@@ -213,6 +216,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new FitnessGuideSkillSystem())
 							.Add(new EnergyDrinkSkillSystem())
 							.Add(new SportShoesSkillSystem())
+							.Add(new HiPowerBulletSkillSystem())
 							 ;
 
 			_animationSystems = new EcsSystems(_world, _sharedData)

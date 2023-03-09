@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using DataStructures.ViliWonka.KDTree;
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
-using TonPlay.Client.Roguelike.Core.Effects;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
@@ -17,7 +15,7 @@ using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
 	public class ForcefieldDeviceSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
@@ -70,11 +68,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Inc<ForcefieldDeviceSkill>()
 						.Inc<PositionComponent>()
 						.Inc<StackTryApplyDamageComponent>()
+						.Inc<DamageMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 			var stackTryApplyDamagePool = _world.GetPool<StackTryApplyDamageComponent>();
 
 			var overlapParams = OverlapParams.Create(_world);
@@ -83,11 +83,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 			foreach (var entityId in filter)
 			{
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 
 				var level = skills.Levels[SkillName.ForcefieldDevice];
 				var levelConfig = _config.GetLevelConfig(level);
+
+				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
 
 				//it's to prevent double damage applying for upgraded forcefield
 				if (LayerMaskExt.ContainsLayer(levelConfig.CollisionLayerMask, _enemyProjectilesLayer))

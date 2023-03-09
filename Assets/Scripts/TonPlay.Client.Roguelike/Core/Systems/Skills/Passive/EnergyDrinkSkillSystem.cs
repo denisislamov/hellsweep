@@ -7,7 +7,7 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 {
 	public class EnergyDrinkSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{

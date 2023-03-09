@@ -1,11 +1,11 @@
 using TonPlay.Client.Roguelike.Core.Collectables.Config;
+using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Levels.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;

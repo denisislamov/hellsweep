@@ -1,6 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collectables;
-using TonPlay.Roguelike.Client.Core.Collectables.Config;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 

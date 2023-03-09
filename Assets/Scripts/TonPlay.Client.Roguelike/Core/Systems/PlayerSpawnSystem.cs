@@ -53,6 +53,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddBloodAnimatorComponent(player.BloodAnimator);
 			entity.AddAnimationsComponent(player.AttackAnimationDuration);
 			entity.AddSpriteRenderersComponent(player.SpriteRenderers);
+			entity.AddDamageMultiplierComponent(1f);
+			entity.AddSkillDurationMultiplierComponent(1f);
 			
 			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
 			entity.AddSpeedComponent(spawnConfig.MovementConfig);

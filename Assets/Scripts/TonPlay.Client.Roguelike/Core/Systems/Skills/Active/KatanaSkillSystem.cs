@@ -1,7 +1,5 @@
-using System;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
-using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -10,13 +8,11 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
 	public class KatanaSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
@@ -65,14 +61,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.End();
 
 			var skillPool = _world.GetPool<KatanaSkill>();
+			var attackPool = _world.GetPool<AttackEvent>();
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
 			var rotationPool = _world.GetPool<RotationComponent>();
-			var attackPool = _world.GetPool<AttackEvent>();
+			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var rotation = ref rotationPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
@@ -80,6 +78,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 
 				var level = skills.Levels[_config.SkillName];
 				var levelConfig = _config.GetLevelConfig(level);
+
+				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
 
 				skill.RefreshLeftTime -= Time.deltaTime;
 

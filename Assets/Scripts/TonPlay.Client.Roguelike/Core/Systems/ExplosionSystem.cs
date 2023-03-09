@@ -49,12 +49,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					if (applyDamagePool.Has(enemyEntityId))
 					{
 						ref var applyDamage = ref applyDamagePool.Get(enemyEntityId);
-						applyDamage.Damage += explosion.DamageProvider.Damage;
+						applyDamage.Damage += explosion.DamageProvider.Damage * explosion.DamageProvider.DamageMultiplier;
 					}
 					else
 					{
 						ref var applyDamage = ref applyDamagePool.Add(enemyEntityId);
-						applyDamage.Damage += explosion.DamageProvider.Damage;
+						applyDamage.Damage += explosion.DamageProvider.Damage * explosion.DamageProvider.DamageMultiplier;
 					}
 				}
 

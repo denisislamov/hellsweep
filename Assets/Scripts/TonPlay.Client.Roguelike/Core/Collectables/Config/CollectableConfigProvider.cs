@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collectables.Config;
-using TonPlay.Roguelike.Client.Core.Collectables.Config.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -14,8 +12,12 @@ namespace TonPlay.Client.Roguelike.Core.Collectables.Config
 		[SerializeField]
 		private CollectableConfig[] _configs;
 
+		[SerializeField]
+		private CollectableConfig _initialExperienceCollectableForFirstLevel;
+
 		private Dictionary<string, ICollectableConfig> _map;
 
+		public ICollectableConfig InitialExperienceCollectableForFirstLevel => _initialExperienceCollectableForFirstLevel;
 		public IEnumerable<ICollectableConfig> AllCollectables => _configs;
 
 		private Dictionary<string, ICollectableConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ICollectableConfig)_);

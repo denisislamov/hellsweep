@@ -8,12 +8,11 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Extensions;
-using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 
-namespace TonPlay.Client.Roguelike.Core.Systems.Skills
+namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
 	public class GuardianSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
@@ -81,6 +80,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 						.Filter<GuardianSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<DamageMultiplierComponent>()
+						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
@@ -88,9 +89,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
+			var skillDurationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
+				ref var skillDurationMultiplier = ref skillDurationMultiplierPool.Get(entityId);
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref rpgPool.Get(entityId);
@@ -98,11 +103,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 				var level = skills.Levels[_config.SkillName];
 				var levelConfig = _config.GetLevelConfig(level);
 
+				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
+
 				skill.RefreshLeftTime -= Time.deltaTime;
 
 				if (skill.RefreshLeftTime <= 0)
 				{
-					skill.RefreshLeftTime = levelConfig.Cooldown + levelConfig.ActiveTime;
+					var duration = levelConfig.ActiveTime * skillDurationMultiplier.Value;
+					
+					skill.RefreshLeftTime = levelConfig.Cooldown + duration;
 
 					var layer = playerPool.Has(entityId)
 						? LayerMask.NameToLayer("PlayerProjectile")
@@ -113,13 +122,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 					{
 						var spawnAngle = angleInterval*i;
 
-						CreateProjectile(position.Position, spawnAngle, layer, entityId, levelConfig);
+						CreateProjectile(position.Position, spawnAngle, layer, entityId, levelConfig, duration);
 					}
 				}
 			}
 		}
 
-		private void CreateProjectile(Vector2 position, float angle, int layer, int playerEntityId, IGuardianSkillLevelConfig levelConfig)
+		private void CreateProjectile(
+			Vector2 position,
+			float angle,
+			int layer,
+			int playerEntityId,
+			IGuardianSkillLevelConfig levelConfig,
+			float duration)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -142,7 +157,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
 
 			entity.AddSpinAroundEntityPositionComponent(playerEntityId, levelConfig.Radius, angle);
-			entity.AddGuardianProjectileComponent(levelConfig.ActiveTime);
+			entity.AddGuardianProjectileComponent(duration);
 
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
 

@@ -60,6 +60,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			[SerializeField]
 			private float _cooldown;
+			
+			[SerializeField]
+			private float _activeTime;
 
 			[SerializeField]
 			private DamageProvider _damageProvider;
@@ -73,6 +76,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			
 			public float Speed => _speed;
 			public float Cooldown => _cooldown;
+			public float ActiveTime => _activeTime;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 			public string Description => _description;

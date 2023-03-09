@@ -5,5 +5,6 @@ namespace TonPlay.Client.Roguelike.Core.Components
 	public struct ProjectileComponent
 	{
 		public IProjectileConfig Config;
+		public int CreatorEntityId;
 	}
 }
