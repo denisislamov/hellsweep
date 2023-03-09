@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a1fe55bc0b4fc4b2b5ceb6d5244b4a, type: 3}
+  m_Name: ForestLevelInstaller
+  m_EditorClassIdentifier: 
+  _enemyConfigProvider: {fileID: 11400000, guid: 495d6cc8e1d634a64902e054dd031a91, type: 2}
+  levelEnemyWaveConfigProvider: {fileID: 11400000, guid: 50d9cce33900b450dba24be502408a6b, type: 2}
+  _playersLevelsConfigProvider: {fileID: 11400000, guid: f25d7e93b7de7457287f6e8b8b8a59b3, type: 2}
+  _collectablesConfigProvider: {fileID: 11400000, guid: 11178122303ac42a58a82fbab912186a, type: 2}

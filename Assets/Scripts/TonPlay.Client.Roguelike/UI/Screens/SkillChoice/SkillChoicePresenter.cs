@@ -69,7 +69,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 					}
 					case SkillType.Utility:
 					{
-						var view = View.UtilityCurrentSkillViews[defenceSkillsCount];
+						var view = View.UtilityCurrentSkillViews[utilitySkillsCount];
 						view.SetColor(Color.white);
 						view.SetIcon(config.Icon);
 						utilitySkillsCount++;

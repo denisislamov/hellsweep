@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c96aa717d6cb409f8a912d1a010edb9b, type: 3}
-  m_Name: HellEnemyConfigProvider
+  m_Name: ForestEnemyConfigProvider
   m_EditorClassIdentifier: 
   _configs:
   - {fileID: 11400000, guid: 28a6d0b4d10ff45b7a8df0d6f8487bf8, type: 2}

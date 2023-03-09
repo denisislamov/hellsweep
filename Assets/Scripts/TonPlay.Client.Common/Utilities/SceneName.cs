@@ -4,6 +4,7 @@ namespace TonPlay.Client.Common.Utilities
 	{
 		Bootstrap,
 		MainMenu,
-		Level_Hell
+		Level_Hell,
+		Level_Forest,
 	}
 }
