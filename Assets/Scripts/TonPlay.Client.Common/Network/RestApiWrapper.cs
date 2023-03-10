@@ -19,15 +19,9 @@ namespace TonPlay.Client.Common.Network
 
         private void Start()
         {
-            if (_useDebugToken)
-            {
-                _token = UriParser.Parse(_debugTokenSettings.GetFullDebugAppUrl(_username))["token"];
-            }
-            else 
-            {
-                _token = UriParser.Parse(Application.absoluteURL)["token"];
-            }
-
+            var uri = _useDebugToken ? _debugTokenSettings.GetFullDebugAppUrl(_username) : Application.absoluteURL;
+            _token = UriParser.Parse(uri)["token"];
+            
             Debug.LogFormat("_token {0}", _token);
             
             _networkClient = new NetworkClient(_networkSettings.BaseAddress, new System.TimeSpan(0, 0, 10));
@@ -46,6 +40,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<SkillAllResponse> GetSkillAll()
         {
             _skillAllResponse = new SkillAllResponse();
+            Debug.LogFormat("_networkClient.GetAsync<SkillAllResponse>");
             var getTask = _networkClient.GetAsync<SkillAllResponse>("v1/skill/all", _headers, _skillAllResponse);
 
             var result = await getTask;
@@ -62,6 +57,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<BoostAllResponse> GetBoostAll()
         {
             _boostAllResponse = new BoostAllResponse();
+            Debug.LogFormat("_networkClient.GetAsync<BoostAllResponse>");
             var getTask = _networkClient.GetAsync<BoostAllResponse>("v1/boost/all", _headers, _boostAllResponse);
 
             var result = await getTask;
@@ -78,6 +74,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<InfoLevelAllResponse> GetInfoLevelAll()
         {
             _infoLevelAllResponse = new InfoLevelAllResponse();
+            Debug.LogFormat("_networkClient.GetAsync<InfoLevelAllResponse>");
             var getTask = _networkClient.GetAsync<InfoLevelAllResponse>("v1/info/level/all", _headers, _infoLevelAllResponse);
 
             var result = await getTask;
@@ -86,6 +83,35 @@ namespace TonPlay.Client.Common.Network
             return result;
         }
         
+        // # Item - Item controller
+        [Space(10)]
+        [Header("--------- Item ---------")]
+        [SerializeField] private ItemPutBody _itemPutBody;
+        [SerializeField] private ItemPutResponse _itemPutResponse;
+        [ContextMenu("PutItem")]
+        public async UniTask<ItemPutResponse> PutItem(ItemPutBody value)
+        {
+            _itemPutResponse = new ItemPutResponse();
+
+            Debug.LogFormat("_networkClient.PutAsync<ItemPutResponse> {0}", value);
+            var putTask = _networkClient.PutAsync<ItemPutResponse>("v1/item", _headers, value);
+
+            var result = await putTask;
+            _itemPutResponse = result;
+
+            return result;
+        }
+
+        [ContextMenu("DeleteItem")]
+        public async UniTask<string> DeleteItem(string slotId)
+        {
+            Debug.LogFormat("_networkClient.DeleteAsync<string> {0}", slotId);
+            var deleteTask = _networkClient.DeleteAsync<string>("v1/item/" + slotId, _headers, "");
+            var result = await deleteTask;
+            
+            return result;
+        }
+
         // # Game - Game controller
         [Space(10)]
         [Header("--------- Game ---------")]
@@ -94,9 +120,36 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<GameSessionResponse> GetGameSession()
         {
             _gameSessionResponse = new GameSessionResponse();
+            Debug.LogFormat("_networkClient.GetAsync<GameSessionResponse>");
             var getTask = _networkClient.GetAsync<GameSessionResponse>("v1/game/session", _headers, _gameSessionResponse);
 
             var result = await getTask;
+            _gameSessionResponse = result;
+
+            return result;
+        }
+
+        [ContextMenu("PutGameSession")]
+        public async UniTask<GameSessionResponse> PutGameSession(GameSessionPutBody value)
+        {
+            _gameSessionResponse = new GameSessionResponse();
+            Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
+            var putTask = _networkClient.PutAsync<GameSessionResponse>("v1/game/session", _headers, value);
+
+            var result = await putTask;
+            _gameSessionResponse = result;
+
+            return result;
+        }
+
+        [ContextMenu("PostGameSession")]
+        public async UniTask<GameSessionResponse> PostGameSession(bool value)
+        {
+            _gameSessionResponse = new GameSessionResponse();
+            Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", value);
+            var postTask = _networkClient.PostAsync<GameSessionResponse>("v1/game/session?pve=" + (value ? "true" : "false"), _headers, null);
+
+            var result = await postTask;
             _gameSessionResponse = result;
 
             return result;
@@ -111,6 +164,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<UserXpResponse> GetUserXp()
         {
             _userXpResponse = new UserXpResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserXpResponse>");
             var getTask = _networkClient.GetAsync<UserXpResponse>("v1/user/xp", _headers, _userXpResponse);
 
             var result = await getTask;
@@ -124,6 +178,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<UserSummaryResponse> GetUserSummary()
         {
             _userSummaryResponse = new UserSummaryResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserSummaryResponse>");
             var getTask = _networkClient.GetAsync<UserSummaryResponse>("v1/user/summary", _headers, _userSummaryResponse);
 
             var result = await getTask;
@@ -137,6 +192,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<UserItemsResponse> GetUserItems()
         {
             _userItemsResponse = new UserItemsResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserItemsResponse>");
             var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/items", _headers, _userItemsResponse);
 
             var result = await getTask;
@@ -150,6 +206,7 @@ namespace TonPlay.Client.Common.Network
         public async UniTask<UserBalanceResponse> GetUserBalance()
         {
             _userBalanceResponse = new UserBalanceResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserBalanceResponse>");
             var getTask = _networkClient.GetAsync<UserBalanceResponse>("v1/user/balance", _headers, _userBalanceResponse);
 
             var result = await getTask;

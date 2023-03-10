@@ -23,7 +23,8 @@ namespace TonPlay.Client.Common.Network
 		public T GetResponseAs<T>()
 		{
 			var data = Encoding.UTF8.GetString(bytes);
-
+			
+			Debug.LogFormat("GetResponseAs data:\n {0}", data);
 			if (data.Contains("[")) 
 			{
 				data = "{ \"items\": " + data + "}";

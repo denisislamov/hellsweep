@@ -17,7 +17,7 @@ namespace TonPlay.Client.Common.Network
 		private readonly string _basePath;
 		private readonly Dictionary<RequestType, PerformRequest> _mapRequests;
 
-		private delegate UnityWebRequest PerformRequest(string path, Dictionary<string, string> formData);
+		private delegate UnityWebRequest PerformRequest(string path, string postData);
 
 		public NetworkClient(string basePath, TimeSpan timeout, params IAsyncDecorator[] decorators)
 			: this(basePath, timeout, null, decorators)
@@ -36,18 +36,13 @@ namespace TonPlay.Client.Common.Network
 			_decorators[this._decorators.Length - 1] = this;
 			_mapRequests = new Dictionary<RequestType, PerformRequest>()
 			{
-				[RequestType.GET] = (path, formData) => UnityWebRequest.Get(path),
-				[RequestType.POST] = UnityWebRequest.Post
+				[RequestType.GET]    = (path, data) => UnityWebRequest.Get(path),
+				[RequestType.POST]   = UnityWebRequest.Post,
+				[RequestType.PUT]    = UnityWebRequest.Put,
+				[RequestType.DELETE] = (path, data) => UnityWebRequest.Delete(path)
 			};
 		}
 
-		public async UniTask<T> PostAsync<T>(string path, T value, CancellationToken cancellationToken = default)
-		{
-			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
-		}
-		
 		public async UniTask<T> GetAsync<T>(string path, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.GET, _basePath, path, value, _timeout, _decorators);
@@ -62,12 +57,55 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 
+		public async UniTask<T> PostAsync<T>(string path, object value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+		
+		public async UniTask<T> PostAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.POST, _basePath, path, requestHeaders, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+
+		public async UniTask<T> PutAsync<T>(string path, object value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+		
+		public async UniTask<T> PutAsync<T>(string path, Dictionary<string, string> requestHeaders, object value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.PUT, _basePath, path, requestHeaders, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+
+		public async UniTask<T> DeleteAsync<T>(string path, T value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.DELETE, _basePath, path, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+		
+		public async UniTask<T> DeleteAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.DELETE, _basePath, path, requestHeaders, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)
 		{
-			var data = JsonUtility.ToJson(context.Value);
+			var data = context.Value == null ? JsonUtility.ToJson(context.Value) : " ";
 			var formData = new Dictionary<string, string> {{"body", data}};
 
-			using (var req = _mapRequests[context.RequestType].Invoke(_basePath + context.Path, formData))
+			Debug.LogFormat("body:\n {0}", data);
+			using (var req = _mapRequests[context.RequestType].Invoke(_basePath + context.Path, data))
 			{
 				Debug.LogFormat("_basePath + context.Path {0}", _basePath + context.Path);
 				var headers = context.GetRawHeaders();
@@ -103,6 +141,7 @@ namespace TonPlay.Client.Common.Network
 					}
 				}
 
+				Debug.LogFormat("req.downloadHandler.data:\n {0}", req.downloadHandler.data);
 				return new ResponseContext(req.downloadHandler.data, req.responseCode, req.GetResponseHeaders());
 			}
 		}
@@ -111,5 +150,5 @@ namespace TonPlay.Client.Common.Network
 		{
 			return context.GetNextDecorator().SendAsync(context, cancellationToken, _next);
 		}
-	}
+    }
 }
