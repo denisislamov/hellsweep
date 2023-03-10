@@ -162,7 +162,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new RegularEnemyMoveOutOnBossSpawnSystem())
 							.Add(new EnemyMovementAroundEnemiesSystem(_overlapExecutor))
 							.Add(new EnemyShootAtTargetSystem())
-							.Add(new PlayerCollisionSystem(_overlapExecutor))
+							.Add(new PlayerCollisionWithCollectablesSystem(_overlapExecutor))
 							.Add(new FadeColorAppliedDamageIndicatorSystem())
 							.Add(new RoninOyoroiSkillSystem()) // - we might refactor it later, now it's here to reduce applied damage
 							.Add(new ApplyDamageSystem())
@@ -217,6 +217,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new EnergyDrinkSkillSystem())
 							.Add(new SportShoesSkillSystem())
 							.Add(new HiPowerBulletSkillSystem())
+							.Add(new HiPowerMagnetSkillSystem())
 							.Add(new ExoBracerSkillSystem())
 							 ;
 

@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Extensions;
@@ -116,7 +117,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				var collisionProjectileConfigProperty = config.GetProperty<ICollisionProjectileConfigProperty>();
 
 				ref var projectileCollision = ref projectileEntity.Add<CollisionComponent>();
-				projectileCollision.CollisionAreaConfig = collisionProjectileConfigProperty.CollisionAreaConfig;
+				projectileCollision.CollisionArea = CollisionAreaFactory.Create(collisionProjectileConfigProperty.CollisionAreaConfig);
 				projectileCollision.LayerMask = collisionLayerMask;
 
 				projectileEntity.AddHasCollidedComponent();

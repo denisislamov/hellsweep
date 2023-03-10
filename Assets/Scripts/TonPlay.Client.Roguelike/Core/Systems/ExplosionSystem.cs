@@ -41,7 +41,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var explosion = ref explosionPool.Get(entityId);
 
 				var count = _overlapExecutor.Overlap(
-					_query, position.Position, explosion.CollisionAreaConfig, ref _overlappedEntities, explosion.LayerMask, overlapParams);
+					_query, position.Position, explosion.CollisionArea, ref _overlappedEntities, explosion.LayerMask, overlapParams);
 
 				for (var i = 0; i < count; i++)
 				{

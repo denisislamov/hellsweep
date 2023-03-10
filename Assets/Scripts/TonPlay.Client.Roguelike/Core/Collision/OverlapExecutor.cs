@@ -28,7 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 		public int Overlap(
 			KDQuery query,
 			Vector2 position,
-			ICollisionAreaConfig collisionAreaConfig,
+			ICollisionArea collisionArea,
 			ref List<int> entities,
 			int layerMask,
 			IOverlapParams overlapParams)
@@ -44,11 +44,11 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 					continue;
 				}
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawCollisionArea(collisionAreaConfig, position, Color.blue);
+				DrawCollisionArea(collisionArea, position, Color.blue);
 #endif
 				//query.KNearest(kdTreeStorage.KdTree, position, RoguelikeConstants.Core.Collision.OVERLAP_K_NEAREST_COUNT, _results);
 
-				var radius = GetOverlapRadius(collisionAreaConfig);
+				var radius = GetOverlapRadius(collisionArea);
 
 				query.Radius(kdTreeStorage.KdTree, position, radius + RoguelikeConstants.Core.Collision.OVERLAP_MIN_RADIUS, _results);
 
@@ -73,7 +73,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 					ref var collision = ref overlapParams.CollisionPool.Get(entityId);
 					var entityPosition = kdTreeStorage.KdTree.Points[index];
 
-					if (IsIntersected(collisionAreaConfig, collision.CollisionAreaConfig, position, entityPosition))
+					if (IsIntersected(collisionArea, collision.CollisionArea, position, entityPosition))
 					{
 						entities.Add(entityId);
 					}
@@ -87,31 +87,32 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			return entities.Count;
 		}
 		
-		private static float GetOverlapRadius(ICollisionAreaConfig collisionAreaConfig)
+		private static float GetOverlapRadius(ICollisionArea collisionArea)
 		{
 			var radius = 0f;
 
-			switch (collisionAreaConfig)
+			switch (collisionArea.Config)
 			{
 				case ICircleCollisionAreaConfig circleCollisionAreaConfig:
 				{
-					radius = circleCollisionAreaConfig.Radius;
+					radius = circleCollisionAreaConfig.Radius * collisionArea.Scale;
 					break;
 				}
 				case IAABBCollisionAreaConfig aabbCollisionAreaConfig:
 				{
 					var sourceRect = aabbCollisionAreaConfig.Rect;
-					radius = Mathf.Max(sourceRect.max.magnitude, sourceRect.min.magnitude);
+					radius = Mathf.Max(sourceRect.max.magnitude, sourceRect.min.magnitude) * collisionArea.Scale;
 					break;
 				}
-				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig:
+				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig 
+					when collisionArea is ICompositeCollisionArea compositeCollisionArea:
 				{
 					var maxRadius = 0f;
 					for (var index = 0; index < compositeCollisionAreaConfig.CollisionAreaConfigs.Count; index++)
 					{
-						var innerConfig = compositeCollisionAreaConfig.CollisionAreaConfigs[index];
-						var distanceToInnerConfig = (innerConfig.Position - compositeCollisionAreaConfig.Position).SqrMagnitude(); 
-						var innerConfigRadius = GetOverlapRadius(innerConfig) + distanceToInnerConfig;
+						var innerArea = compositeCollisionArea.CollisionAreas[index];
+						var distanceToInnerConfig = (innerArea.Position - compositeCollisionAreaConfig.Position).SqrMagnitude(); 
+						var innerConfigRadius = GetOverlapRadius(innerArea) + distanceToInnerConfig;
 
 						if (maxRadius < innerConfigRadius)
 						{
@@ -189,21 +190,21 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 		}*/
 
 		private bool IsIntersected(
-			ICollisionAreaConfig areaA,
-			ICollisionAreaConfig areaB,
+			ICollisionArea areaA,
+			ICollisionArea areaB,
 			Vector2 positionA,
 			Vector2 positionB)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample("OverlapExecutor.IsIntersected");
 
-			var circleA = areaA as ICircleCollisionAreaConfig;
-			var circleB = areaB as ICircleCollisionAreaConfig;
+			var circleA = areaA.Config as ICircleCollisionAreaConfig;
+			var circleB = areaB.Config as ICircleCollisionAreaConfig;
 
-			var aabbA = areaA as IAABBCollisionAreaConfig;
-			var aabbB = areaB as IAABBCollisionAreaConfig;
+			var aabbA = areaA.Config as IAABBCollisionAreaConfig;
+			var aabbB = areaB.Config as IAABBCollisionAreaConfig;
 
-			var compositeA = areaA as ICompositeCollisionAreaConfig;
-			var compositeB = areaB as ICompositeCollisionAreaConfig;
+			var compositeA = areaA as ICompositeCollisionArea;
+			var compositeB = areaB as ICompositeCollisionArea;
 
 			if (circleA != null &&
 				circleB != null)
@@ -211,12 +212,12 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				var diffX = positionB.x - positionA.x;
 				var diffY = positionB.y - positionA.y;
 				var sqrMagnitude = diffX*diffX + diffY*diffY;
-				var combinedRadius = circleA.Radius + circleB.Radius;
-				var sqrMaxDistance = combinedRadius*combinedRadius;
+				var combinedRadius = circleA.Radius * areaA.Scale + circleB.Radius * areaB.Scale;
+				var sqrMaxDistance = combinedRadius * combinedRadius;
 
 				var result = sqrMagnitude < sqrMaxDistance;
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red);
+				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red, areaB.Scale);
 #endif
 
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
@@ -229,14 +230,14 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				var rect = new Rect(
 					positionB,
 					new Vector2(
-						aabbB.Rect.size.x + 2*circleA.Radius,
-						aabbB.Rect.size.y + 2*circleA.Radius)
+						aabbB.Rect.size.x * areaB.Scale + 2 * circleA.Radius * areaA.Scale,
+						aabbB.Rect.size.y * areaB.Scale + 2 * circleA.Radius * areaA.Scale)
 				);
 
 				var result = RectContains(rect, positionB + aabbB.Position, positionA + circleA.Position);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawRect(aabbB.Rect, positionB + aabbB.Position, !result ? Color.green : Color.red);
-				DrawCircle(circleA, positionA + circleA.Position, !result ? Color.green : Color.red);
+				DrawRect(aabbB.Rect, positionB + aabbB.Position, !result ? Color.green : Color.red, areaB.Scale);
+				DrawCircle(circleA, positionA + circleA.Position, !result ? Color.green : Color.red, areaA.Scale);
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
@@ -248,14 +249,14 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 				var rect = new Rect(
 					positionA,
 					new Vector2(
-						aabbA.Rect.size.x + 2*circleB.Radius,
-						aabbA.Rect.size.y + 2*circleB.Radius)
+						aabbA.Rect.size.x * areaA.Scale + 2*circleB.Radius * areaB.Scale,
+						aabbA.Rect.size.y * areaA.Scale + 2*circleB.Radius * areaB.Scale)
 				);
 
 				var result = RectContains(rect, positionA + aabbA.Position, positionB + circleB.Position);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawRect(aabbA.Rect, positionA + aabbA.Position, !result ? Color.green : Color.red);
-				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red);
+				DrawRect(aabbA.Rect, positionA + aabbA.Position, !result ? Color.green : Color.red, areaA.Scale);
+				DrawCircle(circleB, positionB + circleB.Position, !result ? Color.green : Color.red, areaB.Scale);
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
@@ -263,12 +264,12 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 			if (aabbA != null && aabbB != null)
 			{
-				var aRect = new Rect(positionA + aabbA.Position, aabbA.Rect.size);
-				var bRect = new Rect(positionB + aabbB.Position, aabbB.Rect.size);
+				var aRect = new Rect(positionA + aabbA.Position, aabbA.Rect.size * areaA.Scale);
+				var bRect = new Rect(positionB + aabbB.Position, aabbB.Rect.size * areaB.Scale);
 
 				var result = aRect.Overlaps(bRect);
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-				DrawRect(bRect, bRect.position, !result ? Color.green : Color.red);
+				DrawRect(bRect, bRect.position, !result ? Color.green : Color.red, areaB.Scale);
 #endif
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return result;
@@ -276,9 +277,9 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 			if (compositeA != null)
 			{
-				for (var i = 0; i < compositeA.CollisionAreaConfigs.Count; i++)
+				for (var i = 0; i < compositeA.CollisionAreas.Count; i++)
 				{
-					var innerAreaA = compositeA.CollisionAreaConfigs[i];
+					var innerAreaA = compositeA.CollisionAreas[i];
 					
 					if (IsIntersected(innerAreaA, areaB, positionA, positionB))
 						return true;
@@ -289,9 +290,9 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			
 			if (compositeB != null)
 			{
-				for (var i = 0; i < compositeB.CollisionAreaConfigs.Count; i++)
+				for (var i = 0; i < compositeB.CollisionAreas.Count; i++)
 				{
-					var innerAreaB = compositeB.CollisionAreaConfigs[i];
+					var innerAreaB = compositeB.CollisionAreas[i];
 					
 					if (IsIntersected(areaA, innerAreaB, positionA, positionB))
 						return true;
@@ -315,21 +316,22 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 		}
 
 #if UNITY_EDITOR && ENABLE_COLLISION_DRAWING
-		private void DrawCollisionArea(ICollisionAreaConfig collisionAreaConfig, Vector2 position, Color color)
+		private void DrawCollisionArea(ICollisionArea collisionArea, Vector2 position, Color color)
 		{
-			switch (collisionAreaConfig)
+			switch (collisionArea.Config)
 			{
 				case IAABBCollisionAreaConfig aabbCollisionAreaConfig:
-					DrawRect(aabbCollisionAreaConfig.Rect, position + aabbCollisionAreaConfig.Position, color);
+					DrawRect(aabbCollisionAreaConfig.Rect, position + aabbCollisionAreaConfig.Position, color, collisionArea.Scale);
 					return;
 				case ICircleCollisionAreaConfig circleCollisionAreaConfig:
-					DrawCircle(circleCollisionAreaConfig, position + circleCollisionAreaConfig.Position, color);
+					DrawCircle(circleCollisionAreaConfig, position + circleCollisionAreaConfig.Position, color, collisionArea.Scale);
 					return;
-				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig:
+				case ICompositeCollisionAreaConfig compositeCollisionAreaConfig 
+					when collisionArea is ICompositeCollisionArea compositeCollisionArea:
 				{
-					for (var i = 0; i < compositeCollisionAreaConfig.CollisionAreaConfigs.Count; i++)
+					for (var i = 0; i < compositeCollisionArea.CollisionAreas.Count; i++)
 					{
-						var area = compositeCollisionAreaConfig.CollisionAreaConfigs[i];
+						var area = compositeCollisionArea.CollisionAreas[i];
 						DrawCollisionArea(area, position + compositeCollisionAreaConfig.Position, color);
 					}
 					return;
@@ -338,12 +340,12 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 		}
 
-		private void DrawRect(Rect rect, Vector2 position, Color color)
+		private void DrawRect(Rect rect, Vector2 position, Color color, float scale)
 		{
-			var leftDownCorner = new Vector2(position.x + rect.size.x*-0.5f, position.y + rect.size.y*-0.5f);
-			var leftUpCorner = new Vector2(position.x + rect.size.x*-0.5f, position.y + rect.size.y*0.5f);
-			var rightDownCorner = new Vector2(position.x + rect.size.x*0.5f, position.y + rect.size.y*-0.5f);
-			var rightUpCorner = new Vector2(position.x + rect.size.x*0.5f, position.y + rect.size.y*0.5f);
+			var leftDownCorner = new Vector2(position.x + rect.size.x*scale*-0.5f, position.y + rect.size.y*scale*-0.5f);
+			var leftUpCorner = new Vector2(position.x + rect.size.x*scale*-0.5f, position.y + rect.size.y*scale*0.5f);
+			var rightDownCorner = new Vector2(position.x + rect.size.x*scale*0.5f, position.y + rect.size.y*scale*-0.5f);
+			var rightUpCorner = new Vector2(position.x + rect.size.x*scale*0.5f, position.y + rect.size.y*scale*0.5f);
 
 			Debug.DrawLine(leftUpCorner, leftDownCorner, color, Time.deltaTime);
 			Debug.DrawLine(leftDownCorner, rightDownCorner, color, Time.deltaTime);
@@ -351,7 +353,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			Debug.DrawLine(rightUpCorner, leftUpCorner, color, Time.deltaTime);
 		}
 
-		private void DrawCircle(ICircleCollisionAreaConfig circle, Vector2 position, Color color)
+		private void DrawCircle(ICircleCollisionAreaConfig circle, Vector2 position, Color color, float scale)
 		{
 			var previousDir = Vector2.right;
 			var angle = 360/12;
@@ -359,7 +361,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 			{
 				var dir = previousDir.Rotate(angle);
 
-				Debug.DrawLine(position + previousDir*circle.Radius, position + dir*circle.Radius, color, Time.deltaTime);
+				Debug.DrawLine(position + previousDir*(circle.Radius*scale), position + dir*(circle.Radius*scale), color, Time.deltaTime);
 
 				previousDir = dir;
 			}

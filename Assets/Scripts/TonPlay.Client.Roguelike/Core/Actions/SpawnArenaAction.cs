@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
@@ -41,7 +42,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 			ref var arena = ref entity.Add<Arena>();
 			arena.View = view;
 
-			entity.AddCollisionComponent(_collisionAreaConfig, _layerMask);
+			entity.AddCollisionComponent(CollisionAreaFactory.Create(_collisionAreaConfig), _layerMask);
 			entity.AddLayerComponent(_layer);
 			entity.AddHasCollidedComponent();
 			entity.AddPositionComponent(position);

@@ -44,7 +44,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var collision = ref collisionPool.Get(entityId);
 
-				if (collision.CollisionAreaConfig.DoNotInitiateCollisionOverlap)
+				if (collision.CollisionArea.Config.DoNotInitiateCollisionOverlap)
 				{
 					continue;
 				}
@@ -57,7 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				_overlapExecutor.Overlap(
 					_query,
 					position.Position,
-					collision.CollisionAreaConfig,
+					collision.CollisionArea,
 					ref hasCollided.CollidedEntityIds,
 					collision.LayerMask,
 					overlapParams);

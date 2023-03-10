@@ -50,7 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var collision = ref collisionPool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 
-				var collisionArea = (ICircleCollisionAreaConfig)collision.CollisionAreaConfig;
+				var collisionArea = (ICircleCollisionAreaConfig)collision.CollisionArea.Config;
 
 				if (Vector2.Distance(damageOnDistance.LastDamagePosition, position.Position) < collisionArea.Radius)
 				{
@@ -62,7 +62,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				var count = _overlapExecutor.Overlap(
 					_query,
 					position.Position,
-					collision.CollisionAreaConfig,
+					collision.CollisionArea,
 					ref _overlappedEntities,
 					collision.LayerMask,
 					overlapParams);

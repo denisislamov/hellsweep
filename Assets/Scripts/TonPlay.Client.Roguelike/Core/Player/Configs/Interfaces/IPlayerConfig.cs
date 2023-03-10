@@ -12,6 +12,8 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces
 		PlayerView Prefab { get; }
 
 		ICollisionAreaConfig CollisionAreaConfig { get; }
+		
+		ICollisionAreaConfig CollectablesCollisionAreaConfig { get; }
 
 		int StartHealth { get; }
 

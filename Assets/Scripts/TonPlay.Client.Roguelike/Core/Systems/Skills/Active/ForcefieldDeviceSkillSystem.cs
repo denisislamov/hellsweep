@@ -101,7 +101,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				var count = _overlapExecutor.Overlap(
 					_query,
 					position.Position,
-					levelConfig.CollisionAreaConfig,
+					CollisionAreaFactory.Create(levelConfig.CollisionAreaConfig),
 					ref _overlappedEntities,
 					levelConfig.CollisionLayerMask,
 					overlapParams);
@@ -245,14 +245,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 					if (!entity.Has<CollisionComponent>())
 					{
-						entity.AddCollisionComponent(levelConfig.CollisionAreaConfig, levelConfig.CollisionLayerMask);
+						entity.AddCollisionComponent(CollisionAreaFactory.Create(levelConfig.CollisionAreaConfig), levelConfig.CollisionLayerMask);
 						entity.AddHasCollidedComponent();
 						entity.AddDamageOnCollisionComponent(levelConfig.DamageProvider);
 					}
 					else
 					{
 						ref var collision = ref entity.Get<CollisionComponent>();
-						collision.CollisionAreaConfig = levelConfig.CollisionAreaConfig;
+						collision.CollisionArea = CollisionAreaFactory.Create(levelConfig.CollisionAreaConfig);
 						collision.LayerMask = levelConfig.CollisionLayerMask;
 
 						ref var damageOnCollision = ref entity.Get<DamageOnCollisionComponent>();

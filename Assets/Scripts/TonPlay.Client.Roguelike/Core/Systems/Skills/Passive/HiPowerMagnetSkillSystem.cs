@@ -7,10 +7,10 @@ using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 {
-	public class ExoBracerSkillSystem : IEcsInitSystem, IEcsRunSystem
+	public class HiPowerMagnetSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private EcsWorld _world;
-		private IExoBracerSkillConfig _config;
+		private IHiPowerMagnetSkillConfig _config;
 		private ISharedData _sharedData;
 
 		public void Init(EcsSystems systems)
@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (IExoBracerSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.ExoBracer);
+			_config = (IHiPowerMagnetSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.HIPowerMagnet);
 		}
 
 		public void Run(EcsSystems systems)
@@ -32,60 +32,59 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 		{
 			var filter = _world
 						.Filter<SkillsComponent>()
-						.Inc<SkillDurationMultiplierComponent>()
+						.Inc<CollisionAreaWithCollectablesComponent>()
 						.Exc<DeadComponent>()
-						.Exc<ExoBracerSkill>()
+						.Exc<HiPowerMagnetSkill>()
 						.End();
 
-			var durationPool = _world.GetPool<SkillDurationMultiplierComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
-			var skillPool = _world.GetPool<ExoBracerSkill>();
+			var skillPool = _world.GetPool<HiPowerMagnetSkill>();
+			var damageMultiplierPool = _world.GetPool<CollisionAreaWithCollectablesComponent>();
 			
 			foreach (var entityId in filter)
 			{
-				ref var duration = ref durationPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 
 				if (skills.Levels.ContainsKey(_config.SkillName) && skills.Levels[_config.SkillName] > 0)
 				{
 					ref var skill = ref skillPool.Add(entityId);
+					ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 					
 					skill.Level = skills.Levels[_config.SkillName];
-					
-					UpdateSkillDurationMultiplier(ref duration, skill);
+					UpgradeCollisionWithCollectablesScale(ref damageMultiplier, skill);
 				}
 			}
 
 			filter = _world
 					.Filter<SkillsComponent>()
-					.Inc<ExoBracerSkill>()
-					.Inc<SkillDurationMultiplierComponent>()
+					.Inc<HiPowerMagnetSkill>()
+					.Inc<CollisionAreaWithCollectablesComponent>()
 					.Exc<DeadComponent>()
 					.End();
 
 			foreach (var entityId in filter)
 			{
-				ref var duration = ref durationPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
+				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
 
 				if (skills.Levels.ContainsKey(_config.SkillName) && skills.Levels[_config.SkillName] != skill.Level)
 				{
 					skill.Level = skills.Levels[_config.SkillName];
-					
-					UpdateSkillDurationMultiplier(ref duration, skill);
+
+					UpgradeCollisionWithCollectablesScale(ref damageMultiplier, skill);
 				}
 			}
 		}
 		
-		private void UpdateSkillDurationMultiplier(ref SkillDurationMultiplierComponent damageMultiplier, ExoBracerSkill skill)
+		private void UpgradeCollisionWithCollectablesScale(ref CollisionAreaWithCollectablesComponent collision, HiPowerMagnetSkill skill)
 		{
 			if (skill.Level > 1)
 			{
-				damageMultiplier.Value /= _config.GetLevelConfig(skill.Level - 1).MultiplierValue;
+				collision.CollisionArea.Scale /= _config.GetLevelConfig(skill.Level - 1).MultiplierValue;
 			}
 			
-			damageMultiplier.Value *= _config.GetLevelConfig(skill.Level).MultiplierValue;
+			collision.CollisionArea.Scale *= _config.GetLevelConfig(skill.Level).MultiplierValue;
 		}
 	}
 }

@@ -90,9 +90,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				var position = rigidbodyComponent.Position;
 
-				var collisionAreaConfig = collisionComponent.CollisionAreaConfig as ICircleCollisionAreaConfig;
+				var collisionAreaConfig = collisionComponent.CollisionArea.Config as ICircleCollisionAreaConfig;
 
-				GetNeighbors(ref _neighborsEntityIds, position, collisionAreaConfig, overlapParams);
+				GetNeighbors(ref _neighborsEntityIds, position, collisionComponent.CollisionArea, overlapParams);
 
 				var separateVector = SeparateWithNeighbors(ref _neighborsEntityIds, positionComponents, position, entityId, collisionAreaConfig?.Radius ?? 0);
 
@@ -138,12 +138,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			return separateVector;
 		}
 
-		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionAreaConfig collisionAreaConfig, IOverlapParams overlapParams)
+		private void GetNeighbors(ref List<int> cachedNeighborsEntityIds, Vector2 position, ICollisionArea collisionArea, IOverlapParams overlapParams)
 		{
 			_overlapExecutor.Overlap(
 				_query,
 				position,
-				collisionAreaConfig,
+				collisionArea,
 				ref cachedNeighborsEntityIds,
 				_neighborsLayer,
 				overlapParams);

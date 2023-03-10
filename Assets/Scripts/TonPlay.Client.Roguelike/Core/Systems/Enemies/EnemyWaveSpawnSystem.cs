@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
@@ -304,7 +305,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			if (enemyConfig.HasProperty<ICollisionEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<ICollisionEnemyPropertyConfig>();
-				entity.AddCollisionComponent(propertyConfig.CollisionAreaConfig, propertyConfig.LayerMask);
+				entity.AddCollisionComponent(CollisionAreaFactory.Create(propertyConfig.CollisionAreaConfig), propertyConfig.LayerMask);
 				entity.AddHasCollidedComponent();
 			}
 

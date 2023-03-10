@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Extensions;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						explosionEntity.AddPositionComponent(position.Position);
 						explosionEntity.AddExplosionComponent(
 							prepareBomb.Item2.DamageProvider,
-							prepareBomb.Item2.ExplodeCollisionAreaConfig,
+							CollisionAreaFactory.Create(prepareBomb.Item2.ExplodeCollisionAreaConfig),
 							prepareBomb.Item2.LayerMask);
 						explosionEntity.AddStackTryApplyDamageComponent();
 						explosionEntity.AddBlockApplyDamageTimerComponent();

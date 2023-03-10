@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 		public int Overlap(
 			KDQuery query,
 			Vector2 position,
-			ICollisionAreaConfig collisionAreaConfig,
+			ICollisionArea collisionArea,
 			ref List<int> entities,
 			int layerMask,
 			IOverlapParams overlapParams);

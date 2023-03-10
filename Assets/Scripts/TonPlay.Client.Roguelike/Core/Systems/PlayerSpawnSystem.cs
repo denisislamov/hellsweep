@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
@@ -46,8 +47,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddRigidbodyComponent(player.Rigidbody2D);
 			entity.AddSkillsComponent();
 			entity.AddCollisionComponent(
-				spawnConfig.CollisionAreaConfig,
+				CollisionAreaFactory.Create(spawnConfig.CollisionAreaConfig),
 				spawnConfig.CollisionAreaMask);
+			entity.AddCollisionAreaWithCollectablesComponent(
+				CollisionAreaFactory.Create(spawnConfig.CollectablesCollisionAreaConfig));
 
 			entity.AddAnimatorComponent(player.Animator);
 			entity.AddBloodAnimatorComponent(player.BloodAnimator);

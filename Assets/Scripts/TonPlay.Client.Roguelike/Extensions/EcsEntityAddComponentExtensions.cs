@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
+using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
@@ -172,10 +173,10 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref entity.Add<MagnetizableComponent>();
 		}
 
-		public static ref ExplosionComponent AddExplosionComponent(this EcsEntity entity, IDamageProvider damageProvider, ICollisionAreaConfig collisionAreaConfig, int layerMask)
+		public static ref ExplosionComponent AddExplosionComponent(this EcsEntity entity, IDamageProvider damageProvider, ICollisionArea collisionArea, int layerMask)
 		{
 			ref var explosion = ref entity.Add<ExplosionComponent>();
-			explosion.CollisionAreaConfig = collisionAreaConfig;
+			explosion.CollisionArea = collisionArea;
 			explosion.DamageProvider = damageProvider;
 			explosion.LayerMask = layerMask;
 			return ref explosion;
@@ -197,13 +198,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref CollisionComponent AddCollisionComponent(this EcsEntity entity, ICollisionAreaConfig collisionAreaConfig, int layerMask)
+		public static ref CollisionComponent AddCollisionComponent(this EcsEntity entity, ICollisionArea collisionArea, int layerMask)
 		{
 			ref var component = ref entity.Add<CollisionComponent>();
-			component.CollisionAreaConfig = collisionAreaConfig;
+			component.CollisionArea = collisionArea;
 			component.LayerMask = layerMask;
 
-			if (collisionAreaConfig.DoNotInitiateCollisionOverlap)
+			if (collisionArea.Config.DoNotInitiateCollisionOverlap)
 			{
 				entity.Add<DoNotInitiateCollisionOverlap>();
 			}
@@ -481,6 +482,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var component = ref entity.Add<SkillDurationMultiplierComponent>();
 			component.Value = value;
+			return ref component;
+		}
+		
+		public static ref CollisionAreaWithCollectablesComponent AddCollisionAreaWithCollectablesComponent(this EcsEntity entity, ICollisionArea area)
+		{
+			ref var component = ref entity.Add<CollisionAreaWithCollectablesComponent>();
+			component.CollisionArea = area;
 			return ref component;
 		}
 	}

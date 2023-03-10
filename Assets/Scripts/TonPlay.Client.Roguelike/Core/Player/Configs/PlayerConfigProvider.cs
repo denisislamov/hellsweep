@@ -4,15 +4,13 @@ using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Views;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
 using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Player.Views;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Player.Configs
+namespace TonPlay.Client.Roguelike.Core.Player.Configs
 {
 	[CreateAssetMenu(fileName = nameof(PlayerConfigProvider), menuName = AssetMenuConstants.CORE_CONFIGS + nameof(PlayerConfigProvider))]
 	public class PlayerConfigProvider : ScriptableObject, IPlayerConfigProvider
@@ -47,6 +45,9 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 
 			[SerializeField]
 			private CollisionAreaConfig _collisionAreaConfig;
+			
+			[SerializeField]
+			private CollisionAreaConfig _collectablesCollisionAreaConfig;
 
 			[SerializeField]
 			private LayerMask _collisionAreaMask;
@@ -59,6 +60,8 @@ namespace TonPlay.Roguelike.Client.Core.Player.Configs
 			public PlayerView Prefab => _prefab;
 
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
+			
+			public ICollisionAreaConfig CollectablesCollisionAreaConfig => _collectablesCollisionAreaConfig;
 
 			public int StartHealth => _health;
 

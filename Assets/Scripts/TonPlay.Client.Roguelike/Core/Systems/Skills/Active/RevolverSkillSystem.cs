@@ -191,7 +191,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var targetsQuantity = _overlapExecutor.Overlap(
 				_query,
 				position,
-				levelSkillConfig.CollisionAreaConfig,
+				CollisionAreaFactory.Create(levelSkillConfig.CollisionAreaConfig),
 				ref _overlappedEntities,
 				levelSkillConfig.CollisionLayerMask,
 				overlapParams);
