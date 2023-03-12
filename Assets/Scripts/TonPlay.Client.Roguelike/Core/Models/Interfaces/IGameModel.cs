@@ -14,5 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 		IReadOnlyReactiveProperty<bool> Paused { get; }
 
 		IReadOnlyReactiveProperty<int> DeadEnemiesCount { get; }
+		
+		IReadOnlyReactiveProperty<int> DebugEnemyMovementToEachOtherCollisionCount { get; }
 	}
 }

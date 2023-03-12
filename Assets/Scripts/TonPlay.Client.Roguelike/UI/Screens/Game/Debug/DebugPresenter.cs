@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 {
 	internal class DebugPresenter : Presenter<IDebugView, IScreenContext>
 	{
+		private readonly IGameModelProvider _gameModelProvider;
 		private const double UPDATE_RATE_IN_SECONDS = 0.2f;
 
 		private readonly char[] _chars = new[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -19,14 +21,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 
 		private IDisposable _updateHandler;
 		private IDisposable _timerHandler;
+		private IDisposable _debugEnemyMovementHandler;
+
 		private float _deltaCounter;
 		private int _frameCounter;
 
 		public DebugPresenter(
 			IDebugView view,
-			IScreenContext context)
+			IScreenContext context,
+			IGameModelProvider gameModelProvider)
 			: base(view, context)
 		{
+			_gameModelProvider = gameModelProvider;
 			_stringBuilder = new StringBuilder();
 
 			AddSubscription();
@@ -36,6 +42,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		{
 			_updateHandler?.Dispose();
 			_timerHandler?.Dispose();
+			_debugEnemyMovementHandler?.Dispose();
 
 			base.Dispose();
 		}
@@ -43,6 +50,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 		private void AddSubscription()
 		{
 			_updateHandler = Observable.EveryUpdate().Subscribe((unit) => UpdateHandler());
+			_debugEnemyMovementHandler = _gameModelProvider.Get().DebugEnemyMovementToEachOtherCollisionCount.Subscribe(UpdateEnemyMovementCollisionCount);
+		}
+		
+		private void UpdateEnemyMovementCollisionCount(int value)
+		{
+			View.SetEnemyMovementCollisionCount(value);
 		}
 
 		private void UpdateHandler()

@@ -11,5 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Models.Data
 		public PlayerData PlayerData { get; set; }
 
 		public bool Paused { get; set; }
+		
+		public int DebugEnemyMovementToEachOtherCollisionCount { get; set; }
 	}
 }

@@ -8,6 +8,7 @@ using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using UnityEngine;
+using Time = Codice.Client.Common.Time;
 
 namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 {
@@ -15,6 +16,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 	{
 		private const int MAX_NEIGHBORS_CHECK_AMOUNT = 250;
 		private const int MAX_FRAMES_CHECK_DELAY = 4;
+		private const int CHECK_DISTANCE_TO_PLAYER = 14;
+		private const int SQR_CHECK_DISTANCE_TO_PLAYER = CHECK_DISTANCE_TO_PLAYER * CHECK_DISTANCE_TO_PLAYER;
 		
 		private readonly IOverlapExecutor _overlapExecutor;
 
@@ -77,18 +80,27 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			var entitiesRaw = enemyFilter.GetRawEntities();
 
 			_debugStack.Clear();
-			
+
+			var includedInCollisionEnemiesCount = 0;
+
 			for (var currentIndex = startIndex; currentIndex < lastIndex; currentIndex++)
 			{
 				var entityId = entitiesRaw[currentIndex];
 				
-				_debugStack.Push(entityId);
-				
-				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
-				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
+
+				if ((position - _sharedData.PlayerPositionProvider.Position).sqrMagnitude > SQR_CHECK_DISTANCE_TO_PLAYER)
+				{
+					continue;
+				}
+				
+				ref var movementComponent = ref movementComponents.Get(entityId);
+				ref var collisionComponent = ref collisionComponents.Get(entityId);
+
+				_debugStack.Push(entityId);
+				includedInCollisionEnemiesCount++;
 
 				var collisionAreaConfig = collisionComponent.CollisionArea.Config as ICircleCollisionAreaConfig;
 
@@ -101,6 +113,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				_neighborsEntityIds.Clear();
 			}
+
+			var data = _sharedData.GameModel.ToData();
+			data.DebugEnemyMovementToEachOtherCollisionCount = includedInCollisionEnemiesCount;
+			_sharedData.GameModel.Update(data);
 			
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}

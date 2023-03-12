@@ -33,6 +33,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var health = ref healthPool.Get(entityId);
 				
 				health.CurrentHealth += changeHealth.DifferenceValue;
+
+				if (health.CurrentHealth > health.MaxHealth)
+				{
+					health.CurrentHealth = health.MaxHealth;
+				} 
+				else if (health.CurrentHealth < 0)
+				{
+					health.CurrentHealth = 0;
+				}
 				
 				changeHealthPool.Del(entityId);
 				

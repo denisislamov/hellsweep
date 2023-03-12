@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
@@ -474,14 +475,16 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref DamageMultiplierComponent AddDamageMultiplierComponent(this EcsEntity entity, float value)
 		{
 			ref var component = ref entity.Add<DamageMultiplierComponent>();
-			component.Value = value;
+			component.Map = new DictionaryExt<DamageMultiplierType, float>();
+			component.Map[DamageMultiplierType.Default] = value;
 			return ref component;
 		}
 		
 		public static ref SkillDurationMultiplierComponent AddSkillDurationMultiplierComponent(this EcsEntity entity, float value)
 		{
 			ref var component = ref entity.Add<SkillDurationMultiplierComponent>();
-			component.Value = value;
+			component.Map = new DictionaryExt<SkillDurationMultiplierType, float>();
+			component.Map[SkillDurationMultiplierType.Default] = value;
 			return ref component;
 		}
 		
