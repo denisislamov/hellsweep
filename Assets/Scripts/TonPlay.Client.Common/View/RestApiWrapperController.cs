@@ -79,6 +79,11 @@ namespace TonPlay.Client.Common.Network
             _restApiWrapper.PutItem(value);
         }
 
+        public void GetAllItems() 
+        {
+            _restApiWrapper.GetAllItems();
+        }
+
         public void DeleteItem() 
         {
             _restApiWrapper.DeleteItem(_slotIdInputField.text);

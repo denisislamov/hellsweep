@@ -102,6 +102,21 @@ namespace TonPlay.Client.Common.Network
             return result;
         }
 
+        [SerializeField] private ItemsGetResponse _itemsGetResponse;
+        [ContextMenu("GetAllItems")]
+        public async UniTask<ItemsGetResponse> GetAllItems()
+        {
+            _itemsGetResponse = new ItemsGetResponse();
+
+            Debug.LogFormat("_networkClient.GetAsync<ItemsGetResponse> {0}", _itemsGetResponse);
+            var putTask = _networkClient.GetAsync<ItemsGetResponse>("v1/item/all", _headers, _itemsGetResponse);
+
+            var result = await putTask;
+            _itemsGetResponse = result;
+
+            return result;
+        }
+
         [ContextMenu("DeleteItem")]
         public async UniTask<string> DeleteItem(string slotId)
         {
@@ -143,11 +158,11 @@ namespace TonPlay.Client.Common.Network
         }
 
         [ContextMenu("PostGameSession")]
-        public async UniTask<GameSessionResponse> PostGameSession(bool value)
+        public async UniTask<GameSessionResponse> PostGameSession(bool pve)
         {
             _gameSessionResponse = new GameSessionResponse();
-            Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", value);
-            var postTask = _networkClient.PostAsync<GameSessionResponse>("v1/game/session?pve=" + (value ? "true" : "false"), _headers, null);
+            Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", pve);
+            var postTask = _networkClient.PostAsync<GameSessionResponse>("v1/game/session?pve=" + (pve ? "true" : "false"), _headers, null);
 
             var result = await postTask;
             _gameSessionResponse = result;
