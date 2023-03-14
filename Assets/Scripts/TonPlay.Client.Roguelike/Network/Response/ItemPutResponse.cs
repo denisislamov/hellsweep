@@ -1,4 +1,4 @@
-namespace TonPlay.Client.Common.Network
+namespace TonPlay.Client.Roguelike.Network.Response
 {
     [System.Serializable]
     public class ItemPutResponse 

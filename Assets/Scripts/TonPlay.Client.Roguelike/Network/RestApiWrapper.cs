@@ -1,10 +1,13 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.Network;
+using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
+using UnityEngine;
 
-namespace TonPlay.Client.Common.Network
+namespace TonPlay.Client.Roguelike.Network
 {
-    public class RestApiWrapper : MonoBehaviour
+    public class RestApiWrapper : MonoBehaviour, IRestApiClient
     {
         [SerializeField] private bool _useDebugToken;
         [SerializeField] private string _username;

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TonPlay.Client.Common.Network
+namespace TonPlay.Client.Roguelike.Network.View
 {
     public class RestApiWrapperController : MonoBehaviour
     {

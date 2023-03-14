@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7031028170878956479}
   - component: {fileID: 9141338410627678188}
   - component: {fileID: 5968772282407841107}
+  - component: {fileID: 2014974735692503541}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -30,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8815676495273297517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,6 +53,7 @@ MonoBehaviour:
   - {fileID: 5968772282407841107}
   - {fileID: 9141338410627678188}
   - {fileID: 7031028170878956479}
+  - {fileID: 2014974735692503541}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _parentNewObjectsUnderContext: 1
@@ -107,3 +110,109 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entrySceneName: MainMenu
+--- !u!114 &2014974735692503541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358460146733554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda891cc4b244a4ea85795df756c454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _restApiWrapper: {fileID: 1861467414061239321}
+--- !u!1 &731300459185538207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8815676495273297517}
+  - component: {fileID: 1861467414061239321}
+  m_Layer: 0
+  m_Name: RestApiWrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8815676495273297517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731300459185538207}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4092438920768598}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861467414061239321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731300459185538207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435c092f02b7de94aad4c68d3c41a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useDebugToken: 0
+  _username: disadisa
+  _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
+  _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
+  _skillAllResponse:
+    items: []
+  _boostAllResponse:
+    items: []
+  _infoLevelAllResponse:
+    items: []
+  _itemPutBody:
+    slotId: 
+    itemId: 
+  _itemPutResponse:
+    id: 
+    purpose: 
+    item:
+      id: 
+      name: 
+      rarity: 
+  _itemsGetResponse:
+    _items: []
+  _gameSessionResponse:
+    id: 
+    status: 
+    pve: 0
+  _userXpResponse:
+    level: 0
+    xp: 0
+  _userSummaryResponse:
+    id: 
+    identifier: 
+    username: 
+    status: 
+    profile:
+      id: 
+      firstname: 
+      lastname: 
+      avatar: 
+      nickname: 
+      telegram: 
+      level: 0
+      xp: 0
+      coin: 0
+      energy: 0
+  _userItemsResponse:
+    items: []
+  _userBalanceResponse:
+    coin: 0
+    energy: 0
