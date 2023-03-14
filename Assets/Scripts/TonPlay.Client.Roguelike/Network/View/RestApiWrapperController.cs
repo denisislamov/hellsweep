@@ -119,6 +119,11 @@ namespace TonPlay.Client.Roguelike.Network.View
             _restApiWrapper.GetUserSummary();
         }
 
+        public void GetUserSlots()
+        {
+            _restApiWrapper.GetUserSlots();
+        }
+
         public void GetUserItems()
         {
             _restApiWrapper.GetUserItems();
