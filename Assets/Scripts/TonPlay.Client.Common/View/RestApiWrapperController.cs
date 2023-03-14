@@ -118,6 +118,11 @@ namespace TonPlay.Client.Common.Network
             _restApiWrapper.GetUserSummary();
         }
 
+        public void GetUserSlots()
+        {
+            _restApiWrapper.GetUserSlots();
+        }
+
         public void GetUserItems()
         {
             _restApiWrapper.GetUserItems();

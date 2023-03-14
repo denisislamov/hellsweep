@@ -202,6 +202,20 @@ namespace TonPlay.Client.Common.Network
             return result;
         }
 
+        [SerializeField] private UserSlotsResponse _userSlotsResponse;
+        [ContextMenu("GetUserSlots")]
+        public async UniTask<UserSlotsResponse> GetUserSlots()
+        {
+            _userSlotsResponse = new UserSlotsResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserSlotsResponse>");
+            var getTask = _networkClient.GetAsync<UserSlotsResponse>("/v1/user/slots", _headers, _userSlotsResponse);
+
+            var result = await getTask;
+            _userSlotsResponse = result;
+            
+            return result;
+        }
+
         [SerializeField] private UserItemsResponse _userItemsResponse;
         [ContextMenu("GetUserItems")]
         public async UniTask<UserItemsResponse> GetUserItems()
