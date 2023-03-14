@@ -41,7 +41,14 @@ namespace TonPlay.Client.Common.Network
 			this.Timeout = timeout;
 			this.Timestamp = DateTimeOffset.UtcNow;
 		}
- 
+
+		public RequestContext(RequestType requestType, string basePath, string path, Dictionary<string, string> requestHeaders, object value, TimeSpan timeout, IAsyncDecorator[] filters) :
+			this (requestType, basePath, path, value, timeout, filters)
+		{
+			_headers = requestHeaders;
+		}
+		
+
 		internal Dictionary<string, string> GetRawHeaders() => _headers;
 		internal IAsyncDecorator GetNextDecorator() => _decorators[++_decoratorIndex];
  

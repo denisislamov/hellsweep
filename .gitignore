@@ -80,3 +80,6 @@ crashlytics-build.properties
 /BuildTemplate/webgl/StreamingAssets/*
 
 .DS_Store
+.vscode/settings.json
+
+.idea/

@@ -22,7 +22,14 @@ namespace TonPlay.Client.Common.Network
  
 		public T GetResponseAs<T>()
 		{
-			return JsonUtility.FromJson<T>(Encoding.UTF8.GetString(bytes));
+			var data = Encoding.UTF8.GetString(bytes);
+			
+			Debug.LogFormat("GetResponseAs data:\n {0}", data);
+			if (data.Contains("[")) 
+			{
+				data = "{ \"items\": " + data + "}";
+			}
+			return JsonUtility.FromJson<T>(data);
 		}
 	}
 }
