@@ -5,6 +5,7 @@ using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling.Identities;
 using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Core.Weapons.Views;
 using TonPlay.Client.Roguelike.Extensions;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;

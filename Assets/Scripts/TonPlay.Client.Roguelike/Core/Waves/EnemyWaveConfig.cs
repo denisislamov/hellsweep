@@ -21,19 +21,22 @@ namespace TonPlay.Client.Roguelike.Core.Waves
 		private int _maxSpawnedQuantity;
 
 		[SerializeField]
-		private int _spawnQuantityPerRate;
-
-		[SerializeField]
 		private TimingConfig _spawnRate;
 
 		[SerializeField]
 		private WaveSpawnType _waveSpawnType;
+		
+		[SerializeField]
+		private TimingConfig _startTiming;
+		
+		[SerializeField]
+		public float StartHealth;
 
 		public string Id => _id;
 		public string EnemyId => _enemyId;
 		public int EnemiesQuantity => _enemiesQuantity;
-		public int SpawnQuantityPerRate => _spawnQuantityPerRate;
 		public long SpawnTickRate => _spawnRate.GetTimeSpan().Ticks;
+		public long StartTimingTicks => _startTiming.GetTimeSpan().Ticks;
 		public int MaxSpawnedQuantity => _maxSpawnedQuantity;
 		public WaveSpawnType WaveSpawnType => _waveSpawnType;
 	}

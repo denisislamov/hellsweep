@@ -13,8 +13,6 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 
 		public EnemyView Prefab { get; }
 
-		int StartHealth { get; }
-
 		IItemDrop<string>[] RandomCollectableDrops { get; }
 
 		IViewPoolIdentity Identity { get; }

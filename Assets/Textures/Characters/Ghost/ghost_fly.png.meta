@@ -41,6 +41,15 @@ TextureImporter:
   - first:
       213: 4814030500404972278
     second: ghost_fly_12
+  - first:
+      213: 2163104354692439627
+    second: ghost_fly_13
+  - first:
+      213: 8688875667041439153
+    second: ghost_fly_14
+  - first:
+      213: -4372921610826223711
+    second: ghost_fly_15
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -172,8 +181,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +200,10 @@ TextureImporter:
       name: ghost_fly_1
       rect:
         serializedVersion: 2
-        x: 25
+        x: 26
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +221,10 @@ TextureImporter:
       name: ghost_fly_2
       rect:
         serializedVersion: 2
-        x: 50
+        x: 52
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +242,10 @@ TextureImporter:
       name: ghost_fly_3
       rect:
         serializedVersion: 2
-        x: 75
+        x: 78
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,10 +263,10 @@ TextureImporter:
       name: ghost_fly_4
       rect:
         serializedVersion: 2
-        x: 100
+        x: 104
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +284,10 @@ TextureImporter:
       name: ghost_fly_5
       rect:
         serializedVersion: 2
-        x: 125
+        x: 130
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,10 +305,10 @@ TextureImporter:
       name: ghost_fly_6
       rect:
         serializedVersion: 2
-        x: 150
+        x: 156
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,10 +326,10 @@ TextureImporter:
       name: ghost_fly_7
       rect:
         serializedVersion: 2
-        x: 175
+        x: 182
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +347,10 @@ TextureImporter:
       name: ghost_fly_8
       rect:
         serializedVersion: 2
-        x: 200
+        x: 208
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,10 +368,10 @@ TextureImporter:
       name: ghost_fly_9
       rect:
         serializedVersion: 2
-        x: 225
+        x: 234
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +389,10 @@ TextureImporter:
       name: ghost_fly_10
       rect:
         serializedVersion: 2
-        x: 250
+        x: 260
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -401,10 +410,10 @@ TextureImporter:
       name: ghost_fly_11
       rect:
         serializedVersion: 2
-        x: 275
+        x: 286
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -422,10 +431,10 @@ TextureImporter:
       name: ghost_fly_12
       rect:
         serializedVersion: 2
-        x: 300
+        x: 312
         y: 0
-        width: 25
-        height: 25
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,6 +444,69 @@ TextureImporter:
       bones: []
       spriteID: 6fac88afb3fdec240800000000000000
       internalID: 4814030500404972278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_fly_13
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e1b8133f3e40e10800000000000000
+      internalID: 2163104354692439627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_fly_14
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bd4a8f2266159870800000000000000
+      internalID: 8688875667041439153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_fly_15
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1afe214b6f24053c0800000000000000
+      internalID: -4372921610826223711
       vertices: []
       indices: 
       edges: []

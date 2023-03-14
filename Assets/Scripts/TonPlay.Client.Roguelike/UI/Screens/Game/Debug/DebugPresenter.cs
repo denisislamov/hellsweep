@@ -35,7 +35,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Debug
 			_gameModelProvider = gameModelProvider;
 			_stringBuilder = new StringBuilder();
 
+#if ENABLE_DEBUG
 			AddSubscription();
+#endif
+		}
+
+		public override void Show()
+		{
+			base.Show();
+			
+#if !ENABLE_DEBUG
+			View.Hide();
+#endif
 		}
 
 		public override void Dispose()

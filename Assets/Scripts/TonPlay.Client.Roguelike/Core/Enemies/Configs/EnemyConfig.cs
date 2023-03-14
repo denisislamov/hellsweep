@@ -27,9 +27,6 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		private EnemyView _prefab;
 
 		[SerializeField]
-		private int _health;
-
-		[SerializeField]
 		private WeightedCollectableIdDropConfig[] _collectablesIdsOnDeath;
 
 		[SerializeField]
@@ -43,8 +40,6 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		public EnemyType EnemyType => _enemyType;
 
 		public EnemyView Prefab => _prefab;
-
-		public int StartHealth => _health;
 
 		public IItemDrop<string>[] RandomCollectableDrops => _randomCollectablesDrop ??= _collectablesIdsOnDeath.Select(_ => new RandomCollectableIdDrop(_)).ToArray();
 		public IViewPoolIdentity Identity => _identity ??= new EnemyViewPoolIdentity(Prefab);

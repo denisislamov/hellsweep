@@ -91,7 +91,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 					maxSpawnedQuantityOfProjectiles[shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig] += waveConfig.MaxSpawnedQuantity;
 				}
-				
+
 				if (config.HasProperty<ICanSpawnProjectileEnemyPropertyConfig>())
 				{
 					var propertyConfig = config.GetProperty<ICanSpawnProjectileEnemyPropertyConfig>();
@@ -138,11 +138,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				var timespan = TimeSpan.FromSeconds(time.Time);
 
-				var currentWavesConfigs = _enemyWavesConfigProvider.Get(timespan.Ticks)?.Waves;
-				if (currentWavesConfigs == null)
+				var currentWaveGroupConfig = _enemyWavesConfigProvider.Get(timespan.Ticks);
+
+				if (currentWaveGroupConfig is null)
 				{
 					break;
 				}
+
+				var nextWaveGroupConfig = currentWaveGroupConfig.Next();
+				var currentWavesConfigs = currentWaveGroupConfig.Waves;
 
 				foreach (var waveConfig in currentWavesConfigs)
 				{
@@ -165,6 +169,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 						wavesData.WavesTimeLeftToNextSpawn.Add(waveConfig.Id, 0);
 					}
 
+					if (timespan.Ticks < waveConfig.StartTimingTicks)
+					{
+						continue;
+					}
+
 					wavesData.WavesTimeLeftToNextSpawn[waveConfig.Id] -= TimeSpan.FromSeconds(Time.deltaTime).Ticks;
 
 					var timeLeft = wavesData.WavesTimeLeftToNextSpawn[waveConfig.Id];
@@ -172,25 +181,40 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					{
 						continue;
 					}
+					
+					var currentWaveDuration = nextWaveGroupConfig is null
+						? TimeSpan.FromTicks(-1)
+						: TimeSpan.FromTicks(nextWaveGroupConfig.StartTimingTicks - waveConfig.StartTimingTicks);
 
 					var leftEnemiesAmount = waveConfig.EnemiesQuantity - wavesData.WavesEnemiesKilledAmount[waveConfig.Id];
 					var maxEnemiesSpawnedQuantity = Math.Min(leftEnemiesAmount, waveConfig.MaxSpawnedQuantity);
 					var spawnQuantity = maxEnemiesSpawnedQuantity - wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id];
-					spawnQuantity = Mathf.Clamp(spawnQuantity, 0, waveConfig.SpawnQuantityPerRate);
+					var spawnQuantityPerRate = (int) Math.Round(
+						waveConfig.EnemiesQuantity
+						/ currentWaveDuration.TotalSeconds
+						* TimeSpan.FromTicks(waveConfig.SpawnTickRate).TotalSeconds);
+					
+					if (currentWaveDuration.Ticks < 0)
+					{
+						spawnQuantityPerRate = waveConfig.EnemiesQuantity / 60;
+					}
+
+					spawnQuantity = (int)Mathf.Clamp(spawnQuantity, 0, spawnQuantityPerRate);
 
 					var spawnPosition = CreateRandomPosition(_sharedData.PlayerPositionProvider.Position);
-					
+
 					for (var i = 0; i < spawnQuantity; i++)
 					{
 						var enemyConfig = _enemyConfigProvider.Get(waveConfig.EnemyId);
 
 						CreateEnemy(
-							world, 
-							_sharedData.PlayerPositionProvider.Position, 
-							enemyConfig, 
-							waveConfig, 
+							world,
+							_sharedData.PlayerPositionProvider.Position,
+							enemyConfig,
+							waveConfig,
 							spawnPosition,
-							spawnQuantity);
+							spawnQuantity, 
+							waveConfig.StartHealth);
 
 						wavesData.WavesEnemiesSpawnedAmount[waveConfig.Id]++;
 					}
@@ -201,13 +225,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
-		private void CreateEnemy(
-			EcsWorld world, 
-			Vector2 playerPosition, 
-			IEnemyConfig enemyConfig, 
-			IEnemyWaveConfig enemyWaveConfig, 
-			Vector2 randomizedWavePosition,
-			int groupSize)
+		private void CreateEnemy(EcsWorld world,
+								 Vector2 playerPosition,
+								 IEnemyConfig enemyConfig,
+								 IEnemyWaveConfig enemyWaveConfig,
+								 Vector2 randomizedWavePosition,
+								 int groupSize, 
+								 float health)
 		{
 			if (!_pool.TryGet<EnemyView>(enemyConfig.Identity, out var poolObject))
 			{
@@ -255,12 +279,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				entity.AddAnimatorComponent(enemyView.Animator);
 			}
 			
+			if (enemyView.PlayableDirector != null)
+			{
+				entity.AddPlayableDirectorComponent(enemyView.PlayableDirector);
+			}
+
 			entity.Add<FlipSpriteInRotationDirectionComponent>();
 			entity.Add<IgnoreTransformRotation>();
 			entity.AddRotationComponent(Vector2.zero);
 			entity.AddSyncRotationWithMovementDirectionComponent();
 
-			AddHealthComponent(entity, enemyConfig);
+			AddHealthComponent(entity, health);
 
 			AddPoolObjectComponent(entity, poolObject);
 
@@ -330,7 +359,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					action.Execute(entity.Id, _sharedData);
 				}
 			}
-			
+
 			if (enemyConfig.HasProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>())
 			{
 				var propertyConfig = enemyConfig.GetProperty<IRotateMovementInTargetDirectionWhenDistanceExceededEnemyPropertyConfig>();
@@ -349,12 +378,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				case WaveSpawnType.Group:
 				{
 					var minRandomSize = 3f;
-					var dynamicRandomSize = groupSize / 125f;
+					var dynamicRandomSize = groupSize/125f;
 					var randomSize = dynamicRandomSize > minRandomSize ? dynamicRandomSize : minRandomSize;
-					return randomizedWaveSpawnPosition + Random.insideUnitCircle * randomSize;
+					return randomizedWaveSpawnPosition + Random.insideUnitCircle*randomSize;
 				}
 			}
-			
+
 			switch (type)
 			{
 				case EnemyType.Boss:
@@ -414,11 +443,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			return randomPosition;
 		}
 
-		private static void AddHealthComponent(EcsEntity entity, IEnemyConfig config)
+		private static void AddHealthComponent(EcsEntity entity, float health)
 		{
 			ref var healthComponent = ref entity.Add<HealthComponent>();
-			healthComponent.CurrentHealth = config.StartHealth;
-			healthComponent.MaxHealth = config.StartHealth;
+			healthComponent.CurrentHealth = health;
+			healthComponent.MaxHealth = health;
 		}
 
 		private static void AddSpeedComponent(EcsEntity entity, IMovementConfig movementConfig)

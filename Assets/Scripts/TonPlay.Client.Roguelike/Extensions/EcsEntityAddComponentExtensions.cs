@@ -19,6 +19,7 @@ using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace TonPlay.Client.Roguelike.Extensions
 {
@@ -448,6 +449,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 		{
 			ref var component = ref entity.Add<AnimatorComponent>();
 			component.Animator = animator;
+			return ref component;
+		}
+		
+		public static ref PlayableDirectorComponent AddPlayableDirectorComponent(this EcsEntity entity, PlayableDirector director)
+		{
+			ref var component = ref entity.Add<PlayableDirectorComponent>();
+			component.PlayableDirector = director;
 			return ref component;
 		}
 		

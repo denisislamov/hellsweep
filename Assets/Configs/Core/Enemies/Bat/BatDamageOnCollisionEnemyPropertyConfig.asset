@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageProvider:
     damageSource: 20
-    damage: 10
+    damage: 5
     rate: 0.33333334

@@ -135,7 +135,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: fdd2500000fd547a6a2daa9554ba81f8, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -762,7 +763,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 1
   scriptingDefineSymbols:
-    13: '!ENABLE_COLLISION_DRAWING;!ENABLE_PROFILE_SAMPLING'
+    13: '!ENABLE_COLLISION_DRAWING;!ENABLE_PROFILE_SAMPLING;ENABLE_DEBUG'
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

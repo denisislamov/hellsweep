@@ -144,6 +144,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
+							.Add(new EvaluatePlayableDirector())
 							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))
 							.Add(new PrepareToExplodeCollectedBombsSystem())
 							.Add(new StickEaseMovementToEntityPositionSystem())

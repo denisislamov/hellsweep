@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Enemies.Views.Interfaces;
 using TonPlay.Roguelike.Client.Core.Interfaces;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace TonPlay.Client.Roguelike.Core.Enemies.Views
 {
@@ -19,11 +20,16 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Views
 		[SerializeField]
 		private SpriteRenderer[] _spriteRenderers;
 
+		[SerializeField]
+		private PlayableDirector _playableDirector;
+
 		public Collider2D Collider2D => _collider;
 
 		public Rigidbody2D Rigidbody2D => _rigidbody;
 		public Animator Animator => _animator;
 		public SpriteRenderer[] SpriteRenderers => _spriteRenderers;
+
+		public PlayableDirector PlayableDirector => _playableDirector;
 
 		private int? _entityId;
 

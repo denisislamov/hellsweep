@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: GhostEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: ghost
+  _enemyType: 0
+  _prefab: {fileID: 5510139851510968797, guid: 72f36f76ebff247a59747c995fde6830, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: 2a6e52dc4dd384799b8b70891fd10236, type: 2}
+  - {fileID: 11400000, guid: 69d9911a4f3b34d5eaa2f29986749b35, type: 2}
+  - {fileID: 11400000, guid: 2b0ed9f6f26ca4c2ea3c40977c748be6, type: 2}

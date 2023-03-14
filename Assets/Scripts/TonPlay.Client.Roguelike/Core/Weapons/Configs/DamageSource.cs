@@ -23,6 +23,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		Crossbow,
 		Katana,
 		Enemy_Basic,
+		Enemy_Ghost,
 		Enemy_FastDog,
 		Enemy_Shooter,
 		Enemy_Kamikadze,

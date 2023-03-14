@@ -26,7 +26,7 @@ MonoBehaviour:
     _damageProvider:
       damageSource: 16
       damage: 120
-      rate: 0.33
+      rate: 1
     _size: 0.5
     _collisionLayerMask:
       serializedVersion: 2
@@ -37,7 +37,7 @@ MonoBehaviour:
     _damageProvider:
       damageSource: 16
       damage: 180
-      rate: 0.33
+      rate: 1
     _size: 1
     _collisionLayerMask:
       serializedVersion: 2
@@ -48,7 +48,7 @@ MonoBehaviour:
     _damageProvider:
       damageSource: 16
       damage: 240
-      rate: 0.33
+      rate: 1
     _size: 2
     _collisionLayerMask:
       serializedVersion: 2
@@ -59,7 +59,7 @@ MonoBehaviour:
     _damageProvider:
       damageSource: 16
       damage: 270
-      rate: 0.33
+      rate: 1
     _size: 3
     _collisionLayerMask:
       serializedVersion: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
     _damageProvider:
       damageSource: 16
       damage: 300
-      rate: 0.33
+      rate: 1
     _size: 4
     _collisionLayerMask:
       serializedVersion: 2

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: SkeletonEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: skeleton
+  _enemyType: 0
+  _prefab: {fileID: 217007673340517824, guid: c7c91b6a476ef441ea714ce680f5a5f4, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: cd881a227e50f467cb2cc395b68008d2, type: 2}
+  - {fileID: 11400000, guid: 249ef499c80fa46ab9630628ec5c92f1, type: 2}
+  - {fileID: 11400000, guid: 66e7dfbbc861e488fb1240cc74d891d6, type: 2}

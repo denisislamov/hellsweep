@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: GarpyTier1EnemyConfig
+  m_EditorClassIdentifier: 
+  _id: garpy
+  _enemyType: 0
+  _prefab: {fileID: 5109476924477383283, guid: 5296a6b7114494c8e89c817bcfdeeab6, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 1
+  _propertyConfigs:
+  - {fileID: 11400000, guid: afaba99bc12f24e58aa55535559638e8, type: 2}
+  - {fileID: 11400000, guid: c016f3307515d4430af834705ba78531, type: 2}
+  - {fileID: 11400000, guid: a7bf82a30e50743149f72c229c4ccc16, type: 2}
+  - {fileID: 11400000, guid: a2b5458d8877e474aadd1b668be439a0, type: 2}
+  - {fileID: 11400000, guid: b5985547be27648bb99cd887521baefb, type: 2}

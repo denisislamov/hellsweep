@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9169473473045383226}
   - component: {fileID: 9169473473045383229}
+  - component: {fileID: 464514336101456503}
+  - component: {fileID: 3800521503104236717}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -82,6 +84,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &464514336101456503
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169473473045383227}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &3800521503104236717
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169473473045383227}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: bf053b919fb6e47309dd886460a67b0f, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 3
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1623188577718228810, guid: bf053b919fb6e47309dd886460a67b0f, type: 2}
+    value: {fileID: 464514336101456503}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &9169473473151651679
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +164,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9169473473442074979}
   - component: {fileID: 9169473473442074980}
-  - component: {fileID: 1026366925466665326}
   m_Layer: 7
   m_Name: BatEnemyView
   m_TagString: Untagged
@@ -161,28 +200,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 0}
   _collider: {fileID: 9169473474189088758}
-  _animator: {fileID: 1026366925466665326}
+  _animator: {fileID: 0}
   _spriteRenderers:
   - {fileID: 9169473473045383229}
---- !u!95 &1026366925466665326
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9169473473442074977}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f005658042be847568154d147ea0fdc7, type: 2}
-  m_CullingMode: 2
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  _playableDirector: {fileID: 3800521503104236717}
 --- !u!1 &9169473474189088754
 GameObject:
   m_ObjectHideFlags: 0
