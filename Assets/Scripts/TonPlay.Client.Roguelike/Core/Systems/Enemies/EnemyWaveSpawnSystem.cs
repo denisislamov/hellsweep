@@ -82,14 +82,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				if (config.HasProperty<IShootProjectileAtPlayerEnemyPropertyConfig>())
 				{
-					var shootProjectileAtPlayerEnemyPropertyConfig = config.GetProperty<IShootProjectileAtPlayerEnemyPropertyConfig>();
+					var property = config.GetProperty<IShootProjectileAtPlayerEnemyPropertyConfig>();
 
-					if (!maxSpawnedQuantityOfProjectiles.ContainsKey(shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig))
+					if (!maxSpawnedQuantityOfProjectiles.ContainsKey(property.ProjectileConfig))
 					{
-						maxSpawnedQuantityOfProjectiles.Add(shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig, 0);
+						maxSpawnedQuantityOfProjectiles.Add(property.ProjectileConfig, 0);
 					}
 
-					maxSpawnedQuantityOfProjectiles[shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig] += waveConfig.MaxSpawnedQuantity;
+					maxSpawnedQuantityOfProjectiles[property.ProjectileConfig] += waveConfig.MaxSpawnedQuantity * property.PooledProjectileCount;
 				}
 
 				if (config.HasProperty<ICanSpawnProjectileEnemyPropertyConfig>())
@@ -114,6 +114,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			{
 				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value*PROJECTILE_COUNT_PER_ENEMY);
 			}
+
+			//todo: its some kind of optimization, seems like need to replace
+			totalEnemies /= 4;
+			totalEnemies = totalEnemies <= 0 ? 1 : totalEnemies;
 
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(totalEnemies);
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(totalEnemies);
@@ -198,6 +202,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					{
 						spawnQuantityPerRate = waveConfig.EnemiesQuantity / 60;
 					}
+					
+					spawnQuantityPerRate = spawnQuantityPerRate <= 0 ? 1 : spawnQuantityPerRate;
 
 					spawnQuantity = (int)Mathf.Clamp(spawnQuantity, 0, spawnQuantityPerRate);
 
@@ -311,6 +317,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				entity.AddShootProjectileAtTargetComponent(
 					shootProjectileAtPlayerEnemyPropertyConfig.ProjectileConfig,
 					shootProjectileAtPlayerEnemyPropertyConfig.Layer,
+					shootProjectileAtPlayerEnemyPropertyConfig.Quantity,
+					shootProjectileAtPlayerEnemyPropertyConfig.FieldOfView,
 					shootProjectileAtPlayerEnemyPropertyConfig.ShootRateInSeconds,
 					shootProjectileAtPlayerEnemyPropertyConfig.MinDistanceToTargetToShoot,
 					shootProjectileAtPlayerEnemyPropertyConfig.MaxDistanceToTargetToShoot);

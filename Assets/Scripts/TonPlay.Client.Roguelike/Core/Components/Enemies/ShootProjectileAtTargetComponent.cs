@@ -13,5 +13,7 @@ namespace TonPlay.Client.Roguelike.Core.Components.Enemies
 		public float TimeLeft;
 		public float MinDistanceTargetToShoot;
 		public float MaxDistanceTargetToShoot;
+		public float FieldOfView;
+		public int Quantity;
 	}
 }

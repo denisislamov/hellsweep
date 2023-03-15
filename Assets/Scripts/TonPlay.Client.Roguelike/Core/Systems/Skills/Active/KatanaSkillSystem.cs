@@ -100,7 +100,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				
 				if (skill.SpawnQuantity == 0)
 				{
-					var dirX = rotation.Direction.x > 0 ? 1 : -1;
+					var dirX = skill.SelectedDirection.x == 0 ? 1 : skill.SelectedDirection.x;
+					
+					if (rotation.Direction.x > 0)
+					{
+						dirX = 1;
+					} 
+					else if (rotation.Direction.x < 0)
+					{
+						dirX = -1;
+					}
+					
 					var mainDirection = new Vector2(dirX, 0);
 
 					skill.SpawnQuantity = levelConfig.ProjectileQuantity;

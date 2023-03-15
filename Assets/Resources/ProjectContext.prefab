@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435c092f02b7de94aad4c68d3c41a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useDebugToken: 0
+  _useDebugToken: 1
   _username: disadisa
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}

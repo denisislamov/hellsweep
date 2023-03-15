@@ -27,6 +27,8 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		Enemy_FastDog,
 		Enemy_Shooter,
 		Enemy_Kamikadze,
+		Enemy_Snake,
+		Enemy_SnakeFast,
 		Enemy_Boss_Shooter,
 		Enemy_Boss_Worm,
 		Enemy_Boss_Butcher

@@ -359,6 +359,8 @@ namespace TonPlay.Client.Roguelike.Extensions
 			this EcsEntity entity,
 			IProjectileConfig projectileConfig,
 			int layer,
+			int quantity,
+			float fieldOfView,
 			float rate,
 			float minDistanceTargetToShoot,
 			float maxDistanceTargetToShoot)
@@ -368,6 +370,8 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.ProjectileIdentity = projectileConfig.Identity;
 			component.Layer = layer;
 			component.Rate = rate;
+			component.Quantity = quantity;
+			component.FieldOfView = fieldOfView;
 			component.MinDistanceTargetToShoot = minDistanceTargetToShoot;
 			component.MaxDistanceTargetToShoot = maxDistanceTargetToShoot;
 			return ref component;

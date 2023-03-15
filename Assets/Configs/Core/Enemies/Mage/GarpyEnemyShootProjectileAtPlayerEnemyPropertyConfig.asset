@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: GarpyEnemyShootProjectileAtPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _shootRateInSeconds: 3
+  _quantity: 1
+  _fieldOfView: 0
   _layer: 11
   _minDistanceToTargetToShoot: 0
-  _maxDistanceToTargetToShoot: 15
+  _maxDistanceToTargetToShoot: 8
   _projectileConfig: {fileID: 11400000, guid: 07e2448fea90a4c34bf1ba1ee173c89d, type: 2}
+  _pooledProjectileCount: 3

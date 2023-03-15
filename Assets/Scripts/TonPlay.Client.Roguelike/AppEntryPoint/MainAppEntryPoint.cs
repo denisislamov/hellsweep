@@ -25,7 +25,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 		{
 			await base.ProcessEntrance();
 
-			var userSummary = await _restApiClient.GetUserSummary();
+			//var userSummary = await _restApiClient.GetUserSummary();
 
 			_uiService.Open<MainMenuScreen, MainMenuScreenContext>(new MainMenuScreenContext());
 		}

@@ -30,6 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 				applyDamageComponents.Del(entityId);
 			}
+			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 	}
 }

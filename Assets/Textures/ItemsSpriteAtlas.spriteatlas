@@ -50,16 +50,19 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 5165cc138d85c4a068d1442c0006abd5, type: 3}
-  - {fileID: -5238369971071454485, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: 6297799689811114215, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: -7603676246579045255, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: 6896121793885935206, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: -5569782106942435962, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: 6480395024864391761, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: -3235371458999267484, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: -7627676611242036744, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
-  - {fileID: 3891984500605121009, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 2065305969765719129, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 6260372855922411283, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: -8012031045870593764, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 4396181535538005954, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: -5707204864719058874, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 5156955655237389416, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: -3846971792893706422, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
+  - {fileID: 3846917002794187847, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: 21300000, guid: 053a3334afd374b9fbbfbdd19a5cf3a5, type: 3}
+  - {fileID: 21300000, guid: 31625e54e708f42169580374c8a96dc5, type: 3}
+  - {fileID: 21300000, guid: 8390cbc4f008246a39d259f0a7949667, type: 3}
+  - {fileID: 21300000, guid: 21c132279ab954968bcbfa54807d0717, type: 3}
+  - {fileID: 21300000, guid: e8ab3b876b6ec49c4997c3bdd8e6bf92, type: 3}
   - {fileID: 21300000, guid: 5174a7b7c7ffe4aedb7e05576cf188a1, type: 3}
   - {fileID: -6721611737120984632, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: -3526439572902585779, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
@@ -68,6 +71,7 @@ SpriteAtlas:
   - {fileID: 2525788282660435887, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 21300000, guid: d04b5438c76f347d28e58da51e5305cf, type: 3}
   - {fileID: 21300000, guid: 4ca4dce88402043e7ad8efc3676a6f8c, type: 3}
+  - {fileID: 21300000, guid: 4d35920a3e1624ca2a1c468a808996dc, type: 3}
   - {fileID: -589365598807618618, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 8094855776873440288, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: -7633015410158308657, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
@@ -418,20 +422,24 @@ SpriteAtlas:
   - {fileID: -8939010556613990048, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: -6153423947956068894, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 1619102860599000169, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  - {fileID: 21300000, guid: a12eb43b08ba0446eada66d2eb1a25b6, type: 3}
   - {fileID: 21300000, guid: 8fd4107b764e24fafbcfb95cbdff9e4d, type: 3}
   - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
   m_PackedSpriteNamesToIndex:
   - Equipment
-  - Energy_Shield_4
-  - Energy_Shield_5
-  - Energy_Shield_6
-  - Energy_Shield_7
-  - Energy_Shield_0
-  - Energy_Shield_1
-  - Energy_Shield_2
-  - Energy_Shield_3
-  - Energy_Shield_8
+  - Energy_Shield01_5
+  - Energy_Shield01_4
+  - Energy_Shield01_7
+  - Energy_Shield01_6
+  - Energy_Shield01_1
+  - Energy_Shield01_0
+  - Energy_Shield01_3
+  - Energy_Shield01_2
   - Diamond_01a
+  - Item_Magnet_01a
+  - Item_Coins_03a
+  - Item_Health_01a
+  - Item_Coins_02a
   - HolyWaterProjectile_01a
   - KatanaSplash_01a_2
   - KatanaSplash_01a_3
@@ -440,6 +448,7 @@ SpriteAtlas:
   - KatanaSplash_01a_4
   - Katana_01a
   - Diamond_01c
+  - Item_Bomb_01a
   - items_spriteatlas_16x16_143
   - items_spriteatlas_16x16_142
   - items_spriteatlas_16x16_141
@@ -790,6 +799,7 @@ SpriteAtlas:
   - items_spriteatlas_16x16_292
   - items_spriteatlas_16x16_291
   - items_spriteatlas_16x16_290
+  - Item_Coins_01a
   - Power
   - Diamond_01b
   m_RenderDataMap: {}

@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -59,20 +60,25 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 					continue;
 				}
 
-				if (!pool.TryGet<ProjectileView>(shoot.ProjectileIdentity, out var poolObject))
-				{
-					continue;
-				}
-
 				var collisionLayerMask = collisionConfigProvider.Get(shoot.Layer)?.LayerMask ?? 0;
 
-				var projectile = ProjectileSpawner.SpawnProjectile(
-					world,
-					poolObject,
-					shoot.ProjectileConfig,
-					position.Position,
-					direction,
-					collisionLayerMask);
+				var angle = shoot.Quantity == 0 ? 0 : shoot.FieldOfView / (shoot.Quantity - 1);
+				for (var i = 0; i < shoot.Quantity; i++)
+				{
+					if (!pool.TryGet<ProjectileView>(shoot.ProjectileIdentity, out var poolObject))
+					{
+						continue;
+					}
+					
+					var rotatedDirection = direction.Rotate(-shoot.FieldOfView / 2 + angle * i);
+					var projectile = ProjectileSpawner.SpawnProjectile(
+						world,
+						poolObject,
+						shoot.ProjectileConfig,
+						position.Position,
+						rotatedDirection,
+						collisionLayerMask);
+				}
 
 				shoot.TimeLeft = shoot.Rate;
 			}

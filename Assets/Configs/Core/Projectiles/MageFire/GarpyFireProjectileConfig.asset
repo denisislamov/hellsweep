@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: GarpyFireProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 6395491369713235049, guid: 6dbe769f2af42407696d385ffbdd410c, type: 3}
+  _movementConfig:
+    _startSpeed: 4
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 74f836bdff8f545b581b6c75bd3416ec, type: 2}
+  - {fileID: 11400000, guid: 4a440ae65d9254f7c8ecc5e425786fb6, type: 2}
+  - {fileID: 11400000, guid: 2cce443458b5c4058b861dd285cea897, type: 2}
+  - {fileID: 11400000, guid: fb28d77e5734345d6ac2772f7ea5d879, type: 2}
+  - {fileID: 11400000, guid: 9aad525cfbbd64dfaa51f56204f0b4f3, type: 2}
+  _layer: 11

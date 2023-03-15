@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec5a6062dff4429ac60633edd918887, type: 3}
+  m_Name: FitnessGuideSkillConfig
+  m_EditorClassIdentifier: 
+  _skillType: 1
+  _title: The Empty Heart
+  _description: 
+  _icon: {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
+  _excludeFromInitialDrop: 0
+  _maxLevel: 5
+  _evolutions: 
+  _levelConfigs:
+  - _level: 1
+    _description: Max HP + 20 %
+    _multiplierValue: 1.2
+  - _level: 2
+    _description: Max HP + 40 %
+    _multiplierValue: 1.4
+  - _level: 3
+    _description: Max HP + 60 %
+    _multiplierValue: 1.6
+  - _level: 4
+    _description: Max HP + 80 %
+    _multiplierValue: 1.8
+  - _level: 5
+    _description: Max HP + 100 %
+    _multiplierValue: 2
