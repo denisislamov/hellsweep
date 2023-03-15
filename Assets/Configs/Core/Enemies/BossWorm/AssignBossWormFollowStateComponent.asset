@@ -18,7 +18,7 @@ MonoBehaviour:
   _tankRunningDuration: 3
   _tankPreparingDuration: 1
   _tankStoppingDuration: 1
-  _shootStateDuration: 2
+  _shootStateDuration: 1.5
   _projectileConfig: {fileID: 11400000, guid: ae020b64896044a7f8b9a3bfd67b4448, type: 2}
   _shootDelay: 0.5
   _projectileQuantity: 12

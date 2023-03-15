@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootRateInSeconds: 3
   _quantity: 1
-  _fieldOfView: 0
+  _fieldOfView: 1
   _layer: 11
   _minDistanceToTargetToShoot: 0
   _maxDistanceToTargetToShoot: 8

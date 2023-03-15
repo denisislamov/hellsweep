@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
-  m_Name: SnakeFastEnemyConfig
+  m_Name: RedSnakeEnemyConfig
   m_EditorClassIdentifier: 
-  _id: snake_fast
+  _id: red_snake
   _enemyType: 0
-  _prefab: {fileID: 3862886047853430434, guid: 5885c47d14b9347378ca2259e6447917, type: 3}
+  _prefab: {fileID: 1146253541682323705, guid: 2882d39bb72a94d329d933fc78f002d1, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
     _weight: 0.9
   _propertyConfigs:
-  - {fileID: 11400000, guid: 28ace0e54abe34f85b9ae408e56d0449, type: 2}
-  - {fileID: 11400000, guid: ce60ad178a82b49258293610ac148357, type: 2}
-  - {fileID: 11400000, guid: 8cbcab2e2f2044a5da14a74b00a2e1b9, type: 2}
-  - {fileID: 11400000, guid: 87c5c899ac8b641e9aa0cf56bd26abda, type: 2}
+  - {fileID: 11400000, guid: b3a2cd17cd0f44a358cb02f5d9c2e7de, type: 2}
+  - {fileID: 11400000, guid: 01c7f6c428b014cabb06c38edc13df9d, type: 2}
+  - {fileID: 11400000, guid: d51584ef011bb411582d294294f35b6a, type: 2}
+  - {fileID: 11400000, guid: f2ca7688fdcb341a8b4da004506a8c16, type: 2}

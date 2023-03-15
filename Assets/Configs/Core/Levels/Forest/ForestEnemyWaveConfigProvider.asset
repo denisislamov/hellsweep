@@ -162,8 +162,8 @@ MonoBehaviour:
         _minutes: 6
         _seconds: 0
       StartHealth: 20
-    - _id: 8_snake
-      _enemyId: snake
+    - _id: 8_red_snake
+      _enemyId: red_snake
       _enemiesQuantity: 480
       _maxSpawnedQuantity: 250
       _spawnRate:
@@ -250,8 +250,8 @@ MonoBehaviour:
       _minutes: 10
       _seconds: 0
   - _waves:
-    - _id: 12_snake
-      _enemyId: snake
+    - _id: 12_red_snake
+      _enemyId: red_snake
       _enemiesQuantity: 3500
       _maxSpawnedQuantity: 400
       _spawnRate:
@@ -290,8 +290,8 @@ MonoBehaviour:
         _minutes: 11
         _seconds: 30
       StartHealth: 500
-    - _id: 13_snake
-      _enemyId: snake
+    - _id: 13_red_snake
+      _enemyId: red_snake
       _enemiesQuantity: 11100
       _maxSpawnedQuantity: 400
       _spawnRate:

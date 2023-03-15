@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5681c7f1f5a3448493da17f59c27000d, type: 3}
-  m_Name: BossWormDestroyOnCollisionProjectileConfigProperty
+  m_Script: {fileID: 11500000, guid: 5a8bd464e3d44f04b744554f04b907dc, type: 3}
+  m_Name: RedSnakeCollisionEnemyPropertyConfig
   m_EditorClassIdentifier: 
+  _collisionAreaConfig: {fileID: 11400000, guid: ced643e0bb2ac46fba2b1959db18a640, type: 2}
   _layerMask:
     serializedVersion: 2
     m_Bits: 64

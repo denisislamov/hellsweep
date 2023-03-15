@@ -49,6 +49,8 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 3532957986602649593, guid: fb19fd913f4e348499c98848769b9521, type: 3}
+  - {fileID: 686289011293507512, guid: fb19fd913f4e348499c98848769b9521, type: 3}
   - {fileID: 21300000, guid: 5165cc138d85c4a068d1442c0006abd5, type: 3}
   - {fileID: 2065305969765719129, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: 6260372855922411283, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
@@ -426,6 +428,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8fd4107b764e24fafbcfb95cbdff9e4d, type: 3}
   - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Fireball01a_1
+  - Fireball01a_0
   - Equipment
   - Energy_Shield01_5
   - Energy_Shield01_4
