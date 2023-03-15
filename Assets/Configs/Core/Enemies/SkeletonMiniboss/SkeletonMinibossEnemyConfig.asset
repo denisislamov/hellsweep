@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
-  m_Name: RedSnakeEnemyConfig
+  m_Name: SkeletonMinibossEnemyConfig
   m_EditorClassIdentifier: 
-  _id: red_snake
+  _id: skeleton_miniboss
   _enemyType: 0
-  _prefab: {fileID: 3862886047853430434, guid: 5885c47d14b9347378ca2259e6447917, type: 3}
+  _prefab: {fileID: 8675134705281285695, guid: 6eca37cbc40f841a4823cf7aa451a566, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
-    _weight: 0.9
+    _weight: 0.85
   _propertyConfigs:
-  - {fileID: 11400000, guid: b3a2cd17cd0f44a358cb02f5d9c2e7de, type: 2}
-  - {fileID: 11400000, guid: 01c7f6c428b014cabb06c38edc13df9d, type: 2}
-  - {fileID: 11400000, guid: d51584ef011bb411582d294294f35b6a, type: 2}
-  - {fileID: 11400000, guid: f2ca7688fdcb341a8b4da004506a8c16, type: 2}
+  - {fileID: 11400000, guid: 7cef5ad0d0220408a93ddf65c5e0518f, type: 2}
+  - {fileID: 11400000, guid: 10584c3535d26421f91e364a91d4d635, type: 2}
+  - {fileID: 11400000, guid: 21ede50af323040db9d665d603d2a391, type: 2}

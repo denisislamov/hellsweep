@@ -70,6 +70,18 @@ MonoBehaviour:
         _minutes: 2
         _seconds: 0
       StartHealth: 10
+    - _id: 3_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 3
+        _seconds: 0
+      StartHealth: 700
     - _id: 3_garpy
       _enemyId: garpy
       _enemiesQuantity: 100
@@ -214,6 +226,18 @@ MonoBehaviour:
         _minutes: 8
         _seconds: 10
       StartHealth: 25
+    - _id: 9_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 8
+        _seconds: 0
+      StartHealth: 4500
     _startTiming:
       _minutes: 6
       _seconds: 30
@@ -290,6 +314,18 @@ MonoBehaviour:
         _minutes: 11
         _seconds: 30
       StartHealth: 500
+    - _id: 13_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 12
+        _seconds: 0
+      StartHealth: 6000
     - _id: 13_red_snake
       _enemyId: red_snake
       _enemiesQuantity: 11100
@@ -314,6 +350,18 @@ MonoBehaviour:
         _minutes: 13
         _seconds: 20
       StartHealth: 200
+    - _id: 13_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 14
+        _seconds: 0
+      StartHealth: 9000
     _startTiming:
       _minutes: 11
       _seconds: 30

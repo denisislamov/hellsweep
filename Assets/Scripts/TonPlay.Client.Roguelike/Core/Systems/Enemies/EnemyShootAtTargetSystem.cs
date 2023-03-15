@@ -62,7 +62,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				var collisionLayerMask = collisionConfigProvider.Get(shoot.Layer)?.LayerMask ?? 0;
 
-				var angle = shoot.Quantity == 0 ? 0 : shoot.FieldOfView / (shoot.Quantity - 1);
+				var angle = shoot.Quantity <= 1 ? 0 : shoot.FieldOfView / (shoot.Quantity - 1);
 				for (var i = 0; i < shoot.Quantity; i++)
 				{
 					if (!pool.TryGet<ProjectileView>(shoot.ProjectileIdentity, out var poolObject))

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: GuardianSkillConfig
   m_EditorClassIdentifier: 
   _skillType: 0
-  _title: Guardian
+  _title: Snowball
   _description: Guardian desc
-  _icon: {fileID: 7123041360003937833, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _icon: {fileID: 1761501289751115598, guid: 5a7e71cb329dd46758280b15c288f439, type: 3}
   _excludeFromInitialDrop: 0
   _maxLevel: 5
   _evolutions: 
   _projectileConfig: {fileID: 11400000, guid: bfac6040a69f04972946bc3c28919ae5, type: 2}
   _levelConfigs:
   - _level: 1
-    _description: Summons 2 tops that spin circle you. Stops bullets
+    _description: Summons 2 snowballs that spin circle you. Stops bullets
     _quantity: 2
     _speed: 0.55
     _activeTime: 4
@@ -34,7 +34,7 @@ MonoBehaviour:
     _radius: 2
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
   - _level: 2
-    _description: Adds 1 top. Increases spin speed and damage
+    _description: Adds 1 snowball. Increases spin speed and damage
     _quantity: 3
     _speed: 0.6
     _activeTime: 5
@@ -46,7 +46,7 @@ MonoBehaviour:
     _radius: 3
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
   - _level: 3
-    _description: Adds 1 top. Increases spin speed and damage
+    _description: Adds 1 snowball. Increases spin speed and damage
     _quantity: 4
     _speed: 0.7
     _activeTime: 5
@@ -58,7 +58,7 @@ MonoBehaviour:
     _radius: 4
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
   - _level: 4
-    _description: Adds 1 top. Increases spin speed and damage
+    _description: Adds 1 tsnowball. Increases spin speed and damage
     _quantity: 5
     _speed: 0.8
     _activeTime: 5
@@ -70,7 +70,7 @@ MonoBehaviour:
     _radius: 5
     _collisionAreaConfig: {fileID: 11400000, guid: 2044d34dc1a8248aaa09d838e66c17bb, type: 2}
   - _level: 5
-    _description: Adds 1 top. Increases spin speed and damage
+    _description: Adds 1 snowball. Increases spin speed and damage
     _quantity: 6
     _speed: 0.9
     _activeTime: 5

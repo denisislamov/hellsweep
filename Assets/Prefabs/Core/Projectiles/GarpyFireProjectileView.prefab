@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6395491369713234248}
   - component: {fileID: 6395491369713235049}
   m_Layer: 0
-  m_Name: MageFireProjectileView
+  m_Name: GarpyFireProjectileView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
