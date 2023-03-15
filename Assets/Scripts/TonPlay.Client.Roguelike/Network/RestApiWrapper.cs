@@ -35,6 +35,17 @@ namespace TonPlay.Client.Roguelike.Network
             };
         }
 
+        public void Init(bool useDebugToken,
+                         DebugTokenSettings debugTokenSettings,
+                         NetworkSettings networkSettings, 
+                         string username)
+        {
+           _useDebugToken = useDebugToken;
+           _debugTokenSettings = debugTokenSettings;
+           _networkSettings = networkSettings;
+           _username = username;
+        }
+
         // # Skill - Skill Controller
         [Space(10)]
         [Header("--------- Skill ---------")]
