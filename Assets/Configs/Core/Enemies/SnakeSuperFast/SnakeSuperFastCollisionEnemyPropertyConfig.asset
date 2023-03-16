@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44852cf329824850a7e2536afb2a63c2, type: 3}
-  m_Name: SnakeFastMoveOnPlayerEnemyPropertyConfig
+  m_Script: {fileID: 11500000, guid: 5a8bd464e3d44f04b744554f04b907dc, type: 3}
+  m_Name: SnakeSuperFastCollisionEnemyPropertyConfig
   m_EditorClassIdentifier: 
-  _movementConfig:
-    _startSpeed: 2
-    _acceleration: 0
+  _collisionAreaConfig: {fileID: 11400000, guid: 2470369bfc7234ca192ae6a08b4f365d, type: 2}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
