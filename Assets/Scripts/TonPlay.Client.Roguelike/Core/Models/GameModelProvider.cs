@@ -1,5 +1,4 @@
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Models
 {

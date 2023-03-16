@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: snake_fast
   _enemyType: 0
-  _prefab: {fileID: 3862886047853430434, guid: 5885c47d14b9347378ca2259e6447917, type: 3}
+  _prefab: {fileID: 1146253541682323705, guid: 2882d39bb72a94d329d933fc78f002d1, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
     _weight: 0.9

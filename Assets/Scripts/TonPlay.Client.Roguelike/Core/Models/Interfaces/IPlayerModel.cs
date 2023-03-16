@@ -1,8 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Models.Data;
-using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using UniRx;
 
-namespace TonPlay.Roguelike.Client.Core.Models.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 {
 	public interface IPlayerModel
 	{

@@ -20,6 +20,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private ProgressBarView _healthProgressBarView;
 
 		[SerializeField]
+		private ProgressBarView _bossHealthProgressBarView;
+
+		[SerializeField]
 		private LevelProgressBarView _levelProgressBarView;
 
 		[SerializeField]
@@ -32,6 +35,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private DebugView _debugView;
 
 		public IProgressBarView HealthProgressBarView => _healthProgressBarView;
+		
+		public IProgressBarView BossHealthProgressBarView => _bossHealthProgressBarView;
 
 		public ILevelProgressBarView LevelProgressBarView => _levelProgressBarView;
 

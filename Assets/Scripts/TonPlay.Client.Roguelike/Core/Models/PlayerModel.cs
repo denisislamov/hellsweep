@@ -1,7 +1,6 @@
 using System;
 using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using UniRx;
 
 namespace TonPlay.Client.Roguelike.Core.Models

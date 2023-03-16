@@ -1,3 +1,4 @@
+using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
@@ -6,6 +7,8 @@ using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
+using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using UniRx;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Game
@@ -13,16 +16,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	internal class GamePresenter : Presenter<IGameView, IGameScreenContext>
 	{
 		private readonly LevelProgressBarPresenter.Factory _levelProgressBarPresenterFactory;
+		private readonly BossHealthBarPresenter.Factory _bossHealthBarPresenterFactory;
 		private readonly ProgressBarPresenter.Factory _progressBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
 		private readonly DebugPresenter.Factory _debugPresenterFactory;
 		private readonly IGameModelProvider _gameModelProvider;
+		
+		private IDisposable _bossExistsListener;
+		private IPresenter _bossPresenter;
 
 		public GamePresenter(
 			IGameView view,
 			IGameScreenContext context,
 			LevelProgressBarPresenter.Factory levelProgressBarPresenterFactory,
+			BossHealthBarPresenter.Factory bossHealthBarPresenterFactory,
 			ProgressBarPresenter.Factory progressBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
 			TimerPresenter.Factory timerPresenterFactory,
@@ -31,6 +39,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			: base(view, context)
 		{
 			_levelProgressBarPresenterFactory = levelProgressBarPresenterFactory;
+			_bossHealthBarPresenterFactory = bossHealthBarPresenterFactory;
 			_progressBarPresenterFactory = progressBarPresenterFactory;
 			_matchScorePresenter = matchScorePresenter;
 			_timerPresenterFactory = timerPresenterFactory;
@@ -42,6 +51,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			AddMatchScorePresenter();
 			AddTimerPresenter();
 			AddDebugPresenter();
+			AddBossHealthBarPresenter();
+		}
+		
+		private void AddBossHealthBarPresenter()
+		{
+			var presenter = _bossHealthBarPresenterFactory.Create(
+				View.BossHealthProgressBarView,
+				ScreenContext.Empty);
+
+			Presenters.Add(presenter);
 		}
 
 		private void AddMatchScorePresenter()

@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class BombCollectablesSpawnSystem : IEcsInitSystem, IEcsRunSystem
 	{
-		private const float SPAWN_RATE = 30f;
+		private const float SPAWN_RATE = 60f;
 		private const float MIN_DISTANCE = 25f;
 		private const float MAX_DISTANCE = 40f;
 

@@ -1,6 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using UniRx;
 
 namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
@@ -8,6 +7,8 @@ namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 	public interface IGameModel : IModel<GameData>
 	{
 		IPlayerModel PlayerModel { get; }
+		
+		IBossModel BossModel { get; }
 
 		IReadOnlyReactiveProperty<float> GameTime { get; }
 
