@@ -10,6 +10,7 @@ using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Screen = UnityEngine.Screen;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Game
 {
@@ -58,7 +59,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 				var screenPosition = _camera.WorldToScreenPoint(
 					playerModel.Position.Value + 
 					RoguelikeConstants.Core.UI.HEALTH_OFFSET);
-				
+
 				View.SetPosition(screenPosition);
 			});
 		}
