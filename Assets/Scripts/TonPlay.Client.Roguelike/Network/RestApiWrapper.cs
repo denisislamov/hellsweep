@@ -163,7 +163,7 @@ namespace TonPlay.Client.Roguelike.Network
         {
             _gameSessionResponse = new GameSessionResponse();
             Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
-            var putTask = _networkClient.PutAsync<GameSessionResponse>("v1/game/session", _headers, value);
+            var putTask = _networkClient.PutAsync<GameSessionResponse>("v1/game/session/close", _headers, value);
 
             var result = await putTask;
             _gameSessionResponse = result;

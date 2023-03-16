@@ -11,7 +11,9 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			Container.Bind<IMatchLauncher>().To<MatchLauncher>().AsSingle();
 			Container.BindInterfacesTo<MatchProvider>().AsSingle();
 
-			Container.BindFactory<ILocationConfig, OfflineSingleMatch, OfflineSingleMatch.Factory>().FromNew();
+			//Container.BindFactory<ILocationConfig, OfflineSingleMatch, OfflineSingleMatch.Factory>().FromNew();
+			
+			Container.BindFactory<ILocationConfig, SingleMatch, SingleMatch.Factory>().FromNew();
 		}
 	}
 }

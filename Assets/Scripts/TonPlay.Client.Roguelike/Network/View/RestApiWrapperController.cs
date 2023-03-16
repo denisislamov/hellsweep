@@ -13,10 +13,7 @@ namespace TonPlay.Client.Roguelike.Network.View
         [Space(5)]
         [SerializeField] private InputField _slotIdInputField;
         [SerializeField] private InputField _itemIdInputField;
-
-
-        [Space(5)]
-        [SerializeField] private InputField _lootedItemsInputField;
+        
         [SerializeField] private InputField _surviveMillsInputField;
 
         [Space(5)]
@@ -99,7 +96,6 @@ namespace TonPlay.Client.Roguelike.Network.View
         {
             GameSessionPutBody value = new GameSessionPutBody() 
             {
-                lootedItems = new List<string>(_lootedItemsInputField.text.Split(',')),
                 surviveMills = int.Parse(_surviveMillsInputField.text)
             };
             _restApiWrapper.PutGameSession(value);

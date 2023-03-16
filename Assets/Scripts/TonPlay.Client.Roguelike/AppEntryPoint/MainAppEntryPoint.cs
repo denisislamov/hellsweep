@@ -31,7 +31,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 
 		public override async UniTask ProcessEntrance()
         {
-            await base.ProcessEntrance();
+            await base.ProcessEntrance();	
 
             var userSummaryResponse = await _restApiClient.GetUserSummary();
             var infoLevelAllResponse = await _restApiClient.GetInfoLevelAll();
@@ -51,8 +51,8 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
             metaGameData.ProfileData.Experience = userSummary.profile.xp;
             metaGameData.ProfileData.Level = userSummary.profile.level;
             metaGameData.ProfileData.BalanceData.Gold = userSummary.profile.coin;
-            metaGameData.ProfileData.BalanceData.Energy = 0; // TODO not sure about this. Islamov Denis.
-            metaGameData.ProfileData.BalanceData.MaxEnergy = userSummary.profile.energy;
+            metaGameData.ProfileData.BalanceData.Energy = userSummary.profile.energy; 
+            metaGameData.ProfileData.BalanceData.MaxEnergy = userSummary.profile.energyMax;
 
             metaGameData.UserLevelsInfoData = new UserLevelsInfoData
             {
@@ -62,11 +62,15 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
             for (var index = 0; index < infoLevelAllResponse.items.Count; index++)
             {
 	            var items = infoLevelAllResponse.items[index];
-	            metaGameData.UserLevelsInfoData.Levels[index].Level = items.level;
-	            metaGameData.UserLevelsInfoData.Levels[index].Coin = items.coin;
-	            metaGameData.UserLevelsInfoData.Levels[index].Xp = items.xp;
+	            metaGameData.UserLevelsInfoData.Levels[index] = new UserLevelInfoData()
+	            {
+					Level = items.level,
+		            Coin = items.coin,
+		            Xp = items.xp
+	            };
             }
             
+           
             metaGameData.ProfileData.MaxExperience = metaGameData.UserLevelsInfoData.Levels
 	            .FirstOrDefault(x => x.Level == metaGameData.ProfileData.Level + 1)?.Xp ?? 0;
             

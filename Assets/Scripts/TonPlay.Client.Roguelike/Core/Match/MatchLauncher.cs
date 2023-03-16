@@ -8,14 +8,17 @@ namespace TonPlay.Client.Roguelike.Core.Match
 	public class MatchLauncher : IMatchLauncher
 	{
 		private readonly IMatchProviderSetup _matchProviderSetup;
-		private readonly OfflineSingleMatch.Factory _offlineSingleMatchFactory;
+		// private readonly OfflineSingleMatch.Factory _offlineSingleMatchFactory;
+		private readonly SingleMatch.Factory _singleMatchFactory;
 		
 		public MatchLauncher(
 			IMatchProviderSetup matchProviderSetup,
-			OfflineSingleMatch.Factory offlineSingleMatchFactory)
+			SingleMatch.Factory singleMatchFactory)
+			//OfflineSingleMatch.Factory offlineSingleMatchFactory)
 		{
 			_matchProviderSetup = matchProviderSetup;
-			_offlineSingleMatchFactory = offlineSingleMatchFactory;
+			// _offlineSingleMatchFactory = offlineSingleMatchFactory;
+			_singleMatchFactory = singleMatchFactory;
 		}
 
 		public async UniTask Launch(MatchType matchType, ILocationConfig locationConfig)
@@ -24,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				case MatchType.OfflineSingle:
 				{
-					var match = _offlineSingleMatchFactory.Create(locationConfig);
+					var match = _singleMatchFactory.Create(locationConfig);
 					
 					_matchProviderSetup.Setup(match);
 
