@@ -16,8 +16,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	internal class GamePresenter : Presenter<IGameView, IGameScreenContext>
 	{
 		private readonly LevelProgressBarPresenter.Factory _levelProgressBarPresenterFactory;
+		private readonly PlayerHealthBarPresenter.Factory _playerHealthBarPresenterFactory;
 		private readonly BossHealthBarPresenter.Factory _bossHealthBarPresenterFactory;
-		private readonly ProgressBarPresenter.Factory _progressBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
 		private readonly DebugPresenter.Factory _debugPresenterFactory;
@@ -30,8 +30,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			IGameView view,
 			IGameScreenContext context,
 			LevelProgressBarPresenter.Factory levelProgressBarPresenterFactory,
+			PlayerHealthBarPresenter.Factory playerHealthBarPresenterFactory,
 			BossHealthBarPresenter.Factory bossHealthBarPresenterFactory,
-			ProgressBarPresenter.Factory progressBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
 			TimerPresenter.Factory timerPresenterFactory,
 			DebugPresenter.Factory debugPresenterFactory,
@@ -39,8 +39,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			: base(view, context)
 		{
 			_levelProgressBarPresenterFactory = levelProgressBarPresenterFactory;
+			_playerHealthBarPresenterFactory = playerHealthBarPresenterFactory;
 			_bossHealthBarPresenterFactory = bossHealthBarPresenterFactory;
-			_progressBarPresenterFactory = progressBarPresenterFactory;
 			_matchScorePresenter = matchScorePresenter;
 			_timerPresenterFactory = timerPresenterFactory;
 			_debugPresenterFactory = debugPresenterFactory;
@@ -77,7 +77,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private void AddHealthBarPresenter()
 		{
 			var playerModel = _gameModelProvider.Get().PlayerModel;
-			var presenter = _progressBarPresenterFactory.Create(
+			var presenter = _playerHealthBarPresenterFactory.Create(
 				View.HealthProgressBarView,
 				new ProgressBarContext(playerModel.Health, playerModel.MaxHealth));
 

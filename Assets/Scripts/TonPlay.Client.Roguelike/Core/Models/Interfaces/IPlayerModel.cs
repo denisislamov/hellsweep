@@ -1,5 +1,6 @@
 using TonPlay.Client.Roguelike.Core.Models.Data;
 using UniRx;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 {
@@ -12,6 +13,8 @@ namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 		IReadOnlyReactiveProperty<float> Experience { get; }
 
 		IReadOnlyReactiveProperty<float> MaxExperience { get; }
+		
+		IReadOnlyReactiveProperty<Vector2> Position { get; } 
 
 		IMatchProfileGainModel MatchProfileGainModel { get; }
 

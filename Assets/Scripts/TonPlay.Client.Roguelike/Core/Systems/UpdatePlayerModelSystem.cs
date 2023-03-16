@@ -17,12 +17,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 							  .Inc<SkillsComponent>()
 							  .Inc<GoldComponent>()
 							  .Inc<ProfileExperienceComponent>()
+							  .Inc<PositionComponent>()
 							  .Exc<DeadComponent>()
 							  .End();
 			var healthPool = world.GetPool<HealthComponent>();
 			var expPool = world.GetPool<ExperienceComponent>();
 			var goldPool = world.GetPool<GoldComponent>();
 			var skillsPool = world.GetPool<SkillsComponent>();
+			var positionPool = world.GetPool<PositionComponent>();
 			var profileExpPool = world.GetPool<ProfileExperienceComponent>();
 
 			var playerModel = systems.GetShared<SharedData>()?.GameModel?.PlayerModel;
@@ -37,6 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var exp = ref expPool.Get(entityId);
 				ref var gold = ref goldPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
+				ref var position = ref positionPool.Get(entityId);
 				ref var profileExp = ref profileExpPool.Get(entityId);
 
 				if (Math.Abs(playerData.Health - health.CurrentHealth) > 0.001f)
@@ -73,6 +76,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					playerData.MatchProfileGainModel.ProfileExperience = profileExp.Value;
 				}
+
+				playerData.Position = position.Position;
 
 				foreach (var kvp in skills.Levels)
 				{

@@ -17,7 +17,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 	public class GameView : View, IGameView
 	{
 		[SerializeField]
-		private ProgressBarView _healthProgressBarView;
+		private PlayerHealthBarView _healthProgressBarView;
 
 		[SerializeField]
 		private ProgressBarView _bossHealthProgressBarView;
@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		[SerializeField]
 		private DebugView _debugView;
 
-		public IProgressBarView HealthProgressBarView => _healthProgressBarView;
+		public IPlayerHealthBarView HealthProgressBarView => _healthProgressBarView;
 		
 		public IProgressBarView BossHealthProgressBarView => _bossHealthProgressBarView;
 

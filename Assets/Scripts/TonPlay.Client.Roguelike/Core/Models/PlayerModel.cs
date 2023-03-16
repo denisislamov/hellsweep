@@ -2,6 +2,7 @@ using System;
 using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using UniRx;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Models
 {
@@ -15,11 +16,13 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		private readonly ReactiveProperty<float> _maxHealth = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<float> _experience = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<float> _maxExperience = new ReactiveProperty<float>();
+		private readonly ReactiveProperty<Vector2> _position = new ReactiveProperty<Vector2>();
 
 		public IReadOnlyReactiveProperty<float> Health => _health;
 		public IReadOnlyReactiveProperty<float> MaxHealth => _maxHealth;
 		public IReadOnlyReactiveProperty<float> Experience => _experience;
 		public IReadOnlyReactiveProperty<float> MaxExperience => _maxExperience;
+		public IReadOnlyReactiveProperty<Vector2> Position => _position;
 		public ISkillsModel SkillsModel => _skillsModel;
 		public IMatchProfileGainModel MatchProfileGainModel => _matchProfileGainModel;
 
@@ -44,6 +47,11 @@ namespace TonPlay.Client.Roguelike.Core.Models
 			{
 				_maxExperience.SetValueAndForceNotify(data.MaxExperience);
 			}
+			
+			if ((data.Position - _position.Value).sqrMagnitude > 0.001f)
+			{
+				_position.SetValueAndForceNotify(data.Position);
+			}
 
 			_skillsModel.Update(data.SkillsData);
 			_matchProfileGainModel.Update(data.MatchProfileGainModel);
@@ -55,6 +63,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 			_playerData.MaxHealth = _maxHealth.Value;
 			_playerData.Experience = _experience.Value;
 			_playerData.MaxExperience = _maxExperience.Value;
+			_playerData.Position = _position.Value;
 			_playerData.SkillsData = _skillsModel.ToData();
 			_playerData.MatchProfileGainModel = _matchProfileGainModel.ToData();
 			return _playerData;

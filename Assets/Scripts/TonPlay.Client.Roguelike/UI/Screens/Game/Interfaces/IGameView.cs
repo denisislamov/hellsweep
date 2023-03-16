@@ -9,7 +9,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces
 {
 	public interface IGameView : IView
 	{
-		IProgressBarView HealthProgressBarView { get; }
+		IPlayerHealthBarView HealthProgressBarView { get; }
 		
 		IProgressBarView BossHealthProgressBarView { get; }
 
