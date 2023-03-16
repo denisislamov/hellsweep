@@ -21,7 +21,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		{
 			if (data.Exists != _exists.Value)
 			{
-				_exists.SetValueAndForceNotify(true);
+				_exists.SetValueAndForceNotify(data.Exists);
 			}
 
 			if (Math.Abs(_health.Value - data.Health) > 0.001f)
