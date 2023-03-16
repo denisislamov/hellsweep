@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core.Pooling.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Pooling.Interfaces
 {
 	public interface IViewPoolObject
 	{
@@ -8,5 +8,9 @@ namespace TonPlay.Roguelike.Client.Core.Pooling.Interfaces
 	public interface IViewPoolObject<out T> : IViewPoolObject
 	{
 		T Object { get; }
+		
+		bool Active { get; }
+
+		void SetActive(bool state);
 	}
 }

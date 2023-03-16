@@ -50,22 +50,21 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 				_pointer++;
 				_pointer %= _pool.Length;
 
-				if (!_pool[_pointer].Object.gameObject.activeSelf)
+				if (!_pool[_pointer].Active)
 				{
 					break;
 				}
 			}
 
 			var obj = _pool[_pointer];
-			obj.Object.gameObject.SetActive(true);
 
 			return obj;
 		}
 
-		public void Release(T obj)
+		public void Release(ViewPoolObject<T> viewPoolObject)
 		{
-			obj.transform.position = _spawnPosition;
-			obj.gameObject.SetActive(false);
+			viewPoolObject.Object.transform.position = _spawnPosition;
+			viewPoolObject.SetActive(false);
 		}
 
 		public void IncreaseSize(int count)
@@ -87,7 +86,7 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 			var obj = Instantiate(prefab);
 			var transform = obj.transform;
 			transform.position = _spawnPosition;
-			obj.gameObject.SetActive(false);
+			obj.gameObject.SetActive(true);
 
 			return obj;
 		}

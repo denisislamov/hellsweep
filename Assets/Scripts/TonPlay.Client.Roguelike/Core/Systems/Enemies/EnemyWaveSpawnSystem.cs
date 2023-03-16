@@ -9,6 +9,7 @@ using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;

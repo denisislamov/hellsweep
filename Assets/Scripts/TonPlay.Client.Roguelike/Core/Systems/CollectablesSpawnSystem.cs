@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;

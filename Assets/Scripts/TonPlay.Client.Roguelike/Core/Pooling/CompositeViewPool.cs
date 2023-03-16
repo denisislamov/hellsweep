@@ -31,16 +31,5 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 			result = ((IViewPool<T>)_pools[viewPoolIdentity.Id]).Get();
 			return true;
 		}
-
-		public bool TryRelease<T>(IViewPoolIdentity viewPoolIdentity, T obj) where T : Component
-		{
-			if (!_pools.ContainsKey(viewPoolIdentity.Id))
-			{
-				return false;
-			}
-
-			((IViewPool<T>)_pools[viewPoolIdentity.Id]).Release(obj);
-			return true;
-		}
 	}
 }
