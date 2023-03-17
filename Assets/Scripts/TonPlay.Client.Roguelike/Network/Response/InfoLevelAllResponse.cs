@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
     public class InfoLevelAllItemResponse
     {
         public int level;
-        public int xp;
-        public int coin;
+        public long xp;
+        public long coin;
     }
 }

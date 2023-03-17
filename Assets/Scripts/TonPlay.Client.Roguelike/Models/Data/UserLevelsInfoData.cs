@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Models.Data;
 
 namespace TonPlay.Client.Roguelike.Models.Interfaces
 {
