@@ -378,6 +378,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				direction.Normalize();
 				entity.AddRotateMovementInTargetDirectionWhenDistanceExceededComponent(propertyConfig.Distance, direction);
 			}
+
+			if (enemyConfig.HasProperty<ILookAtTargetEnemyPropertyConfig>())
+			{
+				entity.AddLookAtTargetComponent();
+			}
 		}
 
 		private Vector3 GetSpawnPosition(Vector2 playerPosition, EnemyType type, WaveSpawnType waveSpawnType, Vector2 randomizedWaveSpawnPosition, int groupSize)

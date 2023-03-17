@@ -9,7 +9,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
-			var filter = world.Filter<SyncRotationWithMovementDirectionComponent>().Inc<RotationComponent>().Inc<MovementComponent>().End();
+			var filter = world
+						.Filter<SyncRotationWithMovementDirectionComponent>()
+						.Inc<RotationComponent>()
+						.Inc<MovementComponent>()
+						.Exc<LookAtTargetComponent>()
+						.End();
 			var rotationPool = world.GetPool<RotationComponent>();
 			var movementPool = world.GetPool<MovementComponent>();
 

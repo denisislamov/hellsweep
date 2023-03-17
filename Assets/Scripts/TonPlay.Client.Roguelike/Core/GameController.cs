@@ -150,6 +150,8 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new StickEaseMovementToEntityPositionSystem())
 							.Add(new EaseMovementSystem())
 							.Add(new SpinAroundEntityPositionMovementSystem())
+							.Add(new RotationLookAtTargetSystem())
+							.Add(new InvertRegularEnemyRotationLookAtTargetOnBossAppearingSystem())
 							.Add(new SyncRotationWithPositionDifferenceSystem())
 							.Add(new SyncRotationWithMovementDirectionSystem())
 							.Add(new SyncPositionWithAnotherEntitySystem())

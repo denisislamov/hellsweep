@@ -15,7 +15,6 @@ MonoBehaviour:
   _id: cyclope
   _enemyType: 0
   _prefab: {fileID: 2141320536056758984, guid: 5f7ce176d7a4a41fe999f34cd955db7a, type: 3}
-  _health: 700
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
     _weight: 1
@@ -25,3 +24,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 133ccbe4b189640fbb1af7ad5091997c, type: 2}
   - {fileID: 11400000, guid: cfe5b71ee85534c35a0ce84b7e4c64ae, type: 2}
   - {fileID: 11400000, guid: 3b20ffdcc23354847b18b75c4c38c8c2, type: 2}
+  - {fileID: 11400000, guid: a8c8d7d4d984e49d0b14942294e2e576, type: 2}

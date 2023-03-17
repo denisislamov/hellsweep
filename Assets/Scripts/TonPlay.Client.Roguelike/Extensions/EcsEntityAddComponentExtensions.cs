@@ -507,5 +507,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.CollisionArea = area;
 			return ref component;
 		}
+		
+		public static ref LookAtTargetComponent AddLookAtTargetComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<LookAtTargetComponent>();
+			return ref component;
+		}
 	}
 }
