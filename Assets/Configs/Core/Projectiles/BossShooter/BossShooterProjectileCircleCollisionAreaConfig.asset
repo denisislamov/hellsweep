@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7953f5c68f804000a41ab7b623beeefc, type: 3}
   m_Name: BossShooterProjectileCircleCollisionAreaConfig
   m_EditorClassIdentifier: 
+  _position: {x: 0, y: 0}
   _doNotInitiateCollisionOverlap: 0
-  _radius: 0.5
+  _radius: 0.6

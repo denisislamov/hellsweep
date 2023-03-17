@@ -243,6 +243,7 @@ SpriteAtlas:
   - {fileID: -9013092975189028523, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
   - {fileID: -4620389919649047664, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
   - {fileID: -1239736475690029715, guid: 5bfe33bce107b4c8fb472bca7a3a31a3, type: 3}
+  - {fileID: 21300000, guid: 2f1eb1ee7e7274748b77f9da83c957ba, type: 3}
   - {fileID: 4814030500404972278, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
   - {fileID: 2163104354692439627, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
   - {fileID: 8543802333891433136, guid: 9883e79fef99c4c3d94f36d265bfccc1, type: 3}
@@ -454,6 +455,7 @@ SpriteAtlas:
   - char_stay_24_24_13
   - char_stay_24_24_12
   - char_stay_24_24_14
+  - Demon_Fireball_01a
   - ghost_fly_12
   - ghost_fly_13
   - ghost_fly_10
