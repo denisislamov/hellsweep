@@ -175,12 +175,21 @@ namespace TonPlay.Client.Roguelike.Network
         {
             _gameSessionResponse = new GameSessionResponse();
             Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
-            var putTask = _networkClient.PostAsync<GameSessionResponse, GameSessionPostBody>("v1/game/session/close", _headers, value);
+            var postTask = _networkClient.PostAsync<GameSessionResponse, GameSessionPostBody>("v1/game/session/close", _headers, value);
 
-            var result = await putTask;
-            _gameSessionResponse = result;
-            
-            return result;
+            try
+            {
+                var result = await postTask;
+                _gameSessionResponse = result;
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogFormat("GetGameSession exception {0}", e);
+                _gameSessionResponse = null;
+                return null;
+            }
         }
 
         [ContextMenu("PostGameSession")]
@@ -190,10 +199,19 @@ namespace TonPlay.Client.Roguelike.Network
             Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", pve);
             var postTask = _networkClient.PostAsync<GameSessionResponse, string>("v1/game/session?pve=" + (pve ? "true" : "false"), _headers, null);
 
-            var result = await postTask;
-            _gameSessionResponse = result;
+            try
+            {
+                var result = await postTask;
+                _gameSessionResponse = result;
 
-            return result;
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogFormat("GetGameSession exception {0}", e);
+                _gameSessionResponse = null;
+                return null;
+            }
         }
 
         // # User - User Controller

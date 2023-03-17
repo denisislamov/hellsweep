@@ -64,11 +64,15 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			await _restApiClient.PostGameSession(true); 
 			
 			var gameSessionResponse = await _restApiClient.GetGameSession();
-			if (gameSessionResponse == null)
+			if (gameSessionResponse != null)
 			{
-				await _restApiClient.PostGameSession(true); // TODO - add PVE variable
+				await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
+				{
+					surviveMills = 0
+				});
 			}
 
+			await _restApiClient.PostGameSession(true); // TODO - add PVE variable
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
 		}
 		
