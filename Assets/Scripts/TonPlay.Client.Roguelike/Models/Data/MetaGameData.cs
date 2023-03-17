@@ -7,5 +7,7 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public ProfileData ProfileData { get; set; }
 
 		public LocationsData LocationsData { get; set; }
+		
+		public UserLevelsInfoData UserLevelsInfoData { get; set; }
 	}
 }

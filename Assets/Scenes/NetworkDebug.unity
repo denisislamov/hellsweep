@@ -393,8 +393,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 182.11023, y: 0}
+  m_SizeDelta: {x: 212.88977, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &19082752
 MonoBehaviour:
@@ -1223,13 +1223,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2019771844}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2019771845}
+        m_TargetAssemblyTypeName: TonPlay.Client.Roguelike.Network.View.RestApiWrapperController,
+          TonPlay.Roguelike.Client
+        m_MethodName: GetGameSession
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1914,7 +1915,7 @@ GameObject:
   - component: {fileID: 500457425}
   - component: {fileID: 500457424}
   m_Layer: 5
-  m_Name: PutGameSessionButton
+  m_Name: PostGameSessionCloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1985,9 +1986,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2019771845}
-        m_TargetAssemblyTypeName: TonPlay.Client.Common.Network.RestApiWrapperController,
-          TonPlay.Client.Common
-        m_MethodName: PutGameSession
+        m_TargetAssemblyTypeName: TonPlay.Client.Roguelike.Network.View.RestApiWrapperController,
+          TonPlay.Roguelike.Client
+        m_MethodName: PostGameSessionClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2512,8 +2513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
+  m_SizeDelta: {x: 172.11023, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &651057633
 MonoBehaviour:
@@ -2611,7 +2612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &667786935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2628,10 +2629,10 @@ RectTransform:
   m_Father: {fileID: 19082751}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 106.316284, y: -41}
+  m_SizeDelta: {x: 202.63257, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667786936
 MonoBehaviour:
@@ -4168,7 +4169,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PutGameSession
+  m_Text: PostGameSessionClose
 --- !u!222 &1091045606
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4906,6 +4907,7 @@ MonoBehaviour:
       xp: 0
       coin: 0
       energy: 0
+      energyMax: 0
   _userSlotsResponse:
     _items: []
   _userItemsResponse:
@@ -4913,6 +4915,8 @@ MonoBehaviour:
   _userBalanceResponse:
     coin: 0
     energy: 0
+  _gameSessionPutBody:
+    surviveMills: 0
 --- !u!1 &1474860432
 GameObject:
   m_ObjectHideFlags: 0
@@ -6293,9 +6297,8 @@ MonoBehaviour:
   _debugLogView: {fileID: 1758673615}
   _slotIdInputField: {fileID: 121646601}
   _itemIdInputField: {fileID: 1474860434}
-  _lootedItemsInputField: {fileID: 0}
-  _surviveMillsInputField: {fileID: 0}
-  _gameSessionToggle: {fileID: 0}
+  _surviveMillsInputField: {fileID: 711246663}
+  _gameSessionToggle: {fileID: 1506186312}
 --- !u!4 &2019771846
 Transform:
   m_ObjectHideFlags: 0

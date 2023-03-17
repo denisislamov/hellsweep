@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82ec9467f6a43478078e05d50938ae4, type: 3}
   m_Name: ProdNetworkSettings
   m_EditorClassIdentifier: 
-  _baseAddress: http://api.hellsweep.xyz
+  _baseAddress: https://api.hellsweep.xyz
   _port: 0

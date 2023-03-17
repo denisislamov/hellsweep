@@ -211,6 +211,8 @@ MonoBehaviour:
       xp: 0
       coin: 0
       energy: 0
+  _userSlotsResponse:
+    _items: []
   _userItemsResponse:
     items: []
   _userBalanceResponse:

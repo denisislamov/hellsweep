@@ -37,8 +37,8 @@ namespace TonPlay.Client.Common.Network
 			_mapRequests = new Dictionary<RequestType, PerformRequest>()
 			{
 				[RequestType.GET]    = (path, data) => UnityWebRequest.Get(path),
-				[RequestType.POST]   = UnityWebRequest.Post,
-				[RequestType.PUT]    = UnityWebRequest.Put,
+				[RequestType.POST]   = (path, data) => UnityWebRequest.Post(path, data),
+				[RequestType.PUT]    = (path, data) => UnityWebRequest.Put(path, data),
 				[RequestType.DELETE] = (path, data) => UnityWebRequest.Delete(path)
 			};
 		}
@@ -64,7 +64,7 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 		
-		public async UniTask<T> PostAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		public async UniTask<T> PostAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
@@ -78,7 +78,7 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 		
-		public async UniTask<T> PutAsync<T>(string path, Dictionary<string, string> requestHeaders, object value, CancellationToken cancellationToken = default)
+		public async UniTask<T> PutAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
@@ -101,10 +101,10 @@ namespace TonPlay.Client.Common.Network
 
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)
 		{
-			var data = context.Value == null ? JsonUtility.ToJson(context.Value) : " ";
+			var data = context.Value != null ? JsonUtility.ToJson(context.Value) : " ";
 			var formData = new Dictionary<string, string> {{"body", data}};
-
 			Debug.LogFormat("body:\n {0}", data);
+			
 			using (var req = _mapRequests[context.RequestType].Invoke(_basePath + context.Path, data))
 			{
 				Debug.LogFormat("_basePath + context.Path {0}", _basePath + context.Path);
@@ -117,6 +117,13 @@ namespace TonPlay.Client.Common.Network
 						Debug.LogFormat("header: {0} , {1}", item.Key, item.Value);
 						req.SetRequestHeader(item.Key, item.Value);
 					}
+				}
+				
+				// TODO - not sure about it
+				if (req.uploadHandler != null)
+				{
+					req.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(data));
+					req.uploadHandler.contentType = "application/json";
 				}
 
 				var linkToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);

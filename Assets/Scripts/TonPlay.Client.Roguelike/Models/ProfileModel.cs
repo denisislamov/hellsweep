@@ -17,6 +17,7 @@ namespace TonPlay.Client.Roguelike.Models
 		public IReadOnlyReactiveProperty<float> Experience => _experience;
 		public IReadOnlyReactiveProperty<float> MaxExperience => _maxExperience;
 
+		
 		public IBalanceModel BalanceModel { get; } = new BalanceModel();
 
 		public void Update(ProfileData data)

@@ -13,6 +13,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
         public int xp;
         public int coin;
         public int energy;
+        public int energyMax;
     }
 
     [System.Serializable]
