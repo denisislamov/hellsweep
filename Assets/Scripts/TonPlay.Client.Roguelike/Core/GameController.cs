@@ -175,6 +175,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ReduceApplyForceSystem())
 							.Add(new TransformRotationSystem())
 							.Add(new UpdatePlayerModelSystem())
+							.Add(new UpdateBossModelSystem())
 							.Add(new CollisionSystem(_overlapExecutor))
 							.Add(new DamageOnCollisionSystem())
 							.Add(new ProjectileExplodeOnMoveDistanceSystem())

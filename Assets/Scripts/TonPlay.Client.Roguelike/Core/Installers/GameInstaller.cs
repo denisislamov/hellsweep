@@ -5,6 +5,7 @@ using TonPlay.Client.Roguelike.Core.Collision.Config;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Core.Pooling;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.UI;

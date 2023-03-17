@@ -52,6 +52,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 54bfd800ac1754f97b6a5e9a921778e5, type: 3}
   - {fileID: 21300000, guid: 4754f820bf67944a3a864453fe145f74, type: 3}
   - {fileID: 21300000, guid: 6eaf12a05b55e416eb6b3e1582b87fcf, type: 3}
+  - {fileID: 21300000, guid: 1c615e91b3997445985f872b47223181, type: 3}
   - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
   - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
@@ -63,6 +64,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f66dec4364eb645adb66a0f26adde46c, type: 3}
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
+  - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
   - {fileID: 21300000, guid: ff37e0145e7d34880b8d9074902b67a5, type: 3}
   - {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
   - {fileID: 21300000, guid: c4bf3d14b3d1140319f250df7a62f603, type: 3}
@@ -74,6 +76,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
   - {fileID: 21300000, guid: d3af0d466fa194b1e8789ac92cb748e8, type: 3}
+  - {fileID: 21300000, guid: 4661dd76f72d044bea11b544e1b9cd94, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
   - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
   - {fileID: 21300000, guid: 461ddb27c2e8346ab92e82a01c85f3ac, type: 3}
@@ -81,7 +84,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e661e2c7724cc495db0fb3f6cfc287e8, type: 3}
   - {fileID: 21300000, guid: 2de464c789aa244b5898e84bd16e832c, type: 3}
   - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
+  - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
+  - {fileID: 21300000, guid: d3dbd0494d8254f13ba25bc90bfeadd9, type: 3}
   - {fileID: 21300000, guid: 47c98149c6f4d4e389f44d4bc692724e, type: 3}
   - {fileID: 21300000, guid: 1b36d879d3da7480e8c6f740f0ff47a4, type: 3}
   - {fileID: 21300000, guid: 8d8d3189083974811b4d62305911b2ee, type: 3}
@@ -90,9 +95,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
   - {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
+  - {fileID: 21300000, guid: ae2ce99b50d384c52b72f02810a0198b, type: 3}
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
+  - {fileID: 21300000, guid: 8aad821d82e304c7485f9b60002c64cb, type: 3}
   - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
@@ -108,6 +115,7 @@ SpriteAtlas:
   - MainMenu_Background_Skulls_01a
   - TitleBackgroundTexture_02
   - GameLabelPanel_01a
+  - Icons_HiPowerBullet_01a
   - SliderBackground_01
   - Button
   - RectangleRounded16
@@ -119,6 +127,7 @@ SpriteAtlas:
   - SkillChoiceItemBackground_01a
   - RectangleHalfRounded32
   - RectangleHalfRounded8
+  - Icons_ExoBracer_01a
   - SubTitleBackgroundTexture_03
   - Icons_Battle_01a
   - SubTitleBackground_01
@@ -130,6 +139,7 @@ SpriteAtlas:
   - SkillLevelPoint_01b
   - SubTitleBackgroundTexture_01
   - Icons_Settings_01a
+  - Icons_EnergyDrink_01a
   - joystick_background_01a
   - BackgroundSidebarInactive_01
   - SkillLevelPoint_02a
@@ -137,7 +147,9 @@ SpriteAtlas:
   - Icons_Diamond_01b
   - SkillLevelPoint_01a
   - TitleBackgroundTexture_01
+  - Icons_FitnessGuide_01a
   - joystick_01a
+  - Icons_Forcefield_01a
   - Particle_01b
   - SkillChoiceSubtitle_01a
   - BackgroundTab_01a
@@ -146,9 +158,11 @@ SpriteAtlas:
   - CrossLine_01a
   - Rectangle
   - Icons_Power_01a
+  - Icons_SportShoes_01a
   - RectangleRounded32
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a
+  - Icons_RoninOyoroi_01a
   - SmallButton_01a
   - TitleBackgroundTexture_04
   - Star

@@ -1,6 +1,5 @@
 using TonPlay.Client.Roguelike.Core.Models.Data;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
-using TonPlay.Roguelike.Client.Core.Models.Interfaces;
 using UniRx;
 
 namespace TonPlay.Client.Roguelike.Core.Models
@@ -8,6 +7,8 @@ namespace TonPlay.Client.Roguelike.Core.Models
 	public class GameModel : IGameModel
 	{
 		private readonly PlayerModel _playerModel = new PlayerModel();
+		private readonly BossModel _bossModel = new BossModel();
+		
 		private readonly ReactiveProperty<float> _gameTime = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<bool> _paused = new ReactiveProperty<bool>();
 
@@ -16,6 +17,7 @@ namespace TonPlay.Client.Roguelike.Core.Models
 		private readonly ReactiveProperty<int> _debugEnemyMovementToEachOtherCollisionCount = new ReactiveProperty<int>();
 
 		public IPlayerModel PlayerModel => _playerModel;
+		public IBossModel BossModel => _bossModel;
 
 		public IReadOnlyReactiveProperty<float> GameTime => _gameTime;
 

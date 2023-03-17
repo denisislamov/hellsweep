@@ -62,6 +62,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			subContainer.BindFactory<IMatchScoreView, IMatchScoreContext, MatchScorePresenter, MatchScorePresenter.Factory>().FromNew();
 			subContainer.BindFactory<IDebugView, IScreenContext, DebugPresenter, DebugPresenter.Factory>().FromNew();
 			subContainer.BindFactory<ILevelProgressBarView, ILevelProgressBarContext, LevelProgressBarPresenter, LevelProgressBarPresenter.Factory>().FromNew();
+			
+			subContainer.BindFactory<IProgressBarView, IScreenContext, BossHealthBarPresenter, BossHealthBarPresenter.Factory>().FromNew();
+			subContainer.BindFactory<IPlayerHealthBarView, IScreenContext, PlayerHealthBarPresenter, PlayerHealthBarPresenter.Factory>().FromNew();
 		}
 	}
 }

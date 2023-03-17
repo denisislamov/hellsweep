@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: BossShooterShootProjectileAtPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _shootRateInSeconds: 3
+  _quantity: 3
+  _fieldOfView: 90
   _layer: 11
   _minDistanceToTargetToShoot: 0
   _maxDistanceToTargetToShoot: 999999
   _projectileConfig: {fileID: 11400000, guid: add547587956748598d632d7be9196bf, type: 2}
+  _pooledProjectileCount: 6

@@ -8,11 +8,17 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces
 		IProjectileConfig ProjectileConfig { get; }
 
 		float ShootRateInSeconds { get; }
+		
+		int Quantity { get; }
+		
+		float FieldOfView { get; }
 
 		int Layer { get; }
 
 		float MinDistanceToTargetToShoot { get; }
 
 		float MaxDistanceToTargetToShoot { get; }
+		
+		int PooledProjectileCount { get; }
 	}
 }

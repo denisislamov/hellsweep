@@ -1,15 +1,16 @@
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling
+namespace TonPlay.Client.Roguelike.Core.Pooling
 {
 	public class ViewPoolObject<T> : IViewPoolObject<T> where T : Component
 	{
 		private readonly IViewPool<T> _viewPool;
 		private readonly T _obj;
+		private bool _active;
 
 		public T Object => _obj;
+		public bool Active => _active;
 
 		public ViewPoolObject(IViewPool<T> viewPool, T obj)
 		{
@@ -19,7 +20,12 @@ namespace TonPlay.Roguelike.Client.Core.Pooling
 
 		public void Release()
 		{
-			_viewPool.Release(_obj);
+			_viewPool.Release(this);
+		}
+
+		public void SetActive(bool state)
+		{
+			_active = state;
 		}
 	}
 }

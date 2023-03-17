@@ -23,6 +23,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			
 			if (arenaFilter.GetEntitiesCount() <= 0)
 			{
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 				return;
 			}
 

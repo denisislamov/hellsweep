@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Views;
 using TonPlay.Client.Roguelike.Extensions;

@@ -1,3 +1,4 @@
+using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
@@ -36,7 +37,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar
 
 		private void ChangeListener(float value)
 		{
-			View.SetSize(Context.CurrentValue.Value/Context.MaxValue.Value);
+			if (Context.MaxValue.Value == 0) return;
+			
+			var size = Context.CurrentValue.Value/Context.MaxValue.Value;
+			View.SetSize(size);
 		}
 
 		internal class Factory : PlaceholderFactory<IProgressBarView, IProgressBarContext, ProgressBarPresenter>

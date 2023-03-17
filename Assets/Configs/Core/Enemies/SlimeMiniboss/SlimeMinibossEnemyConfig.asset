@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: SlimeMinibossEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: slime_miniboss
+  _enemyType: 0
+  _prefab: {fileID: 704262828941590574, guid: 64c5e46131a684ae89896e7281f08887, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: 46da0f11a326f4792a865067a756f962, type: 2}
+  - {fileID: 11400000, guid: 08427a1c148174679a3adb03dae023e8, type: 2}
+  - {fileID: 11400000, guid: 1d42003e0c59e449a8029bae1c91319d, type: 2}

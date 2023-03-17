@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0a58d73e654e079936b906bbdee7ae, type: 3}
+  m_Name: RPGSkillConfig
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _title: Fireball
+  _description: RPG description
+  _icon: {fileID: 686289011293507512, guid: fb19fd913f4e348499c98848769b9521, type: 3}
+  _excludeFromInitialDrop: 0
+  _maxLevel: 5
+  _evolutions: 
+  _projectileConfig: {fileID: 11400000, guid: 5ef15c66e0719426d82ef024ae17d916, type: 2}
+  _levelConfigs:
+  - _level: 1
+    _description: Fires an explosive fireball
+    _delay: 5
+    _projectileQuantity: 1
+    _damageProvider:
+      damageSource: 2
+      damage: 240
+      rate: 0.25
+  - _level: 2
+    _description: Damage is doubled
+    _delay: 3
+    _projectileQuantity: 1
+    _damageProvider:
+      damageSource: 2
+      damage: 480
+      rate: 0.25
+  - _level: 3
+    _description: Adds 1 more fireball
+    _delay: 2
+    _projectileQuantity: 2
+    _damageProvider:
+      damageSource: 2
+      damage: 480
+      rate: 0.25
+  - _level: 4
+    _description: Damage is greatly increased
+    _delay: 1
+    _projectileQuantity: 2
+    _damageProvider:
+      damageSource: 2
+      damage: 720
+      rate: 0.25
+  - _level: 5
+    _description: Adds 1 more fireball
+    _delay: 0.5
+    _projectileQuantity: 3
+    _damageProvider:
+      damageSource: 2
+      damage: 720
+      rate: 0.25

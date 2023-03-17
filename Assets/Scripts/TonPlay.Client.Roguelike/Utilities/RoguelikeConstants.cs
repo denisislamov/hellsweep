@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace TonPlay.Client.Roguelike.Utilities
 {
 	public static class RoguelikeConstants
@@ -30,6 +32,11 @@ namespace TonPlay.Client.Roguelike.Utilities
 			{
 				public const string COINS_ID = "coins";
 				public const string PROFILE_EXPERIENCE_ID = "profile_experience";
+			}
+
+			public class UI
+			{
+				public static readonly Vector2 HEALTH_OFFSET = new Vector2(0, -1.15f);
 			}
 		}
 	}

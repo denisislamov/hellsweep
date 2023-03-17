@@ -33,7 +33,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 3
-      _waveSpawnType: 0
+      _waveSpawnType: 1
       _startTiming:
         _minutes: 1
         _seconds: 0
@@ -70,6 +70,18 @@ MonoBehaviour:
         _minutes: 2
         _seconds: 0
       StartHealth: 10
+    - _id: 3_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 3
+        _seconds: 0
+      StartHealth: 700
     - _id: 3_garpy
       _enemyId: garpy
       _enemiesQuantity: 100
@@ -77,7 +89,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 3
-      _waveSpawnType: 0
+      _waveSpawnType: 1
       _startTiming:
         _minutes: 3
         _seconds: 15
@@ -95,7 +107,7 @@ MonoBehaviour:
         _seconds: 1
       _waveSpawnType: 1
       _startTiming:
-        _minutes: 0
+        _minutes: 4
         _seconds: 0
       StartHealth: 10
     _startTiming:
@@ -162,8 +174,8 @@ MonoBehaviour:
         _minutes: 6
         _seconds: 0
       StartHealth: 20
-    - _id: 8_snake
-      _enemyId: snake
+    - _id: 8_red_snake
+      _enemyId: red_snake
       _enemiesQuantity: 480
       _maxSpawnedQuantity: 250
       _spawnRate:
@@ -214,6 +226,18 @@ MonoBehaviour:
         _minutes: 8
         _seconds: 10
       StartHealth: 25
+    - _id: 9_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 8
+        _seconds: 0
+      StartHealth: 4500
     _startTiming:
       _minutes: 6
       _seconds: 30
@@ -225,7 +249,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 2
-      _waveSpawnType: 0
+      _waveSpawnType: 1
       _startTiming:
         _minutes: 9
         _seconds: 5
@@ -243,12 +267,104 @@ MonoBehaviour:
         _seconds: 5
       _waveSpawnType: 0
       _startTiming:
-        _minutes: 0
+        _minutes: 10
         _seconds: 0
-      StartHealth: 0
+      StartHealth: 8000
     _startTiming:
       _minutes: 10
       _seconds: 0
+  - _waves:
+    - _id: 12_red_snake
+      _enemyId: red_snake
+      _enemiesQuantity: 3500
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 10
+        _seconds: 2
+      StartHealth: 50
+    - _id: 12_snake_fast
+      _enemyId: snake_fast
+      _enemiesQuantity: 800
+      _maxSpawnedQuantity: 200
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 11
+        _seconds: 0
+      StartHealth: 40
+    _startTiming:
+      _minutes: 10
+      _seconds: 2
+  - _waves:
+    - _id: 13_skeleton
+      _enemyId: skeleton
+      _enemiesQuantity: 1750
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 11
+        _seconds: 30
+      StartHealth: 500
+    - _id: 13_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 12
+        _seconds: 0
+      StartHealth: 6000
+    - _id: 13_red_snake
+      _enemyId: red_snake
+      _enemiesQuantity: 11100
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 13
+        _seconds: 0
+      StartHealth: 600
+    - _id: 13_snake_fast
+      _enemyId: snake_fast
+      _enemiesQuantity: 800
+      _maxSpawnedQuantity: 200
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 13
+        _seconds: 20
+      StartHealth: 200
+    - _id: 13_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 14
+        _seconds: 0
+      StartHealth: 9000
+    _startTiming:
+      _minutes: 11
+      _seconds: 30
   - _waves:
     - _id: boss_butcher
       _enemyId: boss_butcher
@@ -261,7 +377,7 @@ MonoBehaviour:
       _startTiming:
         _minutes: 15
         _seconds: 0
-      StartHealth: 0
+      StartHealth: 100000
     _startTiming:
       _minutes: 15
       _seconds: 0

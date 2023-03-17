@@ -4,6 +4,7 @@ using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling.Identities;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
@@ -100,7 +101,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				
 				if (skill.SpawnQuantity == 0)
 				{
-					var dirX = rotation.Direction.x > 0 ? 1 : -1;
+					var dirX = skill.SelectedDirection.x == 0 ? 1 : skill.SelectedDirection.x;
+					
+					if (rotation.Direction.x > 0)
+					{
+						dirX = 1;
+					} 
+					else if (rotation.Direction.x < 0)
+					{
+						dirX = -1;
+					}
+					
 					var mainDirection = new Vector2(dirX, 0);
 
 					skill.SpawnQuantity = levelConfig.ProjectileQuantity;
@@ -111,9 +122,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 					? LayerMask.NameToLayer("PlayerProjectile")
 					: LayerMask.NameToLayer("EnemyProjectile");
 
-				var direction = skill.SelectedDirection * ((levelConfig.ProjectileQuantity - skill.SpawnQuantity)%2 == 0 ? 1 : -1);
+				var index = levelConfig.ProjectileQuantity - skill.SpawnQuantity;
+				var direction = skill.SelectedDirection * (index % 2 == 0 ? 1 : -1);
 
-				CreateThrowableProjectile(position.Position, direction, entityId, layer, levelConfig);
+				CreateThrowableProjectile(position.Position, direction, entityId, layer, level, index);
 					
 				skill.SpawnQuantity--;
 				skill.RefreshLeftTime = skill.SpawnQuantity == 0
@@ -127,7 +139,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			}
 		}
 
-		private void CreateThrowableProjectile(Vector2 position, Vector2 direction, int entityId, int layer, IKatanaLevelSkillConfig levelConfig)
+		private void CreateThrowableProjectile(Vector2 position, Vector2 direction, int entityId, int layer, int level, int index)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -144,6 +156,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 			var collisionLayerMask = _sharedData.CollisionConfigProvider.Get(layer)?.LayerMask ?? 0;
 
+			poolObject.Object.PlayableDirector.Play();
+			
 			var entity = ProjectileSpawner.SpawnProjectile(_world, poolObject, _config.ProjectileConfig, spawnPosition, direction, collisionLayerMask);
 			entity.AddKatanaSplashProjectileComponent();
 			entity.AddMoveInLocalSpaceOfEntityComponent(entityId);
@@ -152,11 +166,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 
+			var levelConfig = _config.GetLevelConfig(level);
+			var offset = _config.GetLevelConfig(index + 1).SpawnOffset;
+			
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			damageOnCollision.DamageProvider = levelConfig.DamageProvider;
 
 			ref var localPosition = ref localPositionPool.AddOrGet(entity.Id);
-			localPosition.Position = levelConfig.SpawnOffset*direction;
+			localPosition.Position = new Vector2(offset.x * direction.x, offset.y);
 
 			var transform = view.transform;
 			transform.position = spawnPosition + localPosition.Position;
