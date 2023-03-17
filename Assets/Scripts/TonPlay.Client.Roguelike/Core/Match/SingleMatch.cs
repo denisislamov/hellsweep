@@ -61,7 +61,14 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			balanceModel.Update(data);
 			
-			await _restApiClient.PostGameSession(true);  // TODO - add PVE variable
+			await _restApiClient.PostGameSession(true); 
+			
+			var gameSessionResponse = await _restApiClient.GetGameSession();
+			if (gameSessionResponse == null)
+			{
+				await _restApiClient.PostGameSession(true); // TODO - add PVE variable
+			}
+
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
 		}
 		
@@ -100,10 +107,14 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				profileData.BalanceData.Energy += RoguelikeConstants.Meta.INCREASE_ENERGY_PER_GAINED_LEVEL;
 			}
 
-			await _restApiClient.PutGameSession(new GameSessionPutBody()
+			var gameSessionResponse = await _restApiClient.GetGameSession();
+			if (gameSessionResponse != null)
 			{
-				surviveMills = (int)locationData.LongestSurvivedMillis
-			});
+				await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
+				{
+					surviveMills = (int)locationData.LongestSurvivedMillis
+				});
+			}
 			
 			profileModel.Update(profileData);
 			locationsModel.Update(locationsData);

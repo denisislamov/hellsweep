@@ -17,13 +17,13 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		UniTask<GameSessionResponse> GetGameSession();
-		
+
 		/// <summary>
 		/// Close game session
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> PutGameSession(GameSessionPutBody value);
+		UniTask<GameSessionResponse> PostGameSessionClose(GameSessionPostBody value);
 		
 		/// <summary>
 		/// Create game session

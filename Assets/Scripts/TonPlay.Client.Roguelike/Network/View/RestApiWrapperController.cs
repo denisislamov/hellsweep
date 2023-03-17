@@ -92,13 +92,13 @@ namespace TonPlay.Client.Roguelike.Network.View
             _restApiWrapper.GetGameSession();
         }
 
-        public void PutGameSession()
+        public void PostGameSessionClose()
         {
-            GameSessionPutBody value = new GameSessionPutBody() 
+            var value = new GameSessionPostBody() 
             {
                 surviveMills = int.Parse(_surviveMillsInputField.text)
             };
-            _restApiWrapper.PutGameSession(value);
+            _restApiWrapper.PostGameSessionClose(value);
         }
 
         public void PostGameSession()

@@ -1,9 +1,12 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TonPlay.Client.Roguelike.Network
 {
@@ -108,7 +111,7 @@ namespace TonPlay.Client.Roguelike.Network
             _itemPutResponse = new ItemPutResponse();
 
             Debug.LogFormat("_networkClient.PutAsync<ItemPutResponse> {0}", value);
-            var putTask = _networkClient.PutAsync<ItemPutResponse>("v1/item", _headers, value);
+            var putTask = _networkClient.PutAsync<ItemPutResponse, ItemPutBody>("v1/item", _headers, value);
 
             var result = await putTask;
             _itemPutResponse = result;
@@ -152,22 +155,31 @@ namespace TonPlay.Client.Roguelike.Network
             Debug.LogFormat("_networkClient.GetAsync<GameSessionResponse>");
             var getTask = _networkClient.GetAsync<GameSessionResponse>("v1/game/session", _headers, _gameSessionResponse);
 
-            var result = await getTask;
-            _gameSessionResponse = result;
+            try
+            {
+                var result = await getTask;
+                _gameSessionResponse = result;
 
-            return result;
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogFormat("GetGameSession exception {0}", e);
+                _gameSessionResponse = null;
+                return null;
+            }
         }
 
-        [ContextMenu("PutGameSession")]
-        public async UniTask<GameSessionResponse> PutGameSession(GameSessionPutBody value)
+        [ContextMenu("PostGameSession - GameSessionPutBody")]
+        public async UniTask<GameSessionResponse> PostGameSessionClose(GameSessionPostBody value)
         {
             _gameSessionResponse = new GameSessionResponse();
             Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
-            var putTask = _networkClient.PutAsync<GameSessionResponse>("v1/game/session/close", _headers, value);
+            var putTask = _networkClient.PostAsync<GameSessionResponse, GameSessionPostBody>("v1/game/session/close", _headers, value);
 
             var result = await putTask;
             _gameSessionResponse = result;
-
+            
             return result;
         }
 
@@ -176,7 +188,7 @@ namespace TonPlay.Client.Roguelike.Network
         {
             _gameSessionResponse = new GameSessionResponse();
             Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", pve);
-            var postTask = _networkClient.PostAsync<GameSessionResponse>("v1/game/session?pve=" + (pve ? "true" : "false"), _headers, null);
+            var postTask = _networkClient.PostAsync<GameSessionResponse, string>("v1/game/session?pve=" + (pve ? "true" : "false"), _headers, null);
 
             var result = await postTask;
             _gameSessionResponse = result;
@@ -257,5 +269,6 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+
     }
 }
