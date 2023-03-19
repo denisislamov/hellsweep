@@ -1,9 +1,10 @@
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
+using UniRx;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 {
 	public interface ILocationConfigStorage
 	{
-		ILocationConfig Current { get; }
+		IReadOnlyReactiveProperty<ILocationConfig> Current { get; }
 	}
 }

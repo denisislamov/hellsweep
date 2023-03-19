@@ -8,14 +8,15 @@ using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.Signals;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.Installers
 {
 	public class GlobalInstaller : MonoInstaller
 	{
-		[SerializeField]
-		private ProfileConfigProvider _profileConfigProvider;
+		[FormerlySerializedAs("profileConfigProviderProvider")] [FormerlySerializedAs("_profileConfigProvider")] [SerializeField]
+		private ProfileConfigProvider profileConfigProvider;
 
 		[SerializeField]
 		private LocationConfigProvider _locationConfigProvider;
@@ -29,7 +30,11 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.BindInterfacesTo<MetaGameModelProvider>().AsSingle();
 
 			Container.Bind<ILocationConfigProvider>().FromInstance(_locationConfigProvider).AsSingle();
-			Container.Bind<IProfileConfigProvider>().FromInstance(_profileConfigProvider).AsSingle();
+
+			var runtimeProfileConfigProvider = Instantiate(this.profileConfigProvider);
+			
+			Container.Bind<IProfileConfigProvider>().FromInstance(runtimeProfileConfigProvider).AsSingle();
+			Container.Bind<IProfileConfigProviderUpdater>().FromInstance(runtimeProfileConfigProvider).AsSingle();
 
 			Container.BindInterfacesTo<LocationConfigStorage>().AsSingle();
 		}

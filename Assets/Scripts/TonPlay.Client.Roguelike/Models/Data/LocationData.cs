@@ -7,5 +7,9 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public string Id { get; set; }
 
 		public double LongestSurvivedMillis { get; set; }
+		
+		public bool Won { get; set; }
+		
+		public bool Unlocked { get; set; }
 	}
 }

@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
@@ -11,9 +10,6 @@ using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider;
-using TonPlay.Roguelike.Client.UI.UIService;
-using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
-using TonPlay.Roguelike.Client.Utilities;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -28,10 +24,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		private readonly ProfileBarPresenter.Factory _profileBarPresenterFactory;
 		private readonly LocationSliderPresenter.Factory _locationSliderPresenterFactory;
 		private readonly IMatchLauncher _matchLauncher;
+		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly ILocationConfigStorageSelector _locationConfigStorageSelector;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
+
 		private bool _launchingMatch;
+		private ReactiveProperty<bool> _playButtonLockState;
 
 		public MainMenuPresenter(
 			IMainMenuView view,
@@ -42,7 +41,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			ProfileBarPresenter.Factory profileBarPresenterFactory,
 			LocationSliderPresenter.Factory locationSliderPresenterFactory,
 			ILocationConfigStorageSelector locationConfigStorageSelector,
-			IMatchLauncher matchLauncher)
+			IMatchLauncher matchLauncher,
+			IMetaGameModelProvider metaGameModelProvider)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -51,18 +51,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_profileBarPresenterFactory = profileBarPresenterFactory;
 			_locationSliderPresenterFactory = locationSliderPresenterFactory;
 			_matchLauncher = matchLauncher;
+			_metaGameModelProvider = metaGameModelProvider;
 			_locationConfigStorageSelector = locationConfigStorageSelector;
 
 			AddNestedButtonPresenter();
 			AddNestedProfileBarPresenter();
 			AddNestedLocationSliderPresenter(locationConfigStorageSelector);
-		}
 
-		private void AddNestedLocationSliderPresenter(ILocationConfigStorageSelector selector)
-		{
-			var presenter = _locationSliderPresenterFactory.Create(View.LocationSliderView, new LocationSliderContext(selector));
-
-			Presenters.Add(presenter);
+			AddCurrentLocationSubscription();
 		}
 
 		public override void Dispose()
@@ -72,11 +68,47 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			base.Dispose();
 		}
 
+		private void AddCurrentLocationSubscription()
+		{
+			_locationConfigStorageSelector
+			   .Current
+			   .Subscribe(config =>
+				{
+					var metaGameModel = _metaGameModelProvider.Get();
+
+					if (config.AlreadyUnlocked)
+					{
+						_playButtonLockState.SetValueAndForceNotify(false);
+						return;
+					}
+
+					if (!metaGameModel.LocationsModel.Locations.ContainsKey(config.Id))
+					{
+						_playButtonLockState.SetValueAndForceNotify(true);
+						return;
+					}
+					
+					var model = _metaGameModelProvider.Get().LocationsModel.Locations[config.Id];
+					_playButtonLockState.SetValueAndForceNotify(!model.Unlocked.Value);
+				})
+			   .AddTo(_compositeDisposables);
+		}
+
+		private void AddNestedLocationSliderPresenter(ILocationConfigStorageSelector selector)
+		{
+			var presenter = _locationSliderPresenterFactory.Create(View.LocationSliderView, new LocationSliderContext(selector));
+
+			Presenters.Add(presenter);
+		}
+
 		private void AddNestedButtonPresenter()
 		{
+			_playButtonLockState = new ReactiveProperty<bool>();
+			
 			var presenter = _buttonPresenterFactory.Create(View.PlayButton,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(OnPlayButtonClickHandler)));
+				   .Add(new ClickableButtonContext(OnPlayButtonClickHandler))
+				   .Add(new ReactiveLockButtonContext(_playButtonLockState)));
 
 			Presenters.Add(presenter);
 		}
@@ -99,7 +131,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 			try
 			{
-				await _matchLauncher.Launch(MatchType.OfflineSingle, _locationConfigStorageSelector.Current);
+				await _matchLauncher.Launch(MatchType.OfflineSingle, _locationConfigStorageSelector.Current.Value);
 
 				await _sceneService.UnloadAdditiveSceneByNameAsync(SceneName.MainMenu);
 

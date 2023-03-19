@@ -22,6 +22,7 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.BindInterfacesTo<SceneService.SceneService>().AsSingle();
 
 			Container.BindInterfacesTo<ProfileLoadingService>().AsSingle();
+			Container.BindInterfacesTo<ConfigsLoadingService>().AsSingle();
 			
 			MatchInstaller.Install(Container);
 		}

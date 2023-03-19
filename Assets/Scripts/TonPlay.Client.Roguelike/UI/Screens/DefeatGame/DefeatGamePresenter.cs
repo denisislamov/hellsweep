@@ -4,10 +4,13 @@ using System.Globalization;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -38,6 +41,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
 		private readonly IMatchProvider _matchProvider;
 		private bool _loading;
+		private bool _matchFinished;
 
 		public DefeatGamePresenter(
 			IDefeatGameView view,
@@ -64,11 +68,30 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_locationConfigStorage = locationConfigStorage;
 			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
 			_matchProvider = matchProvider;
+			
+			FinishMatchSession().ContinueWith(response =>
+			{
+				_matchFinished = true;
+				
+				InitView();
+				AddTimerPresenter();
+				AddButtonPresenter();
+				AddRewardItemCollectionPresenter();
+			});
+		}
+		
+		public override void Show()
+		{
+			base.Show();
 
-			InitView();
-			AddTimerPresenter();
-			AddButtonPresenter();
-			AddRewardItemCollectionPresenter();
+			if (_matchFinished)
+			{
+				View.Show();
+			}
+			else
+			{
+				View.Hide();
+			}
 		}
 
 		private void InitView()
@@ -77,8 +100,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			var gameModel = _gameModelProvider.Get();
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
 			var longestSurvivedMillis =
-				metaGameModel.LocationsModel.Locations.ContainsKey(_locationConfigStorage.Current.Id)
-					? metaGameModel.LocationsModel.Locations[_locationConfigStorage.Current.Id].LongestSurvivedMillis.Value
+				metaGameModel.LocationsModel.Locations.ContainsKey(_locationConfigStorage.Current.Value.Id)
+					? metaGameModel.LocationsModel.Locations[_locationConfigStorage.Current.Value.Id].LongestSurvivedMillis.Value
 					: 0d;
 
 			var longestSurvivedTimeSpan = TimeSpan.FromMilliseconds(longestSurvivedMillis);
@@ -101,7 +124,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 
 			View.SetNewRecordActiveState(hasReachedNewRecord);
 
-			View.SetLevelTitleText(_locationConfigStorage.Current.Title);
+			View.SetLevelTitleText(_locationConfigStorage.Current.Value.Title);
 			View.SetKilledEnemiesCountText(string.Format("Enemies defeated: <size=150%>{0}</size>", gameModel.DeadEnemiesCount));
 		}
 
@@ -148,7 +171,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			Presenters.Add(presenter);
 		}
 
-		private void ConfirmButtonClickHandler()
+		private async void ConfirmButtonClickHandler()
 		{
 			if (_loading)
 			{
@@ -159,6 +182,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_uiService.CloseAll(new DefaultScreenLayer());
 
 			_matchProvider.Current.Finish();
+		}
+		
+		private UniTask<GameSessionResponse> FinishMatchSession()
+		{
+			var gameModel = _gameModelProvider.Get();
+			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
+
+			return _matchProvider.Current.FinishSession(
+				new MatchResult(MatchResultType.Lose,
+					gainModel.Gold.Value,
+					gainModel.ProfileExperience.Value));
 		}
 
 		internal class Factory : PlaceholderFactory<IDefeatGameView, IDefeatGameScreenContext, DefeatGamePresenter>

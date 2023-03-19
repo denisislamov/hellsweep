@@ -18,6 +18,7 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: 0483d959e45cb4b788214078124d1a7f, type: 3}
     _sceneName: 3
     _blockSize: {x: 9.4, y: 9.4}
+    _alreadyUnlocked: 1
     _blocksMatrix:
     - _prefabs:
       - {fileID: 1214877528198785843, guid: 26330b880388b45248027149164d6c9b, type: 3}
@@ -80,6 +81,7 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: 0483d959e45cb4b788214078124d1a7f, type: 3}
     _sceneName: 2
     _blockSize: {x: 9.4, y: 9.4}
+    _alreadyUnlocked: 0
     _blocksMatrix:
     - _prefabs:
       - {fileID: 8965550830968474546, guid: b7dde0ad7942f4a19920f71fc5ea7981, type: 3}

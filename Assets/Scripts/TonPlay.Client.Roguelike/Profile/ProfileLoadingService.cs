@@ -1,33 +1,43 @@
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Profile
 {
 	public class ProfileLoadingService : IProfileLoadingService
 	{
-		private readonly IProfileConfigProvider _configProvider;
+		private readonly IProfileConfigProvider _profileConfigProvider;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly IRestApiClient _restApiClient;
 
 		public ProfileLoadingService(
-			IProfileConfigProvider configProvider,
-			IMetaGameModelProvider metaGameModelProvider)
+			IProfileConfigProvider profileConfigProvider,
+			IMetaGameModelProvider metaGameModelProvider,
+			IRestApiClient restApiClient)
 		{
-			_configProvider = configProvider;
+			_restApiClient = restApiClient;
+			_profileConfigProvider = profileConfigProvider;
 			_metaGameModelProvider = metaGameModelProvider;
 		}
 
 		public async UniTask Load()
 		{
-			var config = _configProvider.Get(1);
+			var userSummaryResponse = await _restApiClient.GetUserSummary();
+
 			var metaGameModel = _metaGameModelProvider.Get();
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
 
-			data.Level = config.Level;
-			data.MaxExperience = config.ExperienceToLevelUp;
-			data.BalanceData.Energy = config.MaxEnergy;
-			data.BalanceData.MaxEnergy = config.MaxEnergy;
+			data.Level = userSummaryResponse.profile.level;
+			data.Experience = userSummaryResponse.profile.xp;
+			data.BalanceData.Gold = userSummaryResponse.profile.coin;
+			data.BalanceData.Energy = userSummaryResponse.profile.energy; 
+			data.BalanceData.MaxEnergy = userSummaryResponse.profile.energyMax;
+			
+			var config = _profileConfigProvider.Get(data.Level);
+
+			data.MaxExperience = config?.ExperienceToLevelUp ?? int.MaxValue;
 
 			model.Update(data);
 		}

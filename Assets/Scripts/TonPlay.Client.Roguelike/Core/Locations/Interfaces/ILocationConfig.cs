@@ -8,6 +8,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 	public interface ILocationConfig
 	{
 		string Id { get; }
+		
+		int Index { get; }
 
 		string Title { get; }
 
@@ -18,5 +20,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 		IReadOnlyList<IReadOnlyList<LocationBlockView>> BlocksPrefabsMatrix { get; }
 
 		SceneName SceneName { get; }
+		
+		bool AlreadyUnlocked { get; }
 	}
 }

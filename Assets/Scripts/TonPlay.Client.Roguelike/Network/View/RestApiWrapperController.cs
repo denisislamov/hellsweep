@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,17 +54,17 @@ namespace TonPlay.Client.Roguelike.Network.View
 
         public void GetSkillAll()
         {
-            _restApiWrapper.GetSkillAll();
+            _restApiWrapper.GetSkillAll().Forget();
         }
 
         public void GetBoostAll()
         {
-            _restApiWrapper.GetBoostAll();
+            _restApiWrapper.GetBoostAll().Forget();
         }
 
         public void GetInfoLevelAll()
         {
-            _restApiWrapper.GetInfoLevelAll();
+            _restApiWrapper.GetInfoLevelAll().Forget();
         }
 
         public void PutItem() 
@@ -74,22 +75,22 @@ namespace TonPlay.Client.Roguelike.Network.View
                 itemId = _itemIdInputField.text
             };
 
-            _restApiWrapper.PutItem(value);
+            _restApiWrapper.PutItem(value).Forget();
         }
 
         public void GetAllItems() 
         {
-            _restApiWrapper.GetAllItems();
+            _restApiWrapper.GetAllItems().Forget();
         }
 
         public void DeleteItem() 
         {
-            _restApiWrapper.DeleteItem(_slotIdInputField.text);
+            _restApiWrapper.DeleteItem(_slotIdInputField.text).Forget();
         }
 
         public void GetGameSession()
         {
-            _restApiWrapper.GetGameSession();
+            _restApiWrapper.GetGameSession().Forget();
         }
 
         public void PostGameSessionClose()
@@ -98,36 +99,36 @@ namespace TonPlay.Client.Roguelike.Network.View
             {
                 surviveMills = int.Parse(_surviveMillsInputField.text)
             };
-            _restApiWrapper.PostGameSessionClose(value);
+            _restApiWrapper.PostGameSessionClose(value).Forget();
         }
 
         public void PostGameSession()
         {
-            _restApiWrapper.PostGameSession(_gameSessionToggle.isOn);
+            _restApiWrapper.PostGameSession(_gameSessionToggle.isOn).Forget();
         }
         public void GetUserXp()
         {
-            _restApiWrapper.GetUserXp();
+            _restApiWrapper.GetUserXp().Forget();
         }
 
         public void GetUserSummary()
         {
-            _restApiWrapper.GetUserSummary();
+            _restApiWrapper.GetUserSummary().Forget();
         }
 
         public void GetUserSlots()
         {
-            _restApiWrapper.GetUserSlots();
+            _restApiWrapper.GetUserSlots().Forget();
         }
 
         public void GetUserItems()
         {
-            _restApiWrapper.GetUserItems();
+            _restApiWrapper.GetUserItems().Forget();
         }
 
         public void GetUserBalance()
         {
-            _restApiWrapper.GetUserBalance();
+            _restApiWrapper.GetUserBalance().Forget();
         }
     }
 }

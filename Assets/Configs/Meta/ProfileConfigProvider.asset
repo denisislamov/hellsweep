@@ -16,15 +16,15 @@ MonoBehaviour:
   - level: 1
     _experienceToLevelUp: 25
     _maxEnergy: 30
-  - level: 0
+  - level: 2
     _experienceToLevelUp: 38
     _maxEnergy: 30
-  - level: 0
+  - level: 3
     _experienceToLevelUp: 56
     _maxEnergy: 30
-  - level: 0
+  - level: 4
     _experienceToLevelUp: 84
     _maxEnergy: 30
-  - level: 0
+  - level: 5
     _experienceToLevelUp: 126
     _maxEnergy: 30

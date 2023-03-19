@@ -5,6 +5,8 @@ namespace TonPlay.Client.Roguelike.UI.Buttons.Interfaces
 		void Visit(IClickableButtonContext context);
 
 		void Visit(IReactiveTextButtonContext context);
+		
+		void Visit(IReactiveLockButtonContext context);
 
 		void Visit(ITextButtonContext context);
 	}

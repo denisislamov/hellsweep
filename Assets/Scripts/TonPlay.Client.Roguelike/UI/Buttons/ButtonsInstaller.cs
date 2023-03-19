@@ -18,6 +18,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 			Container.BindFactory<IButtonView, ITextButtonContext, TextButtonPresenter, TextButtonPresenter.Factory>();
 			Container.BindFactory<IButtonView, IClickableButtonContext, ClickableButtonPresenter, ClickableButtonPresenter.Factory>();
 			Container.BindFactory<IButtonView, IReactiveTextButtonContext, ReactiveTextButtonPresenter, ReactiveTextButtonPresenter.Factory>();
+			Container.BindFactory<IButtonView, IReactiveLockButtonContext, ReactiveLockButtonPresenter, ReactiveLockButtonPresenter.Factory>();
 		}
 	}
 }

@@ -25,11 +25,17 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 
 		[SerializeField]
 		private Vector2 _blockSize;
+		
+		[SerializeField]
+		private bool _alreadyUnlocked;
 
 		[SerializeField]
 		private List<LocationBlockList> _blocksMatrix;
 
+		public int index = -1;
+
 		public string Id => _id;
+		public int Index => index;
 		public string Title => _title;
 		public Sprite Icon => _icon;
 		public Vector2 BlockSize => _blockSize;
@@ -37,6 +43,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		public IReadOnlyList<IReadOnlyList<LocationBlockView>> BlocksPrefabsMatrix =>
 			_blocksMatrix.Select(_ => _.Prefabs).ToList();
 		public SceneName SceneName => _sceneName;
+		public bool AlreadyUnlocked => _alreadyUnlocked;
 
 		[Serializable]
 		private class LocationBlockList

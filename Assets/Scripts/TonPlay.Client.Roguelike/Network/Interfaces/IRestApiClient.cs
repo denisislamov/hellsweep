@@ -5,6 +5,8 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 {
 	public interface IRestApiClient
 	{
+		void Init();
+		
 		UniTask<SkillAllResponse> GetSkillAll();
 		UniTask<BoostAllResponse> GetBoostAll();
 		UniTask<InfoLevelAllResponse> GetInfoLevelAll();

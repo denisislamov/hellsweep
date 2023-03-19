@@ -23,7 +23,7 @@ namespace TonPlay.Client.Roguelike.Network
         private NetworkSettings _networkSettings;
         private Dictionary<string, string> _headers;
 
-        private void Start()
+        public void Init()
         {
             var uri = _useDebugToken ? _debugTokenSettings.GetFullDebugAppUrl(_username) : Application.absoluteURL;
             _token = UriParser.Parse(uri)["token"];

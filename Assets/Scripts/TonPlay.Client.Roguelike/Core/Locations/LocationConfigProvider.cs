@@ -14,12 +14,33 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 
 		private Dictionary<string, ILocationConfig> _map;
 
-		private IReadOnlyDictionary<string, ILocationConfig> Map => _map ??= _configs.ToDictionary(_ => _.Id, _ => (ILocationConfig)_);
+		private IReadOnlyDictionary<string, ILocationConfig> Map
+		{
+			get
+			{
+				if (_map == null)
+				{
+					for (var index = 0; index < _configs.Length; index++)
+					{
+						var locationConfig = _configs[index];
+						locationConfig.index = index;
+					}
+
+					_map = _configs.ToDictionary(_ => _.Id, _ => (ILocationConfig)_);
+				}
+				return _map;
+			}
+		}
 
 		public ILocationConfig Get(string id) =>
 			!Map.ContainsKey(id)
 				? default(ILocationConfig)
 				: Map[id];
+
+		public ILocationConfig Get(int index) =>
+			index >= _configs.Length || index < 0
+				? default
+				: _configs[index];
 
 		public ILocationConfig[] Configs => _configs;
 	}

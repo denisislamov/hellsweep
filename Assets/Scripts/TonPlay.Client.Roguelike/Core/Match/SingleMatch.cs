@@ -28,6 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly ILocationConfig _locationConfig;
 		private readonly IRestApiClient _restApiClient;
+		private readonly ILocationConfigProvider _locationConfigProvider;
 
 		public SingleMatch(
 			ILocationConfig locationConfig,
@@ -36,7 +37,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			IGameModelProvider gameModelProvider,
 			IProfileConfigProvider profileConfigProvider,
 			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient)
+			IRestApiClient restApiClient,
+			ILocationConfigProvider locationConfigProvider)
 		{
 			_sceneService = sceneService;
 			_uiService = uiService;
@@ -45,6 +47,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			_metaGameModelProvider = metaGameModelProvider;
 			_locationConfig = locationConfig;
 			_restApiClient = restApiClient;
+			_locationConfigProvider = locationConfigProvider;
 		}
 		
 		public async UniTask Launch()
@@ -75,31 +78,56 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			await _restApiClient.PostGameSession(true); // TODO - add PVE variable
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
 		}
-		
-		public async UniTask Finish()
+
+		public async UniTask<GameSessionResponse> FinishSession(IMatchResult matchResult)
 		{
+			var response = new GameSessionResponse();
+			
 			var metaGameModel = _metaGameModelProvider.Get();
+			var gameModel = _gameModelProvider.Get();
 
 			var locationsModel = metaGameModel.LocationsModel;
 			var locationsData = locationsModel.ToData();
-
-			if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
-			{
-				locationsData.Locations.Add(
-					_locationConfig.Id,
-					new LocationData() {Id = _locationConfig.Id});
-			}
-
-			var locationData = locationsData.Locations[_locationConfig.Id];
-
+			
 			var profileModel = metaGameModel.ProfileModel;
-			var gameModel = _gameModelProvider.Get();
-
 			var profileData = profileModel.ToData();
 
+			UpdateCurrentLocationTimeMillis(locationsData, gameModel);
+			UpdatePlayerProfile(profileData, gameModel);
+
+			if (matchResult.MatchResultType == MatchResultType.Win)
+			{
+				UnlockNextLocation(locationsData);
+			}
+
+			var gameSessionResponse = await _restApiClient.GetGameSession();
+			if (gameSessionResponse != null)
+			{
+				response = await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
+				{
+					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.Id].LongestSurvivedMillis)
+				});
+			}
+			
+			profileModel.Update(profileData);
+			locationsModel.Update(locationsData);
+
+			return gameSessionResponse;
+		}
+		
+		public async UniTask Finish()
+		{
+			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu);
+
+			_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
+			
+			await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
+		}
+
+		private void UpdatePlayerProfile(ProfileData profileData, IGameModel gameModel)
+		{
 			profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
 			profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
-			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
 
 			while (profileData.Experience >= profileData.MaxExperience)
 			{
@@ -110,24 +138,43 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += RoguelikeConstants.Meta.INCREASE_ENERGY_PER_GAINED_LEVEL;
 			}
-
-			var gameSessionResponse = await _restApiClient.GetGameSession();
-			if (gameSessionResponse != null)
+		}
+		
+		private void UpdateCurrentLocationTimeMillis(LocationsData locationsData, IGameModel gameModel)
+		{
+			if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
 			{
-				await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
-				{
-					surviveMills = (int)locationData.LongestSurvivedMillis
-				});
+				locationsData.Locations.Add(
+					_locationConfig.Id,
+					new LocationData() {Id = _locationConfig.Id});
+			}
+
+			var locationData = locationsData.Locations[_locationConfig.Id];
+
+			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+		}
+
+		private void UnlockNextLocation(LocationsData locationsData)
+		{
+			var nextLocation = _locationConfigProvider.Get(_locationConfig.Index + 1);
+
+			if (nextLocation is null)
+			{
+				return;
 			}
 			
-			profileModel.Update(profileData);
-			locationsModel.Update(locationsData);
-			
-			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu);
+			if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
+			{
+				locationsData.Locations.Add(
+					nextLocation.Id,
+					new LocationData()
+					{
+						Id = nextLocation.Id
+					});
+			}
 
-			_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
-			
-			await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
+			var nextLocationData = locationsData.Locations[_locationConfig.Id];
+			nextLocationData.Unlocked = true;
 		}
 
 		public class Factory : PlaceholderFactory<ILocationConfig, SingleMatch>

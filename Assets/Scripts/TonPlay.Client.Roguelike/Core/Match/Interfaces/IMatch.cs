@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Roguelike.Network.Response;
 
 namespace TonPlay.Client.Roguelike.Core.Match.Interfaces
 {
@@ -6,6 +7,8 @@ namespace TonPlay.Client.Roguelike.Core.Match.Interfaces
 	{
 		UniTask Launch();
 
+		UniTask<GameSessionResponse> FinishSession(IMatchResult matchResult);
+		
 		UniTask Finish();
 	}
 }

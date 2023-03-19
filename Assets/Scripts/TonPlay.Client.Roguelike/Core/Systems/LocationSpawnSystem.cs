@@ -24,7 +24,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			_blocksRoot = blocksRoot;
 			_kdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Default"));
-			_locationConfig = locationConfigStorage.Current;
+			_locationConfig = locationConfigStorage.Current.Value;
 			_movedBlockEntityIds = new HashSet<int>();
 		}
 

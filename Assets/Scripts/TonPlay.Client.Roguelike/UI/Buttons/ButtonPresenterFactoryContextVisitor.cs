@@ -9,6 +9,7 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		private readonly TextButtonPresenter.Factory _textButtonPresenterFactory;
 		private readonly ClickableButtonPresenter.Factory _clickableButtonPresenterFactory;
 		private readonly ReactiveTextButtonPresenter.Factory _reactiveTextButtonPresenterFactory;
+		private readonly ReactiveLockButtonPresenter.Factory _reactiveLockButtonPresenterFactory;
 
 		private readonly IButtonView _buttonView;
 
@@ -20,12 +21,14 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 			IButtonView buttonView,
 			TextButtonPresenter.Factory textButtonPresenterFactory,
 			ClickableButtonPresenter.Factory clickableButtonPresenterFactory,
-			ReactiveTextButtonPresenter.Factory reactiveTextButtonPresenterFactory)
+			ReactiveTextButtonPresenter.Factory reactiveTextButtonPresenterFactory,
+			ReactiveLockButtonPresenter.Factory reactiveLockButtonPresenterFactory)
 		{
 			_buttonView = buttonView;
 			_textButtonPresenterFactory = textButtonPresenterFactory;
 			_clickableButtonPresenterFactory = clickableButtonPresenterFactory;
 			_reactiveTextButtonPresenterFactory = reactiveTextButtonPresenterFactory;
+			_reactiveLockButtonPresenterFactory = reactiveLockButtonPresenterFactory;
 		}
 
 		public void Visit(IClickableButtonContext context)
@@ -38,6 +41,13 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		public void Visit(IReactiveTextButtonContext context)
 		{
 			var presenter = _reactiveTextButtonPresenterFactory.Create(_buttonView, context);
+
+			_presenters.Add(presenter);
+		}
+		
+		public void Visit(IReactiveLockButtonContext context)
+		{
+			var presenter = _reactiveLockButtonPresenterFactory.Create(_buttonView, context);
 
 			_presenters.Add(presenter);
 		}
