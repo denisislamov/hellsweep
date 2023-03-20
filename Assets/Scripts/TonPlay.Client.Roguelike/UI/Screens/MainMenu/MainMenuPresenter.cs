@@ -1,10 +1,12 @@
 using System;
+using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
@@ -29,6 +31,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
+		private IRestApiClient _restApiClient;
+
+		private IDisposable _userProfileUpdateScheduler;
+		
 		private bool _launchingMatch;
 		private ReactiveProperty<bool> _playButtonLockState;
 
@@ -42,7 +48,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			LocationSliderPresenter.Factory locationSliderPresenterFactory,
 			ILocationConfigStorageSelector locationConfigStorageSelector,
 			IMatchLauncher matchLauncher,
-			IMetaGameModelProvider metaGameModelProvider)
+			IMetaGameModelProvider metaGameModelProvider,
+			IRestApiClient restApiClient)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -53,18 +60,42 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_matchLauncher = matchLauncher;
 			_metaGameModelProvider = metaGameModelProvider;
 			_locationConfigStorageSelector = locationConfigStorageSelector;
-
+			_restApiClient = restApiClient;
+			
 			AddNestedButtonPresenter();
 			AddNestedProfileBarPresenter();
 			AddNestedLocationSliderPresenter(locationConfigStorageSelector);
 
 			AddCurrentLocationSubscription();
+
+			AddUserProfileUpdateScheduler();
+		}
+
+		private void AddUserProfileUpdateScheduler()
+		{
+			_userProfileUpdateScheduler = Observable
+			   .Interval(TimeSpan.FromSeconds(60)) // TODO - move to some config
+			   .Subscribe(_ => UpdateUserProfile());
+		}
+
+		private async void UpdateUserProfile()
+		{
+			var userBalanceResponse = await _restApiClient.GetUserBalance();
+			
+			var metaGameModel = _metaGameModelProvider.Get();
+			var model = metaGameModel.ProfileModel;
+			var data = metaGameModel.ProfileModel.ToData();
+			
+			data.BalanceData.Gold = userBalanceResponse.coin;
+			data.BalanceData.Energy = userBalanceResponse.energy;
+			
+			model.Update(data);
 		}
 
 		public override void Dispose()
 		{
 			_compositeDisposables.Dispose();
-
+			_userProfileUpdateScheduler.Dispose();
 			base.Dispose();
 		}
 
