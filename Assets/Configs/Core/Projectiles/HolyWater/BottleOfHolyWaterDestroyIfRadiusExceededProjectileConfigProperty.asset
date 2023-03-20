@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990e3021fc75489bbf1f4b32a056039f, type: 3}
   m_Name: BottleOfHolyWaterDestroyIfRadiusExceededProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _distance: 3
+  _distance: 4

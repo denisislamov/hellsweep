@@ -72,7 +72,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			FinishMatchSession().ContinueWith(response =>
 			{
 				_matchFinished = true;
-				
+
+				Show();
 				InitView();
 				AddTimerPresenter();
 				AddButtonPresenter();
