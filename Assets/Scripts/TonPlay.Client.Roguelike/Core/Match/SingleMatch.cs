@@ -50,14 +50,14 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			_locationConfigProvider = locationConfigProvider;
 		}
 		
-		public async UniTask Launch()
+		public async UniTask<bool> Launch()
 		{
 			var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
 			var data = balanceModel.ToData();
 
 			if (data.Energy < RoguelikeConstants.Meta.MATCH_ENERGY_PRICE_BASE)
 			{
-				return;
+				return false;
 			}
 
 			data.Energy -= RoguelikeConstants.Meta.MATCH_ENERGY_PRICE_BASE;
@@ -77,6 +77,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			await _restApiClient.PostGameSession(true); // TODO - add PVE variable
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
+
+			return true;
 		}
 
 		public async UniTask<GameSessionResponse> FinishSession(IMatchResult matchResult)

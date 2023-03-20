@@ -21,7 +21,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			_singleMatchFactory = singleMatchFactory;
 		}
 
-		public async UniTask Launch(MatchType matchType, ILocationConfig locationConfig)
+		public async UniTask<bool> Launch(MatchType matchType, ILocationConfig locationConfig)
 		{
 			switch (matchType)
 			{
@@ -31,8 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 					
 					_matchProviderSetup.Setup(match);
 
-					await match.Launch();
-					return;
+					return await match.Launch();
 				}
 				default:
 					throw new NotSupportedException();

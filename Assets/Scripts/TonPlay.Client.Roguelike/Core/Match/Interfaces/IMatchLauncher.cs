@@ -5,6 +5,6 @@ namespace TonPlay.Client.Roguelike.Core.Match.Interfaces
 {
 	public interface IMatchLauncher
 	{
-		UniTask Launch(MatchType matchType, ILocationConfig locationConfig);
+		UniTask<bool> Launch(MatchType matchType, ILocationConfig locationConfig);
 	}
 }

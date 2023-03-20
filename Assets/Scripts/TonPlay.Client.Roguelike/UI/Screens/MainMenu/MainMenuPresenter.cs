@@ -131,11 +131,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 			try
 			{
-				await _matchLauncher.Launch(MatchType.OfflineSingle, _locationConfigStorageSelector.Current.Value);
+				if (await _matchLauncher.Launch(MatchType.OfflineSingle, _locationConfigStorageSelector.Current.Value))
+				{
+					await _sceneService.UnloadAdditiveSceneByNameAsync(SceneName.MainMenu);
 
-				await _sceneService.UnloadAdditiveSceneByNameAsync(SceneName.MainMenu);
-
-				_uiService.Close(Context.Screen);
+					_uiService.Close(Context.Screen);
+				}
 			}
 			catch (Exception e)
 			{

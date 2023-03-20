@@ -5,7 +5,7 @@ namespace TonPlay.Client.Roguelike.Core.Match.Interfaces
 {
 	public interface IMatch
 	{
-		UniTask Launch();
+		UniTask<bool> Launch();
 
 		UniTask<GameSessionResponse> FinishSession(IMatchResult matchResult);
 		
