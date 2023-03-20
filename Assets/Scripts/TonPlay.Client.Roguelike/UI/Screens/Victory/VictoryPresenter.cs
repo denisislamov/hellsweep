@@ -148,7 +148,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
 
 			return _matchProvider.Current.FinishSession(
-				new MatchResult(MatchResultType.Lose,
+				new MatchResult(MatchResultType.Win,
 					gainModel.Gold.Value,
 					gainModel.ProfileExperience.Value));
 		}
