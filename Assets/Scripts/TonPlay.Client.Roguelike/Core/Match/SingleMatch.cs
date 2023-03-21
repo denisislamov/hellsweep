@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
@@ -107,8 +108,28 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				response = await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
 				{
-					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.Id].LongestSurvivedMillis)
+					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.Id].LongestSurvivedMillis),
+					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
 				});
+
+				if (response.rewardSummary != null)
+				{
+					var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
+					gainData.Gold += response.rewardSummary.coin; // TODO check it
+					gainData.ProfileExperience = response.rewardSummary.xp; // TODO check it as well
+
+					var chests = response.rewardSummary.chests;
+					if (chests != null && chests.Count > 0)
+					{
+						gainData.ChestsId = new List<string>(chests.Count);
+						for (var index = 0; index < chests.Count; index++)
+						{
+							gainData.ChestsId[index] = chests[index].id;
+						}
+					}
+					
+					gameModel.PlayerModel.MatchProfileGainModel.Update(gainData);
+				}
 			}
 			
 			profileModel.Update(profileData);
