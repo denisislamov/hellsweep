@@ -5,6 +5,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
     [System.Serializable]
     public class GameSessionPostBody
     {
+        public long coins;
         public long surviveMills;
     }
 }
