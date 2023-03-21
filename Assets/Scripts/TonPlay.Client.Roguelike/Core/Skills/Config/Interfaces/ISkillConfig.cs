@@ -19,6 +19,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		SkillName[] Evolutions { get; }
 
 		string GetLevelDescription(int level);
+		
+		void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor);
 	}
 
 	public interface ISkillConfig<out T> : ISkillConfig

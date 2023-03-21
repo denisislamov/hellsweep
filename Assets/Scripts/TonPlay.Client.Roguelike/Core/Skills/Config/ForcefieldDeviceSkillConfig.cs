@@ -25,19 +25,24 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public override SkillName SkillName => SkillName.ForcefieldDevice;
 
 		public EffectView EffectView => _effectView;
 
-		public override IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) =>
+		public override IForcefieldDeviceSkillLevelConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
 		[Serializable]
-		private class LevelConfig : IForcefieldDeviceSkillLevelConfig
+		public class LevelConfig : IForcefieldDeviceSkillLevelConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -55,7 +60,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			private LayerMask _collisionLayerMask;
 
 			[SerializeField]
-			private CollisionAreaConfig _collisionAreaConfig;
+			private CircleCollisionAreaConfig _collisionAreaConfig;
 
 			public int Level => _level;
 
@@ -68,6 +73,30 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 
 			public string Description => _description;
+			
+			public void SetDamage(float value)
+			{
+				_damageProvider.damage = value;
+			}
+			
+			public void SetRange(float value)
+			{
+				_size = value;
+				_collisionAreaConfig.SetRadius(value);
+			}
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_size = _size,
+					_collisionLayerMask = _collisionLayerMask,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+					_collisionAreaConfig = (CircleCollisionAreaConfig) _collisionAreaConfig.Clone(),
+				};
+			}
 		}
 	}
 }

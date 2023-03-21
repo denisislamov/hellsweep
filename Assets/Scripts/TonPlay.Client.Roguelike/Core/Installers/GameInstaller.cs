@@ -36,10 +36,7 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 
 		[SerializeField]
 		private CollisionConfigProvider _collisionConfigProvider;
-
-		[SerializeField]
-		private SkillConfigProvider _skillConfigProvider;
-
+		
 		[FormerlySerializedAs("_damageText3DView")] [SerializeField]
 		private DamageTextView damageTextView;
 
@@ -50,7 +47,6 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 			Container.Bind<IPlayerConfigProvider>().FromInstance(_playerConfigProvider).AsSingle();
 			Container.Bind<IWeaponConfigProvider>().FromInstance(_weaponConfigProvider).AsSingle();
 			Container.Bind<ICollisionConfigProvider>().FromInstance(_collisionConfigProvider).AsSingle();
-			Container.Bind<ISkillConfigProvider>().FromInstance(_skillConfigProvider).AsSingle();
 
 			Container.Bind<ICompositeViewPool>().To<CompositeViewPool>().AsSingle();
 

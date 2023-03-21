@@ -19,7 +19,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
             public class Detail
             {
                 public int level;
-                public int value;
+                public float value;
             }
         }
     }

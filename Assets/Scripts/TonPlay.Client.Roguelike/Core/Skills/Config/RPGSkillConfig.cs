@@ -22,18 +22,23 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		public override SkillName SkillName => SkillName.RPG;
 
-		public override IRPGSkillLevelConfig GetLevelConfig(int level) =>
+		public override IRPGSkillLevelConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
 		[Serializable]
-		private class LevelConfig : IRPGSkillLevelConfig
+		public class LevelConfig : IRPGSkillLevelConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -56,6 +61,33 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public int ProjectileQuantity => _projectileQuantity;
 			public IDamageProvider DamageProvider => _damageProvider;
 			public string Description => _description;
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_delay = _delay,
+					_projectileQuantity = _projectileQuantity,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+				};
+			}
+			
+			public void SetDamage(float value)
+			{
+				_damageProvider.damage = value;
+			}
+			
+			public void SetCooldown(float value)
+			{
+				_delay = value;
+			}
+			
+			public void SetQuantity(int value)
+			{
+				_projectileQuantity = value;
+			}
 		}
 	}
 }

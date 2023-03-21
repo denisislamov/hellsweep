@@ -12,5 +12,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 		private Rect _rect;
 
 		public Rect Rect => _rect;
+		
+		public override CollisionAreaConfig Clone()
+		{
+			return Instantiate(this);
+		}
 	}
 }

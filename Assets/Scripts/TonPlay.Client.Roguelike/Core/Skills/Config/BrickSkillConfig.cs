@@ -6,8 +6,6 @@ using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -34,7 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		public float TimeToReachDistance => _timeToReachDistance;
@@ -42,14 +40,19 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public float DelayBetweenSpawn => _delayBetweenSpawn;
 
 		public override SkillName SkillName => SkillName.Brick;
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
-		public override IBrickSkillLevelConfig GetLevelConfig(int level) =>
+		public override IBrickSkillLevelConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
 
 		[Serializable]
-		private class LevelConfig : IBrickSkillLevelConfig
+		public class LevelConfig : IBrickSkillLevelConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -76,6 +79,29 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public IDamageProvider DamageProvider => _damageProvider;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 			public string Description => _description;
+
+			public void SetDamage(float damage)
+			{
+				_damageProvider.damage = damage;
+			}
+			
+			public void SetQuantity(int value)
+			{
+				_quantity = value;
+			}
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_collisionAreaConfig = _collisionAreaConfig.Clone(),
+					_cooldown = _cooldown,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+					_quantity = _quantity
+				};
+			}
 		}
 	}
 }

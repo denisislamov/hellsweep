@@ -1,9 +1,10 @@
+using System;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Common.UIService.Interfaces
 {
-	public interface IUIService
+	public interface IUIService : IDisposable
 	{
 		void Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
 			where TContext : IScreenContext

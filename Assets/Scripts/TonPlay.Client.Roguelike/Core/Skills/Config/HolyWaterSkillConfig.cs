@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public override SkillName SkillName => SkillName.Molotov;
 
@@ -41,13 +41,18 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public int CollisionLayerMask => _collisionLayerMask.value;
 
-		public override IHolyWaterSkillLevelConfig GetLevelConfig(int level) =>
+		public override IHolyWaterSkillLevelConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
 		[Serializable]
-		private class LevelConfig : IHolyWaterSkillLevelConfig
+		public class LevelConfig : IHolyWaterSkillLevelConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -66,6 +71,9 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			[SerializeField]
 			private DamageProvider _damageProvider;
+			
+			[SerializeField]
+			private float _radius;
 
 			public int Level => _level;
 
@@ -76,6 +84,37 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 			public IDamageProvider DamageProvider => _damageProvider;
 			public string Description => _description;
+
+			public float Radius => _radius;
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_quantity = _quantity,
+					_activeTime = _activeTime,
+					_cooldown = _cooldown,
+					_radius = _radius,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+				};
+			}
+			
+			public void SetDamage(float value)
+			{
+				_damageProvider.damage = value;
+			}
+
+			public void SetQuantity(int value)
+			{
+				_quantity = value;
+			}
+			
+			public void SetCooldown(float value)
+			{
+				_cooldown = value;
+			}
 		}
 	}
 }

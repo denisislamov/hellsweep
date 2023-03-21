@@ -38,6 +38,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		public int MaxLevel => _maxLevel;
 		public SkillName[] Evolutions => _evolutions;
 		public abstract string GetLevelDescription(int level);
+		public abstract void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor);
 	}
 
 	public abstract class SkillConfig<T> :

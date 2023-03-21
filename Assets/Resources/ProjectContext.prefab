@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiServiceInstaller: {fileID: 11400000, guid: 941c053fe759f4ab29bf8dbe125f156d, type: 2}
+  _skillConfigProvider: {fileID: 11400000, guid: 03bd7816bb333457db6d5a2ac1ed953e, type: 2}
 --- !u!114 &5968772282407841107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +212,7 @@ MonoBehaviour:
       xp: 0
       coin: 0
       energy: 0
+      energyMax: 0
   _userSlotsResponse:
     _items: []
   _userItemsResponse:

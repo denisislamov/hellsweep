@@ -30,20 +30,25 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public RevolverSightEffect SightEffectView => _sightEffectView;
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 
 		public override SkillName SkillName => SkillName.Revolver;
 
-		public override IRevolverLevelSkillConfig GetLevelConfig(int level) =>
+		public override IRevolverLevelSkillConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
 		[Serializable]
-		private class LevelConfig : IRevolverLevelSkillConfig
+		public class LevelConfig : IRevolverLevelSkillConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -73,6 +78,30 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public int CollisionLayerMask => _collisionLayerMask.value;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 			public string Description => _description;
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_shootDelay = _shootDelay,
+					_fieldOfView = _fieldOfView,
+					_collisionLayerMask = _collisionLayerMask,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+					_collisionAreaConfig = (CircleCollisionAreaConfig) _collisionAreaConfig.Clone(),
+				};
+			}
+			
+			public void SetDamage(float value)
+			{
+				_damageProvider.damage = value;
+			}
+			
+			public void SetCooldown(float value)
+			{
+				_shootDelay = value;
+			}
 		}
 	}
 }

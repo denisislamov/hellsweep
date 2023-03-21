@@ -31,5 +31,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills
 		Revolver,
 		Crossbow,
 		Katana,
+		Lightchaser,
+		Bat,
+		Durian,
+		LaserLauncher,
+		GoldGain
 	}
 }

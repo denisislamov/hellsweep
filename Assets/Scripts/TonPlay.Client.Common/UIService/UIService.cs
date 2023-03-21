@@ -6,6 +6,8 @@ using TonPlay.Roguelike.Client.Extensions;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Layers;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +17,15 @@ namespace TonPlay.Client.Common.UIService
     {
         private readonly IDictionary<Type, IUIService> _layeredServices = new Dictionary<Type, IUIService>();
 
+        private readonly IDisposable _rootDestroyHandler;
+        
         public UIService(IDefaultScreenRoot defaultScreenRoot, IEnumerable<IScreenLayer> layers, IScreenFactoryFacade screenFactoryFacade)
         {
             if (layers == null) return;
 
             var screenRoot = defaultScreenRoot.Root;
+            
+            _rootDestroyHandler = defaultScreenRoot.Root.OnDestroyAsObservable().Subscribe(_ => Dispose());
             
             foreach (var layer in layers)
             {
@@ -76,6 +82,16 @@ namespace TonPlay.Client.Common.UIService
             }
             
             return _layeredServices[screenLayer.GetType()].GetScreensRoot();
+        }
+        
+        public void Dispose()
+        {
+            _rootDestroyHandler?.Dispose();
+
+            foreach (var keyValuePair in _layeredServices)
+            {
+                keyValuePair.Value.Dispose();
+            }
         }
     }
 }

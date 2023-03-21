@@ -12,5 +12,10 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 		private List<CollisionAreaConfig> _collisionAreaConfigs;
 
 		public IReadOnlyList<ICollisionAreaConfig> CollisionAreaConfigs => _collisionAreaConfigs;
+		
+		public override CollisionAreaConfig Clone()
+		{
+			return Instantiate(this);
+		}
 	}
 }

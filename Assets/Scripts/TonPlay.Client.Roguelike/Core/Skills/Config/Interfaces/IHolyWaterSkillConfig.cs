@@ -21,6 +21,8 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		float Cooldown { get; }
 
 		float ActiveTime { get; }
+		
+		float Radius { get; }
 
 		IDamageProvider DamageProvider { get; }
 	}

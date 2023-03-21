@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
@@ -26,6 +27,18 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		{
 			get => _damageMultiplier;
 			set => _damageMultiplier = value;
+		}
+		
+		public DamageProvider Clone()
+		{
+			return new DamageProvider()
+			{
+				damageSource = damageSource,
+				damage = damage,
+				rate = rate,
+				_damageSource = _damageSource,
+				_damageMultiplier = _damageMultiplier
+			};
 		}
 	}
 }

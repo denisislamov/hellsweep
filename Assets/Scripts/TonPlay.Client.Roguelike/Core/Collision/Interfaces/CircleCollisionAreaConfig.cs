@@ -12,5 +12,15 @@ namespace TonPlay.Client.Roguelike.Core.Collision.Interfaces
 		private float _radius;
 
 		public float Radius => _radius;
+
+		public void SetRadius(float value)
+		{
+			_radius = value;
+		}
+		
+		public override CollisionAreaConfig Clone()
+		{
+			return Instantiate(this);
+		}
 	}
 }

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Core.Skills;
 
 namespace TonPlay.Client.Roguelike.Network.Response
 {
     [System.Serializable]
-    public class SkillAllResponse 
+    public class SkillAllResponse
     {
         public List<Skill> items;
         [System.Serializable]
@@ -20,7 +21,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
             {
                 public string feature;
                 public int level;
-                public int value;
+                public float value;
             }
         }
     }

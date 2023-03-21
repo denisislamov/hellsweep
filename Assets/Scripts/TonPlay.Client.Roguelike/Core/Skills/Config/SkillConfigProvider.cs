@@ -16,14 +16,14 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		private SkillPresentationConfig _presentationConfig;
 
 		private Dictionary<SkillName, SkillConfig> _map;
-		private Dictionary<SkillName, SkillConfig> Map => _map ??= _skillConfigs.ToDictionary(_ => _.SkillName, _ => _);
+		private Dictionary<SkillName, SkillConfig> Map => _map ??= _skillConfigs.ToDictionary(_ => _.SkillName, Instantiate);
 
 		public IEnumerable<ISkillConfig> All => _skillConfigs;
 		public ISkillPresentationConfig PresentationConfig => _presentationConfig;
 
 		public ISkillConfig Get(SkillName skillName)
 		{
-			return Map[skillName];
+			return Map.ContainsKey(skillName) ? Map[skillName] : default;
 		}
 	}
 }

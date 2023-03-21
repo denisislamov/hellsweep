@@ -1,5 +1,7 @@
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Match;
+using TonPlay.Client.Roguelike.Core.Skills.Config;
+using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
@@ -11,6 +13,9 @@ namespace TonPlay.Client.Roguelike.Installers
 	{
 		[SerializeField]
 		private UIServiceInstaller _uiServiceInstaller;
+		
+		[SerializeField]
+		private SkillConfigProvider _skillConfigProvider;
 
 		public override void InstallBindings()
 		{
@@ -23,7 +28,11 @@ namespace TonPlay.Client.Roguelike.Installers
 
 			Container.BindInterfacesTo<ProfileLoadingService>().AsSingle();
 			Container.BindInterfacesTo<ConfigsLoadingService>().AsSingle();
-			
+
+			var skillConfigProviderInstance = Instantiate(_skillConfigProvider);
+			Container.Bind<ISkillConfigProvider>().FromInstance(skillConfigProviderInstance).AsSingle();
+			Container.Bind<ISkillConfigUpdater>().To<SkillConfigUpdater>().AsSingle();
+
 			MatchInstaller.Install(Container);
 		}
 	}

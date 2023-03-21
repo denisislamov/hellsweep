@@ -29,7 +29,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		private Dictionary<int, LevelConfig> _map;
 
-		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _);
+		private IReadOnlyDictionary<int, LevelConfig> Map => _map ??= _levelConfigs.ToDictionary(_ => _.Level, _ => _.Clone());
 
 		public IProjectileConfig ProjectileConfig => _projectileConfig;
 		
@@ -38,13 +38,18 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 
 		public override SkillName SkillName => SkillName.DrillShot;
 
-		public override IDrillShotSkillLevelConfig GetLevelConfig(int level) =>
+		public override IDrillShotSkillLevelConfig GetLevelConfig(int level) => GetLevelConfigInternal(level);
+		
+		public LevelConfig GetLevelConfigInternal(int level) =>
 			!Map.ContainsKey(level)
 				? null
 				: Map[level];
+		
+		public override void AcceptUpdaterVisitor(ISkillConfigUpdaterVisitor skillConfigUpdaterVisitor) => 
+			skillConfigUpdaterVisitor.Update(this);
 
 		[Serializable]
-		private class LevelConfig : IDrillShotSkillLevelConfig
+		public class LevelConfig : IDrillShotSkillLevelConfig
 		{
 			[SerializeField]
 			private int _level;
@@ -80,6 +85,36 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			public IDamageProvider DamageProvider => _damageProvider;
 			public ICollisionAreaConfig CollisionAreaConfig => _collisionAreaConfig;
 			public string Description => _description;
+			
+			public void SetDamage(float value)
+			{
+				_damageProvider.damage = value;
+			}
+			
+			public void SetQuantity(int value)
+			{
+				_quantity = value;
+			}
+			
+			public void SetSpeed(float value)
+			{
+				_speed = value;
+			}
+			
+			public LevelConfig Clone()
+			{
+				return new LevelConfig()
+				{
+					_quantity = _quantity,
+					_speed = _speed,
+					_cooldown = _cooldown,
+					_activeTime = _activeTime,
+					_damageProvider = _damageProvider.Clone(),
+					_description = (string) _description.Clone(),
+					_level = _level,
+					_collisionAreaConfig = _collisionAreaConfig.Clone(),
+				};
+			}
 		}
 	}
 }

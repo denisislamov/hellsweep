@@ -33,8 +33,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 		private IRestApiClient _restApiClient;
 
-		private IDisposable _userProfileUpdateScheduler;
-		
 		private bool _launchingMatch;
 		private ReactiveProperty<bool> _playButtonLockState;
 
@@ -61,7 +59,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_metaGameModelProvider = metaGameModelProvider;
 			_locationConfigStorageSelector = locationConfigStorageSelector;
 			_restApiClient = restApiClient;
-			
+
 			AddNestedButtonPresenter();
 			AddNestedProfileBarPresenter();
 			AddNestedLocationSliderPresenter(locationConfigStorageSelector);
@@ -71,32 +69,32 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			AddUserProfileUpdateScheduler();
 		}
 
+		public override void Dispose()
+		{
+			_compositeDisposables.Dispose();
+			base.Dispose();
+		}
+		
 		private void AddUserProfileUpdateScheduler()
 		{
-			_userProfileUpdateScheduler = Observable
+			Observable
 			   .Interval(TimeSpan.FromSeconds(60)) // TODO - move to some config
-			   .Subscribe(_ => UpdateUserProfile());
+			   .Subscribe(_ => UpdateUserProfile())
+			   .AddTo(_compositeDisposables);
 		}
 
 		private async void UpdateUserProfile()
 		{
 			var userBalanceResponse = await _restApiClient.GetUserBalance();
-			
+
 			var metaGameModel = _metaGameModelProvider.Get();
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
-			
+
 			data.BalanceData.Gold = userBalanceResponse.coin;
 			data.BalanceData.Energy = userBalanceResponse.energy;
-			
-			model.Update(data);
-		}
 
-		public override void Dispose()
-		{
-			_compositeDisposables.Dispose();
-			_userProfileUpdateScheduler.Dispose();
-			base.Dispose();
+			model.Update(data);
 		}
 
 		private void AddCurrentLocationSubscription()
@@ -118,7 +116,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 						_playButtonLockState.SetValueAndForceNotify(true);
 						return;
 					}
-					
+
 					var model = _metaGameModelProvider.Get().LocationsModel.Locations[config.Id];
 					_playButtonLockState.SetValueAndForceNotify(!model.Unlocked.Value);
 				})
@@ -135,7 +133,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		private void AddNestedButtonPresenter()
 		{
 			_playButtonLockState = new ReactiveProperty<bool>();
-			
+
 			var presenter = _buttonPresenterFactory.Create(View.PlayButton,
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(OnPlayButtonClickHandler))

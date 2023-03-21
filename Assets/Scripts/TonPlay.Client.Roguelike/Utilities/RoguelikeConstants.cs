@@ -17,6 +17,20 @@ namespace TonPlay.Client.Roguelike.Utilities
 			public const float REQUIRED_POSITION_CHANGED_DIFF = 0.00001f;
 			public const int AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP = 1;
 
+			public static class Skills
+			{
+				public static class FeatureIds
+				{
+					public const string DAMAGE = "DAMAGE";
+					public const string QUANTITY = "QUANTITY";
+					public const string COOLDOWN = "COOLDOWN";
+					public const string RANGE = "RANGE";
+					public const string FLIGHT_SPEED = "FLIGHT_SPEED";
+					public const string SPIN_SPEED = "SPIN_SPEED";
+					public const string DURATION = "DURATION";
+				}
+			}
+
 			public class Collision
 			{
 				public const int OVERLAP_MIN_RADIUS = 10;

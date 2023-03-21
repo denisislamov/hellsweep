@@ -64,5 +64,15 @@ namespace TonPlay.Client.Common.UIService
 		{
 			return isEmbedded ? _embeddedClosingStrategy : _defaultClosingStrategy;
 		}
+		
+		public void Dispose()
+		{
+			if (_screenStack == null) return;
+			
+			foreach (var screen in _screenStack)
+			{
+				screen.Dispose();
+			}
+		}
 	}
 }
