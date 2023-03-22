@@ -114,7 +114,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				response = await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
 				{
-					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.Id].LongestSurvivedMillis),
+					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.ChapterIdx].LongestSurvivedMillis),
 					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
 				});
 
@@ -171,38 +171,48 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		
 		private void UpdateCurrentLocationTimeMillis(LocationsData locationsData, IGameModel gameModel)
 		{
-			if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
+			if (!locationsData.Locations.ContainsKey(_locationConfig.ChapterIdx))
 			{
 				locationsData.Locations.Add(
-					_locationConfig.Id,
-					new LocationData() {Id = _locationConfig.Id});
+					_locationConfig.ChapterIdx,
+					new LocationData()
+					{
+						ChapterIdx = _locationConfig.ChapterIdx
+					});
 			}
 
-			var locationData = locationsData.Locations[_locationConfig.Id];
+			var locationData = locationsData.Locations[_locationConfig.ChapterIdx];
 
-			locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+			var currentMatchTimeMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+
+			if (locationData.LongestSurvivedMillis > currentMatchTimeMillis)
+			{
+				return;
+			}
+			
+			locationData.LongestSurvivedMillis = currentMatchTimeMillis;
 		}
 
 		private void UnlockNextLocation(LocationsData locationsData)
 		{
-			var nextLocation = _locationConfigProvider.Get(_locationConfig.Index + 1);
+			var nextLocation = _locationConfigProvider.Get(_locationConfig.ChapterIdx + 1);
 
 			if (nextLocation is null)
 			{
 				return;
 			}
 			
-			if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
+			if (!locationsData.Locations.ContainsKey(nextLocation.ChapterIdx))
 			{
 				locationsData.Locations.Add(
-					nextLocation.Id,
+					nextLocation.ChapterIdx,
 					new LocationData()
 					{
-						Id = nextLocation.Id
+						ChapterIdx = nextLocation.ChapterIdx
 					});
 			}
 
-			var nextLocationData = locationsData.Locations[_locationConfig.Id];
+			var nextLocationData = locationsData.Locations[nextLocation.ChapterIdx];
 			nextLocationData.Unlocked = true;
 		}
 

@@ -112,7 +112,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 
 			var config = Context.LocationConfigStorageSelector.Current.Value;
 			var locationsModel = _metaGameModelProvider.Get().LocationsModel;
-			var model = locationsModel.Locations.ContainsKey(config.Id) ? locationsModel.Locations[config.Id] : new LocationModel();
+			var model = locationsModel.Locations.ContainsKey(config.ChapterIdx) ? locationsModel.Locations[config.ChapterIdx] : new LocationModel();
 			var longestSurvivedTime = TimeSpan.FromMilliseconds(model.LongestSurvivedMillis.Value);
 
 			View.SetIcon(config.Icon);

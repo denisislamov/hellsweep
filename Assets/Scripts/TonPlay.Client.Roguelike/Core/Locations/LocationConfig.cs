@@ -38,7 +38,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		public int index = -1;
 
 		public string Id => _id;
-		public int Index => index;
+		public int ChapterIdx => index;
 		public bool Infinite => _infinite;
 		public string Title => _title;
 		public Sprite Icon => _icon;

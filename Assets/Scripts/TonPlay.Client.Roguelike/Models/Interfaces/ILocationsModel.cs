@@ -6,6 +6,6 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 {
 	public interface ILocationsModel : IModel<LocationsData>
 	{
-		IReadOnlyDictionary<string, ILocationModel> Locations { get; }
+		IReadOnlyDictionary<int, ILocationModel> Locations { get; }
 	}
 }

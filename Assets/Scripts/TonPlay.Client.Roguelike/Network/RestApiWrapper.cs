@@ -304,6 +304,20 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+        
+        [SerializeField] private UserLocationsResponse _userLocationsResponse;
+        [ContextMenu("GetUserBalance")]
+        public async UniTask<UserLocationsResponse> GetUserLocations()
+        {
+            _userLocationsResponse = new UserLocationsResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UserLocationsResponse>");
+            var getTask = _networkClient.GetAsync<UserLocationsResponse>("v1/user/locations", _headers, _userLocationsResponse);
+
+            var result = await getTask;
+            _userLocationsResponse = result;
+
+            return result;
+        }
 
     }
 }

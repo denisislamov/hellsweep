@@ -31,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Updaters
 						levelConfig.SetDamage(detail.value);
 						break;
 					case RoguelikeConstants.Core.Skills.FeatureIds.RANGE:
-						levelConfig.SetRange(detail.value);
+						levelConfig.SetRange(detail.value * RoguelikeConstants.Core.REMOTE_CONFIG_RANGE_MULTIPLIER);
 						break;
 				}
 			}

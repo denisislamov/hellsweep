@@ -101,8 +101,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			var gameModel = _gameModelProvider.Get();
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
 			var longestSurvivedMillis =
-				metaGameModel.LocationsModel.Locations.ContainsKey(_locationConfigStorage.Current.Value.Id)
-					? metaGameModel.LocationsModel.Locations[_locationConfigStorage.Current.Value.Id].LongestSurvivedMillis.Value
+				metaGameModel.LocationsModel.Locations.ContainsKey(_locationConfigStorage.Current.Value.ChapterIdx)
+					? metaGameModel.LocationsModel.Locations[_locationConfigStorage.Current.Value.ChapterIdx].LongestSurvivedMillis.Value
 					: 0d;
 
 			var longestSurvivedTimeSpan = TimeSpan.FromMilliseconds(longestSurvivedMillis);

@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 
 namespace TonPlay.Client.Roguelike.Profile.Interfaces
 {
-	public interface IProfileLoadingService
+	public interface IUserLoadingService
 	{
 		public UniTask Load();
 	}

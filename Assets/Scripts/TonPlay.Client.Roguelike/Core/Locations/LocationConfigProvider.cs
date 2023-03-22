@@ -31,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 				? default(ILocationConfig)
 				: Map[id];
 
-		public ILocationConfig Get(int index) => _configs.FirstOrDefault(config => config.Index == index);
+		public ILocationConfig Get(int index) => _configs.FirstOrDefault(config => config.ChapterIdx == index);
 
 		public ILocationConfig[] Configs => _configs;
 	}

@@ -16,6 +16,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 			public const int ARENA_MAX_COUNT = 1;
 			public const float REQUIRED_POSITION_CHANGED_DIFF = 0.00001f;
 			public const int AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP = 1;
+			public const float REMOTE_CONFIG_RANGE_MULTIPLIER = 2f;
 
 			public static class Skills
 			{

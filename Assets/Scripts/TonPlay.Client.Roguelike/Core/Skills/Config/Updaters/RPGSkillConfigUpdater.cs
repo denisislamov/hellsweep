@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Updaters
 					case RoguelikeConstants.Core.Skills.FeatureIds.DAMAGE:
 						levelConfig.SetDamage(detail.value);
 						break;
-					case RoguelikeConstants.Core.Skills.FeatureIds.RANGE:
+					case RoguelikeConstants.Core.Skills.FeatureIds.COOLDOWN:
 						levelConfig.SetCooldown(detail.value);
 						break;
 					case RoguelikeConstants.Core.Skills.FeatureIds.QUANTITY:

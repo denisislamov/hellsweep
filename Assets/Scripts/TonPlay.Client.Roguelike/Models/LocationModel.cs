@@ -9,22 +9,19 @@ namespace TonPlay.Client.Roguelike.Models
 	{
 		private readonly LocationData _cached = new LocationData();
 
-		private string _id;
+		private int _chapterIdx;
 		private readonly ReactiveProperty<double> _longestSurvivedMillis = new ReactiveProperty<double>();
 		private readonly ReactiveProperty<bool> _won = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<bool> _unlocked = new ReactiveProperty<bool>();
 
-		public string Id => _id;
+		public int ChapterIdx => _chapterIdx;
 		public IReadOnlyReactiveProperty<double> LongestSurvivedMillis => _longestSurvivedMillis;
 		public IReadOnlyReactiveProperty<bool> Won => _won;
 		public IReadOnlyReactiveProperty<bool> Unlocked => _unlocked;
 
 		public void Update(LocationData data)
 		{
-			if (string.IsNullOrEmpty(_id))
-			{
-				_id = data.Id;
-			}
+			_chapterIdx = data.ChapterIdx;
 
 			if (data.Won != _won.Value)
 			{
@@ -41,7 +38,7 @@ namespace TonPlay.Client.Roguelike.Models
 
 		public LocationData ToData()
 		{
-			_cached.Id = _id;
+			_cached.ChapterIdx = _chapterIdx;
 			_cached.Won = _won.Value;
 			_cached.LongestSurvivedMillis = _longestSurvivedMillis.Value;
 

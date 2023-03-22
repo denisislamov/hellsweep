@@ -9,7 +9,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 	{
 		string Id { get; }
 		
-		int Index { get; }
+		int ChapterIdx { get; }
 		
 		bool Infinite { get; }
 

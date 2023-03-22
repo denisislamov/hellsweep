@@ -9,9 +9,9 @@ namespace TonPlay.Client.Roguelike.Models
 	{
 		private readonly LocationsData _cached = new LocationsData();
 
-		private Dictionary<string, ILocationModel> _locations = new Dictionary<string, ILocationModel>();
+		private Dictionary<int, ILocationModel> _locations = new Dictionary<int, ILocationModel>();
 
-		public IReadOnlyDictionary<string, ILocationModel> Locations => _locations;
+		public IReadOnlyDictionary<int, ILocationModel> Locations => _locations;
 
 		public void Update(LocationsData data)
 		{

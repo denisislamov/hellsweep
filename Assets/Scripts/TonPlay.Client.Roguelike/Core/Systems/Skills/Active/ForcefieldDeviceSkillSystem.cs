@@ -150,7 +150,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 				if (Math.Abs(requiredSqrMagnitude - currentSqrMagnitude) > 0.0001f)
 				{
-					effectTransform.Transform.localScale = Vector3.one*(levelConfig.Size*2f);
+					effectTransform.Transform.localScale = Vector3.one * levelConfig.Size;
 				}
 			}
 		}

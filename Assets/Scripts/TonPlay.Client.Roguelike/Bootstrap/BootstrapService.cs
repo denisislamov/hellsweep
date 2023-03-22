@@ -14,18 +14,18 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 	{
 		private readonly IAppEntryPoint _appEntryPoint;
 		private readonly IRestApiClient _restApiClient;
-		private readonly IProfileLoadingService _profileLoadingService;
+		private readonly IUserLoadingService _userLoadingService;
 		private readonly IConfigsLoadingService _configsLoadingService;
 
 		public BootstrapService(
 			IAppEntryPoint appEntryPoint,
 			IRestApiClient restApiClient,
-			IProfileLoadingService profileLoadingService,
+			IUserLoadingService userLoadingService,
 			IConfigsLoadingService configsLoadingService)
 		{
 			_appEntryPoint = appEntryPoint;
 			_restApiClient = restApiClient;
-			_profileLoadingService = profileLoadingService;
+			_userLoadingService = userLoadingService;
 			_configsLoadingService = configsLoadingService;
 		}
 
@@ -41,7 +41,7 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 
 			await _configsLoadingService.Load();
 
-			await _profileLoadingService.Load();
+			await _userLoadingService.Load();
 
 			await _appEntryPoint.ProcessEntrance();
 		}

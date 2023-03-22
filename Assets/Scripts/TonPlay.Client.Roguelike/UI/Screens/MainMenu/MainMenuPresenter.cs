@@ -111,13 +111,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 						return;
 					}
 
-					if (!metaGameModel.LocationsModel.Locations.ContainsKey(config.Id))
+					if (!metaGameModel.LocationsModel.Locations.ContainsKey(config.ChapterIdx))
 					{
 						_playButtonLockState.SetValueAndForceNotify(true);
 						return;
 					}
 
-					var model = _metaGameModelProvider.Get().LocationsModel.Locations[config.Id];
+					var model = _metaGameModelProvider.Get().LocationsModel.Locations[config.ChapterIdx];
 					_playButtonLockState.SetValueAndForceNotify(!model.Unlocked.Value);
 				})
 			   .AddTo(_compositeDisposables);
