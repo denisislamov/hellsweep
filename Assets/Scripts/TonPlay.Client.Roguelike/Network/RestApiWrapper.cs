@@ -82,8 +82,25 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+        
+        // # Location - Location controller
+        [Space(10)]
+        [Header("--------- Location ---------")]
+        [SerializeField] private LocationAllResponse _locationAllResponse;
+        [ContextMenu("GetLocationAll")]
+        public async UniTask<LocationAllResponse> GetLocationAll()
+        {
+            _locationAllResponse = new LocationAllResponse();
+            Debug.LogFormat("_networkClient.GetAsync<BoostAllResponse>");
+            var getTask = _networkClient.GetAsync<LocationAllResponse>("v1/location/all", _headers, _locationAllResponse);
 
-         // # Info - Info controller
+            var result = await getTask;
+            _locationAllResponse = result;
+
+            return result;
+        }
+
+        // # Info - Info controller
         [Space(10)]
         [Header("--------- Info ---------")]
         [SerializeField] private InfoLevelAllResponse _infoLevelAllResponse;
@@ -171,11 +188,11 @@ namespace TonPlay.Client.Roguelike.Network
         }
 
         [ContextMenu("PostGameSession - GameSessionPutBody")]
-        public async UniTask<GameSessionResponse> PostGameSessionClose(GameSessionPostBody value)
+        public async UniTask<GameSessionResponse> PostGameSessionClose(CloseGameSessionPostBody value)
         {
             _gameSessionResponse = new GameSessionResponse();
             Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
-            var postTask = _networkClient.PostAsync<GameSessionResponse, GameSessionPostBody>("v1/game/session/close", _headers, value);
+            var postTask = _networkClient.PostAsync<GameSessionResponse, CloseGameSessionPostBody>("v1/game/session/close", _headers, value);
 
             try
             {
@@ -193,11 +210,11 @@ namespace TonPlay.Client.Roguelike.Network
         }
 
         [ContextMenu("PostGameSession")]
-        public async UniTask<GameSessionResponse> PostGameSession(bool pve)
+        public async UniTask<GameSessionResponse> PostGameSession(OpenGameSessionPostBody value)
         {
             _gameSessionResponse = new GameSessionResponse();
-            Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", pve);
-            var postTask = _networkClient.PostAsync<GameSessionResponse, string>("v1/game/session?pve=" + (pve ? "true" : "false"), _headers, null);
+            Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", value);
+            var postTask = _networkClient.PostAsync<GameSessionResponse, OpenGameSessionPostBody>("v1/game/session", _headers, value);
 
             try
             {

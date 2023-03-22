@@ -28,7 +28,9 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.BindInterfacesTo<GameModelProvider>().AsSingle();
 			Container.BindInterfacesTo<MetaGameModelProvider>().AsSingle();
 
-			Container.Bind<ILocationConfigProvider>().FromInstance(_locationConfigProvider).AsSingle();
+			var locationConfigProvider = Instantiate(_locationConfigProvider);
+			Container.Bind<ILocationConfigProvider>().FromInstance(locationConfigProvider).AsSingle();
+			Container.Bind<ILocationConfigUpdater>().To<LocationConfigUpdater>().AsSingle();
 
 			var runtimeProfileConfigProvider = Instantiate(_profileConfigProvider);
 			

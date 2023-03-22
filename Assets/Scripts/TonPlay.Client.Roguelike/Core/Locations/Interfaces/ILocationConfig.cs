@@ -10,6 +10,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 		string Id { get; }
 		
 		int Index { get; }
+		
+		bool Infinite { get; }
 
 		string Title { get; }
 
@@ -22,5 +24,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 		SceneName SceneName { get; }
 		
 		bool AlreadyUnlocked { get; }
+		
+		void AcceptUpdater(ILocationConfigUpdaterVisitor locationConfigUpdaterVisitor);
 	}
 }

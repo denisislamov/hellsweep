@@ -9,6 +9,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		
 		UniTask<SkillAllResponse> GetSkillAll();
 		UniTask<BoostAllResponse> GetBoostAll();
+		UniTask<LocationAllResponse> GetLocationAll();
 		UniTask<InfoLevelAllResponse> GetInfoLevelAll();
 		UniTask<ItemPutResponse> PutItem(ItemPutBody value);
 		UniTask<ItemsGetResponse> GetAllItems();
@@ -25,14 +26,14 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> PostGameSessionClose(GameSessionPostBody value);
+		UniTask<GameSessionResponse> PostGameSessionClose(CloseGameSessionPostBody value);
 		
 		/// <summary>
 		/// Create game session
 		/// </summary>
 		/// <param name="pve">If True - PvE mode else - PvP mode</param>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> PostGameSession(bool pve);
+		UniTask<GameSessionResponse> PostGameSession(OpenGameSessionPostBody pve);
 		
 		UniTask<UserXpResponse> GetUserXp();
 		UniTask<UserSummaryResponse> GetUserSummary();

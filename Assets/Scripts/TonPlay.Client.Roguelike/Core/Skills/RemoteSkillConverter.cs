@@ -6,25 +6,24 @@ namespace TonPlay.Client.Roguelike.Core.Skills
 	{
 		private static readonly Dictionary<string, SkillName> _map = new Dictionary<string, SkillName>()
 		{
-			["bf330b35-944e-4795-8ad1-2893954f75ce"] = SkillName.Revolver,
-			["fdf5484d-eb77-415d-84e7-d3ecbd57be57"] = SkillName.Lightchaser,
-			["1677bd2b-5644-45ac-9dc1-348264325112"] = SkillName.Bat,
-			["b57c70c7-4ea5-48c7-a921-6747c755e742"] = SkillName.Crossbow,
-			["1940b088-1997-45b7-b981-cc90ac066757"] = SkillName.Katana,
-			["91ecf9d9-0b27-488e-be04-42b40b9e4ada"] = SkillName.Kunai,
-			["2207c252-2b63-4f8d-9aaf-76ef088ba186"] = SkillName.Guardian,
-			["d85cc2d7-6911-44a8-8146-ff5201759a7c"] = SkillName.SoccerBall,
-			["e211ef47-874d-4b7c-9f06-046cdad69324"] = SkillName.DrillShot,
-			["6484da9d-a912-4004-ad88-695b2e1e9715"] = SkillName.TypeADrone,
-			["9775d8b8-ea70-4a6a-9c1e-22c7e71bebf0"] = SkillName.TypeBDrone,
-			["9fb122cd-cae9-4f2f-8abd-fdde8e3be618"] = SkillName.LightningEmitter,
-			["29aca413-cc96-4ad6-b610-844a6997ddf6"] = SkillName.Boomerang,
-			["29b43ac7-e745-4980-8c41-5d3fd765925c"] = SkillName.Brick,
-			["e7bcee96-0352-436d-b72d-2bdf87884d02"] = SkillName.Molotov,
-			["5e1817ec-afc1-4a69-946b-34b5a10c78c1"] = SkillName.RPG,
-			["73e27eee-a041-4500-b83e-9c90d996bdfb"] = SkillName.ForcefieldDevice,
-			["cf9d628f-3736-4e36-9fe9-4ae51b2cbf5e"] = SkillName.Durian,
-			["c448fc0d-5b18-41d3-b04f-39bd440abac1"] = SkillName.LaserLauncher,
+			["86f9c448-69ea-4d82-93b7-4de1875062ea"] = SkillName.Revolver,
+			["60d949de-56ff-45c7-a535-5dbc15a0f363"] = SkillName.Lightchaser,
+			["472ad864-c55a-44a9-9e65-dc7c7be38d23"] = SkillName.Bat,
+			["a24629b1-dd12-4319-ad50-7f680f1a494d"] = SkillName.Crossbow,
+			["06696f24-84bf-40c7-ae12-20323fef31b4"] = SkillName.Katana,
+			["be01aec2-c945-4e27-87fd-914a510ea728"] = SkillName.Kunai,
+			["8b66ebed-1817-4589-ab92-8d720edfe7c0"] = SkillName.Guardian,
+			["6fa310cd-ea28-4765-a02a-55fbe84d484a"] = SkillName.SoccerBall,
+			["b52f7c53-90f5-4078-9a28-a41db06f7064"] = SkillName.DrillShot,
+			["2f3377aa-066f-423a-8224-47d21dc50192"] = SkillName.TypeADrone,
+			["02bec516-20b9-4c54-a372-834f00f9a9c0"] = SkillName.LightningEmitter,
+			["8760b007-2f71-4231-8f1e-09546cb261d2"] = SkillName.Boomerang,
+			["a9b05242-cb45-4b5c-81dc-52271a05e0be"] = SkillName.Brick,
+			["f1dd5ac8-ab6e-47dd-a878-33a89242a63e"] = SkillName.Molotov,
+			["e759c42d-8914-4a5a-89b9-2705d456de8b"] = SkillName.RPG,
+			["f44d9b7d-8dbe-4e5e-a352-375028bb57c8"] = SkillName.ForcefieldDevice,
+			["1e8d38ec-072a-4e0b-9c41-fae6850177fa"] = SkillName.Durian,
+			["d520955c-9b25-49c7-89d4-5901c1adc998"] = SkillName.LaserLauncher,
 			["41d7a577-50a6-45c0-a1b9-45d67994f0df"] = SkillName.AmmoThruster,
 			["b0e55b3a-c0be-4283-9cc0-24dddfe5b6b0"] = SkillName.EnergyDrink,
 			["199aff59-4ebf-4a91-a92b-18b84a5104ca"] = SkillName.HEFuel,
@@ -41,6 +40,14 @@ namespace TonPlay.Client.Roguelike.Core.Skills
 			["e43342a4-c44d-4db5-b8a1-f432683f63c9"] = SkillName.StickOfHam,
 		};
 
-		public static SkillName ConvertUdidToSkillName(string udid) => _map[udid];
+		public static SkillName ConvertUdidToSkillName(string udid)
+		{
+			if (_map.ContainsKey(udid))
+			{
+				return _map[udid];
+			}
+			
+			return SkillName.Unknown;
+		}
 	}
 }

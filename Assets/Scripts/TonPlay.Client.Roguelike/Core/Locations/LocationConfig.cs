@@ -15,6 +15,9 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		private string _id;
 
 		[SerializeField]
+		private bool _infinite;
+
+		[SerializeField]
 		private string _title;
 
 		[SerializeField]
@@ -36,6 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 
 		public string Id => _id;
 		public int Index => index;
+		public bool Infinite => _infinite;
 		public string Title => _title;
 		public Sprite Icon => _icon;
 		public Vector2 BlockSize => _blockSize;
@@ -44,6 +48,21 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 			_blocksMatrix.Select(_ => _.Prefabs).ToList();
 		public SceneName SceneName => _sceneName;
 		public bool AlreadyUnlocked => _alreadyUnlocked;
+		
+		public void AcceptUpdater(ILocationConfigUpdaterVisitor locationConfigUpdaterVisitor)
+		{
+			locationConfigUpdaterVisitor.Visit(this);
+		}
+		
+		public void SetId(string id)
+		{
+			_id = id;
+		}
+		
+		public void SetInfinite(bool infinite)
+		{
+			_infinite = infinite;
+		}
 
 		[Serializable]
 		private class LocationBlockList

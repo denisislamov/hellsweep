@@ -35,6 +35,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills
 		Bat,
 		Durian,
 		LaserLauncher,
-		GoldGain
+		GoldGain,
+		Unknown
 	}
 }

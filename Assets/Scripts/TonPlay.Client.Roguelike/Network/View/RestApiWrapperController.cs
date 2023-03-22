@@ -19,6 +19,7 @@ namespace TonPlay.Client.Roguelike.Network.View
 
         [Space(5)]
         [SerializeField] private Toggle _gameSessionToggle;
+        [SerializeField] private InputField _gameSessionLocationId;
 
         private void OnEnable()
         {
@@ -95,7 +96,7 @@ namespace TonPlay.Client.Roguelike.Network.View
 
         public void PostGameSessionClose()
         {
-            var value = new GameSessionPostBody() 
+            var value = new CloseGameSessionPostBody() 
             {
                 surviveMills = int.Parse(_surviveMillsInputField.text)
             };
@@ -104,7 +105,11 @@ namespace TonPlay.Client.Roguelike.Network.View
 
         public void PostGameSession()
         {
-            _restApiWrapper.PostGameSession(_gameSessionToggle.isOn).Forget();
+            _restApiWrapper.PostGameSession(new OpenGameSessionPostBody()
+            {
+                pve = _gameSessionToggle.isOn,
+                locationId = _gameSessionLocationId.text
+            }).Forget();
         }
         public void GetUserXp()
         {

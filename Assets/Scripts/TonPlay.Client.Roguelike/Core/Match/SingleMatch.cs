@@ -64,19 +64,25 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			data.Energy -= RoguelikeConstants.Meta.MATCH_ENERGY_PRICE_BASE;
 
 			balanceModel.Update(data);
+
+			var requestBody = new OpenGameSessionPostBody()
+			{
+				pve = true,
+				locationId = _locationConfig.Id
+			};
 			
-			await _restApiClient.PostGameSession(true); 
+			await _restApiClient.PostGameSession(requestBody); 
 			
 			var gameSessionResponse = await _restApiClient.GetGameSession();
 			if (gameSessionResponse != null)
 			{
-				await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
+				await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
 				{
 					surviveMills = 0
 				});
 			}
 
-			await _restApiClient.PostGameSession(true); // TODO - add PVE variable
+			await _restApiClient.PostGameSession(requestBody); // TODO - add PVE variable
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
 
 			return true;
@@ -106,7 +112,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var gameSessionResponse = await _restApiClient.GetGameSession();
 			if (gameSessionResponse != null)
 			{
-				response = await _restApiClient.PostGameSessionClose(new GameSessionPostBody()
+				response = await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
 				{
 					surviveMills = Convert.ToInt64(locationsData.Locations[_locationConfig.Id].LongestSurvivedMillis),
 					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
