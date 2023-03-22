@@ -63,7 +63,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm
 						tankStatePool.Add(entityId);
 					}
 
-					speed.Speed = 0f;
+					speed.InitialSpeed = 0f;
 					continue;
 				}
 
@@ -73,7 +73,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm
 				movement.Direction = playerPosition - position;
 				movement.Direction.Normalize();
 				
-				speed.Speed = boss.FollowSpeed;
+				speed.InitialSpeed = boss.FollowSpeed;
 			}
 		}
 	}

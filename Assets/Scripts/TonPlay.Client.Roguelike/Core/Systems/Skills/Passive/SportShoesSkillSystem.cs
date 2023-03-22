@@ -80,12 +80,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 		
 		private void UpgradeSpeed(ref SpeedComponent speed, SportShoesSkill skill)
 		{
-			if (skill.Level > 1)
-			{
-				speed.Speed /= _config.GetLevelConfig(skill.Level - 1).MultiplierValue;
-			}
-			
-			speed.Speed *= _config.GetLevelConfig(skill.Level).MultiplierValue;
+			speed.Map[MovementSpeedMultiplierType.SportShoes] = 1 + _config.GetLevelConfig(skill.Level).MultiplierValue;
 		}
 	}
 }

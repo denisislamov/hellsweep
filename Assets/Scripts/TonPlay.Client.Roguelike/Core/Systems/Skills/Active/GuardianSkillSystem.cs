@@ -169,7 +169,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			ref var damageOnCollisionComponent = ref entity.AddOrGet<DamageOnCollisionComponent>();
 			ref var speed = ref speedPool.Get(entity.Id);
 
-			speed.Speed = GetSpeed(levelConfig);
+			speed.InitialSpeed = GetSpeed(levelConfig);
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 
 			if (movementPool.Has(entity.Id))

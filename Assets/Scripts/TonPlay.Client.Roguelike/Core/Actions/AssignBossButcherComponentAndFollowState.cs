@@ -56,7 +56,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 			
 			entity.AddOrGet<MovementComponent>();
 			entity.AddOrGet<RotationComponent>();
-			entity.AddOrGet<SpeedComponent>();
+			entity.AddSpeedComponent(_followSpeed);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Skills;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -222,9 +223,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			ref var destroyOnTimerComponent = ref entity.Get<DestroyOnTimerComponent>();
 			ref var speed = ref entity.AddOrGet<SpeedComponent>();
 
+			if (speed.Map is null)
+			{
+				speed.Map = new DictionaryExt<MovementSpeedMultiplierType, float>();
+				speed.Map[MovementSpeedMultiplierType.Default] = 1f;
+			}
+
 			destroyOnTimerComponent.TimeLeft = duration;
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
-			speed.Speed = levelConfig.Speed;
+			speed.InitialSpeed = levelConfig.Speed;
 
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
 

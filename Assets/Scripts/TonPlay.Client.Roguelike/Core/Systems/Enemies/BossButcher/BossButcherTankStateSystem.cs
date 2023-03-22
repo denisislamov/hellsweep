@@ -80,7 +80,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher
 			ref BossButcherComponent boss,
 			ref SpeedComponent speed)
 		{
-			speed.Speed = boss.TankSpeed;
+			speed.InitialSpeed = boss.TankSpeed;
 
 			if (tank.TimeLeft > 0)
 			{
@@ -98,7 +98,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher
 			int entityId, 
 			EcsPool<BossButcherFollowStateComponent> followStatePool)
 		{
-			speed.Speed = 0;
+			speed.InitialSpeed = 0;
 
 			if (tank.TimeLeft > 0)
 			{
@@ -124,7 +124,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher
 			movement.Direction = playerPosition - position;
 			movement.Direction.Normalize();
 
-			speed.Speed = 0;
+			speed.InitialSpeed = 0;
 
 			if (tank.TimeLeft > 0)
 			{

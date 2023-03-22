@@ -47,7 +47,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 				ref var applyDamage = ref applyDamagePool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
 
-				applyDamage.Damage -= applyDamage.Damage * skill.ReduceMultiplierValue;
+				applyDamage.Damage += applyDamage.Damage * skill.ReduceMultiplierValue;
 			}
 		}
 

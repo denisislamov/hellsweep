@@ -78,9 +78,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 			}
 		}
 		
-		private void UpdateSkillDurationMultiplier(ref SkillDurationMultiplierComponent damageMultiplier, ExoBracerSkill skill)
+		private void UpdateSkillDurationMultiplier(ref SkillDurationMultiplierComponent skillDurationMultiplier, ExoBracerSkill skill)
 		{
-			damageMultiplier.Map[SkillDurationMultiplierType.ExoBracer] = _config.GetLevelConfig(skill.Level).MultiplierValue;
+			skillDurationMultiplier.Map[SkillDurationMultiplierType.ExoBracer] = 1 + _config.GetLevelConfig(skill.Level).MultiplierValue;
 		}
 	}
 }

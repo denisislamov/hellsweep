@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling.Identities;
@@ -70,7 +71,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					movement.Direction = Vector2.up;
 
 					ref var speed = ref speedPool.Add(entityId);
-					speed.Speed = MOVE_SPEED;
+					speed.Map = new DictionaryExt<MovementSpeedMultiplierType, float>();
+					speed.Map[MovementSpeedMultiplierType.Default] = 1f;
+					speed.InitialSpeed = MOVE_SPEED;
 
 					ref var poolObjectComponent = ref poolObjectPool.Add(entityId);
 					poolObjectComponent.ViewPoolObject = poolObject;

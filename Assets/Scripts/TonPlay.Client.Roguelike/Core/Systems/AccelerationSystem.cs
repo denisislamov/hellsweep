@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				ref var speed = ref speedPool.Get(entityId);
 				ref var acceleration = ref accelerationPool.Get(entityId);
 
-				speed.Speed += acceleration.Acceleration*Time.deltaTime;
+				speed.InitialSpeed += acceleration.Acceleration * Time.deltaTime;
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}

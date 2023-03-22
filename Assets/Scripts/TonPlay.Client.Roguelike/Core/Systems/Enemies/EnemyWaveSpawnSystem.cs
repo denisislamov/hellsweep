@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Components.Enemies;
@@ -336,7 +337,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				}
 
 				var moveOnPlayerEnemyPropertyConfig = enemyConfig.GetProperty<IMoveOnPlayerEnemyPropertyConfig>();
-				entity.AddSpeedComponent(moveOnPlayerEnemyPropertyConfig.MovementConfig);
+				entity.AddSpeedComponent(moveOnPlayerEnemyPropertyConfig.MovementConfig.StartSpeed);
 				entity.AddMoveToTargetComponent();
 			}
 
@@ -462,12 +463,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			ref var healthComponent = ref entity.Add<HealthComponent>();
 			healthComponent.CurrentHealth = health;
 			healthComponent.MaxHealth = health;
-		}
-
-		private static void AddSpeedComponent(EcsEntity entity, IMovementConfig movementConfig)
-		{
-			ref var speedComponent = ref entity.Add<SpeedComponent>();
-			speedComponent.Speed = movementConfig.StartSpeed;
 		}
 
 		private static LerpTransformComponent AddLerpTransformComponent(EcsEntity entity)

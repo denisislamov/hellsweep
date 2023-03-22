@@ -22,16 +22,16 @@ MonoBehaviour:
   _levelConfigs:
   - _level: 1
     _description: Received damage - 10 %
-    _multiplierValue: 0.1
+    _multiplierValue: -0.1
   - _level: 2
     _description: Received damage - 20 %
-    _multiplierValue: 0.2
+    _multiplierValue: -0.2
   - _level: 3
     _description: Received damage - 30 %
-    _multiplierValue: 0.3
+    _multiplierValue: -0.3
   - _level: 4
     _description: Received damage - 40 %
-    _multiplierValue: 0.4
+    _multiplierValue: -0.4
   - _level: 5
     _description: Received damage - 50 %
-    _multiplierValue: 0.5
+    _multiplierValue: -0.5

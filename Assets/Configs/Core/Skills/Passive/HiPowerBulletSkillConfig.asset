@@ -22,16 +22,16 @@ MonoBehaviour:
   _levelConfigs:
   - _level: 1
     _description: ATK + 10 %
-    _multiplierValue: 1.1
+    _multiplierValue: 0.1
   - _level: 2
     _description: ATK + 20 %
-    _multiplierValue: 1.2
+    _multiplierValue: 0.2
   - _level: 3
     _description: ATK + 30 %
-    _multiplierValue: 1.3
+    _multiplierValue: 0.3
   - _level: 4
     _description: ATK + 40 %
-    _multiplierValue: 1.4
+    _multiplierValue: 0.4
   - _level: 5
     _description: ATK + 50 %
-    _multiplierValue: 1.5
+    _multiplierValue: 0.5

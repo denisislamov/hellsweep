@@ -22,16 +22,16 @@ MonoBehaviour:
   _levelConfigs:
   - _level: 1
     _description: Max HP + 20 %
-    _multiplierValue: 1.2
+    _multiplierValue: 0.2
   - _level: 2
     _description: Max HP + 40 %
-    _multiplierValue: 1.4
+    _multiplierValue: 0.4
   - _level: 3
     _description: Max HP + 60 %
-    _multiplierValue: 1.6
+    _multiplierValue: 0.6
   - _level: 4
     _description: Max HP + 80 %
-    _multiplierValue: 1.8
+    _multiplierValue: 0.8
   - _level: 5
     _description: Max HP + 100 %
-    _multiplierValue: 2
+    _multiplierValue: 1

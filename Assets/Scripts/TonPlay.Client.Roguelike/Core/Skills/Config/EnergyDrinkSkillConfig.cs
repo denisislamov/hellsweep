@@ -42,12 +42,15 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 			
 			[SerializeField]
 			private float _increaseHealthMultiplier;
+			
+			[SerializeField]
+			private float _periodInSeconds;
 
 			public int Level => _level;
 
 			public string Description => _description;
 			
-			public float IncreaseHealthMultiplier => _increaseHealthMultiplier;
+			public float IncreaseHealthMultiplier => _increaseHealthMultiplier / _periodInSeconds;
 			
 			public void SetValue(float value)
 			{
@@ -61,6 +64,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 					_description = (string) _description.Clone(),
 					_level = _level,
 					_increaseHealthMultiplier = _increaseHealthMultiplier,
+					_periodInSeconds = _periodInSeconds
 				};
 			}
 		}

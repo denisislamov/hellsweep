@@ -56,7 +56,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher
 
 				if (follow.TimeLeft <= 0)
 				{
-					speed.Speed = 0f;
+					speed.InitialSpeed = 0f;
 
 					followStatePool.Del(entityId);
 					tankStatePool.Add(entityId);
@@ -70,7 +70,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossButcher
 				movement.Direction = playerPosition - position;
 				movement.Direction.Normalize();
 				
-				speed.Speed = boss.FollowSpeed;
+				speed.InitialSpeed = boss.FollowSpeed;
 			}
 		}
 	}

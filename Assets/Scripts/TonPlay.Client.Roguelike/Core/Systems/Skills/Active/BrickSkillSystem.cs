@@ -134,8 +134,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
 
-			speed.Speed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
-						  /_config.TimeToReachDistance;
+			speed.InitialSpeed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
+								 /_config.TimeToReachDistance;
 
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
 

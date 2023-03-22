@@ -123,11 +123,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref SpeedComponent AddSpeedComponent(this EcsEntity entity, IMovementConfig movementConfig)
+		public static ref SpeedComponent AddSpeedComponent(this EcsEntity entity, float speed)
 		{
 			ref var speedComponent = ref entity.Add<SpeedComponent>();
-			speedComponent.Speed = movementConfig.StartSpeed;
-			speedComponent.InitialSpeed = movementConfig.StartSpeed;
+			speedComponent.Map = new DictionaryExt<MovementSpeedMultiplierType, float>();
+			speedComponent.Map[MovementSpeedMultiplierType.Default] = 1f;
+			speedComponent.InitialSpeed = speed;
 			return ref speedComponent;
 		}
 

@@ -40,14 +40,13 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			ref var projectilePosition = ref projectileEntity.Add<PositionComponent>();
 			ref var projectileMovement = ref projectileEntity.Add<MovementComponent>();
 			ref var projectileTransform = ref projectileEntity.Add<TransformComponent>();
-			ref var projectileSpeed = ref projectileEntity.Add<SpeedComponent>();
 			ref var projectileAcceleration = ref projectileEntity.Add<AccelerationComponent>();
 			ref var projectileViewPoolObject = ref projectileEntity.Add<ViewPoolObjectComponent>();
+			ref var projectileSpeed = ref projectileEntity.AddSpeedComponent(config.MovementConfig.StartSpeed);
 
 			projectileViewProviderComponent.View = projectileView.gameObject;
 			projectileComponent.Config = config;
 			projectileComponent.CreatorEntityId = creatorEntityId;
-			projectileSpeed.Speed = config.MovementConfig.StartSpeed;
 			projectileAcceleration.Acceleration = config.MovementConfig.Acceleration;
 			projectileRotation.Direction = direction;
 			projectilePosition.Position = position;

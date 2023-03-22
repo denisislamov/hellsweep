@@ -81,7 +81,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 		private void UpgradeHealth(ref HealthComponent health, FitnessGuideSkill skill)
 		{
 			var previousMaxHealth = health.MaxHealth;
-			var upgradedMaxHealth = health.InitialMaxHealth * _config.GetLevelConfig(skill.Level).MultiplierValue;
+			var upgradedMaxHealth = health.InitialMaxHealth + health.InitialMaxHealth * _config.GetLevelConfig(skill.Level).MultiplierValue;
 			var diff = upgradedMaxHealth - previousMaxHealth;
 			health.MaxHealth = upgradedMaxHealth;
 			health.CurrentHealth += diff;

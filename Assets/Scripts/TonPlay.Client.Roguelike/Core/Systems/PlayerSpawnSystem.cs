@@ -60,7 +60,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			entity.AddSkillDurationMultiplierComponent(1f);
 			
 			var healthComponent = entity.AddHealthComponent(spawnConfig.StartHealth, spawnConfig.StartHealth);
-			entity.AddSpeedComponent(spawnConfig.MovementConfig);
+			entity.AddSpeedComponent(spawnConfig.MovementConfig.StartSpeed);
 			entity.AddGoldComponent();
 			entity.AddProfileExperienceComponent();
 			entity.AddStackTryApplyDamageComponent();
