@@ -23,6 +23,11 @@ namespace TonPlay.Client.Roguelike.Network
         private NetworkSettings _networkSettings;
         private Dictionary<string, string> _headers;
 
+        // private void Awake()
+        // {
+        //     Init();
+        // }
+
         public void Init()
         {
             var uri = _useDebugToken ? _debugTokenSettings.GetFullDebugAppUrl(_username) : Application.absoluteURL;
@@ -49,6 +54,23 @@ namespace TonPlay.Client.Roguelike.Network
            _username = username;
         }
 
+        // # Unit - Unit Controller
+        [Space(10)]
+        [Header("--------- Unit ---------")]
+        [SerializeField] private UnitAllResponse _unitAllResponse;
+        [ContextMenu("GetUnitAll")]
+        public async UniTask<UnitAllResponse> GetUnitAll()
+        {
+            _unitAllResponse = new UnitAllResponse();
+            Debug.LogFormat("_networkClient.GetAsync<UnitAllResponse>");
+            var getTask = _networkClient.GetAsync<UnitAllResponse>("v1/unit/all", _headers, _unitAllResponse);
+
+            var result = await getTask;
+            _unitAllResponse = result;
+
+            return result;
+        }
+        
         // # Skill - Skill Controller
         [Space(10)]
         [Header("--------- Skill ---------")]

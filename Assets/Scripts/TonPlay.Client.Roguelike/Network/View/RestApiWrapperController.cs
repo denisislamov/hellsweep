@@ -52,7 +52,12 @@ namespace TonPlay.Client.Roguelike.Network.View
             _logString = logString.Replace(",", ",\n").Replace("{", "{\n").Replace("}", "\n}");
             _dirtyFlag = true;
         }
-
+        
+        public void GetUnitAll()
+        {
+            _restApiWrapper.GetUnitAll().Forget();
+        }
+        
         public void GetSkillAll()
         {
             _restApiWrapper.GetSkillAll().Forget();

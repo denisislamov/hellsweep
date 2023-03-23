@@ -25,4 +25,22 @@ namespace TonPlay.Client.Roguelike.Network.Response
             }
         }
     }
+    
+    [System.Serializable]
+    public class UnitAllResponse
+    {
+        public List<Unit> items;
+        [System.Serializable]
+        public class Unit
+        {
+            public string id;
+            public string name;
+            public int timing;
+            public int speed;
+            public int quantity;
+            public int frequency;
+            public int health;
+            public int damage;
+        }
+    }
 }
