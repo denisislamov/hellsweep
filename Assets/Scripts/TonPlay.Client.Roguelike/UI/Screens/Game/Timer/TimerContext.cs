@@ -7,9 +7,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Timer
 {
 	public class TimerContext : ScreenContext, ITimerContext
 	{
-		public IReadOnlyReactiveProperty<float> TimeInSeconds { get; }
+		public IReadOnlyReactiveProperty<double> TimeInSeconds { get; }
 
-		public TimerContext(IReadOnlyReactiveProperty<float> timeInSeconds)
+		public TimerContext(IReadOnlyReactiveProperty<double> timeInSeconds)
 		{
 			TimeInSeconds = timeInSeconds;
 		}

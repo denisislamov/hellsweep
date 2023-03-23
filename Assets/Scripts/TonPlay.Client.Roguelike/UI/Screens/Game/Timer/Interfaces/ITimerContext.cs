@@ -6,6 +6,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Timer.Interfaces
 {
 	public interface ITimerContext : IScreenContext
 	{
-		IReadOnlyReactiveProperty<float> TimeInSeconds { get; }
+		IReadOnlyReactiveProperty<double> TimeInSeconds { get; }
 	}
 }

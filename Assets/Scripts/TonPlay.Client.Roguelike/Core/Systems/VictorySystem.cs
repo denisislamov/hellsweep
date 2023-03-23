@@ -29,7 +29,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				return;
 			}
 			
-			var gameTime = TimeSpan.FromSeconds(sharedData.GameModel.GameTime.Value);
+			var gameTime = TimeSpan.FromSeconds(sharedData.GameModel.GameTimeInSeconds.Value);
 
 			if (lastWave.StartTimingTicks > gameTime.Ticks)
 			{

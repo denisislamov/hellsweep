@@ -99,7 +99,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			var gameModel = _gameModelProvider.Get();
 			var presenter = _timerPresenterFactory.Create(
 				View.TimerView,
-				new TimerContext(gameModel.GameTime));
+				new TimerContext(gameModel.GameTimeInSeconds));
 
 			Presenters.Add(presenter);
 		}

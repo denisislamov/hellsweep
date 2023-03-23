@@ -112,39 +112,22 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var gameSessionResponse = await _restApiClient.GetGameSession();
 			if (gameSessionResponse != null)
 			{
+				var surviveTime = TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value);
+
+				if (HasDiedInTheEndOfMatch(matchResult, surviveTime))
+				{
+					surviveTime = SetFailedMaxSurviveTime(gameModel);
+				}
+
 				response = await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
 				{
-					surviveMills = Convert.ToInt64(gameModel.GameTime.Value * 1000),
+					surviveMills = Convert.ToInt64(surviveTime.TotalMilliseconds),
 					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
-					
 				});
 
 				if (response.rewardSummary != null)
 				{
-					var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
-					gainData.Gold += response.rewardSummary.coin; // TODO check it
-					gainData.ProfileExperience += response.rewardSummary.xp; // TODO check it as well
-					
-					var chests = response.rewardSummary.chests;
-					if (chests != null && chests.Count > 0)
-					{
-						var chestsId = new List<string>(chests.Count);
-						for (var index = 0; index < chests.Count; index++)
-						{
-							chestsId[index] = chests[index].id;
-						}
-
-						if (gainData.ChestsId != null)
-						{
-							gainData.ChestsId.AddRange(chestsId);
-						}
-						else
-						{
-							gainData.ChestsId = chestsId;
-						}
-					}
-					
-					gameModel.PlayerModel.MatchProfileGainModel.Update(gainData);
+					UpdateGainModelWithResponse(gameModel, response);
 				}
 			}
 			
@@ -153,7 +136,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			return gameSessionResponse;
 		}
-		
+
 		public async UniTask Finish()
 		{
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu);
@@ -193,7 +176,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			var locationData = locationsData.Locations[_locationConfig.ChapterIdx];
 
-			var currentMatchTimeMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+			var currentMatchTimeMillis = TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value).TotalMilliseconds;
 
 			if (locationData.LongestSurvivedMillis > currentMatchTimeMillis)
 			{
@@ -224,6 +207,49 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			var nextLocationData = locationsData.Locations[nextLocation.ChapterIdx];
 			nextLocationData.Unlocked = true;
+		}
+		
+		private static void UpdateGainModelWithResponse(IGameModel gameModel, GameSessionResponse response)
+		{
+			var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
+			gainData.Gold += response.rewardSummary.coin; // TODO check it
+			gainData.ProfileExperience += response.rewardSummary.xp; // TODO check it as well
+
+			var chests = response.rewardSummary.chests;
+			if (chests != null && chests.Count > 0)
+			{
+				var chestsId = new List<string>(chests.Count);
+				for (var index = 0; index < chests.Count; index++)
+				{
+					chestsId[index] = chests[index].id;
+				}
+
+				if (gainData.ChestsId != null)
+				{
+					gainData.ChestsId.AddRange(chestsId);
+				}
+				else
+				{
+					gainData.ChestsId = chestsId;
+				}
+			}
+
+			gameModel.PlayerModel.MatchProfileGainModel.Update(gainData);
+		}
+		
+		private static bool HasDiedInTheEndOfMatch(IMatchResult matchResult, TimeSpan surviveTime)
+		{
+			return matchResult.MatchResultType == MatchResultType.Lose && 
+				   surviveTime.TotalMinutes >= RoguelikeConstants.Core.MAX_MATCH_TIME_MINUTES;
+		}
+		
+		private static TimeSpan SetFailedMaxSurviveTime(IGameModel gameModel)
+		{
+			var surviveTime = TimeSpan.FromMinutes(RoguelikeConstants.Core.MAX_MATCH_TIME_MINUTES - 1) + TimeSpan.FromSeconds(59);
+			var gameData = gameModel.ToData();
+			gameData.GameTimeInSeconds = surviveTime.TotalSeconds;
+			gameModel.Update(gameData);
+			return surviveTime;
 		}
 
 		public class Factory : PlaceholderFactory<ILocationConfig, SingleMatch>
