@@ -59,6 +59,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private KdTreeStorage _collectablesKdTreeStorage;
 		private KdTreeStorage _playerProjectilesKdTreeStorage;
 		private KdTreeStorage _arenasKdTreeStorage;
+		private KdTreeStorage _locationBlocksKdTreeStorage;
 
 		private OverlapExecutor _overlapExecutor;
 		private ICollectableEntityFactory _collectablesEntityFactory;
@@ -93,6 +94,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_collectablesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Utility"));
 			_playerProjectilesKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("PlayerProjectile"));
 			_arenasKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Arena"));
+			_locationBlocksKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("LocationBlock"));
 
 			_storages = new KdTreeStorage[]
 			{
@@ -100,7 +102,8 @@ namespace TonPlay.Client.Roguelike.Core
 				_playersKdTreeStorage,
 				_collectablesKdTreeStorage,
 				_playerProjectilesKdTreeStorage,
-				_arenasKdTreeStorage
+				_arenasKdTreeStorage,
+				_locationBlocksKdTreeStorage
 			};
 
 			_playerProjectilesKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.PLAYER_PROJECTILES_MAX_COUNT);
@@ -139,7 +142,7 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new HealthCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new MagnetCollectablesSpawnSystem(_collectablesEntityFactory))
 						   .Add(new BombCollectablesSpawnSystem(_collectablesEntityFactory))
-						   .Add(new LocationSpawnSystem(_blocksRoot, _locationConfigStorage))
+						   .Add(new LocationSpawnSystem(_blocksRoot, _locationBlocksKdTreeStorage, _locationConfigStorage))
 						   .Add(new SpawnExperienceCollectablesToGainFirstLevelsSystem(_collectablesEntityFactory));
 
 			_updateSystems = new EcsSystems(_world, _sharedData)
@@ -190,6 +193,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ShowAppliedDamageSystem())
 							.Add(new SpawnAppliedDamageIndicatorSystem())
 							.Add(new DrawDebugKdTreePositionSystem())
+							.Add(new LocationMoveSystem(_locationBlocksKdTreeStorage, _locationConfigStorage))
 							.Add(new GameOverSystem(_uiService))
 							.Add(new VictorySystem(_uiService))
 				;
