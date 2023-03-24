@@ -23,10 +23,10 @@ namespace TonPlay.Client.Roguelike.Network
         private NetworkSettings _networkSettings;
         private Dictionary<string, string> _headers;
 
-        // private void Awake()
-        // {
-        //     Init();
-        // }
+        private void Awake()
+        {
+            // Init();
+        }
 
         public void Init()
         {

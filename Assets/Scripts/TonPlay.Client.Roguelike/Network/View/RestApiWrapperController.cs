@@ -16,7 +16,7 @@ namespace TonPlay.Client.Roguelike.Network.View
         [SerializeField] private InputField _itemIdInputField;
         
         [SerializeField] private InputField _surviveMillsInputField;
-
+        [SerializeField] private InputField _coinsInputField;
         [Space(5)]
         [SerializeField] private Toggle _gameSessionToggle;
         [SerializeField] private InputField _gameSessionLocationId;
@@ -73,6 +73,11 @@ namespace TonPlay.Client.Roguelike.Network.View
             _restApiWrapper.GetInfoLevelAll().Forget();
         }
 
+        public void GetLocationAll()
+        {
+            _restApiWrapper.GetLocationAll().Forget();
+        }
+        
         public void PutItem() 
         {
             ItemPutBody value = new ItemPutBody() 
@@ -103,7 +108,8 @@ namespace TonPlay.Client.Roguelike.Network.View
         {
             var value = new CloseGameSessionPostBody() 
             {
-                surviveMills = int.Parse(_surviveMillsInputField.text)
+                surviveMills = int.Parse(_surviveMillsInputField.text),
+                coins = int.Parse(_coinsInputField.text)
             };
             _restApiWrapper.PostGameSessionClose(value).Forget();
         }
