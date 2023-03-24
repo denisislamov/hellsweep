@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Common.UIService.Layers;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
@@ -12,6 +14,7 @@ using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Loading;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.Utilities;
@@ -60,6 +63,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				return false;
 			}
+			
+			var loadingScreen = _uiService.Open<LoadingScreen, IScreenContext>(ScreenContext.Empty, false, new LoadingScreenLayer());
 
 			data.Energy -= RoguelikeConstants.Meta.MATCH_ENERGY_PRICE_BASE;
 
@@ -82,8 +87,17 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				});
 			}
 
-			await _restApiClient.PostGameSession(requestBody); // TODO - add PVE variable
+			var openSessionResponse = await _restApiClient.PostGameSession(requestBody);
+
+			if (openSessionResponse == null)
+			{
+				_uiService.Close(loadingScreen);
+				return false;
+			}
+			
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(_locationConfig.SceneName);
+			
+			_uiService.Close(loadingScreen);
 
 			return true;
 		}
@@ -139,11 +153,15 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 		public async UniTask Finish()
 		{
+			var loadingScreen = _uiService.Open<LoadingScreen, IScreenContext>(ScreenContext.Empty, false, new LoadingScreenLayer());
+
 			await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu);
 
 			_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
 			
 			await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
+			
+			_uiService.Close(loadingScreen);
 		}
 
 		private void UpdatePlayerProfile(ProfileData profileData, IGameModel gameModel)

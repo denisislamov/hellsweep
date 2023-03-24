@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Common.UIService.Layers;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Layers;
@@ -37,7 +38,8 @@ namespace TonPlay.Client.Common.UIService
 						.FromInstance(new IScreenLayer[]
 						 {
 							 new DefaultScreenLayer(),
-							 new TutorialScreenLayer()
+							 new TutorialScreenLayer(),
+							 new LoadingScreenLayer()
 						 })
 						.AsSingle();
 

@@ -168,12 +168,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDebugToken: 1
-  _username: disadisa
+  _username: csharky
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
+  _unitAllResponse:
+    items: []
   _skillAllResponse:
     items: []
   _boostAllResponse:
+    items: []
+  _locationAllResponse:
     items: []
   _infoLevelAllResponse:
     items: []
@@ -188,11 +192,16 @@ MonoBehaviour:
       name: 
       rarity: 
   _itemsGetResponse:
-    _items: []
+    items: []
   _gameSessionResponse:
     id: 
     status: 
     pve: 0
+    rewardSummary:
+      xp: 0
+      coin: 0
+      energy: 0
+      chests: []
   _userXpResponse:
     level: 0
     xp: 0
@@ -220,3 +229,5 @@ MonoBehaviour:
   _userBalanceResponse:
     coin: 0
     energy: 0
+  _userLocationsResponse:
+    items: []

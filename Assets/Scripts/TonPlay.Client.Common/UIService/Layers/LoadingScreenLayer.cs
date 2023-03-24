@@ -3,7 +3,7 @@ using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 
 namespace TonPlay.Client.Common.UIService.Layers
 {
-	public class DefaultScreenLayer : IScreenLayer
+	public class LoadingScreenLayer : IScreenLayer
 	{
 	}
 }

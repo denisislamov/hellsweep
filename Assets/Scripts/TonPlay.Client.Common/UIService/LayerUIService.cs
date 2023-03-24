@@ -28,12 +28,12 @@ namespace TonPlay.Client.Common.UIService
 			_embeddedClosingStrategy = new EmbeddedClosingScreenStrategy(_screenStack);
 		}
 		
-		public void Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
+		public TScreen Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
 			where TContext : IScreenContext
 			where TScreen : IScreen
 		{
 			var openingScreenStrategy = GetOpeningScreenStrategy(isEmbedded);
-			openingScreenStrategy.Open<TScreen, TContext>(context);
+			return openingScreenStrategy.Open<TScreen, TContext>(context);
 		}
 		
 		public void Close(IScreen screen, bool isEmbedded = false)

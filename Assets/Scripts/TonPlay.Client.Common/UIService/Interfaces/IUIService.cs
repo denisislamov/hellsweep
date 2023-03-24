@@ -6,7 +6,7 @@ namespace TonPlay.Client.Common.UIService.Interfaces
 {
 	public interface IUIService : IDisposable
 	{
-		void Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
+		TScreen Open<TScreen, TContext>(TContext context, bool isEmbedded = false, IScreenLayer screenLayer = null) 
 			where TContext : IScreenContext
 			where TScreen : IScreen;
 		
