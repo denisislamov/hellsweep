@@ -106,7 +106,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 					: 0d;
 
 			var longestSurvivedTimeSpan = TimeSpan.FromMilliseconds(longestSurvivedMillis);
-			var currentSurvivedTimeSpan = TimeSpan.FromSeconds(gameModel.GameTime.Value);
+			var currentSurvivedTimeSpan = TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value);
 
 			var hasReachedNewRecord = currentSurvivedTimeSpan > longestSurvivedTimeSpan;
 
@@ -134,7 +134,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			var gameModel = _gameModelProvider.Get();
 			var presenter = _timerPresenterFactory.Create(
 				View.TimerView,
-				new TimerContext(gameModel.GameTime));
+				new TimerContext(gameModel.GameTimeInSeconds));
 
 			Presenters.Add(presenter);
 		}

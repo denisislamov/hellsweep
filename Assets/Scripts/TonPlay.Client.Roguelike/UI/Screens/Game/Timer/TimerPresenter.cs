@@ -45,7 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Timer
 			_subscription = Context.TimeInSeconds.Subscribe(UpdateView);
 		}
 
-		private void UpdateView(float seconds)
+		private void UpdateView(double seconds)
 		{
 			var timeSpan = TimeSpan.FromSeconds(seconds);
 

@@ -82,7 +82,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 	//
 	// 		profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
 	// 		profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
-	// 		locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTime.Value).TotalMilliseconds;
+	// 		locationData.LongestSurvivedMillis = TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value).TotalMilliseconds;
 	//
 	// 		while (profileData.Experience >= profileData.MaxExperience)
 	// 		{

@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Core.Models.Interfaces
 		
 		IBossModel BossModel { get; }
 
-		IReadOnlyReactiveProperty<float> GameTime { get; }
+		IReadOnlyReactiveProperty<double> GameTimeInSeconds { get; }
 
 		IReadOnlyReactiveProperty<bool> Paused { get; }
 

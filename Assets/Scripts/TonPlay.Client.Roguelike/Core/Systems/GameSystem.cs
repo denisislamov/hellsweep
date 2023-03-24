@@ -52,7 +52,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			var data = _sharedData.GameModel.ToData();
 
-			data.GameTime = component.Time;
+			data.GameTimeInSeconds = component.Time;
 
 			_sharedData.GameModel.Update(data);
 		}
