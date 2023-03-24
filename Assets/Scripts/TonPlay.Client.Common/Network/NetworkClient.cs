@@ -64,6 +64,13 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 		
+		public async UniTask<T> PostAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+		
 		public async UniTask<T> PostAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, requestHeaders, value, _timeout, _decorators);
@@ -72,6 +79,13 @@ namespace TonPlay.Client.Common.Network
 		}
 
 		public async UniTask<T> PutAsync<T>(string path, object value, CancellationToken cancellationToken = default)
+		{
+			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
+			var response = await InvokeRecursive(request, cancellationToken);
+			return response.GetResponseAs<T>();
+		}
+		
+		public async UniTask<T> PutAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);

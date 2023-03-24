@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TonPlay.Client.Common.Network.Interfaces;
+using TonPlay.Client.Common.Utilities;
 
 namespace TonPlay.Client.Common.Network
 {
@@ -35,6 +36,7 @@ namespace TonPlay.Client.Common.Network
 			this._decoratorIndex = -1;
 			RequestType = requestType;
 			this._decorators = filters;
+			this._headers = new DictionaryExt<string, string>();
 			this.BasePath = basePath;
 			this.Path = path;
 			this.Value = value;
