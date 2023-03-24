@@ -128,9 +128,9 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				var surviveTime = TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value);
 
-				if (HasDiedInTheEndOfMatch(matchResult, surviveTime))
+				if (HasDiedOnBossFight(matchResult, gameModel))
 				{
-					surviveTime = SetFailedMaxSurviveTime(gameModel);
+					surviveTime = SetSurviveTimeToPreviousMinuteLastSecond(gameModel);
 				}
 
 				response = await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
@@ -255,15 +255,17 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			gameModel.PlayerModel.MatchProfileGainModel.Update(gainData);
 		}
 		
-		private static bool HasDiedInTheEndOfMatch(IMatchResult matchResult, TimeSpan surviveTime)
+		private static bool HasDiedOnBossFight(IMatchResult matchResult, IGameModel gameModel)
 		{
 			return matchResult.MatchResultType == MatchResultType.Lose && 
-				   surviveTime.TotalMinutes >= RoguelikeConstants.Core.MAX_MATCH_TIME_MINUTES;
+				   gameModel.BossModel.Exists.Value &&
+				   gameModel.BossModel.Health.Value > 0;
 		}
 		
-		private static TimeSpan SetFailedMaxSurviveTime(IGameModel gameModel)
+		private static TimeSpan SetSurviveTimeToPreviousMinuteLastSecond(IGameModel gameModel)
 		{
-			var surviveTime = TimeSpan.FromMinutes(RoguelikeConstants.Core.MAX_MATCH_TIME_MINUTES - 1) + TimeSpan.FromSeconds(59);
+			var surviveTime = TimeSpan.FromMinutes(Math.Round(TimeSpan.FromSeconds(gameModel.GameTimeInSeconds.Value).TotalMinutes) - 1) 
+							  + TimeSpan.FromSeconds(59);
 			var gameData = gameModel.ToData();
 			gameData.GameTimeInSeconds = surviveTime.TotalSeconds;
 			gameModel.Update(gameData);

@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Updaters
 						levelConfig.SetQuantity((int)detail.value);
 						break;
 					case RoguelikeConstants.Core.Skills.FeatureIds.FLIGHT_SPEED:
-						levelConfig.SetSpeed(detail.value);
+						levelConfig.SetSpeed(detail.value * RoguelikeConstants.Core.REMOTE_CONFIG_RANGE_MULTIPLIER);
 						break;
 				}
 			}

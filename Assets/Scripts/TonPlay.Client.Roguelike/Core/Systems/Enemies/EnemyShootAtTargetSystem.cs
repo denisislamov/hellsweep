@@ -47,15 +47,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				ref var targetPosition = ref positionPool.Get(target.EntityId);
 
+				var sqrMinDistance = shoot.MinDistanceTargetToShoot * shoot.MinDistanceTargetToShoot;
+				var sqrMaxDistance = shoot.MaxDistanceTargetToShoot * shoot.MaxDistanceTargetToShoot;
+				
 				var direction = targetPosition.Position - position.Position;
+				var directionSqrMagnitude = direction.sqrMagnitude;
+				
 				direction.Normalize();
-
-				var sqrMinDistance = shoot.MinDistanceTargetToShoot*shoot.MinDistanceTargetToShoot;
-				var sqrMaxDistance = shoot.MaxDistanceTargetToShoot*shoot.MaxDistanceTargetToShoot;
-
+				
 				shoot.TimeLeft -= Time.deltaTime;
 
-				if (shoot.TimeLeft > 0 || direction.sqrMagnitude < sqrMinDistance || direction.sqrMagnitude > sqrMaxDistance)
+				if (shoot.TimeLeft > 0 || directionSqrMagnitude < sqrMinDistance || directionSqrMagnitude > sqrMaxDistance)
 				{
 					continue;
 				}
