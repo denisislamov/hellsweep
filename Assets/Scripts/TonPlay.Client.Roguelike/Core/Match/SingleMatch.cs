@@ -230,7 +230,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		private static void UpdateGainModelWithResponse(IGameModel gameModel, GameSessionResponse response)
 		{
 			var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
-			gainData.Gold += response.rewardSummary.coin; // TODO check it
+			gainData.Gold = response.rewardSummary.coin; // TODO check it
 			gainData.ProfileExperience += response.rewardSummary.xp; // TODO check it as well
 
 			var chests = response.rewardSummary.chests;

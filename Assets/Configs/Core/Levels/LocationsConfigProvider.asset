@@ -81,7 +81,7 @@ MonoBehaviour:
   - _id: location_hell
     _infinite: 0
     _title: Hell
-    _icon: {fileID: 21300000, guid: 0483d959e45cb4b788214078124d1a7f, type: 3}
+    _icon: {fileID: 21300000, guid: ec9585b8e43d2413bbb3f233442e1fbd, type: 3}
     _sceneName: 2
     _blockSize: {x: 9.4, y: 9.4}
     _alreadyUnlocked: 0
