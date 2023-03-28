@@ -24,7 +24,7 @@ namespace TonPlay.Client.Roguelike.Network
 
         private void Awake()
         {
-            // Init();
+             Init();
         }
 
         public void Init()

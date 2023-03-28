@@ -14,13 +14,16 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 	{
 		private readonly IAppEntryPoint _appEntryPoint;
 		private readonly IRestApiClient _restApiClient;
-
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		
 		public BootstrapService(
 			IAppEntryPoint appEntryPoint,
-			IRestApiClient restApiClient)
+			IRestApiClient restApiClient,
+			IAnalyticsServiceWrapper analyticsServiceWrapper)
 		{
 			_appEntryPoint = appEntryPoint;
 			_restApiClient = restApiClient;
+			_analyticsServiceWrapper = analyticsServiceWrapper;
 		}
 
 		public async UniTask Bootstrap()
@@ -32,7 +35,8 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 			Application.targetFrameRate = -1;
 
 			_restApiClient.Init();
-
+			
+			await _analyticsServiceWrapper.Init();
 			await _appEntryPoint.ProcessEntrance();
 		}
 
