@@ -1,5 +1,6 @@
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine.UI;
 
@@ -12,5 +13,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 		IProfileBarView ProfileBarView { get; }
 
 		ILocationSliderView LocationSliderView { get; }
+		
+		INavigationMenuView NavigationMenuView { get; }
 	}
 }

@@ -52,6 +52,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 54bfd800ac1754f97b6a5e9a921778e5, type: 3}
   - {fileID: 21300000, guid: 4754f820bf67944a3a864453fe145f74, type: 3}
   - {fileID: 21300000, guid: 6eaf12a05b55e416eb6b3e1582b87fcf, type: 3}
+  - {fileID: 21300000, guid: b82329c0f542a4e9f8518822473baac7, type: 3}
+  - {fileID: 21300000, guid: c8e77161f82a547759efd49011af25f0, type: 3}
   - {fileID: 21300000, guid: 1c615e91b3997445985f872b47223181, type: 3}
   - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
@@ -65,14 +67,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
+  - {fileID: 21300000, guid: 6848fdf360b684dd094e0e428df7046c, type: 3}
   - {fileID: 21300000, guid: ff37e0145e7d34880b8d9074902b67a5, type: 3}
   - {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
   - {fileID: 21300000, guid: c4bf3d14b3d1140319f250df7a62f603, type: 3}
+  - {fileID: 21300000, guid: 62ec69245e5964b8aacc2af44f54e3c2, type: 3}
   - {fileID: 21300000, guid: 9d59f234a6c8145469f6827027ec1ae0, type: 3}
   - {fileID: -3154963133287660859, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
   - {fileID: 2305930069447662853, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
   - {fileID: 21300000, guid: 2bbac415e3f194c9cb424313092e7f66, type: 3}
   - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
+  - {fileID: 21300000, guid: 567306a502202429993999780fed243b, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
   - {fileID: 21300000, guid: d3af0d466fa194b1e8789ac92cb748e8, type: 3}
@@ -81,17 +86,23 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
   - {fileID: 21300000, guid: 461ddb27c2e8346ab92e82a01c85f3ac, type: 3}
   - {fileID: 21300000, guid: f7d8f157bef03400b938a491cafadfd5, type: 3}
+  - {fileID: 21300000, guid: bf61898717aef4797ba5c26491375c54, type: 3}
   - {fileID: 21300000, guid: e661e2c7724cc495db0fb3f6cfc287e8, type: 3}
   - {fileID: 21300000, guid: 2de464c789aa244b5898e84bd16e832c, type: 3}
   - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
+  - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
+  - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
   - {fileID: 21300000, guid: d3dbd0494d8254f13ba25bc90bfeadd9, type: 3}
   - {fileID: 21300000, guid: 47c98149c6f4d4e389f44d4bc692724e, type: 3}
+  - {fileID: 21300000, guid: 253007599fa8a4785adbb985f5414340, type: 3}
+  - {fileID: 21300000, guid: 3ad69a69b50f24281a92a9d21bcee6d9, type: 3}
   - {fileID: 21300000, guid: 1b36d879d3da7480e8c6f740f0ff47a4, type: 3}
   - {fileID: 21300000, guid: 8d8d3189083974811b4d62305911b2ee, type: 3}
   - {fileID: 21300000, guid: 768cace996f4c483c9e35817368edbcc, type: 3}
   - {fileID: 21300000, guid: 9cc526f9f18464c93b544cc506a5d219, type: 3}
+  - {fileID: 21300000, guid: 58db841a7ba2f4f8480a3101fcf48c03, type: 3}
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
   - {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
@@ -100,6 +111,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
   - {fileID: 21300000, guid: 8aad821d82e304c7485f9b60002c64cb, type: 3}
+  - {fileID: 21300000, guid: a1c26b5dbc6f54093a34d2b07a08906d, type: 3}
   - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
@@ -107,6 +119,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: eaf26e2e2321d4eea866a94ab65f7c82, type: 3}
   - {fileID: 21300000, guid: 191bdd6e24b874cab9daed40a1173849, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
+  - {fileID: 21300000, guid: 0345d3dea35f342668e72e65b23038e0, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
   - {fileID: 21300000, guid: a1703c2fd8bbc44d5bd84907afdb3590, type: 3}
   - {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
@@ -115,6 +128,8 @@ SpriteAtlas:
   - MainMenu_Background_Skulls_01a
   - TitleBackgroundTexture_02
   - GameLabelPanel_01a
+  - Boot
+  - Plus
   - Icons_HiPowerBullet_01a
   - SliderBackground_01
   - Button
@@ -128,14 +143,17 @@ SpriteAtlas:
   - RectangleHalfRounded32
   - RectangleHalfRounded8
   - Icons_ExoBracer_01a
+  - EquipTitleBackground
   - SubTitleBackgroundTexture_03
   - Icons_Battle_01a
   - SubTitleBackground_01
+  - Body
   - Particle_01a
   - SkillChoiceSkillsIcons_01a_1
   - SkillChoiceSkillsIcons_01a_0
   - Icon_Skill_SilverBar_01a
   - CircleDonut_01a
+  - Heart
   - SkillLevelPoint_01b
   - SubTitleBackgroundTexture_01
   - Icons_Settings_01a
@@ -144,17 +162,23 @@ SpriteAtlas:
   - BackgroundSidebarInactive_01
   - SkillLevelPoint_02a
   - SkillLevelProgressBar_01a
+  - EquipItemsBackground
   - Icons_Diamond_01b
   - SkillLevelPoint_01a
   - TitleBackgroundTexture_01
   - Icons_FitnessGuide_01a
   - joystick_01a
+  - Belt
+  - Shield
   - Icons_Forcefield_01a
   - Particle_01b
+  - Arms
+  - Item_Icon_Sword
   - SkillChoiceSubtitle_01a
   - BackgroundTab_01a
   - Icons_Coin_02a
   - Title holder
+  - Power
   - CrossLine_01a
   - Rectangle
   - Icons_Power_01a
@@ -163,6 +187,7 @@ SpriteAtlas:
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a
   - Icons_RoninOyoroi_01a
+  - Weapon
   - SmallButton_01a
   - TitleBackgroundTexture_04
   - Star
@@ -170,6 +195,7 @@ SpriteAtlas:
   - Background_Items_01a
   - Icon_Skill_HolyWater_01a
   - RectangleRounded8
+  - Neck
   - RectangleHalfRounded16
   - Icons_Kills_01a
   - Icons_Coin_01a

@@ -6,6 +6,8 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 	public interface IProfileModel : IModel<ProfileData>
 	{
 		IBalanceModel BalanceModel { get; }
+		
+		IInventoryModel InventoryModel { get; }
 
 		IReadOnlyReactiveProperty<int> Level { get; }
 

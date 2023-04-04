@@ -19,6 +19,7 @@ namespace TonPlay.Client.Roguelike.Models
 
 		
 		public IBalanceModel BalanceModel { get; } = new BalanceModel();
+		public IInventoryModel InventoryModel { get; } = new InventoryModel();
 
 		public void Update(ProfileData data)
 		{
@@ -38,6 +39,7 @@ namespace TonPlay.Client.Roguelike.Models
 			}
 
 			BalanceModel.Update(data.BalanceData);
+			InventoryModel.Update(data.InventoryData);
 		}
 
 		public ProfileData ToData()
@@ -46,6 +48,7 @@ namespace TonPlay.Client.Roguelike.Models
 			_cached.MaxExperience = _maxExperience.Value;
 
 			_cached.BalanceData = BalanceModel.ToData();
+			_cached.InventoryData = InventoryModel.ToData();
 			return _cached;
 		}
 	}

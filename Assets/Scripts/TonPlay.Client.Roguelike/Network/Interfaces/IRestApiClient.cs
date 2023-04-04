@@ -38,6 +38,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<UserXpResponse> GetUserXp();
 		UniTask<UserSummaryResponse> GetUserSummary();
 		UniTask<UserItemsResponse> GetUserItems();
+		UniTask<UserSlotsResponse> GetUserSlots();
 		UniTask<UserBalanceResponse> GetUserBalance();
 		UniTask<UserLocationsResponse> GetUserLocations();
 	}

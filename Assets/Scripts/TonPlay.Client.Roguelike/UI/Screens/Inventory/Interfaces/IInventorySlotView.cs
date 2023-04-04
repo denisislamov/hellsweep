@@ -1,0 +1,15 @@
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using UnityEngine;
+
+namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
+{
+	public interface IInventorySlotView : IView
+	{
+		IButtonView ButtonView { get; }
+
+		void SetEmptyIconActiveState(bool state);
+
+		void SetIcon(Sprite sprite);
+	}
+}

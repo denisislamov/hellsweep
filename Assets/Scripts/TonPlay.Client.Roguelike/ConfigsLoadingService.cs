@@ -4,6 +4,7 @@ using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 
@@ -14,17 +15,20 @@ namespace TonPlay.Client.Roguelike
 		private readonly IProfileConfigProviderUpdater _profileConfigProviderUpdater;
 		private readonly ILocationConfigUpdater _locationConfigUpdater;
 		private readonly ISkillConfigUpdater _skillConfigUpdater;
+		private readonly IInventoryItemsConfigUpdater _itemsConfigUpdater;
 		private readonly IRestApiClient _restApiClient;
 
 		public ConfigsLoadingService(
 			IProfileConfigProviderUpdater profileConfigProviderUpdater,
 			ILocationConfigUpdater locationConfigUpdater,
 			ISkillConfigUpdater skillConfigUpdater,
+			IInventoryItemsConfigUpdater itemsConfigUpdater,
 			IRestApiClient restApiClient)
 		{
 			_profileConfigProviderUpdater = profileConfigProviderUpdater;
 			_locationConfigUpdater = locationConfigUpdater;
 			_skillConfigUpdater = skillConfigUpdater;
+			_itemsConfigUpdater = itemsConfigUpdater;
 			_restApiClient = restApiClient;
 		}
 
@@ -33,6 +37,7 @@ namespace TonPlay.Client.Roguelike
 			await UpdateProfileConfigs();
 			await UpdateSkillsConfigs();
 			await UpdateLocationsConfigs();
+			await UpdateItemsConfigs();
 		}
 		
 		private async UniTask UpdateLocationsConfigs()
@@ -76,6 +81,18 @@ namespace TonPlay.Client.Roguelike
 				var name = RemoteSkillConverter.ConvertUdidToSkillName(remoteConfig.id);
 
 				_skillConfigUpdater.UpdateConfig(name, remoteConfig);
+			}
+		}
+		
+		private async UniTask UpdateItemsConfigs()
+		{
+			var response = await _restApiClient.GetAllItems();
+
+			for (var i = 0; i < response.items.Count; i++)
+			{
+				var remoteConfig = response.items[i];
+				
+				_itemsConfigUpdater.Update(remoteConfig.id, remoteConfig);
 			}
 		}
 	}

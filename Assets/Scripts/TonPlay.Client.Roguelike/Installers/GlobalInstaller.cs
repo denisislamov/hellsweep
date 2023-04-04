@@ -2,6 +2,8 @@ using TonPlay.Client.Roguelike.Bootstrap;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models;
+using TonPlay.Client.Roguelike.Inventory.Configs;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
@@ -20,6 +22,9 @@ namespace TonPlay.Client.Roguelike.Installers
 		[SerializeField]
 		private LocationConfigProvider _locationConfigProvider;
 
+		[SerializeField]
+		private InventoryItemPresentationProvider _inventoryItemPresentationProvider;
+
 		public override void InstallBindings()
 		{
 			SignalsInstaller.Install(Container);
@@ -36,6 +41,15 @@ namespace TonPlay.Client.Roguelike.Installers
 			
 			Container.Bind<IProfileConfigProvider>().FromInstance(runtimeProfileConfigProvider).AsSingle();
 			Container.Bind<IProfileConfigProviderUpdater>().FromInstance(runtimeProfileConfigProvider).AsSingle();
+
+			var itemsConfigProvider = new InventoryItemsConfigProvider();
+			var itemsConfigUpdater = new InventoryItemsConfigUpdater(itemsConfigProvider);
+
+			Container.Bind<IInventoryItemsConfigProvider>().FromInstance(itemsConfigProvider).AsSingle();
+			Container.Bind<IInventoryItemsConfigUpdater>().FromInstance(itemsConfigUpdater).AsSingle();
+
+			var inventoryItemPresentationProvider = Instantiate(_inventoryItemPresentationProvider);
+			Container.Bind<IInventoryItemPresentationProvider>().FromInstance(inventoryItemPresentationProvider).AsSingle();
 
 			Container.BindInterfacesTo<LocationConfigStorage>().AsSingle();
 		}

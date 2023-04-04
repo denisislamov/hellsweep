@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
@@ -33,6 +35,7 @@ namespace TonPlay.Client.Roguelike.Profile
 		{
 			await UpdateProfileModel();
 			await UpdateLocationsModel();
+			await UpdateInventoryModel();
 		}
 		
 		private async UniTask UpdateLocationsModel()
@@ -84,6 +87,41 @@ namespace TonPlay.Client.Roguelike.Profile
 			var config = _profileConfigProvider.Get(data.Level);
 
 			data.MaxExperience = config?.ExperienceToLevelUp ?? int.MaxValue;
+
+			model.Update(data);
+		}
+		
+		private async UniTask UpdateInventoryModel()
+		{
+			var itemsResponse = await _restApiClient.GetUserItems();
+
+			var metaGameModel = _metaGameModelProvider.Get();
+			var model = metaGameModel.ProfileModel.InventoryModel;
+			var data = model.ToData();
+			
+			for (var i = 0; i < itemsResponse.items.Count; i++)
+			{
+				var itemData = itemsResponse.items[i];
+				data.Items.Add(new InventoryItemData()
+				{
+					Id = itemData.id,
+				});
+			}
+			
+			var slotsResponse = await _restApiClient.GetUserSlots();
+			
+			for (var i = 0; i < slotsResponse.items.Count; i++)
+			{
+				var slotData = slotsResponse.items[i];
+				var item = slotData.item != null ? new InventoryItemData(){ Id = slotData.id } : null;
+				var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
+				data.Slots.Add(slotName, new SlotData()
+				{
+					Id = slotData.id,
+					SlotName = slotName,
+					Item = item
+				});
+			}
 
 			model.Update(data);
 		}
