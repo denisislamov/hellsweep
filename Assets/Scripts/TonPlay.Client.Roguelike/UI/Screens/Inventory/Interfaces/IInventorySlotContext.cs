@@ -1,12 +1,13 @@
 using System;
-using System.Collections.Generic;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 {
-	public interface IInventoryItemCollectionContext : IScreenContext
+	public interface IInventorySlotContext : IScreenContext
 	{
-		IReadOnlyList<IInventoryItemModel> Items { get; }
+		ISlotModel SlotModel { get; }
+		Action ClickCallback { get; }
 	}
 }

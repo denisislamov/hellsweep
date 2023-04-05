@@ -24,9 +24,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public IButtonView ButtonView => _buttonView;
 		
-		public void SetEmptyIconActiveState(bool state)
+		public void SetEmptyState(bool state)
 		{
 			_emptyIcon.gameObject.SetActive(state);
+			_icon.gameObject.SetActive(!state);
 		}
 		
 		public void SetIcon(Sprite sprite)

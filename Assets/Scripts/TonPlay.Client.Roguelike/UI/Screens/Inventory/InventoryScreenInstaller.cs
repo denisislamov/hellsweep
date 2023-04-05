@@ -76,6 +76,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			subContainer
 			   .BindFactory<IInventoryItemCollectionView, IInventoryItemCollectionContext, InventoryItemCollectionPresenter, InventoryItemCollectionPresenter.Factory>()
 			   .FromNew();
+			
+			subContainer
+			   .BindFactory<IInventorySlotView, IInventorySlotContext, InventorySlotPresenter, InventorySlotPresenter.Factory>()
+			   .FromNew();
 		}
 	}
 }

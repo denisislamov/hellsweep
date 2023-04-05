@@ -7,39 +7,39 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 	{
 		void Init();
 		
-		UniTask<SkillAllResponse> GetSkillAll();
-		UniTask<BoostAllResponse> GetBoostAll();
-		UniTask<LocationAllResponse> GetLocationAll();
-		UniTask<InfoLevelAllResponse> GetInfoLevelAll();
-		UniTask<ItemPutResponse> PutItem(ItemPutBody value);
-		UniTask<ItemsGetResponse> GetAllItems();
-		UniTask<string> DeleteItem(string slotId);
+		UniTask<Response<SkillAllResponse>> GetSkillAll();
+		UniTask<Response<BoostAllResponse>> GetBoostAll();
+		UniTask<Response<LocationAllResponse>> GetLocationAll();
+		UniTask<Response<InfoLevelAllResponse>> GetInfoLevelAll();
+		UniTask<Response<ItemPutResponse>> PutItem(ItemPutBody value);
+		UniTask<Response<ItemsGetResponse>> GetAllItems();
+		UniTask<Response<string>> DeleteItem(string slotId);
 		
 		/// <summary>
 		/// Get current active user session
 		/// </summary>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> GetGameSession();
+		UniTask<Response<GameSessionResponse>> GetGameSession();
 
 		/// <summary>
 		/// Close game session
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> PostGameSessionClose(CloseGameSessionPostBody value);
+		UniTask<Response<GameSessionResponse>> PostGameSessionClose(CloseGameSessionPostBody value);
 		
 		/// <summary>
 		/// Create game session
 		/// </summary>
 		/// <param name="pve">If True - PvE mode else - PvP mode</param>
 		/// <returns></returns>
-		UniTask<GameSessionResponse> PostGameSession(OpenGameSessionPostBody pve);
+		UniTask<Response<GameSessionResponse>> PostGameSession(OpenGameSessionPostBody pve);
 		
-		UniTask<UserXpResponse> GetUserXp();
-		UniTask<UserSummaryResponse> GetUserSummary();
-		UniTask<UserItemsResponse> GetUserItems();
-		UniTask<UserSlotsResponse> GetUserSlots();
-		UniTask<UserBalanceResponse> GetUserBalance();
-		UniTask<UserLocationsResponse> GetUserLocations();
+		UniTask<Response<UserXpResponse>> GetUserXp();
+		UniTask<Response<UserSummaryResponse>> GetUserSummary();
+		UniTask<Response<UserItemsResponse>> GetUserItems();
+		UniTask<Response<UserSlotsResponse>> GetUserSlots();
+		UniTask<Response<UserBalanceResponse>> GetUserBalance();
+		UniTask<Response<UserLocationsResponse>> GetUserLocations();
 	}
 }

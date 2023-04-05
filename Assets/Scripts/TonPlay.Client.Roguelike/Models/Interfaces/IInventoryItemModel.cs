@@ -5,10 +5,14 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 {
 	public interface IInventoryItemModel : IModel<InventoryItemData>
 	{
-		public IReadOnlyReactiveProperty<string> Id { get; }
+		IReadOnlyReactiveProperty<string> Id { get; }
 		
-		public IReadOnlyReactiveProperty<string> Name { get; }
+		IReadOnlyReactiveProperty<string> DetailId { get; }
 		
-		public IReadOnlyReactiveProperty<RarityName> Rarity { get; }
+		// IReadOnlyReactiveProperty<string> Name { get; }
+	
+		IReadOnlyReactiveProperty<ushort> Level { get; }
+
+		// IReadOnlyReactiveProperty<RarityName> Rarity { get; }
 	}
 }

@@ -104,7 +104,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 		public async UniTask<GameSessionResponse> FinishSession(IMatchResult matchResult)
 		{
-			var response = new GameSessionResponse();
+			var response = new Response<GameSessionResponse>();
 			
 			var metaGameModel = _metaGameModelProvider.Get();
 			var gameModel = _gameModelProvider.Get();
@@ -139,16 +139,16 @@ namespace TonPlay.Client.Roguelike.Core.Match
 					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
 				});
 
-				if (response.rewardSummary != null)
+				if (response.response.rewardSummary != null)
 				{
-					UpdateGainModelWithResponse(gameModel, response);
+					UpdateGainModelWithResponse(gameModel, response.response);
 				}
 			}
 			
 			profileModel.Update(profileData);
 			locationsModel.Update(locationsData);
 
-			return gameSessionResponse;
+			return gameSessionResponse?.response;
 		}
 
 		public async UniTask Finish()

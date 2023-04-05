@@ -53,7 +53,7 @@ namespace TonPlay.Client.Roguelike.Profile
 			for (var i = 0; i < locationConfigs.Length; i++)
 			{
 				var locationConfig = locationConfigs[i];
-				var userLocation = userLocationsResponse.items.FirstOrDefault(_ => _.chapter == locationConfig.ChapterIdx);
+				var userLocation = userLocationsResponse.response.items.FirstOrDefault(_ => _.chapter == locationConfig.ChapterIdx);
 				var userLocationSurviveMills = Convert.ToDouble(userLocation?.surviveMills ?? 0L);
 				var userLocationFinished = userLocationSurviveMills >= TimeSpan.FromMinutes(14.99d).TotalMilliseconds;
 				var locationData = new LocationData()
@@ -78,11 +78,11 @@ namespace TonPlay.Client.Roguelike.Profile
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
 
-			data.Level = userSummaryResponse.profile.level;
-			data.Experience = userSummaryResponse.profile.xp;
-			data.BalanceData.Gold = userSummaryResponse.profile.coin;
-			data.BalanceData.Energy = userSummaryResponse.profile.energy;
-			data.BalanceData.MaxEnergy = userSummaryResponse.profile.energyMax;
+			data.Level = userSummaryResponse.response.profile.level;
+			data.Experience = userSummaryResponse.response.profile.xp;
+			data.BalanceData.Gold = userSummaryResponse.response.profile.coin;
+			data.BalanceData.Energy = userSummaryResponse.response.profile.energy;
+			data.BalanceData.MaxEnergy = userSummaryResponse.response.profile.energyMax;
 
 			var config = _profileConfigProvider.Get(data.Level);
 
@@ -99,22 +99,26 @@ namespace TonPlay.Client.Roguelike.Profile
 			var model = metaGameModel.ProfileModel.InventoryModel;
 			var data = model.ToData();
 			
-			for (var i = 0; i < itemsResponse.items.Count; i++)
+			for (var i = 0; i < itemsResponse.response.items.Count; i++)
 			{
-				var itemData = itemsResponse.items[i];
+				var itemData = itemsResponse.response.items[i];
 				data.Items.Add(new InventoryItemData()
 				{
 					Id = itemData.id,
+					DetailId = itemData.item.id,
+					Level = itemData.level
 				});
 			}
 			
 			var slotsResponse = await _restApiClient.GetUserSlots();
 			
-			for (var i = 0; i < slotsResponse.items.Count; i++)
+			for (var i = 0; i < slotsResponse.response.items.Count; i++)
 			{
-				var slotData = slotsResponse.items[i];
-				var item = slotData.item != null ? new InventoryItemData(){ Id = slotData.id } : null;
+				var slotData = slotsResponse.response.items[i];
+				var item = new InventoryItemData(){ Id = slotData.itemDetail?.id, DetailId = slotData.itemDetail?.item?.id} ;
+				
 				var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
+				
 				data.Slots.Add(slotName, new SlotData()
 				{
 					Id = slotData.id,

@@ -8,5 +8,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		void GetColors(RarityName rarityName, out Color mainColor, out Gradient backgroundGradient);
 
 		Sprite GetIcon(string itemId);
+		
+		Sprite GetSlotIcon(SlotName slotName);
 	}
 }

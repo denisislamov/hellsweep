@@ -1,3 +1,4 @@
+using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using UnityEngine;
@@ -9,20 +10,35 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public string Id { get; }
 		
 		public string Name { get; }
-		
+		public ushort Level { get; }
+
 		public Sprite Icon { get; }
-		
+		public Sprite SlotIcon { get; }
+
 		public Color MainColor { get; }
 		
 		public Gradient BackgroundGradient { get; }
+		
+		public Action ClickCallback { get; }
 
-		public InventoryItemContext(string id, Sprite icon, Color mainColor, Gradient backgroundGradient, string name)
+		public InventoryItemContext(
+			string id, 
+			Sprite icon, 
+			Sprite slotIcon, 
+			Color mainColor, 
+			Gradient backgroundGradient, 
+			string name, 
+			ushort level, 
+			Action clickCallback)
 		{
 			Id = id;
 			Icon = icon;
 			MainColor = mainColor;
 			BackgroundGradient = backgroundGradient;
 			Name = name;
+			Level = level;
+			SlotIcon = slotIcon;
+			ClickCallback = clickCallback;
 		}
 	}
 }

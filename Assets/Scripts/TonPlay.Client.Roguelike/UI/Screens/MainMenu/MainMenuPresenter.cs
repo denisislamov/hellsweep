@@ -95,8 +95,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
 
-			data.BalanceData.Gold = userBalanceResponse.coin;
-			data.BalanceData.Energy = userBalanceResponse.energy;
+			data.BalanceData.Gold = userBalanceResponse.response.coin;
+			data.BalanceData.Energy = userBalanceResponse.response.energy;
 
 			model.Update(data);
 		}

@@ -55,13 +55,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Unit - Unit Controller
         [Space(10)]
         [Header("--------- Unit ---------")]
-        [SerializeField] private UnitAllResponse _unitAllResponse;
+        [SerializeField] private Response<UnitAllResponse> _unitAllResponse;
         [ContextMenu("GetUnitAll")]
-        public async UniTask<UnitAllResponse> GetUnitAll()
+        public async UniTask<Response<UnitAllResponse>> GetUnitAll()
         {
-            _unitAllResponse = new UnitAllResponse();
+            _unitAllResponse = new Response<UnitAllResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UnitAllResponse>");
-            var getTask = _networkClient.GetAsync<UnitAllResponse>("v1/unit/all", _unitAllResponse);
+            var getTask = _networkClient.GetAsync<UnitAllResponse>("v1/unit/all", null);
 
             var result = await getTask;
             _unitAllResponse = result;
@@ -72,13 +72,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Skill - Skill Controller
         [Space(10)]
         [Header("--------- Skill ---------")]
-        [SerializeField] private SkillAllResponse _skillAllResponse;
+        [SerializeField] private Response<SkillAllResponse> _skillAllResponse;
         [ContextMenu("GetSkillAll")]
-        public async UniTask<SkillAllResponse> GetSkillAll()
+        public async UniTask<Response<SkillAllResponse>> GetSkillAll()
         {
-            _skillAllResponse = new SkillAllResponse();
+            _skillAllResponse = new Response<SkillAllResponse>();
             Debug.LogFormat("_networkClient.GetAsync<SkillAllResponse>");
-            var getTask = _networkClient.GetAsync<SkillAllResponse>("v1/skill/all", _skillAllResponse);
+            var getTask = _networkClient.GetAsync<SkillAllResponse>("v1/skill/all", null);
 
             var result = await getTask;
             _skillAllResponse = result;
@@ -89,13 +89,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Boost - Boost controller
         [Space(10)]
         [Header("--------- Boost ---------")]
-        [SerializeField] private BoostAllResponse _boostAllResponse;
+        [SerializeField] private Response<BoostAllResponse> _boostAllResponse;
         [ContextMenu("GetBoostAll")]
-        public async UniTask<BoostAllResponse> GetBoostAll()
+        public async UniTask<Response<BoostAllResponse>> GetBoostAll()
         {
-            _boostAllResponse = new BoostAllResponse();
+            _boostAllResponse = new Response<BoostAllResponse>();
             Debug.LogFormat("_networkClient.GetAsync<BoostAllResponse>");
-            var getTask = _networkClient.GetAsync<BoostAllResponse>("v1/boost/all", _boostAllResponse);
+            var getTask = _networkClient.GetAsync<BoostAllResponse>("v1/boost/all", null);
 
             var result = await getTask;
             _boostAllResponse = result;
@@ -106,13 +106,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Location - Location controller
         [Space(10)]
         [Header("--------- Location ---------")]
-        [SerializeField] private LocationAllResponse _locationAllResponse;
+        [SerializeField] private Response<LocationAllResponse> _locationAllResponse;
         [ContextMenu("GetLocationAll")]
-        public async UniTask<LocationAllResponse> GetLocationAll()
+        public async UniTask<Response<LocationAllResponse>> GetLocationAll()
         {
-            _locationAllResponse = new LocationAllResponse();
+            _locationAllResponse = new Response<LocationAllResponse>();
             Debug.LogFormat("_networkClient.GetAsync<BoostAllResponse>");
-            var getTask = _networkClient.GetAsync<LocationAllResponse>("v1/location/all", _locationAllResponse);
+            var getTask = _networkClient.GetAsync<LocationAllResponse>("v1/location/all", null);
 
             var result = await getTask;
             _locationAllResponse = result;
@@ -123,13 +123,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Info - Info controller
         [Space(10)]
         [Header("--------- Info ---------")]
-        [SerializeField] private InfoLevelAllResponse _infoLevelAllResponse;
+        [SerializeField] private Response<InfoLevelAllResponse> _infoLevelAllResponse;
         [ContextMenu("GetInfoLevelAll")]
-        public async UniTask<InfoLevelAllResponse> GetInfoLevelAll()
+        public async UniTask<Response<InfoLevelAllResponse>> GetInfoLevelAll()
         {
-            _infoLevelAllResponse = new InfoLevelAllResponse();
+            _infoLevelAllResponse = new Response<InfoLevelAllResponse>();
             Debug.LogFormat("_networkClient.GetAsync<InfoLevelAllResponse>");
-            var getTask = _networkClient.GetAsync<InfoLevelAllResponse>("v1/info/level/all", _infoLevelAllResponse);
+            var getTask = _networkClient.GetAsync<InfoLevelAllResponse>("v1/info/level/all", null);
 
             var result = await getTask;
             _infoLevelAllResponse = result;
@@ -141,11 +141,11 @@ namespace TonPlay.Client.Roguelike.Network
         [Space(10)]
         [Header("--------- Item ---------")]
         [SerializeField] private ItemPutBody _itemPutBody;
-        [SerializeField] private ItemPutResponse _itemPutResponse;
+        [SerializeField] private Response<ItemPutResponse> _itemPutResponse;
         [ContextMenu("PutItem")]
-        public async UniTask<ItemPutResponse> PutItem(ItemPutBody value)
+        public async UniTask<Response<ItemPutResponse>> PutItem(ItemPutBody value)
         {
-            _itemPutResponse = new ItemPutResponse();
+            _itemPutResponse = new Response<ItemPutResponse>();
 
             Debug.LogFormat("_networkClient.PutAsync<ItemPutResponse> {0}", value);
             var putTask = _networkClient.PutAsync<ItemPutResponse, ItemPutBody>("v1/item", value);
@@ -156,14 +156,14 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
 
-        [SerializeField] private ItemsGetResponse _itemsGetResponse;
+        [SerializeField] private Response<ItemsGetResponse> _itemsGetResponse;
         [ContextMenu("GetAllItems")]
-        public async UniTask<ItemsGetResponse> GetAllItems()
+        public async UniTask<Response<ItemsGetResponse>> GetAllItems()
         {
-            _itemsGetResponse = new ItemsGetResponse();
+            _itemsGetResponse = new Response<ItemsGetResponse>();
 
             Debug.LogFormat("_networkClient.GetAsync<ItemsGetResponse> {0}", _itemsGetResponse);
-            var putTask = _networkClient.GetAsync<ItemsGetResponse>("v1/item/all", _itemsGetResponse);
+            var putTask = _networkClient.GetAsync<ItemsGetResponse>("v1/item/all", null);
 
             var result = await putTask;
             _itemsGetResponse = result;
@@ -172,7 +172,7 @@ namespace TonPlay.Client.Roguelike.Network
         }
 
         [ContextMenu("DeleteItem")]
-        public async UniTask<string> DeleteItem(string slotId)
+        public async UniTask<Response<string>> DeleteItem(string slotId)
         {
             Debug.LogFormat("_networkClient.DeleteAsync<string> {0}", slotId);
             var deleteTask = _networkClient.DeleteAsync<string>("v1/item/" + slotId, "");
@@ -184,13 +184,13 @@ namespace TonPlay.Client.Roguelike.Network
         // # Game - Game controller
         [Space(10)]
         [Header("--------- Game ---------")]
-        [SerializeField] private GameSessionResponse _gameSessionResponse;
+        [SerializeField] private Response<GameSessionResponse> _gameSessionResponse;
         [ContextMenu("GetGameSession")]
-        public async UniTask<GameSessionResponse> GetGameSession()
+        public async UniTask<Response<GameSessionResponse>> GetGameSession()
         {
-            _gameSessionResponse = new GameSessionResponse();
+            _gameSessionResponse = new Response<GameSessionResponse>();
             Debug.LogFormat("_networkClient.GetAsync<GameSessionResponse>");
-            var getTask = _networkClient.GetAsync<GameSessionResponse>("v1/game/session", _gameSessionResponse);
+            var getTask = _networkClient.GetAsync<GameSessionResponse>("v1/game/session", null);
 
             try
             {
@@ -202,15 +202,14 @@ namespace TonPlay.Client.Roguelike.Network
             catch (Exception e)
             {
                 Debug.LogFormat("GetGameSession exception {0}", e);
-                _gameSessionResponse = null;
-                return null;
+                return _gameSessionResponse;
             }
         }
 
         [ContextMenu("PostGameSession - GameSessionPutBody")]
-        public async UniTask<GameSessionResponse> PostGameSessionClose(CloseGameSessionPostBody value)
+        public async UniTask<Response<GameSessionResponse>> PostGameSessionClose(CloseGameSessionPostBody value)
         {
-            _gameSessionResponse = new GameSessionResponse();
+            _gameSessionResponse = new Response<GameSessionResponse>();
             Debug.LogFormat("_networkClient.PutAsync<GameSessionResponse> {0}", value);
             var postTask = _networkClient.PostAsync<GameSessionResponse, CloseGameSessionPostBody>("v1/game/session/close", value);
 
@@ -224,15 +223,14 @@ namespace TonPlay.Client.Roguelike.Network
             catch (Exception e)
             {
                 Debug.LogFormat("GetGameSession exception {0}", e);
-                _gameSessionResponse = null;
-                return null;
+                return _gameSessionResponse;
             }
         }
 
         [ContextMenu("PostGameSession")]
-        public async UniTask<GameSessionResponse> PostGameSession(OpenGameSessionPostBody value)
+        public async UniTask<Response<GameSessionResponse>> PostGameSession(OpenGameSessionPostBody value)
         {
-            _gameSessionResponse = new GameSessionResponse();
+            _gameSessionResponse = new Response<GameSessionResponse>();
             Debug.LogFormat("_networkClient.PostAsync<GameSessionResponse> {0}", value);
             var postTask = _networkClient.PostAsync<GameSessionResponse, OpenGameSessionPostBody>("v1/game/session", value);
 
@@ -246,8 +244,7 @@ namespace TonPlay.Client.Roguelike.Network
             catch (Exception e)
             {
                 Debug.LogFormat("GetGameSession exception {0}", e);
-                _gameSessionResponse = null;
-                return null;
+                return _gameSessionResponse;
             }
         }
 
@@ -255,13 +252,13 @@ namespace TonPlay.Client.Roguelike.Network
         [Space(10)]
         [Header("--------- User ---------")]
        
-        [SerializeField] private UserXpResponse _userXpResponse;
+        [SerializeField] private Response<UserXpResponse> _userXpResponse;
         [ContextMenu("GetUserXp")]
-        public async UniTask<UserXpResponse> GetUserXp()
+        public async UniTask<Response<UserXpResponse>> GetUserXp()
         {
-            _userXpResponse = new UserXpResponse();
+            _userXpResponse = new Response<UserXpResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserXpResponse>");
-            var getTask = _networkClient.GetAsync<UserXpResponse>("v1/user/xp", _userXpResponse);
+            var getTask = _networkClient.GetAsync<UserXpResponse>("v1/user/xp", null);
 
             var result = await getTask;
             _userXpResponse = result;
@@ -269,13 +266,13 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
 
-        [SerializeField] private UserSummaryResponse _userSummaryResponse;
+        [SerializeField] private Response<UserSummaryResponse> _userSummaryResponse;
         [ContextMenu("GetUserSummary")]
-        public async UniTask<UserSummaryResponse> GetUserSummary()
+        public async UniTask<Response<UserSummaryResponse>> GetUserSummary()
         {
-            _userSummaryResponse = new UserSummaryResponse();
+            _userSummaryResponse = new Response<UserSummaryResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserSummaryResponse>");
-            var getTask = _networkClient.GetAsync<UserSummaryResponse>("v1/user/summary", _userSummaryResponse);
+            var getTask = _networkClient.GetAsync<UserSummaryResponse>("v1/user/summary", null);
 
             var result = await getTask;
             _userSummaryResponse = result;
@@ -283,13 +280,13 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
 
-        [SerializeField] private UserSlotsResponse _userSlotsResponse;
+        [SerializeField] private Response<UserSlotsResponse> _userSlotsResponse;
         [ContextMenu("GetUserSlots")]
-        public async UniTask<UserSlotsResponse> GetUserSlots()
+        public async UniTask<Response<UserSlotsResponse>> GetUserSlots()
         {
-            _userSlotsResponse = new UserSlotsResponse();
+            _userSlotsResponse = new Response<UserSlotsResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserSlotsResponse>");
-            var getTask = _networkClient.GetAsync<UserSlotsResponse>("/v1/user/slots", _userSlotsResponse);
+            var getTask = _networkClient.GetAsync<UserSlotsResponse>("/v1/user/slots", null);
 
             var result = await getTask;
             _userSlotsResponse = result;
@@ -297,13 +294,13 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
 
-        [SerializeField] private UserItemsResponse _userItemsResponse;
+        [SerializeField] private Response<UserItemsResponse> _userItemsResponse;
         [ContextMenu("GetUserItems")]
-        public async UniTask<UserItemsResponse> GetUserItems()
+        public async UniTask<Response<UserItemsResponse>> GetUserItems()
         {
-            _userItemsResponse = new UserItemsResponse();
+            _userItemsResponse = new Response<UserItemsResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserItemsResponse>");
-            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/items", _userItemsResponse);
+            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/item/detail/all", null);
 
             var result = await getTask;
             _userItemsResponse = result;
@@ -311,13 +308,13 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
 
-        [SerializeField] private UserBalanceResponse _userBalanceResponse;
+        [SerializeField] private Response<UserBalanceResponse> _userBalanceResponse;
         [ContextMenu("GetUserBalance")]
-        public async UniTask<UserBalanceResponse> GetUserBalance()
+        public async UniTask<Response<UserBalanceResponse>> GetUserBalance()
         {
-            _userBalanceResponse = new UserBalanceResponse();
+            _userBalanceResponse = new Response<UserBalanceResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserBalanceResponse>");
-            var getTask = _networkClient.GetAsync<UserBalanceResponse>("v1/user/balance", _userBalanceResponse);
+            var getTask = _networkClient.GetAsync<UserBalanceResponse>("v1/user/balance", null);
 
             var result = await getTask;
             _userBalanceResponse = result;
@@ -325,13 +322,13 @@ namespace TonPlay.Client.Roguelike.Network
             return result;
         }
         
-        [SerializeField] private UserLocationsResponse _userLocationsResponse;
+        [SerializeField] private Response<UserLocationsResponse> _userLocationsResponse;
         [ContextMenu("GetUserBalance")]
-        public async UniTask<UserLocationsResponse> GetUserLocations()
+        public async UniTask<Response<UserLocationsResponse>> GetUserLocations()
         {
-            _userLocationsResponse = new UserLocationsResponse();
+            _userLocationsResponse = new Response<UserLocationsResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserLocationsResponse>");
-            var getTask = _networkClient.GetAsync<UserLocationsResponse>("v1/user/locations", _userLocationsResponse);
+            var getTask = _networkClient.GetAsync<UserLocationsResponse>("v1/user/locations", null);
 
             var result = await getTask;
             _userLocationsResponse = result;

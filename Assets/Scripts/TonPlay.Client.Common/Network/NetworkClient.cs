@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -39,22 +42,35 @@ namespace TonPlay.Client.Common.Network
 				[RequestType.GET]    = (path, data) => UnityWebRequest.Get(path),
 				[RequestType.POST]   = (path, data) => UnityWebRequest.Post(path, data),
 				[RequestType.PUT]    = (path, data) => UnityWebRequest.Put(path, data),
-				[RequestType.DELETE] = (path, data) => UnityWebRequest.Delete(path)
+				[RequestType.DELETE] = (path, data) =>
+				{
+					var request = UnityWebRequest.Delete(path);
+					request.downloadHandler = new DownloadHandlerBuffer();
+					return request;
+				}
 			};
 		}
 
-		public async UniTask<T> GetAsync<T>(string path, T value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> GetAsync<T>(string path, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.GET, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 
-		public async UniTask<T> GetAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> GetAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.GET, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 
 		public async UniTask<T> PostAsync<T>(string path, object value, CancellationToken cancellationToken = default)
@@ -64,53 +80,81 @@ namespace TonPlay.Client.Common.Network
 			return response.GetResponseAs<T>();
 		}
 		
-		public async UniTask<T> PostAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> PostAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 		
-		public async UniTask<T> PostAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> PostAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 
-		public async UniTask<T> PutAsync<T>(string path, object value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> PutAsync<T>(string path, object value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 		
-		public async UniTask<T> PutAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> PutAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 		
-		public async UniTask<T> PutAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> PutAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 
-		public async UniTask<T> DeleteAsync<T>(string path, T value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> DeleteAsync<T>(string path, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.DELETE, _basePath, path, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 		
-		public async UniTask<T> DeleteAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		public async Task<Response<T>> DeleteAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.DELETE, _basePath, path, requestHeaders, value, _timeout, _decorators);
 			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			return new Response<T>
+			{
+				successful = response.StatusCode == (int) HttpStatusCode.OK,
+				response = response.GetResponseAs<T>()
+			};
 		}
 
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)

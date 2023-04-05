@@ -171,3 +171,17 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   _icons: []
   _defaultIcon: {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
+  _slotIcons:
+  - SlotName: 0
+    Sprite: {fileID: 21300000, guid: 253007599fa8a4785adbb985f5414340, type: 3}
+  - SlotName: 1
+    Sprite: {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
+  - SlotName: 2
+    Sprite: {fileID: 21300000, guid: 62ec69245e5964b8aacc2af44f54e3c2, type: 3}
+  - SlotName: 3
+    Sprite: {fileID: 21300000, guid: b82329c0f542a4e9f8518822473baac7, type: 3}
+  - SlotName: 4
+    Sprite: {fileID: 21300000, guid: 0345d3dea35f342668e72e65b23038e0, type: 3}
+  - SlotName: 5
+    Sprite: {fileID: 21300000, guid: a1c26b5dbc6f54093a34d2b07a08906d, type: 3}
+  _defaultSlotIcon: {fileID: 21300000, guid: 253007599fa8a4785adbb985f5414340, type: 3}

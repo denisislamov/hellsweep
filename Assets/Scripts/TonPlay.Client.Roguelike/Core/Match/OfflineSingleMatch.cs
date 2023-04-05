@@ -66,14 +66,14 @@ namespace TonPlay.Client.Roguelike.Core.Match
 	// 		var locationsModel = metagameModel.LocationsModel;
 	// 		var locationsData = locationsModel.ToData();
 	//
-	// 		if (!locationsData.Locations.ContainsKey(_locationConfig.Id))
+	// 		if (!locationsData.Locations.ContainsKey(_locationConfig.DetailId))
 	// 		{
 	// 			locationsData.Locations.Add(
-	// 				_locationConfig.Id,
-	// 				new LocationData() {Id = _locationConfig.Id});
+	// 				_locationConfig.DetailId,
+	// 				new LocationData() {DetailId = _locationConfig.DetailId});
 	// 		}
 	//
-	// 		var locationData = locationsData.Locations[_locationConfig.Id];
+	// 		var locationData = locationsData.Locations[_locationConfig.DetailId];
 	//
 	// 		var profileModel = metagameModel.ProfileModel;
 	// 		var gameModel = _gameModelProvider.Get();

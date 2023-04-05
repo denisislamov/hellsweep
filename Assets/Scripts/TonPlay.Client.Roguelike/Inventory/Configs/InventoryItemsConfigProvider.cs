@@ -8,6 +8,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	{
 		public DictionaryExt<string, IInventoryItemConfig> ConfigsMap { get; } = new DictionaryExt<string, IInventoryItemConfig>();
 
-		public IInventoryItemConfig Get(string id) => ConfigsMap.ContainsKey(id) ? ConfigsMap[id] : default;
+		public IInventoryItemConfig Get(string id) => !string.IsNullOrWhiteSpace(id) && ConfigsMap.ContainsKey(id) 
+			? ConfigsMap[id] 
+			: default;
 	}
 }

@@ -22,6 +22,12 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 
 		[SerializeField]
 		private Sprite _defaultIcon;
+		
+		[SerializeField]
+		private SlotIconSet[] _slotIcons;
+		
+		[SerializeField]
+		private Sprite _defaultSlotIcon;
 
 		private Dictionary<RarityName, ColorSet> _colorSetsByRarityMap;
 		private Dictionary<RarityName, ColorSet> ColorSetsByRarity => _colorSetsByRarityMap ??= _colorSetsByRarity.ToDictionary(_ => _.Rarity, _ => _);
@@ -29,6 +35,9 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		
 		private Dictionary<string, Sprite> _iconsMap;
 		private Dictionary<string, Sprite> Icons => _iconsMap ??= _icons.ToDictionary(_ => _.Id, _ => _.Sprite);
+		
+		private Dictionary<SlotName, Sprite> _slotIconsMap;
+		private Dictionary<SlotName, Sprite> SlotIcons => _slotIconsMap ??= _slotIcons.ToDictionary(_ => _.SlotName, _ => _.Sprite);
 
 		
 		public void GetColors(RarityName rarityName, out Color mainColor, out Gradient backgroundGradient)
@@ -41,7 +50,12 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		
 		public Sprite GetIcon(string itemId)
 		{
-			return Icons.ContainsKey(itemId) ? Icons[itemId] : _defaultIcon;
+			return !string.IsNullOrWhiteSpace(itemId) && Icons.ContainsKey(itemId) ? Icons[itemId] : _defaultIcon;
+		}
+		
+		public Sprite GetSlotIcon(SlotName slotName)
+		{
+			return SlotIcons.ContainsKey(slotName) ? SlotIcons[slotName] : _defaultSlotIcon;
 		}
 	}
 	
@@ -57,6 +71,13 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	internal class IconSet
 	{
 		public string Id;
+		public Sprite Sprite;
+	}
+	
+	[Serializable]
+	internal class SlotIconSet
+	{
+		public SlotName SlotName;
 		public Sprite Sprite;
 	}
 }

@@ -44,9 +44,9 @@ namespace TonPlay.Client.Roguelike
 		{
 			var response = await _restApiClient.GetLocationAll();
 
-			for (int i = 0; i < response.items.Count; i++)
+			for (int i = 0; i < response.response.items.Count; i++)
 			{
-				var locationConfig = response.items[i];
+				var locationConfig = response.response.items[i];
 				_locationConfigUpdater.UpdateByIndex(locationConfig.chapter, locationConfig);
 			}
 		}
@@ -55,9 +55,9 @@ namespace TonPlay.Client.Roguelike
 		{
 			var response = await _restApiClient.GetInfoLevelAll();
 
-			for (var i = 0; i < response.items.Count; i++)
+			for (var i = 0; i < response.response.items.Count; i++)
 			{
-				var itemConfig = response.items[i];
+				var itemConfig = response.response.items[i];
 				_profileConfigProviderUpdater.UpdateConfigExperienceToLevelUp(itemConfig.level, itemConfig.xp);
 			}
 		}
@@ -67,17 +67,17 @@ namespace TonPlay.Client.Roguelike
 			var skillAllResponse = await _restApiClient.GetSkillAll();
 			var boostAllResponse = await _restApiClient.GetBoostAll();
 
-			for (var i = 0; i < skillAllResponse.items.Count; i++)
+			for (var i = 0; i < skillAllResponse.response.items.Count; i++)
 			{
-				var remoteConfig = skillAllResponse.items[i];
+				var remoteConfig = skillAllResponse.response.items[i];
 				var name = RemoteSkillConverter.ConvertUdidToSkillName(remoteConfig.id);
 
 				_skillConfigUpdater.UpdateConfig(name, remoteConfig);
 			}
 			
-			for (var i = 0; i < boostAllResponse.items.Count; i++)
+			for (var i = 0; i < boostAllResponse.response.items.Count; i++)
 			{
-				var remoteConfig = boostAllResponse.items[i];
+				var remoteConfig = boostAllResponse.response.items[i];
 				var name = RemoteSkillConverter.ConvertUdidToSkillName(remoteConfig.id);
 
 				_skillConfigUpdater.UpdateConfig(name, remoteConfig);
@@ -88,9 +88,9 @@ namespace TonPlay.Client.Roguelike
 		{
 			var response = await _restApiClient.GetAllItems();
 
-			for (var i = 0; i < response.items.Count; i++)
+			for (var i = 0; i < response.response.items.Count; i++)
 			{
-				var remoteConfig = response.items[i];
+				var remoteConfig = response.response.items[i];
 				
 				_itemsConfigUpdater.Update(remoteConfig.id, remoteConfig);
 			}

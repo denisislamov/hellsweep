@@ -4,7 +4,13 @@ namespace TonPlay.Client.Roguelike.Network.Response
     public class UserItemResponse 
     {
         public string id;
-        public string name;
-        public string rarity;
+        public ushort level;
+        public Item item;
+
+        [System.Serializable]
+        public class Item
+        {
+            public string id;
+        }
     }
 }

@@ -13,7 +13,16 @@ namespace TonPlay.Client.Roguelike.Network.Response
             public string id;
             public string name;
             public string rarity;
+            public string purpose;
+            public List<Detail> details;
+
+            [System.Serializable]
+            public class Detail
+            {
+                public string feature;
+                public ushort level;
+                public uint value;
+            }
         }
-        
     }
 }

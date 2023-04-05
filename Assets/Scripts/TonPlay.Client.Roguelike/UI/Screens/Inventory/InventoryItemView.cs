@@ -1,5 +1,7 @@
 using Nox7atra.UIFigmaGradients;
 using TMPro;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
@@ -23,7 +25,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		[SerializeField]
 		private UIFigmaGradientRadialDrawer _backgroundGradient;
+		
+		[SerializeField]
+		private ButtonView _buttonView;
 
+		public IButtonView ButtonView => _buttonView;
+		
 		public void SetBackgroundGradient(Gradient gradient)
 		{
 			_backgroundGradient.SetGradient(gradient);
@@ -38,7 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			}
 		}
 
-		public void SetItemGroupIcon(Sprite sprite)
+		public void SetItemSlotIcon(Sprite sprite)
 		{
 			_iconGroupImage.sprite = sprite;
 		}

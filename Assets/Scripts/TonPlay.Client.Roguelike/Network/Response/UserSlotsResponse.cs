@@ -13,7 +13,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
         {
             public string id;
             public string purpose;
-            public ItemPutResponse.Item item;
+            public UserItemResponse itemDetail;
         }
     }
 }

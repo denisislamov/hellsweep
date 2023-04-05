@@ -86,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _profileConfigProvider: {fileID: 11400000, guid: 1bbd6c8fc652e4521934d41ea33bf8a0, type: 2}
   _locationConfigProvider: {fileID: 11400000, guid: df60e11a4d8d640eaad6c80ba630748f, type: 2}
+  _inventoryItemPresentationProvider: {fileID: 11400000, guid: ee0b74d0ec9b8433281a8bd2c22c3e96, type: 2}
 --- !u!114 &9141338410627678188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +238,7 @@ MonoBehaviour:
       energy: 0
       energyMax: 0
   _userSlotsResponse:
-    _items: []
+    items: []
   _userItemsResponse:
     items: []
   _userBalanceResponse:
