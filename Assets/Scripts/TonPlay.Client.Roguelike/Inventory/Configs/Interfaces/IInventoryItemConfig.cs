@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Models;
 
 namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
@@ -12,6 +13,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		RarityName Rarity { get; }
 		
 		SlotName SlotName { get; }
+		
+		AttributeName AttributeName { get; }
 
 		IReadOnlyDictionary<ushort, IInventoryItemDetailConfig> Details { get; }
 	}

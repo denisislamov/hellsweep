@@ -90,9 +90,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 			if (response != null)
 			{
-				Clear();
 				AddItemToSlotModel(item, requiredSlot);
-				InitView();
 			}
 		}
 

@@ -115,7 +115,12 @@ namespace TonPlay.Client.Roguelike.Profile
 			for (var i = 0; i < slotsResponse.response.items.Count; i++)
 			{
 				var slotData = slotsResponse.response.items[i];
-				var item = new InventoryItemData(){ Id = slotData.itemDetail?.id, DetailId = slotData.itemDetail?.item?.id} ;
+				var item = new InventoryItemData()
+				{
+					Id = slotData.itemDetail?.id, 
+					DetailId = slotData.itemDetail?.item?.id,
+					Level = slotData.itemDetail?.level ?? 0
+				} ;
 				
 				var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
 				

@@ -3,6 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
@@ -30,6 +31,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
 		private readonly InventoryItemCollectionPresenter.Factory _inventoryItemCollectionPresenter;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
@@ -49,6 +51,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
 			InventoryItemCollectionPresenter.Factory inventoryItemCollectionPresenter,
 			IMetaGameModelProvider metaGameModelProvider,
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
 			IRestApiClient restApiClient)
 			: base(view, context)
 		{
@@ -60,6 +63,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
 			_inventoryItemCollectionPresenter = inventoryItemCollectionPresenter;
 			_metaGameModelProvider = metaGameModelProvider;
+			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 			_restApiClient = restApiClient;
 
 			AddNestedProfileBarPresenter();
@@ -67,6 +71,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			AddItemCollectionPresenter();
 			AddSlotPresenters();
 			AddUserProfileUpdateScheduler();
+			RefreshAttributes();
+			AddSubscriptionToSlotsToRefreshAttributes();
 		}
 
 		public override void Dispose()
@@ -81,6 +87,47 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			   .Interval(TimeSpan.FromSeconds(60)) // TODO - move to some config
 			   .Subscribe(_ => UpdateUserProfile())
 			   .AddTo(_compositeDisposables);
+		}
+		
+		private void AddSubscriptionToSlotsToRefreshAttributes()
+		{
+			foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots)
+			{
+				kvp.Value.Updated.Subscribe((unit) => RefreshAttributes()).AddTo(_compositeDisposables);
+			}
+		}
+		
+		private void RefreshAttributes()
+		{
+			uint armor = 0;
+			uint damage = 0;
+			uint health = 0;
+			
+			foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots)
+			{
+				var slot = kvp.Value;
+				
+				if (slot.Item?.Id?.Value is null) continue;
+				
+				var itemConfig = _inventoryItemsConfigProvider.Get(slot.Item.DetailId.Value);
+
+				switch (itemConfig.AttributeName)
+				{
+					case AttributeName.ATTACK:
+						damage += itemConfig.Details[slot.Item.Level.Value].Value;
+						break;
+					case AttributeName.HEALTH:
+						health += itemConfig.Details[slot.Item.Level.Value].Value;
+						break;
+					case AttributeName.ARMOR:
+						armor += itemConfig.Details[slot.Item.Level.Value].Value;
+						break;
+				}
+			}
+			
+			View.SetArmorValueText(armor.ToString());
+			View.SetAttackValueText(damage.ToString());
+			View.SetHealthValueText(health.ToString());
 		}
 
 		private async void UpdateUserProfile()

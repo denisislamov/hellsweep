@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
             public string name;
             public string rarity;
             public string purpose;
+            public string feature;
             public List<Detail> details;
 
             [System.Serializable]

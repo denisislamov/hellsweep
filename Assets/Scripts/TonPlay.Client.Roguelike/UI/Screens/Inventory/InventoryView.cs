@@ -66,17 +66,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		public void SetAttackValueText(string text)
 		{
-			throw new System.NotImplementedException();
+			_attackText.SetText(text);
 		}
 		
 		public void SetArmorValueText(string text)
 		{
-			throw new System.NotImplementedException();
+			_armorText.SetText(text);
 		}
 		
 		public void SetHealthValueText(string text)
 		{
-			throw new System.NotImplementedException();
+			_healthText.SetText(text);
 		}
 	}
 }
