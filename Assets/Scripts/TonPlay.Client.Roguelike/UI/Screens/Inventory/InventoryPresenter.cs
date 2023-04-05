@@ -152,13 +152,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			Debug.Log($"Has been clicked '{slotModel.SlotName}' slot with item id: '{slotModel.Item?.DetailId?.Value}'");
 
+			if (slotModel.Item?.DetailId?.Value is null)
+			{
+				return;
+			}
+
 			var response = await _restApiClient.DeleteItem(slotModel.Id.Value);
 			if (response != null && response.successful)
 			{
-				var data = slotModel.ToData();
-				data.Item = new InventoryItemData();
-				slotModel.Update(data);
+				ClearSlot(slotModel);
 			}
+		}
+		
+		private static void ClearSlot(ISlotModel slotModel)
+		{
+			var data = slotModel.ToData();
+			data.Item = new InventoryItemData();
+			slotModel.Update(data);
 		}
 
 		internal class Factory : PlaceholderFactory<IInventoryView, IInventoryScreenContext, InventoryPresenter>
