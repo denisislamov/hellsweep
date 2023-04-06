@@ -120,7 +120,8 @@ namespace TonPlay.Client.Roguelike.Core
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
 
-			_sharedData.SetPlayerWeapon(GetPlayerWeaponId(metaGameModelProvider));
+			var weaponItemId = GetPlayerWeaponItemId(metaGameModelProvider);
+			_sharedData.SetPlayerWeapon(weaponItemId);
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 			_sharedData.SetArenasKdTreeStorage(_arenasKdTreeStorage);
 			_sharedData.SetWorld(_world);
@@ -349,9 +350,9 @@ namespace TonPlay.Client.Roguelike.Core
 			cameraTransformComponent.Transform = _camera.transform;
 		}
 		
-		private string GetPlayerWeaponId(IMetaGameModelProvider metaGameModelProvider)
+		private string GetPlayerWeaponItemId(IMetaGameModelProvider metaGameModelProvider)
 		{
-			return metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON]?.Id?.Value;
+			return metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON]?.Item?.DetailId?.Value;
 		}
 	}
 }
