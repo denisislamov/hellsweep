@@ -70,12 +70,9 @@ namespace TonPlay.Client.Roguelike.Models
 				_items[i].Update(data.Items[i]);
 			}
 
-			if (_items.Count != data.Items.Count)
+			while (_items.Count > data.Items.Count)
 			{
-				for (var i = data.Items.Count; i < _items.Count; i++)
-				{
-					_items.RemoveAt(i);
-				}
+				_items.RemoveAt(_items.Count - 1);
 			}
 		}
 

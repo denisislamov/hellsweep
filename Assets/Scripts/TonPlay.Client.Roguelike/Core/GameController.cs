@@ -16,6 +16,8 @@ using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.Core.Systems.Skills.Active;
 using TonPlay.Client.Roguelike.Core.Systems.Skills.Passive;
+using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -77,7 +79,8 @@ namespace TonPlay.Client.Roguelike.Core
 			OverlapExecutor.Factory overlapExecutorFactory,
 			SharedData.Factory sharedDataFactory,
 			ILocationConfigStorage locationConfigStorage,
-			CollectablesEntityFactory.Factory collectablesEntityFactoryFactory)
+			CollectablesEntityFactory.Factory collectablesEntityFactoryFactory,
+			IMetaGameModelProvider metaGameModelProvider)
 		{
 			_uiService = uiService;
 			_locationConfigStorage = locationConfigStorage;
@@ -117,7 +120,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
 
-			_sharedData.SetPlayerWeapon("katana");
+			_sharedData.SetPlayerWeapon(GetPlayerWeaponId(metaGameModelProvider));
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 			_sharedData.SetArenasKdTreeStorage(_arenasKdTreeStorage);
 			_sharedData.SetWorld(_world);
@@ -344,6 +347,11 @@ namespace TonPlay.Client.Roguelike.Core
 			cameraEntityId.Add<CameraShakeComponent>();
 			ref var cameraTransformComponent = ref cameraEntityId.Add<TransformComponent>();
 			cameraTransformComponent.Transform = _camera.transform;
+		}
+		
+		private string GetPlayerWeaponId(IMetaGameModelProvider metaGameModelProvider)
+		{
+			return metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON]?.Id?.Value;
 		}
 	}
 }

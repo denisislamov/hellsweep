@@ -52,24 +52,24 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				var icon = _itemPresentationProvider.GetIcon(itemId);
 				var slotIcon = _itemPresentationProvider.GetSlotIcon(config.SlotName);
 
-				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradient);
+				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradientMaterial);
 
 				var itemView = Add();
 				var presenter = _itemPresenterFactory.Create(
 					itemView,
-					CreateItemContext(itemId, icon, slotIcon, mainColor, backgroundGradient, config, item));
+					CreateItemContext(itemId, icon, slotIcon, mainColor, backgroundGradientMaterial, config, item));
 
 				Presenters.Add(presenter);
 			}
 		}
 
-		private IInventoryItemContext CreateItemContext(string itemId, Sprite icon, Sprite slotIcon, Color mainColor, Gradient backgroundGradient, IInventoryItemConfig config, IInventoryItemModel item)
+		private IInventoryItemContext CreateItemContext(string itemId, Sprite icon, Sprite slotIcon, Color mainColor, Material backgroundGradientMaterial, IInventoryItemConfig config, IInventoryItemModel item)
 			=> new InventoryItemContext(
 				itemId,
 				icon,
 				slotIcon,
 				mainColor,
-				backgroundGradient,
+				backgroundGradientMaterial,
 				config.Name,
 				item.Level.Value,
 				() => ItemClickHandler(item));

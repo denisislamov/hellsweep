@@ -40,7 +40,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		private Dictionary<SlotName, Sprite> SlotIcons => _slotIconsMap ??= _slotIcons.ToDictionary(_ => _.SlotName, _ => _.Sprite);
 
 		
-		public void GetColors(RarityName rarityName, out Color mainColor, out Gradient backgroundGradient)
+		public void GetColors(RarityName rarityName, out Color mainColor, out Material backgroundGradient)
 		{
 			var colorSet = ColorSetsByRarity.ContainsKey(rarityName) ? ColorSetsByRarity[rarityName] : _defaultColorSet;
 			
@@ -64,7 +64,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	{
 		public RarityName Rarity;
 		public Color MainColor;
-		public Gradient Gradient;
+		public Material Gradient;
 	}
 	
 	[Serializable]

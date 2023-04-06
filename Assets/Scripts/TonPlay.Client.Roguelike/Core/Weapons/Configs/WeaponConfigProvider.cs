@@ -14,9 +14,14 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		[SerializeField]
 		private WeaponConfig[] _configs;
 
+		[SerializeField]
+		private WeaponConfig _defaultWeapon;
+
 		public IWeaponConfig Get(string id)
 		{
-			return _configs.First(config => config.ItemId == id);
+			return string.IsNullOrEmpty(id) 
+				? _defaultWeapon 
+				: _configs.FirstOrDefault(config => config.ItemId == id) ?? _defaultWeapon;
 		}
 
 		[Serializable]

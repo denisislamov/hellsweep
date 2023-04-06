@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 	{
 		IButtonView ButtonView { get; }
 
-		void SetBackgroundGradient(Gradient gradient);
+		void SetBackgroundGradientMaterial(Material material);
 
 		void SetPanelsColor(Color color);
 

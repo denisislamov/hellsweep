@@ -25,7 +25,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		private void InitView()
 		{
-			View.SetBackgroundGradient(Context.BackgroundGradient);
+			View.SetBackgroundGradientMaterial(Context.BackgroundGradientMaterial);
 			View.SetPanelsColor(Context.MainColor);
 			View.SetItemIcon(Context.Icon);
 			View.SetItemSlotIcon(Context.SlotIcon);

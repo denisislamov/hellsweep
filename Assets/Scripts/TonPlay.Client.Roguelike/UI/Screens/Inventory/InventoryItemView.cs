@@ -24,16 +24,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private Image[] _backgroundPanels;
 		
 		[SerializeField]
-		private UIFigmaGradientRadialDrawer _backgroundGradient;
+		private RawImage _backgroundGradient;
 		
 		[SerializeField]
 		private ButtonView _buttonView;
 
 		public IButtonView ButtonView => _buttonView;
 		
-		public void SetBackgroundGradient(Gradient gradient)
+		public void SetBackgroundGradientMaterial(Material material)
 		{
-			_backgroundGradient.SetGradient(gradient);
+			_backgroundGradient.material = material;
 		}
 		
 		public void SetPanelsColor(Color color)

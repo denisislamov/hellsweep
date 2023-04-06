@@ -12,7 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		Sprite Icon { get; }
 		Sprite SlotIcon { get; }
 		Color MainColor { get; }
-		Gradient BackgroundGradient { get; }
+		Material BackgroundGradientMaterial { get; }
 		Action ClickCallback { get; }
 	}
 }

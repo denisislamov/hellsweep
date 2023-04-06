@@ -187,62 +187,90 @@ MonoBehaviour:
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
   _unitAllResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _skillAllResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _boostAllResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _locationAllResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _infoLevelAllResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _itemPutBody:
     slotId: 
-    itemId: 
+    itemDetailId: 
   _itemPutResponse:
-    id: 
-    purpose: 
-    item:
+    successful: 0
+    response:
       id: 
-      name: 
-      rarity: 
+      purpose: 
+      item:
+        id: 
+        name: 
+        rarity: 
   _itemsGetResponse:
-    items: []
+    successful: 0
+    response:
+      items: []
   _gameSessionResponse:
-    id: 
-    status: 
-    pve: 0
-    rewardSummary:
-      xp: 0
-      coin: 0
-      energy: 0
-      chests: []
-  _userXpResponse:
-    level: 0
-    xp: 0
-  _userSummaryResponse:
-    id: 
-    identifier: 
-    username: 
-    status: 
-    profile:
+    successful: 0
+    response:
       id: 
-      firstname: 
-      lastname: 
-      avatar: 
-      nickname: 
-      telegram: 
+      status: 
+      pve: 0
+      rewardSummary:
+        xp: 0
+        coin: 0
+        energy: 0
+        chests: []
+  _userXpResponse:
+    successful: 0
+    response:
       level: 0
       xp: 0
+  _userSummaryResponse:
+    successful: 0
+    response:
+      id: 
+      identifier: 
+      username: 
+      status: 
+      profile:
+        id: 
+        firstname: 
+        lastname: 
+        avatar: 
+        nickname: 
+        telegram: 
+        level: 0
+        xp: 0
+        coin: 0
+        energy: 0
+        energyMax: 0
+  _userSlotsResponse:
+    successful: 0
+    response:
+      items: []
+  _userItemsResponse:
+    successful: 0
+    response:
+      items: []
+  _userBalanceResponse:
+    successful: 0
+    response:
       coin: 0
       energy: 0
-      energyMax: 0
-  _userSlotsResponse:
-    items: []
-  _userItemsResponse:
-    items: []
-  _userBalanceResponse:
-    coin: 0
-    energy: 0
   _userLocationsResponse:
-    items: []
+    successful: 0
+    response:
+      items: []

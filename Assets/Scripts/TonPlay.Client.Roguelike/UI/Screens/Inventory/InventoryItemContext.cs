@@ -17,7 +17,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public Color MainColor { get; }
 		
-		public Gradient BackgroundGradient { get; }
+		public Material BackgroundGradientMaterial { get; }
 		
 		public Action ClickCallback { get; }
 
@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Sprite icon, 
 			Sprite slotIcon, 
 			Color mainColor, 
-			Gradient backgroundGradient, 
+			Material backgroundGradientMaterial, 
 			string name, 
 			ushort level, 
 			Action clickCallback)
@@ -34,7 +34,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Id = id;
 			Icon = icon;
 			MainColor = mainColor;
-			BackgroundGradient = backgroundGradient;
+			BackgroundGradientMaterial = backgroundGradientMaterial;
 			Name = name;
 			Level = level;
 			SlotIcon = slotIcon;
