@@ -31,12 +31,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
             IGameSettingsScreenContext context,
             IButtonPresenterFactory buttonPresenterFactory,
             SliderPresenter.Factory sliderPresenterFactory,
+            TogglePresenter.Factory togglePresenterFactory,
             IUIService uiService,
             IRestApiClient restApiClient)
             : base(view, context)
         {
             _buttonPresenterFactory = buttonPresenterFactory;
             _sliderPresenterFactory = sliderPresenterFactory;
+            _togglePresenterFactory = togglePresenterFactory;
+            
             _uiService = uiService;
             _restApiClient = restApiClient;
 
@@ -77,7 +80,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
         private void AddSlidersPresenter()
         {
             ISliderContext musicSliderContext = new SliderViewContext();
-            musicSliderContext.OnValueChanged = OnSoundValueChanged;
+            musicSliderContext.OnValueChanged = OnMusicSliderValueChanged;
 
             var presenter = _sliderPresenterFactory.Create(View.MusicSlider, musicSliderContext);
             Presenters.Add(presenter);
