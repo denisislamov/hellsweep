@@ -31,7 +31,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		public IProfileBarView ProfileBarView => _profileBarView;
 		public ILocationSliderView LocationSliderView => _locationSliderView;
 		public INavigationMenuView NavigationMenuView => _navigationMenuView;
-		
-		public IButtonView GameSettingsButtonView { get; }
+		public IButtonView GameSettingsButtonView => _gameSettingsButtonView;
 	}
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec7d3e490394628ac4d5801b1e2500e, type: 3}
   m_Name: GameSettingsScreenInstaller
   m_EditorClassIdentifier: 
-  _screen: {fileID: 0}
+  _screen: {fileID: 5192910770657173835, guid: c236afbba9c4e8f41909049131425ddb, type: 3}

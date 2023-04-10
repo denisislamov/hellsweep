@@ -1,4 +1,8 @@
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
+using TonPlay.Client.Roguelike.UI.Sliders;
+using TonPlay.Client.Roguelike.UI.Sliders.Interfaces;
+using TonPlay.Client.Roguelike.UI.Toggles;
+using TonPlay.Client.Roguelike.UI.Toggles.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -29,7 +33,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
                 .AsCached()
                 .WithArguments(ScreenPrefab);
             
-            subContainer.BindFactory<IGameSettingsView, IGameSettingsScreenContext,GameSettingsPresenter, GameSettingsPresenter.Factory>();
+            subContainer.BindFactory<IGameSettingsView, IGameSettingsScreenContext ,GameSettingsPresenter, GameSettingsPresenter.Factory>();
+            subContainer.BindFactory<ISliderView, ISliderContext, SliderPresenter, SliderPresenter.Factory>();
+            subContainer.BindFactory<IToggleView, IToggleContext, TogglePresenter, TogglePresenter.Factory>();
         }
     }
 }
