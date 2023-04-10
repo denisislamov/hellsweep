@@ -1,0 +1,33 @@
+include:
+- project: tonplay/gitlabci-templates
+  ref: master
+  file: /defaults/web3-gaming.yml
+- project: tonplay/gitlabci-templates
+  ref: master
+  file: /snippets/build.yml
+- project: tonplay/gitlabci-templates
+  ref: master
+  file: /snippets/deploy.yml
+
+
+stages:
+- build
+- deploy
+
+
+Build Hellsweep:
+  extends: .build-docker-manual
+  stage: build
+  variables:
+    IMAGE_NAME: hellsweep-asia
+    SERVICE_PATH: ./BuildTemplate/webgl
+    DIR: ./BuildTemplate/webgl
+
+# Deploy Hellsweep:
+#   extends: .deploy-image-cloudrun
+#   stage: deploy
+#   variables:
+#     APP_NAME: hellsweep-asia
+#     IMAGE_NAME: hellsweep-asia
+#     SERVICE_PATH: ./BuildTemplate/webgl
+
