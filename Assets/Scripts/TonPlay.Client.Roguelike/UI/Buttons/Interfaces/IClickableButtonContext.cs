@@ -6,4 +6,5 @@ namespace TonPlay.Client.Roguelike.UI.Buttons.Interfaces
 	{
 		Action OnClick { get; }
 	}
+	
 }

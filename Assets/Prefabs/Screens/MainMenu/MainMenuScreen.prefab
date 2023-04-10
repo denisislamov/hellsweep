@@ -7944,6 +7944,7 @@ MonoBehaviour:
   _profileBarView: {fileID: 6955209125008248341}
   _locationSliderView: {fileID: 4477504502584114040}
   _navigationMenuView: {fileID: 4148239200276008992}
+  _gameSettingsButtonView: {fileID: 4764452216413496344}
 --- !u!114 &4477504502584114040
 MonoBehaviour:
   m_ObjectHideFlags: 0
