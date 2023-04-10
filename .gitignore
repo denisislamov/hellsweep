@@ -75,10 +75,6 @@ crashlytics-build.properties
 
 # Webgl build template
 /BuildTemplate/Game/*
-/BuildTemplate/webgl/unitybuilds/*
-/BuildTemplate/webgl/unitybuild/*
-/BuildTemplate/webgl/StreamingAssets/*
-
 .DS_Store
 .vscode/settings.json
 
