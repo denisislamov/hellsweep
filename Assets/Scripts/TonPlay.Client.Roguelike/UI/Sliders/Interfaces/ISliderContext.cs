@@ -5,6 +5,8 @@ namespace TonPlay.Client.Roguelike.UI.Sliders.Interfaces
 {
     public interface ISliderContext : IScreenContext
     {
-        Action<float> OnValueChanged { get; set; }
+        float InitialValue { get; }
+        
+        Action<float> OnValueChanged { get; }
     }
 }

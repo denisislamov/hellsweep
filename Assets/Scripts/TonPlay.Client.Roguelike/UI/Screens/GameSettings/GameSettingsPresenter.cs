@@ -13,143 +13,149 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 {
-    internal class GameSettingsPresenter : Presenter<IGameSettingsView, IGameSettingsScreenContext>
-    {
-        private readonly IButtonPresenterFactory _buttonPresenterFactory;
-        private readonly SliderPresenter.Factory _sliderPresenterFactory;
-        private readonly TogglePresenter.Factory _togglePresenterFactory;
-        private readonly IUIService _uiService;
+	internal class GameSettingsPresenter : Presenter<IGameSettingsView, IGameSettingsScreenContext>
+	{
+		private readonly IButtonPresenterFactory _buttonPresenterFactory;
+		private readonly SliderPresenter.Factory _sliderPresenterFactory;
+		private readonly TogglePresenter.Factory _togglePresenterFactory;
+		private readonly IUIService _uiService;
 
-        // TODO Audio Service
-        // TODO Switch game stick view and visual damage
+		// TODO Audio Service
+		// TODO Switch game stick view and visual damage
 
-        private readonly IRestApiClient _restApiClient;
+		private readonly IRestApiClient _restApiClient;
 
-        // TODO IGameSettingsScreen - to ScreenContext
-        public GameSettingsPresenter(
-            IGameSettingsView view,
-            IGameSettingsScreenContext context,
-            IButtonPresenterFactory buttonPresenterFactory,
-            SliderPresenter.Factory sliderPresenterFactory,
-            TogglePresenter.Factory togglePresenterFactory,
-            IUIService uiService,
-            IRestApiClient restApiClient)
-            : base(view, context)
-        {
-            _buttonPresenterFactory = buttonPresenterFactory;
-            _sliderPresenterFactory = sliderPresenterFactory;
-            _togglePresenterFactory = togglePresenterFactory;
-            
-            _uiService = uiService;
-            _restApiClient = restApiClient;
+		// TODO IGameSettingsScreen - to ScreenContext
+		public GameSettingsPresenter(
+			IGameSettingsView view,
+			IGameSettingsScreenContext context,
+			IButtonPresenterFactory buttonPresenterFactory,
+			SliderPresenter.Factory sliderPresenterFactory,
+			TogglePresenter.Factory togglePresenterFactory,
+			IUIService uiService,
+			IRestApiClient restApiClient)
+			: base(view, context)
+		{
+			_buttonPresenterFactory = buttonPresenterFactory;
+			_sliderPresenterFactory = sliderPresenterFactory;
+			_togglePresenterFactory = togglePresenterFactory;
 
-            // TODO add save and load data to meta game settings
-        }
+			_uiService = uiService;
+			_restApiClient = restApiClient;
 
-        public override void Show()
-        {
-            // TODO add load data to meta game settings
-            // TODO add load data from rest api
-            base.Show();
+			// TODO add save and load data to meta game settings
+		}
 
-            AddButtonsPresenter();
-            AddSlidersPresenter();
-            AddTogglesPresenter();
-        }
+		public override void Show()
+		{
+			// TODO add load data to meta game settings
+			// TODO add load data from rest api
+			base.Show();
 
-        public override void Hide()
-        {
-            base.Hide();
-        }
+			AddButtonsPresenter();
+			AddSlidersPresenter();
+			AddTogglesPresenter();
+		}
 
-        private void AddButtonsPresenter()
-        {
-            var presenter = _buttonPresenterFactory.Create(View.ApplyButton,
-                new CompositeButtonContext()
-                    .Add(new ClickableButtonContext(ApplyButtonClickHandler)));
+		public override void Hide()
+		{
+			base.Hide();
+		}
 
-            Presenters.Add(presenter);
+		private void AddButtonsPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(View.ApplyButton,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(ApplyButtonClickHandler)));
 
-            presenter = _buttonPresenterFactory.Create(View.CloseButton,
-                new CompositeButtonContext()
-                    .Add(new ClickableButtonContext(CloseButtonClickHandler)));
+			Presenters.Add(presenter);
 
-            Presenters.Add(presenter);
-        }
+			presenter = _buttonPresenterFactory.Create(View.CloseButton,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(CloseButtonClickHandler)));
 
-        private void AddSlidersPresenter()
-        {
-            ISliderContext musicSliderContext = new SliderViewContext();
-            musicSliderContext.OnValueChanged = OnMusicSliderValueChanged;
+			Presenters.Add(presenter);
+		}
 
-            var presenter = _sliderPresenterFactory.Create(View.MusicSlider, musicSliderContext);
-            Presenters.Add(presenter);
+		private void AddSlidersPresenter()
+		{
+			var musicSliderContext = new SliderViewContext(
+				0.5f, // TODO - replace with current value
+				OnMusicSliderValueChanged
+			);
+			var presenter = _sliderPresenterFactory.Create(View.MusicSlider, musicSliderContext);
+			Presenters.Add(presenter);
 
-            ISliderContext soundSliderContext = new SliderViewContext();
-            soundSliderContext.OnValueChanged = OnSoundValueChanged;
+			var soundSliderContext = new SliderViewContext(
+				0.5f, // TODO - replace with current value 
+				OnSoundValueChanged
+			);
+			presenter = _sliderPresenterFactory.Create(View.SoundSlider, soundSliderContext);
+			Presenters.Add(presenter);
 
-            presenter = _sliderPresenterFactory.Create(View.SoundSlider, soundSliderContext);
-            Presenters.Add(presenter);
+			// TODO - ask who remove func from listener
+		}
 
-            // TODO - ask who remove func from listener
-        }
+		private void AddTogglesPresenter()
+		{
+			var presenter = _togglePresenterFactory.Create(
+				View.ScreenGameStickToggle,
+				new ToggleViewContext(
+					true, // TODO - replace with current value
+					OnScreenGameStickToggleValueChanged
+				));
+			Presenters.Add(presenter);
 
-        private void AddTogglesPresenter()
-        {
-            var presenter = _togglePresenterFactory.Create(View.ScreenGameStickToggle, new ToggleViewContext()
-            {
-                OnValueChanged = OnScreenGameStickToggleValueChanged
-            });
-            Presenters.Add(presenter);
-            
-            presenter = _togglePresenterFactory.Create(View.VisualizeDamageToggle, new ToggleViewContext()
-            {
-                OnValueChanged = OnVisualizeDamageToggleValueChanged
-            });
-            Presenters.Add(presenter);
-        }
+			presenter = _togglePresenterFactory.Create(
+				View.VisualizeDamageToggle,
+				new ToggleViewContext(
+					true, // TODO - replace with current value
+					OnVisualizeDamageToggleValueChanged
+				));
+			Presenters.Add(presenter);
+		}
 
-        private void OnVisualizeDamageToggleValueChanged(bool value)
-        {
-            // TODO Switch game stick view and visual damage
-            Debug.LogFormat("OnVisualizeDamageToggleValueChanged: {0}", value);
-        }
+		private void OnVisualizeDamageToggleValueChanged(bool value)
+		{
+			// TODO Switch game stick view and visual damage
+			Debug.LogFormat("OnVisualizeDamageToggleValueChanged: {0}", value);
+		}
 
-        private void OnScreenGameStickToggleValueChanged(bool value)
-        {
-            // TODO Switch game stick view and visual damage
-            Debug.LogFormat("OnScreenGameStickToggleValueChanged: {0}", value);
-        }
+		private void OnScreenGameStickToggleValueChanged(bool value)
+		{
+			// TODO Switch game stick view and visual damage
+			Debug.LogFormat("OnScreenGameStickToggleValueChanged: {0}", value);
+		}
 
 
-        private void OnMusicSliderValueChanged(float value)
-        {
-            Debug.LogFormat("OnMusicSliderValueChanged: {0}", value);
-        }
+		private void OnMusicSliderValueChanged(float value)
+		{
+			Debug.LogFormat("OnMusicSliderValueChanged: {0}", value);
+		}
 
-        private void OnSoundValueChanged(float value)
-        {
-            Debug.LogFormat("OnSoundValueChanged: {0}", value);
-        }
-        
-        private void ApplyButtonClickHandler()
-        {
-            // TODO add save data to meta game settings
-            // TODO add save data from rest api
-            Debug.Log("ApplyButtonClickHandler");
-            Hide();
-        }
+		private void OnSoundValueChanged(float value)
+		{
+			Debug.LogFormat("OnSoundValueChanged: {0}", value);
+		}
 
-        private void CloseButtonClickHandler()
-        {
-            // Reset settings and close
-            Debug.Log("CloseButtonClickHandler");
-            Hide();
-        }
+		private void ApplyButtonClickHandler()
+		{
+			// TODO add save data to meta game settings
+			// TODO add save data from rest api
+			Debug.Log("ApplyButtonClickHandler");
+			Hide();
+		}
 
-        internal class Factory : PlaceholderFactory<IGameSettingsView, IGameSettingsScreenContext, GameSettingsPresenter>
-        {
-            
-        }
-    }
+		private void CloseButtonClickHandler()
+		{
+			// Reset settings and close
+			Debug.Log("CloseButtonClickHandler");
+			Hide();
+		}
+
+		internal class Factory : PlaceholderFactory<IGameSettingsView, IGameSettingsScreenContext, GameSettingsPresenter>
+		{
+
+		}
+	}
 }

@@ -6,6 +6,14 @@ namespace TonPlay.Client.Roguelike.UI.Toggles
 {
     public class ToggleViewContext : ScreenContext, IToggleContext
     {
-        public Action<bool> OnValueChanged { get; set; }
+        public Action<bool> OnValueChanged { get; }
+        
+        public bool InitialValue { get; }
+        
+        public ToggleViewContext(bool initialValue, Action<bool> onValueChanged)
+        {
+            InitialValue = initialValue;
+            OnValueChanged = onValueChanged;
+        }
     }
 }
