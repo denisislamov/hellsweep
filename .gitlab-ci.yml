@@ -12,6 +12,7 @@ include:
 
 stages:
 - build
+- deploy
 
 
 Build Hellsweep:
