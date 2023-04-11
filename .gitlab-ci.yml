@@ -19,9 +19,8 @@ Build Hellsweep:
   stage: build
   variables:
     IMAGE_NAME: hellsweep-asia
-    SERVICE_PATH: ./BuildTemplate/webgl
+    SERVICE_PATH: BuildTemplate/webgl
     DIR: ./BuildTemplate/webgl
-    DOCKERFILE: ./BuildTemplate/webgl/Dockerfile
 
 # Deploy Hellsweep:
 #   extends: .deploy-image-cloudrun
