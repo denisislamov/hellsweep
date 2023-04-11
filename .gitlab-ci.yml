@@ -18,7 +18,8 @@ Build Hellsweep:
   extends: .build-docker-manual
   stage: build
   variables:
-    IMAGE_NAME: hellsweep-asia-dev
+    IMAGE_NAME: hellsweep-asia
+    IMAGE_TAG: dev
     SERVICE_PATH: BuildTemplate/webgl
     DIR: ./BuildTemplate/webgl
 
