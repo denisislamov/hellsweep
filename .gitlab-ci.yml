@@ -32,4 +32,3 @@ Deploy Hellsweep:
     APP_NAME: hellsweep-front-dev-asia
     IMAGE_NAME: hellsweep-asia-front-dev
     SERVICE_PATH: BuildTemplate/webgl
-
