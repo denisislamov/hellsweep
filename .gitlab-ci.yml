@@ -24,11 +24,11 @@ Build Hellsweep:
     DIR: ./BuildTemplate/webgl
 
 
-# Deploy Hellsweep:
-#   extends: .deploy-image-cloudrun
-#   stage: deploy
-#   variables:
-#     APP_NAME: hellsweep-asia
-#     IMAGE_NAME: hellsweep-asia
-#     SERVICE_PATH: ./BuildTemplate/webgl
+Deploy Hellsweep:
+  extends: .deploy-image-cloudrun-manual-dev
+  stage: deploy
+  variables:
+    APP_NAME: hellsweep-front-dev-asia
+    IMAGE_NAME: hellsweep-asia-front-dev
+    SERVICE_PATH: BuildTemplate/webgl
 
