@@ -247,6 +247,50 @@ namespace TonPlay.Client.Roguelike.Network
                 return _gameSessionResponse;
             }
         }
+        
+        [SerializeField] private Response<GamePropertiesResponse> _gamePropertiesResponse;
+        [ContextMenu("GetGameProperties")]
+        public async UniTask<Response<GamePropertiesResponse>> GetGameProperties()
+        {
+            _gamePropertiesResponse = new Response<GamePropertiesResponse>(); 
+            Debug.LogFormat("_networkClient.GetAsync<GamePropertiesResponse>");
+            var getTask = _networkClient.GetAsync<GamePropertiesResponse>("v1/game/properties", null);
+
+            try
+            {
+                var result = await getTask;
+                _gamePropertiesResponse = result;
+                
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogFormat("GetGameProperties exception {0}", e);
+                return _gamePropertiesResponse;
+            }
+        }
+
+        [ContextMenu("PostGameProperties")]
+        public async UniTask<Response<GamePropertiesResponse>> PostGameProperties(GamePropertiesResponse value)
+        {
+            _gamePropertiesResponse = new Response<GamePropertiesResponse>();
+            Debug.LogFormat("_networkClient.PostGameProperties<GamePropertiesResponse> {0}", value);
+            
+            var postTask = _networkClient.PostAsync<GamePropertiesResponse, GamePropertiesResponse>("v1/game/properties", value);
+
+            try
+            {
+                var result = await postTask;
+                _gamePropertiesResponse = result;
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogFormat("GetGameSession exception {0}", e);
+                return _gamePropertiesResponse;
+            }
+        }
 
         // # User - User Controller
         [Space(10)]
@@ -335,6 +379,5 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
-
     }
 }
