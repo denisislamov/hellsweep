@@ -41,5 +41,8 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<UserSlotsResponse>> GetUserSlots();
 		UniTask<Response<UserBalanceResponse>> GetUserBalance();
 		UniTask<Response<UserLocationsResponse>> GetUserLocations();
+
+		UniTask<Response<GamePropertiesResponse>> GetGameProperties();
+		UniTask<Response<GamePropertiesResponse>> PostGameProperties(GamePropertiesResponse value);
 	}
 }
