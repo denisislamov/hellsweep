@@ -10,6 +10,8 @@ using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
@@ -71,6 +73,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			AddCurrentLocationSubscription();
 
 			AddUserProfileUpdateScheduler();
+			
+			AddSettingsButtonPresenter();
+
 		}
 
 		public override void Dispose()
@@ -161,7 +166,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 			Presenters.Add(presenter);
 		}
+		
+		private void AddSettingsButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(View.GameSettingsButtonView,
+				new CompositeButtonContext()
+					.Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
 
+			Presenters.Add(presenter);
+		}
+
+		
+		private void OnSettingsButtonClickHandler()
+		{
+			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
+		}
+		
 		private async void OnPlayButtonClickHandler()
 		{
 			if (_launchingMatch)

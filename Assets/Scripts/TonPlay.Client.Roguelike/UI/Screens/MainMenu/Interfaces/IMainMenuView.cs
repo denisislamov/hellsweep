@@ -15,5 +15,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 		ILocationSliderView LocationSliderView { get; }
 		
 		INavigationMenuView NavigationMenuView { get; }
+		
+		IButtonView GameSettingsButtonView { get; }
 	}
 }

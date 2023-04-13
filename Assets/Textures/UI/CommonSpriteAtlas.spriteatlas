@@ -61,10 +61,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d47bab522d11846668dbdbe0422890c3, type: 3}
   - {fileID: 21300000, guid: 6e144172d12ee43fa9dc7ed38cd8fecc, type: 3}
   - {fileID: 21300000, guid: e9ccee82ac1024dc99be2f71add15e63, type: 3}
+  - {fileID: 21300000, guid: 640118a268380ec4c866f3eacb743dc8, type: 3}
   - {fileID: 21300000, guid: 73b636b206e194048a8cb3d091e3ae0e, type: 3}
   - {fileID: 21300000, guid: b07b23c2d66cf420795672b35b056d3b, type: 3}
   - {fileID: 21300000, guid: f66dec4364eb645adb66a0f26adde46c, type: 3}
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
+  - {fileID: 21300000, guid: 5833458341820d449a545a554a195a6a, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
   - {fileID: 21300000, guid: 6848fdf360b684dd094e0e428df7046c, type: 3}
@@ -92,11 +94,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
+  - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
   - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
   - {fileID: 21300000, guid: d3dbd0494d8254f13ba25bc90bfeadd9, type: 3}
   - {fileID: 21300000, guid: 47c98149c6f4d4e389f44d4bc692724e, type: 3}
   - {fileID: 21300000, guid: 253007599fa8a4785adbb985f5414340, type: 3}
+  - {fileID: 21300000, guid: 46f54569ef15f0147a77498816b8eb97, type: 3}
   - {fileID: 21300000, guid: 3ad69a69b50f24281a92a9d21bcee6d9, type: 3}
   - {fileID: 21300000, guid: 1b36d879d3da7480e8c6f740f0ff47a4, type: 3}
   - {fileID: 21300000, guid: 8d8d3189083974811b4d62305911b2ee, type: 3}
@@ -107,6 +111,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
   - {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
   - {fileID: 21300000, guid: ae2ce99b50d384c52b72f02810a0198b, type: 3}
+  - {fileID: 21300000, guid: c538c2cb68a70ac4298ef6fb0993b42f, type: 3}
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
@@ -137,10 +142,12 @@ SpriteAtlas:
   - BackgroundSidebarActive_01
   - SubTitleBackgroundTexture_02
   - RevolverSight_01a
+  - Close_button
   - TitleBackgroundTexture_05
   - HeaderBarBackground_01a
   - SkillChoiceItemBackground_01a
   - RectangleHalfRounded32
+  - Slider red
   - RectangleHalfRounded8
   - Icons_ExoBracer_01a
   - EquipTitleBackground
@@ -168,11 +175,13 @@ SpriteAtlas:
   - TitleBackgroundTexture_01
   - Icons_FitnessGuide_01a
   - joystick_01a
+  - Settings_skull
   - Belt
   - Shield
   - Icons_Forcefield_01a
   - Particle_01b
   - Arms
+  - Toggle_on_red
   - Item_Icon_Sword
   - SkillChoiceSubtitle_01a
   - BackgroundTab_01a
@@ -183,6 +192,7 @@ SpriteAtlas:
   - Rectangle
   - Icons_Power_01a
   - Icons_SportShoes_01a
+  - Apply_button
   - RectangleRounded32
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a

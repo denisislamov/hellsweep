@@ -13,7 +13,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 		
 		[SerializeField]
 		private NavigationButtonView _inventoryButtonView;
-
+		
 		public INavigationButtonView MainMenuButtonView => _mainMenuButtonView;
 		public INavigationButtonView InventoryButtonView => _inventoryButtonView;
 	}

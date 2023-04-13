@@ -2,6 +2,8 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -15,13 +17,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 	{
 		private readonly IUIService _uiService;
 		private readonly NavigationButtonPresenter.Factory _navigationButtonPresenterFactory;
-
+		
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
 		private readonly ReactiveProperty<NavigationMenuTabName> _currentActiveTab = new ReactiveProperty<NavigationMenuTabName>();
 
-		public NavigationMenuPresenter(
-			INavigationMenuView view,
+		public NavigationMenuPresenter(INavigationMenuView view,
 			INavigationMenuContext context,
 			IUIService uiService,
 			NavigationButtonPresenter.Factory navigationButtonPresenterFactory)
@@ -29,7 +30,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 		{
 			_uiService = uiService;
 			_navigationButtonPresenterFactory = navigationButtonPresenterFactory;
-
+			
 			_currentActiveTab.SetValueAndForceNotify(Context.InitialTab);
 			
 			AddMainMenuButtonPresenter();
@@ -71,7 +72,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 
 			Presenters.Add(presenter);
 		}
-
+		
 		private void OnMainMenuButtonClickHandler()
 		{
 			_uiService.Close(Context.Screen);
@@ -83,7 +84,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 			_uiService.Close(Context.Screen);
 			_uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
 		}
-
+		
 		internal class Factory : PlaceholderFactory<INavigationMenuView, INavigationMenuContext, NavigationMenuPresenter>
 		{
 		}
