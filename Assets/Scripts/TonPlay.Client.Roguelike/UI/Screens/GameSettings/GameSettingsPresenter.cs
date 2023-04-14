@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -26,8 +28,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 		// TODO Switch game stick view and visual damage
 
 		private readonly IRestApiClient _restApiClient;
-
-		private GamePropertiesResponse.JsonData.GameSettings _gameSetting;
+		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		
+		private GamePropertiesResponse.JsonData.GameSettings _gameSettingCached;
 		
 		// TODO IGameSettingsScreen - to ScreenContext
 		public GameSettingsPresenter(
@@ -37,13 +40,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 			SliderPresenter.Factory sliderPresenterFactory,
 			TogglePresenter.Factory togglePresenterFactory,
 			IUIService uiService,
+			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient)
 			: base(view, context)
 		{
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_sliderPresenterFactory = sliderPresenterFactory;
 			_togglePresenterFactory = togglePresenterFactory;
-
+			_metaGameModelProvider = metaGameModelProvider;
+			
 			_uiService = uiService;
 			_restApiClient = restApiClient;
 
@@ -52,36 +57,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 
 		public override async void Show()
 		{
-			_gameSetting = new GamePropertiesResponse.JsonData.GameSettings();
-			// TODO add load data to meta game settings
-			// TODO add load data from rest api
+			_gameSettingCached = new GamePropertiesResponse.JsonData.GameSettings();
 			base.Show();
 			
 			AddButtonsPresenter();
 			AddSlidersPresenter();
 			AddTogglesPresenter();
-			
-			var gamePropertiesResponse = await _restApiClient.GetGameProperties();
-			if (gamePropertiesResponse != null)
-			{
-				if (gamePropertiesResponse.response.jsonData != null)
-				{
-					_gameSetting = gamePropertiesResponse.response.jsonData.gameSettings;
-					SetViewValues();
-				}
-			}
-			else
-			{
-				Debug.LogWarning("Can't get GamePropertiesResponse from server");
-			}
+			SetViewValues();
 		}
 
 		private void SetViewValues()
 		{
-			View.MusicSlider.SetSliderValue(_gameSetting.MusicVolume);
-			View.SoundSlider.SetSliderValue(_gameSetting.SoundsVolume);
-			View.ScreenGameStickToggle.SetToggleValue(_gameSetting.ScreenGameStick);
-			View.VisualizeDamageToggle.SetToggleValue(_gameSetting.VisualizeDamage);
+			var data = _metaGameModelProvider.Get().GameSettingsModel.ToData();
+			
+			View.MusicSlider.SetSliderValue(data.MusicVolume);
+			View.SoundSlider.SetSliderValue(data.SoundsVolume);
+			View.ScreenGameStickToggle.SetToggleValue(data.ScreenGameStick);
+			View.VisualizeDamageToggle.SetToggleValue(data.VisualizeDamage);
 		}
 
 		public override void Hide()
@@ -144,52 +136,68 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 		
 		private void OnVisualizeDamageToggleValueChanged(bool value)
 		{
-			// TODO Switch game stick view and visual damage
-			_gameSetting.VisualizeDamage = value;
+			_gameSettingCached.VisualizeDamage = value;
 			Debug.LogFormat("OnVisualizeDamageToggleValueChanged: {0}", value);
 		}
 
 		private void OnScreenGameStickToggleValueChanged(bool value)
 		{
-			// TODO Switch game stick view and visual damage
-			_gameSetting.ScreenGameStick = value;
+			_gameSettingCached.ScreenGameStick = value;
 			Debug.LogFormat("OnScreenGameStickToggleValueChanged: {0}", value);
 		}
 
 
 		private void OnMusicSliderValueChanged(float value)
 		{
-			_gameSetting.MusicVolume = value;
+			_gameSettingCached.MusicVolume = value;
 			Debug.LogFormat("OnMusicSliderValueChanged: {0}", value);
 		}
 
 		private void OnSoundValueChanged(float value)
 		{
-			_gameSetting.SoundsVolume = value;
+			_gameSettingCached.SoundsVolume = value;
 			Debug.LogFormat("OnSoundValueChanged: {0}", value);
 		}
 
 		private async void ApplyButtonClickHandler()
 		{
-			// TODO add save data to meta game settings
-			// TODO add save data from rest api
-			
-			var gameSettingResponse = new GamePropertiesResponse();
-			gameSettingResponse.jsonData.gameSettings = _gameSetting;
-			
-			var gamePropertiesResponse = await _restApiClient.PostGameProperties(gameSettingResponse);
-			if (gamePropertiesResponse == null)
-			{
-				Debug.LogWarning("Can't set GamePropertiesResponse to server");
-			}
+			UpdateGameSettingsModel();
+			await PostGameSettingsToServer();
 
 			Debug.Log("ApplyButtonClickHandler");
 			Hide();
 		}
 
+		private async Task PostGameSettingsToServer()
+		{
+			var gameSettingResponse = new GamePropertiesResponse
+			{
+				jsonData =
+				{
+					gameSettings = _gameSettingCached
+				}
+			};
+			var gamePropertiesResponse = await _restApiClient.PostGameProperties(gameSettingResponse);
+			if (gamePropertiesResponse == null)
+			{
+				Debug.LogWarning("Can't set GamePropertiesResponse to server");
+			}
+		}
+
+		private void UpdateGameSettingsModel()
+		{
+			var data = _metaGameModelProvider.Get().GameSettingsModel.ToData();
+
+			data.MusicVolume = _gameSettingCached.MusicVolume;
+			data.SoundsVolume = _gameSettingCached.SoundsVolume;
+			data.ScreenGameStick = _gameSettingCached.ScreenGameStick;
+			data.VisualizeDamage = _gameSettingCached.VisualizeDamage;
+
+			_metaGameModelProvider.Get().GameSettingsModel.Update(data);
+		}
+
 		private void CloseButtonClickHandler()
 		{
-			// Reset settings and close
 			Debug.Log("CloseButtonClickHandler");
 			Hide();
 		}
