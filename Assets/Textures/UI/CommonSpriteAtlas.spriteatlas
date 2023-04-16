@@ -82,6 +82,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 567306a502202429993999780fed243b, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
+  - {fileID: 21300000, guid: 910ee636c43d9474b9d8cc0de498e1a3, type: 3}
   - {fileID: 21300000, guid: d3af0d466fa194b1e8789ac92cb748e8, type: 3}
   - {fileID: 21300000, guid: 4661dd76f72d044bea11b544e1b9cd94, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
@@ -92,6 +93,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e661e2c7724cc495db0fb3f6cfc287e8, type: 3}
   - {fileID: 21300000, guid: 2de464c789aa244b5898e84bd16e832c, type: 3}
   - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
+  - {fileID: 21300000, guid: d19230e78cdc948c284c4e3233d3255a, type: 3}
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
@@ -163,6 +165,7 @@ SpriteAtlas:
   - Heart
   - SkillLevelPoint_01b
   - SubTitleBackgroundTexture_01
+  - Avatar
   - Icons_Settings_01a
   - Icons_EnergyDrink_01a
   - joystick_background_01a
@@ -173,6 +176,7 @@ SpriteAtlas:
   - Icons_Diamond_01b
   - SkillLevelPoint_01a
   - TitleBackgroundTexture_01
+  - SortButton01
   - Icons_FitnessGuide_01a
   - joystick_01a
   - Settings_skull

@@ -24,6 +24,12 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		
 		[SerializeField]
 		private GameObject _lockedViewObject;
+		
+		[SerializeField]
+		private GameObject[] _unlockedViewObjects;
+		
+		[SerializeField]
+		private GameObject[] _lockedViewObjects;
 
 		public override void Show()
 		{
@@ -64,6 +70,16 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		{
 			_lockedViewObject.SetActive(locked);
 			_unlockedViewObject.SetActive(!locked);
+			
+			for (var i = 0; i < _lockedViewObjects.Length; i++)
+			{
+				_lockedViewObjects[i].gameObject.SetActive(locked);
+			}
+			
+			for (var i = 0; i < _unlockedViewObjects.Length; i++)
+			{
+				_unlockedViewObjects[i].gameObject.SetActive(!locked);
+			}
 		}
 	}
 }

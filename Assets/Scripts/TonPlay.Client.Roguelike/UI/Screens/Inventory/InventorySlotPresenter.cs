@@ -12,6 +12,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 	public class InventorySlotPresenter : Presenter<IInventorySlotView, IInventorySlotContext>
 	{
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
+		private readonly IInventoryItemsConfigProvider _itemsConfigProvider;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
 		private IDisposable _subscription;
 
@@ -19,10 +20,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			IInventorySlotView view, 
 			IInventorySlotContext context,
 			IButtonPresenterFactory buttonPresenterFactory,
+			IInventoryItemsConfigProvider itemsConfigProvider,
 			IInventoryItemPresentationProvider inventoryItemPresentationProvider) 
 			: base(view, context)
 		{
 			_buttonPresenterFactory = buttonPresenterFactory;
+			_itemsConfigProvider = itemsConfigProvider;
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
 
 			InitView();
@@ -53,10 +56,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		private void InitView()
 		{
-			var icon = _inventoryItemPresentationProvider.GetIcon(Context.SlotModel.Item?.DetailId?.Value);
+			var itemId = Context.SlotModel.Item?.DetailId?.Value;
+			var config = _itemsConfigProvider.Get(itemId);
+			var slotIsEmpty = string.IsNullOrWhiteSpace(itemId);
+
+			View.SetEmptyState(slotIsEmpty);
+
+			if (slotIsEmpty || config == null)
+			{
+				return;
+			}
 			
-			View.SetEmptyState(string.IsNullOrWhiteSpace(Context.SlotModel.Item?.DetailId?.Value));
+			var icon = _inventoryItemPresentationProvider.GetIcon(itemId);
+				
+			_inventoryItemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var rarityMaterial);
+
 			View.SetIcon(icon);
+			View.SetBackgroundMaterial(rarityMaterial);
 		}
 
 		public class Factory : PlaceholderFactory<IInventorySlotView, IInventorySlotContext, InventorySlotPresenter>

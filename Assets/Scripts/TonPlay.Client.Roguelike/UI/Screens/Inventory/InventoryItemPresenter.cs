@@ -1,9 +1,11 @@
+using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
+using UniRx;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
@@ -11,6 +13,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 	public class InventoryItemPresenter : Presenter<IInventoryItemView, IInventoryItemContext>
 	{
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
+		private IDisposable _subscription;
 		public InventoryItemPresenter(
 			IInventoryItemView view, 
 			IInventoryItemContext context,
@@ -21,8 +24,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			
 			InitView();
 			AddButtonPresenter();
+			AddSubscription();
 		}
-		
+
+		public override void Dispose()
+		{
+			_subscription?.Dispose();
+			base.Dispose();
+		}
+
+		private void AddSubscription()
+		{
+			_subscription = Context.IsEquipped.Subscribe(state => View.SetEquippedState(state));
+		}
+
 		private void InitView()
 		{
 			View.SetBackgroundGradientMaterial(Context.BackgroundGradientMaterial);
@@ -30,6 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			View.SetItemIcon(Context.Icon);
 			View.SetItemSlotIcon(Context.SlotIcon);
 			View.SetPanelText($"Lv.{Context.Level}");
+			View.SetEquippedState(Context.IsEquipped.Value);
 		}
 		
 		private void AddButtonPresenter()

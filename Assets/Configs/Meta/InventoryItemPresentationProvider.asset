@@ -20,10 +20,10 @@ MonoBehaviour:
     MainColor: {r: 0.57254905, g: 1, b: 0.37254903, a: 1}
     Gradient: {fileID: 2100000, guid: eee9d0a54322a4460a9c87e1952ffb22, type: 2}
   - Rarity: 2
-    MainColor: {r: 1, g: 0.37254903, b: 0.6745098, a: 1}
+    MainColor: {r: 0.67058825, g: 0.47058824, b: 1, a: 1}
     Gradient: {fileID: 2100000, guid: 505a35c7925ca419296759eb483df3cc, type: 2}
   - Rarity: 3
-    MainColor: {r: 0.67058825, g: 0.47058824, b: 1, a: 1}
+    MainColor: {r: 1, g: 0.37254903, b: 0.6745098, a: 1}
     Gradient: {fileID: 2100000, guid: 7e450246f3864473788128fb309136e2, type: 2}
   _defaultColorSet:
     Rarity: 0

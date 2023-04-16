@@ -24,6 +24,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private Image[] _backgroundPanels;
 		
 		[SerializeField]
+		private GameObject[] _equippedObjects;
+		
+		[SerializeField]
 		private RawImage _backgroundGradient;
 		
 		[SerializeField]
@@ -58,6 +61,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public void SetPanelText(string text)
 		{
 			_panelText.SetText(text);
+		}
+		
+		public void SetEquippedState(bool state)
+		{
+			for (var i = 0; i < _equippedObjects.Length; i++)
+			{
+				_equippedObjects[i].SetActive(state);
+			}
 		}
 	}
 }

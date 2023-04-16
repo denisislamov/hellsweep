@@ -1,6 +1,7 @@
 using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
+using UniRx;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
@@ -16,7 +17,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public Sprite SlotIcon { get; }
 
 		public Color MainColor { get; }
-		
+
+		public IReadOnlyReactiveProperty<bool> IsEquipped { get; }
+
 		public Material BackgroundGradientMaterial { get; }
 		
 		public Action ClickCallback { get; }
@@ -29,6 +32,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Material backgroundGradientMaterial, 
 			string name, 
 			ushort level, 
+			IReadOnlyReactiveProperty<bool> isEquipped,
 			Action clickCallback)
 		{
 			Id = id;
@@ -37,6 +41,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			BackgroundGradientMaterial = backgroundGradientMaterial;
 			Name = name;
 			Level = level;
+			IsEquipped = isEquipped;
 			SlotIcon = slotIcon;
 			ClickCallback = clickCallback;
 		}

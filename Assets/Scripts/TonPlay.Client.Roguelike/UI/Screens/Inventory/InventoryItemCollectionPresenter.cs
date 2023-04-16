@@ -1,6 +1,7 @@
 using TonPlay.Client.Common.Network.Interfaces;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
@@ -9,6 +10,7 @@ using TonPlay.Client.Roguelike.UI.Rewards;
 using TonPlay.Client.Roguelike.UI.Rewards.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Utilities;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +23,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private readonly IInventoryItemsConfigProvider _itemsConfigProvider;
 		private readonly IRestApiClient _restApiClient;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly DictionaryExt<string, InventoryItemContext> _itemContexts = new DictionaryExt<string, InventoryItemContext>();
 
 		public InventoryItemCollectionPresenter(
 			ICollectionView<IInventoryItemView> view,
@@ -46,24 +49,37 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			for (var i = 0; i < Context.Items.Count; i++)
 			{
-				var item = Context.Items[i];
+				var item = Context.Items[i].Model;
 				var itemId = item.DetailId.Value;
 				var config = _itemsConfigProvider.Get(itemId);
 				var icon = _itemPresentationProvider.GetIcon(itemId);
 				var slotIcon = _itemPresentationProvider.GetSlotIcon(config.SlotName);
+				var slots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots;
+				var itemEquippedState = Context.Items[i].EquippedState;
 
 				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradientMaterial);
 
 				var itemView = Add();
+				var context = CreateItemContext(itemId, icon, slotIcon, mainColor, backgroundGradientMaterial, itemEquippedState, config, item);
 				var presenter = _itemPresenterFactory.Create(
 					itemView,
-					CreateItemContext(itemId, icon, slotIcon, mainColor, backgroundGradientMaterial, config, item));
-
+					context);
+				
+				_itemContexts.Add(item.Id.Value, context);
+				
 				Presenters.Add(presenter);
 			}
 		}
 
-		private IInventoryItemContext CreateItemContext(string itemId, Sprite icon, Sprite slotIcon, Color mainColor, Material backgroundGradientMaterial, IInventoryItemConfig config, IInventoryItemModel item)
+		private InventoryItemContext CreateItemContext(
+			string itemId, 
+			Sprite icon,
+			Sprite slotIcon, 
+			Color mainColor, 
+			Material backgroundGradientMaterial,
+			IReadOnlyReactiveProperty<bool> isEquipped,
+			IInventoryItemConfig config, 
+			IInventoryItemModel item)
 			=> new InventoryItemContext(
 				itemId,
 				icon,
@@ -72,34 +88,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				backgroundGradientMaterial,
 				config.Name,
 				item.Level.Value,
-				() => ItemClickHandler(item));
-
-		private async void ItemClickHandler(IInventoryItemModel item)
-		{
-			Debug.Log($"Has been clicked item with id {item.DetailId.Value}");
-
-			var itemConfig = _itemsConfigProvider.Get(item.DetailId.Value);
-			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
-
-			var response = await _restApiClient.PutItem(
-				new ItemPutBody()
-				{
-					itemDetailId = item.Id.Value,
-					slotId = requiredSlot.Id.Value
-				});
-
-			if (response != null)
-			{
-				AddItemToSlotModel(item, requiredSlot);
-			}
-		}
-
-		private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
-		{
-			var requiredSlotData = requiredSlot.ToData();
-			requiredSlotData.Item = item.ToData();
-			requiredSlot.Update(requiredSlotData);
-		}
+				isEquipped: isEquipped,
+				() => Context.ItemClickCallback?.Invoke(item));
 
 		public class Factory : PlaceholderFactory<IInventoryItemCollectionView, IInventoryItemCollectionContext, InventoryItemCollectionPresenter>
 		{

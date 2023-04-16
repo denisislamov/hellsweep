@@ -8,11 +8,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 {
 	public class InventoryItemCollectionContext : ScreenContext, IInventoryItemCollectionContext
 	{
-		public IReadOnlyList<IInventoryItemModel> Items { get; }
+		public IReadOnlyList<IInventoryItemState> Items { get; }
+		public Action<IInventoryItemModel> ItemClickCallback { get; }
 
-		public InventoryItemCollectionContext(IReadOnlyList<IInventoryItemModel> items)
+		public InventoryItemCollectionContext(IReadOnlyList<IInventoryItemState> items, Action<IInventoryItemModel> itemClickCallback)
 		{
 			Items = items;
+			ItemClickCallback = itemClickCallback;
 		}
 	}
 }

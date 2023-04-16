@@ -1,4 +1,6 @@
 using TMPro;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -46,6 +48,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		[SerializeField]
 		private TMP_Text _healthText;
+		
+		[SerializeField]
+		private InventorySortPanelView _sortPanelView;
+		
+		[SerializeField] 
+		private ButtonView _sortButtonView;
 
 		public IProfileBarView ProfileBarView => _profileBarView;
 		public INavigationMenuView NavigationMenuView => _navigationMenuView;
@@ -64,6 +72,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		public IInventorySlotView BootsSlotView => _bootsSlotView;
 		
+		public IInventorySortPanelView SortPanelView => _sortPanelView;
+		
+		public IButtonView SortButtonView => _sortButtonView;
+
 		public void SetAttackValueText(string text)
 		{
 			_attackText.SetText(text);

@@ -7,6 +7,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 {
 	public interface IInventoryItemCollectionContext : IScreenContext
 	{
-		IReadOnlyList<IInventoryItemModel> Items { get; }
+		IReadOnlyList<IInventoryItemState> Items { get; }
+		
+		Action<IInventoryItemModel> ItemClickCallback { get; }
 	}
 }

@@ -16,6 +16,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		[SerializeField]
 		private Image _icon;
+		
+		[SerializeField]
+		private RawImage _background;
 
 		[SerializeField]
 		private Image _emptyIcon;
@@ -28,11 +31,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			_emptyIcon.gameObject.SetActive(state);
 			_icon.gameObject.SetActive(!state);
+			_background.gameObject.SetActive(!state);
 		}
 		
 		public void SetIcon(Sprite sprite)
 		{
 			_icon.sprite = sprite;
+		}
+		
+		public void SetBackgroundMaterial(Material material)
+		{
+			_background.material = material;
 		}
 	}
 }

@@ -19,5 +19,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		void SetItemIcon(Sprite sprite);
 
 		void SetPanelText(string text);
+
+		void SetEquippedState(bool state);
 	}
 }

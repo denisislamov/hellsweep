@@ -11,5 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		void SetEmptyState(bool state);
 
 		void SetIcon(Sprite sprite);
+
+		void SetBackgroundMaterial(Material material);
 	}
 }
