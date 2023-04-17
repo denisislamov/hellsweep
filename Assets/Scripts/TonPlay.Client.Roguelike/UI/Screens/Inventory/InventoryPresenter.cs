@@ -14,6 +14,8 @@ using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
@@ -85,6 +87,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			AddToggleSortPanelButtonPresenter();
 			AddSortButtonsPresenters();
 			AddSubscriptionToCurrentSortType();
+			AddSettingsButtonPresenter();
 			InitView();
 			RefreshItems();
 		}
@@ -402,6 +405,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private void SortButtonClickHandler()
 		{
 			View.SortPanelView.Toggle();
+		}
+		
+		private void AddSettingsButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(View.GameSettingsButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
+
+			Presenters.Add(presenter);
+		}
+
+		private void OnSettingsButtonClickHandler()
+		{
+			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
 		}
 
 		internal class Factory : PlaceholderFactory<IInventoryView, IInventoryScreenContext, InventoryPresenter>

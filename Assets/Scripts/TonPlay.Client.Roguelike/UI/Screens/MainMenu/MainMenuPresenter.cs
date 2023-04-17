@@ -175,7 +175,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 			Presenters.Add(presenter);
 		}
-
 		
 		private void OnSettingsButtonClickHandler()
 		{

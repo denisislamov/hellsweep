@@ -54,6 +54,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		[SerializeField] 
 		private ButtonView _sortButtonView;
+		
+		[SerializeField] 
+		private ButtonView _gameSettingsButtonView;
 
 		public IProfileBarView ProfileBarView => _profileBarView;
 		public INavigationMenuView NavigationMenuView => _navigationMenuView;
@@ -75,6 +78,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public IInventorySortPanelView SortPanelView => _sortPanelView;
 		
 		public IButtonView SortButtonView => _sortButtonView;
+		
+		public IButtonView GameSettingsButtonView => _gameSettingsButtonView;
 
 		public void SetAttackValueText(string text)
 		{

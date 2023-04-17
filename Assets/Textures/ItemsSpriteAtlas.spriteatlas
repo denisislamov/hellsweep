@@ -49,7 +49,11 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: abb6e500627304c9193d863cab36319e, type: 3}
+  - {fileID: 21300000, guid: d70f1511c12cb4ec6974fe207f302428, type: 3}
   - {fileID: 686289011293507512, guid: fb19fd913f4e348499c98848769b9521, type: 3}
+  - {fileID: 21300000, guid: d553ad22b135e42f794e6939ade314af, type: 3}
+  - {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
   - {fileID: 21300000, guid: 391339921256e418d9863fc81b8b0a44, type: 3}
   - {fileID: 21300000, guid: 5165cc138d85c4a068d1442c0006abd5, type: 3}
   - {fileID: 2065305969765719129, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
@@ -62,8 +66,14 @@ SpriteAtlas:
   - {fileID: 3846917002794187847, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: 21300000, guid: 053a3334afd374b9fbbfbdd19a5cf3a5, type: 3}
   - {fileID: 21300000, guid: 31625e54e708f42169580374c8a96dc5, type: 3}
+  - {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
   - {fileID: 21300000, guid: 8390cbc4f008246a39d259f0a7949667, type: 3}
+  - {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
+  - {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
+  - {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
   - {fileID: 21300000, guid: 573dd456b314d439eac17725ff18b40b, type: 3}
+  - {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
+  - {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
   - {fileID: 21300000, guid: 21c132279ab954968bcbfa54807d0717, type: 3}
   - {fileID: 21300000, guid: e8ab3b876b6ec49c4997c3bdd8e6bf92, type: 3}
   - {fileID: 21300000, guid: eddd3897df81d43868e163abff9738ef, type: 3}
@@ -75,7 +85,10 @@ SpriteAtlas:
   - {fileID: 2525788282660435887, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 21300000, guid: d04b5438c76f347d28e58da51e5305cf, type: 3}
   - {fileID: 21300000, guid: 4ca4dce88402043e7ad8efc3676a6f8c, type: 3}
+  - {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
+  - {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
   - {fileID: 21300000, guid: 4d35920a3e1624ca2a1c468a808996dc, type: 3}
+  - {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
   - {fileID: -589365598807618618, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 8094855776873440288, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: -7633015410158308657, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
@@ -427,13 +440,24 @@ SpriteAtlas:
   - {fileID: -6153423947956068894, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 1619102860599000169, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
   - {fileID: 21300000, guid: a12eb43b08ba0446eada66d2eb1a25b6, type: 3}
+  - {fileID: 21300000, guid: 05a2bc3bed9024edd985397bc0236294, type: 3}
+  - {fileID: 21300000, guid: 1eee2e3bb45424422a0f4bb094fb92c4, type: 3}
   - {fileID: 21300000, guid: 8fd4107b764e24fafbcfb95cbdff9e4d, type: 3}
   - {fileID: -1167417496419087487, guid: 5a7e71cb329dd46758280b15c288f439, type: 3}
   - {fileID: 1761501289751115598, guid: 5a7e71cb329dd46758280b15c288f439, type: 3}
   - {fileID: 2736593200994387163, guid: 5a7e71cb329dd46758280b15c288f439, type: 3}
+  - {fileID: 21300000, guid: 602ada0c087cc422693ba219df5574a5, type: 3}
+  - {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
+  - {fileID: 21300000, guid: 72575efc35ce1450b93ebed4d3c0b19e, type: 3}
   - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
+  - {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
+  - {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Leather Belt
+  - Armor_Protective
   - Fireball01a_0
+  - Melat Nackguard
+  - Gloves_protective
   - Item_IceSpike01a
   - Equipment
   - Energy_Shield01_5
@@ -446,8 +470,14 @@ SpriteAtlas:
   - Energy_Shield01_2
   - Diamond_01a
   - Item_Magnet_01a
+  - Armor_Cloak
   - Item_Coins_03a
+  - Armor_Metal
+  - Stylish Belt
+  - Trendy Charm
   - Light
+  - Broad waistguard
+  - Crystal Pendant
   - Item_Health_01a
   - Item_Coins_02a
   - Blue light
@@ -459,7 +489,10 @@ SpriteAtlas:
   - KatanaSplash_01a_4
   - Katana_01a
   - Diamond_01c
+  - Armor_Carapace
+  - Gloves_leather
   - Item_Bomb_01a
+  - Gloves_Shiny
   - items_spriteatlas_16x16_143
   - items_spriteatlas_16x16_142
   - items_spriteatlas_16x16_141
@@ -811,11 +844,18 @@ SpriteAtlas:
   - items_spriteatlas_16x16_291
   - items_spriteatlas_16x16_290
   - Item_Coins_01a
+  - Honor Belt
+  - Waist Sensor
   - Power
   - Item_Snowball_01a_1
   - Item_Snowball_01a_0
   - Item_Snowball_01a_2
+  - Bone Pendant
+  - Emerald Pendant
+  - Armor_Shirt
   - Diamond_01b
+  - Gloves_Basic
+  - Gloves_Finrgerless
   m_RenderDataMap: {}
   m_Tag: ItemsSpriteAtlas
   m_IsVariant: 0

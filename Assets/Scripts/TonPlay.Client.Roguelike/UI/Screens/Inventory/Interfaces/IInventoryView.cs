@@ -28,6 +28,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		IInventorySortPanelView SortPanelView { get; }
 		
 		IButtonView SortButtonView { get; }
+		
+		IButtonView GameSettingsButtonView { get; }
 
 		void SetAttackValueText(string text);
 		
