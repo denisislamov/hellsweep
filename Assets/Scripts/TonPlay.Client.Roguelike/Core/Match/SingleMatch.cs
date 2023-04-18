@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
@@ -76,8 +77,6 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				locationId = _locationConfig.Id
 			};
 			
-			await _restApiClient.PostGameSession(requestBody); 
-			
 			var gameSessionResponse = await _restApiClient.GetGameSession();
 			if (gameSessionResponse != null)
 			{
@@ -117,7 +116,9 @@ namespace TonPlay.Client.Roguelike.Core.Match
 
 			UpdateCurrentLocationTimeMillis(locationsData, gameModel);
 			UpdatePlayerProfile(profileData, gameModel);
-
+			
+			await UpdateUserBalance();
+			
 			if (matchResult.MatchResultType == MatchResultType.Win)
 			{
 				UnlockNextLocation(locationsData);
@@ -147,8 +148,22 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			
 			profileModel.Update(profileData);
 			locationsModel.Update(locationsData);
-
+			
 			return gameSessionResponse?.response;
+		}
+
+		private async UniTask UpdateUserBalance()
+		{
+			var userBalanceResponse = await _restApiClient.GetUserBalance();
+
+			var metaGameModel = _metaGameModelProvider.Get();
+			var model = metaGameModel.ProfileModel;
+			var data = metaGameModel.ProfileModel.ToData();
+
+			data.BalanceData.Gold = userBalanceResponse.response.coin;
+			data.BalanceData.Energy = userBalanceResponse.response.energy;
+
+			model.Update(data);
 		}
 
 		public async UniTask Finish()
@@ -162,9 +177,11 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
 			
 			_uiService.Close(loadingScreen);
+			
+			
 		}
 
-		private void UpdatePlayerProfile(ProfileData profileData, IGameModel gameModel)
+		private async void UpdatePlayerProfile(ProfileData profileData, IGameModel gameModel)
 		{
 			profileData.BalanceData.Gold += gameModel.PlayerModel.MatchProfileGainModel.Gold.Value;
 			profileData.Experience += gameModel.PlayerModel.MatchProfileGainModel.ProfileExperience.Value;
