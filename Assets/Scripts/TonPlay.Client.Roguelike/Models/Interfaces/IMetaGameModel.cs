@@ -7,5 +7,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IProfileModel ProfileModel { get; }
 
 		ILocationsModel LocationsModel { get; }
+		
+		IGameSettingsModel GameSettingsModel { get; }
 	}
 }

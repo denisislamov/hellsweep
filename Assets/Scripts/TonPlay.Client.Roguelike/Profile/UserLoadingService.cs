@@ -36,8 +36,27 @@ namespace TonPlay.Client.Roguelike.Profile
 			await UpdateProfileModel();
 			await UpdateLocationsModel();
 			await UpdateInventoryModel();
+			await UpdateGameSettingsModel();
 		}
-		
+
+		private async Task UpdateGameSettingsModel()
+		{
+			var gamePropertiesResponse = await _restApiClient.GetGameProperties();
+			if (gamePropertiesResponse?.response.jsonData != null)
+			{
+				var gameSettingCached = gamePropertiesResponse.response.jsonData.gameSettings;
+
+				var data = _metaGameModelProvider.Get().GameSettingsModel.ToData();
+
+				data.MusicVolume = gameSettingCached.MusicVolume;
+				data.SoundsVolume = gameSettingCached.SoundsVolume;
+				data.ScreenGameStick = gameSettingCached.ScreenGameStick;
+				data.VisualizeDamage = gameSettingCached.VisualizeDamage;
+
+				_metaGameModelProvider.Get().GameSettingsModel.Update(data);
+			}
+		}
+
 		private async UniTask UpdateLocationsModel()
 		{
 			var userLocationsResponse = await _restApiClient.GetUserLocations();

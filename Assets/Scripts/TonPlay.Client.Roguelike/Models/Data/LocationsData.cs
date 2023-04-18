@@ -7,4 +7,6 @@ namespace TonPlay.Client.Roguelike.Models.Data
 	{
 		public Dictionary<int, LocationData> Locations { get; set; }
 	}
+	
+	
 }

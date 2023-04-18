@@ -5,7 +5,7 @@ using TonPlay.Client.Roguelike.Models.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Models
 {
-	public class LocationsModel : ILocationsModel
+	public class  LocationsModel : ILocationsModel
 	{
 		private readonly LocationsData _cached = new LocationsData();
 
