@@ -99,7 +99,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 	// 		
 	// 		await _sceneService.LoadAdditiveSceneWithZenjectByNameAsync(SceneName.MainMenu);
 	//
-	// 		_uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
+	// 		_uiService.Open<InventoryItemUpgradeScreen, IInventoryScreenContext>(new InventoryItemUpgradeScreenContext());
 	// 		
 	// 		await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
 	// 	}

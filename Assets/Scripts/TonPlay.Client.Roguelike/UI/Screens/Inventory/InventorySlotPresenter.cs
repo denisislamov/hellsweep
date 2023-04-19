@@ -67,7 +67,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				return;
 			}
 			
-			var icon = _inventoryItemPresentationProvider.GetIcon(itemId);
+			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(itemId);
+			var icon = presentation?.Icon ? presentation.Icon : _inventoryItemPresentationProvider.DefaultItemIcon;
 				
 			_inventoryItemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var rarityMaterial);
 

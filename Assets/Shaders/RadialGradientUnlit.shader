@@ -10,12 +10,30 @@
         _ColorTo ("Color To", Color) = (1, 1, 0, 1)
         _RadiusMultiplier ("Radius", Range(0, 5)) = 1
         _GradientPivot ("Position", Vector) = (0, 0, 0, 0)
+        
+        _Stencil("Stencil ID", Float) = 0
+        _StencilComp("StencilComp", Float) = 8
+        _StencilOp("StencilOp", Float) = 0
+        _StencilReadMask("StencilReadMask", Float) = 255
+        _StencilWriteMask("StencilWriteMask", Float) = 255
+        _ColorMask("ColorMask", Float) = 15
     }
     SubShader
     {
+        ZTest [unity_GUIZTestMode]
+        
         Tags { "Queue" = "Transparent" }
 
         Blend SrcAlpha OneMinusSrcAlpha 
+        
+        Stencil{
+            Ref [_Stencil]
+            Comp [_StencilComp]
+            Pass [_StencilOp]
+            ReadMask [_StencilReadMask]
+            WriteMask [_StencilWriteMask]
+        }
+        ColorMask [_ColorMask]
 
         Pass
         {

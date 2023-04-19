@@ -52,9 +52,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				var item = Context.Items[i].Model;
 				var itemId = item.DetailId.Value;
 				var config = _itemsConfigProvider.Get(itemId);
-				var icon = _itemPresentationProvider.GetIcon(itemId);
+				var presentation = _itemPresentationProvider.GetItemPresentation(itemId);
+				var icon = presentation?.Icon ? presentation.Icon : _itemPresentationProvider.DefaultItemIcon;
 				var slotIcon = _itemPresentationProvider.GetSlotIcon(config.SlotName);
-				var slots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots;
 				var itemEquippedState = Context.Items[i].EquippedState;
 
 				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradientMaterial);

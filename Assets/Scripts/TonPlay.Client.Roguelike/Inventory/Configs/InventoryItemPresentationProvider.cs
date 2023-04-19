@@ -5,6 +5,7 @@ using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TonPlay.Client.Roguelike.Inventory.Configs
 {
@@ -18,7 +19,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		private ColorSet _defaultColorSet;
 		
 		[SerializeField]
-		private IconSet[] _icons;
+		private InventoryItemPresentation[] _itemPresentations;
 
 		[SerializeField]
 		private Sprite _defaultIcon;
@@ -33,12 +34,13 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		private Dictionary<RarityName, ColorSet> ColorSetsByRarity => _colorSetsByRarityMap ??= _colorSetsByRarity.ToDictionary(_ => _.Rarity, _ => _);
 
 		
-		private Dictionary<string, Sprite> _iconsMap;
-		private Dictionary<string, Sprite> Icons => _iconsMap ??= _icons.ToDictionary(_ => _.Id, _ => _.Sprite);
+		private Dictionary<string, InventoryItemPresentation> _presentationsMap;
+		private Dictionary<string, InventoryItemPresentation> ItemsPresentations => _presentationsMap ??= _itemPresentations.ToDictionary(_ => _.DetailItemId, _ => _);
 		
 		private Dictionary<SlotName, Sprite> _slotIconsMap;
 		private Dictionary<SlotName, Sprite> SlotIcons => _slotIconsMap ??= _slotIcons.ToDictionary(_ => _.SlotName, _ => _.Sprite);
 
+		public Sprite DefaultItemIcon => _defaultIcon;
 		
 		public void GetColors(RarityName rarityName, out Color mainColor, out Material backgroundGradient)
 		{
@@ -48,14 +50,14 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			backgroundGradient = colorSet.Gradient;
 		}
 		
-		public Sprite GetIcon(string itemId)
-		{
-			return !string.IsNullOrWhiteSpace(itemId) && Icons.ContainsKey(itemId) ? Icons[itemId] : _defaultIcon;
-		}
-		
 		public Sprite GetSlotIcon(SlotName slotName)
 		{
 			return SlotIcons.ContainsKey(slotName) ? SlotIcons[slotName] : _defaultSlotIcon;
+		}
+		
+		public IInventoryItemPresentation GetItemPresentation(string detailItemId)
+		{
+			return !string.IsNullOrWhiteSpace(detailItemId) && ItemsPresentations.ContainsKey(detailItemId) ? ItemsPresentations[detailItemId] : null;
 		}
 	}
 	
@@ -68,16 +70,30 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	}
 	
 	[Serializable]
-	internal class IconSet
-	{
-		public string Id;
-		public Sprite Sprite;
-	}
-	
-	[Serializable]
 	internal class SlotIconSet
 	{
 		public SlotName SlotName;
 		public Sprite Sprite;
+	}
+	
+	[Serializable]
+	internal class InventoryItemPresentation : IInventoryItemPresentation
+	{
+		[SerializeField]
+		private string _detailItemId;
+		
+		[SerializeField]
+		private Sprite _icon;
+		
+		[SerializeField]
+		private string _title;
+		
+		[SerializeField]
+		private string _description;
+		
+		public string DetailItemId => _detailItemId;
+		public Sprite Icon => _icon;
+		public string Description => _description;
+		public string Title => _title;
 	}
 }

@@ -17,6 +17,7 @@ using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
 using UniRx;
@@ -293,38 +294,53 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Presenters.Add(presenter);
 		}
 
-		private async void ItemClickHandler(IInventoryItemModel item)
+		private void ItemClickHandler(IInventoryItemModel item)
+		{
+			_uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
+				new InventoryItemUpgradeScreenContext(item, EquipItem, false));
+		}
+		
+		private void SlotClickHandler(ISlotModel slotModel)
+		{
+			if (slotModel.Item?.DetailId?.Value is null)
+			{
+				return;
+			}
+			
+			_uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
+				new InventoryItemUpgradeScreenContext(slotModel.Item, UnequipItem, true));
+		}
+		
+		private async void UnequipItem(IInventoryItemModel item)
 		{
 			var itemConfig = _inventoryItemsConfigProvider.Get(item.DetailId.Value);
 			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
-
+			
+			var response = await _restApiClient.DeleteItem(requiredSlot.Id.Value);
+			if (response != null && response.successful)
+			{
+				SetSlotItemEquippedState(requiredSlot, false);
+				ClearSlot(requiredSlot);
+			}
+		}
+		
+		private async void EquipItem(IInventoryItemModel item)
+		{
+			var itemConfig = _inventoryItemsConfigProvider.Get(item.DetailId.Value);
+			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
+			
 			var response = await _restApiClient.PutItem(
 				new ItemPutBody()
 				{
 					itemDetailId = item.Id.Value,
 					slotId = requiredSlot.Id.Value
 				});
-
+			
 			if (response != null)
 			{
 				SetSlotItemEquippedState(requiredSlot, false);
 				AddItemToSlotModel(item, requiredSlot);
 				SetSlotItemEquippedState(requiredSlot, true);
-			}
-		}
-
-		private async void SlotClickHandler(ISlotModel slotModel)
-		{
-			if (slotModel.Item?.DetailId?.Value is null)
-			{
-				return;
-			}
-
-			var response = await _restApiClient.DeleteItem(slotModel.Id.Value);
-			if (response != null && response.successful)
-			{
-				SetSlotItemEquippedState(slotModel, false);
-				ClearSlot(slotModel);
 			}
 		}
 

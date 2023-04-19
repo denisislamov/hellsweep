@@ -5,10 +5,12 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 {
 	public interface IInventoryItemPresentationProvider
 	{
+		Sprite DefaultItemIcon { get; }
+		
 		void GetColors(RarityName rarityName, out Color mainColor, out Material backgroundGradient);
 
-		Sprite GetIcon(string itemId);
-		
 		Sprite GetSlotIcon(SlotName slotName);
+		
+		IInventoryItemPresentation GetItemPresentation(string detailItemId);
 	}
 }

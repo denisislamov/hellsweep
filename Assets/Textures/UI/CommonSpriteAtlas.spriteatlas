@@ -79,6 +79,7 @@ SpriteAtlas:
   - {fileID: 2305930069447662853, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
   - {fileID: 21300000, guid: 2bbac415e3f194c9cb424313092e7f66, type: 3}
   - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
+  - {fileID: 21300000, guid: b8772045f46ff4c8587fbb3d0e8be2f2, type: 3}
   - {fileID: 21300000, guid: 567306a502202429993999780fed243b, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
@@ -97,6 +98,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
+  - {fileID: 21300000, guid: 7694ab98d9b7a4ea3a5bd464f363e549, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
   - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
   - {fileID: 21300000, guid: d3dbd0494d8254f13ba25bc90bfeadd9, type: 3}
@@ -122,6 +124,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
+  - {fileID: 21300000, guid: 419065edfcfbc45e886f7103c8b9c6e4, type: 3}
   - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
   - {fileID: 21300000, guid: eaf26e2e2321d4eea866a94ab65f7c82, type: 3}
   - {fileID: 21300000, guid: 191bdd6e24b874cab9daed40a1173849, type: 3}
@@ -162,6 +165,7 @@ SpriteAtlas:
   - SkillChoiceSkillsIcons_01a_0
   - Icon_Skill_SilverBar_01a
   - CircleDonut_01a
+  - CloseButton_01
   - Heart
   - SkillLevelPoint_01b
   - SubTitleBackgroundTexture_01
@@ -180,6 +184,7 @@ SpriteAtlas:
   - Icons_FitnessGuide_01a
   - joystick_01a
   - Settings_skull
+  - Blueprint_02
   - Belt
   - Shield
   - Icons_Forcefield_01a
@@ -205,6 +210,7 @@ SpriteAtlas:
   - SmallButton_01a
   - TitleBackgroundTexture_04
   - Star
+  - Icon_Attribute_Health_01
   - TitleBackgroundTexture_03
   - Background_Items_01a
   - Icon_Skill_HolyWater_01a

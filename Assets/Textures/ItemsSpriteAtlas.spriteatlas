@@ -449,15 +449,19 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 602ada0c087cc422693ba219df5574a5, type: 3}
   - {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
   - {fileID: 21300000, guid: 72575efc35ce1450b93ebed4d3c0b19e, type: 3}
+  - {fileID: -3279757364864341472, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
+  - {fileID: 2125513177987854397, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
+  - {fileID: 7348329637513692805, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
+  - {fileID: 7705574847099197214, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
   - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
   - {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
   - {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Leather Belt
-  - Armor_Protective
+  - Item_Leather Belt
+  - Item_Armor_Protective
   - Fireball01a_0
-  - Melat Nackguard
-  - Gloves_protective
+  - Item_Melat Nackguard
+  - Item_Gloves_protective
   - Item_IceSpike01a
   - Equipment
   - Energy_Shield01_5
@@ -470,14 +474,14 @@ SpriteAtlas:
   - Energy_Shield01_2
   - Diamond_01a
   - Item_Magnet_01a
-  - Armor_Cloak
+  - Item_Armor_Cloak
   - Item_Coins_03a
-  - Armor_Metal
-  - Stylish Belt
-  - Trendy Charm
+  - Item_Armor_Metal
+  - Item_Stylish Belt
+  - Item_Trendy Charm
   - Light
-  - Broad waistguard
-  - Crystal Pendant
+  - Item_Broad waistguard
+  - Item_Crystal Pendant
   - Item_Health_01a
   - Item_Coins_02a
   - Blue light
@@ -489,10 +493,10 @@ SpriteAtlas:
   - KatanaSplash_01a_4
   - Katana_01a
   - Diamond_01c
-  - Armor_Carapace
-  - Gloves_leather
+  - Item_Armor_Carapace
+  - Item_Gloves_leather
   - Item_Bomb_01a
-  - Gloves_Shiny
+  - Item_Gloves_Shiny
   - items_spriteatlas_16x16_143
   - items_spriteatlas_16x16_142
   - items_spriteatlas_16x16_141
@@ -844,18 +848,22 @@ SpriteAtlas:
   - items_spriteatlas_16x16_291
   - items_spriteatlas_16x16_290
   - Item_Coins_01a
-  - Honor Belt
-  - Waist Sensor
+  - Item_Honor Belt
+  - Item_Waist Sensor
   - Power
   - Item_Snowball_01a_1
   - Item_Snowball_01a_0
   - Item_Snowball_01a_2
-  - Bone Pendant
-  - Emerald Pendant
-  - Armor_Shirt
+  - Item_Bone Pendant
+  - Item_Emerald Pendant
+  - Item_Armor_Shirt
+  - Energy_Shield_02_3
+  - Energy_Shield_02_2
+  - Energy_Shield_02_1
+  - Energy_Shield_02_0
   - Diamond_01b
-  - Gloves_Basic
-  - Gloves_Finrgerless
+  - Item_Gloves_Basic
+  - Item_Gloves_Finrgerless
   m_RenderDataMap: {}
   m_Tag: ItemsSpriteAtlas
   m_IsVariant: 0
