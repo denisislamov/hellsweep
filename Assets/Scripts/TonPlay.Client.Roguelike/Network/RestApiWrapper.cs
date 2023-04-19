@@ -170,6 +170,21 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+        
+        [SerializeField] private Response<ItemLevelRatesResponse> _itemLevelRatesResponse;
+        [ContextMenu("GetAllItems")]
+        public async UniTask<Response<ItemLevelRatesResponse>> GetItemLevelRatesAll()
+        {
+            _itemLevelRatesResponse = new Response<ItemLevelRatesResponse>();
+
+            Debug.LogFormat("_networkClient.GetAsync<ItemLevelRatesResponse> {0}", _itemLevelRatesResponse);
+            var putTask = _networkClient.GetAsync<ItemLevelRatesResponse>("v1/item/lvl/rate/all", null);
+
+            var result = await putTask;
+            _itemLevelRatesResponse = result;
+
+            return result;
+        }
 
         [ContextMenu("DeleteItem")]
         public async UniTask<Response<string>> DeleteItem(string slotId)
@@ -335,6 +350,20 @@ namespace TonPlay.Client.Roguelike.Network
 
             var result = await getTask;
             _userSlotsResponse = result;
+            
+            return result;
+        }
+        
+        [SerializeField] private Response<UserInventoryResponse> _userInventoryResponse;
+        [ContextMenu("GetUserItems")]
+        public async UniTask<Response<UserInventoryResponse>> GetUserInventory()
+        {
+            _userInventoryResponse = new Response<UserInventoryResponse>();
+            Debug.LogFormat("_networkClient.GetAsync<UserInventoryResponse>");
+            var getTask = _networkClient.GetAsync<UserInventoryResponse>("v1/user/inventory", null);
+
+            var result = await getTask;
+            _userInventoryResponse = result;
             
             return result;
         }

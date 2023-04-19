@@ -34,12 +34,15 @@ namespace TonPlay.Client.Roguelike
 
 		public async UniTask Load()
 		{
-			await UpdateProfileConfigs();
-			await UpdateSkillsConfigs();
-			await UpdateLocationsConfigs();
-			await UpdateItemsConfigs();
+			await UniTask.WhenAll(
+				UpdateProfileConfigs(),
+				UpdateSkillsConfigs(),
+				UpdateLocationsConfigs(),
+				UpdateItemsConfigs(),
+				UpdateItemsCostsConfigs()
+			);
 		}
-		
+
 		private async UniTask UpdateLocationsConfigs()
 		{
 			var response = await _restApiClient.GetLocationAll();
@@ -61,7 +64,7 @@ namespace TonPlay.Client.Roguelike
 				_profileConfigProviderUpdater.UpdateConfigExperienceToLevelUp(itemConfig.level, itemConfig.xp);
 			}
 		}
-		
+
 		private async UniTask UpdateSkillsConfigs()
 		{
 			var skillAllResponse = await _restApiClient.GetSkillAll();
@@ -74,7 +77,7 @@ namespace TonPlay.Client.Roguelike
 
 				_skillConfigUpdater.UpdateConfig(name, remoteConfig);
 			}
-			
+
 			for (var i = 0; i < boostAllResponse.response.items.Count; i++)
 			{
 				var remoteConfig = boostAllResponse.response.items[i];
@@ -83,7 +86,7 @@ namespace TonPlay.Client.Roguelike
 				_skillConfigUpdater.UpdateConfig(name, remoteConfig);
 			}
 		}
-		
+
 		private async UniTask UpdateItemsConfigs()
 		{
 			var response = await _restApiClient.GetAllItems();
@@ -91,8 +94,20 @@ namespace TonPlay.Client.Roguelike
 			for (var i = 0; i < response.response.items.Count; i++)
 			{
 				var remoteConfig = response.response.items[i];
-				
+
 				_itemsConfigUpdater.Update(remoteConfig.id, remoteConfig);
+			}
+		}
+		
+		private async UniTask UpdateItemsCostsConfigs()
+		{
+			var response = await _restApiClient.GetItemLevelRatesAll();
+
+			for (ushort i = 0; i < response.response.items.Count; i++)
+			{
+				var remoteConfig = response.response.items[i];
+
+				_itemsConfigUpdater.UpdateItemUpgradePrices((ushort)(i + 1), remoteConfig);
 			}
 		}
 	}

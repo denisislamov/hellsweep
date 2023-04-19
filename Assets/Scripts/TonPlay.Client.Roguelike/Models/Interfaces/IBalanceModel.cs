@@ -5,10 +5,10 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 {
 	public interface IBalanceModel : IModel<BalanceData>
 	{
-		IReadOnlyReactiveProperty<int> Gold { get; }
+		IReadOnlyReactiveProperty<long> Gold { get; }
+		
+		IReadOnlyReactiveProperty<long> Energy { get; }
 
-		IReadOnlyReactiveProperty<int> Energy { get; }
-
-		IReadOnlyReactiveProperty<int> MaxEnergy { get; }
+		IReadOnlyReactiveProperty<long> MaxEnergy { get; }
 	}
 }

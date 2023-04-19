@@ -11,6 +11,8 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		
 		IReadOnlyDictionary<SlotName, ISlotModel> Slots { get; }
 		
+		IReadOnlyReactiveProperty<long> Blueprints { get; }
+		
 		IObservable<Unit> Updated { get; }
 	}
 }

@@ -1,10 +1,12 @@
 using System;
 using TonPlay.Client.Common.Extensions;
+using TonPlay.Client.Common.Network.Interfaces;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
@@ -17,8 +19,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 	internal class InventoryItemUpgradePresenter : Presenter<IInventoryItemUpgradeView, IInventoryItemUpgradeScreenContext>
 	{
 		private readonly IUIService _uiService;
-		private readonly IButtonPresenterFactory _buttonPresenterFactory;
+		private readonly IRestApiClient _restApiClient;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
 
@@ -34,6 +37,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			IInventoryItemUpgradeView view,
 			IInventoryItemUpgradeScreenContext context,
 			IUIService uiService,
+			IRestApiClient restApiClient,
 			IMetaGameModelProvider metaGameModelProvider,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
@@ -41,6 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			: base(view, context)
 		{
 			_uiService = uiService;
+			_restApiClient = restApiClient;
 			_metaGameModelProvider = metaGameModelProvider;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
@@ -55,6 +60,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private void InitView()
 		{
 			var config = _inventoryItemsConfigProvider.Get(Context.Item.DetailId.Value);
+			var priceConfig = _inventoryItemsConfigProvider.GetUpgradePrice(Context.Item.Level.Value);
 			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(Context.Item.DetailId.Value);
 			var defaultItemIcon = _inventoryItemPresentationProvider.DefaultItemIcon;
 			
@@ -68,8 +74,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			View.SetRarityColor(mainColor);
 			View.SetItemBackgroundGradientMaterial(backgroundGradient);
 			View.SetAttributeValueText($"+{config.Details[Context.Item.Level.Value].Value}");
+			View.SetGoldPriceText(GetGoldPriceText(priceConfig));
+			View.SetBlueprintsPriceText(GetBlueprintsPriceText(priceConfig));
 			
 			_equipButtonLockState.SetValueAndForceNotify(Context.IsEquipped && config.SlotName == SlotName.WEAPON);
+			_upgradeButtonLockState.SetValueAndForceNotify(!CanUpgrade(priceConfig));
 		}
 
 		private void AddCloseButtonPresenter()
@@ -117,7 +126,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		
 		private void UpgradeButtonClickHandler()
 		{
-			
 		}
 
 		private void CloseButtonClickHandler()
@@ -128,6 +136,39 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private void ClosePopup()
 		{
 			_uiService.Close(Context.Screen);
+		}
+		
+		private bool CanUpgrade(IInventoryItemUpgradePriceConfig priceConfig)
+		{
+			var model = _metaGameModelProvider.Get();
+			var currentCoins = model.ProfileModel.BalanceModel.Gold.Value;
+			var currentBlueprints = model.ProfileModel.InventoryModel.Blueprints.Value;
+
+			return currentCoins >= priceConfig.Coins && currentBlueprints >= priceConfig.Blueprints;
+		}
+
+		private string GetGoldPriceText(IInventoryItemUpgradePriceConfig priceConfig)
+		{
+			var currentCoins = _metaGameModelProvider.Get().ProfileModel.BalanceModel.Gold.Value;
+			var enoughCoins = currentCoins >= priceConfig.Coins;
+			
+			var currentCoinsText = currentCoins.ConvertToSuffixedFormat(1_000L, 2);
+			var requiredCoinsText = priceConfig.Coins.ConvertToSuffixedFormat(1_000L, 2);
+			currentCoinsText = enoughCoins ? currentCoinsText : $"<color=red>{currentCoinsText}</color>";
+			
+			return $"{currentCoinsText}/{requiredCoinsText}";
+		}
+		
+		private string GetBlueprintsPriceText(IInventoryItemUpgradePriceConfig priceConfig)
+		{
+			var currentBlueprints = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Blueprints.Value;
+			var enoughBlueprints = currentBlueprints >= priceConfig.Blueprints;
+			
+			var requiredBlueprintsText = priceConfig.Blueprints.ConvertToSuffixedFormat(1_000L, 2);
+			var currentBlueprintsText = currentBlueprints.ConvertToSuffixedFormat(1_000L, 2);
+			currentBlueprintsText = enoughBlueprints ? currentBlueprintsText : $"<color=red>{currentBlueprintsText}</color>";
+			
+			return $"{currentBlueprintsText}/{requiredBlueprintsText}";
 		}
 
 		internal class Factory : PlaceholderFactory<IInventoryItemUpgradeView, IInventoryItemUpgradeScreenContext, InventoryItemUpgradePresenter>

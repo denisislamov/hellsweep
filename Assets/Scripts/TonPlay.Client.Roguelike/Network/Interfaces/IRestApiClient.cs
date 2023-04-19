@@ -13,6 +13,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<InfoLevelAllResponse>> GetInfoLevelAll();
 		UniTask<Response<ItemPutResponse>> PutItem(ItemPutBody value);
 		UniTask<Response<ItemsGetResponse>> GetAllItems();
+		UniTask<Response<ItemLevelRatesResponse>> GetItemLevelRatesAll();
 		UniTask<Response<string>> DeleteItem(string slotId);
 		
 		/// <summary>
@@ -37,6 +38,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		
 		UniTask<Response<UserXpResponse>> GetUserXp();
 		UniTask<Response<UserSummaryResponse>> GetUserSummary();
+		UniTask<Response<UserInventoryResponse>> GetUserInventory();
 		UniTask<Response<UserItemsResponse>> GetUserItems();
 		UniTask<Response<UserSlotsResponse>> GetUserSlots();
 		UniTask<Response<UserBalanceResponse>> GetUserBalance();

@@ -38,5 +38,10 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 									  Value = _.value
 								  }));
 		}
+		
+		public void UpdateItemUpgradePrices(ushort level, ItemLevelRatesResponse.Item remoteConfig)
+		{
+			_provider.UpgradePricesMap[level] = new InventoryItemUpgradePriceConfig(remoteConfig.id, remoteConfig.coins, remoteConfig.blueprints);
+		}
 	}
 }

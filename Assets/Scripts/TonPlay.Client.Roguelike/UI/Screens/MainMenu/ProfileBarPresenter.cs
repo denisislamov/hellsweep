@@ -44,12 +44,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_profileModel.MaxExperience.Subscribe(UpdateExperienceInfo).AddTo(_subscriptions);
 		}
 
-		private void UpdateEnergyInfo(int value)
+		private void UpdateEnergyInfo(long value)
 		{
 			View.SetEnergyText($"{_profileModel.BalanceModel.Energy.Value}/{_profileModel.BalanceModel.MaxEnergy.Value}");
 		}
 
-		private void UpdateGoldInfo(int value)
+		private void UpdateGoldInfo(long value)
 		{
 			View.SetGoldText($"{_profileModel.BalanceModel.Gold.Value}");
 		}

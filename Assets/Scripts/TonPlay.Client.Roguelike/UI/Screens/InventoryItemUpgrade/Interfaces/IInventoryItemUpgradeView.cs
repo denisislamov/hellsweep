@@ -34,6 +34,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces
 
 		void SetGoldPriceText(string text);
 
-		void SetDrawingPriceText(string text);
+		void SetBlueprintsPriceText(string text);
 	}
 }

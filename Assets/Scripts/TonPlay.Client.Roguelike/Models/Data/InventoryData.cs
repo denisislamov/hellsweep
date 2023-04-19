@@ -7,5 +7,6 @@ namespace TonPlay.Client.Roguelike.Models.Data
 	{
 		public List<InventoryItemData> Items { get; set; }
 		public Dictionary<SlotName, SlotData> Slots { get; set; }
+		public long Blueprints { get; set; }
 	}
 }

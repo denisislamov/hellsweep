@@ -4,10 +4,10 @@ namespace TonPlay.Client.Roguelike.Models.Data
 {
 	public class BalanceData : IData
 	{
-		public int Gold { get; set; }
+		public long Gold { get; set; }
 
-		public int Energy { get; set; }
+		public long Energy { get; set; }
 
-		public int MaxEnergy { get; set; }
+		public long MaxEnergy { get; set; }
 	}
 }

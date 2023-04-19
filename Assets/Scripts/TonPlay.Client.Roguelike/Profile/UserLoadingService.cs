@@ -112,7 +112,13 @@ namespace TonPlay.Client.Roguelike.Profile
 		
 		private async UniTask UpdateInventoryModel()
 		{
-			var itemsResponse = await _restApiClient.GetUserItems();
+			var itemsResponseTask = _restApiClient.GetUserItems();
+			var slotsResponseTask = _restApiClient.GetUserSlots();
+			var inventoryResponseTask = _restApiClient.GetUserInventory();
+
+			var itemsResponse = await itemsResponseTask;
+			var slotsResponse = await slotsResponseTask;
+			var inventoryResponse = await inventoryResponseTask;
 
 			var metaGameModel = _metaGameModelProvider.Get();
 			var model = metaGameModel.ProfileModel.InventoryModel;
@@ -128,8 +134,6 @@ namespace TonPlay.Client.Roguelike.Profile
 					Level = itemData.level
 				});
 			}
-			
-			var slotsResponse = await _restApiClient.GetUserSlots();
 			
 			for (var i = 0; i < slotsResponse.response.items.Count; i++)
 			{
@@ -150,6 +154,8 @@ namespace TonPlay.Client.Roguelike.Profile
 					Item = item
 				});
 			}
+
+			data.Blueprints = inventoryResponse.response.blueprints;
 
 			model.Update(data);
 		}

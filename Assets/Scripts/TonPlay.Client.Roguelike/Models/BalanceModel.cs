@@ -8,13 +8,15 @@ namespace TonPlay.Client.Roguelike.Models
 	{
 		private readonly BalanceData _cached = new BalanceData();
 
-		private readonly ReactiveProperty<int> _gold = new ReactiveProperty<int>();
-		private readonly ReactiveProperty<int> _energy = new ReactiveProperty<int>();
-		private readonly ReactiveProperty<int> _maxEnergy = new ReactiveProperty<int>();
+		private readonly ReactiveProperty<long> _gold = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprints = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _energy = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _maxEnergy = new ReactiveProperty<long>();
 
-		public IReadOnlyReactiveProperty<int> Gold => _gold;
-		public IReadOnlyReactiveProperty<int> Energy => _energy;
-		public IReadOnlyReactiveProperty<int> MaxEnergy => _maxEnergy;
+		public IReadOnlyReactiveProperty<long> Gold => _gold;
+		public IReadOnlyReactiveProperty<long> Blueprints => _blueprints;
+		public IReadOnlyReactiveProperty<long> Energy => _energy;
+		public IReadOnlyReactiveProperty<long> MaxEnergy => _maxEnergy;
 
 		public void Update(BalanceData data)
 		{
