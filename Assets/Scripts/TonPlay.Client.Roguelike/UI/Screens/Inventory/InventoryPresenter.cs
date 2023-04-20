@@ -160,20 +160,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			{
 				var slot = kvp.Value;
 
-				if (slot.Item?.Id?.Value is null) continue;
+				if (slot.ItemId?.Value is null) continue;
 
-				var itemConfig = _inventoryItemsConfigProvider.Get(slot.Item.DetailId.Value);
+				var itemModel = GetItemModel(slot.ItemId.Value);
+				
+				if (itemModel is null) continue;
+
+				var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+				var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
 
 				switch (itemConfig.AttributeName)
 				{
 					case AttributeName.ATTACK:
-						damage += itemConfig.Details[slot.Item.Level.Value].Value;
+						damage += detailConfig.Value;
 						break;
 					case AttributeName.HEALTH:
-						health += itemConfig.Details[slot.Item.Level.Value].Value;
+						health += detailConfig.Value;
 						break;
 					case AttributeName.ARMOR:
-						armor += itemConfig.Details[slot.Item.Level.Value].Value;
+						armor += detailConfig.Value;
 						break;
 				}
 			}
@@ -182,6 +187,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			View.SetAttackValueText(damage.ToString());
 			View.SetHealthValueText(health.ToString());
 		}
+
+		private IInventoryItemModel GetItemModel(string itemId) 
+			=> _metaGameModelProvider.Get().ProfileModel.InventoryModel.Items.FirstOrDefault(_ => _.Id.Value == itemId);
 
 		private async void UpdateUserProfile()
 		{
@@ -231,9 +239,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			{
 				_itemStates.Add(items[i].Model.Id.Value, items[i]);
 
-				var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.DetailId.Value);
+				var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
-				items[i].SetEquippedState(slots[itemConfig.SlotName].Item.Id.Value == items[i].Model.Id.Value);
+				items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
 			}
 
 			var presenter = _inventoryItemCollectionPresenter.Create(
@@ -247,24 +255,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		private int SortItemsByCurrentSortType(IInventoryItemState x, IInventoryItemState y)
 		{
+			var xConfig = _inventoryItemsConfigProvider.Get(x.Model.ItemId.Value);
+			var yConfig = _inventoryItemsConfigProvider.Get(y.Model.ItemId.Value);
+			
 			switch (_currentSortType.Value)
 			{
 				case InventorySortType.Level:
 				{
-					return x.Model.Level.Value > y.Model.Level.Value ? -1 : 1;
+					return xConfig.GetDetails(x.Model.DetailId.Value).Level > yConfig.GetDetails(y.Model.DetailId.Value).Level ? -1 : 1;
 				}
 				case InventorySortType.Rarity:
 				{
-					var xConfig = _inventoryItemsConfigProvider.Get(x.Model.DetailId.Value);
-					var yConfig = _inventoryItemsConfigProvider.Get(y.Model.DetailId.Value);
-					
 					return xConfig.Rarity > yConfig.Rarity ? -1 : 1;
 				}
 				case InventorySortType.Slot:
 				{
-					var xConfig = _inventoryItemsConfigProvider.Get(x.Model.DetailId.Value);
-					var yConfig = _inventoryItemsConfigProvider.Get(y.Model.DetailId.Value);
-					
 					return xConfig.SlotName > yConfig.SlotName ? -1 : 1;
 				}
 			}
@@ -302,18 +307,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		private void SlotClickHandler(ISlotModel slotModel)
 		{
-			if (slotModel.Item?.DetailId?.Value is null)
+			if (slotModel.ItemId?.Value is null)
 			{
 				return;
 			}
+
+			var itemModel = GetItemModel(slotModel.ItemId.Value);
 			
 			_uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
-				new InventoryItemUpgradeScreenContext(slotModel.Item, UnequipItem, true));
+				new InventoryItemUpgradeScreenContext(itemModel, UnequipItem, true));
 		}
 		
 		private async void UnequipItem(IInventoryItemModel item)
 		{
-			var itemConfig = _inventoryItemsConfigProvider.Get(item.DetailId.Value);
+			var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
 			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
 			
 			var response = await _restApiClient.DeleteItem(requiredSlot.Id.Value);
@@ -326,13 +333,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		private async void EquipItem(IInventoryItemModel item)
 		{
-			var itemConfig = _inventoryItemsConfigProvider.Get(item.DetailId.Value);
+			var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
 			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
 			
 			var response = await _restApiClient.PutItem(
 				new ItemPutBody()
 				{
-					itemDetailId = item.Id.Value,
+					userItemId = item.Id.Value,
 					slotId = requiredSlot.Id.Value
 				});
 			
@@ -347,24 +354,24 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private static void ClearSlot(ISlotModel slotModel)
 		{
 			var data = slotModel.ToData();
-			data.Item = new InventoryItemData();
+			data.ItemId = null;
 			slotModel.Update(data);
 		}
 
 		private void SetSlotItemEquippedState(ISlotModel requiredSlot, bool state)
 		{
-			if (requiredSlot.Item?.DetailId?.Value is null || requiredSlot.Item?.Id?.Value is null)
+			if (requiredSlot.ItemId?.Value is null)
 			{
 				return;
 			}
 
-			_itemStates[requiredSlot.Item.Id.Value].SetEquippedState(state);
+			_itemStates[requiredSlot.ItemId.Value].SetEquippedState(state);
 		}
 
 		private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
 		{
 			var requiredSlotData = requiredSlot.ToData();
-			requiredSlotData.Item = item.ToData();
+			requiredSlotData.ItemId = item.Id.Value;
 			requiredSlot.Update(requiredSlotData);
 		}
 

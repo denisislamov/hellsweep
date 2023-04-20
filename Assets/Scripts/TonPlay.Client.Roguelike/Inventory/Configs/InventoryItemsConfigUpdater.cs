@@ -30,10 +30,10 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 				attributeName: attributeName,
 				details: item.details
 							 .ToDictionary(
-								  _ => _.level,
+								  _ => _.id,
 								  _ => (IInventoryItemDetailConfig)new InventoryItemDetailConfig()
 								  {
-									  Feature = _.feature,
+									  Feature = _.id,
 									  Level = _.level,
 									  Value = _.value
 								  }));

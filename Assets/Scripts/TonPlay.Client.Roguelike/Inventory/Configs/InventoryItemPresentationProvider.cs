@@ -35,7 +35,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 
 		
 		private Dictionary<string, InventoryItemPresentation> _presentationsMap;
-		private Dictionary<string, InventoryItemPresentation> ItemsPresentations => _presentationsMap ??= _itemPresentations.ToDictionary(_ => _.DetailItemId, _ => _);
+		private Dictionary<string, InventoryItemPresentation> ItemsPresentations => _presentationsMap ??= _itemPresentations.ToDictionary(_ => _.ItemId, _ => _);
 		
 		private Dictionary<SlotName, Sprite> _slotIconsMap;
 		private Dictionary<SlotName, Sprite> SlotIcons => _slotIconsMap ??= _slotIcons.ToDictionary(_ => _.SlotName, _ => _.Sprite);
@@ -55,9 +55,9 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			return SlotIcons.ContainsKey(slotName) ? SlotIcons[slotName] : _defaultSlotIcon;
 		}
 		
-		public IInventoryItemPresentation GetItemPresentation(string detailItemId)
+		public IInventoryItemPresentation GetItemPresentation(string itemId)
 		{
-			return !string.IsNullOrWhiteSpace(detailItemId) && ItemsPresentations.ContainsKey(detailItemId) ? ItemsPresentations[detailItemId] : null;
+			return !string.IsNullOrWhiteSpace(itemId) && ItemsPresentations.ContainsKey(itemId) ? ItemsPresentations[itemId] : null;
 		}
 	}
 	
@@ -80,18 +80,18 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	internal class InventoryItemPresentation : IInventoryItemPresentation
 	{
 		[SerializeField]
-		private string _detailItemId;
-		
-		[SerializeField]
-		private Sprite _icon;
-		
-		[SerializeField]
 		private string _title;
 		
 		[SerializeField]
+		private string _itemId;
+		
+		[SerializeField]
+		private Sprite _icon;
+
+		[SerializeField]
 		private string _description;
 		
-		public string DetailItemId => _detailItemId;
+		public string ItemId => _itemId;
 		public Sprite Icon => _icon;
 		public string Description => _description;
 		public string Title => _title;

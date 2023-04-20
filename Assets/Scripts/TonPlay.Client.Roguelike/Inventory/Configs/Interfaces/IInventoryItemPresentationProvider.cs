@@ -11,6 +11,6 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 
 		Sprite GetSlotIcon(SlotName slotName);
 		
-		IInventoryItemPresentation GetItemPresentation(string detailItemId);
+		IInventoryItemPresentation GetItemPresentation(string itemId);
 	}
 }

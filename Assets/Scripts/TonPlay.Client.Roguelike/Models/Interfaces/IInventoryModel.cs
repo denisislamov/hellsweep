@@ -14,5 +14,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IReadOnlyReactiveProperty<long> Blueprints { get; }
 		
 		IObservable<Unit> Updated { get; }
+		
+		IInventoryItemModel GetItemModel(string userItemId);
 	}
 }

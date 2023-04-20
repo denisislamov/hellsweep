@@ -59,9 +59,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 
 		private void InitView()
 		{
-			var config = _inventoryItemsConfigProvider.Get(Context.Item.DetailId.Value);
-			var priceConfig = _inventoryItemsConfigProvider.GetUpgradePrice(Context.Item.Level.Value);
-			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(Context.Item.DetailId.Value);
+			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
+			var detailConfig = config.GetDetails(Context.Item.DetailId.Value);
+			var priceConfig = _inventoryItemsConfigProvider.GetUpgradePrice(detailConfig.Level);
+			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(Context.Item.ItemId.Value);
 			var defaultItemIcon = _inventoryItemPresentationProvider.DefaultItemIcon;
 			
 			_inventoryItemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradient);
@@ -69,11 +70,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			View.SetDescriptionText(presentation?.Description);
 			View.SetTitleText(presentation?.Title);
 			View.SetItemIcon(presentation?.Icon ? presentation.Icon : defaultItemIcon);
-			View.SetLevelText($"Lv. {Context.Item.Level.Value}");
+			View.SetLevelText($"Lv. {detailConfig.Level}");
 			View.SetRarityText(config.Rarity.ToString().ToLower().FirstCharToUpper());
 			View.SetRarityColor(mainColor);
 			View.SetItemBackgroundGradientMaterial(backgroundGradient);
-			View.SetAttributeValueText($"+{config.Details[Context.Item.Level.Value].Value}");
+			View.SetAttributeValueText($"+{detailConfig.Value}");
 			View.SetGoldPriceText(GetGoldPriceText(priceConfig));
 			View.SetBlueprintsPriceText(GetBlueprintsPriceText(priceConfig));
 			

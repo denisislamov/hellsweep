@@ -7,7 +7,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 {
 	public class InventoryItemConfig : IInventoryItemConfig
 	{
-		private readonly Dictionary<ushort, IInventoryItemDetailConfig> _details;
+		private readonly Dictionary<string, IInventoryItemDetailConfig> _details;
 
 		public string Id { get; }
 		public string Name { get; }
@@ -15,7 +15,11 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		public SlotName SlotName { get; }
 		
 		public AttributeName AttributeName { get; }
-		public IReadOnlyDictionary<ushort, IInventoryItemDetailConfig> Details => _details;
+
+		public IInventoryItemDetailConfig GetDetails(string detailId)
+			=> string.IsNullOrEmpty(detailId) || !Details.ContainsKey(detailId) ? null : Details[detailId];
+		
+		public IReadOnlyDictionary<string, IInventoryItemDetailConfig> Details => _details;
 
 		public InventoryItemConfig(
 			string id, 
@@ -23,7 +27,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			RarityName rarity, 
 			SlotName slotName, 
 			AttributeName attributeName,
-			Dictionary<ushort, IInventoryItemDetailConfig> details)
+			Dictionary<string, IInventoryItemDetailConfig> details)
 		{
 			Id = id;
 			Name = name;

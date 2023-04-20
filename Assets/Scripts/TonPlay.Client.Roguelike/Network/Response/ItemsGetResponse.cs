@@ -20,7 +20,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
             [System.Serializable]
             public class Detail
             {
-                public string feature;
+                public string id;
                 public ushort level;
                 public uint value;
             }

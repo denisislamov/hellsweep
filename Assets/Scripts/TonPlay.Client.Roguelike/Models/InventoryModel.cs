@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using UniRx;
@@ -25,6 +26,11 @@ namespace TonPlay.Client.Roguelike.Models
 		public IReadOnlyReactiveProperty<long> Blueprints => _blueprints;
 		public IObservable<Unit> Updated => _updated;
 		
+		public IInventoryItemModel GetItemModel(string userItemId)
+		{
+			return Items.FirstOrDefault(_ => _.Id.Value == userItemId);
+		}
+
 		public void Update(InventoryData data)
 		{
 			UpdateItems(data);

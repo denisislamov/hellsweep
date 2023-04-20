@@ -83,7 +83,7 @@ namespace TonPlay.Client.Roguelike.Network.View
             ItemPutBody value = new ItemPutBody() 
             {
                 slotId = _slotIdInputField.text,
-                itemDetailId = _itemIdInputField.text
+                userItemId = _itemIdInputField.text
             };
 
             _restApiWrapper.PutItem(value).Forget();

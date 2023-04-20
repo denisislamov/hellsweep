@@ -1,6 +1,7 @@
 using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
@@ -14,11 +15,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IInventoryItemsConfigProvider _itemsConfigProvider;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		private readonly IInventoryModel _inventoryModel;
 		private IDisposable _subscription;
 
 		public InventorySlotPresenter(
 			IInventorySlotView view, 
 			IInventorySlotContext context,
+			IMetaGameModelProvider metaGameModelProvider,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IInventoryItemsConfigProvider itemsConfigProvider,
 			IInventoryItemPresentationProvider inventoryItemPresentationProvider) 
@@ -27,6 +30,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_itemsConfigProvider = itemsConfigProvider;
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
+			_inventoryModel = metaGameModelProvider.Get().ProfileModel.InventoryModel;
 
 			InitView();
 			AddButtonPresenter();
@@ -56,7 +60,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		private void InitView()
 		{
-			var itemId = Context.SlotModel.Item?.DetailId?.Value;
+			var userItemId = Context.SlotModel.ItemId?.Value;
+			var itemId = _inventoryModel.GetItemModel(userItemId)?.ItemId?.Value;
 			var config = _itemsConfigProvider.Get(itemId);
 			var slotIsEmpty = string.IsNullOrWhiteSpace(itemId);
 

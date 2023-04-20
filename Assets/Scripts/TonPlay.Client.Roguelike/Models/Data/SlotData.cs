@@ -6,6 +6,6 @@ namespace TonPlay.Client.Roguelike.Models.Data
 	{
 		public SlotName SlotName { get; set; }
 		public string Id { get; set; }
-		public InventoryItemData Item { get; set; }
+		public string ItemId { get; set; }
 	}
 }

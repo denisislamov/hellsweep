@@ -7,12 +7,8 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 	{
 		IReadOnlyReactiveProperty<string> Id { get; }
 		
-		IReadOnlyReactiveProperty<string> DetailId { get; }
-		
-		// IReadOnlyReactiveProperty<string> Name { get; }
-	
-		IReadOnlyReactiveProperty<ushort> Level { get; }
+		IReadOnlyReactiveProperty<string> ItemId { get; }
 
-		// IReadOnlyReactiveProperty<RarityName> Rarity { get; }
+		IReadOnlyReactiveProperty<string> DetailId { get; }
 	}
 }

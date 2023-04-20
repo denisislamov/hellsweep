@@ -374,7 +374,7 @@ namespace TonPlay.Client.Roguelike.Network
         {
             _userItemsResponse = new Response<UserItemsResponse>();
             Debug.LogFormat("_networkClient.GetAsync<UserItemsResponse>");
-            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/item/detail/all", null);
+            var getTask = _networkClient.GetAsync<UserItemsResponse>("v1/user/item/all", null);
 
             var result = await getTask;
             _userItemsResponse = result;

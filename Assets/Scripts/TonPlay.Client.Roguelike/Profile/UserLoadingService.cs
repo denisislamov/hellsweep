@@ -16,6 +16,7 @@ namespace TonPlay.Client.Roguelike.Profile
 	{
 		private readonly IProfileConfigProvider _profileConfigProvider;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 		private readonly ILocationConfigProvider _locationConfigProvider;
 		private readonly IRestApiClient _restApiClient;
 
@@ -23,12 +24,14 @@ namespace TonPlay.Client.Roguelike.Profile
 			ILocationConfigProvider locationConfigProvider,
 			IProfileConfigProvider profileConfigProvider,
 			IMetaGameModelProvider metaGameModelProvider,
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
 			IRestApiClient restApiClient)
 		{
 			_locationConfigProvider = locationConfigProvider;
 			_restApiClient = restApiClient;
 			_profileConfigProvider = profileConfigProvider;
 			_metaGameModelProvider = metaGameModelProvider;
+			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 		}
 
 		public async UniTask Load()
@@ -130,28 +133,21 @@ namespace TonPlay.Client.Roguelike.Profile
 				data.Items.Add(new InventoryItemData()
 				{
 					Id = itemData.id,
-					DetailId = itemData.item.id,
-					Level = itemData.level
+					ItemId = itemData.itemId,
+					DetailId = itemData.itemDetailId,
 				});
 			}
 			
 			for (var i = 0; i < slotsResponse.response.items.Count; i++)
 			{
 				var slotData = slotsResponse.response.items[i];
-				var item = new InventoryItemData()
-				{
-					Id = slotData.itemDetail?.id, 
-					DetailId = slotData.itemDetail?.item?.id,
-					Level = slotData.itemDetail?.level ?? 0
-				} ;
-				
 				var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
 				
 				data.Slots.Add(slotName, new SlotData()
 				{
 					Id = slotData.id,
 					SlotName = slotName,
-					Item = item
+					ItemId = slotData.userItemId
 				});
 			}
 

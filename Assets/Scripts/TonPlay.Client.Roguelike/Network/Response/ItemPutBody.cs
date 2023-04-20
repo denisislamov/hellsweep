@@ -4,6 +4,6 @@ namespace TonPlay.Client.Roguelike.Network.Response
     public class ItemPutBody 
     {
         public string slotId;
-        public string itemDetailId;
+        public string userItemId;
     }
 }

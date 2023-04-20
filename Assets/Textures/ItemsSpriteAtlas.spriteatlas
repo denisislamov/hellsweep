@@ -51,10 +51,14 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: abb6e500627304c9193d863cab36319e, type: 3}
   - {fileID: 21300000, guid: d70f1511c12cb4ec6974fe207f302428, type: 3}
+  - {fileID: 21300000, guid: e6e66951400004d1c8a9a1470f8b47fe, type: 3}
   - {fileID: 686289011293507512, guid: fb19fd913f4e348499c98848769b9521, type: 3}
   - {fileID: 21300000, guid: d553ad22b135e42f794e6939ade314af, type: 3}
+  - {fileID: 21300000, guid: 8c19a132e0e7e4d9aa0160452372b069, type: 3}
   - {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
   - {fileID: 21300000, guid: 391339921256e418d9863fc81b8b0a44, type: 3}
+  - {fileID: 21300000, guid: 28846103f74b54c2fbb8be8d9a91b709, type: 3}
+  - {fileID: 21300000, guid: 39f39503979b5419588a209ae5e6b7df, type: 3}
   - {fileID: 21300000, guid: 5165cc138d85c4a068d1442c0006abd5, type: 3}
   - {fileID: 2065305969765719129, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
   - {fileID: 6260372855922411283, guid: 26d249149ae804d42857456bbfd6f75a, type: 3}
@@ -68,13 +72,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 31625e54e708f42169580374c8a96dc5, type: 3}
   - {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
   - {fileID: 21300000, guid: 8390cbc4f008246a39d259f0a7949667, type: 3}
+  - {fileID: 21300000, guid: d0b934d45f26348db94989a1944c4d12, type: 3}
   - {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
   - {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
   - {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
   - {fileID: 21300000, guid: 573dd456b314d439eac17725ff18b40b, type: 3}
+  - {fileID: 21300000, guid: c4d7ed866c06c4315a58c6c40eaca8bf, type: 3}
   - {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
   - {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
+  - {fileID: 21300000, guid: bbb8df17b65b44098b0ac2c5d8947e5a, type: 3}
   - {fileID: 21300000, guid: 21c132279ab954968bcbfa54807d0717, type: 3}
+  - {fileID: 21300000, guid: 014d2727d81c446daa0427157c231ad2, type: 3}
   - {fileID: 21300000, guid: e8ab3b876b6ec49c4997c3bdd8e6bf92, type: 3}
   - {fileID: 21300000, guid: eddd3897df81d43868e163abff9738ef, type: 3}
   - {fileID: 21300000, guid: 5174a7b7c7ffe4aedb7e05576cf188a1, type: 3}
@@ -84,6 +92,8 @@ SpriteAtlas:
   - {fileID: -7790264127303807331, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 2525788282660435887, guid: 819a3dc7f03b8495bafa420124e7b3a9, type: 3}
   - {fileID: 21300000, guid: d04b5438c76f347d28e58da51e5305cf, type: 3}
+  - {fileID: 21300000, guid: 381fe458f9ae04fb2afb49d6892ae8be, type: 3}
+  - {fileID: 21300000, guid: 4a2db37820395421dae12e2232a6c523, type: 3}
   - {fileID: 21300000, guid: 4ca4dce88402043e7ad8efc3676a6f8c, type: 3}
   - {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
   - {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
@@ -453,16 +463,21 @@ SpriteAtlas:
   - {fileID: 2125513177987854397, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
   - {fileID: 7348329637513692805, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
   - {fileID: 7705574847099197214, guid: 8bfef26d717c3476ca68286bf7a1c27e, type: 3}
+  - {fileID: 21300000, guid: cb56351e46688497ea03aa0fecbfbc7d, type: 3}
   - {fileID: 21300000, guid: 6e7288de6cceb412ba5f06d778dffb32, type: 3}
   - {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
   - {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Item_Leather Belt
+  - Item_Belt_Leather Belt
   - Item_Armor_Protective
+  - Item_Weapon_Shuriken
   - Fireball01a_0
-  - Item_Melat Nackguard
+  - Item_Neck_Melat Nackguard
+  - Item_Boots_Crocs
   - Item_Gloves_protective
   - Item_IceSpike01a
+  - Item_Weapon_Katana
+  - Item_Boots_Boots
   - Equipment
   - Energy_Shield01_5
   - Energy_Shield01_4
@@ -476,13 +491,17 @@ SpriteAtlas:
   - Item_Magnet_01a
   - Item_Armor_Cloak
   - Item_Coins_03a
+  - Item_Weapon_Bow
   - Item_Armor_Metal
-  - Item_Stylish Belt
-  - Item_Trendy Charm
+  - Item_Belt_Stylish Belt
+  - Item_Neck_Trendy Charm
   - Light
-  - Item_Broad waistguard
-  - Item_Crystal Pendant
+  - Item_Boots_Sabaton
+  - Item_Belt_Broad waistguard
+  - Item_Neck_Crystal Pendant
+  - Item_Weapon_Fireknife
   - Item_Health_01a
+  - Item_Boots_Claws
   - Item_Coins_02a
   - Blue light
   - HolyWaterProjectile_01a
@@ -492,6 +511,8 @@ SpriteAtlas:
   - KatanaSplash_01a_1
   - KatanaSplash_01a_4
   - Katana_01a
+  - Item_Boots_Shoes
+  - Item_Weapon_Arbalet
   - Diamond_01c
   - Item_Armor_Carapace
   - Item_Gloves_leather
@@ -848,19 +869,20 @@ SpriteAtlas:
   - items_spriteatlas_16x16_291
   - items_spriteatlas_16x16_290
   - Item_Coins_01a
-  - Item_Honor Belt
-  - Item_Waist Sensor
+  - Item_Belt_Honor Belt
+  - Item_Belt_Waist Sensor
   - Power
   - Item_Snowball_01a_1
   - Item_Snowball_01a_0
   - Item_Snowball_01a_2
-  - Item_Bone Pendant
-  - Item_Emerald Pendant
+  - Item_Neck_Bone Pendant
+  - Item_Neck_Emerald Pendant
   - Item_Armor_Shirt
   - Energy_Shield_02_3
   - Energy_Shield_02_2
   - Energy_Shield_02_1
   - Energy_Shield_02_0
+  - Item_Weapon_Kanabo
   - Diamond_01b
   - Item_Gloves_Basic
   - Item_Gloves_Finrgerless

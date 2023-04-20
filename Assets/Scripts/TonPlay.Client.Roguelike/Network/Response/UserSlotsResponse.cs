@@ -12,8 +12,8 @@ namespace TonPlay.Client.Roguelike.Network.Response
         public class Slot
         {
             public string id;
+            public string userItemId;
             public string purpose;
-            public UserItemResponse itemDetail;
         }
     }
 }

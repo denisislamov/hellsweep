@@ -352,7 +352,9 @@ namespace TonPlay.Client.Roguelike.Core
 		
 		private string GetPlayerWeaponItemId(IMetaGameModelProvider metaGameModelProvider)
 		{
-			return metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON]?.Item?.DetailId?.Value;
+			var inventoryModel = metaGameModelProvider.Get().ProfileModel.InventoryModel;
+			var userItemId = inventoryModel.Slots[SlotName.WEAPON]?.ItemId?.Value;
+			return inventoryModel.GetItemModel(userItemId).ItemId.Value;
 		}
 	}
 }

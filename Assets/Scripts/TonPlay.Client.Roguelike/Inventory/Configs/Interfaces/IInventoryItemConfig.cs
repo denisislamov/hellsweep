@@ -16,6 +16,6 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		
 		AttributeName AttributeName { get; }
 
-		IReadOnlyDictionary<ushort, IInventoryItemDetailConfig> Details { get; }
+		IInventoryItemDetailConfig GetDetails(string detailIdValue);
 	}
 }

@@ -50,7 +50,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			for (var i = 0; i < Context.Items.Count; i++)
 			{
 				var item = Context.Items[i].Model;
-				var itemId = item.DetailId.Value;
+				var itemId = item.ItemId.Value;
 				var config = _itemsConfigProvider.Get(itemId);
 				var presentation = _itemPresentationProvider.GetItemPresentation(itemId);
 				var icon = presentation?.Icon ? presentation.Icon : _itemPresentationProvider.DefaultItemIcon;
@@ -78,7 +78,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Color mainColor, 
 			Material backgroundGradientMaterial,
 			IReadOnlyReactiveProperty<bool> isEquipped,
-			IInventoryItemConfig config, 
+			IInventoryItemConfig config,
 			IInventoryItemModel item)
 			=> new InventoryItemContext(
 				itemId,
@@ -87,7 +87,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				mainColor,
 				backgroundGradientMaterial,
 				config.Name,
-				item.Level.Value,
+				config.GetDetails(item.DetailId.Value).Level,
 				isEquipped: isEquipped,
 				() => Context.ItemClickCallback?.Invoke(item));
 

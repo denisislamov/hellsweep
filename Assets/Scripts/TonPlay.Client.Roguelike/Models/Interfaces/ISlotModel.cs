@@ -10,7 +10,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		
 		public IReadOnlyReactiveProperty<string> Id { get; }
 		
-		public IInventoryItemModel Item { get; }
+		public IReadOnlyReactiveProperty<string> ItemId { get; }
 		
 		IObservable<Unit> Updated { get; }
 	}

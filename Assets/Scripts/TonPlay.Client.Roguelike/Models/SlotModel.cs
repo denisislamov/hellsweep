@@ -8,16 +8,16 @@ namespace TonPlay.Client.Roguelike.Models
 	internal class SlotModel : ISlotModel
 	{
 		private readonly SlotData _data = new SlotData();
-		private readonly IInventoryItemModel _item = new InventoryItemModel();
 
 		private SlotName _slotName;
 		private ReactiveProperty<string> _id = new ReactiveProperty<string>();
+		private ReactiveProperty<string> _itemId = new ReactiveProperty<string>();
 		
 		private Subject<Unit> _updated = new Subject<Unit>();
 
 		public SlotName SlotName => _slotName;
 		public IReadOnlyReactiveProperty<string> Id => _id;
-		public IInventoryItemModel Item => _item;
+		public IReadOnlyReactiveProperty<string> ItemId => _itemId;
 		public IObservable<Unit> Updated => _updated;
 
 		public void Update(SlotData data)
@@ -26,7 +26,7 @@ namespace TonPlay.Client.Roguelike.Models
 			
 			_id.SetValueAndForceNotify(data.Id);
 			
-			_item.Update(data.Item);
+			_itemId.SetValueAndForceNotify(data.ItemId);
 			
 			_updated.OnNext(Unit.Default);
 		}
@@ -35,7 +35,7 @@ namespace TonPlay.Client.Roguelike.Models
 		{
 			_data.Id = _id.Value;
 			_data.SlotName = _slotName;
-			_data.Item = _item.ToData();
+			_data.ItemId = _itemId.Value;
 
 			return _data;
 		}
