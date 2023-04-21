@@ -31,6 +31,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		
 		IButtonView GameSettingsButtonView { get; }
 
+		IButtonView MergeButtonView { get; }
+		
 		void SetAttackValueText(string text);
 		
 		void SetArmorValueText(string text);

@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDebugToken: 1
-  _username: csharky
+  _username: disadisa
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
   _unitAllResponse:
@@ -233,6 +233,15 @@ MonoBehaviour:
         coin: 0
         energy: 0
         chests: []
+  _gamePropertiesResponse:
+    successful: 0
+    response:
+      jsonData:
+        gameSettings:
+          SoundsVolume: 0
+          MusicVolume: 0
+          ScreenGameStick: 0
+          VisualizeDamage: 0
   _userXpResponse:
     successful: 0
     response:
