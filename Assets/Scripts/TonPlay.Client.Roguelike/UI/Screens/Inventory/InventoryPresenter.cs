@@ -88,6 +88,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			AddSortButtonsPresenters();
 			AddSubscriptionToCurrentSortType();
 			AddSettingsButtonPresenter();
+			AddMergeButtonPresenter();
 			InitView();
 			RefreshItems();
 		}
@@ -415,12 +416,26 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 			Presenters.Add(presenter);
 		}
+		
+		private void AddMergeButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(View.MergeButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(OnMergeButtonClickHandler)));
 
+			Presenters.Add(presenter);
+		}
+		
 		private void OnSettingsButtonClickHandler()
 		{
 			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
 		}
 
+		private void OnMergeButtonClickHandler()
+		{
+			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
+		}
+		
 		internal class Factory : PlaceholderFactory<IInventoryView, IInventoryScreenContext, InventoryPresenter>
 		{
 		}
