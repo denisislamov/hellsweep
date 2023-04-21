@@ -98,6 +98,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
+  - {fileID: 21300000, guid: f0010c38e50cfda4bbd0e2d1bda869b8, type: 3}
   - {fileID: 21300000, guid: 7694ab98d9b7a4ea3a5bd464f363e549, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
   - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
@@ -184,6 +185,7 @@ SpriteAtlas:
   - Icons_FitnessGuide_01a
   - joystick_01a
   - Settings_skull
+  - Pink_glow
   - Blueprint_02
   - Belt
   - Shield

@@ -5,5 +5,6 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		string Feature { get; }
 		ushort Level { get; }
 		uint Value { get; }
+		IInventoryItemDetailConfig Next { get; }
 	}
 }

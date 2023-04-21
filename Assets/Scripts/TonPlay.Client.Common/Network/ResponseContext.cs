@@ -24,11 +24,13 @@ namespace TonPlay.Client.Common.Network
 		{
 			var data = Encoding.UTF8.GetString(bytes);
 			
-			Debug.LogFormat("GetResponseAs data:\n {0}", data);
-			if (data.Contains("[")) 
+			if (data.TrimStart().StartsWith("[")) 
 			{
 				data = "{ \"items\": " + data + "}";
 			}
+			
+			Utilities.Logger.Log($"GetResponseAs data:\n {data}");
+
 			return JsonUtility.FromJson<T>(data);
 		}
 	}

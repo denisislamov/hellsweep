@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.Network;
 using TonPlay.Client.Roguelike.Network.Response;
 
 namespace TonPlay.Client.Roguelike.Network.Interfaces
@@ -12,6 +13,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<LocationAllResponse>> GetLocationAll();
 		UniTask<Response<InfoLevelAllResponse>> GetInfoLevelAll();
 		UniTask<Response<ItemPutResponse>> PutItem(ItemPutBody value);
+		UniTask<Response<ItemLevelUpPutResponse>> PutItemLevelUp(string id, bool isMax);
 		UniTask<Response<ItemsGetResponse>> GetAllItems();
 		UniTask<Response<ItemLevelRatesResponse>> GetItemLevelRatesAll();
 		UniTask<Response<string>> DeleteItem(string slotId);

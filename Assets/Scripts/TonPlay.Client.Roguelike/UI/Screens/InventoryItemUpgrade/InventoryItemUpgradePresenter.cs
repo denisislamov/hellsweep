@@ -7,11 +7,13 @@ using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
@@ -70,16 +72,46 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			View.SetDescriptionText(presentation?.Description);
 			View.SetTitleText(presentation?.Title);
 			View.SetItemIcon(presentation?.Icon ? presentation.Icon : defaultItemIcon);
-			View.SetLevelText($"Lv. {detailConfig.Level}");
 			View.SetRarityText(config.Rarity.ToString().ToLower().FirstCharToUpper());
 			View.SetRarityColor(mainColor);
 			View.SetItemBackgroundGradientMaterial(backgroundGradient);
-			View.SetAttributeValueText($"+{detailConfig.Value}");
-			View.SetGoldPriceText(GetGoldPriceText(priceConfig));
-			View.SetBlueprintsPriceText(GetBlueprintsPriceText(priceConfig));
 			
+			UpdateAttributeValueText(detailConfig);
+			UpdateLevelText(detailConfig);
+			UpdateGoldPriceText(priceConfig);
+			UpdateBlueprintsPriceText(priceConfig);
+			UpdateEquipButtonLockState(config);
+			UpdateLevelUpButtonLockState(priceConfig, detailConfig);
+		}
+		
+		private void UpdateLevelText(IInventoryItemDetailConfig detailConfig)
+		{
+			View.SetLevelText($"Lv. {detailConfig.Level}");
+		}
+
+		private void UpdateAttributeValueText(IInventoryItemDetailConfig detailConfig)
+		{
+			View.SetAttributeValueText($"+{detailConfig.Value}");
+		}
+		
+		private void UpdateLevelUpButtonLockState(IInventoryItemUpgradePriceConfig priceConfig, IInventoryItemDetailConfig itemDetailConfig)
+		{
+			_upgradeButtonLockState.SetValueAndForceNotify(!CanUpgrade(priceConfig, itemDetailConfig));
+		}
+
+		private void UpdateEquipButtonLockState(IInventoryItemConfig config)
+		{
 			_equipButtonLockState.SetValueAndForceNotify(Context.IsEquipped && config.SlotName == SlotName.WEAPON);
-			_upgradeButtonLockState.SetValueAndForceNotify(!CanUpgrade(priceConfig));
+		}
+
+		private void UpdateBlueprintsPriceText(IInventoryItemUpgradePriceConfig priceConfig)
+		{
+			View.SetBlueprintsPriceText(GetBlueprintsPriceText(priceConfig));
+		}
+
+		private void UpdateGoldPriceText(IInventoryItemUpgradePriceConfig priceConfig)
+		{
+			View.SetGoldPriceText(GetGoldPriceText(priceConfig));
 		}
 
 		private void AddCloseButtonPresenter()
@@ -125,8 +157,46 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			ClosePopup();
 		}
 		
-		private void UpgradeButtonClickHandler()
+		private async void UpgradeButtonClickHandler()
 		{
+			var response = await _restApiClient.PutItemLevelUp(Context.Item.Id.Value, false);
+
+			if (!response.successful)
+			{
+				Debug.LogError($"ErrorCode: {response.error.code}");
+				return;
+			}
+
+			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
+			var previousDetailConfig = config.GetDetails(Context.Item.DetailId.Value);
+			var paidUpgradePrice = _inventoryItemsConfigProvider.GetUpgradePrice(previousDetailConfig.Level);
+			
+			var itemModel = Context.Item;
+			var itemData = itemModel.ToData();
+			itemData.DetailId = response.response.itemDetailId;
+			itemModel.Update(itemData);
+			
+			var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
+			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+			
+			var balanceData = balanceModel.ToData();
+			var inventoryData = inventoryModel.ToData();
+			
+			balanceData.Gold -= paidUpgradePrice.Coins;
+			inventoryData.Blueprints -= paidUpgradePrice.Blueprints;
+			
+			balanceModel.Update(balanceData);
+			inventoryModel.Update(inventoryData);
+			
+			var currentDetailConfig = config.GetDetails(Context.Item.DetailId.Value);
+			var currentUpgradePrice = _inventoryItemsConfigProvider.GetUpgradePrice(previousDetailConfig.Level);
+
+			UpdateAttributeValueText(currentDetailConfig);
+			UpdateLevelText(currentDetailConfig);
+			UpdateGoldPriceText(currentUpgradePrice);
+			UpdateBlueprintsPriceText(currentUpgradePrice);
+			UpdateEquipButtonLockState(config);
+			UpdateLevelUpButtonLockState(currentUpgradePrice, currentDetailConfig);
 		}
 
 		private void CloseButtonClickHandler()
@@ -139,13 +209,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			_uiService.Close(Context.Screen);
 		}
 		
-		private bool CanUpgrade(IInventoryItemUpgradePriceConfig priceConfig)
+		private bool CanUpgrade(IInventoryItemUpgradePriceConfig priceConfig, IInventoryItemDetailConfig detailConfig)
 		{
 			var model = _metaGameModelProvider.Get();
 			var currentCoins = model.ProfileModel.BalanceModel.Gold.Value;
 			var currentBlueprints = model.ProfileModel.InventoryModel.Blueprints.Value;
 
-			return currentCoins >= priceConfig.Coins && currentBlueprints >= priceConfig.Blueprints;
+			return detailConfig.Next != null && currentCoins >= priceConfig.Coins && currentBlueprints >= priceConfig.Blueprints;
 		}
 
 		private string GetGoldPriceText(IInventoryItemUpgradePriceConfig priceConfig)

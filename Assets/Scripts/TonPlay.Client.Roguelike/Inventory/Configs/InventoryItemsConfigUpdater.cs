@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
@@ -22,21 +23,32 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			var slotName = (SlotName)Enum.Parse(typeof(SlotName), item.purpose, true);
 			var attributeName = (AttributeName)Enum.Parse(typeof(AttributeName), item.feature, true);
 
+			var details = new Dictionary<string, IInventoryItemDetailConfig>();
+			IInventoryItemDetailConfig previousDetail = null;
+			
+			for (var index = item.details.Count - 1; index >= 0; index--)
+			{
+				var remoteDetail = item.details[index];
+				var currentDetail = new InventoryItemDetailConfig()
+				{
+					Feature = remoteDetail.id,
+					Level = remoteDetail.level,
+					Value = remoteDetail.value,
+					Next = previousDetail
+				};
+				
+				details.Add(remoteDetail.id, currentDetail);
+
+				previousDetail = currentDetail;
+			}
+			
 			_provider.ConfigsMap[id] = new InventoryItemConfig(
 				id: item.id,
 				name: item.name,
 				rarity: rarity,
 				slotName: slotName,
 				attributeName: attributeName,
-				details: item.details
-							 .ToDictionary(
-								  _ => _.id,
-								  _ => (IInventoryItemDetailConfig)new InventoryItemDetailConfig()
-								  {
-									  Feature = _.id,
-									  Level = _.level,
-									  Value = _.value
-								  }));
+				details: details);
 		}
 		
 		public void UpdateItemUpgradePrices(ushort level, ItemLevelRatesResponse.Item remoteConfig)

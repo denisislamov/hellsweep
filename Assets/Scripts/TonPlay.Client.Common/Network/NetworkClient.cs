@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network.Interfaces;
-using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -51,128 +50,92 @@ namespace TonPlay.Client.Common.Network
 			};
 		}
 
-		public async Task<Response<T>> GetAsync<T>(string path, T value, CancellationToken cancellationToken = default)
+		public async UniTask<Response<T>> GetAsync<T>(string path, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.GET, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 
-		public async Task<Response<T>> GetAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
+		public async UniTask<Response<T>> GetAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.GET, _basePath, path, requestHeaders, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 
-		public async UniTask<T> PostAsync<T>(string path, object value, CancellationToken cancellationToken = default)
+		public async UniTask<Response<T>> PostAsync<T>(string path, object value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return response.GetResponseAs<T>();
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 		
 		public async Task<Response<T>> PostAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 		
 		public async Task<Response<T>> PostAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.POST, _basePath, path, requestHeaders, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 
 		public async Task<Response<T>> PutAsync<T>(string path, object value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 		
 		public async Task<Response<T>> PutAsync<T, U>(string path, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 		
 		public async Task<Response<T>> PutAsync<T, U>(string path, Dictionary<string, string> requestHeaders, U value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.PUT, _basePath, path, requestHeaders, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 
 		public async Task<Response<T>> DeleteAsync<T>(string path, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.DELETE, _basePath, path, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 		
 		public async Task<Response<T>> DeleteAsync<T>(string path, Dictionary<string, string> requestHeaders, T value, CancellationToken cancellationToken = default)
 		{
 			var request = new RequestContext(RequestType.DELETE, _basePath, path, requestHeaders, value, _timeout, _decorators);
-			var response = await InvokeRecursive(request, cancellationToken);
-			return new Response<T>
-			{
-				successful = response.StatusCode == (int) HttpStatusCode.OK,
-				response = response.GetResponseAs<T>()
-			};
+			var responseContext = await InvokeRecursive(request, cancellationToken);
+			return GenerateResponse<T>(responseContext);
 		}
 
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)
 		{
 			var data = context.Value != null ? JsonUtility.ToJson(context.Value) : " ";
 			var formData = new Dictionary<string, string> {{"body", data}};
-			Debug.LogFormat("body:\n {0}", data);
+			Utilities.Logger.Log($"body:\n {data}");
 			
 			using (var req = _mapRequests[context.RequestType].Invoke(_basePath + context.Path, data))
 			{
-				Debug.LogFormat("_basePath + context.Path {0}", _basePath + context.Path);
+				Utilities.Logger.Log($"_basePath + context.Path {(_basePath + context.Path)}");
 				var headers = context.GetRawHeaders();
 
 				if (headers != null)
 				{
 					foreach (var item in headers)
 					{
-						Debug.LogFormat("header: {0} , {1}", item.Key, item.Value);
+						Utilities.Logger.Log($"header: {item.Key} , {item.Value}");
 						req.SetRequestHeader(item.Key, item.Value);
 					}
 				}
@@ -198,6 +161,10 @@ namespace TonPlay.Client.Common.Network
 						throw new TimeoutException();
 					}
 				}
+				catch (UnityWebRequestException webRequestException)
+				{
+					Debug.LogError(webRequestException.ToString());
+				}
 				finally
 				{
 					if (!linkToken.IsCancellationRequested)
@@ -206,7 +173,7 @@ namespace TonPlay.Client.Common.Network
 					}
 				}
 
-				Debug.LogFormat("req.downloadHandler.data:\n {0}", req.downloadHandler.data);
+				Utilities.Logger.Log($"req.downloadHandler.data:\n {req.downloadHandler.data}");
 				return new ResponseContext(req.downloadHandler.data, req.responseCode, req.GetResponseHeaders());
 			}
 		}
@@ -215,5 +182,25 @@ namespace TonPlay.Client.Common.Network
 		{
 			return context.GetNextDecorator().SendAsync(context, cancellationToken, _next);
 		}
-    }
+		
+		private Response<T> GenerateResponse<T>(ResponseContext responseContext)
+		{
+			var successful = responseContext.StatusCode == (int)HttpStatusCode.OK;
+			var response = new Response<T>()
+			{
+				successful = successful
+			};
+
+			if (successful)
+			{
+				response.response = responseContext.GetResponseAs<T>();
+			}
+			else
+			{
+				response.error = responseContext.GetResponseAs<ErrorResponse>();
+			}
+
+			return response;
+		}
+	}
 }

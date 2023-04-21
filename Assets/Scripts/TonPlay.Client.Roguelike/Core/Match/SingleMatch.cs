@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.Network;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.UIService.Layers;
