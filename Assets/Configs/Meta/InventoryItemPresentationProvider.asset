@@ -54,106 +54,113 @@ MonoBehaviour:
     _itemId: 78af8a73-1fc5-4ac2-8684-b1c2ae0ef9c6
     _icon: {fileID: 21300000, guid: e6e66951400004d1c8a9a1470f8b47fe, type: 3}
     _description: 
-  - _title: Wraparound Gloves
+  - _title: Wraps
     _itemId: 53934035-6afb-4587-aa3d-babf0c8b5406
     _icon: {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
-    _description: 
-  - _title: Basic Gloves
+    _description: Any peasant knows how to make them. They help handle both the plow
+      and the sword.
+  - _title: Leather Gauntlets
     _itemId: 4eeda7c6-d4a1-4784-b2fd-5a1a6d9d23a7
     _icon: {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
-    _description: 
-  - _title: Mittens
+    _description: Favorite attribute of all thieves in the Empire.
+  - _title: Gauntlets
     _itemId: 1d444f74-1ab2-4984-ae32-b6d560db496f
     _icon: {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
-    _description: 
-  - _title: Blessed Gloves
+    _description: Not too comfortable, but great protection for hands.
+  - _title: Blessed Gauntlets
     _itemId: 5880f55e-7538-4fac-b9bd-fa0c2ea72483
     _icon: {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
-    _description: 
-  - _title: Lats Mittens
+    _description: They make a slight ringing sound with every movement.
+  - _title: Mitten Gauntlets
     _itemId: 9eb7569e-a641-4dc7-8ca4-dcce87ab0cdd
     _icon: {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
-    _description: 
-  - _title: Armor Jacket
+    _description: A single blow with such a glove will throw a person to the ground.
+  - _title: Plate Armour
     _itemId: 317f13fd-82fe-4b84-9768-ae4644273952
     _icon: {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
-    _description: 
-  - _title: Armor Cloak
+    _description: Heavy and sonorous, it gives a sense of protection and hum in the
+      ears.
+  - _title: Cloak
     _itemId: 201fb3bd-3e51-4161-9223-82cdcd0f3a0f
     _icon: {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
-    _description: 
-  - _title: Armor Lats
+    _description: Protects from both arrows and rain.
+  - _title: Jacket
     _itemId: 62b5cb3c-4101-4d24-a223-a08e57d4d91d
     _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
-    _description: 
-  - _title: Armor Chain
+    _description: Both warm and safe. Just look how many pockets it has!
+  - _title: Chain Mail
     _itemId: 7269d629-582e-4260-b1f9-a211168931f5
     _icon: {fileID: 21300000, guid: d70f1511c12cb4ec6974fe207f302428, type: 3}
-    _description: 
-  - _title: Armor Shirt
+    _description: How many rings does it have? A thousand? A hundred thousand?
+  - _title: Shirt
     _itemId: 036c9151-22ef-4ee1-b650-c03558e1a74f
     _icon: {fileID: 21300000, guid: 72575efc35ce1450b93ebed4d3c0b19e, type: 3}
-    _description: 
-  - _title: Beads
+    _description: It may not be the best protection in battle, but it does not constrain
+      movement.
+  - _title: Rosary
     _itemId: 24fd1e54-a963-4d9d-aa9f-c7da28078305
     _icon: {fileID: 21300000, guid: 602ada0c087cc422693ba219df5574a5, type: 3}
-    _description: 
-  - _title: Suspension
+    _description: Indispensable attribute for every monk.
+  - _title: Necklace
     _itemId: 9c7b5190-d660-41b7-9263-5fd2011351e6
     _icon: {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
-    _description: 
+    _description: A gorgeous piece of jewelry for all noblemen.
   - _title: Pendant
     _itemId: a66bbfa6-2372-45e9-bbd7-3e1d6d5f59f0
     _icon: {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
-    _description: 
-  - _title: Collar
+    _description: Emerald drop in a gilded frame.
+  - _title: Gorget
     _itemId: 1142e798-d682-4d5e-a9f1-1476b63b48f4
     _icon: {fileID: 21300000, guid: d553ad22b135e42f794e6939ade314af, type: 3}
-    _description: 
+    _description: It is uncomfortable to wear, but there is no better protection
+      against a Jiangshi vampire.
   - _title: Cross
     _itemId: 071944f6-9c00-4f72-ab96-f3861c2bd2d7
     _icon: {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
-    _description: 
+    _description: Strangers' jewelry that has retained its power.
   - _title: Girdle
     _itemId: 555105dd-df07-4d51-8b2e-54225756691f
     _icon: {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
-    _description: 
+    _description: A piece of cloth in which you can easily hide a knife or a handful
+      of coins.
   - _title: Belt
     _itemId: 66f289a1-b44e-4f44-b76b-90d10bed4015
     _icon: {fileID: 21300000, guid: 05a2bc3bed9024edd985397bc0236294, type: 3}
-    _description: 
+    _description: More practical than pretty.
   - _title: Sash
     _itemId: c308cdbc-bfe1-4ee5-aa2c-8487e2ac9027
     _icon: {fileID: 21300000, guid: abb6e500627304c9193d863cab36319e, type: 3}
-    _description: 
+    _description: Wide belt for a refined nature.
   - _title: Champion belt
     _itemId: 3b268836-48fc-4cf4-b3f7-7e309925a464
     _icon: {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
-    _description: 
-  - _title: Strap
+    _description: Insignia of warriors and soldiers, it comes with a champion title.
+  - _title: Ceinture
     _itemId: 61a6655a-60fe-4403-8050-3ea9e21781aa
     _icon: {fileID: 21300000, guid: 1eee2e3bb45424422a0f4bb094fb92c4, type: 3}
-    _description: 
-  - _title: Shoes
+    _description: Sturdy leather and metal buckles. What more do you need?
+  - _title: Solerets
     _itemId: f0eea396-b730-4bca-bc7c-3f53aaad7478
     _icon: {fileID: 21300000, guid: 381fe458f9ae04fb2afb49d6892ae8be, type: 3}
-    _description: 
+    _description: The choice of true knights. Blessed by the monks of the Celestial
+      Abode.
   - _title: Claws
     _itemId: f1c737b9-beb0-49a0-be2e-524bbb0c62c1
     _icon: {fileID: 21300000, guid: 014d2727d81c446daa0427157c231ad2, type: 3}
-    _description: 
-  - _title: Boots
+    _description: Whoever came up with the idea of adding hooks to shoes was a genius.
+  - _title: High Boots
     _itemId: d1ee7c3b-cef5-4801-8660-e0d62cd6d0c0
     _icon: {fileID: 21300000, guid: 39f39503979b5419588a209ae5e6b7df, type: 3}
-    _description: 
-  - _title: Crocs
+    _description: Sneaking in them is difficult, but running is not. For example,
+      in pursuit of an enemy.
+  - _title: Gaiters
     _itemId: 27b351c3-82cc-4dbd-bd14-227f6b70d5e4
     _icon: {fileID: 21300000, guid: 8c19a132e0e7e4d9aa0160452372b069, type: 3}
-    _description: 
-  - _title: Sabaton
+    _description: Additional protection if greaves are not enough.
+  - _title: Boots
     _itemId: 236de172-7a00-4481-9cf6-a98ac2b1eaf0
     _icon: {fileID: 21300000, guid: c4d7ed866c06c4315a58c6c40eaca8bf, type: 3}
-    _description: 
+    _description: For fast and silent walking.
   - _title: ---UNCOMMON---
     _itemId: ---UNCOMMON---
     _icon: {fileID: 0}
@@ -178,106 +185,113 @@ MonoBehaviour:
     _itemId: f2ffae76-f563-4d52-ae69-bf4a73b61b08
     _icon: {fileID: 21300000, guid: e6e66951400004d1c8a9a1470f8b47fe, type: 3}
     _description: 
-  - _title: Wraparound Gloves
+  - _title: Wraps
     _itemId: f34c289a-65c0-4ec9-b6e5-43973dc89e85
     _icon: {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
-    _description: 
-  - _title: Basic Gloves
+    _description: Any peasant knows how to make them. They help handle both the plow
+      and the sword.
+  - _title: Leather Gauntlets
     _itemId: 3a95aaa7-9640-427e-a238-b9755ca05fad
     _icon: {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
-    _description: 
-  - _title: Mittens
+    _description: Favorite attribute of all thieves in the Empire.
+  - _title: Gauntlets
     _itemId: ed7a3dce-0bf5-4b75-9ffc-0a0863e4fc0b
     _icon: {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
     _description: 
-  - _title: Blessed Gloves
+  - _title: Blessed Gauntlets
     _itemId: d0ab8444-4407-4ec5-bc43-58d42c9172ff
     _icon: {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
-    _description: 
-  - _title: Lats Mittens
+    _description: They make a slight ringing sound with every movement.
+  - _title: Mitten Gauntlets
     _itemId: 3df30146-a1da-4f69-8eae-24a2d740dd9d
     _icon: {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
-    _description: 
-  - _title: Armor Jacket
+    _description: A single blow with such a glove will throw a person to the ground.
+  - _title: Plate Armour
     _itemId: 87ea249d-a0cf-4701-bb94-e7c2af168a21
     _icon: {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
-    _description: 
-  - _title: Armor Cloak
+    _description: Heavy and sonorous, it gives a sense of protection and hum in the
+      ears.
+  - _title: Cloak
     _itemId: 2cb4a624-94b7-457d-96ae-65cc191b9a00
     _icon: {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
-    _description: 
-  - _title: Armor Lats
+    _description: Protects from both arrows and rain.
+  - _title: Jacket
     _itemId: ccc6f110-0c0c-4119-b1c8-7c9698533620"
     _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
-    _description: 
-  - _title: Armor Chain
+    _description: Both warm and safe. Just look how many pockets it has!
+  - _title: Chain Mail
     _itemId: 9e9d3ae5-5d3c-427b-bf12-081ed3ca7646
     _icon: {fileID: 21300000, guid: d70f1511c12cb4ec6974fe207f302428, type: 3}
-    _description: 
-  - _title: Armor Shirt
+    _description: How many rings does it have? A thousand? A hundred thousand?
+  - _title: Shirt
     _itemId: 2b935693-e97e-4eae-bb01-641f2f03d572
     _icon: {fileID: 21300000, guid: 72575efc35ce1450b93ebed4d3c0b19e, type: 3}
-    _description: 
-  - _title: Beads
+    _description: It may not be the best protection in battle, but it does not constrain
+      movement.
+  - _title: Rosary
     _itemId: 13a79254-5f26-4b63-9cb9-4a0ae0da8fc1
     _icon: {fileID: 21300000, guid: 602ada0c087cc422693ba219df5574a5, type: 3}
-    _description: 
-  - _title: Suspension
+    _description: Indispensable attribute for every monk.
+  - _title: Necklace
     _itemId: 4d6fcc82-d08a-4ff6-906a-0d48d0cb2412
     _icon: {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
-    _description: 
+    _description: A gorgeous piece of jewelry for all noblemen.
   - _title: Pendant
     _itemId: e424731c-1d91-4daa-908c-d693b2bbc11d
     _icon: {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
-    _description: 
-  - _title: Collar
+    _description: Emerald drop in a gilded frame.
+  - _title: Gorget
     _itemId: 05e20f73-631a-4461-bfef-f19a533dc3a5
     _icon: {fileID: 21300000, guid: d553ad22b135e42f794e6939ade314af, type: 3}
-    _description: 
+    _description: It is uncomfortable to wear, but there is no better protection
+      against a Jiangshi vampire.
   - _title: Cross
     _itemId: 0061e474-a6c2-4180-a009-4fde1c98651d
     _icon: {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
-    _description: 
+    _description: Strangers' jewelry that has retained its power.
   - _title: Girdle
     _itemId: d4e7f785-526c-48e7-a68a-c4c104f3af86
     _icon: {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
-    _description: 
+    _description: A piece of cloth in which you can easily hide a knife or a handful
+      of coins.
   - _title: Belt
     _itemId: 9236df41-462d-4eb5-b091-73fdd5491b0e
     _icon: {fileID: 21300000, guid: 05a2bc3bed9024edd985397bc0236294, type: 3}
-    _description: 
+    _description: More practical than pretty.
   - _title: Sash
     _itemId: 0d099712-456b-4fa5-af43-5150ea0e26e2
     _icon: {fileID: 21300000, guid: abb6e500627304c9193d863cab36319e, type: 3}
-    _description: 
+    _description: Wide belt for a refined nature.
   - _title: Champion belt
     _itemId: df9963c2-5a05-4af2-bff7-ed4e0854ba2f
     _icon: {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
-    _description: 
-  - _title: Strap
+    _description: Insignia of warriors and soldiers, it comes with a champion title.
+  - _title: Ceinture
     _itemId: c1f7d111-5fb1-43f5-81eb-18726a600233
     _icon: {fileID: 21300000, guid: 1eee2e3bb45424422a0f4bb094fb92c4, type: 3}
-    _description: 
-  - _title: Shoes
+    _description: Sturdy leather and metal buckles. What more do you need?
+  - _title: Solerets
     _itemId: 63c991b5-8bfc-4c02-b4cb-d811d6869684
     _icon: {fileID: 21300000, guid: 381fe458f9ae04fb2afb49d6892ae8be, type: 3}
-    _description: 
+    _description: The choice of true knights. Blessed by the monks of the Celestial
+      Abode.
   - _title: Claws
     _itemId: 0754b1d8-ef9d-433c-bdea-16111ac80842
     _icon: {fileID: 21300000, guid: 014d2727d81c446daa0427157c231ad2, type: 3}
-    _description: 
-  - _title: Boots
+    _description: Whoever came up with the idea of adding hooks to shoes was a genius.
+  - _title: High Boots
     _itemId: 390d3412-0e35-47d1-994c-8550557ab13a
     _icon: {fileID: 21300000, guid: 39f39503979b5419588a209ae5e6b7df, type: 3}
-    _description: 
-  - _title: Crocs
+    _description: Sneaking in them is difficult, but running is not. For example,
+      in pursuit of an enemy.
+  - _title: Gaiters
     _itemId: 19d5a269-b382-4682-9d8a-a34c5dc818a8
     _icon: {fileID: 21300000, guid: 8c19a132e0e7e4d9aa0160452372b069, type: 3}
-    _description: 
-  - _title: Sabaton
+    _description: Additional protection if greaves are not enough.
+  - _title: Boots
     _itemId: 77ab7ab6-8d0f-4bbe-b5a6-f4b4c702d053
     _icon: {fileID: 21300000, guid: c4d7ed866c06c4315a58c6c40eaca8bf, type: 3}
-    _description: 
+    _description: For fast and silent walking.
   - _title: ---RARE---
     _itemId: ---RARE---
     _icon: {fileID: 0}
@@ -302,106 +316,113 @@ MonoBehaviour:
     _itemId: 5ad89519-5b4f-465f-ad87-df3e06d48d8e
     _icon: {fileID: 21300000, guid: e6e66951400004d1c8a9a1470f8b47fe, type: 3}
     _description: 
-  - _title: Lats Mittens
+  - _title: Mitten Gauntlets
     _itemId: 96bf5be2-dff9-4c7f-ba70-1f79ed2dab30
     _icon: {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
-    _description: 
-  - _title: Wraparound Gloves
+    _description: A single blow with such a glove will throw a person to the ground.
+  - _title: Wraps
     _itemId: 046ebd63-3fd7-4430-a7ae-4fa4d2da076b
     _icon: {fileID: 21300000, guid: 2e1037fe2300940e39cf9321365a7396, type: 3}
-    _description: 
-  - _title: Mittens
+    _description: Any peasant knows how to make them. They help handle both the plow
+      and the sword.
+  - _title: Gauntlets
     _itemId: d85012d5-57ea-4701-9175-12105f75ed9d
     _icon: {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
-    _description: 
-  - _title: Blessed Gloves
+    _description: Not too comfortable, but great protection for hands.
+  - _title: Blessed Gauntlets
     _itemId: 3b284078-2569-4f3a-8100-7d725e22aea7
     _icon: {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
-    _description: 
-  - _title: Basic Gloves
+    _description: They make a slight ringing sound with every movement.
+  - _title: Leather Gauntlets
     _itemId: e5917e13-ada2-4ed5-b35d-fe0cfeaf7018
     _icon: {fileID: 21300000, guid: 0381a4df1a9f241f28f8251e24c0b041, type: 3}
-    _description: 
+    _description: Favorite attribute of all thieves in the Empire.
   - _title: Belt
     _itemId: 60e71db5-7d91-4353-9880-02e5162e4f16
     _icon: {fileID: 21300000, guid: 05a2bc3bed9024edd985397bc0236294, type: 3}
-    _description: 
-  - _title: Strap
+    _description: More practical than pretty.
+  - _title: Ceinture
     _itemId: f296ea5d-71ef-4ef9-89a3-693a538f8651
     _icon: {fileID: 21300000, guid: 1eee2e3bb45424422a0f4bb094fb92c4, type: 3}
-    _description: 
+    _description: Sturdy leather and metal buckles. What more do you need?
   - _title: Girdle
     _itemId: ce69a347-06a3-454f-9b73-47dfcd8dcca8
     _icon: {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
-    _description: 
+    _description: A piece of cloth in which you can easily hide a knife or a handful
+      of coins.
   - _title: Sash
     _itemId: 1db90d4d-f648-47e2-91d0-03edc6eb414d
     _icon: {fileID: 21300000, guid: abb6e500627304c9193d863cab36319e, type: 3}
-    _description: 
+    _description: Wide belt for a refined nature.
   - _title: Champion belt
     _itemId: e903d890-8cbd-4cf5-9098-634f1b8d6fd8
     _icon: {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
-    _description: 
-  - _title: Armor Jacket
+    _description: Insignia of warriors and soldiers, it comes with a champion title.
+  - _title: Jacket
     _itemId: 699c1fbb-423e-45d9-8220-54fcc8721738
     _icon: {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
-    _description: 
-  - _title: Armor Shirt
+    _description: Both warm and safe. Just look how many pockets it has!
+  - _title: Shirt
     _itemId: 3b8c19b5-1a73-4529-bdb1-dd15c3729626
     _icon: {fileID: 21300000, guid: 72575efc35ce1450b93ebed4d3c0b19e, type: 3}
-    _description: 
-  - _title: Armor Cloak
+    _description: It may not be the best protection in battle, but it does not constrain
+      movement.
+  - _title: Cloak
     _itemId: 4807706c-9772-476f-8513-91538b87ade9
     _icon: {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
-    _description: 
-  - _title: Armor Jacket
+    _description: Protects from both arrows and rain.
+  - _title: Plate Armour
     _itemId: 80f2c9ab-ece8-4854-a552-04d9ffb4894c
     _icon: {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
-    _description: 
-  - _title: Armor Chain
+    _description: Heavy and sonorous, it gives a sense of protection and hum in the
+      ears.
+  - _title: Chain Mail
     _itemId: bb06a7e4-7e2f-4f36-b2e4-3241f2ca9359
     _icon: {fileID: 21300000, guid: d70f1511c12cb4ec6974fe207f302428, type: 3}
-    _description: 
+    _description: How many rings does it have? A thousand? A hundred thousand?
   - _title: Pendant
     _itemId: 6c947aae-05e4-4e94-88c1-1021281c5ad6
     _icon: {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
-    _description: 
-  - _title: Beads
+    _description: Emerald drop in a gilded frame.
+  - _title: Rosary
     _itemId: a8964da7-ff43-4abd-b02d-0fa8d78e5ab5
     _icon: {fileID: 21300000, guid: 602ada0c087cc422693ba219df5574a5, type: 3}
-    _description: 
-  - _title: Suspension
+    _description: Indispensable attribute for every monk.
+  - _title: Necklace
     _itemId: f20b85af-dab2-419c-a83b-d44eb591abcb
     _icon: {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
-    _description: 
-  - _title: Collar
+    _description: A gorgeous piece of jewelry for all noblemen.
+  - _title: Gorget
     _itemId: ac697bae-e0a5-47bf-93c3-01378e867055
     _icon: {fileID: 21300000, guid: d553ad22b135e42f794e6939ade314af, type: 3}
-    _description: 
+    _description: It is uncomfortable to wear, but there is no better protection
+      against a Jiangshi vampire.
   - _title: Cross
     _itemId: bae6aeaf-d9ce-4698-b79b-5f09885393fd
     _icon: {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
-    _description: 
+    _description: Strangers' jewelry that has retained its power.
   - _title: Claws
     _itemId: f64942d5-dc41-4b53-a0c2-8d64b9db4d7d
     _icon: {fileID: 21300000, guid: 014d2727d81c446daa0427157c231ad2, type: 3}
-    _description: 
-  - _title: Sabaton
+    _description: Whoever came up with the idea of adding hooks to shoes was a genius.
+  - _title: Boots
     _itemId: 1d36fe48-5251-40bb-8a36-79ce22f6461e
     _icon: {fileID: 21300000, guid: c4d7ed866c06c4315a58c6c40eaca8bf, type: 3}
-    _description: 
-  - _title: Boots
+    _description: For fast and silent walking.
+  - _title: High Boots
     _itemId: f0993fe5-51a5-4cf8-8e6e-9b653a52049b
     _icon: {fileID: 21300000, guid: 39f39503979b5419588a209ae5e6b7df, type: 3}
-    _description: 
-  - _title: Crocs
+    _description: Sneaking in them is difficult, but running is not. For example,
+      in pursuit of an enemy.
+  - _title: Gaiters
     _itemId: 668e5536-4adb-440c-b16e-5d9f6a34e2a1
     _icon: {fileID: 21300000, guid: 8c19a132e0e7e4d9aa0160452372b069, type: 3}
-    _description: 
-  - _title: Shoes
+    _description: Additional protection if greaves are not enough.
+  - _title: Solerets
     _itemId: 1c252863-cfb6-4b6b-a1c7-d857175b65f6
     _icon: {fileID: 21300000, guid: 381fe458f9ae04fb2afb49d6892ae8be, type: 3}
-    _description: 
+    _description: The choice of true knights. Blessed by the monks of the Celestial
+      Abode.
   - _title: ---LEGENDARY---
     _itemId: ---LEGENDARY---
     _icon: {fileID: 0}
@@ -430,13 +451,33 @@ MonoBehaviour:
     _itemId: 97ca9701-c7eb-49c0-8255-6079af427e4f
     _icon: {fileID: 21300000, guid: 4a2db37820395421dae12e2232a6c523, type: 3}
     _description: 
-  - _title: Mittens
+  - _title: Gauntlets
     _itemId: 0a13894f-4d16-4fcd-b8ca-b81559bebd5c
     _icon: {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
-    _description: 
-  - _title: Lats Mittens
+    _description: Not too comfortable, but great protection for hands.
+  - _title: Blessed Gauntlets
+    _itemId: 3caf353c-bb59-4dff-a738-492cd8555b58
+    _icon: {fileID: 21300000, guid: 3d838192c95cc43f3b91d99c1543919b, type: 3}
+    _description: They make a slight ringing sound with every movement.
+  - _title: Mitten Gauntlets
     _itemId: be6c839f-af33-406b-b9fb-2fc14a9fd087
     _icon: {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
+    _description: A single blow with such a glove will throw a person to the ground.
+  - _title: Cloak
+    _itemId: 4895059a-80f0-40dc-ab17-30ffeb872788
+    _icon: {fileID: 21300000, guid: a9d0ea84590a74a728167ec401a1577c, type: 3}
+    _description: Protects from both arrows and rain.
+  - _title: Jacket
+    _itemId: 3642a18a-0a46-4adc-9984-6cb281f65a5d
+    _icon: {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
+    _description: Both warm and safe. Just look how many pockets it has!
+  - _title: Pendant
+    _itemId: 187f8bdb-19ab-40c5-b1c3-4aff8427a980
+    _icon: {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
+    _description: Emerald drop in a gilded frame.
+  - _title: Champion belt
+    _itemId: c72678ee-62d3-417a-bc88-cff3c0cacb7c
+    _icon: {fileID: 21300000, guid: cc99504c7cf01490485176a9aa4e79d2, type: 3}
     _description: 
   _defaultIcon: {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
   _slotIcons:
