@@ -2842,8 +2842,6 @@ GameObject:
   - component: {fileID: 8770450386681067118}
   - component: {fileID: 2904052733925938043}
   - component: {fileID: 8097882388061225412}
-  - component: {fileID: 1137052722890403260}
-  - component: {fileID: 4753470293354129050}
   m_Layer: 0
   m_Name: MergeButtonBackground (2)
   m_TagString: Untagged
@@ -2908,69 +2906,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.69
---- !u!114 &1137052722890403260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4897733947380724112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 8097882388061225412}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4753470293354129050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4897733947380724112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 994051a89c6548b0a808bdf0fac723c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 1137052722890403260}
-  _text: {fileID: 3093705777795759606}
-  _activatableObjects: []
-  _unlockedViewObject: {fileID: 0}
-  _lockedViewObject: {fileID: 0}
-  _unlockedViewObjects: []
-  _lockedViewObjects: []
 --- !u!1 &4923897707540172174
 GameObject:
   m_ObjectHideFlags: 0
@@ -6939,7 +6874,7 @@ MonoBehaviour:
   _sortPanelView: {fileID: 7192994435967228137}
   _sortButtonView: {fileID: 1858624247183158789}
   _gameSettingsButtonView: {fileID: 4744091679167079050}
-  _mergeButtonView: {fileID: 4753470293354129050}
+  _mergeButtonView: {fileID: 2227818763160119055}
 --- !u!1 &5996307530175957628
 GameObject:
   m_ObjectHideFlags: 0
@@ -13689,6 +13624,7 @@ GameObject:
   - component: {fileID: 6804301914963253117}
   - component: {fileID: 6917191287374709162}
   - component: {fileID: 351265518798259001}
+  - component: {fileID: 2227818763160119055}
   m_Layer: 0
   m_Name: DarkMergeBackground (1)
   m_TagString: Untagged
@@ -13797,6 +13733,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2227818763160119055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792884012595717941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994051a89c6548b0a808bdf0fac723c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 351265518798259001}
+  _text: {fileID: 3093705777795759606}
+  _activatableObjects: []
+  _unlockedViewObject: {fileID: 0}
+  _lockedViewObject: {fileID: 0}
+  _unlockedViewObjects: []
+  _lockedViewObjects: []
 --- !u!1 &7960991387518793341
 GameObject:
   m_ObjectHideFlags: 0
@@ -14441,6 +14396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8cacc0dd03b147778ab672844e7bcea, type: 3}
+--- !u!224 &148841832452066862 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3445032785346090090, guid: a8cacc0dd03b147778ab672844e7bcea, type: 3}
+  m_PrefabInstance: {fileID: 3305639701798902340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4668162801047857265 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7860849113766605365, guid: a8cacc0dd03b147778ab672844e7bcea, type: 3}
@@ -14452,8 +14412,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881e8de377f84e0288781f8181310f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &148841832452066862 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3445032785346090090, guid: a8cacc0dd03b147778ab672844e7bcea, type: 3}
-  m_PrefabInstance: {fileID: 3305639701798902340}
-  m_PrefabAsset: {fileID: 0}
