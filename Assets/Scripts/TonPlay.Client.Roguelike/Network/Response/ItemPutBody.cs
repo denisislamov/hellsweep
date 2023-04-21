@@ -6,10 +6,4 @@ namespace TonPlay.Client.Roguelike.Network.Response
         public string slotId;
         public string userItemId;
     }
-    [System.Serializable]
-    public class ItemLevelUpPutBody 
-    {
-        public string id;
-        public bool isMax;
-    }
 }
