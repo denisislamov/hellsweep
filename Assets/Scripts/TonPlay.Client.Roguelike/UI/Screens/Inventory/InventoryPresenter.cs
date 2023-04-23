@@ -20,6 +20,8 @@ using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
+using TonPlay.Client.Roguelike.UI.Screens.Merge;
+using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -456,7 +458,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		private void OnMergeButtonClickHandler()
 		{
-			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
+			_uiService.Close(Context.Screen);
+			_uiService.Open<MergeScreen, IMergeScreenContext>(new MergeScreenContext());
 		}
 		
 		internal class Factory : PlaceholderFactory<IInventoryView, IInventoryScreenContext, InventoryPresenter>
