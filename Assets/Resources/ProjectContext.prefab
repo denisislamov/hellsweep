@@ -208,7 +208,7 @@ MonoBehaviour:
       items: []
   _itemPutBody:
     slotId: 
-    itemDetailId: 
+    userItemId: 
   _itemPutResponse:
     successful: 0
     response:
@@ -219,6 +219,10 @@ MonoBehaviour:
         name: 
         rarity: 
   _itemsGetResponse:
+    successful: 0
+    response:
+      items: []
+  _itemLevelRatesResponse:
     successful: 0
     response:
       items: []
@@ -270,6 +274,10 @@ MonoBehaviour:
     successful: 0
     response:
       items: []
+  _userInventoryResponse:
+    successful: 0
+    response:
+      blueprints: 0
   _userItemsResponse:
     successful: 0
     response:

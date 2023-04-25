@@ -10,6 +10,7 @@ using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
@@ -35,7 +36,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		private readonly ILocationConfig _locationConfig;
 		private readonly IRestApiClient _restApiClient;
 		private readonly ILocationConfigProvider _locationConfigProvider;
-
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		
 		public SingleMatch(
 			ILocationConfig locationConfig,
 			ISceneService sceneService,
@@ -44,7 +46,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			IProfileConfigProvider profileConfigProvider,
 			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient,
-			ILocationConfigProvider locationConfigProvider)
+			ILocationConfigProvider locationConfigProvider,
+			IAnalyticsServiceWrapper analyticsServiceWrapper)
 		{
 			_sceneService = sceneService;
 			_uiService = uiService;
@@ -54,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			_locationConfig = locationConfig;
 			_restApiClient = restApiClient;
 			_locationConfigProvider = locationConfigProvider;
+			_analyticsServiceWrapper = analyticsServiceWrapper;
 		}
 		
 		public async UniTask<bool> Launch()
@@ -149,6 +153,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			
 			profileModel.Update(profileData);
 			locationsModel.Update(locationsData);
+
+			_analyticsServiceWrapper.OnSingleMatchFinishSession(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value);
 			
 			return gameSessionResponse?.response;
 		}
