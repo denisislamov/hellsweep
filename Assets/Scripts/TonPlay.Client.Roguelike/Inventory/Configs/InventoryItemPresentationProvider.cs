@@ -91,9 +91,13 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		[SerializeField]
 		private string _description;
 		
+		[SerializeField]
+		private string _gradeDescription;
+		
 		public string ItemId => _itemId;
 		public Sprite Icon => _icon;
 		public string Description => _description;
 		public string Title => _title;
+		public string GradeDescription => _gradeDescription;
 	}
 }

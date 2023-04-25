@@ -9,5 +9,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		string Description { get; }
 		
 		string Title { get; }
+		
+		string GradeDescription { get; }
 	}
 }
