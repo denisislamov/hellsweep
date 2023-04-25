@@ -82,6 +82,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			UpdateBlueprintsPriceText(priceConfig);
 			UpdateEquipButtonLockState(config);
 			UpdateLevelUpButtonLockState(priceConfig, detailConfig);
+			
+			foreach (var grade in _inventoryItemsConfigProvider.GetInnerItemConfig(Context.Item.ItemId.Value).Grades)
+			{
+				Debug.Log(grade.ItemId + " " + grade.RarityName);
+			}
 		}
 		
 		private void UpdateLevelText(IInventoryItemDetailConfig detailConfig)

@@ -87,6 +87,7 @@ MonoBehaviour:
   _profileConfigProvider: {fileID: 11400000, guid: 1bbd6c8fc652e4521934d41ea33bf8a0, type: 2}
   _locationConfigProvider: {fileID: 11400000, guid: df60e11a4d8d640eaad6c80ba630748f, type: 2}
   _inventoryItemPresentationProvider: {fileID: 11400000, guid: ee0b74d0ec9b8433281a8bd2c22c3e96, type: 2}
+  _inventoryItemsConfigProvider: {fileID: 11400000, guid: d6832cbbd41174a19869039613cf7720, type: 2}
 --- !u!114 &9141338410627678188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,32 +184,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDebugToken: 1
-  _username: disadisa
+  _username: csharky
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
   _unitAllResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _skillAllResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _boostAllResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _locationAllResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _infoLevelAllResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _itemPutBody:
     slotId: 
-    itemDetailId: 
+    userItemId: 
   _itemPutResponse:
     successful: 0
     response:
@@ -218,10 +239,37 @@ MonoBehaviour:
         id: 
         name: 
         rarity: 
+    error:
+      code: 
+      description: 
+      message: 
+  _itemLevelUpPutBody:
+    id: 
+    isMax: 0
+  _itemLevelUpPutResponse:
+    successful: 0
+    response:
+      itemDetailId: 
+    error:
+      code: 
+      description: 
+      message: 
   _itemsGetResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
+  _itemLevelRatesResponse:
+    successful: 0
+    response:
+      items: []
+    error:
+      code: 
+      description: 
+      message: 
   _gameSessionResponse:
     successful: 0
     response:
@@ -233,6 +281,10 @@ MonoBehaviour:
         coin: 0
         energy: 0
         chests: []
+    error:
+      code: 
+      description: 
+      message: 
   _gamePropertiesResponse:
     successful: 0
     response:
@@ -242,11 +294,19 @@ MonoBehaviour:
           MusicVolume: 0
           ScreenGameStick: 0
           VisualizeDamage: 0
+    error:
+      code: 
+      description: 
+      message: 
   _userXpResponse:
     successful: 0
     response:
       level: 0
       xp: 0
+    error:
+      code: 
+      description: 
+      message: 
   _userSummaryResponse:
     successful: 0
     response:
@@ -266,20 +326,48 @@ MonoBehaviour:
         coin: 0
         energy: 0
         energyMax: 0
+    error:
+      code: 
+      description: 
+      message: 
   _userSlotsResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
+  _userInventoryResponse:
+    successful: 0
+    response:
+      blueprints: 0
+    error:
+      code: 
+      description: 
+      message: 
   _userItemsResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
   _userBalanceResponse:
     successful: 0
     response:
       coin: 0
       energy: 0
+    error:
+      code: 
+      description: 
+      message: 
   _userLocationsResponse:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 

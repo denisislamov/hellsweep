@@ -1,0 +1,319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051e15b7e88948749c0152a9745d915d, type: 3}
+  m_Name: InventoryItemsConfigProvider
+  m_EditorClassIdentifier: 
+  _items:
+  - _innerItemId: lightchaser
+    _itemGrades:
+    - _itemId: 18689dfb-fd19-4efb-b1f2-c2ca27feb339
+      _rarityName: 3
+  - _innerItemId: katana
+    _itemGrades:
+    - _itemId: bae7a647-359a-4bb5-ae6b-7181a616cf7f
+      _rarityName: 0
+    - _itemId: 8c26a50f-936e-4e21-b5f0-f804b7c9d58c
+      _rarityName: 1
+    - _itemId: f8cd0977-1d17-4465-8b93-afc61b0a0755
+      _rarityName: 2
+    - _itemId: fffa4a86-8df8-4f6a-9431-514af8163e2b
+      _rarityName: 3
+  - _innerItemId: crossbow
+    _itemGrades:
+    - _itemId: ac3c85df-3833-4306-bb40-0f79adc4f3e9
+      _rarityName: 0
+    - _itemId: 8210965a-fc6c-4228-94d7-d8faf226aac6
+      _rarityName: 1
+    - _itemId: 495f6bce-252c-4689-a33e-89847da9ab36
+      _rarityName: 2
+    - _itemId: 97ca9701-c7eb-49c0-8255-6079af427e4f
+      _rarityName: 3
+  - _innerItemId: bow
+    _itemGrades:
+    - _itemId: 66339f94-da17-48e2-b35a-4dab039d1626
+      _rarityName: 0
+    - _itemId: cc54a750-b790-4888-8603-f292e16c16d4
+      _rarityName: 1
+    - _itemId: 575e605d-637d-428e-98ce-6c6ed58d4b8e
+      _rarityName: 2
+    - _itemId: c9060a0e-8a2b-49dd-8e37-3cad6856ed1d
+      _rarityName: 3
+  - _innerItemId: kanabo
+    _itemGrades:
+    - _itemId: b60b2a0b-18af-414d-8b81-c19705201d68
+      _rarityName: 0
+    - _itemId: d0957a7c-65e9-4401-8eb6-6ebb8f738f0a
+      _rarityName: 1
+    - _itemId: 83ef34f9-9d2a-4d5b-988a-1807c1752630
+      _rarityName: 2
+    - _itemId: 59605a0c-e22f-4786-98d1-7f7b803b0d18
+      _rarityName: 3
+  - _innerItemId: shuriken
+    _itemGrades:
+    - _itemId: 78af8a73-1fc5-4ac2-8684-b1c2ae0ef9c6
+      _rarityName: 0
+    - _itemId: f2ffae76-f563-4d52-ae69-bf4a73b61b08
+      _rarityName: 1
+    - _itemId: 5ad89519-5b4f-465f-ad87-df3e06d48d8e
+      _rarityName: 2
+    - _itemId: 3bcee08a-a60c-4b0d-89ce-55c8dd91f1ba
+      _rarityName: 3
+  - _innerItemId: wraps
+    _itemGrades:
+    - _itemId: 53934035-6afb-4587-aa3d-babf0c8b5406
+      _rarityName: 0
+    - _itemId: f34c289a-65c0-4ec9-b6e5-43973dc89e85
+      _rarityName: 1
+    - _itemId: 046ebd63-3fd7-4430-a7ae-4fa4d2da076b
+      _rarityName: 2
+    - _itemId: d87d5ff5-a995-487a-9087-33f15dce3a1e
+      _rarityName: 3
+  - _innerItemId: leather_gauntlets
+    _itemGrades:
+    - _itemId: 4eeda7c6-d4a1-4784-b2fd-5a1a6d9d23a7
+      _rarityName: 0
+    - _itemId: 3a95aaa7-9640-427e-a238-b9755ca05fad
+      _rarityName: 1
+    - _itemId: e5917e13-ada2-4ed5-b35d-fe0cfeaf7018
+      _rarityName: 2
+    - _itemId: 1398b49b-8edd-4a9d-845c-e4ba490b2043
+      _rarityName: 3
+  - _innerItemId: gauntlets
+    _itemGrades:
+    - _itemId: 1d444f74-1ab2-4984-ae32-b6d560db496f
+      _rarityName: 0
+    - _itemId: ed7a3dce-0bf5-4b75-9ffc-0a0863e4fc0b
+      _rarityName: 1
+    - _itemId: d85012d5-57ea-4701-9175-12105f75ed9d
+      _rarityName: 2
+    - _itemId: 0a13894f-4d16-4fcd-b8ca-b81559bebd5c
+      _rarityName: 3
+  - _innerItemId: blessed_gauntlets
+    _itemGrades:
+    - _itemId: 5880f55e-7538-4fac-b9bd-fa0c2ea72483
+      _rarityName: 0
+    - _itemId: d0ab8444-4407-4ec5-bc43-58d42c9172ff
+      _rarityName: 1
+    - _itemId: 3b284078-2569-4f3a-8100-7d725e22aea7
+      _rarityName: 2
+    - _itemId: 3caf353c-bb59-4dff-a738-492cd8555b58
+      _rarityName: 3
+  - _innerItemId: mitten_gauntlets
+    _itemGrades:
+    - _itemId: 9eb7569e-a641-4dc7-8ca4-dcce87ab0cdd
+      _rarityName: 0
+    - _itemId: 3df30146-a1da-4f69-8eae-24a2d740dd9d
+      _rarityName: 1
+    - _itemId: 96bf5be2-dff9-4c7f-ba70-1f79ed2dab30
+      _rarityName: 2
+    - _itemId: be6c839f-af33-406b-b9fb-2fc14a9fd087
+      _rarityName: 3
+  - _innerItemId: plate_armour
+    _itemGrades:
+    - _itemId: 317f13fd-82fe-4b84-9768-ae4644273952
+      _rarityName: 0
+    - _itemId: 87ea249d-a0cf-4701-bb94-e7c2af168a21
+      _rarityName: 1
+    - _itemId: 80f2c9ab-ece8-4854-a552-04d9ffb4894c
+      _rarityName: 2
+    - _itemId: 296e9d91-acf7-470a-a9f8-ad9725e52dfc
+      _rarityName: 3
+  - _innerItemId: cloak
+    _itemGrades:
+    - _itemId: 201fb3bd-3e51-4161-9223-82cdcd0f3a0f
+      _rarityName: 0
+    - _itemId: 2cb4a624-94b7-457d-96ae-65cc191b9a00
+      _rarityName: 1
+    - _itemId: 4807706c-9772-476f-8513-91538b87ade9
+      _rarityName: 2
+    - _itemId: 4895059a-80f0-40dc-ab17-30ffeb872788
+      _rarityName: 3
+  - _innerItemId: jacket
+    _itemGrades:
+    - _itemId: 62b5cb3c-4101-4d24-a223-a08e57d4d91d
+      _rarityName: 0
+    - _itemId: ccc6f110-0c0c-4119-b1c8-7c9698533620
+      _rarityName: 1
+    - _itemId: 699c1fbb-423e-45d9-8220-54fcc8721738
+      _rarityName: 2
+    - _itemId: 3642a18a-0a46-4adc-9984-6cb281f65a5d
+      _rarityName: 3
+  - _innerItemId: chain_mail
+    _itemGrades:
+    - _itemId: 7269d629-582e-4260-b1f9-a211168931f5
+      _rarityName: 0
+    - _itemId: 9e9d3ae5-5d3c-427b-bf12-081ed3ca7646
+      _rarityName: 1
+    - _itemId: bb06a7e4-7e2f-4f36-b2e4-3241f2ca9359
+      _rarityName: 2
+    - _itemId: a1808bf7-9e3c-42bf-b5a0-524d0bb4c8b7
+      _rarityName: 3
+  - _innerItemId: shirt
+    _itemGrades:
+    - _itemId: 036c9151-22ef-4ee1-b650-c03558e1a74f
+      _rarityName: 0
+    - _itemId: 2b935693-e97e-4eae-bb01-641f2f03d572
+      _rarityName: 1
+    - _itemId: 3b8c19b5-1a73-4529-bdb1-dd15c3729626
+      _rarityName: 2
+    - _itemId: 3471305e-2aaf-47a4-b90e-a511c22a0b1e
+      _rarityName: 3
+  - _innerItemId: rosary
+    _itemGrades:
+    - _itemId: 24fd1e54-a963-4d9d-aa9f-c7da28078305
+      _rarityName: 0
+    - _itemId: 13a79254-5f26-4b63-9cb9-4a0ae0da8fc1
+      _rarityName: 1
+    - _itemId: a8964da7-ff43-4abd-b02d-0fa8d78e5ab5
+      _rarityName: 2
+    - _itemId: 97b58795-f471-4d48-9fcb-f7830b1280c2
+      _rarityName: 3
+  - _innerItemId: necklace
+    _itemGrades:
+    - _itemId: 9c7b5190-d660-41b7-9263-5fd2011351e6
+      _rarityName: 0
+    - _itemId: 4d6fcc82-d08a-4ff6-906a-0d48d0cb2412
+      _rarityName: 1
+    - _itemId: f20b85af-dab2-419c-a83b-d44eb591abcb
+      _rarityName: 2
+    - _itemId: 00e85199-5ba7-4ec1-a557-2c9b31ae6123
+      _rarityName: 3
+  - _innerItemId: pendant
+    _itemGrades:
+    - _itemId: a66bbfa6-2372-45e9-bbd7-3e1d6d5f59f0
+      _rarityName: 0
+    - _itemId: e424731c-1d91-4daa-908c-d693b2bbc11d
+      _rarityName: 1
+    - _itemId: 6c947aae-05e4-4e94-88c1-1021281c5ad6
+      _rarityName: 2
+    - _itemId: 187f8bdb-19ab-40c5-b1c3-4aff8427a980
+      _rarityName: 3
+  - _innerItemId: gorget
+    _itemGrades:
+    - _itemId: 1142e798-d682-4d5e-a9f1-1476b63b48f4
+      _rarityName: 0
+    - _itemId: 05e20f73-631a-4461-bfef-f19a533dc3a5
+      _rarityName: 1
+    - _itemId: ac697bae-e0a5-47bf-93c3-01378e867055
+      _rarityName: 2
+    - _itemId: e167601a-4ac7-4379-a140-94edcc3dfcba
+      _rarityName: 3
+  - _innerItemId: cross
+    _itemGrades:
+    - _itemId: 071944f6-9c00-4f72-ab96-f3861c2bd2d7
+      _rarityName: 0
+    - _itemId: 0061e474-a6c2-4180-a009-4fde1c98651d
+      _rarityName: 1
+    - _itemId: bae6aeaf-d9ce-4698-b79b-5f09885393fd
+      _rarityName: 2
+    - _itemId: e7a2ff29-0703-42cf-961f-d2db7d57cd54
+      _rarityName: 3
+  - _innerItemId: girdle
+    _itemGrades:
+    - _itemId: 555105dd-df07-4d51-8b2e-54225756691f
+      _rarityName: 0
+    - _itemId: d4e7f785-526c-48e7-a68a-c4c104f3af86
+      _rarityName: 1
+    - _itemId: ce69a347-06a3-454f-9b73-47dfcd8dcca8
+      _rarityName: 2
+    - _itemId: 0ea77b27-8dc1-4f4d-a7c7-bdc859a2376b
+      _rarityName: 3
+  - _innerItemId: belt
+    _itemGrades:
+    - _itemId: 66f289a1-b44e-4f44-b76b-90d10bed4015
+      _rarityName: 0
+    - _itemId: 9236df41-462d-4eb5-b091-73fdd5491b0e
+      _rarityName: 1
+    - _itemId: 60e71db5-7d91-4353-9880-02e5162e4f16
+      _rarityName: 2
+    - _itemId: 79c86799-d146-4aa7-808d-be6306cd5d1d
+      _rarityName: 3
+  - _innerItemId: sash
+    _itemGrades:
+    - _itemId: c308cdbc-bfe1-4ee5-aa2c-8487e2ac9027
+      _rarityName: 0
+    - _itemId: 0d099712-456b-4fa5-af43-5150ea0e26e2
+      _rarityName: 1
+    - _itemId: 1db90d4d-f648-47e2-91d0-03edc6eb414d
+      _rarityName: 2
+    - _itemId: 0d376dc9-61b9-4f3d-9435-6b7cb48b1c3b
+      _rarityName: 3
+  - _innerItemId: champion_belt
+    _itemGrades:
+    - _itemId: 3b268836-48fc-4cf4-b3f7-7e309925a464
+      _rarityName: 0
+    - _itemId: df9963c2-5a05-4af2-bff7-ed4e0854ba2f
+      _rarityName: 1
+    - _itemId: e903d890-8cbd-4cf5-9098-634f1b8d6fd8
+      _rarityName: 2
+    - _itemId: c72678ee-62d3-417a-bc88-cff3c0cacb7c
+      _rarityName: 3
+  - _innerItemId: ceinture
+    _itemGrades:
+    - _itemId: 61a6655a-60fe-4403-8050-3ea9e21781aa
+      _rarityName: 0
+    - _itemId: c1f7d111-5fb1-43f5-81eb-18726a600233
+      _rarityName: 1
+    - _itemId: f296ea5d-71ef-4ef9-89a3-693a538f8651
+      _rarityName: 2
+    - _itemId: 8f742754-0a5a-4777-88a0-314063e7d77c
+      _rarityName: 3
+  - _innerItemId: solerets
+    _itemGrades:
+    - _itemId: f0eea396-b730-4bca-bc7c-3f53aaad7478
+      _rarityName: 0
+    - _itemId: 63c991b5-8bfc-4c02-b4cb-d811d6869684
+      _rarityName: 1
+    - _itemId: 1c252863-cfb6-4b6b-a1c7-d857175b65f6
+      _rarityName: 2
+    - _itemId: af586dc5-2a68-402e-9289-df08c2541de7
+      _rarityName: 3
+  - _innerItemId: claws
+    _itemGrades:
+    - _itemId: f1c737b9-beb0-49a0-be2e-524bbb0c62c1
+      _rarityName: 0
+    - _itemId: 0754b1d8-ef9d-433c-bdea-16111ac80842
+      _rarityName: 1
+    - _itemId: f64942d5-dc41-4b53-a0c2-8d64b9db4d7d
+      _rarityName: 2
+    - _itemId: ef469d4a-6a33-490c-96a4-bbc5322436b0
+      _rarityName: 3
+  - _innerItemId: high_boots
+    _itemGrades:
+    - _itemId: d1ee7c3b-cef5-4801-8660-e0d62cd6d0c0
+      _rarityName: 0
+    - _itemId: 390d3412-0e35-47d1-994c-8550557ab13a
+      _rarityName: 1
+    - _itemId: f0993fe5-51a5-4cf8-8e6e-9b653a52049b
+      _rarityName: 2
+    - _itemId: 754c37f3-30fc-4abc-a24c-15384c06e55e
+      _rarityName: 3
+  - _innerItemId: gaiters
+    _itemGrades:
+    - _itemId: 27b351c3-82cc-4dbd-bd14-227f6b70d5e4
+      _rarityName: 0
+    - _itemId: 19d5a269-b382-4682-9d8a-a34c5dc818a8
+      _rarityName: 1
+    - _itemId: 668e5536-4adb-440c-b16e-5d9f6a34e2a1
+      _rarityName: 2
+    - _itemId: 5a5aa8dd-574e-46bd-83a1-91b5df4fc591
+      _rarityName: 3
+  - _innerItemId: boots
+    _itemGrades:
+    - _itemId: 236de172-7a00-4481-9cf6-a98ac2b1eaf0
+      _rarityName: 0
+    - _itemId: 77ab7ab6-8d0f-4bbe-b5a6-f4b4c702d053
+      _rarityName: 1
+    - _itemId: 1d36fe48-5251-40bb-8a36-79ce22f6461e
+      _rarityName: 2
+    - _itemId: f780be13-c89f-4740-8e5f-f3195ddb3819
+      _rarityName: 3

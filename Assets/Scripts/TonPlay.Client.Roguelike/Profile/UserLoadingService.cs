@@ -9,6 +9,7 @@ using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Profile
 {
@@ -130,6 +131,8 @@ namespace TonPlay.Client.Roguelike.Profile
 			for (var i = 0; i < itemsResponse.response.items.Count; i++)
 			{
 				var itemData = itemsResponse.response.items[i];
+				var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemData.itemId);
+				
 				data.Items.Add(new InventoryItemData()
 				{
 					Id = itemData.id,

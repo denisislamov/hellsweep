@@ -4,6 +4,6 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs
 	{
 		ATTACK,
 		HEALTH,
-		ARMOR
+		ARMOR,
 	}
 }

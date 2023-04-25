@@ -24,6 +24,9 @@ namespace TonPlay.Client.Roguelike.Installers
 
 		[SerializeField]
 		private InventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		
+		[SerializeField]
+		private InventoryItemsConfigProvider _inventoryItemsConfigProvider;
 
 		public override void InstallBindings()
 		{
@@ -42,10 +45,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.Bind<IProfileConfigProvider>().FromInstance(runtimeProfileConfigProvider).AsSingle();
 			Container.Bind<IProfileConfigProviderUpdater>().FromInstance(runtimeProfileConfigProvider).AsSingle();
 
-			var itemsConfigProvider = new InventoryItemsConfigProvider();
-			var itemsConfigUpdater = new InventoryItemsConfigUpdater(itemsConfigProvider);
-
-			Container.Bind<IInventoryItemsConfigProvider>().FromInstance(itemsConfigProvider).AsSingle();
+			var itemsConfigUpdater = new InventoryItemsConfigUpdater(_inventoryItemsConfigProvider);
+			Container.Bind<IInventoryItemsConfigProvider>().FromInstance(_inventoryItemsConfigProvider).AsSingle();
 			Container.Bind<IInventoryItemsConfigUpdater>().FromInstance(itemsConfigUpdater).AsSingle();
 
 			var inventoryItemPresentationProvider = Instantiate(_inventoryItemPresentationProvider);
