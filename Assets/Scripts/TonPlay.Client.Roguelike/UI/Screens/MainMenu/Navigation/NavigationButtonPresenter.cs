@@ -7,7 +7,7 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 {
-	internal class NavigationButtonPresenter : Presenter<INavigationButtonView, INavigationButtonContext>
+	public class NavigationButtonPresenter : Presenter<INavigationButtonView, INavigationButtonContext>
 	{
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 
@@ -53,7 +53,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 			Presenters.Add(presenter);
 		}
 
-		internal class Factory : PlaceholderFactory<INavigationButtonView, INavigationButtonContext, NavigationButtonPresenter>
+		public class Factory : PlaceholderFactory<INavigationButtonView, INavigationButtonContext, NavigationButtonPresenter>
 		{
 		}
 	}

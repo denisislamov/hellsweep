@@ -13,7 +13,7 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 {
-	internal class NavigationMenuPresenter : Presenter<INavigationMenuView, INavigationMenuContext>
+	public class NavigationMenuPresenter : Presenter<INavigationMenuView, INavigationMenuContext>
 	{
 		private readonly IUIService _uiService;
 		private readonly NavigationButtonPresenter.Factory _navigationButtonPresenterFactory;
@@ -84,8 +84,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 			_uiService.Close(Context.Screen);
 			_uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
 		}
-		
-		internal class Factory : PlaceholderFactory<INavigationMenuView, INavigationMenuContext, NavigationMenuPresenter>
+
+		public class Factory : PlaceholderFactory<INavigationMenuView, INavigationMenuContext, NavigationMenuPresenter>
 		{
 		}
 	}

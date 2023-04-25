@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: MergeScreenInstaller
   m_EditorClassIdentifier: 
   _screen: {fileID: 3594827216355291081, guid: fef144dd2a8b812438240c61ed49a0b9, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}
+  _prefab: {fileID: 7751181822353944667, guid: 1472f13a5218b4b8ca00336d90352557, type: 3}
