@@ -13,6 +13,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces
 		IButtonView UpgradeButtonView { get; }
 		
 		IButtonView MaxLevelButtonView { get; }
+		
+		IInventoryItemGradeDescriptionView UncommonGradeDescriptionView { get; }
+		
+		IInventoryItemGradeDescriptionView RareGradeDescriptionView { get; }
+		
+		IInventoryItemGradeDescriptionView LegendaryGradeDescriptionView { get; }
 
 		void SetAttributeValueText(string text);
 
@@ -35,5 +41,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces
 		void SetGoldPriceText(string text);
 
 		void SetBlueprintsPriceText(string text);
+
+		void UpdateGradeLayout();
+		
+		void SetGradeLayoutActiveState(bool state);
 	}
 }

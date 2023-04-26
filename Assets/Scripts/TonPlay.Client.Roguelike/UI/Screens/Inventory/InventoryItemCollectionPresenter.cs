@@ -1,3 +1,4 @@
+using System;
 using TonPlay.Client.Common.Network.Interfaces;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
@@ -50,9 +51,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			for (var i = 0; i < Context.Items.Count; i++)
 			{
 				var item = Context.Items[i].Model;
-				var itemId = item.ItemId.Value;
-				var config = _itemsConfigProvider.Get(itemId);
-				var presentation = _itemPresentationProvider.GetItemPresentation(itemId);
+				var userItemId = item.Id;
+				var itemId = item.ItemId;
+				var config = _itemsConfigProvider.Get(itemId.Value);
+				var presentation = _itemPresentationProvider.GetItemPresentation(itemId.Value);
 				var icon = presentation?.Icon ? presentation.Icon : _itemPresentationProvider.DefaultItemIcon;
 				var slotIcon = _itemPresentationProvider.GetSlotIcon(config.SlotName);
 				var itemEquippedState = Context.Items[i].EquippedState;
@@ -60,7 +62,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradientMaterial);
 
 				var itemView = Add();
-				var context = CreateItemContext(itemId, icon, slotIcon, mainColor, backgroundGradientMaterial, itemEquippedState, config, item);
+				var context = CreateItemContext(
+					userItemId, 
+					icon, 
+					slotIcon, 
+					mainColor, 
+					backgroundGradientMaterial, 
+					itemEquippedState, 
+					config, 
+					item);
 				var presenter = _itemPresenterFactory.Create(
 					itemView,
 					context);
@@ -72,7 +82,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		}
 
 		private InventoryItemContext CreateItemContext(
-			string itemId, 
+			IReadOnlyReactiveProperty<string> userItemId, 
 			Sprite icon,
 			Sprite slotIcon, 
 			Color mainColor, 
@@ -81,13 +91,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			IInventoryItemConfig config,
 			IInventoryItemModel item)
 			=> new InventoryItemContext(
-				itemId,
+				userItemId,
 				icon,
 				slotIcon,
 				mainColor,
 				backgroundGradientMaterial,
 				config.Name,
-				config.GetDetails(item.DetailId.Value).Level,
 				isEquipped: isEquipped,
 				() => Context.ItemClickCallback?.Invoke(item));
 

@@ -7,9 +7,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 {
 	public interface IInventoryItemContext : IScreenContext
 	{
-		string Id { get; }
+		IReadOnlyReactiveProperty<string> UserItemId { get; }
 		string Name { get; }
-		ushort Level { get; }
 		Sprite Icon { get; }
 		Sprite SlotIcon { get; }
 		Color MainColor { get; }

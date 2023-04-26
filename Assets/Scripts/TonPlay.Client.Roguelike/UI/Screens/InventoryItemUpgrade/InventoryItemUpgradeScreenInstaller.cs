@@ -44,6 +44,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 				IInventoryItemUpgradeScreenContext, 
 				InventoryItemUpgradePresenter, 
 				InventoryItemUpgradePresenter.Factory>();
+			
+			subContainer.BindFactory<
+				IInventoryItemGradeDescriptionView, 
+				IInventoryItemGradeDescriptionContext, 
+				InventoryItemGradeDescriptionPresenter, 
+				InventoryItemGradeDescriptionPresenter.Factory>();
 		}
 	}
 }

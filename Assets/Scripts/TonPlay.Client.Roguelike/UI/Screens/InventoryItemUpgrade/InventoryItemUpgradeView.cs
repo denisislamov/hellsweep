@@ -54,11 +54,26 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		
 		[SerializeField]
 		private Image[] _rarityPanels;
+		
+		[SerializeField] 
+		private InventoryItemGradeDescriptionView _uncommonGradeDescriptionView;
+		
+		[SerializeField] 
+		private InventoryItemGradeDescriptionView _rareGradeDescriptionView;
+		
+		[SerializeField] 
+		private InventoryItemGradeDescriptionView _legendaryGradeDescriptionView;
+		
+		[SerializeField]
+		private LayoutGroup _gradesLayout;
 
 		public IButtonView CloseButtonView => _closeButtonView;
 		public IButtonView EquipButtonView => _equipButtonView;
 		public IButtonView UpgradeButtonView => _nextLevelUpgradeButtonView;
 		public IButtonView MaxLevelButtonView => _maxLevelUpgradeButtonView;
+		public IInventoryItemGradeDescriptionView UncommonGradeDescriptionView => _uncommonGradeDescriptionView;
+		public IInventoryItemGradeDescriptionView RareGradeDescriptionView => _rareGradeDescriptionView;
+		public IInventoryItemGradeDescriptionView LegendaryGradeDescriptionView => _legendaryGradeDescriptionView;
 
 		public void SetAttributeValueText(string text)
 		{
@@ -116,6 +131,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		public void SetBlueprintsPriceText(string text)
 		{
 			_drawingPriceText.SetText(text);
+		}
+		
+		public void UpdateGradeLayout()
+		{
+			LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) _gradesLayout.transform);
+		}
+		
+		public void SetGradeLayoutActiveState(bool state)
+		{
+			_gradesLayout.enabled = state;
 		}
 	}
 }

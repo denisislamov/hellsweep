@@ -8,11 +8,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 {
 	public class InventoryItemContext : ScreenContext, IInventoryItemContext
 	{
-		public string Id { get; }
+		public IReadOnlyReactiveProperty<string> UserItemId { get; }
 		
 		public string Name { get; }
-		public ushort Level { get; }
-
 		public Sprite Icon { get; }
 		public Sprite SlotIcon { get; }
 
@@ -25,22 +23,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public Action ClickCallback { get; }
 
 		public InventoryItemContext(
-			string id, 
+			IReadOnlyReactiveProperty<string> userItemId, 
 			Sprite icon, 
 			Sprite slotIcon, 
 			Color mainColor, 
 			Material backgroundGradientMaterial, 
 			string name, 
-			ushort level, 
 			IReadOnlyReactiveProperty<bool> isEquipped,
 			Action clickCallback)
 		{
-			Id = id;
+			UserItemId = userItemId;
 			Icon = icon;
 			MainColor = mainColor;
 			BackgroundGradientMaterial = backgroundGradientMaterial;
 			Name = name;
-			Level = level;
 			IsEquipped = isEquipped;
 			SlotIcon = slotIcon;
 			ClickCallback = clickCallback;

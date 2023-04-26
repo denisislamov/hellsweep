@@ -26,9 +26,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		private readonly InventoryItemGradeDescriptionPresenter.Factory _gradeDescriptionPresenterFactory;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
-		
+
 		private readonly ReactiveProperty<bool> _equipButtonLockState = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<string> _equipButtonText = new ReactiveProperty<string>();
 
@@ -43,7 +44,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			IMetaGameModelProvider metaGameModelProvider,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
-			IInventoryItemPresentationProvider inventoryItemPresentationProvider)
+			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
+			InventoryItemGradeDescriptionPresenter.Factory gradeDescriptionPresenterFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -52,11 +54,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
+			_gradeDescriptionPresenterFactory = gradeDescriptionPresenterFactory;
 
 			InitView();
+			
 			AddCloseButtonPresenter();
 			AddEquipButtonPresenter();
 			AddUpgradeButtonPresenter();
+			AddMaxUpgradeButtonPresenter();
+			
+			AddGradeDescriptionPresenters();
 		}
 
 		private void InitView()
@@ -66,7 +73,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var priceConfig = _inventoryItemsConfigProvider.GetUpgradePrice(detailConfig.Level);
 			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(Context.Item.ItemId.Value);
 			var defaultItemIcon = _inventoryItemPresentationProvider.DefaultItemIcon;
-			
+
 			_inventoryItemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradient);
 
 			View.SetDescriptionText(presentation?.Description);
@@ -75,23 +82,47 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			View.SetRarityText(config.Rarity.ToString().ToLower().FirstCharToUpper());
 			View.SetRarityColor(mainColor);
 			View.SetItemBackgroundGradientMaterial(backgroundGradient);
-			
+
 			UpdateAttributeValueText(detailConfig);
 			UpdateLevelText(detailConfig);
 			UpdateGoldPriceText(priceConfig);
 			UpdateBlueprintsPriceText(priceConfig);
 			UpdateEquipButtonLockState(config);
 			UpdateLevelUpButtonLockState(priceConfig, detailConfig);
-			
-			foreach (var innerItemGradeConfig in _inventoryItemsConfigProvider.GetInnerItemConfig(Context.Item.ItemId.Value).Grades)
-			{
-				var innerItemConfig = _inventoryItemsConfigProvider.Get(innerItemGradeConfig.ItemId);
-				var innerItemPresentationConfig = _inventoryItemPresentationProvider.GetItemPresentation(innerItemConfig.Id);
-				
-				Debug.Log(innerItemPresentationConfig.GradeDescription);
-			}
+			UpdateMaxLevelUpButtonLockState(priceConfig, detailConfig);
 		}
 		
+		private void AddGradeDescriptionPresenters()
+		{
+			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
+			AddGradeDescriptionPresenter(config.Rarity, RarityName.UNCOMMON, View.UncommonGradeDescriptionView);
+			AddGradeDescriptionPresenter(config.Rarity, RarityName.RARE, View.RareGradeDescriptionView);
+			AddGradeDescriptionPresenter(config.Rarity, RarityName.LEGENDARY, View.LegendaryGradeDescriptionView);
+		
+			View.UpdateGradeLayout();
+			View.UpdateGradeLayout();
+			View.UpdateGradeLayout();
+		}
+		
+		private void AddGradeDescriptionPresenter(
+			RarityName userItemRarityName, 
+			RarityName gradeDescriptionRarityName, 
+			IInventoryItemGradeDescriptionView gradeDescriptionView)
+		{
+			var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(Context.Item.ItemId.Value);
+			if (innerItemConfig.GetGradeConfig(gradeDescriptionRarityName) is null)
+			{
+				gradeDescriptionView.Hide();
+				return;
+			}
+
+			var presenter = _gradeDescriptionPresenterFactory.Create(
+				gradeDescriptionView,
+				new InventoryItemGradeDescriptionContext(Context.Item.ItemId.Value, userItemRarityName, gradeDescriptionRarityName));
+			
+			Presenters.Add(presenter);
+		}
+
 		private void UpdateLevelText(IInventoryItemDetailConfig detailConfig)
 		{
 			View.SetLevelText($"Lv. {detailConfig.Level}");
@@ -101,10 +132,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		{
 			View.SetAttributeValueText($"+{detailConfig.Value}");
 		}
-		
+
 		private void UpdateLevelUpButtonLockState(IInventoryItemUpgradePriceConfig priceConfig, IInventoryItemDetailConfig itemDetailConfig)
 		{
 			_upgradeButtonLockState.SetValueAndForceNotify(!CanUpgrade(priceConfig, itemDetailConfig));
+		}
+		
+		private void UpdateMaxLevelUpButtonLockState(IInventoryItemUpgradePriceConfig priceConfig, IInventoryItemDetailConfig itemDetailConfig)
+		{
+			_maxLevelButtonLockState.SetValueAndForceNotify(!CanUpgrade(priceConfig, itemDetailConfig));
 		}
 
 		private void UpdateEquipButtonLockState(IInventoryItemConfig config)
@@ -127,10 +163,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var presenter = _buttonPresenterFactory.Create(
 				View.CloseButtonView,
 				new CompositeButtonContext().Add(new ClickableButtonContext(CloseButtonClickHandler)));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddEquipButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(
@@ -139,18 +175,29 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 				   .Add(new ClickableButtonContext(EquipButtonClickHandler))
 				   .Add(new TextButtonContext(GetEquipButtonText()))
 				   .Add(new ReactiveLockButtonContext(_equipButtonLockState)));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddUpgradeButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(
 				View.UpgradeButtonView,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(UpgradeButtonClickHandler))
+				   .Add(new ClickableButtonContext(() => UpgradeButtonClickHandler(false)))
 				   .Add(new ReactiveLockButtonContext(_upgradeButtonLockState)));
-			
+
+			Presenters.Add(presenter);
+		}
+		
+		private void AddMaxUpgradeButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(
+				View.MaxLevelButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(() => UpgradeButtonClickHandler(true)))
+				   .Add(new ReactiveLockButtonContext(_maxLevelButtonLockState)));
+
 			Presenters.Add(presenter);
 		}
 
@@ -164,10 +211,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			Context.EquipButtonCallback?.Invoke(Context.Item);
 			ClosePopup();
 		}
-		
-		private async void UpgradeButtonClickHandler()
+
+		private async void UpgradeButtonClickHandler(bool isMax)
 		{
-			var response = await _restApiClient.PutItemLevelUp(Context.Item.Id.Value, false);
+			var response = await _restApiClient.PutItemLevelUp(Context.Item.Id.Value, isMax);
 
 			if (!response.successful)
 			{
@@ -178,24 +225,24 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
 			var previousDetailConfig = config.GetDetails(Context.Item.DetailId.Value);
 			var paidUpgradePrice = _inventoryItemsConfigProvider.GetUpgradePrice(previousDetailConfig.Level);
-			
+
 			var itemModel = Context.Item;
 			var itemData = itemModel.ToData();
 			itemData.DetailId = response.response.itemDetailId;
 			itemModel.Update(itemData);
-			
+
 			var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
-			
+
 			var balanceData = balanceModel.ToData();
 			var inventoryData = inventoryModel.ToData();
-			
+
 			balanceData.Gold -= paidUpgradePrice.Coins;
 			inventoryData.Blueprints -= paidUpgradePrice.Blueprints;
-			
+
 			balanceModel.Update(balanceData);
 			inventoryModel.Update(inventoryData);
-			
+
 			var currentDetailConfig = config.GetDetails(Context.Item.DetailId.Value);
 			var currentUpgradePrice = _inventoryItemsConfigProvider.GetUpgradePrice(previousDetailConfig.Level);
 
@@ -205,18 +252,19 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			UpdateBlueprintsPriceText(currentUpgradePrice);
 			UpdateEquipButtonLockState(config);
 			UpdateLevelUpButtonLockState(currentUpgradePrice, currentDetailConfig);
+			UpdateMaxLevelUpButtonLockState(currentUpgradePrice, currentDetailConfig);
 		}
 
 		private void CloseButtonClickHandler()
 		{
 			ClosePopup();
 		}
-		
+
 		private void ClosePopup()
 		{
 			_uiService.Close(Context.Screen);
 		}
-		
+
 		private bool CanUpgrade(IInventoryItemUpgradePriceConfig priceConfig, IInventoryItemDetailConfig detailConfig)
 		{
 			var model = _metaGameModelProvider.Get();
@@ -230,23 +278,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		{
 			var currentCoins = _metaGameModelProvider.Get().ProfileModel.BalanceModel.Gold.Value;
 			var enoughCoins = currentCoins >= priceConfig.Coins;
-			
+
 			var currentCoinsText = currentCoins.ConvertToSuffixedFormat(1_000L, 2);
 			var requiredCoinsText = priceConfig.Coins.ConvertToSuffixedFormat(1_000L, 2);
 			currentCoinsText = enoughCoins ? currentCoinsText : $"<color=red>{currentCoinsText}</color>";
-			
+
 			return $"{currentCoinsText}/{requiredCoinsText}";
 		}
-		
+
 		private string GetBlueprintsPriceText(IInventoryItemUpgradePriceConfig priceConfig)
 		{
 			var currentBlueprints = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Blueprints.Value;
 			var enoughBlueprints = currentBlueprints >= priceConfig.Blueprints;
-			
+
 			var requiredBlueprintsText = priceConfig.Blueprints.ConvertToSuffixedFormat(1_000L, 2);
 			var currentBlueprintsText = currentBlueprints.ConvertToSuffixedFormat(1_000L, 2);
 			currentBlueprintsText = enoughBlueprints ? currentBlueprintsText : $"<color=red>{currentBlueprintsText}</color>";
-			
+
 			return $"{currentBlueprintsText}/{requiredBlueprintsText}";
 		}
 

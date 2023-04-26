@@ -1,5 +1,7 @@
 using System;
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
@@ -10,39 +12,55 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 {
 	public class InventoryItemBasePresenter : Presenter<IInventoryItemView, IInventoryItemContext>
 	{
+		private readonly IInventoryModel _inventoryModel;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
-		private IDisposable _subscription;
+		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
+		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		private CompositeDisposable _subscriptions = new CompositeDisposable();
 		public InventoryItemBasePresenter(
 			IInventoryItemView view, 
 			IInventoryItemContext context,
-			IButtonPresenterFactory buttonPresenterFactory)
+			IMetaGameModelProvider metaGameModelProvider,
+			IButtonPresenterFactory buttonPresenterFactory,
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
+			IInventoryItemPresentationProvider inventoryItemPresentationProvider)
 			: base(view, context)
 		{
+			_inventoryModel = metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			_buttonPresenterFactory = buttonPresenterFactory;
-			
-			InitView();
+			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
+			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
+
+			UpdateView();
 			AddButtonPresenter();
 			AddSubscription();
 		}
 
 		public override void Dispose()
 		{
-			_subscription?.Dispose();
+			_subscriptions?.Dispose();
 			base.Dispose();
 		}
 
 		private void AddSubscription()
 		{
-			_subscription = Context.IsEquipped.Subscribe(state => View.SetEquippedState(state));
+			var itemModel = _inventoryModel.GetItemModel(Context.UserItemId.Value);
+			Context.IsEquipped.Subscribe(state => View.SetEquippedState(state)).AddTo(_subscriptions);
+			itemModel.DetailId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
+			itemModel.ItemId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
 		}
 
-		private void InitView()
+		private void UpdateView()
 		{
+			var itemModel = _inventoryModel.GetItemModel(Context.UserItemId.Value);
+			var config = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+			var level = config.GetDetails(itemModel.DetailId.Value).Level;
+			
 			View.SetBackgroundGradientMaterial(Context.BackgroundGradientMaterial);
 			View.SetPanelsColor(Context.MainColor);
 			View.SetItemIcon(Context.Icon);
 			View.SetItemSlotIcon(Context.SlotIcon);
-			View.SetPanelText($"Lv.{Context.Level}");
+			View.SetPanelText($"Lv.{level}");
 			View.SetEquippedState(Context.IsEquipped.Value);
 		}
 		

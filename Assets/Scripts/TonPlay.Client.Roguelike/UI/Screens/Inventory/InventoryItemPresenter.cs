@@ -9,8 +9,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 	public class InventoryItemPresenter : Presenter<IInventoryItemView, IInventoryItemContext>
 	{
 		private readonly InventoryItemBasePresenter.Factory _inventoryItemBasePresenterFactory;
+
+		private CompositeDisposable _subscriptions = new CompositeDisposable();
 		
-		private IDisposable _subscription;
 		public InventoryItemPresenter(
 			IInventoryItemView view, 
 			IInventoryItemContext context,
@@ -49,13 +50,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public override void Dispose()
 		{
-			_subscription?.Dispose();
+			_subscriptions?.Dispose();
 			base.Dispose();
 		}
 
 		private void AddSubscription()
 		{
-			_subscription = Context.IsEquipped.Subscribe(state => TryHideIfEquippedOrShow());
+			Context.IsEquipped.Subscribe(state => TryHideIfEquippedOrShow()).AddTo(_subscriptions);
 		}
 
 		public class Factory : PlaceholderFactory<IInventoryItemView, IInventoryItemContext, InventoryItemPresenter>
