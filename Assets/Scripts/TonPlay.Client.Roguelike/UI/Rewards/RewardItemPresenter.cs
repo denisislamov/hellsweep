@@ -19,6 +19,7 @@ namespace TonPlay.Client.Roguelike.UI.Rewards
 			var showCountPanel = Context.Count > 1;
 			
 			View.SetIcon(Context.Icon);
+			View.SetBackgroundGradientMaterial(Context.GradientMaterial);
 			View.SetCountActiveState(showCountPanel);
 			View.SetCountText($"x{Context.Count}");
 		}

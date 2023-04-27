@@ -165,6 +165,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			{
 				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int)gainModel.ProfileExperience.Value));
 			}
+			
+			foreach (var itemRewardModel in gainModel.Items)
+			{
+				rewardList.Add(new RewardData(itemRewardModel.ItemId.Value, 1));
+			}
 
 			var presenter = _rewardItemCollectionPresenterFactory.Create(
 				View.RewardItemCollectionView,

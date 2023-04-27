@@ -37,6 +37,11 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			? ConfigsMap[id]
 			: default;
 
+		public IInventoryItemConfig GetConfigByDetailId(string itemDetailId)
+		{
+			return ConfigsMap.FirstOrDefault(_ => _.Value.GetDetails(itemDetailId) != null).Value;
+		}
+
 		public IInventoryItemUpgradePriceConfig GetUpgradePrice(ushort level) => UpgradePricesMap.ContainsKey(level)
 			? UpgradePricesMap[level]
 			: default;

@@ -360,7 +360,9 @@ namespace TonPlay.Client.Roguelike.Core
 		{
 			var inventoryModel = metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var userItemId = inventoryModel.Slots[SlotName.WEAPON]?.ItemId?.Value;
-			return inventoryModel.GetItemModel(userItemId).ItemId.Value;
+			var weaponItemId = inventoryModel.GetItemModel(userItemId)?.ItemId?.Value;
+			//todo hardcoded katana
+			return weaponItemId ?? "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
 		}
 	}
 }

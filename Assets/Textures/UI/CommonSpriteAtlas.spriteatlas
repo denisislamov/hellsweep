@@ -133,6 +133,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 419065edfcfbc45e886f7103c8b9c6e4, type: 3}
   - {fileID: 21300000, guid: cf7e091e83b8c4cfda01ac1092c22e0f, type: 3}
   - {fileID: 21300000, guid: eaf26e2e2321d4eea866a94ab65f7c82, type: 3}
+  - {fileID: 21300000, guid: 97f1013e02bc84f87b97ed0a07878413, type: 3}
   - {fileID: 21300000, guid: 191bdd6e24b874cab9daed40a1173849, type: 3}
   - {fileID: 21300000, guid: e8925ece259f249dab3145aac833575f, type: 3}
   - {fileID: 21300000, guid: 0345d3dea35f342668e72e65b23038e0, type: 3}
@@ -225,6 +226,7 @@ SpriteAtlas:
   - Icon_Attribute_Health_01
   - TitleBackgroundTexture_03
   - Background_Items_01a
+  - Icon_Experience_01
   - Icon_Skill_HolyWater_01a
   - RectangleRounded8
   - Neck
