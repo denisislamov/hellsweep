@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tanjiro Crossbow Animator Override Controller
+  m_Controller: {fileID: 9100000, guid: f7a056537506949e6a1a2cbdf374fb5d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6aa3c5b107c5f46f0bfcf2669096de3f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 53c6ff52eb7fe4a91a4aef5a33f4ffee, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1defc0fee419b4dc48e99551083139a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d678c87819709413497decf1c36bcef3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 82e6e48eae453468d9fd8f8881a07fd3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b2835b5e0889849859ad952235f4858d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 197e641f4599344fab49926529901f8c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3d3347c828d8849b0bd51ff9dfa04388, type: 2}

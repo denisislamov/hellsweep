@@ -341,7 +341,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
                 var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
-                // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
+                // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemIds.Value == items[i].Model.Id.Value);
             }
 
             var presenter = _inventoryItemCollectionPresenter.Create(

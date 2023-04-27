@@ -6,9 +6,9 @@ using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Views;
 using TonPlay.Roguelike.Client.Core.Movement;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
-using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TonPlay.Client.Roguelike.Core.Player.Configs
 {
@@ -20,6 +20,19 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs
 
 		[SerializeField]
 		private string _defaultConfigId;
+
+		[SerializeField]
+		private SkinConfig[] _skinConfigs;
+
+		public ISkinConfig GetSkin(string id = default)
+		{
+			if (string.IsNullOrEmpty(id))
+			{
+				id = _defaultConfigId;
+			}
+
+			return _skinConfigs.FirstOrDefault(config => config.Id == id);
+		}
 
 		public IPlayerConfig Get(string id = default)
 		{
@@ -55,7 +68,12 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs
 			[SerializeField]
 			private MovementConfig _movementConfig;
 
+			[SerializeField]
+			private string _skinId;
+
 			public string Id => _id;
+			
+			public string SkinId => _skinId;
 
 			public PlayerView Prefab => _prefab;
 

@@ -5,6 +5,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
+using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
@@ -25,6 +26,7 @@ using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 {
@@ -39,6 +41,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private readonly InventoryItemCollectionPresenter.Factory _inventoryItemCollectionPresenter;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
+		private readonly IPlayerConfigProvider _playerConfigProvider;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 		private readonly DictionaryExt<string, IInventoryItemState> _itemStates = new DictionaryExt<string, IInventoryItemState>();
@@ -67,6 +70,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			InventoryItemCollectionPresenter.Factory inventoryItemCollectionPresenter,
 			IMetaGameModelProvider metaGameModelProvider,
 			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
+			IPlayerConfigProvider playerConfigProvider,
 			IRestApiClient restApiClient)
 			: base(view, context)
 		{
@@ -79,6 +83,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_inventoryItemCollectionPresenter = inventoryItemCollectionPresenter;
 			_metaGameModelProvider = metaGameModelProvider;
 			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
+			_playerConfigProvider = playerConfigProvider;
 			_restApiClient = restApiClient;
 
 			AddNestedProfileBarPresenter();
@@ -94,6 +99,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			AddMergeButtonPresenter();
 			InitView();
 			RefreshItems();
+			UpdateSkinView();
 		}
 
 		public override void Show()
@@ -256,6 +262,36 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_inventoryItemsPresenter = presenter;
 		}
 		
+		private void UpdateSkinView()
+		{
+			var slotUserItemId = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON].ItemId?.Value;
+			var itemId = string.IsNullOrEmpty(slotUserItemId) 
+				? "bae7a647-359a-4bb5-ae6b-7181a616cf7f" 
+				: _metaGameModelProvider.Get().ProfileModel.InventoryModel.GetItemModel(slotUserItemId)?.ItemId?.Value;
+			
+			var skinConfig = _playerConfigProvider.GetSkin(_playerConfigProvider.Get().SkinId);
+
+			if (string.IsNullOrEmpty(itemId))
+			{
+				itemId = "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
+			}
+			
+			for (var i = 0; i < View.SkinRoot.childCount; i++)
+			{
+				Object.Destroy(View.SkinRoot.GetChild(i).gameObject);
+			}
+
+			var prefab = skinConfig.GetInventorySpriteForWeaponItemId(itemId);
+			
+			if (prefab == null)
+			{
+				itemId = "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
+				prefab = skinConfig.GetInventorySpriteForWeaponItemId(itemId);
+			}
+			
+			Object.Instantiate(prefab, View.SkinRoot);
+		}
+		
 		private int SortItemsByCurrentSortType(IInventoryItemState x, IInventoryItemState y)
 		{
 			var xConfig = _inventoryItemsConfigProvider.Get(x.Model.ItemId.Value);
@@ -331,9 +367,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			{
 				SetSlotItemEquippedState(requiredSlot, false);
 				ClearSlot(requiredSlot);
+				UpdateSkinView();
 			}
 		}
-		
+
 		private async void EquipItem(IInventoryItemModel item)
 		{
 			var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
@@ -351,6 +388,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				SetSlotItemEquippedState(requiredSlot, false);
 				AddItemToSlotModel(item, requiredSlot);
 				SetSlotItemEquippedState(requiredSlot, true);
+				UpdateSkinView();
 			}
 		}
 

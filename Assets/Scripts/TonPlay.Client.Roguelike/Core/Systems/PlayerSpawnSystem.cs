@@ -41,7 +41,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var sharedData = systems.GetShared<SharedData>();
 			var spawnConfig = sharedData.PlayerConfigProvider.Get();
 
-			var player = CreateViewAndEntity(spawnConfig, out var entity);
+			var player = CreateViewAndEntity(GetSkinPrefab(sharedData, spawnConfig.SkinId), out var entity);
 
 			CalculateUserStats(out var armor, out var health, out var damage);
 
@@ -92,6 +92,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, player.Position);
 
 			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
+		}
+		
+		private PlayerView GetSkinPrefab(ISharedData sharedData, string skinId)
+		{
+			return sharedData.PlayerConfigProvider.GetSkin(skinId).GetPlayerViewForWeaponItemId(sharedData.PlayerWeaponId);
 		}
 
 		private void CalculateUserStats(out uint armor, out uint health, out uint damage)
@@ -144,9 +149,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			playerSkills.Levels.Add(config.SkillName, 1);
 		}
 
-		private PlayerView CreateViewAndEntity(IPlayerConfig config, out EcsEntity entity)
+		private PlayerView CreateViewAndEntity(PlayerView view, out EcsEntity entity)
 		{
-			var player = Object.Instantiate(config.Prefab);
+			var player = Object.Instantiate(view);
 			entity = _world.NewEntity();
 			return player;
 		}

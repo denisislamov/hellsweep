@@ -2,6 +2,8 @@ using TonPlay.Client.Roguelike.Bootstrap;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
+using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
@@ -27,6 +29,9 @@ namespace TonPlay.Client.Roguelike.Installers
 		
 		[SerializeField]
 		private InventoryItemsConfigProvider _inventoryItemsConfigProvider;
+		
+		[SerializeField]
+		private PlayerConfigProvider _playerConfigProvider;
 
 		public override void InstallBindings()
 		{
@@ -39,6 +44,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			var locationConfigProvider = Instantiate(_locationConfigProvider);
 			Container.Bind<ILocationConfigProvider>().FromInstance(locationConfigProvider).AsSingle();
 			Container.Bind<ILocationConfigUpdater>().To<LocationConfigUpdater>().AsSingle();
+			
+			Container.Bind<IPlayerConfigProvider>().FromInstance(_playerConfigProvider).AsSingle();
 
 			var runtimeProfileConfigProvider = Instantiate(_profileConfigProvider);
 			

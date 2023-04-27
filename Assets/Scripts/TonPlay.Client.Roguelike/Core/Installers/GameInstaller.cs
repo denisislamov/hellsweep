@@ -4,18 +4,12 @@ using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Collision.Config;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
+using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
-using TonPlay.Client.Roguelike.Core.Skills.Config;
-using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.UI;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
-using TonPlay.Roguelike.Client.Core;
-using TonPlay.Roguelike.Client.Core.Collision;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
-using TonPlay.Roguelike.Client.Core.Player.Configs;
-using TonPlay.Roguelike.Client.Core.Player.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
@@ -44,7 +38,6 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 		{
 			Container.BindFactory<SharedData, SharedData.Factory>().AsSingle();
 			Container.BindFactory<EcsWorld, KdTreeStorage[], OverlapExecutor, OverlapExecutor.Factory>().AsSingle();
-			Container.Bind<IPlayerConfigProvider>().FromInstance(_playerConfigProvider).AsSingle();
 			Container.Bind<IWeaponConfigProvider>().FromInstance(_weaponConfigProvider).AsSingle();
 			Container.Bind<ICollisionConfigProvider>().FromInstance(_collisionConfigProvider).AsSingle();
 

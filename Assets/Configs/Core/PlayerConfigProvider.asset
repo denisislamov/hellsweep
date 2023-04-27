@@ -24,4 +24,43 @@ MonoBehaviour:
     _movementConfig:
       _startSpeed: 4.8
       _acceleration: 0
+    _skinId: tanjiro
   _defaultConfigId: knight
+  _skinConfigs:
+  - _id: tanjiro
+    _weaponSlotInventorySpriteSets:
+    - _itemIds:
+      - 66339f94-da17-48e2-b35a-4dab039d1626
+      - cc54a750-b790-4888-8603-f292e16c16d4
+      - 575e605d-637d-428e-98ce-6c6ed58d4b8e
+      - c9060a0e-8a2b-49dd-8e37-3cad6856ed1d
+      _inventoryViewPrefab: {fileID: 6392972286504636877, guid: 3d8dd2750ae60480394d8a87426533e6, type: 3}
+      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
+    - _itemIds:
+      - ac3c85df-3833-4306-bb40-0f79adc4f3e9
+      - 8210965a-fc6c-4228-94d7-d8faf226aac6
+      - 495f6bce-252c-4689-a33e-89847da9ab36
+      - 97ca9701-c7eb-49c0-8255-6079af427e4f
+      _inventoryViewPrefab: {fileID: 7290076439773989623, guid: 5e2be152b9f1d47d888fcf009dedc241, type: 3}
+      _playerViewPrefab: {fileID: 5678140036874552092, guid: 2b45889e28ac6498683bf97490c473b1, type: 3}
+    - _itemIds:
+      - b60b2a0b-18af-414d-8b81-c19705201d68
+      - d0957a7c-65e9-4401-8eb6-6ebb8f738f0a
+      - 83ef34f9-9d2a-4d5b-988a-1807c1752630
+      - 59605a0c-e22f-4786-98d1-7f7b803b0d18
+      _inventoryViewPrefab: {fileID: 5501326316944559301, guid: 2b422a3c892b6484b81d2e3cd5730c95, type: 3}
+      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
+    - _itemIds:
+      - bae7a647-359a-4bb5-ae6b-7181a616cf7f
+      - 8c26a50f-936e-4e21-b5f0-f804b7c9d58c
+      - f8cd0977-1d17-4465-8b93-afc61b0a0755
+      - fffa4a86-8df8-4f6a-9431-514af8163e2b
+      _inventoryViewPrefab: {fileID: 654442528995836756, guid: 4c561655d38654406a869534c2d4d838, type: 3}
+      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
+    - _itemIds:
+      - 78af8a73-1fc5-4ac2-8684-b1c2ae0ef9c6
+      - f2ffae76-f563-4d52-ae69-bf4a73b61b08
+      - 5ad89519-5b4f-465f-ad87-df3e06d48d8e
+      - 3bcee08a-a60c-4b0d-89ce-55c8dd91f1ba
+      _inventoryViewPrefab: {fileID: 658411809934428778, guid: 20e8abaca96cc46abb15a3efa1ef93fa, type: 3}
+      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}

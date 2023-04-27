@@ -2,6 +2,7 @@ using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 {
@@ -32,6 +33,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		IButtonView GameSettingsButtonView { get; }
 
 		IButtonView MergeButtonView { get; }
+		
+		RectTransform SkinRoot { get; }
 		
 		void SetAttackValueText(string text);
 		

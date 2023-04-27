@@ -102,6 +102,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.End();
 
 			var skillPool = _world.GetPool<CrossbowSkill>();
+			var attackPool = _world.GetPool<AttackEvent>();
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
@@ -127,6 +128,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 				if (skill.TimeLeft <= 0)
 				{
+					attackPool.Add(entityId);
+					
 					skill.TimeLeft = levelConfig.ShootDelay;
 
 					var layer = playerPool.Has(entityId)

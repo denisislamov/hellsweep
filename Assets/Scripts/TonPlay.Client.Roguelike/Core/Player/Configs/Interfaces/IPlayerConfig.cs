@@ -8,6 +8,8 @@ namespace TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces
 	public interface IPlayerConfig
 	{
 		string Id { get; }
+		
+		string SkinId { get; }
 
 		PlayerView Prefab { get; }
 
