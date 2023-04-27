@@ -1,73 +1,73 @@
 fileFormatVersion: 2
-guid: a592b22b6ccbe499389f9ab86dc4c092
+guid: 00aa93367ee5249b9b27612bef6f0b94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6454863605655070954
-    second: char_run_shuriken_w22_h29_0
+      213: -7240743616380877882
+    second: bow_char_run_bow_w24_h26_0
   - first:
-      213: -9008460992881643932
-    second: char_run_shuriken_w22_h29_1
+      213: -6021494473133556549
+    second: bow_char_run_bow_w24_h26_1
   - first:
-      213: 1711920615713554895
-    second: char_run_shuriken_w22_h29_2
+      213: -2979350494305653851
+    second: bow_char_run_bow_w24_h26_2
   - first:
-      213: -320382043760181248
-    second: char_run_shuriken_w22_h29_3
+      213: -7811266878308593292
+    second: bow_char_run_bow_w24_h26_3
   - first:
-      213: -2908259622039641535
-    second: char_run_shuriken_w22_h29_4
+      213: 7904049497945842244
+    second: bow_char_run_bow_w24_h26_4
   - first:
-      213: -3454911740855128157
-    second: char_run_shuriken_w22_h29_5
+      213: -4962158268722476532
+    second: bow_char_run_bow_w24_h26_5
   - first:
-      213: 4263911879689093872
-    second: char_run_shuriken_w22_h29_6
+      213: 3329751753523621106
+    second: bow_char_run_bow_w24_h26_6
   - first:
-      213: 2193040893298345364
-    second: char_run_shuriken_w22_h29_7
+      213: -7822562519812342045
+    second: bow_char_run_bow_w24_h26_7
   - first:
-      213: 246708357287747970
-    second: char_run_shuriken_w22_h29_8
+      213: -8221486857974834880
+    second: bow_char_run_bow_w24_h26_8
   - first:
-      213: 4716029104722536886
-    second: char_run_shuriken_w22_h29_9
+      213: -165883437890053229
+    second: bow_char_run_bow_w24_h26_9
   - first:
-      213: 211343574093019213
-    second: char_run_shuriken_w22_h29_10
+      213: -1828208360119377889
+    second: bow_char_run_bow_w24_h26_10
   - first:
-      213: 8168260705368210026
-    second: char_run_shuriken_w22_h29_11
+      213: -379991818288903156
+    second: bow_char_run_bow_w24_h26_11
   - first:
-      213: -4725281188985466443
-    second: char_run_shuriken_w22_h29_12
+      213: -7890370124523221062
+    second: bow_char_run_bow_w24_h26_12
   - first:
-      213: -168451850047146214
-    second: char_run_shuriken_w22_h29_13
+      213: -1309170277086581112
+    second: bow_char_run_bow_w24_h26_13
   - first:
-      213: -5408867946191870950
-    second: char_run_shuriken_w22_h29_14
+      213: -2497433756171666972
+    second: bow_char_run_bow_w24_h26_14
   - first:
-      213: -7831632201365885875
-    second: char_run_shuriken_w22_h29_15
+      213: 7668630849708646785
+    second: bow_char_run_bow_w24_h26_15
   - first:
-      213: -7301645667162509398
-    second: char_run_shuriken_w22_h29_16
+      213: 6029083149982316082
+    second: bow_char_run_bow_w24_h26_16
   - first:
-      213: 7296525022714498098
-    second: char_run_shuriken_w22_h29_17
+      213: -3569665618739214232
+    second: bow_char_run_bow_w24_h26_17
   - first:
-      213: -7930478249341368546
-    second: char_run_shuriken_w22_h29_18
+      213: 797898269406860179
+    second: bow_char_run_bow_w24_h26_18
   - first:
-      213: -4589409668975893164
-    second: char_run_shuriken_w22_h29_19
+      213: 1626725822335629576
+    second: bow_char_run_bow_w24_h26_19
   - first:
-      213: -2675755417015584036
-    second: char_run_shuriken_w22_h29_20
+      213: -7157251150839703939
+    second: bow_char_run_bow_w24_h26_20
   - first:
-      213: -2688937766277023516
-    second: char_run_shuriken_w22_h29_21
+      213: -1747562622189606791
+    second: bow_char_run_bow_w24_h26_21
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -194,13 +194,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_0
+      name: bow_char_run_bow_w24_h26_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae8eaa00048449950800000000000000
-      internalID: 6454863605655070954
+      spriteID: 6c3c0f34b06b38b90800000000000000
+      internalID: -7240743616380877882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_1
+      name: bow_char_run_bow_w24_h26_1
       rect:
         serializedVersion: 2
-        x: 22
+        x: 24
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46ea352b4748bf280800000000000000
-      internalID: -9008460992881643932
+      spriteID: bbc75ef0eaa5f6ca0800000000000000
+      internalID: -6021494473133556549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_2
+      name: bow_char_run_bow_w24_h26_2
       rect:
         serializedVersion: 2
-        x: 44
+        x: 48
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc14647dab6f1c710800000000000000
-      internalID: 1711920615713554895
+      spriteID: 5abe68db28837a6d0800000000000000
+      internalID: -2979350494305653851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_3
+      name: bow_char_run_bow_w24_h26_3
       rect:
         serializedVersion: 2
-        x: 66
+        x: 72
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 000c2498a36cd8bf0800000000000000
-      internalID: -320382043760181248
+      spriteID: 47154a8f82ec89390800000000000000
+      internalID: -7811266878308593292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_4
+      name: bow_char_run_bow_w24_h26_4
       rect:
         serializedVersion: 2
-        x: 88
+        x: 96
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14227b94849c3a7d0800000000000000
-      internalID: -2908259622039641535
+      spriteID: 442aa241423d0bd60800000000000000
+      internalID: 7904049497945842244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_5
+      name: bow_char_run_bow_w24_h26_5
       rect:
         serializedVersion: 2
-        x: 110
+        x: 120
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,20 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3afe00c9310bd00d0800000000000000
-      internalID: -3454911740855128157
+      spriteID: c0a8781685fd22bb0800000000000000
+      internalID: -4962158268722476532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_6
+      name: bow_char_run_bow_w24_h26_6
       rect:
         serializedVersion: 2
-        x: 132
+        x: 144
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,20 +334,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f2cf6e63457c2b30800000000000000
-      internalID: 4263911879689093872
+      spriteID: 2fc620bf397a53e20800000000000000
+      internalID: 3329751753523621106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_7
+      name: bow_char_run_bow_w24_h26_7
       rect:
         serializedVersion: 2
-        x: 154
+        x: 168
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,20 +355,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49504feb21f3f6e10800000000000000
-      internalID: 2193040893298345364
+      spriteID: 3eefc4d75dca07390800000000000000
+      internalID: -7822562519812342045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_8
+      name: bow_char_run_bow_w24_h26_8
       rect:
         serializedVersion: 2
-        x: 176
+        x: 192
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,20 +376,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 281a14f91fb7c6300800000000000000
-      internalID: 246708357287747970
+      spriteID: 0491ed0134967ed80800000000000000
+      internalID: -8221486857974834880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_9
+      name: bow_char_run_bow_w24_h26_9
       rect:
         serializedVersion: 2
-        x: 198
+        x: 216
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,20 +397,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9e361fb73b27140800000000000000
-      internalID: 4716029104722536886
+      spriteID: 39b517264e9a2bdf0800000000000000
+      internalID: -165883437890053229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_10
+      name: bow_char_run_bow_w24_h26_10
       rect:
         serializedVersion: 2
-        x: 220
+        x: 240
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,41 +418,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4830636cd7dee200800000000000000
-      internalID: 211343574093019213
+      spriteID: f106fa7ce26e0a6e0800000000000000
+      internalID: -1828208360119377889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_11
-      rect:
-        serializedVersion: 2
-        x: 242
-        y: 0
-        width: 22
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6af04095dd7b5170800000000000000
-      internalID: 8168260705368210026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_12
+      name: bow_char_run_bow_w24_h26_11
       rect:
         serializedVersion: 2
         x: 264
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,20 +439,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b19fa25bcd6c6eb0800000000000000
-      internalID: -4725281188985466443
+      spriteID: c0cc55d547ff9baf0800000000000000
+      internalID: -379991818288903156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_13
+      name: bow_char_run_bow_w24_h26_12
       rect:
         serializedVersion: 2
-        x: 286
+        x: 288
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -481,20 +460,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a17be245fe989adf0800000000000000
-      internalID: -168451850047146214
+      spriteID: abf407d3d26cf7290800000000000000
+      internalID: -7890370124523221062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_14
+      name: bow_char_run_bow_w24_h26_13
       rect:
         serializedVersion: 2
-        x: 308
+        x: 312
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -502,20 +481,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a14ac36a247dfe4b0800000000000000
-      internalID: -5408867946191870950
+      spriteID: 88e21cbb194e4dde0800000000000000
+      internalID: -1309170277086581112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_15
+      name: bow_char_run_bow_w24_h26_14
       rect:
         serializedVersion: 2
-        x: 330
+        x: 336
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -523,20 +502,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4c6312b104705390800000000000000
-      internalID: -7831632201365885875
+      spriteID: 4e971511b35575dd0800000000000000
+      internalID: -2497433756171666972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_16
+      name: bow_char_run_bow_w24_h26_15
       rect:
         serializedVersion: 2
-        x: 352
+        x: 360
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -544,20 +523,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaf220593f75baa90800000000000000
-      internalID: -7301645667162509398
+      spriteID: 1816c7ea0237c6a60800000000000000
+      internalID: 7668630849708646785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_17
+      name: bow_char_run_bow_w24_h26_16
       rect:
         serializedVersion: 2
-        x: 374
+        x: 384
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -565,20 +544,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23c85a979d6724560800000000000000
-      internalID: 7296525022714498098
+      spriteID: 2363df37e2b9ba350800000000000000
+      internalID: 6029083149982316082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_18
+      name: bow_char_run_bow_w24_h26_17
       rect:
         serializedVersion: 2
-        x: 396
+        x: 408
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -586,20 +565,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e17cb09bc0841f190800000000000000
-      internalID: -7930478249341368546
+      spriteID: 868cf1c5800067ec0800000000000000
+      internalID: -3569665618739214232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_19
+      name: bow_char_run_bow_w24_h26_18
       rect:
         serializedVersion: 2
-        x: 418
+        x: 432
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -607,20 +586,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 455e2f7c8342f40c0800000000000000
-      internalID: -4589409668975893164
+      spriteID: 39315e2af34b21b00800000000000000
+      internalID: 797898269406860179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_20
+      name: bow_char_run_bow_w24_h26_19
       rect:
         serializedVersion: 2
-        x: 440
+        x: 456
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -628,20 +607,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda75feff9ecddad0800000000000000
-      internalID: -2675755417015584036
+      spriteID: 8093543448a439610800000000000000
+      internalID: 1626725822335629576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_run_shuriken_w22_h29_21
+      name: bow_char_run_bow_w24_h26_20
       rect:
         serializedVersion: 2
-        x: 462
+        x: 480
         y: 0
-        width: 22
-        height: 29
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -649,8 +628,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e8fce12959feaad0800000000000000
-      internalID: -2688937766277023516
+      spriteID: d7691f1cff55cac90800000000000000
+      internalID: -7157251150839703939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bow_char_run_bow_w24_h26_21
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97863a9dd096fb7e0800000000000000
+      internalID: -1747562622189606791
       vertices: []
       indices: 
       edges: []

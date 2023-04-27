@@ -35,7 +35,7 @@ MonoBehaviour:
       - 575e605d-637d-428e-98ce-6c6ed58d4b8e
       - c9060a0e-8a2b-49dd-8e37-3cad6856ed1d
       _inventoryViewPrefab: {fileID: 6392972286504636877, guid: 3d8dd2750ae60480394d8a87426533e6, type: 3}
-      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
+      _playerViewPrefab: {fileID: 3325759505571904680, guid: 3a215a384dd364e48a8b4f9fd215134a, type: 3}
     - _itemIds:
       - ac3c85df-3833-4306-bb40-0f79adc4f3e9
       - 8210965a-fc6c-4228-94d7-d8faf226aac6
@@ -63,4 +63,4 @@ MonoBehaviour:
       - 5ad89519-5b4f-465f-ad87-df3e06d48d8e
       - 3bcee08a-a60c-4b0d-89ce-55c8dd91f1ba
       _inventoryViewPrefab: {fileID: 658411809934428778, guid: 20e8abaca96cc46abb15a3efa1ef93fa, type: 3}
-      _playerViewPrefab: {fileID: 2531811088074614733, guid: e8791e1054a27484eaafcddd9a3e7eae, type: 3}
+      _playerViewPrefab: {fileID: 994986359098113057, guid: 32bae4d5954fa4f5386939694497dccf, type: 3}

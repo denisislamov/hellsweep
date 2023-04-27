@@ -33,5 +33,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces
 		void Update(RPGSkillConfig rpgSkillConfig);
 		
 		void Update(SportShoesSkillConfig sportShoesSkillConfig);
+		
+		void Update(ShurikenSkillConfig shurikenSkillConfig);
 	}
 }

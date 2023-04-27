@@ -97,6 +97,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4ca4dce88402043e7ad8efc3676a6f8c, type: 3}
   - {fileID: 21300000, guid: 9c38aa299c29044d0b23efdb5d9c754a, type: 3}
   - {fileID: 21300000, guid: 1b250d491ebcd430ab10ce346f7a5a59, type: 3}
+  - {fileID: 21300000, guid: 5313d959be0ef49eb97b4d2f939e59f7, type: 3}
   - {fileID: 21300000, guid: 4d35920a3e1624ca2a1c468a808996dc, type: 3}
   - {fileID: 21300000, guid: a90ffc2adb1684ac58210567eb73b0ad, type: 3}
   - {fileID: -589365598807618618, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
@@ -516,6 +517,7 @@ SpriteAtlas:
   - Diamond_01c
   - Item_Armor_Carapace
   - Item_Gloves_leather
+  - Item_Shuriken
   - Item_Bomb_01a
   - Item_Gloves_Shiny
   - items_spriteatlas_16x16_143

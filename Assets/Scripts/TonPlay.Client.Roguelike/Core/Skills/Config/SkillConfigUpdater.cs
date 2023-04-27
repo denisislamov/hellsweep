@@ -124,5 +124,10 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 		{
 			new EnergyDrinkSkillConfigUpdater(config, _currentBoost).Update();
 		}
+		
+		public void Update(ShurikenSkillConfig config)
+		{
+			new ShurikenSkillConfigUpdater(config, _currentSkill).Update();
+		}
 	}
 }

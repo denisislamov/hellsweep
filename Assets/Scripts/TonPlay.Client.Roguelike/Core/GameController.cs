@@ -229,6 +229,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new HolyWaterSkillSystem())
 							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new RevolverSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
+							.Add(new ShurikenSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new FitnessGuideSkillSystem())

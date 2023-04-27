@@ -24,7 +24,7 @@ using Object = UnityEngine.Object;
 
 namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 {
-	public class RevolverSkillSystem : IEcsInitSystem, IEcsRunSystem
+	public class ShurikenSkillSystem : IEcsInitSystem, IEcsRunSystem
 	{
 		private const int MAX_TARGET_QUANTITY = 6;
 
@@ -36,12 +36,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 		private readonly int[] _cachedTargetEntityIds = new int[MAX_TARGET_QUANTITY];
 
 		private EcsWorld _world;
-		private IRevolverSkillConfig _config;
+		private IShurikenSkillConfig _config;
 		private ICompositeViewPool _pool;
 		private IViewPoolIdentity _poolIdentity;
 		private ISharedData _sharedData;
 
-		public RevolverSkillSystem(IOverlapExecutor overlapExecutor, KdTreeStorage kdTreeStorage)
+		public ShurikenSkillSystem(IOverlapExecutor overlapExecutor, KdTreeStorage kdTreeStorage)
 		{
 			_overlapExecutor = overlapExecutor;
 			_kdTreeStorage = kdTreeStorage;
@@ -52,7 +52,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			_sharedData = systems.GetShared<ISharedData>();
 
 			_world = systems.GetWorld();
-			_config = (IRevolverSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.Revolver);
+			_config = (IShurikenSkillConfig)_sharedData.SkillsConfigProvider.Get(SkillName.Kunai);
 
 			_poolIdentity = new ProjectileConfigViewPoolIdentity(_config.ProjectileConfig);
 
@@ -65,46 +65,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			AddSkillComponentIfDoesntExist();
 			TrySpawnProjectile();
-			SyncSightEffectWithSkillLevel();
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
-		}
-
-		private void SyncSightEffectWithSkillLevel()
-		{
-			var filter = _world
-						.Filter<RevolverSightEffectComponent>()
-						.Exc<DeadComponent>()
-						.Exc<InactiveComponent>()
-						.End();
-
-			var effectPool = _world.GetPool<RevolverSightEffectComponent>();
-			var deadPool = _world.GetPool<DeadComponent>();
-			var skillsPool = _world.GetPool<SkillsComponent>();
-			var rotationPool = _world.GetPool<RotationComponent>();
-
-			foreach (var entityId in filter)
-			{
-				ref var effect = ref effectPool.Get(entityId);
-
-				if (deadPool.Has(effect.ParentEntityId))
-				{
-					continue;
-				}
-
-				ref var rotation = ref rotationPool.Get(entityId);
-				ref var skills = ref skillsPool.Get(effect.ParentEntityId);
-
-				var level = skills.Levels[SkillName.Revolver];
-				var levelConfig = _config.GetLevelConfig(level);
-
-				SetEffectFieldOfView(effect.Effect, levelConfig.FieldOfView, rotation.Direction);
-			}
 		}
 
 		private void TrySpawnProjectile()
 		{
 			var filter = _world
-						.Filter<RevolverSkill>()
+						.Filter<ShurikenSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
 						.Inc<RotationComponent>()
@@ -113,7 +80,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Exc<DeadComponent>()
 						.End();
 
-			var skillPool = _world.GetPool<RevolverSkill>();
+			var skillPool = _world.GetPool<ShurikenSkill>();
 			var attackPool = _world.GetPool<AttackEvent>();
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
@@ -135,7 +102,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
 
-				var level = skills.Levels[SkillName.Revolver];
+				var level = skills.Levels[SkillName.Kunai];
 				var levelConfig = _config.GetLevelConfig(level);
 
 				levelConfig.DamageProvider.DamageMultiplier = damageMultiplier.Value;
@@ -160,7 +127,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 		private void CreateProjectile(Vector2 position,
 									  Vector2 revolverDirection,
 									  int layer,
-									  IRevolverLevelSkillConfig levelSkillConfig,
+									  IShurikenLevelSkillConfig levelSkillConfig,
 									  IOverlapParams overlapParams,
 									  float baseDamage)
 		{
@@ -193,7 +160,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			collisionPool.AddOrGet(entity.Id);
 		}
 
-		private Vector3 GetProjectileDirection(Vector2 position, Vector2 revolverDirection, IRevolverLevelSkillConfig levelSkillConfig, IOverlapParams overlapParams)
+		private Vector3 GetProjectileDirection(Vector2 position, Vector2 shurikenDirection, IShurikenLevelSkillConfig levelSkillConfig, IOverlapParams overlapParams)
 		{
 			var positionPool = _world.GetPool<PositionComponent>();
 			var targetsQuantity = _overlapExecutor.Overlap(
@@ -207,17 +174,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			if (targetsQuantity > 0)
 			{
 				var currentCachedTargetEntityIdx = 0;
-				var halfOfFieldOfView = levelSkillConfig.FieldOfView*0.5f;
 				for (var i = 0; i < Mathf.Min(MAX_TARGET_QUANTITY, targetsQuantity); i++)
 				{
-					var overlappedEntity = _overlappedEntities[i];
-					var dirToOverlappedEntity = positionPool.Get(overlappedEntity).Position - position;
-
-					if (Vector2.Angle(dirToOverlappedEntity, revolverDirection) > halfOfFieldOfView)
-					{
-						continue;
-					}
-
 					_cachedTargetEntityIds[currentCachedTargetEntityIdx] = _overlappedEntities[i];
 					currentCachedTargetEntityIdx++;
 
@@ -231,7 +189,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 				if (currentCachedTargetEntityIdx == 0)
 				{
-					return GetRandomProjectileDirection(revolverDirection, levelSkillConfig);
+					return GetRandomProjectileDirection(shurikenDirection, levelSkillConfig);
 				}
 
 				var targetIdx = Random.Range(0, currentCachedTargetEntityIdx);
@@ -241,16 +199,14 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				return dirToTarget.normalized;
 			}
 
-			return GetRandomProjectileDirection(revolverDirection, levelSkillConfig);
+			return GetRandomProjectileDirection(shurikenDirection, levelSkillConfig);
 		}
 
-		private static Vector3 GetRandomProjectileDirection(Vector2 revolverDirection, IRevolverLevelSkillConfig levelSkillConfig)
+		private static Vector3 GetRandomProjectileDirection(Vector2 shurikenDirection, IShurikenLevelSkillConfig levelSkillConfig)
 		{
-			var randomAngle = Random.Range(
-				-levelSkillConfig.FieldOfView*0.5f,
-				levelSkillConfig.FieldOfView*0.5f);
+			var randomAngle = Random.Range(0, 360f);
 
-			return revolverDirection.Rotate(randomAngle);
+			return shurikenDirection.Rotate(randomAngle);
 		}
 
 		private void AddSkillComponentIfDoesntExist()
@@ -259,12 +215,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<SkillsComponent>()
 						.Inc<PositionComponent>()
 						.Exc<DeadComponent>()
-						.Exc<RevolverSkill>()
+						.Exc<ShurikenSkill>()
 						.End();
 
 			var positionPool = _world.GetPool<PositionComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
-			var skillPool = _world.GetPool<RevolverSkill>();
+			var skillPool = _world.GetPool<ShurikenSkill>();
 
 			foreach (var entityId in filter)
 			{
@@ -274,38 +230,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 				if (skills.Levels.ContainsKey(_config.SkillName) && skills.Levels[_config.SkillName] > 0)
 				{
 					ref var skill = ref skillPool.Add(entityId);
-					var level = skills.Levels[_config.SkillName];
-					var levelConfig = _config.GetLevelConfig(level);
-					var effectEntity = CreateEffect(position.Position, entityId, levelConfig.FieldOfView);
 				}
 			}
-		}
-
-		private EcsEntity CreateEffect(Vector2 position, int parentEntityId, float fieldOfView)
-		{
-			var entity = _world.NewEntity();
-			var effect = Object.Instantiate(_config.SightEffectView);
-			var transform = effect.transform;
-			var right = transform.right;
-
-			transform.position = position;
-
-			SetEffectFieldOfView(effect, fieldOfView, right);
-
-			entity.AddPositionComponent(position);
-			entity.AddRotationComponent(right);
-			entity.AddTransformComponent(effect.transform);
-			entity.AddRevolverSightEffectComponent(effect, parentEntityId);
-			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId);
-			entity.AddSyncRotationWithAnotherEntityComponent(parentEntityId);
-
-			return entity;
-		}
-
-		private static void SetEffectFieldOfView(RevolverSightEffect effect, float fieldOfView, Vector3 right)
-		{
-			effect.SetLeftBorderDirection(right.ToVector2XY().Rotate(fieldOfView*-0.5f));
-			effect.SetRightBorderDirection(right.ToVector2XY().Rotate(fieldOfView*0.5f));
 		}
 	}
 }

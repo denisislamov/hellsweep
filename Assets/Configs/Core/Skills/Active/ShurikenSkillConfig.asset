@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcb0d44d2384126bcfad1700e63c4d5, type: 3}
+  m_Name: ShurikenSkillConfig
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _title: Shuriken
+  _description: 
+  _icon: {fileID: 21300000, guid: 5313d959be0ef49eb97b4d2f939e59f7, type: 3}
+  _excludeFromInitialDrop: 1
+  _maxLevel: 5
+  _evolutions: 
+  _projectileConfig: {fileID: 11400000, guid: 5916dae9fad604273a1abf70a0c73244, type: 2}
+  _levelConfigs:
+  - _level: 1
+    _description: '-'
+    _damageProvider:
+      damageSource: 3
+      damage: 10
+      rate: 1
+    _shootDelay: 0.5
+    _collisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
+  - _level: 2
+    _description: Damage is doubled
+    _damageProvider:
+      damageSource: 3
+      damage: 10
+      rate: 1
+    _shootDelay: 0.4
+    _collisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
+  - _level: 3
+    _description: Damage is doubled
+    _damageProvider:
+      damageSource: 3
+      damage: 40
+      rate: 1
+    _shootDelay: 0.3
+    _collisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
+  - _level: 4
+    _description: Damage is doubled
+    _damageProvider:
+      damageSource: 3
+      damage: 80
+      rate: 1
+    _shootDelay: 0.25
+    _collisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}
+  - _level: 5
+    _description: Damage is doubled
+    _damageProvider:
+      damageSource: 3
+      damage: 160
+      rate: 1
+    _shootDelay: 0.2
+    _collisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    _collisionAreaConfig: {fileID: 11400000, guid: 4b2603a5d967440f18373faafa64e238, type: 2}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tanjiro Shuriken Animator Override Controller
+  m_Controller: {fileID: 9100000, guid: f7a056537506949e6a1a2cbdf374fb5d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6aa3c5b107c5f46f0bfcf2669096de3f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1c12b390fb9a642d69a847148c5d95fe, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1defc0fee419b4dc48e99551083139a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ee43994b117e144f19d2fe030cdd1d8a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 82e6e48eae453468d9fd8f8881a07fd3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3046495849edb4a799eddd3c70e2d8be, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 197e641f4599344fab49926529901f8c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c9d46046af0584c13aefb77bfccbd139, type: 2}

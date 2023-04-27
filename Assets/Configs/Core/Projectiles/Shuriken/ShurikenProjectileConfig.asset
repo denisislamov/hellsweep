@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: ShurikenProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8748127353641096366, guid: ab3b80c8ea5964b0199c57a791809aac, type: 3}
+  _movementConfig:
+    _startSpeed: 10
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 1edf8d0c4aa574d6d96fb3877f36fd3c, type: 2}
+  - {fileID: 11400000, guid: b07e29833353a4b06a0ca804648645eb, type: 2}
+  - {fileID: 11400000, guid: 89691c7d12b1c4e3fad68f77523695b6, type: 2}
+  - {fileID: 11400000, guid: 241edfb7efafa41159f9e04e548d36fc, type: 2}
+  _layer: 10
