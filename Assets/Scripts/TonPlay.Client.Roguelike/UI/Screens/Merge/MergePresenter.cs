@@ -101,6 +101,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         {
             base.Show();
             View.Show();
+            View.SortPanelView.Hide();
         }
 
         public override void Hide()
@@ -135,7 +136,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void AddSlotPresenters()
         {
-            // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
+            // AddSlotPresenter(0, View.Slots[0]);
+            // AddSlotPresenter(1, View.Slots[0]);
+            // AddSlotPresenter(2, View.Slots[0]);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
         }
@@ -200,7 +203,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
             var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
             
-            
+            SetSlotItemEquippedState(requiredSlot, false);
+        }
+        
+        private void SetSlotItemEquippedState(ISlotModel requiredSlot, bool state)
+        {
+            if (requiredSlot.ItemId?.Value is null)
+            {
+                return;
+            }
+
+            _itemStates[requiredSlot.ItemId.Value].SetEquippedState(state);
         }
         
         private void AddInventoryButtonPresenter()
@@ -328,7 +341,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
                 var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
-                items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
+                // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
             }
 
             var presenter = _inventoryItemCollectionPresenter.Create(
