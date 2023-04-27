@@ -62,6 +62,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<DrillShotSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<BaseDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
 						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
@@ -71,6 +72,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 			var skillDurationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
@@ -78,6 +80,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			{
 				ref var skillDurationMultiplier = ref skillDurationMultiplierPool.Get(entityId);
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
@@ -102,7 +105,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 					var duration = levelConfig.ActiveTime * skillDurationMultiplier.Value;
 					
-					CreateProjectile(position.Position, layer, levelConfig, entityId, duration);
+					CreateProjectile(position.Position, layer, levelConfig, entityId, duration, baseDamage.Value);
 
 					skill.SpawnQuantity--;
 					skill.RefreshLeftTime = skill.SpawnQuantity == 0
@@ -194,12 +197,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			}
 		}
 
-		private void CreateProjectile(
-			Vector2 position,
-			int layer,
-			IDrillShotSkillLevelConfig levelConfig,
-			int creatorEntityId,
-			float duration)
+		private void CreateProjectile(Vector2 position,
+									  int layer,
+									  IDrillShotSkillLevelConfig levelConfig,
+									  int creatorEntityId,
+									  float duration, 
+									  float baseDamage)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -231,6 +234,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 			destroyOnTimerComponent.TimeLeft = duration;
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
+			damageOnCollisionComponent.DamageProvider.Clone().AddDamageValue(baseDamage);
 			speed.InitialSpeed = levelConfig.Speed;
 
 			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);

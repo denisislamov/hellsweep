@@ -79,7 +79,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Passive
 		
 		private void UpgradeDamageMultiplier(ref DamageMultiplierComponent damageMultiplier, HiPowerBulletSkill skill)
 		{
-			damageMultiplier.Map[DamageMultiplierType.HiPowerBullet] = 1 + _config.GetLevelConfig(skill.Level).MultiplierValue;
+			damageMultiplier.Map[DamageMultiplierType.HiPowerBullet] = _config.GetLevelConfig(skill.Level).MultiplierValue;
 		}
 	}
 }

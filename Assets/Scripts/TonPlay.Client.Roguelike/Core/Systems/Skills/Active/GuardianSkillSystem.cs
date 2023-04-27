@@ -82,6 +82,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<GuardianSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<BaseDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
 						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
@@ -91,6 +92,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 			var skillDurationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
@@ -98,6 +100,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			{
 				ref var skillDurationMultiplier = ref skillDurationMultiplierPool.Get(entityId);
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref rpgPool.Get(entityId);
@@ -124,19 +127,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 					{
 						var spawnAngle = angleInterval*i;
 
-						CreateProjectile(position.Position, spawnAngle, layer, entityId, levelConfig, duration);
+						CreateProjectile(position.Position, spawnAngle, layer, entityId, levelConfig, duration, baseDamage.Value);
 					}
 				}
 			}
 		}
 
-		private void CreateProjectile(
-			Vector2 position,
-			float angle,
-			int layer,
-			int playerEntityId,
-			IGuardianSkillLevelConfig levelConfig,
-			float duration)
+		private void CreateProjectile(Vector2 position,
+									  float angle,
+									  int layer,
+									  int playerEntityId,
+									  IGuardianSkillLevelConfig levelConfig,
+									  float duration, 
+									  float baseDamage)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -170,7 +173,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			ref var speed = ref speedPool.Get(entity.Id);
 
 			speed.InitialSpeed = GetSpeed(levelConfig);
-			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
+			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider.Clone().AddDamageValue(baseDamage);
 
 			if (movementPool.Has(entity.Id))
 			{

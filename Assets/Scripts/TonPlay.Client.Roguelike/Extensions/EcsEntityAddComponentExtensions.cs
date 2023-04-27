@@ -319,13 +319,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref PrepareToSpawnBottleOfHolyWaterProjectileComponent AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(
-			this EcsEntity entity, IHolyWaterSkillLevelConfig config, int layer, int creatorEntityId)
+		public static ref PrepareToSpawnBottleOfHolyWaterProjectileComponent AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(this EcsEntity entity, IHolyWaterSkillLevelConfig config, int layer, int creatorEntityId, float creatorBaseDamage)
 		{
 			ref var component = ref entity.Add<PrepareToSpawnBottleOfHolyWaterProjectileComponent>();
 			component.Config = config;
 			component.Layer = layer;
 			component.CreatorEntityId = creatorEntityId;
+			component.CreatorBaseDamage = creatorBaseDamage;
 			return ref component;
 		}
 
@@ -512,6 +512,13 @@ namespace TonPlay.Client.Roguelike.Extensions
 		public static ref LookAtTargetComponent AddLookAtTargetComponent(this EcsEntity entity)
 		{
 			ref var component = ref entity.Add<LookAtTargetComponent>();
+			return ref component;
+		}
+		
+		public static ref BaseDamageComponent AddBaseDamageComponent(this EcsEntity entity, float value)
+		{
+			ref var component = ref entity.Add<BaseDamageComponent>();
+			component.Value = value;
 			return ref component;
 		}
 	}

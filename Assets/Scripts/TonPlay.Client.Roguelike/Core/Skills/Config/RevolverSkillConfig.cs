@@ -86,7 +86,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 					_shootDelay = _shootDelay,
 					_fieldOfView = _fieldOfView,
 					_collisionLayerMask = _collisionLayerMask,
-					_damageProvider = _damageProvider.Clone(),
+					_damageProvider = _damageProvider.CloneInternal(),
 					_description = (string) _description.Clone(),
 					_level = _level,
 					_collisionAreaConfig = (CircleCollisionAreaConfig) _collisionAreaConfig.Clone(),

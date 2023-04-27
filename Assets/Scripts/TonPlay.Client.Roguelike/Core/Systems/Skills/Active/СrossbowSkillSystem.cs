@@ -96,6 +96,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
 						.Inc<RotationComponent>()
+						.Inc<BaseDamageComponent>()
+						.Inc<DamageMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
@@ -104,11 +106,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
 			var rotationPool = _world.GetPool<RotationComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var rotation = ref rotationPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
@@ -132,13 +136,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 					var angleStep = levelConfig.FieldOfView/(levelConfig.ProjectileQuantity - 1);
 					for (var idx = 0; idx < levelConfig.ProjectileQuantity; idx++)
 					{
-						CreateProjectile(idx, position.Position, rotation.Direction, angleStep, layer, levelConfig);
+						CreateProjectile(idx, position.Position, rotation.Direction, angleStep, layer, levelConfig, baseDamage.Value);
 					}
 				}
 			}
 		}
 
-		private void CreateProjectile(int idx, Vector2 position, Vector2 crossbowDirection, float angleStep, int layer, ICrossbowLevelSkillConfig levelSkillConfig)
+		private void CreateProjectile(
+			int idx, 
+			Vector2 position, 
+			Vector2 crossbowDirection, 
+			float angleStep, 
+			int layer, 
+			ICrossbowLevelSkillConfig levelSkillConfig, 
+			float baseDamage)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -161,7 +172,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var collisionPool = _world.GetPool<CollisionComponent>();
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
-			damageOnCollision.DamageProvider = levelSkillConfig.DamageProvider;
+			damageOnCollision.DamageProvider = levelSkillConfig.DamageProvider.Clone().AddDamageValue(baseDamage);
 
 			collisionPool.AddOrGet(entity.Id);
 

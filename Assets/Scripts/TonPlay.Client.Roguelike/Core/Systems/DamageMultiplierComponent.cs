@@ -10,11 +10,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			get
 			{
-				var value = 1f;
+				var value = 0f;
 				
 				foreach (var mapValue in Map.Values)
 				{
-					value *= mapValue;
+					value += mapValue;
 				}
 
 				return value;
