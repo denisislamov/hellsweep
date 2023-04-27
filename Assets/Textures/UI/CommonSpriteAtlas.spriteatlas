@@ -90,6 +90,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4661dd76f72d044bea11b544e1b9cd94, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
   - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
+  - {fileID: 21300000, guid: a106ef17fe2684aa69bf5b33665d83fd, type: 3}
   - {fileID: 21300000, guid: 461ddb27c2e8346ab92e82a01c85f3ac, type: 3}
   - {fileID: 21300000, guid: f7d8f157bef03400b938a491cafadfd5, type: 3}
   - {fileID: 21300000, guid: bf61898717aef4797ba5c26491375c54, type: 3}
@@ -125,6 +126,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8aad821d82e304c7485f9b60002c64cb, type: 3}
   - {fileID: 21300000, guid: a1c26b5dbc6f54093a34d2b07a08906d, type: 3}
   - {fileID: 21300000, guid: 4115b26dbc6e349bcbc1a5ef7f9c8f89, type: 3}
+  - {fileID: 21300000, guid: f1244f7dd474e4a0d80754107f201e27, type: 3}
   - {fileID: 21300000, guid: a57ab4ad8c32b4dd59fafea1947af1c1, type: 3}
   - {fileID: 21300000, guid: 1e134fdd72b0d43bc96bfbe88955aac8, type: 3}
   - {fileID: 21300000, guid: 419065edfcfbc45e886f7103c8b9c6e4, type: 3}
@@ -179,6 +181,7 @@ SpriteAtlas:
   - Icons_EnergyDrink_01a
   - joystick_background_01a
   - BackgroundSidebarInactive_01
+  - Icon_Attribute_Armor_01
   - SkillLevelPoint_02a
   - SkillLevelProgressBar_01a
   - EquipItemsBackground
@@ -214,6 +217,7 @@ SpriteAtlas:
   - Icons_RoninOyoroi_01a
   - Weapon
   - SmallButton_01a
+  - Icon_Attribute_Attack_01
   - TitleBackgroundTexture_04
   - Star
   - Icon_Attribute_Health_01

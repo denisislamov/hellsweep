@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Roguelike.Client.Utilities;
@@ -30,8 +31,14 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		[SerializeField]
 		private Sprite _defaultSlotIcon;
 
+		[SerializeField]
+		private AttributeIconSet[] _attributeIconSets;
+
 		private Dictionary<RarityName, ColorSet> _colorSetsByRarityMap;
 		private Dictionary<RarityName, ColorSet> ColorSetsByRarity => _colorSetsByRarityMap ??= _colorSetsByRarity.ToDictionary(_ => _.Rarity, _ => _);
+
+		private Dictionary<AttributeName, Sprite> _attributeIconMap;
+		private Dictionary<AttributeName, Sprite> AttributeIconMap => _attributeIconMap ??= _attributeIconSets.ToDictionary(_ => _.AttributeName, _ => _.Sprite);
 
 		
 		private Dictionary<string, InventoryItemPresentation> _presentationsMap;
@@ -55,6 +62,11 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 			return SlotIcons.ContainsKey(slotName) ? SlotIcons[slotName] : _defaultSlotIcon;
 		}
 		
+		public Sprite GetItemAttributeIcon(AttributeName attributeName)
+		{
+			return AttributeIconMap.ContainsKey(attributeName) ? AttributeIconMap[attributeName] : null;
+		}
+
 		public IInventoryItemPresentation GetItemPresentation(string itemId)
 		{
 			return !string.IsNullOrWhiteSpace(itemId) && ItemsPresentations.ContainsKey(itemId) ? ItemsPresentations[itemId] : null;
@@ -73,6 +85,13 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 	internal class SlotIconSet
 	{
 		public SlotName SlotName;
+		public Sprite Sprite;
+	}
+	
+	[Serializable]
+	internal class AttributeIconSet
+	{
+		public AttributeName AttributeName;
 		public Sprite Sprite;
 	}
 	
