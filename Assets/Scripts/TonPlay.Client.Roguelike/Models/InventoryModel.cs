@@ -12,7 +12,8 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly InventoryData _data = new InventoryData()
 		{
 			Items = new List<InventoryItemData>(),
-			Slots = new Dictionary<SlotName, SlotData>()
+			Slots = new Dictionary<SlotName, SlotData>(),
+			MergeSlots = new List<SlotData>(3)
 		};
 		
 		private readonly Subject<Unit> _updated = new Subject<Unit>();
@@ -20,9 +21,12 @@ namespace TonPlay.Client.Roguelike.Models
 
 		private List<IInventoryItemModel> _items = new List<IInventoryItemModel>();
 		private Dictionary<SlotName, ISlotModel> _slots = new Dictionary<SlotName, ISlotModel>();
+		private List<ISlotModel> _mergeSlots = new List<ISlotModel>(3);
 
 		public IReadOnlyList<IInventoryItemModel> Items => _items;
 		public IReadOnlyDictionary<SlotName, ISlotModel> Slots => _slots;
+		public IReadOnlyList<ISlotModel> MergeSlots => _mergeSlots;
+
 		public IReadOnlyReactiveProperty<long> Blueprints => _blueprints;
 		public IObservable<Unit> Updated => _updated;
 		
@@ -35,7 +39,8 @@ namespace TonPlay.Client.Roguelike.Models
 		{
 			UpdateItems(data);
 			UpdateSlots(data);
-
+			UpdateMergeSlots(data);
+			
 			if (data.Blueprints != Blueprints.Value)
 			{
 				_blueprints.SetValueAndForceNotify(data.Blueprints);
@@ -89,11 +94,30 @@ namespace TonPlay.Client.Roguelike.Models
 			}
 		}
 
+		private void UpdateMergeSlots(InventoryData data)
+		{
+			for (var i = 0; i < data.MergeSlots.Count; i++)
+			{
+				if (_mergeSlots.Count >= i)
+				{
+					_mergeSlots.Add(new SlotModel());
+				}
+
+				_mergeSlots[i].Update(data.MergeSlots[i]);
+			}
+
+			while (_mergeSlots.Count > data.MergeSlots.Count)
+			{
+				_mergeSlots.RemoveAt(_mergeSlots.Count - 1);
+			}
+		}
+		
 		public InventoryData ToData()
 		{
 			_data.Items.Clear();
 			_data.Slots.Clear();
-
+			_data.MergeSlots.Clear();
+			
 			for (var i = 0; i < _items.Count; i++)
 			{
 				_data.Items.Add(_items[i].ToData());
@@ -109,6 +133,11 @@ namespace TonPlay.Client.Roguelike.Models
 				_data.Slots[kvp.Key] = _slots[kvp.Key].ToData();
 			}
 
+			for (var i = 0; i < _mergeSlots.Count; i++)
+			{
+				_data.MergeSlots.Add(_mergeSlots[i].ToData());
+			}
+			
 			return _data;
 		}
 	}

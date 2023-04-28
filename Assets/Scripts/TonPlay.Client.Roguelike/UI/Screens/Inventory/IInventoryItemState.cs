@@ -8,5 +8,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		IInventoryItemModel Model { get; }
 		IReadOnlyReactiveProperty<bool> EquippedState { get; }
 		void SetEquippedState(bool state);
+		
+		IReadOnlyReactiveProperty<bool> InMergingState { get; }
+		
+		void SetMergeState(bool state);
 	}
 }

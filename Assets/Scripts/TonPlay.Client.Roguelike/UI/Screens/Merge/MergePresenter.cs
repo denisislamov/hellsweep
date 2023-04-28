@@ -18,6 +18,7 @@ using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
 using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Merge
@@ -136,9 +137,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void AddSlotPresenters()
         {
-            // AddSlotPresenter(0, View.Slots[0]);
-            // AddSlotPresenter(1, View.Slots[0]);
-            // AddSlotPresenter(2, View.Slots[0]);
+            AddSlotPresenter(0, View.Slots[0]);
+            AddSlotPresenter(1, View.Slots[1]); 
+            AddSlotPresenter(2, View.Slots[2]);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
         }
@@ -153,9 +154,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         
         private void AddSubscriptionToSlotsToRefreshAttributes()
         {
-            foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots)
+            foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots)
             {
-                kvp.Value.Updated.Subscribe((unit) => RefreshAttributes()).AddTo(_compositeDisposables);
+                // kvp.Value.Updated.Subscribe((unit) => RefreshAttributes()).AddTo(_compositeDisposables);
             }
         }
         
@@ -164,11 +165,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             // TODO - add attributes
         }
         
-        private void AddSlotPresenter(SlotName slotName, IInventorySlotView view)
+        private void AddSlotPresenter(int index, IInventorySlotView view)
         {
-            var slotsModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots;
-            var slotModel = slotsModel[slotName];
-
+            var slotsModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var slotModel = slotsModel[index];
+            
             var presenter = _inventorySlotPresenterFactory.Create(
                 view,
                 new InventorySlotContext(slotModel, () => SlotClickHandler(slotModel)));
@@ -192,28 +193,33 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 return;
             }
 
-            var itemModel = GetItemModel(slotModel.ItemId.Value);
-			
-            _uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
-                new InventoryItemUpgradeScreenContext(itemModel, UnequipItem, true));
-        }
-        
-        private async void UnequipItem(IInventoryItemModel item)
-        {
-            var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
-            var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
+            // var itemModel = GetItemModel(slotModel.ItemId.Value);
             
-            SetSlotItemEquippedState(requiredSlot, false);
+            SetSlotItemInMergingState(slotModel, false);
         }
         
-        private void SetSlotItemEquippedState(ISlotModel requiredSlot, bool state)
+        private void SetSlotItemInMergingState(ISlotModel requiredSlot, bool state)
         {
-            if (requiredSlot.ItemId?.Value is null)
+            if (requiredSlot.ItemId?.Value == string.Empty)
             {
                 return;
             }
 
-            _itemStates[requiredSlot.ItemId.Value].SetEquippedState(state);
+            _itemStates[requiredSlot.ItemId.Value].SetMergeState(state);
+        }
+        
+        private void InMergeItem(ISlotModel requiredSlot, IInventoryItemModel item)
+        {
+            SetSlotItemInMergingState(requiredSlot, false);
+            AddItemToSlotModel(item, requiredSlot);
+            SetSlotItemInMergingState(requiredSlot, true);
+        }
+        
+        private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
+        {
+            var requiredSlotData = requiredSlot.ToData();
+            requiredSlotData.ItemId = item.Id.Value;
+            requiredSlot.Update(requiredSlotData);
         }
         
         private void AddInventoryButtonPresenter()
@@ -355,6 +361,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void ItemClickHandler(IInventoryItemModel item)
         {
+            Debug.LogFormat("ItemClickHandler: {0}", item.Id.Value);
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var i = 0;
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
+                {
+                    break;
+                }
+            }
+
+            if (i < mergingSlots.Count)
+            {
+                InMergeItem(mergingSlots[i], item);
+            }
         }
 
         private int SortItemsByCurrentSortType(IInventoryItemState x, IInventoryItemState y)
