@@ -15,7 +15,7 @@ MonoBehaviour:
   _skillType: 0
   _title: Crossbow
   _description: Crossbow text
-  _icon: {fileID: 4444314321190802610, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}
+  _icon: {fileID: 21300000, guid: 4a2db37820395421dae12e2232a6c523, type: 3}
   _excludeFromInitialDrop: 1
   _maxLevel: 5
   _evolutions: 
