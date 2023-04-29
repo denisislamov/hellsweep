@@ -172,7 +172,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             
             var presenter = _inventorySlotPresenterFactory.Create(
                 view,
-                new InventorySlotContext(slotModel, () => SlotClickHandler(slotModel)));
+                new InventorySlotContext(slotModel, () => SlotClickHandler(index, slotModel)));
 
             Presenters.Add(presenter);
         }
@@ -186,9 +186,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             Presenters.Add(presenter);
         }
         
-        private void SlotClickHandler(ISlotModel slotModel)
+        private void SlotClickHandler(int index, ISlotModel slotModel)
         {
-            if (slotModel.ItemId?.Value is null)
+            Debug.LogFormat("SlotClickHandler {0}", slotModel.SlotName);
+            
+            if (slotModel.ItemId?.Value == string.Empty)
             {
                 return;
             }
@@ -196,6 +198,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             // var itemModel = GetItemModel(slotModel.ItemId.Value);
             
             SetSlotItemInMergingState(slotModel, false);
+            
+            var slotData = slotModel.ToData();
+            slotData.ItemId = string.Empty;
+            slotModel.Update(slotData);
         }
         
         private void SetSlotItemInMergingState(ISlotModel requiredSlot, bool state)
@@ -204,7 +210,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             {
                 return;
             }
-
+            
+            // TODO - Slot view update
             _itemStates[requiredSlot.ItemId.Value].SetMergeState(state);
         }
         
@@ -339,7 +346,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 								 
             items.Sort(SortItemsByCurrentSortType);
 			
-            var slots = inventory.Slots;
+            var mergeSlots = inventory.MergeSlots;
 
             for (var i = 0; i < items.Count; i++)
             {
@@ -347,6 +354,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
                 var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
+                for (var j = 0; j < mergeSlots.Count; j++)
+                {
+                    if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
+                    {
+                        items[i].SetMergeState(true);
+                    }
+                }
+
+                
                 // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
             }
 
