@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using UniRx;
 
@@ -9,8 +11,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		IReadOnlyReactiveProperty<bool> EquippedState { get; }
 		void SetEquippedState(bool state);
 		
-		IReadOnlyReactiveProperty<bool> InMergingState { get; }
-		
-		void SetMergeState(bool state);
+		IReadOnlyReactiveProperty<MergeStates> MergingState { get; }
+		void SetMergeState(MergeStates state);
 	}
 }

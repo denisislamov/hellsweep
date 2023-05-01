@@ -197,14 +197,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
             // var itemModel = GetItemModel(slotModel.ItemId.Value);
             
-            SetSlotItemInMergingState(slotModel, false);
+            SetSlotItemInMergingState(slotModel, MergeStates.NONE);
             
             var slotData = slotModel.ToData();
             slotData.ItemId = string.Empty;
             slotModel.Update(slotData);
         }
         
-        private void SetSlotItemInMergingState(ISlotModel requiredSlot, bool state)
+        private void SetSlotItemInMergingState(ISlotModel requiredSlot, MergeStates state)
         {
             if (requiredSlot.ItemId?.Value == string.Empty)
             {
@@ -217,9 +217,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         
         private void InMergeItem(ISlotModel requiredSlot, IInventoryItemModel item)
         {
-            SetSlotItemInMergingState(requiredSlot, false);
+            SetSlotItemInMergingState(requiredSlot, MergeStates.NONE);
             AddItemToSlotModel(item, requiredSlot);
-            SetSlotItemInMergingState(requiredSlot, true);
+            SetSlotItemInMergingState(requiredSlot, MergeStates.IN_MERGE);
         }
         
         private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
@@ -358,11 +358,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 {
                     if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
                     {
-                        items[i].SetMergeState(true);
+                        items[i].SetMergeState(MergeStates.IN_MERGE);
                     }
                 }
-
-                
                 // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
             }
 

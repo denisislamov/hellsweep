@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
@@ -21,5 +22,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 		void SetPanelText(string text);
 
 		void SetEquippedState(bool state);
+		
+		void SetMergeState(MergeStates State, Color color);
 	}
 }

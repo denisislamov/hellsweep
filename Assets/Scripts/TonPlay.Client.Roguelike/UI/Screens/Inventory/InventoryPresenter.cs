@@ -171,7 +171,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 				var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
 				var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
-
+				
 				switch (itemConfig.AttributeName)
 				{
 					case AttributeName.ATTACK:

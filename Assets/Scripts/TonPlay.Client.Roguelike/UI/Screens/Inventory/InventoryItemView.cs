@@ -1,9 +1,12 @@
+using System;
 using Nox7atra.UIFigmaGradients;
 using TMPro;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,6 +71,28 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			for (var i = 0; i < _equippedObjects.Length; i++)
 			{
 				_equippedObjects[i].SetActive(state);
+			}
+		}
+
+		public void SetMergeState(MergeStates State, Color color)
+		{
+			Debug.LogFormat("SetMergeState {0}", State);
+			switch (State)
+			{
+				case MergeStates.NONE:
+					_iconImage.color = Color.white;
+					break;
+				case MergeStates.AVAILABLE:
+					_iconImage.color = Color.white;
+					break;
+				case MergeStates.NOT_AVAILABLE:
+					_iconImage.color = Color.gray;
+					break;
+				case MergeStates.IN_MERGE:
+					_iconImage.color = Color.blue;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(State), State, null);
 			}
 		}
 	}
