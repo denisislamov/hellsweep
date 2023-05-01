@@ -114,6 +114,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private void InitView()
         {
             SetCurrentSortType(InventorySortType.Rarity);
+            UpdateView();
         }
         
         private void AddNestedProfileBarPresenter()
@@ -202,6 +203,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             var slotData = slotModel.ToData();
             slotData.ItemId = string.Empty;
             slotModel.Update(slotData);
+            
+            UpdateView();
         }
         
         private void SetSlotItemInMergingState(ISlotModel requiredSlot, MergeStates state)
@@ -211,8 +214,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 return;
             }
             
-            // TODO - Slot view update
             _itemStates[requiredSlot.ItemId.Value].SetMergeState(state);
+            UpdateView();
         }
         
         private void InMergeItem(ISlotModel requiredSlot, IInventoryItemModel item)
@@ -430,6 +433,49 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         internal class Factory : PlaceholderFactory<IMergeView, IMergeScreenContext, MergePresenter>
         {
 
+        }
+
+        private void UpdateView()
+        {
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var i = 0;
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
+                {
+                    break;
+                }
+            }
+            
+            View.SelectItemText.gameObject.SetActive(false);
+            
+            View.MergedItemView.gameObject.SetActive(false);
+            View.GlowImage.gameObject.SetActive(false);
+            View.DescriptionPanel.gameObject.SetActive(false);
+            
+            View.MergeButtonView.Hide();
+            
+            Debug.LogFormat("i {0}", i);
+            
+            if (i == 0)
+            {
+                View.SelectItemText.gameObject.SetActive(true);
+            }
+            else if (i > 0 && i <= 3)
+            {
+                View.MergedItemView.gameObject.SetActive(true);
+                View.GlowImage.gameObject.SetActive(true);
+                View.DescriptionPanel.gameObject.SetActive(true);
+
+                //var config = _inventoryItemsConfigProvider.Get(mergingSlots[0].ItemId.Value);
+                //var slotIcon = _inventoryItemPresentationProvider.GetSlotIcon(config.SlotName);
+                //View.SetMergedItemView(slotIcon);
+            }
+
+            if (i == mergingSlots.Count)
+            {
+                View.MergeButtonView.Show();
+            }
         }
     }
 }
