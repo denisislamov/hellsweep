@@ -3,27 +3,35 @@ include:
   ref: master
   file: /defaults/web3-gaming.yml
 - project: tonplay/gitlabci-templates
-  ref: master
+  ref: roguelike-ci
   file: /snippets/build.yml
 - project: tonplay/gitlabci-templates
   ref: master
   file: /snippets/deploy.yml
 
-
 stages:
 - build
 - deploy
 
-
-Build Hellsweep:
-  extends: .build-docker-manual
+.build-hellsweep:
+  extends: .build-docker
   stage: build
   variables:
-    IMAGE_NAME: hellsweep-asia-front-dev
-    IMAGE_TAG: dev
+    IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
     DIR: ./BuildTemplate/webgl
 
+Build Hellsweep (dev):
+  extends: .build-hellsweep
+  variables:
+    IMAGE_TAG: dev
+  rules:
+  - <<: *if-dev-branch
+
+Build Hellsweep (main):
+  extends: .build-hellsweep
+  rules:
+  - <<: *if-main-branch
 
 Deploy Hellsweep:
   extends: .deploy-image-cloudrun-manual-dev
