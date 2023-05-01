@@ -6,7 +6,7 @@ include:
     ref: roguelike-ci
     file: /snippets/build.yml
   - project: tonplay/gitlabci-templates
-    ref: master
+    ref: roguelike-ci
     file: /snippets/deploy.yml
 
 stages:
@@ -35,11 +35,25 @@ Build Hellsweep (main):
   rules:
     - !reference [.if-main-branch, rules]
 
-Deploy Hellsweep:
+Deploy Hellsweep (dev):
   extends:
-    - .deploy-image-cloudrun-manual-dev
+    - .deploy-image-cloudrun
   stage: deploy
   variables:
     APP_NAME: hellsweep-front-dev-asia
-    IMAGE_NAME: hellsweep-asia-front-dev
+    IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
+  rules:
+    - !reference [.if-dev-branch, rules]
+
+Deploy Hellsweep (prod):
+  extends:
+    - .deploy-image-cloudrun
+  stage: deploy
+  variables:
+    APP_NAME: hellsweep-front-prod-asia
+    IMAGE_NAME: hellsweep-asia-front
+    SERVICE_PATH: BuildTemplate/webgl
+  rules:
+    - !reference [.if-dev-branch, rules]
+    - !reference [.if-manual, rules]
