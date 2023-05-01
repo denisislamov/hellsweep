@@ -3,10 +3,10 @@ include:
     ref: master
     file: /defaults/web3-gaming.yml
   - project: tonplay/gitlabci-templates
-    ref: roguelike-ci
+    ref: master
     file: /snippets/build.yml
   - project: tonplay/gitlabci-templates
-    ref: roguelike-ci
+    ref: master
     file: /snippets/deploy.yml
 
 stages:
