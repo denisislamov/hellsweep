@@ -34,7 +34,7 @@ Build Hellsweep (main):
     - .build-hellsweep
   rules:
     - !reference [.if-main-branch, rules]
-    - !reference [.if-service-shanges, rules]
+    - !reference [.if-service-changes, rules]
 
 Deploy Hellsweep (dev):
   extends:
