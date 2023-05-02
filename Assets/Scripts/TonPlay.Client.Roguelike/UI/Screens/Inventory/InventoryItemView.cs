@@ -76,6 +76,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public void SetMergeState(MergeStates state)
 		{
+			Debug.LogFormat("InventoryItemView SetMergeState {0}", state);
 			switch (state)
 			{
 				case MergeStates.NONE:
@@ -85,7 +86,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 					_iconImage.color = Color.white;
 					break;
 				case MergeStates.NOT_AVAILABLE:
-					_iconImage.color = Color.gray;
+					_iconImage.color = Color.black;
 					break;
 				case MergeStates.IN_MERGE:
 					_iconImage.color = Color.green;

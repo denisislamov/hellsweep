@@ -206,6 +206,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             slotModel.Update(slotData);
             
             UpdateView();
+            RefreshItems();
         }
         
         private void SetSlotItemInMergingState(ISlotModel requiredSlot, MergeStates state)
@@ -216,7 +217,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             }
             
             _itemStates[requiredSlot.ItemId.Value].SetMergeState(state);
-            UpdateView();
         }
         
         private void InMergeItem(ISlotModel requiredSlot, IInventoryItemModel item)
@@ -224,6 +224,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             SetSlotItemInMergingState(requiredSlot, MergeStates.NONE);
             AddItemToSlotModel(item, requiredSlot);
             SetSlotItemInMergingState(requiredSlot, MergeStates.IN_MERGE);
+            
+            UpdateView();
+            RefreshItems();
         }
         
         private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
@@ -357,14 +360,36 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             for (var i = 0; i < items.Count; i++)
             {
                 _itemStates.Add(items[i].Model.Id.Value, items[i]);
-
-                var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
-
+                
+                items[i].SetMergeState(MergeStates.NONE);
+                
                 for (var j = 0; j < mergeSlots.Count; j++)
                 {
                     if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
                     {
                         items[i].SetMergeState(MergeStates.IN_MERGE);
+                    }
+                    else
+                    {
+                        var mergingItemModel = GetItemModel(mergeSlots[0].ItemId.Value);
+                        if (mergingItemModel != null)
+                        {
+                            var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                            var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
+
+                            if (mergingItemConfig.Name != itemConfig.Name ||
+                                mergingItemConfig.Rarity != itemConfig.Rarity)
+                            {
+                                items[i].SetMergeState(MergeStates.NOT_AVAILABLE);
+                            }
+                            else
+                            {
+                                if (items[i].MergingState.Value != MergeStates.IN_MERGE)
+                                {
+                                    items[i].SetMergeState(MergeStates.AVAILABLE);
+                                }
+                            }
+                        }
                     }
                 }
                 // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
@@ -504,6 +529,59 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             if (i == mergingSlots.Count)
             {
                 View.MergeButtonView.Show();
+            }
+
+            //UpdateItemCollectionPresenter();
+        }
+        
+        private void UpdateItemCollectionPresenter()
+        {
+            var inventory = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+            var items = inventory.Items
+                .Select(item => (IInventoryItemState)new InventoryItemState(item))
+                .ToList();
+								 
+            var mergeSlots = inventory.MergeSlots;
+
+            for (var i = 0; i < _itemStates.Count; i++)
+            {
+                items[i].SetMergeState(MergeStates.NONE);
+                // _itemStates.Add(items[i].Model.Id.Value, items[i]);
+                
+                for (var j = 0; j < mergeSlots.Count; j++)
+                {
+                    if (mergeSlots[j].ItemId.Value == string.Empty)
+                    {
+                        continue;
+                    }
+
+                    if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
+                    {
+                        items[i].SetMergeState(MergeStates.IN_MERGE);
+                    }
+                    else
+                    {
+                        var mergingItemModel = GetItemModel(mergeSlots[0].ItemId.Value);
+                        if (mergingItemModel == null)
+                        {
+                            continue;
+                        }
+                        
+                        var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                        var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
+
+                        if (mergingItemConfig.Name != itemConfig.Name ||
+                            mergingItemConfig.Rarity != itemConfig.Rarity)
+                        {
+                            items[i].SetMergeState(MergeStates.NOT_AVAILABLE);
+                            Debug.LogFormat("items[i] {0} MergeStates.NOT_AVAILABLE", items[i].Model.ItemId.Value);
+                        }
+                        else
+                        {
+                            items[i].SetMergeState(MergeStates.AVAILABLE);
+                        }
+                    }
+                }
             }
         }
     }

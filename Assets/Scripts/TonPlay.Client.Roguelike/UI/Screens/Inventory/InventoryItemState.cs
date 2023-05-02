@@ -1,6 +1,7 @@
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using UniRx;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 {
@@ -23,8 +24,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		private ReactiveProperty<MergeStates> _mergingState = new ReactiveProperty<MergeStates>(MergeStates.NONE);
 		public IReadOnlyReactiveProperty<MergeStates> MergingState => _mergingState;
+		
 		public void SetMergeState(MergeStates state)
 		{
+			Debug.LogFormat("InventoryItemState SetMergeState {0}", state);
 			_mergingState.SetValueAndForceNotify(state);
 		}
 	}
