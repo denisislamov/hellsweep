@@ -14,7 +14,7 @@ stages:
   - deploy
 
 .build-hellsweep:
-  extends: .build-docker
+  extends: .build-docker-base
   stage: build
   variables:
     IMAGE_NAME: hellsweep-asia-front
@@ -34,6 +34,7 @@ Build Hellsweep (main):
     - .build-hellsweep
   rules:
     - !reference [.if-main-branch, rules]
+    - !reference [.if-service-shanges, rules]
 
 Deploy Hellsweep (dev):
   extends:
