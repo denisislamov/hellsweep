@@ -9,7 +9,7 @@ include:
     ref: master
     file: /snippets/deploy.yml
 
-image: google/cloud-sdk:428.0.0
+image: google/cloud-sdk:410.0.0
 
 stages:
   - build
