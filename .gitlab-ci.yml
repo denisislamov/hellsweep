@@ -20,6 +20,7 @@ stages:
     IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
     DIR: ./BuildTemplate/webgl
+    IMAGE_TAG: latest
 
 Build Hellsweep (dev):
   extends:
