@@ -74,10 +74,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			}
 		}
 
-		public void SetMergeState(MergeStates State, Color color)
+		public void SetMergeState(MergeStates state)
 		{
-			Debug.LogFormat("SetMergeState {0}", State);
-			switch (State)
+			switch (state)
 			{
 				case MergeStates.NONE:
 					_iconImage.color = Color.white;
@@ -89,10 +88,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 					_iconImage.color = Color.gray;
 					break;
 				case MergeStates.IN_MERGE:
-					_iconImage.color = Color.blue;
+					_iconImage.color = Color.green;
 					break;
 				default:
-					throw new ArgumentOutOfRangeException(nameof(State), State, null);
+					throw new ArgumentOutOfRangeException(nameof(state), state, null);
 			}
 		}
 	}

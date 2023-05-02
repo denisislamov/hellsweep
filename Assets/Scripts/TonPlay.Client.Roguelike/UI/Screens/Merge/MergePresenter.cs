@@ -3,6 +3,7 @@ using System.Linq;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -229,6 +230,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         {
             var requiredSlotData = requiredSlot.ToData();
             requiredSlotData.ItemId = item.Id.Value;
+            requiredSlotData.Id = item.ItemId.Value;
+            
             requiredSlot.Update(requiredSlotData);
         }
         
@@ -467,9 +470,35 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 View.GlowImage.gameObject.SetActive(true);
                 View.DescriptionPanel.gameObject.SetActive(true);
 
-                //var config = _inventoryItemsConfigProvider.Get(mergingSlots[0].ItemId.Value);
-                //var slotIcon = _inventoryItemPresentationProvider.GetSlotIcon(config.SlotName);
-                //View.SetMergedItemView(slotIcon);
+                var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
+
+                if (itemModel != null)
+                {
+                    var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                    var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
+                    var presentation = _inventoryItemPresentationProvider.GetItemPresentation(itemModel.ItemId.Value);
+                    
+                    var rarityValue = itemConfig.Rarity;
+                    var name = itemConfig.Name;
+
+                    var maxLevelLabel = "Max Lvl";
+                    var attributeNameLabel = itemConfig.AttributeName;
+                    
+                    var maxLevelValue = detailConfig.Level;
+                    var attributeValue = detailConfig.Value;
+                    
+                    View.SetDescriptionHeaderText(rarityValue + " " + name);
+                    View.SetDescriptionInfoText(maxLevelLabel + "\n" +
+                                                attributeNameLabel);
+                    View.SetDescriptionValuesText(maxLevelValue + "\n" +
+                                                  attributeValue);
+                    // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)
+                    // Max Lvl\nAttack\nMax Lvl
+                    // 20 <color=#55FE5D>> 30</color>
+                    // 30 <color=#55FE5D>> 140</color>
+                    // 40 <color=#55FE5D>> 60</color>
+                    View.SetMergedItemView(presentation.Icon);
+                }
             }
 
             if (i == mergingSlots.Count)

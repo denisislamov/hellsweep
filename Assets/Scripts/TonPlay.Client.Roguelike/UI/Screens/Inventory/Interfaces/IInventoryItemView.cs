@@ -23,6 +23,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces
 
 		void SetEquippedState(bool state);
 		
-		void SetMergeState(MergeStates State, Color color);
+		void SetMergeState(MergeStates state);
 	}
 }

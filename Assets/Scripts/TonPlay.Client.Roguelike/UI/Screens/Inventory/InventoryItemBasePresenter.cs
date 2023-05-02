@@ -46,7 +46,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			var itemModel = _inventoryModel.GetItemModel(Context.UserItemId.Value);
 			Context.IsEquipped.Subscribe(state => View.SetEquippedState(state)).AddTo(_subscriptions);
-			Context.MergeState.Subscribe(state => View.SetMergeState(state, Context.MainColor * 0.5f)).AddTo(_subscriptions);
+			Context.MergeState.Subscribe(state => View.SetMergeState(state)).AddTo(_subscriptions);
 			itemModel.DetailId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
 			itemModel.ItemId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
 			
@@ -64,7 +64,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			View.SetItemSlotIcon(Context.SlotIcon);
 			View.SetPanelText($"Lv.{level}");
 			View.SetEquippedState(Context.IsEquipped.Value);
-			View.SetMergeState(Context.MergeState.Value, Context.MainColor * 0.5f);
+			View.SetMergeState(Context.MergeState.Value);
 		}
 		
 		private void AddButtonPresenter()
