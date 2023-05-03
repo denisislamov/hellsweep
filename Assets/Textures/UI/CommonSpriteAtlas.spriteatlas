@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
   - {fileID: 21300000, guid: 6848fdf360b684dd094e0e428df7046c, type: 3}
+  - {fileID: 21300000, guid: c4f345044774447da85d83ba4de4ae21, type: 3}
   - {fileID: 21300000, guid: ff37e0145e7d34880b8d9074902b67a5, type: 3}
   - {fileID: 21300000, guid: 45b1b11495d444ff5866a071d52bc0ee, type: 3}
   - {fileID: 21300000, guid: c4bf3d14b3d1140319f250df7a62f603, type: 3}
@@ -79,6 +80,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9d59f234a6c8145469f6827027ec1ae0, type: 3}
   - {fileID: -3154963133287660859, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
   - {fileID: 2305930069447662853, guid: c882615464c6c42bf8cc999d85be2ca2, type: 3}
+  - {fileID: 21300000, guid: afed94f4d4ae545439de103e226e155c, type: 3}
   - {fileID: 21300000, guid: 2bbac415e3f194c9cb424313092e7f66, type: 3}
   - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
   - {fileID: 21300000, guid: b8772045f46ff4c8587fbb3d0e8be2f2, type: 3}
@@ -122,6 +124,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ae2ce99b50d384c52b72f02810a0198b, type: 3}
   - {fileID: 21300000, guid: c538c2cb68a70ac4298ef6fb0993b42f, type: 3}
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
+  - {fileID: 21300000, guid: ac2f460c456424e3ea7cfeab5a756a8b, type: 3}
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
   - {fileID: 21300000, guid: 8aad821d82e304c7485f9b60002c64cb, type: 3}
@@ -139,6 +142,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0345d3dea35f342668e72e65b23038e0, type: 3}
   - {fileID: 21300000, guid: b7a3712ff37d841508745687ec6a8130, type: 3}
   - {fileID: 21300000, guid: a1703c2fd8bbc44d5bd84907afdb3590, type: 3}
+  - {fileID: 21300000, guid: 0d83b75fe308a4b709407a638f101dcb, type: 3}
   - {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
   - {fileID: 21300000, guid: bc8ab47f213464d30b6f3602eb11f98a, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -165,6 +169,7 @@ SpriteAtlas:
   - RectangleHalfRounded8
   - Icons_ExoBracer_01a
   - EquipTitleBackground
+  - Shop
   - SubTitleBackgroundTexture_03
   - Icons_Battle_01a
   - SubTitleBackground_01
@@ -172,6 +177,7 @@ SpriteAtlas:
   - Particle_01a
   - SkillChoiceSkillsIcons_01a_1
   - SkillChoiceSkillsIcons_01a_0
+  - RectangleDonut
   - Icon_Skill_SilverBar_01a
   - CircleDonut_01a
   - CloseButton_01
@@ -215,6 +221,7 @@ SpriteAtlas:
   - Icons_SportShoes_01a
   - Apply_button
   - RectangleRounded32
+  - TitleBackground_03
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a
   - Icons_RoninOyoroi_01a
@@ -232,6 +239,7 @@ SpriteAtlas:
   - Neck
   - RectangleHalfRounded16
   - Icons_Kills_01a
+  - LootBox_01a
   - Icons_Coin_01a
   - IconPlacementBackgroundBordered_01a
   m_RenderDataMap: {}

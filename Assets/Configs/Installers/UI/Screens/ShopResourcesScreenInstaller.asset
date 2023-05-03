@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc178a14455346bab46de76f77da82d7, type: 3}
+  m_Name: ShopResourcesScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 1214565324161529236, guid: 3b9df42ff19a0415bb9b490cc7629c71, type: 3}
