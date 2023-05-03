@@ -1,34 +1,61 @@
 include:
-- project: tonplay/gitlabci-templates
-  ref: master
-  file: /defaults/web3-gaming.yml
-- project: tonplay/gitlabci-templates
-  ref: master
-  file: /snippets/build.yml
-- project: tonplay/gitlabci-templates
-  ref: master
-  file: /snippets/deploy.yml
-
+  - project: tonplay/gitlabci-templates
+    ref: master
+    file: /defaults/web3-gaming.yml
+  - project: tonplay/gitlabci-templates
+    ref: master
+    file: /snippets/build.yml
+  - project: tonplay/gitlabci-templates
+    ref: master
+    file: /snippets/deploy.yml
 
 stages:
-- build
-- deploy
+  - build
+  - deploy
 
-
-Build Hellsweep:
-  extends: .build-docker-manual
+.build-hellsweep:
+  extends: .build-docker-base
   stage: build
   variables:
-    IMAGE_NAME: hellsweep-asia-front-dev
-    IMAGE_TAG: dev
+    IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
     DIR: ./BuildTemplate/webgl
 
+Build Hellsweep (dev):
+  extends:
+    - .build-hellsweep
+  variables:
+    IMAGE_TAG: dev
+  rules:
+    - !reference [.if-dev-branch, rules]
+    - !reference [.if-service-changes, rules]
 
-Deploy Hellsweep:
-  extends: .deploy-image-cloudrun-manual-dev
+Build Hellsweep (main):
+  extends:
+    - .build-hellsweep
+  rules:
+    - !reference [.if-main-branch, rules]
+    - !reference [.if-service-changes, rules]
+
+Deploy Hellsweep (dev):
+  extends:
+    - .deploy-image-cloudrun
   stage: deploy
   variables:
     APP_NAME: hellsweep-front-dev-asia
-    IMAGE_NAME: hellsweep-asia-front-dev
+    IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
+  rules:
+    - !reference [.if-dev-branch, rules]
+
+Deploy Hellsweep (prod):
+  extends:
+    - .deploy-image-cloudrun
+  stage: deploy
+  variables:
+    APP_NAME: hellsweep-front-prod-asia
+    IMAGE_NAME: hellsweep-asia-front
+    SERVICE_PATH: BuildTemplate/webgl
+  rules:
+    - !reference [.if-dev-branch, rules]
+    - !reference [.if-manual, rules]
