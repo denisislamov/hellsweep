@@ -65,6 +65,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         [SerializeField] 
         private GameObject _descriptionPanel;
         
+        [SerializeField]
+        private ParticleSystem _mergeParticles;
+        
         public IProfileBarView ProfileBarView => _profileBarView;
         public INavigationMenuView NavigationMenuView => _navigationMenuView;
         public IInventoryItemCollectionView ItemCollectionView => _itemCollectionView;
@@ -75,11 +78,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         public IInventorySlotView[] Slots => _slots;
         public IButtonView MergeButtonView => _mergeButtonView;
         public TMP_Text SelectItemText => _selectItemText;
-
+        
         public Image GlowImage => _glowImage;
         
         public GameObject DescriptionPanel => _descriptionPanel;
-
+        public ParticleSystem MergeParticles => _mergeParticles;
+        
         public void SetMergedItemView(Sprite sprite)
         {
             _mergedItemView.sprite = sprite;

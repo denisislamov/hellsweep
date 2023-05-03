@@ -517,26 +517,27 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 }
             }
             
-            View.SelectItemText.gameObject.SetActive(false);
-            
-            View.MergedItemView.gameObject.SetActive(false);
-            View.GlowImage.gameObject.SetActive(false);
-            View.DescriptionPanel.gameObject.SetActive(false);
-            
-            View.MergeButtonView.Hide();
-            
             Debug.LogFormat("i {0}", i);
             
             if (i == 0)
             {
+                View.MergeButtonView.Hide();
+                
+                View.MergedItemView.gameObject.SetActive(false);
+                View.GlowImage.gameObject.SetActive(false);
+                View.DescriptionPanel.gameObject.SetActive(false);
+                View.MergeParticles.gameObject.SetActive(false);
+                
                 View.SelectItemText.gameObject.SetActive(true);
             }
-            else if (i > 0 && i <= 3)
+            else if (i == 1)
             {
+                View.SelectItemText.gameObject.SetActive(false);
                 View.MergedItemView.gameObject.SetActive(true);
                 View.GlowImage.gameObject.SetActive(true);
                 View.DescriptionPanel.gameObject.SetActive(true);
-
+                View.MergeParticles.gameObject.SetActive(true);
+                
                 var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
 
                 if (itemModel != null)
@@ -577,7 +578,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
                     _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
                     View.GlowImage.color = mainColor;
-                    
+
+                    var particlesMain = View.MergeParticles.main;
+                    particlesMain.startColor = mainColor;
                     // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)
                     // Max Lvl\nAttack\nMax Lvl
                     // 20 <color=#55FE5D>> 30</color>

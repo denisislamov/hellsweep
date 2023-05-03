@@ -38,6 +38,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces
         
         Image GlowImage { get; }
         GameObject DescriptionPanel { get; }
+        ParticleSystem MergeParticles { get; }
         
         void SetDescriptionHeaderText(string text);
         
