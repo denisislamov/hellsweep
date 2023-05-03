@@ -530,14 +530,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 
                 View.SelectItemText.gameObject.SetActive(true);
             }
-            else if (i == 1)
+            else if (i > 0 && i <= mergingSlots.Count)
             {
                 View.SelectItemText.gameObject.SetActive(false);
                 View.MergedItemView.gameObject.SetActive(true);
                 View.GlowImage.gameObject.SetActive(true);
                 View.DescriptionPanel.gameObject.SetActive(true);
-                View.MergeParticles.gameObject.SetActive(true);
-                
+
+                if (!View.MergeParticles.gameObject.activeSelf)
+                {
+                    View.MergeParticles.gameObject.SetActive(true);
+                }
+
                 var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
 
                 if (itemModel != null)
