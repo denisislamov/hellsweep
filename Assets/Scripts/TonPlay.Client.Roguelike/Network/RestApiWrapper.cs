@@ -173,7 +173,31 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+        
+        [SerializeField] private ItemMergePostBody _itemMergePostBody;
+        [SerializeField] private Response<ItemMergeResponse> _itemMergeResponse;
+        [ContextMenu("MergeItems")]
+        public async UniTask<Response<ItemMergeResponse>> PostItemMerge(ItemMergePostBody value)
+        {
+            _itemMergeResponse = new Response<ItemMergeResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostItemMerge<ItemMergeResponse> {value}");
+            var postTask = _networkClient.PostAsync<ItemMergeResponse, ItemMergePostBody>("/v1/item/merge", value);
 
+            try
+            
+            {
+                var result = await postTask;
+                _itemMergeResponse = result;
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Common.Utilities.Logger.Log($"PostItemMerge exception {e}");
+                return _itemMergeResponse;
+            }
+        }
+        
         [SerializeField] private Response<ItemsGetResponse> _itemsGetResponse;
         [ContextMenu("GetAllItems")]
         public async UniTask<Response<ItemsGetResponse>> GetAllItems()
