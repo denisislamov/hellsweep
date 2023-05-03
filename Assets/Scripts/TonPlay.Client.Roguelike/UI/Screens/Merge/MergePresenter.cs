@@ -409,6 +409,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             Debug.LogFormat("ItemClickHandler: {0}", item.Id.Value);
             var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
             var i = 0;
+
+            if (mergingSlots.Count > 0 && mergingSlots[0].ItemId.Value != string.Empty)
+            {
+                var mergingItemModel = GetItemModel(mergingSlots[0].ItemId.Value);
+                if (mergingItemModel == null)
+                {
+                    return;
+                }
+
+                var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
+
+                if (mergingItemConfig.Name != itemConfig.Name ||
+                    mergingItemConfig.Rarity != itemConfig.Rarity)
+                {
+                    return;
+                }
+            }
+
             for (; i < mergingSlots.Count; i++)
             {
                 if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
@@ -416,7 +435,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     break;
                 }
             }
-
+            
             if (i < mergingSlots.Count)
             {
                 InMergeItem(mergingSlots[i], item);
@@ -506,6 +525,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     var rarityValue = itemConfig.Rarity;
                     var name = itemConfig.Name;
 
+                    if (rarityValue == RarityName.LEGENDARY)
+                    {
+                        return;
+                    }
+                    
+                    rarityValue = itemConfig.Rarity + 1;
+                    
+                    var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemModel.ItemId.Value);
+                    var rareGradeItemId = innerItemConfig.GetGradeConfig(rarityValue + 1).ItemId;
+                    //
+                    // itemModel = GetItemModel(rareGradeItemId);
+                    itemConfig = _inventoryItemsConfigProvider.Get(rareGradeItemId);
+                    // detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
+
+                    
                     var maxLevelLabel = "Max Lvl";
                     var attributeNameLabel = itemConfig.AttributeName;
                     
@@ -569,7 +603,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                         
                         var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
                         var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
-
+                        
                         if (mergingItemConfig.Name != itemConfig.Name ||
                             mergingItemConfig.Rarity != itemConfig.Rarity)
                         {
