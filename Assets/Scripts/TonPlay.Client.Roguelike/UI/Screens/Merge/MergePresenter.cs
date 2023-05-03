@@ -199,11 +199,23 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
             // var itemModel = GetItemModel(slotModel.ItemId.Value);
             
-            SetSlotItemInMergingState(slotModel, MergeStates.NONE);
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            int i = 0;
+
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (mergingSlots[i].ItemId?.Value == string.Empty)
+                {
+                    break;
+                }
+            }
+            i--;
             
-            var slotData = slotModel.ToData();
+            SetSlotItemInMergingState(mergingSlots[i], MergeStates.NONE);
+            
+            var slotData = mergingSlots[i].ToData();
             slotData.ItemId = string.Empty;
-            slotModel.Update(slotData);
+            mergingSlots[i].Update(slotData);
             
             UpdateView();
             RefreshItems();
