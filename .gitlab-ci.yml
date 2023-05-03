@@ -9,8 +9,6 @@ include:
     ref: master
     file: /snippets/deploy.yml
 
-image: google/cloud-sdk:410.0.0
-
 stages:
   - build
   - deploy
@@ -30,14 +28,12 @@ Build Hellsweep (dev):
     IMAGE_TAG: dev
   rules:
     - !reference [.if-dev-branch, rules]
-    - !reference [.if-service-changes, rules]
 
 Build Hellsweep (main):
   extends:
     - .build-hellsweep
   rules:
     - !reference [.if-main-branch, rules]
-    - !reference [.if-service-changes, rules]
 
 Deploy Hellsweep (dev):
   extends:
