@@ -196,7 +196,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             {
                 return;
             }
-
+            
             // var itemModel = GetItemModel(slotModel.ItemId.Value);
             
             var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
@@ -429,22 +429,33 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 {
                     return;
                 }
-
+                
                 var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
                 var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
 
+                if (mergingItemConfig.Rarity == RarityName.LEGENDARY)
+                {
+                    return;
+                }
+                
                 if (mergingItemConfig.Name != itemConfig.Name ||
                     mergingItemConfig.Rarity != itemConfig.Rarity)
                 {
                     return;
                 }
             }
-
+            
+            
             for (; i < mergingSlots.Count; i++)
             {
                 if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
                 {
                     break;
+                }
+                
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == item.Id.Value)
+                {
+                    return;
                 }
             }
             
@@ -563,6 +574,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                                                 attributeNameLabel);
                     View.SetDescriptionValuesText(maxLevelValue + "\n" +
                                                   attributeValue);
+
+                    _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
+                    View.GlowImage.color = mainColor;
+                    
                     // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)
                     // Max Lvl\nAttack\nMax Lvl
                     // 20 <color=#55FE5D>> 30</color>
