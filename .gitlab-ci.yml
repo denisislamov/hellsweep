@@ -44,7 +44,7 @@ Deploy Hellsweep (dev):
     IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
   rules:
-    - !reference [.if-dev-branch, rules]
+    - !reference [.if-dev-branch-manual, rules]
 
 Deploy Hellsweep (prod):
   extends:
@@ -55,5 +55,4 @@ Deploy Hellsweep (prod):
     IMAGE_NAME: hellsweep-asia-front
     SERVICE_PATH: BuildTemplate/webgl
   rules:
-    - !reference [.if-dev-branch, rules]
-    - !reference [.if-manual, rules]
+    - !reference [.if-main-branch-manual, rules]
