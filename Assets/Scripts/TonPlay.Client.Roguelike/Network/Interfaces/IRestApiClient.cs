@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<InfoLevelAllResponse>> GetInfoLevelAll();
 		UniTask<Response<ItemPutResponse>> PutItem(ItemPutBody value);
 		UniTask<Response<ItemLevelUpPutResponse>> PutItemLevelUp(string id, bool isMax);
+		UniTask<Response<ItemMergeResponse>> PostItemMerge(ItemMergePostBody value);
 		UniTask<Response<ItemsGetResponse>> GetAllItems();
 		UniTask<Response<ItemLevelRatesResponse>> GetItemLevelRatesAll();
 		UniTask<Response<string>> DeleteItem(string slotId);

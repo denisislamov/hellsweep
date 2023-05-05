@@ -1,13 +1,16 @@
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
@@ -94,6 +97,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             
             AddSettingsButtonPresenter();
             AddInventoryButtonPresenter();
+
+            AddMergeButtonPresenter();
             
             InitView();
             RefreshItems();
@@ -104,6 +109,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             base.Show();
             View.Show();
             View.SortPanelView.Hide();
+            View.MergeButtonView.Hide();
         }
 
         public override void Hide()
@@ -258,6 +264,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
             Presenters.Add(presenter);
         }
+
+        private void AddMergeButtonPresenter()
+        {
+            var presenter = _buttonPresenterFactory.Create(View.MergeButtonView,
+                new CompositeButtonContext().Add(new ClickableButtonContext(OnMergeButtonClickHandler)));
+            
+            Presenters.Add(presenter);
+        }
+
         private async void UpdateUserProfile()
         {
             var userBalanceResponse = await _restApiClient.GetUserBalance();
@@ -445,7 +460,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 }
             }
             
-            
             for (; i < mergingSlots.Count; i++)
             {
                 if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
@@ -499,7 +513,77 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             _uiService.Close(Context.Screen);
             _uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
         }
-        
+
+        private async void OnMergeButtonClickHandler()
+        {
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var itemMergePostBody = new ItemMergePostBody();
+            
+            foreach (var mergingSlot in mergingSlots)
+            {
+                var itemModel = GetItemModel(mergingSlot.ItemId.Value);
+                if (itemModel is null)
+                {
+                    return;
+                }
+                
+                itemMergePostBody.itemDetailIds.Add(itemModel.DetailId.Value);
+            }
+            
+            var itemMergeResponse = await _restApiClient.PostItemMerge(itemMergePostBody);
+            if (itemMergeResponse == null)
+            {
+                Debug.Log("itemMergeResponse == null");
+            }
+            else
+            {
+                Debug.Log("Merging success");
+            }
+            // TODO - update inventory
+        }
+
+        private async UniTask UpdateInventoryModel()
+        {
+            var itemsResponseTask = _restApiClient.GetUserItems();
+            var inventoryResponseTask = _restApiClient.GetUserInventory();
+
+            var itemsResponse = await itemsResponseTask;
+            var inventoryResponse = await inventoryResponseTask;
+
+            var metaGameModel = _metaGameModelProvider.Get();
+            var model = metaGameModel.ProfileModel.InventoryModel;
+            var data = model.ToData();
+			
+            for (var i = 0; i < itemsResponse.response.items.Count; i++)
+            {
+                var itemData = itemsResponse.response.items[i];
+                var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemData.itemId);
+				
+                data.Items.Add(new InventoryItemData()
+                {
+                    Id = itemData.id,
+                    ItemId = itemData.itemId,
+                    DetailId = itemData.itemDetailId,
+                });
+            }
+			
+            for (var i = 0; i < 3; i++)
+            {
+                data.MergeSlots.Add(new SlotData()
+                {
+                    Id = string.Empty,
+                    SlotName = SlotName.NECK,
+                    ItemId = string.Empty
+                });
+            }
+
+            data.Blueprints = inventoryResponse.response.blueprints;
+
+            model.Update(data);
+            
+            UpdateView();
+        }
+
         internal class Factory : PlaceholderFactory<IMergeView, IMergeScreenContext, MergePresenter>
         {
 
@@ -532,6 +616,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             }
             else if (i > 0 && i <= mergingSlots.Count)
             {
+                View.MergeButtonView.Hide();
                 View.SelectItemText.gameObject.SetActive(false);
                 View.MergedItemView.gameObject.SetActive(true);
                 View.GlowImage.gameObject.SetActive(true);
@@ -566,7 +651,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     // itemModel = GetItemModel(rareGradeItemId);
                     itemConfig = _inventoryItemsConfigProvider.Get(rareGradeItemId);
                     // detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
-
                     
                     var maxLevelLabel = "Max Lvl";
                     var attributeNameLabel = itemConfig.AttributeName;

@@ -92,7 +92,6 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			}
 
 			var openSessionResponse = await _restApiClient.PostGameSession(requestBody);
-
 			if (openSessionResponse == null)
 			{
 				_uiService.Close(loadingScreen);
@@ -184,8 +183,6 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			await _sceneService.UnloadAdditiveSceneByNameAsync(_locationConfig.SceneName);
 			
 			_uiService.Close(loadingScreen);
-			
-			
 		}
 
 		private async void UpdatePlayerProfile(ProfileData profileData, IGameModel gameModel)
