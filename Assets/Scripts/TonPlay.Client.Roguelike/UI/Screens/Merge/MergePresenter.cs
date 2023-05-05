@@ -525,7 +525,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 if (itemModel is null)
                 {
                     return;
-                }
+                } 
                 
                 itemMergePostBody.itemDetailIds.Add(itemModel.DetailId.Value);
             }
@@ -538,22 +538,54 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             else
             {
                 Debug.Log("Merging success");
+                // UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
+                
+                _inventoryItemsPresenter?.Dispose();
+                _itemStates?.Clear();
+                
+                await UpdateInventoryModel();
+                
+                // UpdateView();
             }
+            
             // TODO - update inventory
         }
 
+        private void UpdateInventoryModel(ItemMergeResponse itemMergeResponse, ItemMergePostBody itemMergePostBody)
+        {
+            var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+            var inventoryData = inventoryModel.ToData();
+
+            inventoryData.Items.RemoveAll(x => itemMergePostBody.itemDetailIds.Contains(x.DetailId));
+            
+            foreach (var mergeSlot in inventoryData.MergeSlots)
+            {
+                mergeSlot.ItemId = string.Empty;
+                mergeSlot.SlotName = SlotName.NECK;
+                mergeSlot.Id = string.Empty;
+            }
+            
+            inventoryModel.Update(inventoryData);
+        }
+        
         private async UniTask UpdateInventoryModel()
         {
             var itemsResponseTask = _restApiClient.GetUserItems();
+            var slotsResponseTask = _restApiClient.GetUserSlots();
             var inventoryResponseTask = _restApiClient.GetUserInventory();
 
             var itemsResponse = await itemsResponseTask;
+            var slotsResponse = await slotsResponseTask;
             var inventoryResponse = await inventoryResponseTask;
 
             var metaGameModel = _metaGameModelProvider.Get();
             var model = metaGameModel.ProfileModel.InventoryModel;
             var data = model.ToData();
 			
+            data.Items.Clear();
+            data.Slots.Clear();
+            data.MergeSlots.Clear();
+            
             for (var i = 0; i < itemsResponse.response.items.Count; i++)
             {
                 var itemData = itemsResponse.response.items[i];
@@ -567,6 +599,19 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 });
             }
 			
+            for (var i = 0; i < slotsResponse.response.items.Count; i++)
+            {
+                var slotData = slotsResponse.response.items[i];
+                var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
+				
+                data.Slots.Add(slotName, new SlotData()
+                {
+                    Id = slotData.id,
+                    SlotName = slotName,
+                    ItemId = slotData.userItemId
+                });
+            }
+
             for (var i = 0; i < 3; i++)
             {
                 data.MergeSlots.Add(new SlotData()
@@ -578,12 +623,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             }
 
             data.Blueprints = inventoryResponse.response.blueprints;
-
             model.Update(data);
             
+            AddItemCollectionPresenter();
             UpdateView();
         }
-
+        
         internal class Factory : PlaceholderFactory<IMergeView, IMergeScreenContext, MergePresenter>
         {
 
