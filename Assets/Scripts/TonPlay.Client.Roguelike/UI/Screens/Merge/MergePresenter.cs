@@ -39,7 +39,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private readonly InventoryItemCollectionPresenter.Factory _inventoryItemCollectionPresenter;
         private readonly IMetaGameModelProvider _metaGameModelProvider;
         private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
-
+        
         private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
         private readonly DictionaryExt<string, IInventoryItemState> _itemStates = new DictionaryExt<string, IInventoryItemState>();
         private readonly ReactiveProperty<string> _sortButtonText = new ReactiveProperty<string>();
@@ -690,25 +690,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     
                     rarityValue = itemConfig.Rarity + 1;
                     
-                    var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemModel.ItemId.Value);
-                    var rareGradeItemId = innerItemConfig.GetGradeConfig(rarityValue + 1).ItemId;
-                    //
-                    // itemModel = GetItemModel(rareGradeItemId);
-                    itemConfig = _inventoryItemsConfigProvider.Get(rareGradeItemId);
-                    // detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
-                    
                     var maxLevelLabel = "Max Lvl";
                     var attributeNameLabel = itemConfig.AttributeName;
-                    
-                    var maxLevelValue = detailConfig.Level;
-                    var attributeValue = detailConfig.Value;
-                    
+
+
+                    var nextRarityMap = _inventoryItemsConfigProvider.GetNextRarityMap();
                     View.SetDescriptionHeaderText(rarityValue + " " + name);
                     View.SetDescriptionInfoText(maxLevelLabel + "\n" +
                                                 attributeNameLabel);
-                    View.SetDescriptionValuesText(maxLevelValue + "\n" +
-                                                  attributeValue);
+                    
+                    if (nextRarityMap.ContainsKey(itemModel.ItemId.Value))
+                    {
+                        var items = nextRarityMap[itemModel.ItemId.Value];
+                        var maxLevelValue = items.details[items.details.Count - 1].level;
+                        var attributeValue= items.details[detailConfig.Level - 1].value;
+                        View.SetDescriptionValuesText(maxLevelValue + "\n" +
+                                                      attributeValue);
 
+                    }
+                    
                     _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
                     View.GlowImage.color = mainColor;
 

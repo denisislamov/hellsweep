@@ -42,7 +42,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 				previousDetail = currentDetail;
 			}
 			
-			_provider.ConfigsMap[id] = new InventoryItemConfig(
+			_provider.ConfigsMap[id] = new 
+				InventoryItemConfig(
 				id: item.id,
 				name: item.name,
 				rarity: rarity,
@@ -54,6 +55,45 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		public void UpdateItemUpgradePrices(ushort level, ItemLevelRatesResponse.Item remoteConfig)
 		{
 			_provider.UpgradePricesMap[level] = new InventoryItemUpgradePriceConfig(remoteConfig.id, remoteConfig.coins, remoteConfig.blueprints);
+		}
+
+		public void UpdateItemRarenessConfigs(List<ItemsGetResponse.Item> responseItems)
+		{
+			Dictionary<string, ItemsGetResponse.Item> nextRarityMap = _provider.NextRarityMap;
+			nextRarityMap.Clear();
+			
+			for (var i = 0; i < responseItems.Count - 1; i++)
+			{
+				var item = responseItems[i];
+				var name = item.name;
+				var rarity = (RarityName)Enum.Parse(typeof(RarityName), item.rarity, true);
+
+				if (rarity == RarityName.LEGENDARY)
+				{
+					continue;
+				}
+
+				for (var j = i + 1; j < responseItems.Count; j++)
+				{
+					if (name != responseItems[j].name)
+					{
+						continue;
+					}
+
+					var rarityJ = (RarityName)Enum.Parse(typeof(RarityName), responseItems[j].rarity, true);
+					if (rarity + 1 == rarityJ)
+					{
+						if (nextRarityMap.ContainsKey(item.id))
+						{
+							nextRarityMap[item.id] = responseItems[j];
+						}
+						else
+						{
+							nextRarityMap.Add(item.id, responseItems[j]);
+						}
+					}
+				}
+			}
 		}
 	}
 }
