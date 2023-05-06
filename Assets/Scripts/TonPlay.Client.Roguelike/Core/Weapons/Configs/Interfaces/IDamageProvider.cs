@@ -9,5 +9,9 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 		float Rate { get; }
 		
 		float DamageMultiplier { get; set; }
+
+		IDamageProvider AddDamageValue(float damage);
+
+		IDamageProvider Clone();
 	}
 }

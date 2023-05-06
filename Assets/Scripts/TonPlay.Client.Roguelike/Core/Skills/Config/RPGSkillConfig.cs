@@ -68,7 +68,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 				{
 					_delay = _delay,
 					_projectileQuantity = _projectileQuantity,
-					_damageProvider = _damageProvider.Clone(),
+					_damageProvider = _damageProvider.CloneInternal(),
 					_description = (string) _description.Clone(),
 					_level = _level,
 				};

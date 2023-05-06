@@ -91,7 +91,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 				{
 					_size = _size,
 					_collisionLayerMask = _collisionLayerMask,
-					_damageProvider = _damageProvider.Clone(),
+					_damageProvider = _damageProvider.CloneInternal(),
 					_description = (string) _description.Clone(),
 					_level = _level,
 					_collisionAreaConfig = (CircleCollisionAreaConfig) _collisionAreaConfig.Clone(),

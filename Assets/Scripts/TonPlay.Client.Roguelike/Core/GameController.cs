@@ -16,6 +16,7 @@ using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm;
 using TonPlay.Client.Roguelike.Core.Systems.Skills;
 using TonPlay.Client.Roguelike.Core.Systems.Skills.Active;
 using TonPlay.Client.Roguelike.Core.Systems.Skills.Passive;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game;
@@ -69,6 +70,8 @@ namespace TonPlay.Client.Roguelike.Core
 
 		private bool _inited;
 		private KdTreeStorage[] _storages;
+		private IMetaGameModelProvider _metaGameModelProvider;
+		private IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 
 		[Inject]
 		public void Construct(
@@ -80,10 +83,13 @@ namespace TonPlay.Client.Roguelike.Core
 			SharedData.Factory sharedDataFactory,
 			ILocationConfigStorage locationConfigStorage,
 			CollectablesEntityFactory.Factory collectablesEntityFactoryFactory,
-			IMetaGameModelProvider metaGameModelProvider)
+			IMetaGameModelProvider metaGameModelProvider,
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider)
 		{
 			_uiService = uiService;
 			_locationConfigStorage = locationConfigStorage;
+			_metaGameModelProvider = metaGameModelProvider;
+			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 
 			CreateGameModel(gameModelSetter);
 
@@ -138,7 +144,7 @@ namespace TonPlay.Client.Roguelike.Core
 			AddCameraToEcsWorld();
 
 			_spawnSystems = new EcsSystems(_world, _sharedData)
-						   .Add(new PlayerSpawnSystem(_playersKdTreeStorage))
+						   .Add(new PlayerSpawnSystem(_playersKdTreeStorage, _metaGameModelProvider, _inventoryItemsConfigProvider))
 						   .Add(new EnemyWaveSpawnSystem(_enemyKdTreeStorage))
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
 						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesEntityFactory))
@@ -223,6 +229,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new HolyWaterSkillSystem())
 							.Add(new ForcefieldDeviceSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new RevolverSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
+							.Add(new ShurikenSkillSystem(_overlapExecutor, _playerProjectilesKdTreeStorage))
 							.Add(new CrossbowSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new KatanaSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new FitnessGuideSkillSystem())
@@ -354,7 +361,9 @@ namespace TonPlay.Client.Roguelike.Core
 		{
 			var inventoryModel = metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var userItemId = inventoryModel.Slots[SlotName.WEAPON]?.ItemId?.Value;
-			return inventoryModel.GetItemModel(userItemId).ItemId.Value;
+			var weaponItemId = inventoryModel.GetItemModel(userItemId)?.ItemId?.Value;
+			//todo hardcoded katana
+			return weaponItemId ?? "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
 		}
 	}
 }

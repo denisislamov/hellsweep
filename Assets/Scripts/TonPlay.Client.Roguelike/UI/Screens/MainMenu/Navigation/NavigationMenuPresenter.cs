@@ -8,6 +8,8 @@ using TonPlay.Client.Roguelike.UI.Screens.Inventory;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Shop;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.Interfaces;
 using UniRx;
 using Zenject;
 
@@ -17,24 +19,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 	{
 		private readonly IUIService _uiService;
 		private readonly NavigationButtonPresenter.Factory _navigationButtonPresenterFactory;
-		
+
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
 		private readonly ReactiveProperty<NavigationMenuTabName> _currentActiveTab = new ReactiveProperty<NavigationMenuTabName>();
 
 		public NavigationMenuPresenter(INavigationMenuView view,
-			INavigationMenuContext context,
-			IUIService uiService,
-			NavigationButtonPresenter.Factory navigationButtonPresenterFactory)
+									   INavigationMenuContext context,
+									   IUIService uiService,
+									   NavigationButtonPresenter.Factory navigationButtonPresenterFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_navigationButtonPresenterFactory = navigationButtonPresenterFactory;
-			
+
 			_currentActiveTab.SetValueAndForceNotify(Context.InitialTab);
-			
+
 			AddMainMenuButtonPresenter();
 			AddInventoryButtonPresenter();
+			AddShopButtonPresenter();
 		}
 
 		public override void Dispose()
@@ -42,7 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 			_compositeDisposables.Dispose();
 			base.Dispose();
 		}
-		
+
 		private void AddMainMenuButtonPresenter()
 		{
 			var context = new NavigationButtonContext(
@@ -57,13 +60,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddInventoryButtonPresenter()
 		{
 			var context = new NavigationButtonContext(
-					OnInventoryButtonClickHandler,
-					NavigationMenuTabName.Inventory,
-					_currentActiveTab)
+				OnInventoryButtonClickHandler,
+				NavigationMenuTabName.Inventory,
+				_currentActiveTab)
 			{
 				Screen = Context.Screen
 			};
@@ -72,17 +75,38 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 
 			Presenters.Add(presenter);
 		}
-		
+
+		private void AddShopButtonPresenter()
+		{
+			var context = new NavigationButtonContext(
+				OnShopButtonClickHandler,
+				NavigationMenuTabName.Shop,
+				_currentActiveTab)
+			{
+				Screen = Context.Screen
+			};
+
+			var presenter = _navigationButtonPresenterFactory.Create(View.ShopButtonView, context);
+
+			Presenters.Add(presenter);
+		}
+
 		private void OnMainMenuButtonClickHandler()
 		{
 			_uiService.Close(Context.Screen);
 			_uiService.Open<MainMenuScreen, IMainMenuScreenContext>(new MainMenuScreenContext());
 		}
-		
+
 		private void OnInventoryButtonClickHandler()
 		{
 			_uiService.Close(Context.Screen);
 			_uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
+		}
+
+		private void OnShopButtonClickHandler()
+		{
+			_uiService.Close(Context.Screen);
+			_uiService.Open<ShopScreen, IShopScreenContext>(new ShopScreenContext(ShopNavTab.Packs));
 		}
 
 		public class Factory : PlaceholderFactory<INavigationMenuView, INavigationMenuContext, NavigationMenuPresenter>

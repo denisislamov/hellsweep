@@ -43,3 +43,14 @@ MonoBehaviour:
     _skillName: 26
   - _itemId: c9060a0e-8a2b-49dd-8e37-3cad6856ed1d
     _skillName: 26
+  - _itemId: 78af8a73-1fc5-4ac2-8684-b1c2ae0ef9c6
+    _skillName: 1
+  - _itemId: f2ffae76-f563-4d52-ae69-bf4a73b61b08
+    _skillName: 1
+  - _itemId: 5ad89519-5b4f-465f-ad87-df3e06d48d8e
+    _skillName: 1
+  - _itemId: 3bcee08a-a60c-4b0d-89ce-55c8dd91f1ba
+    _skillName: 1
+  _defaultWeapon:
+    _itemId: 
+    _skillName: 0

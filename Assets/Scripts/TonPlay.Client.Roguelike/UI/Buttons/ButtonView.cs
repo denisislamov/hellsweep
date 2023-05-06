@@ -68,8 +68,15 @@ namespace TonPlay.Client.Roguelike.UI.Buttons
 		
 		public void SetLockState(bool locked)
 		{
-			_lockedViewObject.SetActive(locked);
-			_unlockedViewObject.SetActive(!locked);
+			if (_lockedViewObject != null)
+			{
+				_lockedViewObject.SetActive(locked);
+			}
+			
+			if (_unlockedViewObject != null)
+			{
+				_unlockedViewObject.SetActive(!locked);
+			}
 			
 			for (var i = 0; i < _lockedViewObjects.Length; i++)
 			{

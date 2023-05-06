@@ -4,6 +4,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 	{
 		MainMenu,
 		Inventory,
-		Settings
+		Shop
 	}
 }

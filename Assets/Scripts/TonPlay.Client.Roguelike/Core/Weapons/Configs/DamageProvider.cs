@@ -29,7 +29,15 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 			set => _damageMultiplier = value;
 		}
 		
-		public DamageProvider Clone()
+		public IDamageProvider AddDamageValue(float damage)
+		{
+			this.damage += damage;
+			return this;
+		}
+
+		public IDamageProvider Clone() => CloneInternal();
+
+		public DamageProvider CloneInternal()
 		{
 			return new DamageProvider()
 			{

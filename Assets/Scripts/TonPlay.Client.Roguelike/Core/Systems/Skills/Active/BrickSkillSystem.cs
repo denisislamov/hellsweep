@@ -57,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<BrickSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<BaseDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
@@ -65,11 +66,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
@@ -92,7 +95,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						skill.SpawnQuantity = levelConfig.Quantity;
 					}
 
-					CreateProjectile(position.Position, layer, levelConfig);
+					CreateProjectile(position.Position, layer, levelConfig, baseDamage.Value);
 
 					skill.SpawnQuantity--;
 					skill.RefreshLeftTime = skill.SpawnQuantity == 0
@@ -102,7 +105,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			}
 		}
 
-		private void CreateProjectile(Vector2 position, int layer, IBrickSkillLevelConfig levelConfig)
+		private void CreateProjectile(Vector2 position, int layer, IBrickSkillLevelConfig levelConfig, float baseDamage)
 		{
 			if (!_pool.TryGet<ProjectileView>(_poolIdentity, out var poolObject))
 			{
@@ -133,6 +136,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			ref var acceleration = ref accelerationPool.AddOrGet(entity.Id);
 
 			damageOnCollisionComponent.DamageProvider = levelConfig.DamageProvider;
+			damageOnCollisionComponent.DamageProvider.Clone().AddDamageValue(baseDamage);
 
 			speed.InitialSpeed = (_config.DistanceToThrow - acceleration.Acceleration*Mathf.Pow(_config.TimeToReachDistance, 2)/2f)
 								 /_config.TimeToReachDistance;

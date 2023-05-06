@@ -57,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<RPGSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<BaseDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
 						.Exc<DeadComponent>()
 						.End();
@@ -65,11 +66,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 
 			foreach (var entityId in filter)
 			{
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var rpg = ref rpgPool.Get(entityId);
@@ -91,7 +94,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 					for (int i = 0; i < levelConfig.ProjectileQuantity; i++)
 					{
-						CreateProjectile(position.Position, layer, levelConfig.DamageProvider);
+						CreateProjectile(position.Position, layer, levelConfig.DamageProvider.Clone().AddDamageValue(baseDamage.Value));
 					}
 				}
 			}

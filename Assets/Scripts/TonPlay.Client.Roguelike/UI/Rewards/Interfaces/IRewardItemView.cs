@@ -7,6 +7,8 @@ namespace TonPlay.Client.Roguelike.UI.Rewards.Interfaces
 	{
 		void SetIcon(Sprite icon);
 
+		void SetBackgroundGradientMaterial(Material material);
+
 		void SetCountText(string text);
 
 		void SetCountActiveState(bool state);

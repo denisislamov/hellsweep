@@ -92,7 +92,7 @@ namespace TonPlay.Client.Roguelike.Core.Skills.Config
 					_activeTime = _activeTime,
 					_cooldown = _cooldown,
 					_radius = _radius,
-					_damageProvider = _damageProvider.Clone(),
+					_damageProvider = _damageProvider.CloneInternal(),
 					_description = (string) _description.Clone(),
 					_level = _level,
 					_collisionAreaConfig = (CircleCollisionAreaConfig) _collisionAreaConfig.Clone(),

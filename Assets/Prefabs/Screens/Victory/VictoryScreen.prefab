@@ -1314,6 +1314,10 @@ MonoBehaviour:
   _button: {fileID: 6751581382574301401}
   _text: {fileID: 2082491488603785777}
   _activatableObjects: []
+  _unlockedViewObject: {fileID: 0}
+  _lockedViewObject: {fileID: 0}
+  _unlockedViewObjects: []
+  _lockedViewObjects: []
 --- !u!1 &2884201724440447671
 GameObject:
   m_ObjectHideFlags: 0

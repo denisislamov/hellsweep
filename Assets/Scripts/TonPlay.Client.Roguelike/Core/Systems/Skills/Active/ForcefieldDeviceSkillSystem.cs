@@ -70,11 +70,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Inc<PositionComponent>()
 						.Inc<StackTryApplyDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
+						.Inc<BaseDamageComponent>()
 						.Exc<DeadComponent>()
 						.End();
 
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 			var stackTryApplyDamagePool = _world.GetPool<StackTryApplyDamageComponent>();
 
@@ -85,6 +87,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			foreach (var entityId in filter)
 			{
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 
@@ -114,7 +117,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 					ref var stack = ref stackTryApplyDamagePool.Get(entityId);
 					stack.Stack.Push(new TryApplyDamageComponent()
 					{
-						DamageProvider = levelConfig.DamageProvider,
+						DamageProvider = levelConfig.DamageProvider.Clone().AddDamageValue(baseDamage.Value),
 						VictimEntityId = overlappedEntityId,
 					});
 				}

@@ -57,6 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 						.Filter<HolyWaterSkill>()
 						.Inc<SkillsComponent>()
 						.Inc<PositionComponent>()
+						.Inc<BaseDamageComponent>()
 						.Inc<DamageMultiplierComponent>()
 						.Inc<SkillDurationMultiplierComponent>()
 						.Exc<DeadComponent>()
@@ -66,6 +67,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			var playerPool = _world.GetPool<PlayerComponent>();
 			var skillsPool = _world.GetPool<SkillsComponent>();
 			var positionPool = _world.GetPool<PositionComponent>();
+			var baseDamagePool = _world.GetPool<BaseDamageComponent>();
 			var damageMultiplierPool = _world.GetPool<DamageMultiplierComponent>();
 			var durationMultiplierPool = _world.GetPool<SkillDurationMultiplierComponent>();
 
@@ -73,6 +75,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			{
 				ref var durationMultiplier = ref durationMultiplierPool.Get(entityId);
 				ref var damageMultiplier = ref damageMultiplierPool.Get(entityId);
+				ref var baseDamage = ref baseDamagePool.Get(entityId);
 				ref var position = ref positionPool.Get(entityId);
 				ref var skills = ref skillsPool.Get(entityId);
 				ref var skill = ref skillPool.Get(entityId);
@@ -104,7 +107,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 						entity.AddBottleOfHolyWaterProjectileComponent();
 						entity.AddPrepareToSpawnAfterTimerComponent(_config.DelayBetweenThrowingProjectiles);
-						entity.AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(levelConfig, layer, entityId);
+						entity.AddPrepareToSpawnBottleOfHolyWaterProjectileComponent(levelConfig, layer, entityId, baseDamage.Value);
 						entity.AddRotationComponent(direction);
 						entity.AddPositionComponent(position.Position);
 					}
@@ -137,7 +140,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 				if (timer.TimeLeft <= 0)
 				{
-					CreateThrowableProjectile(position.Position, rotation.Direction, prepare.Layer, prepare.Config, prepare.CreatorEntityId);
+					CreateThrowableProjectile(position.Position, rotation.Direction, prepare.Layer, prepare.Config, prepare.CreatorEntityId, prepare.CreatorBaseDamage);
 
 					_world.DelEntity(entityId);
 				}
@@ -149,7 +152,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			Vector2 direction, 
 			int layer, 
 			IHolyWaterSkillLevelConfig levelConfig, 
-			int creatorEntityId)
+			int creatorEntityId,
+			float baseDamage)
 		{
 			if (!_pool.TryGet<ProjectileView>(_throwablePoolIdentity, out var poolObject))
 			{
@@ -173,7 +177,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 
 			ref var damageOnCollision = ref damageOnCollisionPool.AddOrGet(entity.Id);
 			
-			damageOnCollision.DamageProvider = levelConfig.DamageProvider;
+			damageOnCollision.DamageProvider = levelConfig.DamageProvider.Clone().AddDamageValue(baseDamage);
 		}
 
 		private Vector2 GetRandomDirection()

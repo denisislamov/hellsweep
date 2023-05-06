@@ -7,5 +7,7 @@ namespace TonPlay.Client.Roguelike.UI.Rewards.Interfaces
 		string Id { get; }
 		
 		Sprite Icon { get; }
+		
+		Material BackgroundGradientMaterial { get; }
 	}
 }

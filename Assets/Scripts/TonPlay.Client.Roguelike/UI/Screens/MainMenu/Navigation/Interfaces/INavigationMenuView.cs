@@ -8,6 +8,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation.Interfaces
 		INavigationButtonView MainMenuButtonView { get; }
 		
 		INavigationButtonView InventoryButtonView { get; }
-
+		
+		INavigationButtonView ShopButtonView { get; }
 	}
 }

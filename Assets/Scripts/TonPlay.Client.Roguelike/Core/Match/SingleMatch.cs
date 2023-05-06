@@ -118,16 +118,6 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var profileModel = metaGameModel.ProfileModel;
 			var profileData = profileModel.ToData();
 
-			UpdateCurrentLocationTimeMillis(locationsData, gameModel);
-			UpdatePlayerProfile(profileData, gameModel);
-			
-			await UpdateUserBalance();
-			
-			if (matchResult.MatchResultType == MatchResultType.Win)
-			{
-				UnlockNextLocation(locationsData);
-			}
-
 			var gameSessionResponse = await _restApiClient.GetGameSession();
 			if (gameSessionResponse != null)
 			{
@@ -150,8 +140,17 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				}
 			}
 			
+			UpdatePlayerProfile(profileData, gameModel);
 			profileModel.Update(profileData);
+			
+			UpdateCurrentLocationTimeMillis(locationsData, gameModel);
+			if (matchResult.MatchResultType == MatchResultType.Win)
+			{
+				UnlockNextLocation(locationsData);
+			}
 			locationsModel.Update(locationsData);
+			
+			await UpdateUserBalance();
 
 			_analyticsServiceWrapper.OnSingleMatchFinishSession(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value);
 			
@@ -166,7 +165,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var model = metaGameModel.ProfileModel;
 			var data = metaGameModel.ProfileModel.ToData();
 
-			data.BalanceData.Gold = userBalanceResponse.response.coin;
+			data.BalanceData.Gold = userBalanceResponse.response.coins;
 			data.BalanceData.Energy = userBalanceResponse.response.energy;
 
 			model.Update(data);
@@ -199,6 +198,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += RoguelikeConstants.Meta.INCREASE_ENERGY_PER_GAINED_LEVEL;
 			}
+			
+			profileData.InventoryData.Items.AddRange(gameModel.PlayerModel.MatchProfileGainModel.ToData().Items);
 		}
 		
 		private void UpdateCurrentLocationTimeMillis(LocationsData locationsData, IGameModel gameModel)
@@ -251,26 +252,25 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		private static void UpdateGainModelWithResponse(IGameModel gameModel, GameSessionResponse response)
 		{
 			var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
-			gainData.Gold = response.rewardSummary.coin; // TODO check it
-			gainData.ProfileExperience += response.rewardSummary.xp; // TODO check it as well
+			gainData.Gold = response.rewardSummary.coin; 
+			gainData.ProfileExperience += response.rewardSummary.xp;
 
-			var chests = response.rewardSummary.chests;
-			if (chests != null && chests.Count > 0)
+			var responseItems = response.rewardSummary.items;
+			if (responseItems != null && responseItems.Count > 0)
 			{
-				var chestsId = new List<string>(chests.Count);
-				for (var index = 0; index < chests.Count; index++)
+				var items = new List<InventoryItemData>(responseItems.Count);
+				for (var index = 0; index < responseItems.Count; index++)
 				{
-					chestsId[index] = chests[index].id;
+					items.Add(new InventoryItemData()
+					{
+						Id = responseItems[index].id,
+						ItemId = responseItems[index].itemId,
+						DetailId = responseItems[index].itemDetailId
+					});
 				}
 
-				if (gainData.ChestsId != null)
-				{
-					gainData.ChestsId.AddRange(chestsId);
-				}
-				else
-				{
-					gainData.ChestsId = chestsId;
-				}
+				gainData.Items.Clear();
+				gainData.Items.AddRange(items);
 			}
 
 			gameModel.PlayerModel.MatchProfileGainModel.Update(gainData);

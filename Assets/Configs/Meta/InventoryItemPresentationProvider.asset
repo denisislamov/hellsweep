@@ -704,3 +704,10 @@ MonoBehaviour:
   - SlotName: 5
     Sprite: {fileID: 21300000, guid: a1c26b5dbc6f54093a34d2b07a08906d, type: 3}
   _defaultSlotIcon: {fileID: 21300000, guid: 253007599fa8a4785adbb985f5414340, type: 3}
+  _attributeIconSets:
+  - AttributeName: 0
+    Sprite: {fileID: 21300000, guid: f1244f7dd474e4a0d80754107f201e27, type: 3}
+  - AttributeName: 1
+    Sprite: {fileID: 21300000, guid: 419065edfcfbc45e886f7103c8b9c6e4, type: 3}
+  - AttributeName: 2
+    Sprite: {fileID: 21300000, guid: a106ef17fe2684aa69bf5b33665d83fd, type: 3}

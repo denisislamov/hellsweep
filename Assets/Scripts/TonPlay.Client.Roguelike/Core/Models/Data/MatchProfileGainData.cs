@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Models.Data;
 
 namespace TonPlay.Client.Roguelike.Core.Models.Data
 {
@@ -6,7 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Models.Data
 	{
 		public int Gold { get; set; }
 		public float ProfileExperience { get; set; }
-		
-		public List<string> ChestsId { get; set; }
+		public List<InventoryItemData> Items { get; set; }
 	}
 }

@@ -34,9 +34,14 @@ namespace TonPlay.Client.Roguelike.UI.Rewards
 			[SerializeField]
 			private Sprite _icon;
 			
+			[SerializeField]
+			private Material _backgroundGradientMaterial;
+
 			public string Id => _id;
 			
 			public Sprite Icon => _icon;
+			
+			public Material BackgroundGradientMaterial => _backgroundGradientMaterial;
 		}
 	}
 }

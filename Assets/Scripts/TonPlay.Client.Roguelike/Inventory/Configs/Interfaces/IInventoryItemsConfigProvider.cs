@@ -8,6 +8,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		IReadOnlyDictionary<string, IInventoryInnerItemConfig> InnerItemMap { get; }
 
 		IInventoryItemConfig Get(string id);
+		IInventoryItemConfig GetConfigByDetailId(string itemDetailId);
 
 		IInventoryItemUpgradePriceConfig GetUpgradePrice(ushort level);
 		
