@@ -281,7 +281,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             var model = metaGameModel.ProfileModel;
             var data = metaGameModel.ProfileModel.ToData();
 
-            data.BalanceData.Gold = userBalanceResponse.response.coin;
+            data.BalanceData.Gold = userBalanceResponse.response.coins;
             data.BalanceData.Energy = userBalanceResponse.response.energy;
 
             model.Update(data);
