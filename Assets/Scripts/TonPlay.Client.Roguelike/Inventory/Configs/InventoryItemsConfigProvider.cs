@@ -4,6 +4,7 @@ using System.Linq;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		private List<Item> _items;
 		public DictionaryExt<string, IInventoryItemConfig> ConfigsMap { get; } = new DictionaryExt<string, IInventoryItemConfig>();
 		public DictionaryExt<ushort, IInventoryItemUpgradePriceConfig> UpgradePricesMap { get; } = new DictionaryExt<ushort, IInventoryItemUpgradePriceConfig>();
+
+		public readonly Dictionary<string, ItemsGetResponse.Item> NextRarityMap = new Dictionary<string, ItemsGetResponse.Item>();
 
 		public IReadOnlyDictionary<string, IInventoryInnerItemConfig> InnerItemMap =>
 			_itemsMap ??= _items.ToDictionary(
@@ -32,7 +35,9 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 									  _ => InnerItemMap[_.InnerItemId]);
 
 		private Dictionary<string, IInventoryInnerItemConfig> _itemsByItemIdMap;
-
+		
+		// TODO add map for next rarity or something similar
+		
 		public IInventoryItemConfig Get(string id) => !string.IsNullOrWhiteSpace(id) && ConfigsMap.ContainsKey(id)
 			? ConfigsMap[id]
 			: default;
@@ -49,6 +54,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		public IInventoryInnerItemConfig GetInnerItemConfig(string itemId) => 
 			!string.IsNullOrEmpty(itemId) && InnerItemIdMapByItemId.ContainsKey(itemId) ? InnerItemIdMapByItemId[itemId] : default;
 
+		public Dictionary<string, ItemsGetResponse.Item> GetNextRarityMap() => NextRarityMap;
+		
 		[Serializable]
 		public class Item : IInventoryInnerItemConfig
 		{

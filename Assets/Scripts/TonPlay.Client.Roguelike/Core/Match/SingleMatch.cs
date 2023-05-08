@@ -92,7 +92,6 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			}
 
 			var openSessionResponse = await _restApiClient.PostGameSession(requestBody);
-
 			if (openSessionResponse == null)
 			{
 				_uiService.Close(loadingScreen);

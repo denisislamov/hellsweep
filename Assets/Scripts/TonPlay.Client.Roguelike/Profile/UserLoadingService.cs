@@ -189,6 +189,16 @@ namespace TonPlay.Client.Roguelike.Profile
 				});
 			}
 
+			for (var i = 0; i < 3; i++)
+			{
+				data.MergeSlots.Add(new SlotData()
+				{
+					Id = string.Empty,
+					SlotName = SlotName.NECK,
+					ItemId = string.Empty
+				});
+			}
+
 			data.Blueprints = inventoryResponse.response.blueprints;
 
 			model.Update(data);

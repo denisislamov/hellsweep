@@ -41,7 +41,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(Context.ItemId);
 			var gradeConfig = innerItemConfig.GetGradeConfig(Context.GradeDescriptionRarityName);
 			var innerItemPresentationConfig = _inventoryItemPresentationProvider.GetItemPresentation(gradeConfig.ItemId);
-
+			
 			_inventoryItemPresentationProvider.GetColors(Context.GradeDescriptionRarityName, out var color, out var gradient);
 
 			View.SetText(innerItemPresentationConfig.GradeDescription);

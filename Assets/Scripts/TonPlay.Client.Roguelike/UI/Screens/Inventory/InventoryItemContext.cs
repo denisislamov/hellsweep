@@ -1,5 +1,6 @@
 using System;
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -17,7 +18,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		public Color MainColor { get; }
 
 		public IReadOnlyReactiveProperty<bool> IsEquipped { get; }
-
+		public IReadOnlyReactiveProperty<MergeStates> MergeState { get; }
+		
 		public Material BackgroundGradientMaterial { get; }
 		
 		public Action ClickCallback { get; }
@@ -30,6 +32,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Material backgroundGradientMaterial, 
 			string name, 
 			IReadOnlyReactiveProperty<bool> isEquipped,
+			IReadOnlyReactiveProperty<MergeStates> mergeState,
 			Action clickCallback)
 		{
 			UserItemId = userItemId;
@@ -38,6 +41,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			BackgroundGradientMaterial = backgroundGradientMaterial;
 			Name = name;
 			IsEquipped = isEquipped;
+			MergeState = mergeState;
 			SlotIcon = slotIcon;
 			ClickCallback = clickCallback;
 		}

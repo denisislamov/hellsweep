@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TonPlay.Client.Roguelike.Network.Response;
 
 namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 {
@@ -12,5 +13,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		IInventoryItemUpgradePriceConfig GetUpgradePrice(ushort level);
 		
 		IInventoryInnerItemConfig GetInnerItemConfig(string itemId);
+
+		public Dictionary<string, ItemsGetResponse.Item> GetNextRarityMap();
 	}
 }

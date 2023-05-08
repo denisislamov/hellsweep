@@ -70,6 +70,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		{
 			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
 			var detailConfig = config.GetDetails(Context.Item.DetailId.Value);
+			
 			var priceConfig = _inventoryItemsConfigProvider.GetUpgradePrice(detailConfig.Level);
 			var presentation = _inventoryItemPresentationProvider.GetItemPresentation(Context.Item.ItemId.Value);
 			var defaultItemIcon = _inventoryItemPresentationProvider.DefaultItemIcon;

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
@@ -5,7 +7,9 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 
 namespace TonPlay.Client.Roguelike
@@ -97,6 +101,8 @@ namespace TonPlay.Client.Roguelike
 
 				_itemsConfigUpdater.Update(remoteConfig.id, remoteConfig);
 			}
+
+			UpdateItemRarenessConfigs(response.response);
 		}
 		
 		private async UniTask UpdateItemsCostsConfigs()
@@ -109,6 +115,11 @@ namespace TonPlay.Client.Roguelike
 
 				_itemsConfigUpdater.UpdateItemUpgradePrices((ushort)(i + 1), remoteConfig);
 			}
+		}
+
+		private void UpdateItemRarenessConfigs(ItemsGetResponse response)
+		{
+			_itemsConfigUpdater.UpdateItemRarenessConfigs(response.items);
 		}
 	}
 }

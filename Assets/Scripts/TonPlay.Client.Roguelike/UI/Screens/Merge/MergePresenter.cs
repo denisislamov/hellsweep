@@ -1,12 +1,16 @@
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
@@ -18,6 +22,7 @@ using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
 using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Merge
@@ -34,7 +39,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private readonly InventoryItemCollectionPresenter.Factory _inventoryItemCollectionPresenter;
         private readonly IMetaGameModelProvider _metaGameModelProvider;
         private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
-
+        
         private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
         private readonly DictionaryExt<string, IInventoryItemState> _itemStates = new DictionaryExt<string, IInventoryItemState>();
         private readonly ReactiveProperty<string> _sortButtonText = new ReactiveProperty<string>();
@@ -92,6 +97,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             
             AddSettingsButtonPresenter();
             AddInventoryButtonPresenter();
+
+            AddMergeButtonPresenter();
             
             InitView();
             RefreshItems();
@@ -102,6 +109,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             base.Show();
             View.Show();
             View.SortPanelView.Hide();
+            View.MergeButtonView.Hide();
         }
 
         public override void Hide()
@@ -113,6 +121,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private void InitView()
         {
             SetCurrentSortType(InventorySortType.Rarity);
+            UpdateView();
         }
         
         private void AddNestedProfileBarPresenter()
@@ -136,9 +145,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void AddSlotPresenters()
         {
-            // AddSlotPresenter(0, View.Slots[0]);
-            // AddSlotPresenter(1, View.Slots[0]);
-            // AddSlotPresenter(2, View.Slots[0]);
+            AddSlotPresenter(0, View.Slots[0]);
+            AddSlotPresenter(1, View.Slots[1]); 
+            AddSlotPresenter(2, View.Slots[2]);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
             // AddSlotPresenter(SlotName.ARMS, View.ArmsSlotView);
         }
@@ -153,9 +162,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         
         private void AddSubscriptionToSlotsToRefreshAttributes()
         {
-            foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots)
+            foreach (var kvp in _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots)
             {
-                kvp.Value.Updated.Subscribe((unit) => RefreshAttributes()).AddTo(_compositeDisposables);
+                // kvp.Value.Updated.Subscribe((unit) => RefreshAttributes()).AddTo(_compositeDisposables);
             }
         }
         
@@ -164,14 +173,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             // TODO - add attributes
         }
         
-        private void AddSlotPresenter(SlotName slotName, IInventorySlotView view)
+        private void AddSlotPresenter(int index, IInventorySlotView view)
         {
-            var slotsModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots;
-            var slotModel = slotsModel[slotName];
-
+            var slotsModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var slotModel = slotsModel[index];
+            
             var presenter = _inventorySlotPresenterFactory.Create(
                 view,
-                new InventorySlotContext(slotModel, () => SlotClickHandler(slotModel)));
+                new InventorySlotContext(slotModel, () => SlotClickHandler(index, slotModel)));
 
             Presenters.Add(presenter);
         }
@@ -185,35 +194,66 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             Presenters.Add(presenter);
         }
         
-        private void SlotClickHandler(ISlotModel slotModel)
+        private void SlotClickHandler(int index, ISlotModel slotModel)
         {
-            if (slotModel.ItemId?.Value is null)
-            {
-                return;
-            }
-
-            var itemModel = GetItemModel(slotModel.ItemId.Value);
-			
-            _uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
-                new InventoryItemUpgradeScreenContext(itemModel, UnequipItem, true));
-        }
-        
-        private async void UnequipItem(IInventoryItemModel item)
-        {
-            var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
-            var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
+            Debug.LogFormat("SlotClickHandler {0}", slotModel.SlotName);
             
-            SetSlotItemEquippedState(requiredSlot, false);
-        }
-        
-        private void SetSlotItemEquippedState(ISlotModel requiredSlot, bool state)
-        {
-            if (requiredSlot.ItemId?.Value is null)
+            if (slotModel.ItemId?.Value == string.Empty)
             {
                 return;
             }
+            
+            // var itemModel = GetItemModel(slotModel.ItemId.Value);
+            
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            int i = 0;
 
-            _itemStates[requiredSlot.ItemId.Value].SetEquippedState(state);
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (mergingSlots[i].ItemId?.Value == string.Empty)
+                {
+                    break;
+                }
+            }
+            i--;
+            
+            SetSlotItemInMergingState(mergingSlots[i], MergeStates.NONE);
+            
+            var slotData = mergingSlots[i].ToData();
+            slotData.ItemId = string.Empty;
+            mergingSlots[i].Update(slotData);
+            
+            UpdateView();
+            RefreshItems();
+        }
+        
+        private void SetSlotItemInMergingState(ISlotModel requiredSlot, MergeStates state)
+        {
+            if (requiredSlot.ItemId?.Value == string.Empty)
+            {
+                return;
+            }
+            
+            _itemStates[requiredSlot.ItemId.Value].SetMergeState(state);
+        }
+        
+        private void InMergeItem(ISlotModel requiredSlot, IInventoryItemModel item)
+        {
+            SetSlotItemInMergingState(requiredSlot, MergeStates.NONE);
+            AddItemToSlotModel(item, requiredSlot);
+            SetSlotItemInMergingState(requiredSlot, MergeStates.IN_MERGE);
+            
+            UpdateView();
+            RefreshItems();
+        }
+        
+        private static void AddItemToSlotModel(IInventoryItemModel item, ISlotModel requiredSlot)
+        {
+            var requiredSlotData = requiredSlot.ToData();
+            requiredSlotData.ItemId = item.Id.Value;
+            requiredSlotData.Id = item.ItemId.Value;
+            
+            requiredSlot.Update(requiredSlotData);
         }
         
         private void AddInventoryButtonPresenter()
@@ -224,6 +264,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
             Presenters.Add(presenter);
         }
+
+        private void AddMergeButtonPresenter()
+        {
+            var presenter = _buttonPresenterFactory.Create(View.MergeButtonView,
+                new CompositeButtonContext().Add(new ClickableButtonContext(OnMergeButtonClickHandler)));
+            
+            Presenters.Add(presenter);
+        }
+
         private async void UpdateUserProfile()
         {
             var userBalanceResponse = await _restApiClient.GetUserBalance();
@@ -333,15 +382,44 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 								 
             items.Sort(SortItemsByCurrentSortType);
 			
-            var slots = inventory.Slots;
+            var mergeSlots = inventory.MergeSlots;
 
             for (var i = 0; i < items.Count; i++)
             {
                 _itemStates.Add(items[i].Model.Id.Value, items[i]);
+                
+                items[i].SetMergeState(MergeStates.NONE);
+                
+                for (var j = 0; j < mergeSlots.Count; j++)
+                {
+                    if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
+                    {
+                        items[i].SetMergeState(MergeStates.IN_MERGE);
+                    }
+                    else
+                    {
+                        var mergingItemModel = GetItemModel(mergeSlots[0].ItemId.Value);
+                        if (mergingItemModel != null)
+                        {
+                            var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                            var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
-                var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
-
-                // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemIds.Value == items[i].Model.Id.Value);
+                            if (mergingItemConfig.Name != itemConfig.Name ||
+                                mergingItemConfig.Rarity != itemConfig.Rarity)
+                            {
+                                items[i].SetMergeState(MergeStates.NOT_AVAILABLE);
+                            }
+                            else
+                            {
+                                if (items[i].MergingState.Value != MergeStates.IN_MERGE)
+                                {
+                                    items[i].SetMergeState(MergeStates.AVAILABLE);
+                                }
+                            }
+                        }
+                    }
+                }
+                // items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
             }
 
             var presenter = _inventoryItemCollectionPresenter.Create(
@@ -355,6 +433,50 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void ItemClickHandler(IInventoryItemModel item)
         {
+            Debug.LogFormat("ItemClickHandler: {0}", item.Id.Value);
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var i = 0;
+
+            if (mergingSlots.Count > 0 && mergingSlots[0].ItemId.Value != string.Empty)
+            {
+                var mergingItemModel = GetItemModel(mergingSlots[0].ItemId.Value);
+                if (mergingItemModel == null)
+                {
+                    return;
+                }
+                
+                var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
+
+                if (mergingItemConfig.Rarity == RarityName.LEGENDARY)
+                {
+                    return;
+                }
+                
+                if (mergingItemConfig.Name != itemConfig.Name ||
+                    mergingItemConfig.Rarity != itemConfig.Rarity)
+                {
+                    return;
+                }
+            }
+            
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
+                {
+                    break;
+                }
+                
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == item.Id.Value)
+                {
+                    return;
+                }
+            }
+            
+            if (i < mergingSlots.Count)
+            {
+                InMergeItem(mergingSlots[i], item);
+            }
         }
 
         private int SortItemsByCurrentSortType(IInventoryItemState x, IInventoryItemState y)
@@ -391,10 +513,273 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             _uiService.Close(Context.Screen);
             _uiService.Open<InventoryScreen, IInventoryScreenContext>(new InventoryScreenContext());
         }
+
+        private async void OnMergeButtonClickHandler()
+        {
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var itemMergePostBody = new ItemMergePostBody();
+            
+            foreach (var mergingSlot in mergingSlots)
+            {
+                var itemModel = GetItemModel(mergingSlot.ItemId.Value);
+                if (itemModel is null)
+                {
+                    return;
+                } 
+                
+                itemMergePostBody.itemDetailIds.Add(itemModel.DetailId.Value);
+            }
+            
+            var itemMergeResponse = await _restApiClient.PostItemMerge(itemMergePostBody);
+            if (itemMergeResponse == null)
+            {
+                Debug.Log("itemMergeResponse == null");
+            }
+            else
+            {
+                Debug.Log("Merging success");
+                // UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
+                
+                _inventoryItemsPresenter?.Dispose();
+                _itemStates?.Clear();
+                
+                await UpdateInventoryModel();
+                
+                // UpdateView();
+            }
+            
+            // TODO - update inventory
+        }
+
+        private void UpdateInventoryModel(ItemMergeResponse itemMergeResponse, ItemMergePostBody itemMergePostBody)
+        {
+            var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+            var inventoryData = inventoryModel.ToData();
+
+            inventoryData.Items.RemoveAll(x => itemMergePostBody.itemDetailIds.Contains(x.DetailId));
+            
+            foreach (var mergeSlot in inventoryData.MergeSlots)
+            {
+                mergeSlot.ItemId = string.Empty;
+                mergeSlot.SlotName = SlotName.NECK;
+                mergeSlot.Id = string.Empty;
+            }
+            
+            inventoryModel.Update(inventoryData);
+        }
+        
+        private async UniTask UpdateInventoryModel()
+        {
+            var itemsResponseTask = _restApiClient.GetUserItems();
+            var slotsResponseTask = _restApiClient.GetUserSlots();
+            var inventoryResponseTask = _restApiClient.GetUserInventory();
+
+            var itemsResponse = await itemsResponseTask;
+            var slotsResponse = await slotsResponseTask;
+            var inventoryResponse = await inventoryResponseTask;
+
+            var metaGameModel = _metaGameModelProvider.Get();
+            var model = metaGameModel.ProfileModel.InventoryModel;
+            var data = model.ToData();
+			
+            data.Items.Clear();
+            data.Slots.Clear();
+            data.MergeSlots.Clear();
+            
+            for (var i = 0; i < itemsResponse.response.items.Count; i++)
+            {
+                var itemData = itemsResponse.response.items[i];
+                var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemData.itemId);
+				
+                data.Items.Add(new InventoryItemData()
+                {
+                    Id = itemData.id,
+                    ItemId = itemData.itemId,
+                    DetailId = itemData.itemDetailId,
+                });
+            }
+			
+            for (var i = 0; i < slotsResponse.response.items.Count; i++)
+            {
+                var slotData = slotsResponse.response.items[i];
+                var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
+				
+                data.Slots.Add(slotName, new SlotData()
+                {
+                    Id = slotData.id,
+                    SlotName = slotName,
+                    ItemId = slotData.userItemId
+                });
+            }
+
+            for (var i = 0; i < 3; i++)
+            {
+                data.MergeSlots.Add(new SlotData()
+                {
+                    Id = string.Empty,
+                    SlotName = SlotName.NECK,
+                    ItemId = string.Empty
+                });
+            }
+
+            data.Blueprints = inventoryResponse.response.blueprints;
+            model.Update(data);
+            
+            AddItemCollectionPresenter();
+            UpdateView();
+        }
         
         internal class Factory : PlaceholderFactory<IMergeView, IMergeScreenContext, MergePresenter>
         {
 
+        }
+
+        private void UpdateView()
+        {
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var i = 0;
+            for (; i < mergingSlots.Count; i++)
+            {
+                if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots[i].ItemId.Value == string.Empty)
+                {
+                    break;
+                }
+            }
+            
+            Debug.LogFormat("i {0}", i);
+            
+            if (i == 0)
+            {
+                View.MergeButtonView.Hide();
+                
+                View.MergedItemView.gameObject.SetActive(false);
+                View.GlowImage.gameObject.SetActive(false);
+                View.DescriptionPanel.gameObject.SetActive(false);
+                View.MergeParticles.gameObject.SetActive(false);
+                
+                View.SelectItemText.gameObject.SetActive(true);
+            }
+            else if (i > 0 && i <= mergingSlots.Count)
+            {
+                View.MergeButtonView.Hide();
+                View.SelectItemText.gameObject.SetActive(false);
+                View.MergedItemView.gameObject.SetActive(true);
+                View.GlowImage.gameObject.SetActive(true);
+                View.DescriptionPanel.gameObject.SetActive(true);
+
+                if (!View.MergeParticles.gameObject.activeSelf)
+                {
+                    View.MergeParticles.gameObject.SetActive(true);
+                }
+
+                var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
+
+                if (itemModel != null)
+                {
+                    var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                    var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
+                    var presentation = _inventoryItemPresentationProvider.GetItemPresentation(itemModel.ItemId.Value);
+                    
+                    var rarityValue = itemConfig.Rarity;
+                    var name = itemConfig.Name;
+
+                    if (rarityValue == RarityName.LEGENDARY)
+                    {
+                        return;
+                    }
+                    
+                    rarityValue = itemConfig.Rarity + 1;
+                    
+                    var maxLevelLabel = "Max Lvl";
+                    var attributeNameLabel = itemConfig.AttributeName;
+
+
+                    var nextRarityMap = _inventoryItemsConfigProvider.GetNextRarityMap();
+                    View.SetDescriptionHeaderText(rarityValue + " " + name);
+                    View.SetDescriptionInfoText(maxLevelLabel + "\n" +
+                                                attributeNameLabel);
+                    
+                    if (nextRarityMap.ContainsKey(itemModel.ItemId.Value))
+                    {
+                        var items = nextRarityMap[itemModel.ItemId.Value];
+                        var maxLevelValue = items.details[items.details.Count - 1].level;
+                        var attributeValue= items.details[detailConfig.Level - 1].value;
+                        View.SetDescriptionValuesText(maxLevelValue + "\n" +
+                                                      attributeValue);
+
+                    }
+                    
+                    _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
+                    View.GlowImage.color = mainColor;
+
+                    var particlesMain = View.MergeParticles.main;
+                    particlesMain.startColor = mainColor;
+                    // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)
+                    // Max Lvl\nAttack\nMax Lvl
+                    // 20 <color=#55FE5D>> 30</color>
+                    // 30 <color=#55FE5D>> 140</color>
+                    // 40 <color=#55FE5D>> 60</color>
+                    View.SetMergedItemView(presentation.Icon);
+                }
+            }
+
+            if (i == mergingSlots.Count)
+            {
+                View.MergeButtonView.Show();
+            }
+
+            //UpdateItemCollectionPresenter();
+        }
+        
+        private void UpdateItemCollectionPresenter()
+        {
+            var inventory = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+            var items = inventory.Items
+                .Select(item => (IInventoryItemState)new InventoryItemState(item))
+                .ToList();
+								 
+            var mergeSlots = inventory.MergeSlots;
+
+            for (var i = 0; i < _itemStates.Count; i++)
+            {
+                items[i].SetMergeState(MergeStates.NONE);
+                // _itemStates.Add(items[i].Model.Id.Value, items[i]);
+                
+                for (var j = 0; j < mergeSlots.Count; j++)
+                {
+                    if (mergeSlots[j].ItemId.Value == string.Empty)
+                    {
+                        continue;
+                    }
+
+                    if (mergeSlots[j].ItemId.Value == items[i].Model.Id.Value)
+                    {
+                        items[i].SetMergeState(MergeStates.IN_MERGE);
+                    }
+                    else
+                    {
+                        var mergingItemModel = GetItemModel(mergeSlots[0].ItemId.Value);
+                        if (mergingItemModel == null)
+                        {
+                            continue;
+                        }
+                        
+                        var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
+                        var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
+                        
+                        if (mergingItemConfig.Name != itemConfig.Name ||
+                            mergingItemConfig.Rarity != itemConfig.Rarity)
+                        {
+                            items[i].SetMergeState(MergeStates.NOT_AVAILABLE);
+                            Debug.LogFormat("items[i] {0} MergeStates.NOT_AVAILABLE", items[i].Model.ItemId.Value);
+                        }
+                        else
+                        {
+                            items[i].SetMergeState(MergeStates.AVAILABLE);
+                        }
+                    }
+                }
+            }
         }
     }
 }

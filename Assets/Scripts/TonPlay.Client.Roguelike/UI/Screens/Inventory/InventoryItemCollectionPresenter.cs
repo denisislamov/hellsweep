@@ -4,6 +4,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
@@ -58,7 +59,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				var icon = presentation?.Icon ? presentation.Icon : _itemPresentationProvider.DefaultItemIcon;
 				var slotIcon = _itemPresentationProvider.GetSlotIcon(config.SlotName);
 				var itemEquippedState = Context.Items[i].EquippedState;
-
+				var mergeState = Context.Items[i].MergingState;
+				
 				_itemPresentationProvider.GetColors(config.Rarity, out var mainColor, out var backgroundGradientMaterial);
 
 				var itemView = Add();
@@ -68,7 +70,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 					slotIcon, 
 					mainColor, 
 					backgroundGradientMaterial, 
-					itemEquippedState, 
+					itemEquippedState,
+					mergeState,
 					config, 
 					item);
 				var presenter = _itemPresenterFactory.Create(
@@ -88,6 +91,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Color mainColor, 
 			Material backgroundGradientMaterial,
 			IReadOnlyReactiveProperty<bool> isEquipped,
+			IReadOnlyReactiveProperty<MergeStates> mergeState,
 			IInventoryItemConfig config,
 			IInventoryItemModel item)
 			=> new InventoryItemContext(
@@ -98,6 +102,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				backgroundGradientMaterial,
 				config.Name,
 				isEquipped: isEquipped,
+				mergeState: mergeState,
 				() => Context.ItemClickCallback?.Invoke(item));
 
 		public class Factory : PlaceholderFactory<IInventoryItemCollectionView, IInventoryItemCollectionContext, InventoryItemCollectionPresenter>

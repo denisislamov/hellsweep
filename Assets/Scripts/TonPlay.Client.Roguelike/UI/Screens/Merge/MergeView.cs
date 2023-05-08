@@ -11,6 +11,7 @@ using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 {
@@ -51,6 +52,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 		
         [SerializeField] 
         private ButtonView _gameSettingsButtonView;
+
+        [SerializeField] 
+        private Image _mergedItemView;
+
+        [SerializeField] 
+        private TMP_Text _selectItemText;
+        
+        [SerializeField] 
+        private Image _glowImage;
+        
+        [SerializeField] 
+        private GameObject _descriptionPanel;
+        
+        [SerializeField]
+        private ParticleSystem _mergeParticles;
         
         public IProfileBarView ProfileBarView => _profileBarView;
         public INavigationMenuView NavigationMenuView => _navigationMenuView;
@@ -61,7 +77,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         public IButtonView InventoryButtonView => _inventoryButtonView;
         public IInventorySlotView[] Slots => _slots;
         public IButtonView MergeButtonView => _mergeButtonView;
+        public TMP_Text SelectItemText => _selectItemText;
         
+        public Image GlowImage => _glowImage;
+        
+        public GameObject DescriptionPanel => _descriptionPanel;
+        public ParticleSystem MergeParticles => _mergeParticles;
+        
+        public void SetMergedItemView(Sprite sprite)
+        {
+            _mergedItemView.sprite = sprite;
+        }
+
+        public Image MergedItemView => _mergedItemView;
+       
         public void SetDescriptionHeaderText(string text)
         {
             _descriptionHeaderText.text = text;

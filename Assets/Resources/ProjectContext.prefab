@@ -255,6 +255,25 @@ MonoBehaviour:
       code: 
       description: 
       message: 
+  _itemMergePostBody:
+    itemDetailIds: []
+  _itemMergeResponse:
+    successful: 0
+    response:
+      id: 
+      level: 0
+      value: 0
+      item:
+        id: 
+        name: 
+        rarity: 
+        purpose: 
+        feature: 
+        details: []
+    error:
+      code: 
+      description: 
+      message: 
   _itemsGetResponse:
     successful: 0
     response:
