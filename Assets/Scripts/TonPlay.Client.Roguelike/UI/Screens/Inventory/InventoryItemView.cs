@@ -76,7 +76,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public void SetMergeState(MergeStates state)
 		{
-			Debug.LogFormat("InventoryItemView SetMergeState {0}", state);
+			Common.Utilities.Logger.Log($"InventoryItemView SetMergeState {state}");
 			switch (state)
 			{
 				case MergeStates.NONE:
