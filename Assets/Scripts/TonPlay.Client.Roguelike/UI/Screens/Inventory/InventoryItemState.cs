@@ -27,7 +27,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		
 		public void SetMergeState(MergeStates state)
 		{
-			Debug.LogFormat("InventoryItemState SetMergeState {0}", state);
+			Common.Utilities.Logger.Log($"InventoryItemState SetMergeState {state}");
 			_mergingState.SetValueAndForceNotify(state);
 		}
 	}
