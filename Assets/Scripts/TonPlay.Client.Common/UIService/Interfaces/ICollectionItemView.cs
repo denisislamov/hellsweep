@@ -1,6 +1,7 @@
+using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UnityEngine;
 
-namespace TonPlay.Roguelike.Client.UI.UIService.Interfaces
+namespace TonPlay.Client.Common.UIService.Interfaces
 {
 	public interface ICollectionItemView : IView
 	{

@@ -9,5 +9,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		ILocationsModel LocationsModel { get; }
 		
 		IGameSettingsModel GameSettingsModel { get; }
+		
+		IShopModel ShopModel { get; }
 	}
 }

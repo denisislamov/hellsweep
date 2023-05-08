@@ -25,6 +25,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
 		private IRestApiClient _restApiClient;
+		private readonly ShopPackCollectionPresenter.Factory _collectionPresenterFactory;
 
 		public ShopPacksPresenter(
 			IShopPacksView view,
@@ -32,13 +33,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 			IUIService uiService,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient)
+			IRestApiClient restApiClient,
+			ShopPackCollectionPresenter.Factory collectionPresenterFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
+			_collectionPresenterFactory = collectionPresenterFactory;
+
+			AddCollectionPresenter();
 		}
 
 		public override void Show()
@@ -50,6 +55,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		{
 			_compositeDisposables.Dispose();
 			base.Dispose();
+		}
+		
+		private void AddCollectionPresenter()
+		{
+			var presenter = _collectionPresenterFactory.Create(View.PackCollectionView, new ShopPackCollectionContext());
+			
+			Presenters.Add(presenter);
 		}
 
 		internal class Factory : PlaceholderFactory<IShopPacksView, IShopPacksScreenContext, ShopPacksPresenter>

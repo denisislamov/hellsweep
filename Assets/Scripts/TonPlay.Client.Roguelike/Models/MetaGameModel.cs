@@ -1,6 +1,5 @@
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
-using UniRx;
 
 namespace TonPlay.Client.Roguelike.Models
 {
@@ -14,6 +13,8 @@ namespace TonPlay.Client.Roguelike.Models
 		public IGameSettingsModel GameSettingsModel { get; } = new GameSettingsModel();
 		
 		private IUserLevelsInfoModel UserLevelsInfoModel { get; } = new UserLevelsInfoModel();
+
+		public IShopModel ShopModel { get; } = new ShopModel();
 
 		public void Update(MetaGameData data)
 		{

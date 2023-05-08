@@ -22,6 +22,8 @@ namespace TonPlay.Roguelike.Client.Utilities
 		
 		public const string CORE_CONFIGS = CONFIGS + "Core/";
 		
+		public const string SHOP_UI_CONFIGS = UI_CONFIGS + "Shop/";
+
 		public const string ENEMIES_CONFIGS = CORE_CONFIGS + "Enemies/";
 		
 		public const string ENEMIES_PROPERTIES_CONFIGS = ENEMIES_CONFIGS + "Properties/";

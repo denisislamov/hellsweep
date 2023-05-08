@@ -1,4 +1,5 @@
 using System;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using UnityEngine;

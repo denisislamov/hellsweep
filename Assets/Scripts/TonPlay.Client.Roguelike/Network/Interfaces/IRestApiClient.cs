@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network;
 using TonPlay.Client.Roguelike.Network.Response;
@@ -48,5 +49,6 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 
 		UniTask<Response<GamePropertiesResponse>> GetGameProperties();
 		UniTask<Response<GamePropertiesResponse>> PostGameProperties(GamePropertiesResponse value);
+		UniTask<Response<ShopPacksResponse>> GetShopPacksAll();
 	}
 }

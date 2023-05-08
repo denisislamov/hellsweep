@@ -30,6 +30,21 @@ namespace TonPlay.Client.Common.Extensions
 			return hasDecimal ? (truncated / (double) powed) + suffix : (truncated / powed) + suffix;
 		}
 		
+		public static string ConvertToSuffixedFormat(this ulong value, ulong convertFromValue, int floatingDigits)
+		{
+			if (value < convertFromValue) return value.ToString();
+
+			var kvp = _suffixes.First(_ => value / (ulong)_.Key >= 1 && value / (ulong)_.Key < 1000);
+			var divideBy = kvp.Key;
+			var suffix = kvp.Value;
+			var powed = (int) Mathf.Pow(10, floatingDigits);
+
+			var truncated = value / (ulong)(divideBy / powed);
+
+			var hasDecimal = (truncated / (double) powed) != (truncated / (ulong)powed);
+			return hasDecimal ? (truncated / (double) powed) + suffix : (truncated / (ulong)powed) + suffix;
+		}
+		
 		public static string ConvertToSuffixedFormat(this int value, long convertFromValue, int floatingDigits)
 		{
 			if (value < 0) return "-" + ConvertToSuffixedFormat(-value, convertFromValue, floatingDigits);

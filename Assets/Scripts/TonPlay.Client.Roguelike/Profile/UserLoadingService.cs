@@ -41,9 +41,44 @@ namespace TonPlay.Client.Roguelike.Profile
 			await UpdateLocationsModel();
 			await UpdateInventoryModel();
 			await UpdateGameSettingsModel();
+			await UpdateShopModel();
+		}
+		
+		private async UniTask UpdateShopModel()
+		{
+			var model = _metaGameModelProvider.Get().ShopModel;
+			var data = model.ToData();
+			
+			var packsResponse = await _restApiClient.GetShopPacksAll();
+			if (packsResponse.successful && packsResponse.response != null)
+			{
+				for (var i = 0; i < packsResponse.response.items.Count; i++)
+				{
+					var remotePack = packsResponse.response.items[i];
+					
+					data.Packs.Add(new ShopPackData()
+					{
+						Id = remotePack.id,
+						Price = remotePack.priceTon,
+						Rewards = new ShopPackRewardsData()
+						{
+							Blueprints = remotePack.blueprints,
+							Coins = remotePack.coins,
+							Energy = remotePack.energy,
+							HeroSkins = remotePack.heroSkins,
+							KeysCommon = remotePack.keysCommon,
+							KeysUncommon = remotePack.keysUncommon,
+							KeysRare = remotePack.keysRare,
+							KeysLegendary = remotePack.keysLegendary,
+						}
+					});
+				}
+			}
+			
+			model.Update(data);
 		}
 
-		private async Task UpdateGameSettingsModel()
+		private async UniTask UpdateGameSettingsModel()
 		{
 			var gamePropertiesResponse = await _restApiClient.GetGameProperties();
 			if (gamePropertiesResponse?.response.jsonData != null)

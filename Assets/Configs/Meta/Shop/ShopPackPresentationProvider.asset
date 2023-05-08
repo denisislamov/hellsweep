@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faac2d82391b4ce99fc052763d6065d2, type: 3}
+  m_Name: ShopPackPresentationProvider
+  m_EditorClassIdentifier: 
+  _configs:
+  - _id: 0cfb4989-af8e-4ef6-bcdd-4709b7aba4e3
+    _title: Common Pack
+    _description: 
+    _mainColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 8b26e165f1d1e45859deb1ff71e45583, type: 2}
+  - _id: 8daec682-5e59-40c2-943d-b66c61b59fb5
+    _title: Uncommon Pack
+    _description: 
+    _mainColor: {r: 0.5411765, g: 0.9058824, b: 0.5803922, a: 1}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: d44871cc1dd0b4566a0c5d8b65be8883, type: 2}
+  - _id: 768495af-c303-4130-89e8-d05dfc368e57
+    _title: Rare Pack
+    _description: 
+    _mainColor: {r: 0.4784314, g: 0.9686275, b: 1, a: 1}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: d91df79db3b8d48d3821db119ae74c01, type: 2}
+  - _id: b9920255-e715-4a85-85c2-ebfeb749303e
+    _title: Legendary Pack
+    _description: 
+    _mainColor: {r: 0.67058825, g: 0.47058827, b: 1, a: 1}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 730d93a27556842b48286e7940b216e3, type: 2}
+  - _id: 45713766-b78e-4bc3-bbfc-1a11ea495d02
+    _title: Epic Pack
+    _description: 
+    _mainColor: {r: 0.97647065, g: 0.98823535, b: 0.3921569, a: 1}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 4ef598817aed547f3bbd36a3bd818e28, type: 2}
+  _rewardConfigs:
+  - _id: coins
+    _icon: {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 2db05cee2b43249dca5c8c806586acfe, type: 2}
+  - _id: energy
+    _icon: {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 2db05cee2b43249dca5c8c806586acfe, type: 2}
+  - _id: blueprints
+    _icon: {fileID: 21300000, guid: 13115236b90a6462ab7cc118b1d1d547, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 505a35c7925ca419296759eb483df3cc, type: 2}
+  - _id: hero_skins
+    _icon: {fileID: 0}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 7e450246f3864473788128fb309136e2, type: 2}
+  - _id: keys_common
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 2db05cee2b43249dca5c8c806586acfe, type: 2}
+  - _id: keys_uncommon
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: eee9d0a54322a4460a9c87e1952ffb22, type: 2}
+  - _id: keys_rare
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 505a35c7925ca419296759eb483df3cc, type: 2}
+  - _id: keys_legendary
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 7e450246f3864473788128fb309136e2, type: 2}

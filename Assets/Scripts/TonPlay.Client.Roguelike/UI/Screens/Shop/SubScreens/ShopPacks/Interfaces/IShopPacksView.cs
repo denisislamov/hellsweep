@@ -7,5 +7,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfac
 {
 	public interface IShopPacksView : IView
 	{
+		IShopPackCollectionView PackCollectionView { get; }
 	}
 }

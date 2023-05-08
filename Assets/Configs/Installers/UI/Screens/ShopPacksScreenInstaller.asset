@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: ShopPacksScreenInstaller
   m_EditorClassIdentifier: 
   _screen: {fileID: 8768568388117548209, guid: e8c6d20e4dfdf4309bbbbae6ab5185f1, type: 3}
+  _presentationProvider: {fileID: 11400000, guid: 7d6732b55561140c7aeaa55cd98973a7, type: 2}
+  _packView: {fileID: 6347013591088056782, guid: 99714624c39b7491981df91aab27b539, type: 3}
+  _packItemView: {fileID: 3435315641669912224, guid: 5145055d913e349d28a13c17879079ec, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}
