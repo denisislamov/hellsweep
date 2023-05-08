@@ -465,5 +465,19 @@ namespace TonPlay.Client.Roguelike.Network
 
             return result;
         }
+        
+        [SerializeField] private Response<ShopResourcesResponse> _shopResourcesResponse;
+        [ContextMenu("GetUserBalance")]
+        public async UniTask<Response<ShopResourcesResponse>> GetShopResourcesAll()
+        {
+            _shopResourcesResponse = new Response<ShopResourcesResponse>();
+            Common.Utilities.Logger.Log("_networkClient.GetAsync<ShopResourcesResponse>");
+            var getTask = _networkClient.GetAsync<ShopResourcesResponse>("v1/market/rate/all", null);
+
+            var result = await getTask;
+            _shopResourcesResponse = result;
+
+            return result;
+        }
     }
 }

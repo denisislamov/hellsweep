@@ -2,41 +2,42 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Interfaces;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 {
-	internal class ShopResourcesPresenter : Presenter<IShopResourcesView, IShopResourcesScreenContext>
+	internal class ShopResourcePresenter : Presenter<IShopResourceView, IShopResourceContext>
 	{
 		private readonly IUIService _uiService;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
-		private readonly ShopResourceCollectionPresenter.Factory _collectionPresenterFactory;
-
+		private readonly IRestApiClient _restApiClient;
+		
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
-		private IRestApiClient _restApiClient;
-
-		public ShopResourcesPresenter(
-			IShopResourcesView view,
-			IShopResourcesScreenContext context,
+		public ShopResourcePresenter(
+			IShopResourceView view,
+			IShopResourceContext context,
 			IUIService uiService,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient, 
-			ShopResourceCollectionPresenter.Factory collectionPresenterFactory)
+			IRestApiClient restApiClient)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
-			_collectionPresenterFactory = collectionPresenterFactory;
 
-			AddCollectionPresenter();
+			InitView();
+			AddButtonPresenter();
 		}
 
 		public override void Show()
@@ -50,14 +51,29 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 			base.Dispose();
 		}
 		
-		private void AddCollectionPresenter()
+		private void InitView()
 		{
-			var presenter = _collectionPresenterFactory.Create(View.CollectionView, new ShopResourceCollectionContext());
+			View.SetIcon(Context.Icon);
+			View.SetTitleText(Context.Title);
+			View.SetBackgroundGradientMaterial(Context.Gradient);
+		}
+		
+		private void AddButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(
+				View.ButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(OnButtonClickHandler)));
 			
 			Presenters.Add(presenter);
 		}
+		
+		private void OnButtonClickHandler()
+		{
+			Debug.Log($"Clicked shop resource with id {Context.Model.Id}");
+		}
 
-		internal class Factory : PlaceholderFactory<IShopResourcesView, IShopResourcesScreenContext, ShopResourcesPresenter>
+		internal class Factory : PlaceholderFactory<IShopResourceView, IShopResourceContext, ShopResourcePresenter>
 		{
 		}
 	}

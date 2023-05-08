@@ -51,5 +51,6 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<GamePropertiesResponse>> GetGameProperties();
 		UniTask<Response<GamePropertiesResponse>> PostGameProperties(GamePropertiesResponse value);
 		UniTask<Response<ShopPacksResponse>> GetShopPacksAll();
+		UniTask<Response<ShopResourcesResponse>> GetShopResourcesAll();
 	}
 }

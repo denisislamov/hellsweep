@@ -10,8 +10,10 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly ShopData _cached = new ShopData();
 		
 		private readonly List<IShopPackModel> _packs = new List<IShopPackModel>();
+		private readonly List<IShopResourceModel> _resources = new List<IShopResourceModel>();
 
 		public IReadOnlyList<IShopPackModel> Packs => _packs;
+		public IReadOnlyList<IShopResourceModel> Resources => _resources;
 
 		public void Update(ShopData data)
 		{
@@ -21,6 +23,15 @@ namespace TonPlay.Client.Roguelike.Models
 			{
 				var model = new ShopPackModel();
 				model.Update(shopPackData);
+				return model;
+			}));
+			
+			_resources.Clear();
+
+			_resources.AddRange(data.Resources.Select(_ =>
+			{
+				var model = new ShopResourceModel();
+				model.Update(_);
 				return model;
 			}));
 		}

@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
 		public class Pack
 		{
 			public string id;
-			public uint priceTon;
+			public float priceTon;
 			public uint energy;
 			public ulong coins;
 			public uint blueprints;

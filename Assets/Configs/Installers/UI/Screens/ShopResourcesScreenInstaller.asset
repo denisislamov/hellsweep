@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: ShopResourcesScreenInstaller
   m_EditorClassIdentifier: 
   _screen: {fileID: 1214565324161529236, guid: 3b9df42ff19a0415bb9b490cc7629c71, type: 3}
+  _presentationProvider: {fileID: 11400000, guid: 7ae2d88b4e4564962911edfdf6d942d9, type: 2}
+  _resourceView: {fileID: 7683565101426916742, guid: 69ffeeabf58a54477bbbcdfcbcadeacf, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}

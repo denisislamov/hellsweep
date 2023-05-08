@@ -163,7 +163,7 @@ namespace TonPlay.Client.Common.Network
 				}
 				catch (UnityWebRequestException webRequestException)
 				{
-					Debug.LogError(webRequestException.ToString());
+					Debug.LogError($"{_basePath + context.Path}\t" + webRequestException.ToString());
 				}
 				finally
 				{

@@ -4,6 +4,7 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Utilities;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
@@ -73,6 +74,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		private void AddRewardPresenter(string rewardId, ulong amount)
 		{
 			var presentation = _shopPackPresentationProvider.GetRewardPresentation(rewardId);
+
+			if (presentation == null)
+			{
+				Debug.LogWarning($"[ShopPackItemCollectionPresenter] Presentation for reward {rewardId} hasn't been found");
+				return;
+			}
 
 			var view = Add();
 			var context = new ShopPackItemContext($"x{amount.ConvertToSuffixedFormat(1000, 2)}", presentation.Icon, presentation.BackgroundGradientMaterial);

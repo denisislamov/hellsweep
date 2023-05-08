@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2f61cd64414d908772f6e5d34c4d39, type: 3}
+  m_Name: ShopResourcePresentationProvider
+  m_EditorClassIdentifier: 
+  _configs:
+  - _id: resource_items_common
+    _title: Common Items
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: dfce1b6d9d797464d8240cf13751bbfb, type: 2}
+    _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
+  - _id: resource_items_uncommon
+    _title: Uncommon Items
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 5d7b655c71b3f42138bf8515317cec4b, type: 2}
+    _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
+  - _id: resource_items_rare
+    _title: Rare Items
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 4d37e0d84903e4d898d64715f3cc9e45, type: 2}
+    _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
+  - _id: resource_items_legendary
+    _title: Legendary Items
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 2bcc7c6f3f0b449d3b6f85b815329c4f, type: 2}
+    _icon: {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
+  - _id: resource_keys_common
+    _title: Common Keys
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: dfce1b6d9d797464d8240cf13751bbfb, type: 2}
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+  - _id: resource_keys_uncommon
+    _title: Uncommon Keys
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 5d7b655c71b3f42138bf8515317cec4b, type: 2}
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+  - _id: resource_keys_rare
+    _title: Rare Keys
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 4d37e0d84903e4d898d64715f3cc9e45, type: 2}
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+  - _id: resource_keys_legendary
+    _title: Legendary Keys
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: 2bcc7c6f3f0b449d3b6f85b815329c4f, type: 2}
+    _icon: {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
+  - _id: resource_coins
+    _title: Coins
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: dfce1b6d9d797464d8240cf13751bbfb, type: 2}
+    _icon: {fileID: 21300000, guid: 8ac3437f21b4d4c93aeb2781a9abb119, type: 3}
+  - _id: resource_energy
+    _title: Energy
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: dfce1b6d9d797464d8240cf13751bbfb, type: 2}
+    _icon: {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
+  - _id: resource_blueprints
+    _title: Blueprints
+    _description: 
+    _backgroundGradientMaterial: {fileID: 2100000, guid: dfce1b6d9d797464d8240cf13751bbfb, type: 2}
+    _icon: {fileID: 21300000, guid: 13115236b90a6462ab7cc118b1d1d547, type: 3}

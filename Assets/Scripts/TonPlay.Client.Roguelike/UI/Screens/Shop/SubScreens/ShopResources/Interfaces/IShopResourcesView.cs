@@ -4,5 +4,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Inte
 {
 	public interface IShopResourcesView : IView
 	{
+		IShopResourceCollectionView CollectionView { get; }
 	}
 }
