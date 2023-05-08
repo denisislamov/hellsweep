@@ -80,7 +80,7 @@ namespace TonPlay.Client.Roguelike.Profile
 			{
 				if (resourcesResponse.response.items != null)
 				{
-					if (resourcesResponse.response.items.COMMON != null)
+					if (resourcesResponse.response.items.COMMON != null && resourcesResponse.response.items.COMMON.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_items_common",
@@ -91,7 +91,7 @@ namespace TonPlay.Client.Roguelike.Profile
 						});
 					}
 					
-					if (resourcesResponse.response.items.UNCOMMON != null)
+					if (resourcesResponse.response.items.UNCOMMON != null && resourcesResponse.response.items.UNCOMMON.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_items_uncommon",
@@ -102,7 +102,7 @@ namespace TonPlay.Client.Roguelike.Profile
 						});
 					}
 					
-					if (resourcesResponse.response.items.RARE != null)
+					if (resourcesResponse.response.items.RARE != null && resourcesResponse.response.items.RARE.amount != 0l)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_items_rare",
@@ -113,7 +113,7 @@ namespace TonPlay.Client.Roguelike.Profile
 						});
 					}
 					
-					if (resourcesResponse.response.items.LEGENDARY != null)
+					if (resourcesResponse.response.items.LEGENDARY != null && resourcesResponse.response.items.LEGENDARY.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_items_legendary",
@@ -127,47 +127,47 @@ namespace TonPlay.Client.Roguelike.Profile
 
 				if (resourcesResponse.response.keys != null)
 				{
-					if (resourcesResponse.response.keys.COMMON != null)
+					if (resourcesResponse.response.keys.COMMON != null && resourcesResponse.response.keys.COMMON.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_keys_common",
 							Rarity = RarityName.COMMON, 
 							Amount = resourcesResponse.response.keys.COMMON.amount, 
 							Price = resourcesResponse.response.keys.COMMON.price,
-							Type = ShopResourceType.Items
+							Type = ShopResourceType.Keys
 						});
 					}
 					
-					if (resourcesResponse.response.keys.UNCOMMON != null)
+					if (resourcesResponse.response.keys.UNCOMMON != null && resourcesResponse.response.keys.UNCOMMON.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_keys_uncommon",
 							Rarity = RarityName.UNCOMMON, 
 							Amount = resourcesResponse.response.keys.UNCOMMON.amount, 
 							Price = resourcesResponse.response.keys.UNCOMMON.price,
-							Type = ShopResourceType.Items
+							Type = ShopResourceType.Keys
 						});
 					}
 					
-					if (resourcesResponse.response.keys.RARE != null)
+					if (resourcesResponse.response.keys.RARE != null && resourcesResponse.response.keys.RARE.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_keys_rare",
 							Rarity = RarityName.RARE, 
 							Amount = resourcesResponse.response.keys.RARE.amount, 
 							Price = resourcesResponse.response.keys.RARE.price,
-							Type = ShopResourceType.Items
+							Type = ShopResourceType.Keys
 						});
 					}
 					
-					if (resourcesResponse.response.keys.LEGENDARY != null)
+					if (resourcesResponse.response.keys.LEGENDARY != null && resourcesResponse.response.keys.LEGENDARY.amount != 0)
 					{
 						data.Resources.Add(new ShopResourceData(){
 							Id = "resource_keys_legendary",
 							Rarity = RarityName.LEGENDARY, 
 							Amount = resourcesResponse.response.keys.LEGENDARY.amount, 
 							Price = resourcesResponse.response.keys.LEGENDARY.price,
-							Type = ShopResourceType.Items
+							Type = ShopResourceType.Keys
 						});
 					}
 				}
