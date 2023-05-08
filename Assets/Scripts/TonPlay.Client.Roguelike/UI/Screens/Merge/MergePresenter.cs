@@ -433,7 +433,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private void ItemClickHandler(IInventoryItemModel item)
         {
-            Debug.LogFormat("ItemClickHandler: {0}", item.Id.Value);
+            Common.Utilities.Logger.Log($"ItemClickHandler: {item.Id.Value}");
             var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
             var i = 0;
 
@@ -646,7 +646,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 }
             }
             
-            Debug.LogFormat("i {0}", i);
+            Common.Utilities.Logger.Log($"i {i}");
             
             if (i == 0)
             {
@@ -771,7 +771,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                             mergingItemConfig.Rarity != itemConfig.Rarity)
                         {
                             items[i].SetMergeState(MergeStates.NOT_AVAILABLE);
-                            Debug.LogFormat("items[i] {0} MergeStates.NOT_AVAILABLE", items[i].Model.ItemId.Value);
+                            Common.Utilities.Logger.LogWarning($"items[i] {items[i].Model.ItemId.Value} MergeStates.NOT_AVAILABLE");
                         }
                         else
                         {
