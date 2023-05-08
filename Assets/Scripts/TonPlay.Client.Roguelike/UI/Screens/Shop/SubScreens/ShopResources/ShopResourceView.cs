@@ -12,6 +12,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 	{
 		[SerializeField]
 		private TMP_Text _titleText;
+		
+		[SerializeField]
+		private TMP_Text _amountText;
 
 		[SerializeField]
 		private RawImage[] _gradients;
@@ -29,6 +32,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 			_titleText.SetText(text);
 		}
 		
+		public void SetAmountText(string text)
+		{
+			_amountText.SetText(text);
+		}
+
 		public void SetIcon(Sprite sprite)
 		{
 			_icon.sprite = sprite;

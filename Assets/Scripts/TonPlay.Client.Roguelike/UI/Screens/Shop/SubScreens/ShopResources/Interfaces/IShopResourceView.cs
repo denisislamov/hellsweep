@@ -10,6 +10,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Inte
 		IButtonView ButtonView { get; }
 		
 		void SetTitleText(string text);
+		
+		void SetAmountText(string text);
 
 		void SetIcon(Sprite sprite);
 		

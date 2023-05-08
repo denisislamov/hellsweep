@@ -1,3 +1,4 @@
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -55,6 +56,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 		{
 			View.SetIcon(Context.Icon);
 			View.SetTitleText(Context.Title);
+			View.SetAmountText($"x{Context.Model.Amount.ConvertToSuffixedFormat(1000, 2)}");
 			View.SetBackgroundGradientMaterial(Context.Gradient);
 		}
 		
