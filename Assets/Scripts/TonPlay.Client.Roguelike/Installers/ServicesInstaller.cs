@@ -26,7 +26,8 @@ namespace TonPlay.Client.Roguelike.Installers
 
 			Container.BindInterfacesTo<SceneService.SceneService>().AsSingle();
 
-			Container.BindInterfacesTo<UserLoadingService>().AsSingle();
+			UserLoadingServiceInstaller.Install(Container);
+			
 			Container.BindInterfacesTo<ConfigsLoadingService>().AsSingle();
 
 			var skillConfigProviderInstance = Instantiate(_skillConfigProvider);
