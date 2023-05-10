@@ -10,6 +10,8 @@ namespace TonPlay.Client.Roguelike.Shop
 		
 		string Description { get; }
 		
+		string RarityText { get; }
+
 		Color MainColor { get; }
 		
 		Material BackgroundGradientMaterial { get; }

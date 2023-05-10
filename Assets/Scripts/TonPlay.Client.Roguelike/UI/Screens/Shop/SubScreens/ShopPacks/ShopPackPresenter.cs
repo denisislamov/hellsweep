@@ -85,7 +85,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		
 		private void OnButtonClickHandler()
 		{
-			Debug.Log($"Clicked shop pack with id {Context.ShopPackModel.Id}");
+			var context = new ShopPackPopupScreenContext(Context.ShopPackModel);
+			var screen = _uiService.Open<ShopPackPopupScreen, IShopPackPopupScreenContext>(context);
+			context.Screen = screen;
 		}
 
 		internal class Factory : PlaceholderFactory<IShopPackView, IShopPackContext, ShopPackPresenter>

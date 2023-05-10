@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc630c3c06b4a18976f88c371dc2d61, type: 3}
+  m_Name: ShopPackPopupScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 8489395256416115277, guid: c9bb5da296dd64fd7b58af9ffe042cbf, type: 3}
+  _presentationProvider: {fileID: 11400000, guid: 7d6732b55561140c7aeaa55cd98973a7, type: 2}
+  _packItemView: {fileID: 3435315641669912224, guid: 5145055d913e349d28a13c17879079ec, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}

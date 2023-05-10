@@ -17,7 +17,6 @@ namespace TonPlay.Client.Roguelike.Models
 		};
 		
 		private readonly Subject<Unit> _updated = new Subject<Unit>();
-		private readonly ReactiveProperty<long> _blueprints = new ReactiveProperty<long>();
 
 		private List<IInventoryItemModel> _items = new List<IInventoryItemModel>();
 		private Dictionary<SlotName, ISlotModel> _slots = new Dictionary<SlotName, ISlotModel>();
@@ -26,8 +25,31 @@ namespace TonPlay.Client.Roguelike.Models
 		public IReadOnlyList<IInventoryItemModel> Items => _items;
 		public IReadOnlyDictionary<SlotName, ISlotModel> Slots => _slots;
 		public IReadOnlyList<ISlotModel> MergeSlots => _mergeSlots;
+		
+		private readonly ReactiveProperty<long> _blueprintsArms = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprintsBody = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprintsBelt = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprintsFeet = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprintsNeck = new ReactiveProperty<long>();
+		private readonly ReactiveProperty<long> _blueprintsWeapon = new ReactiveProperty<long>();
+		
+		private readonly ReactiveProperty<int> _commonKeys = new ReactiveProperty<int>();
+		private readonly ReactiveProperty<int> _uncommonKeys = new ReactiveProperty<int>();
+		private readonly ReactiveProperty<int> _rareKeys = new ReactiveProperty<int>();
+		private readonly ReactiveProperty<int> _legendaryKeys = new ReactiveProperty<int>();
 
-		public IReadOnlyReactiveProperty<long> Blueprints => _blueprints;
+		public IReadOnlyReactiveProperty<long> BlueprintsArms => _blueprintsArms;
+		public IReadOnlyReactiveProperty<long> BlueprintsBody => _blueprintsBody;
+		public IReadOnlyReactiveProperty<long> BlueprintsBelt => _blueprintsBelt;
+		public IReadOnlyReactiveProperty<long> BlueprintsFeet => _blueprintsFeet;
+		public IReadOnlyReactiveProperty<long> BlueprintsNeck => _blueprintsNeck;
+		public IReadOnlyReactiveProperty<long> BlueprintsWeapon => _blueprintsWeapon;
+		
+		public IReadOnlyReactiveProperty<int> CommonKeys => _commonKeys;
+		public IReadOnlyReactiveProperty<int> UncommonKeys => _uncommonKeys;
+		public IReadOnlyReactiveProperty<int> RareKeys => _rareKeys;
+		public IReadOnlyReactiveProperty<int> LegendaryKeys => _legendaryKeys;
+		
 		public IObservable<Unit> Updated => _updated;
 		
 		public IInventoryItemModel GetItemModel(string userItemId)
@@ -41,9 +63,54 @@ namespace TonPlay.Client.Roguelike.Models
 			UpdateSlots(data);
 			UpdateMergeSlots(data);
 			
-			if (data.Blueprints != Blueprints.Value)
+			if (data.BlueprintsArms != BlueprintsArms.Value)
 			{
-				_blueprints.SetValueAndForceNotify(data.Blueprints);
+				_blueprintsArms.SetValueAndForceNotify(data.BlueprintsArms);
+			}
+			
+			if (data.BlueprintsBody != BlueprintsBody.Value)
+			{
+				_blueprintsBody.SetValueAndForceNotify(data.BlueprintsBody);
+			}
+			
+			if (data.BlueprintsBelt != BlueprintsBelt.Value)
+			{
+				_blueprintsBelt.SetValueAndForceNotify(data.BlueprintsBelt);
+			}
+			
+			if (data.BlueprintsFeet != BlueprintsFeet.Value)
+			{
+				_blueprintsFeet.SetValueAndForceNotify(data.BlueprintsFeet);
+			}
+			
+			if (data.BlueprintsNeck != BlueprintsNeck.Value)
+			{
+				_blueprintsNeck.SetValueAndForceNotify(data.BlueprintsNeck);
+			}
+			
+			if (data.BlueprintsWeapon != BlueprintsWeapon.Value)
+			{
+				_blueprintsWeapon.SetValueAndForceNotify(data.BlueprintsWeapon);
+			}
+			
+			if (data.CommonKeys != _commonKeys.Value)
+			{
+				_commonKeys.SetValueAndForceNotify(data.CommonKeys);
+			}
+			
+			if (data.UncommonKeys != _uncommonKeys.Value)
+			{
+				_uncommonKeys.SetValueAndForceNotify(data.UncommonKeys);
+			}
+			
+			if (data.RareKeys != _rareKeys.Value)
+			{
+				_rareKeys.SetValueAndForceNotify(data.RareKeys);
+			}
+			
+			if (data.LegendaryKeys != _legendaryKeys.Value)
+			{
+				_legendaryKeys.SetValueAndForceNotify(data.LegendaryKeys);
 			}
 
 			_updated.OnNext(Unit.Default);
@@ -137,6 +204,18 @@ namespace TonPlay.Client.Roguelike.Models
 			{
 				_data.MergeSlots.Add(_mergeSlots[i].ToData());
 			}
+
+			_data.BlueprintsArms = BlueprintsArms.Value;
+			_data.BlueprintsBody = BlueprintsBody.Value;
+			_data.BlueprintsBelt = BlueprintsBelt.Value;
+			_data.BlueprintsFeet = BlueprintsFeet.Value;
+			_data.BlueprintsNeck = BlueprintsNeck.Value;
+			_data.BlueprintsWeapon = BlueprintsWeapon.Value;
+			
+			_data.CommonKeys = CommonKeys.Value;
+			_data.UncommonKeys = UncommonKeys.Value;
+			_data.RareKeys = RareKeys.Value;
+			_data.LegendaryKeys = LegendaryKeys.Value;
 			
 			return _data;
 		}

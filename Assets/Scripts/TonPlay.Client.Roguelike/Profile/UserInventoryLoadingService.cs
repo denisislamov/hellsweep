@@ -40,6 +40,10 @@ namespace TonPlay.Client.Roguelike.Profile
 			var model = metaGameModel.ProfileModel.InventoryModel;
 			var data = model.ToData();
 			
+			data.Items.Clear();
+			data.Slots.Clear();
+			data.MergeSlots.Clear();
+			
 			for (var i = 0; i < itemsResponse.response.items.Count; i++)
 			{
 				var itemData = itemsResponse.response.items[i];
@@ -76,8 +80,18 @@ namespace TonPlay.Client.Roguelike.Profile
 				});
 			}
 
-			data.Blueprints = inventoryResponse.response.blueprints;
+			data.BlueprintsArms = inventoryResponse.response.blueprintsArms;
+			data.BlueprintsBody = inventoryResponse.response.blueprintsBody;
+			data.BlueprintsBelt = inventoryResponse.response.blueprintsBelt;
+			data.BlueprintsFeet = inventoryResponse.response.blueprintsFeet;
+			data.BlueprintsNeck = inventoryResponse.response.blueprintsNeck;
+			data.BlueprintsWeapon = inventoryResponse.response.blueprintsWeapon;
 
+			data.CommonKeys = inventoryResponse.response.keysCommon;
+			data.UncommonKeys = inventoryResponse.response.keysUncommon;
+			data.RareKeys = inventoryResponse.response.keysRare;
+			data.LegendaryKeys = inventoryResponse.response.keysLegendary;
+			
 			model.Update(data);
 		}
 		

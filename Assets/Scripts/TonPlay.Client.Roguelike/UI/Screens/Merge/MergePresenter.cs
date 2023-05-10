@@ -11,6 +11,7 @@ using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
+using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
@@ -570,60 +571,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         
         private async UniTask UpdateInventoryModel()
         {
-            var itemsResponseTask = _restApiClient.GetUserItems();
-            var slotsResponseTask = _restApiClient.GetUserSlots();
-            var inventoryResponseTask = _restApiClient.GetUserInventory();
-
-            var itemsResponse = await itemsResponseTask;
-            var slotsResponse = await slotsResponseTask;
-            var inventoryResponse = await inventoryResponseTask;
-
-            var metaGameModel = _metaGameModelProvider.Get();
-            var model = metaGameModel.ProfileModel.InventoryModel;
-            var data = model.ToData();
-			
-            data.Items.Clear();
-            data.Slots.Clear();
-            data.MergeSlots.Clear();
-            
-            for (var i = 0; i < itemsResponse.response.items.Count; i++)
-            {
-                var itemData = itemsResponse.response.items[i];
-                var innerItemConfig = _inventoryItemsConfigProvider.GetInnerItemConfig(itemData.itemId);
-				
-                data.Items.Add(new InventoryItemData()
-                {
-                    Id = itemData.id,
-                    ItemId = itemData.itemId,
-                    DetailId = itemData.itemDetailId,
-                });
-            }
-			
-            for (var i = 0; i < slotsResponse.response.items.Count; i++)
-            {
-                var slotData = slotsResponse.response.items[i];
-                var slotName = (SlotName) Enum.Parse(typeof(SlotName), slotData.purpose, true);
-				
-                data.Slots.Add(slotName, new SlotData()
-                {
-                    Id = slotData.id,
-                    SlotName = slotName,
-                    ItemId = slotData.userItemId
-                });
-            }
-
-            for (var i = 0; i < 3; i++)
-            {
-                data.MergeSlots.Add(new SlotData()
-                {
-                    Id = string.Empty,
-                    SlotName = SlotName.NECK,
-                    ItemId = string.Empty
-                });
-            }
-
-            data.Blueprints = inventoryResponse.response.blueprints;
-            model.Update(data);
+            await new UserInventoryLoadingService(_inventoryItemsConfigProvider, _metaGameModelProvider, _restApiClient).Load();
             
             AddItemCollectionPresenter();
             UpdateView();

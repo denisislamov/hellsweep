@@ -1,6 +1,7 @@
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -14,31 +15,35 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 {
-	internal class ShopResourcePresenter : Presenter<IShopResourceView, IShopResourceContext>
+	internal class ShopResourcePopupPresenter : Presenter<IShopResourcePopupView, IShopResourcePopupScreenContext>
 	{
 		private readonly IUIService _uiService;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly IRestApiClient _restApiClient;
-		
+		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
-		public ShopResourcePresenter(
-			IShopResourceView view,
-			IShopResourceContext context,
+		public ShopResourcePopupPresenter(
+			IShopResourcePopupView view,
+			IShopResourcePopupScreenContext context,
 			IUIService uiService,
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient)
+			IRestApiClient restApiClient,
+			IInventoryItemPresentationProvider inventoryItemPresentationProvider)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
+			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
 
 			InitView();
-			AddButtonPresenter();
+			AddBuyButtonPresenter();
+			AddCloseButtonPresenter();
 		}
 
 		public override void Show()
@@ -54,35 +59,47 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 		
 		private void InitView()
 		{
+			_inventoryItemPresentationProvider.GetColors(Context.Model.Rarity, out var mainColor, out var backgroundGradient);
 			View.SetIcon(Context.Icon);
 			View.SetTitleText(Context.Title);
+			View.SetPanelsColor(mainColor);
+			View.SetPriceText($"{Context.Model.Price} TON");
+			View.SetRarityText(Context.Model.Rarity.ToString().ToLowerInvariant().FirstCharToUpper());
 			View.SetAmountText($"x{Context.Model.Amount.ConvertToSuffixedFormat(1000, 2)}");
-			View.SetBackgroundGradientMaterial(Context.Gradient);
+			View.SetBackgroundGradientMaterial(backgroundGradient);
 		}
 		
-		private void AddButtonPresenter()
+		private void AddBuyButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(
-				View.ButtonView,
+				View.BuyButtonView,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(OnButtonClickHandler)));
+				   .Add(new ClickableButtonContext(OnBuyButtonClickHandler)));
 			
 			Presenters.Add(presenter);
 		}
 		
-		private void OnButtonClickHandler()
+		private void AddCloseButtonPresenter()
 		{
-			var context = new ShopResourcePopupScreenContext(
-				Context.Model,
-				Context.Title,
-				Context.Icon);
-
-			var screen = _uiService.Open<ShopResourcePopupScreen, IShopResourcePopupScreenContext>(context);
-
-			context.Screen = screen;
+			var presenter = _buttonPresenterFactory.Create(
+				View.CloseButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(OnCloseButtonClickHandler)));
+			
+			Presenters.Add(presenter);
+		}
+		
+		private void OnCloseButtonClickHandler()
+		{
+			_uiService.Close(Context.Screen);
 		}
 
-		internal class Factory : PlaceholderFactory<IShopResourceView, IShopResourceContext, ShopResourcePresenter>
+		private void OnBuyButtonClickHandler()
+		{
+			Debug.Log($"Clicked shop resource with id {Context.Model.Id}");
+		}
+
+		internal class Factory : PlaceholderFactory<IShopResourcePopupView, IShopResourcePopupScreenContext, ShopResourcePopupPresenter>
 		{
 		}
 	}

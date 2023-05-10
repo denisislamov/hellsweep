@@ -13,7 +13,25 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		
 		IReadOnlyList<ISlotModel> MergeSlots { get; }
 		
-		IReadOnlyReactiveProperty<long> Blueprints { get; }
+		IReadOnlyReactiveProperty<long> BlueprintsArms { get; }
+		
+		IReadOnlyReactiveProperty<long> BlueprintsBody { get; }
+		
+		IReadOnlyReactiveProperty<long> BlueprintsBelt { get; }
+		
+		IReadOnlyReactiveProperty<long> BlueprintsFeet { get; }
+		
+		IReadOnlyReactiveProperty<long> BlueprintsNeck { get; }
+		
+		IReadOnlyReactiveProperty<long> BlueprintsWeapon { get; }
+		
+		IReadOnlyReactiveProperty<int> CommonKeys { get; }
+		
+		IReadOnlyReactiveProperty<int> UncommonKeys { get; }
+		
+		IReadOnlyReactiveProperty<int> RareKeys { get; }
+		
+		IReadOnlyReactiveProperty<int> LegendaryKeys { get; }
 		
 		IObservable<Unit> Updated { get; }
 		

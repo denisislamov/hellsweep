@@ -37,6 +37,9 @@ namespace TonPlay.Client.Roguelike.Shop
 			private string _description;
 			
 			[SerializeField]
+			private string _rarityText;
+			
+			[SerializeField]
 			private Color _mainColor;
 			
 			[SerializeField]
@@ -45,7 +48,8 @@ namespace TonPlay.Client.Roguelike.Shop
 			public string Id => _id;
 			public string Title => _title;
 			public string Description => _description;
-			
+			public string RarityText => _rarityText;
+
 			public Color MainColor => _mainColor;
 			
 			public Material BackgroundGradientMaterial => _backgroundGradientMaterial;
