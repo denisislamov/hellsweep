@@ -383,12 +383,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             items.Sort(SortItemsByCurrentSortType);
 			
             var mergeSlots = inventory.MergeSlots;
-
+            var slots = inventory.Slots;
+            
             for (var i = 0; i < items.Count; i++)
             {
                 _itemStates.Add(items[i].Model.Id.Value, items[i]);
                 
                 items[i].SetMergeState(MergeStates.NONE);
+                var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
+
+                items[i].SetEquippedState(slots[itemConfig.SlotName].ItemId.Value == items[i].Model.Id.Value);
                 
                 for (var j = 0; j < mergeSlots.Count; j++)
                 {
@@ -402,7 +406,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                         if (mergingItemModel != null)
                         {
                             var mergingItemConfig = _inventoryItemsConfigProvider.Get(mergingItemModel.ItemId.Value);
-                            var itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
+                            itemConfig = _inventoryItemsConfigProvider.Get(items[i].Model.ItemId.Value);
 
                             if (mergingItemConfig.Name != itemConfig.Name ||
                                 mergingItemConfig.Rarity != itemConfig.Rarity)

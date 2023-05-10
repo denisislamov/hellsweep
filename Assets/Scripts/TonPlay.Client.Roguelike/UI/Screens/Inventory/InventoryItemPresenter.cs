@@ -1,5 +1,6 @@
 using System;
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using UniRx;
 using Zenject;
@@ -44,6 +45,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			}
 			else
 			{
+				if (Context.MergeState.Value != MergeStates.IN_INVENTORY)
+				{
+					return;
+				}
 				base.Hide();
 			}
 		}

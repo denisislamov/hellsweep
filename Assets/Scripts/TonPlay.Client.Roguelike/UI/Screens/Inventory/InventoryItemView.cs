@@ -89,10 +89,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			{
 				return;
 			}
-
+			
 			Common.Utilities.Logger.Log($"InventoryItemView SetMergeState {state}");
 			switch (state)
 			{
+				case MergeStates.IN_INVENTORY:
+					MergeAdded.gameObject.SetActive(false);
+					MergeLock.gameObject.SetActive(false);
+					MergeLockBackgrounde.gameObject.SetActive(false);
+					break;
 				case MergeStates.NONE:
 					MergeAdded.gameObject.SetActive(false);
 					MergeLock.gameObject.SetActive(false);
