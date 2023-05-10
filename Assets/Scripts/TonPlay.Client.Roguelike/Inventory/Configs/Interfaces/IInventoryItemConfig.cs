@@ -15,7 +15,9 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		SlotName SlotName { get; }
 		
 		AttributeName AttributeName { get; }
-
+		
 		IInventoryItemDetailConfig GetDetails(string detailIdValue);
+		
+		int GetMaxLevel();
 	}
 }

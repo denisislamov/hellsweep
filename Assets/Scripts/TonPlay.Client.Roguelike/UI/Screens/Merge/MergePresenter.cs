@@ -682,7 +682,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     
                     var rarityValue = itemConfig.Rarity;
                     var name = itemConfig.Name;
-
+                    
                     if (rarityValue == RarityName.LEGENDARY)
                     {
                         return;
@@ -692,18 +692,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     
                     var maxLevelLabel = "Max Lvl";
                     var attributeNameLabel = itemConfig.AttributeName;
-
-
+                    
                     var nextRarityMap = _inventoryItemsConfigProvider.GetNextRarityMap();
-                    View.SetDescriptionHeaderText(rarityValue + " " + name);
-                    View.SetDescriptionInfoText(maxLevelLabel + "\n" +
-                                                attributeNameLabel);
                     
                     if (nextRarityMap.ContainsKey(itemModel.ItemId.Value))
                     {
                         var items = nextRarityMap[itemModel.ItemId.Value];
-                        var maxLevelValue = items.details[items.details.Count - 1].level;
-                        var attributeValue= items.details[detailConfig.Level - 1].value;
+                        var itemsPrev = nextRarityMap[itemModel.ItemId.Value];
+                        
+                        var maxLevelValue = itemConfig.GetMaxLevel() + "<color=#55FE5D>>" +
+                                            items.details[items.details.Count - 1].level + "</color>";
+                        var attributeValue= detailConfig.Value + "<color=#55FE5D>>" 
+                                                               + items.details[detailConfig.Level - 1].value + "</color>";
                         View.SetDescriptionValuesText(maxLevelValue + "\n" +
                                                       attributeValue);
 
@@ -720,6 +720,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     // 30 <color=#55FE5D>> 140</color>
                     // 40 <color=#55FE5D>> 60</color>
                     View.SetMergedItemView(presentation.Icon);
+                    
+                    View.SetDescriptionHeaderText("<color=#" + ColorUtility.ToHtmlStringRGB(mainColor) + ">" + rarityValue + "</color>" + " " + name);
+                    View.SetDescriptionInfoText(maxLevelLabel + "\n" +
+                                                attributeNameLabel);
                 }
             }
 
