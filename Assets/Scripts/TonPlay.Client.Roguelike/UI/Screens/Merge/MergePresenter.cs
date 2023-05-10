@@ -721,7 +721,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     // 40 <color=#55FE5D>> 60</color>
                     View.SetMergedItemView(presentation.Icon);
                     
-                    View.SetDescriptionHeaderText("<color=#" + ColorUtility.ToHtmlStringRGB(mainColor) + ">" + rarityValue + "</color>" + " " + name);
+                    View.SetDescriptionHeaderText("<color=#" + ColorUtility.ToHtmlStringRGB(mainColor) + ">" 
+                                                  + rarityValue + "</color>" + " " 
+                                                  + name + " (" + i + "/3 Items)");
                     View.SetDescriptionInfoText(maxLevelLabel + "\n" +
                                                 attributeNameLabel);
                 }
