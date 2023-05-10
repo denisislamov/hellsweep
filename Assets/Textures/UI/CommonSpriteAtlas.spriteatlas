@@ -87,6 +87,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b8772045f46ff4c8587fbb3d0e8be2f2, type: 3}
   - {fileID: 21300000, guid: 567306a502202429993999780fed243b, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
+  - {fileID: 21300000, guid: 239d8dd563867704abeebd2f473b598e, type: 3}
   - {fileID: 21300000, guid: 4a58eee5794d44192b2d4628454f40ba, type: 3}
   - {fileID: 21300000, guid: 5f60fdf5fe11e4963b40bbb0f2060487, type: 3}
   - {fileID: 21300000, guid: 13115236b90a6462ab7cc118b1d1d547, type: 3}
@@ -94,6 +95,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d3af0d466fa194b1e8789ac92cb748e8, type: 3}
   - {fileID: 21300000, guid: 4661dd76f72d044bea11b544e1b9cd94, type: 3}
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
+  - {fileID: 21300000, guid: 216beb86078be0b47bab2da14e9395ac, type: 3}
   - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
   - {fileID: 21300000, guid: a106ef17fe2684aa69bf5b33665d83fd, type: 3}
   - {fileID: 21300000, guid: 461ddb27c2e8346ab92e82a01c85f3ac, type: 3}
@@ -186,6 +188,7 @@ SpriteAtlas:
   - CloseButton_01
   - Heart
   - SkillLevelPoint_01b
+  - Locked
   - SubTitleBackgroundTexture_01
   - Check01a
   - Icon_Random_Blueprint_01
@@ -193,6 +196,7 @@ SpriteAtlas:
   - Icons_Settings_01a
   - Icons_EnergyDrink_01a
   - joystick_background_01a
+  - merge_added_icon
   - BackgroundSidebarInactive_01
   - Icon_Attribute_Armor_01
   - SkillLevelPoint_02a

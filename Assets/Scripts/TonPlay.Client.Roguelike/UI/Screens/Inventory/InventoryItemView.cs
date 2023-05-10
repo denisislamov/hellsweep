@@ -35,6 +35,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		[SerializeField]
 		private ButtonView _buttonView;
 
+		[SerializeField] 
+		private Image MergeAdded;
+
+		[SerializeField]
+		private Image MergeLock;
+
+		[SerializeField]
+		private Image MergeLockBackgrounde;
+		
 		public IButtonView ButtonView => _buttonView;
 		
 		public void SetBackgroundGradientMaterial(Material material)
@@ -76,20 +85,33 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 		public void SetMergeState(MergeStates state)
 		{
+			if (MergeLockBackgrounde == null || MergeLock == null || MergeAdded == null)
+			{
+				return;
+			}
+
 			Common.Utilities.Logger.Log($"InventoryItemView SetMergeState {state}");
 			switch (state)
 			{
 				case MergeStates.NONE:
-					_iconImage.color = Color.white;
+					MergeAdded.gameObject.SetActive(false);
+					MergeLock.gameObject.SetActive(false);
+					MergeLockBackgrounde.gameObject.SetActive(false);
 					break;
 				case MergeStates.AVAILABLE:
-					_iconImage.color = Color.white;
+					MergeAdded.gameObject.SetActive(false);
+					MergeLock.gameObject.SetActive(false);
+					MergeLockBackgrounde.gameObject.SetActive(false);
 					break;
 				case MergeStates.NOT_AVAILABLE:
-					_iconImage.color = Color.black;
+					MergeAdded.gameObject.SetActive(false);
+					MergeLock.gameObject.SetActive(true);
+					MergeLockBackgrounde.gameObject.SetActive(true);
 					break;
 				case MergeStates.IN_MERGE:
-					_iconImage.color = Color.green;
+					MergeAdded.gameObject.SetActive(true);
+					MergeLock.gameObject.SetActive(false);
+					MergeLockBackgrounde.gameObject.SetActive(false);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(state), state, null);
