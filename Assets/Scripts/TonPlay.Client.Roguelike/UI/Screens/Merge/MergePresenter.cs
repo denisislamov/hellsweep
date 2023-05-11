@@ -438,6 +438,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private void ItemClickHandler(IInventoryItemModel item)
         {
             Common.Utilities.Logger.Log($"ItemClickHandler: {item.Id.Value}");
+            
+            var itemModel = GetItemModel(item.Id.Value);
+
+            if (itemModel != null)
+            {
+                var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                if (itemConfig.Rarity == RarityName.LEGENDARY)
+                {
+                    return;
+                }
+            }
+
             var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
             var i = 0;
 
@@ -660,7 +672,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 View.GlowImage.gameObject.SetActive(false);
                 View.DescriptionPanel.gameObject.SetActive(false);
                 View.MergeParticles.gameObject.SetActive(false);
-                
                 View.SelectItemText.gameObject.SetActive(true);
             }
             else if (i > 0 && i <= mergingSlots.Count)
@@ -675,14 +686,44 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 {
                     View.MergeParticles.gameObject.SetActive(true);
                 }
+                
+                // Get max level item
 
+                var currentHighLevel = -1;
+                foreach (var mergingSlot in mergingSlots)
+                {
+                    var im = GetItemModel(mergingSlot.ItemId.Value);
+                    if (im == null)
+                    {
+                        continue;
+                    }
+                    
+                    var itemConfig = _inventoryItemsConfigProvider.Get(im.ItemId.Value);
+                    var detailConfig = itemConfig.GetDetails(im.DetailId.Value);
+                    
+                    if (detailConfig.Level <= currentHighLevel)
+                    {
+                        continue;
+                    }
+                    
+                    if (detailConfig.Level > currentHighLevel)
+                    {
+                        currentHighLevel = detailConfig.Level;
+                    }
+                }
+                
                 var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
-
                 if (itemModel != null)
                 {
                     var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                    var config = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                    
                     var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
+                    
                     var presentation = _inventoryItemPresentationProvider.GetItemPresentation(itemModel.ItemId.Value);
+                    var slotIcon = _inventoryItemPresentationProvider.GetSlotIcon(config.SlotName);
+                    
+                    View.SetItemSlotIcon(slotIcon);
                     
                     var rarityValue = itemConfig.Rarity;
                     var name = itemConfig.Name;
@@ -694,7 +735,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     
                     rarityValue = itemConfig.Rarity + 1;
                     
-                    var maxLevelLabel = "Max Lvl";
+                    const string maxLevelLabel = "Max Lvl";
                     var attributeNameLabel = itemConfig.AttributeName;
                     
                     var nextRarityMap = _inventoryItemsConfigProvider.GetNextRarityMap();
@@ -715,7 +756,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     
                     _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
                     View.GlowImage.color = mainColor;
-
+                    
+                    View.SetPanelsColor(mainColor);
+                    View.SetBackgroundGradientMaterial(rarityMaterial, i - 1);
+                    View.SetPanelText($"Lv.{currentHighLevel}");
+                    
                     var particlesMain = View.MergeParticles.main;
                     particlesMain.startColor = mainColor;
                     // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)

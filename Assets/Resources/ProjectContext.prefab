@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDebugToken: 1
-  _username: csharky
+  _username: disadisa
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
   _unitAllResponse:
@@ -387,6 +387,56 @@ MonoBehaviour:
     successful: 0
     response:
       items: []
+    error:
+      code: 
+      description: 
+      message: 
+  _shopPacksResponse:
+    successful: 0
+    response:
+      items: []
+    error:
+      code: 
+      description: 
+      message: 
+  _shopResourcesResponse:
+    successful: 0
+    response:
+      blueprints:
+        amount: 0
+        price: 0
+      energy:
+        amount: 0
+        price: 0
+      coins:
+        amount: 0
+        price: 0
+      keys:
+        COMMON:
+          amount: 0
+          price: 0
+        UNCOMMON:
+          amount: 0
+          price: 0
+        RARE:
+          amount: 0
+          price: 0
+        LEGENDARY:
+          amount: 0
+          price: 0
+      items:
+        COMMON:
+          amount: 0
+          price: 0
+        UNCOMMON:
+          amount: 0
+          price: 0
+        RARE:
+          amount: 0
+          price: 0
+        LEGENDARY:
+          amount: 0
+          price: 0
     error:
       code: 
       description: 
