@@ -83,7 +83,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         
         public GameObject DescriptionPanel => _descriptionPanel;
         public ParticleSystem MergeParticles => _mergeParticles;
-        
+
+        [SerializeField] 
+        private TMP_Text _panelText;
+        [SerializeField] 
+        private Image[] _backgroundPanels;
+        [SerializeField] 
+        private Image _iconGroupImage;
+        [SerializeField]
+        private RawImage[] _backgroundGradient;
+
         public void SetMergedItemView(Sprite sprite)
         {
             _mergedItemView.sprite = sprite;
@@ -104,6 +113,30 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         public void SetDescriptionValuesText(string text)
         {
             _descriptionValuesText.text = text;
+        }
+        
+        public void SetPanelText(string text)
+        {
+            _panelText.SetText(text);
+        }
+        
+        public void SetPanelsColor(Color color)
+        {
+            for (var i = 0; i < _backgroundPanels.Length; i++)
+            {
+                var panel = _backgroundPanels[i];
+                panel.color = color;
+            }
+        }
+        
+        public void SetItemSlotIcon(Sprite sprite)
+        {
+            _iconGroupImage.sprite = sprite;
+        }
+
+        public void SetBackgroundGradientMaterial(Material material, int index)
+        {
+            _backgroundGradient[index].material = material;
         }
     }
 }

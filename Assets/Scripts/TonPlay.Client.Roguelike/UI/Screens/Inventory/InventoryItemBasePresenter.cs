@@ -49,7 +49,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			Context.MergeState.Subscribe(state => View.SetMergeState(state)).AddTo(_subscriptions);
 			itemModel.DetailId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
 			itemModel.ItemId.Subscribe(state => UpdateView()).AddTo(_subscriptions);
-			
 		}
 
 		private void UpdateView()

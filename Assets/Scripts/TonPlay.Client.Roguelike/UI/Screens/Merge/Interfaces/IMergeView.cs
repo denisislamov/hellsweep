@@ -45,5 +45,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces
         void SetDescriptionInfoText(string text);
 		
         void SetDescriptionValuesText(string text);
+
+        void SetPanelText(string text);
+        void SetPanelsColor(Color color);
+        void SetItemSlotIcon(Sprite sprite);
+        void SetBackgroundGradientMaterial(Material backgroundGradient, int index);
     }
 }

@@ -59,7 +59,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 
 		public void UpdateItemRarenessConfigs(List<ItemsGetResponse.Item> responseItems)
 		{
-			Dictionary<string, ItemsGetResponse.Item> nextRarityMap = _provider.NextRarityMap;
+			var nextRarityMap = _provider.NextRarityMap;
 			nextRarityMap.Clear();
 			
 			for (var i = 0; i < responseItems.Count - 1; i++)
@@ -73,7 +73,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 					continue;
 				}
 
-				for (var j = i + 1; j < responseItems.Count; j++)
+				for (var j = 0; j < responseItems.Count; j++)
 				{
 					if (name != responseItems[j].name)
 					{

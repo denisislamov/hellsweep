@@ -22,7 +22,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_state.SetValueAndForceNotify(state);
 		}
 
-		private ReactiveProperty<MergeStates> _mergingState = new ReactiveProperty<MergeStates>(MergeStates.NONE);
+		private ReactiveProperty<MergeStates> _mergingState = new ReactiveProperty<MergeStates>(MergeStates.IN_INVENTORY);
 		public IReadOnlyReactiveProperty<MergeStates> MergingState => _mergingState;
 		
 		public void SetMergeState(MergeStates state)

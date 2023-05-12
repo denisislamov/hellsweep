@@ -16,13 +16,19 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		public SlotName SlotName { get; }
 		
 		public AttributeName AttributeName { get; }
-
+		
 		public IInventoryItemDetailConfig GetDetails(string detailId)
 			=> string.IsNullOrEmpty(detailId) || !Details.ContainsKey(detailId) ? null : Details[detailId];
 		
 		public IInventoryItemDetailConfig GetDetails(ushort level)
 			=> _details.Values.FirstOrDefault(_ => _.Level == level);
 		
+
+		public int GetMaxLevel()
+		{
+			return _details.Count - 1;
+		}
+
 		public IReadOnlyDictionary<string, IInventoryItemDetailConfig> Details => _details;
 
 		public InventoryItemConfig(
