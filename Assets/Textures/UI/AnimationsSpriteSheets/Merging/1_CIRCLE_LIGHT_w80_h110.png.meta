@@ -1,0 +1,913 @@
+fileFormatVersion: 2
+guid: e4be65c9d27099542ab37b8d738623e5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5569978577418537442
+    second: 1_CIRCLE_LIGHT_w80_h110_0
+  - first:
+      213: 7725067187900973683
+    second: 1_CIRCLE_LIGHT_w80_h110_1
+  - first:
+      213: -5630929772859189705
+    second: 1_CIRCLE_LIGHT_w80_h110_2
+  - first:
+      213: 4287175707827704669
+    second: 1_CIRCLE_LIGHT_w80_h110_3
+  - first:
+      213: 1265506663512994322
+    second: 1_CIRCLE_LIGHT_w80_h110_4
+  - first:
+      213: -2113110766781791688
+    second: 1_CIRCLE_LIGHT_w80_h110_5
+  - first:
+      213: -1575770108803721409
+    second: 1_CIRCLE_LIGHT_w80_h110_6
+  - first:
+      213: 8797241824703760737
+    second: 1_CIRCLE_LIGHT_w80_h110_7
+  - first:
+      213: 2390356892798700674
+    second: 1_CIRCLE_LIGHT_w80_h110_8
+  - first:
+      213: 7843374633037987896
+    second: 1_CIRCLE_LIGHT_w80_h110_9
+  - first:
+      213: -4166680849076744023
+    second: 1_CIRCLE_LIGHT_w80_h110_10
+  - first:
+      213: -1907023050327200550
+    second: 1_CIRCLE_LIGHT_w80_h110_11
+  - first:
+      213: -8682745494070179461
+    second: 1_CIRCLE_LIGHT_w80_h110_12
+  - first:
+      213: 1119430404057708275
+    second: 1_CIRCLE_LIGHT_w80_h110_13
+  - first:
+      213: -5251129398005357806
+    second: 1_CIRCLE_LIGHT_w80_h110_14
+  - first:
+      213: 978089060763221563
+    second: 1_CIRCLE_LIGHT_w80_h110_15
+  - first:
+      213: -3755026187781213487
+    second: 1_CIRCLE_LIGHT_w80_h110_16
+  - first:
+      213: -6745289195754758491
+    second: 1_CIRCLE_LIGHT_w80_h110_17
+  - first:
+      213: 6586112490446919897
+    second: 1_CIRCLE_LIGHT_w80_h110_18
+  - first:
+      213: -4326740067488172982
+    second: 1_CIRCLE_LIGHT_w80_h110_19
+  - first:
+      213: 8513228556087285930
+    second: 1_CIRCLE_LIGHT_w80_h110_20
+  - first:
+      213: 6192915202269394032
+    second: 1_CIRCLE_LIGHT_w80_h110_21
+  - first:
+      213: -790300875060799336
+    second: 1_CIRCLE_LIGHT_w80_h110_22
+  - first:
+      213: -4809970334097521287
+    second: 1_CIRCLE_LIGHT_w80_h110_23
+  - first:
+      213: 1686095717665058216
+    second: 1_CIRCLE_LIGHT_w80_h110_24
+  - first:
+      213: -3204534952992570122
+    second: 1_CIRCLE_LIGHT_w80_h110_25
+  - first:
+      213: -9125684182220176910
+    second: 1_CIRCLE_LIGHT_w80_h110_26
+  - first:
+      213: 4122729340811127463
+    second: 1_CIRCLE_LIGHT_w80_h110_27
+  - first:
+      213: -1009140254794211245
+    second: 1_CIRCLE_LIGHT_w80_h110_28
+  - first:
+      213: 2449797185744649367
+    second: 1_CIRCLE_LIGHT_w80_h110_29
+  - first:
+      213: 1768686527788996053
+    second: 1_CIRCLE_LIGHT_w80_h110_30
+  - first:
+      213: 7447919288178831398
+    second: 1_CIRCLE_LIGHT_w80_h110_31
+  - first:
+      213: 683029257884948813
+    second: 1_CIRCLE_LIGHT_w80_h110_32
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16be6eaef573b2b0800000000000000
+      internalID: -5569978577418537442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3720dd0ada3f43b60800000000000000
+      internalID: 7725067187900973683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7369e8d943bead1b0800000000000000
+      internalID: -5630929772859189705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5311c2879b1f7b30800000000000000
+      internalID: 4287175707827704669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212f4930b9bff8110800000000000000
+      internalID: 1265506663512994322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_5
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8320bee04f8bca2e0800000000000000
+      internalID: -2113110766781791688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3753115f6db12ae0800000000000000
+      internalID: -1575770108803721409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_7
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1694dac64d4161a70800000000000000
+      internalID: 8797241824703760737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c4ca9ede04c2120800000000000000
+      internalID: 2390356892798700674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_9
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8300a8a3ca349dc60800000000000000
+      internalID: 7843374633037987896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_10
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a09b5208d9fc26c0800000000000000
+      internalID: -4166680849076744023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_11
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adce3cab3a4e885e0800000000000000
+      internalID: -1907023050327200550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_12
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b79c2dee9f0b08780800000000000000
+      internalID: -8682745494070179461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_13
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f6b1a08504098f00800000000000000
+      internalID: 1119430404057708275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_14
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 213a74a52ad3027b0800000000000000
+      internalID: -5251129398005357806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_15
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3ebc7191ded29d00800000000000000
+      internalID: 978089060763221563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_16
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d2f203c39773ebc0800000000000000
+      internalID: -3755026187781213487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_17
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aed1cbe63be362a0800000000000000
+      internalID: -6745289195754758491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_18
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d81ad35a62966b50800000000000000
+      internalID: 6586112490446919897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_19
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44fae925d454f3c0800000000000000
+      internalID: -4326740067488172982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_20
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa85b494440152670800000000000000
+      internalID: 8513228556087285930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_21
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0743263a097a1f550800000000000000
+      internalID: 6192915202269394032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_22
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89812549a894805f0800000000000000
+      internalID: -790300875060799336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_23
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97543f7277d8f3db0800000000000000
+      internalID: -4809970334097521287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_24
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8adabb43f17366710800000000000000
+      internalID: 1686095717665058216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_25
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f40e8840743783d0800000000000000
+      internalID: -3204534952992570122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_26
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f18d52169e0b5180800000000000000
+      internalID: -9125684182220176910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_27
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aaa0280e70e63930800000000000000
+      internalID: 4122729340811127463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_28
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 350a170f840def1f0800000000000000
+      internalID: -1009140254794211245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_29
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79cbf049f8d6ff120800000000000000
+      internalID: 2449797185744649367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_30
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d5d1efa603ab8810800000000000000
+      internalID: 1768686527788996053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_31
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620fdafb1235c5760800000000000000
+      internalID: 7447919288178831398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_CIRCLE_LIGHT_w80_h110_32
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d495e6fbd7b9a7900800000000000000
+      internalID: 683029257884948813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

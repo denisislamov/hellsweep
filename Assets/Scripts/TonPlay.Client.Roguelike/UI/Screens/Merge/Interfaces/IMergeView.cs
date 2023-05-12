@@ -39,7 +39,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces
         Image GlowImage { get; }
         GameObject DescriptionPanel { get; }
         ParticleSystem MergeParticles { get; }
-        
+
+        int RestApiVersion { get; }
+
         void SetDescriptionHeaderText(string text);
         
         void SetDescriptionInfoText(string text);
@@ -50,5 +52,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces
         void SetPanelsColor(Color color);
         void SetItemSlotIcon(Sprite sprite);
         void SetBackgroundGradientMaterial(Material backgroundGradient, int index);
+        void PlayMergeAnimation();
     }
 }

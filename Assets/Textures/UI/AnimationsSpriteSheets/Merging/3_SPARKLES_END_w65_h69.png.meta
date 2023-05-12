@@ -1,0 +1,1177 @@
+fileFormatVersion: 2
+guid: 69d70984bc8055f44bb17779d40722b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3643886134309381330
+    second: 3_SPARKLES_END_w65_h69_0
+  - first:
+      213: 5390897664936494792
+    second: 3_SPARKLES_END_w65_h69_1
+  - first:
+      213: 935118172978885858
+    second: 3_SPARKLES_END_w65_h69_2
+  - first:
+      213: 3285499175672447933
+    second: 3_SPARKLES_END_w65_h69_3
+  - first:
+      213: -5586448203226538342
+    second: 3_SPARKLES_END_w65_h69_4
+  - first:
+      213: -7700157905378636927
+    second: 3_SPARKLES_END_w65_h69_5
+  - first:
+      213: -5627731266022612602
+    second: 3_SPARKLES_END_w65_h69_6
+  - first:
+      213: 258075746164965705
+    second: 3_SPARKLES_END_w65_h69_7
+  - first:
+      213: 2459961918611580447
+    second: 3_SPARKLES_END_w65_h69_8
+  - first:
+      213: -3910874711348246719
+    second: 3_SPARKLES_END_w65_h69_9
+  - first:
+      213: -1576510144483341484
+    second: 3_SPARKLES_END_w65_h69_10
+  - first:
+      213: 5013952139253932415
+    second: 3_SPARKLES_END_w65_h69_11
+  - first:
+      213: 5243028853803577009
+    second: 3_SPARKLES_END_w65_h69_12
+  - first:
+      213: 6702567545032068771
+    second: 3_SPARKLES_END_w65_h69_13
+  - first:
+      213: 4974927845137045126
+    second: 3_SPARKLES_END_w65_h69_14
+  - first:
+      213: -2962807521635604138
+    second: 3_SPARKLES_END_w65_h69_15
+  - first:
+      213: 1747306705242802414
+    second: 3_SPARKLES_END_w65_h69_16
+  - first:
+      213: -6800928228217616924
+    second: 3_SPARKLES_END_w65_h69_17
+  - first:
+      213: 8167025594524265377
+    second: 3_SPARKLES_END_w65_h69_18
+  - first:
+      213: 8724744508808647481
+    second: 3_SPARKLES_END_w65_h69_19
+  - first:
+      213: 7368285473697142881
+    second: 3_SPARKLES_END_w65_h69_20
+  - first:
+      213: -2821931458608241291
+    second: 3_SPARKLES_END_w65_h69_21
+  - first:
+      213: 5455901168350771773
+    second: 3_SPARKLES_END_w65_h69_22
+  - first:
+      213: 1450163432512189068
+    second: 3_SPARKLES_END_w65_h69_23
+  - first:
+      213: -350817981265437647
+    second: 3_SPARKLES_END_w65_h69_24
+  - first:
+      213: -2704266647992926646
+    second: 3_SPARKLES_END_w65_h69_25
+  - first:
+      213: -855126881942556990
+    second: 3_SPARKLES_END_w65_h69_26
+  - first:
+      213: -6391881159111690017
+    second: 3_SPARKLES_END_w65_h69_27
+  - first:
+      213: -4176116445028445820
+    second: 3_SPARKLES_END_w65_h69_28
+  - first:
+      213: 9014125622773746356
+    second: 3_SPARKLES_END_w65_h69_29
+  - first:
+      213: -4557178681102250789
+    second: 3_SPARKLES_END_w65_h69_30
+  - first:
+      213: 7993090933324413865
+    second: 3_SPARKLES_END_w65_h69_31
+  - first:
+      213: 2361934909706067046
+    second: 3_SPARKLES_END_w65_h69_32
+  - first:
+      213: -5644208143290364045
+    second: 3_SPARKLES_END_w65_h69_33
+  - first:
+      213: 2568258138408061792
+    second: 3_SPARKLES_END_w65_h69_34
+  - first:
+      213: -1730631882144323473
+    second: 3_SPARKLES_END_w65_h69_35
+  - first:
+      213: -7665925451444341491
+    second: 3_SPARKLES_END_w65_h69_36
+  - first:
+      213: 6279891094624314828
+    second: 3_SPARKLES_END_w65_h69_37
+  - first:
+      213: -3794253370589924699
+    second: 3_SPARKLES_END_w65_h69_38
+  - first:
+      213: -7208987572344139000
+    second: 3_SPARKLES_END_w65_h69_39
+  - first:
+      213: -1772377736271153373
+    second: 3_SPARKLES_END_w65_h69_40
+  - first:
+      213: -3144013183409907737
+    second: 3_SPARKLES_END_w65_h69_41
+  - first:
+      213: -9101781071346408352
+    second: 3_SPARKLES_END_w65_h69_42
+  - first:
+      213: -5650715472980455571
+    second: 3_SPARKLES_END_w65_h69_43
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d46b7d022fa19230800000000000000
+      internalID: 3643886134309381330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c6c5033dd050da40800000000000000
+      internalID: 5390897664936494792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e43b6b16053afc00800000000000000
+      internalID: 935118172978885858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db38bcbc710789d20800000000000000
+      internalID: 3285499175672447933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9e109a15f2f872b0800000000000000
+      internalID: -5586448203226538342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b8d77ae2b832590800000000000000
+      internalID: -7700157905378636927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 681ec550b3846e1b0800000000000000
+      internalID: -5627731266022612602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9418e47168ed49300800000000000000
+      internalID: 258075746164965705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_8
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16e4dfd45a832220800000000000000
+      internalID: 2459961918611580447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_9
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1478705bb28c9b9c0800000000000000
+      internalID: -3910874711348246719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_10
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45b4545506c1f1ae0800000000000000
+      internalID: -1576510144483341484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_11
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f716a05d7e2259540800000000000000
+      internalID: 5013952139253932415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_12
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bee51ab6faf2c840800000000000000
+      internalID: 5243028853803577009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_13
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aec2b4abad440d50800000000000000
+      internalID: 6702567545032068771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_14
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686d790548e7a0540800000000000000
+      internalID: 4974927845137045126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_15
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 659ed07b14ef1e6d0800000000000000
+      internalID: -2962807521635604138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_16
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8c7a7d03eaf3810800000000000000
+      internalID: 1747306705242802414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_17
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5892e2fcf3e91a0800000000000000
+      internalID: -6800928228217616924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_18
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ab6429e18a175170800000000000000
+      internalID: 8167025594524265377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_19
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9335493b7e4841970800000000000000
+      internalID: 8724744508808647481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_20
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16893677998614660800000000000000
+      internalID: 7368285473697142881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_21
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 575e7252a4c76d8d0800000000000000
+      internalID: -2821931458608241291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_22
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3abf2db43147bb40800000000000000
+      internalID: 5455901168350771773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_23
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c82762565f3002410800000000000000
+      internalID: 1450163432512189068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_24
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c9add97e4a12bf0800000000000000
+      internalID: -350817981265437647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_25
+      rect:
+        serializedVersion: 2
+        x: 1625
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ef17cbfc3887ad0800000000000000
+      internalID: -2704266647992926646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_26
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ce2deba1aaf124f0800000000000000
+      internalID: -855126881942556990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_27
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd8b2a093f97b47a0800000000000000
+      internalID: -6391881159111690017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_28
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 481996128347b06c0800000000000000
+      internalID: -4176116445028445820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_29
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba0d2abe7b981d70800000000000000
+      internalID: 9014125622773746356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_30
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdccaee6226a1c0c0800000000000000
+      internalID: -4557178681102250789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_31
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ab723acad92dee60800000000000000
+      internalID: 7993090933324413865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_32
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66cdf9b494747c020800000000000000
+      internalID: 2361934909706067046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_33
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37f8fc4199ebba1b0800000000000000
+      internalID: -5644208143290364045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_34
+      rect:
+        serializedVersion: 2
+        x: 2210
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b815f6b2944a320800000000000000
+      internalID: 2568258138408061792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_35
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6862d3f87f8bf7e0800000000000000
+      internalID: -1730631882144323473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_36
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d05b800fa692d9590800000000000000
+      internalID: -7665925451444341491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_37
+      rect:
+        serializedVersion: 2
+        x: 2405
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5a833ada7a62750800000000000000
+      internalID: 6279891094624314828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_38
+      rect:
+        serializedVersion: 2
+        x: 2470
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2b82a89aa185bc0800000000000000
+      internalID: -3794253370589924699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_39
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803d8307ff784fb90800000000000000
+      internalID: -7208987572344139000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_40
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3273fbdd6df3767e0800000000000000
+      internalID: -1772377736271153373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_41
+      rect:
+        serializedVersion: 2
+        x: 2665
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e715b9daa83e54d0800000000000000
+      internalID: -3144013183409907737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_42
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064e503c65affa180800000000000000
+      internalID: -9101781071346408352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3_SPARKLES_END_w65_h69_43
+      rect:
+        serializedVersion: 2
+        x: 2795
+        y: 0
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6f42325730a491b0800000000000000
+      internalID: -5650715472980455571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
