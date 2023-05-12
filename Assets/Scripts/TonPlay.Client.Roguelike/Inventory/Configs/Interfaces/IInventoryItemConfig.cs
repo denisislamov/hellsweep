@@ -17,5 +17,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 		AttributeName AttributeName { get; }
 
 		IInventoryItemDetailConfig GetDetails(string detailIdValue);
+
+		IInventoryItemDetailConfig GetDetails(ushort level);
 	}
 }

@@ -5,6 +5,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs.Interfaces
 {
 	public interface IInventoryItemsConfigProvider
 	{
+		IReadOnlyList<IInventoryItemConfig> AllConfigs { get; }
+		
 		IReadOnlyDictionary<string, IInventoryInnerItemConfig> InnerItemMap { get; }
 
 		IInventoryItemConfig Get(string id);

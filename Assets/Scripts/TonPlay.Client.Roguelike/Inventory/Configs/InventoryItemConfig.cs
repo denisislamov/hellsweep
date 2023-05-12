@@ -20,6 +20,9 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 		public IInventoryItemDetailConfig GetDetails(string detailId)
 			=> string.IsNullOrEmpty(detailId) || !Details.ContainsKey(detailId) ? null : Details[detailId];
 		
+		public IInventoryItemDetailConfig GetDetails(ushort level)
+			=> _details.Values.FirstOrDefault(_ => _.Level == level);
+		
 		public IReadOnlyDictionary<string, IInventoryItemDetailConfig> Details => _details;
 
 		public InventoryItemConfig(

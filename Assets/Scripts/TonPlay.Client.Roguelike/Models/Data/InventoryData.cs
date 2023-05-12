@@ -74,5 +74,22 @@ namespace TonPlay.Client.Roguelike.Models.Data
 
 			return -1;
 		}
+		
+		public long GetKeysValue(RarityName rarity)
+		{
+			switch (rarity)
+			{
+				case RarityName.COMMON:
+					return CommonKeys;
+				case RarityName.UNCOMMON:
+					return UncommonKeys;
+				case RarityName.RARE:
+					return RareKeys;
+				case RarityName.LEGENDARY:
+					return LegendaryKeys;
+			}
+
+			return -1;
+		}
 	}
 }

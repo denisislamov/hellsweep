@@ -45,10 +45,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 				AddRewardPresenter("blueprints", Context.RewardsModel.Blueprints);
 			}
 			
-			if (Context.RewardsModel.HeroSkins > 0)
-			{
-				AddRewardPresenter("hero_skins", Context.RewardsModel.HeroSkins);
-			}
+			//todo: uncomment it if we would use heroSkins
+			// if (Context.RewardsModel.HeroSkins > 0)
+			// {
+			// 	AddRewardPresenter("hero_skins", Context.RewardsModel.HeroSkins);
+			// }
 			
 			if (Context.RewardsModel.KeysCommon > 0)
 			{

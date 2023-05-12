@@ -20,6 +20,8 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 
 		public readonly Dictionary<string, ItemsGetResponse.Item> NextRarityMap = new Dictionary<string, ItemsGetResponse.Item>();
 
+		public IReadOnlyList<IInventoryItemConfig> AllConfigs => ConfigsMap.Values.ToList();
+		
 		public IReadOnlyDictionary<string, IInventoryInnerItemConfig> InnerItemMap =>
 			_itemsMap ??= _items.ToDictionary(
 				_ => _.InnerItemId,

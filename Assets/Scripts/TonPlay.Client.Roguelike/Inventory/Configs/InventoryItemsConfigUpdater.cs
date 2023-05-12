@@ -31,7 +31,7 @@ namespace TonPlay.Client.Roguelike.Inventory.Configs
 				var remoteDetail = item.details[index];
 				var currentDetail = new InventoryItemDetailConfig()
 				{
-					Feature = remoteDetail.id,
+					Id = remoteDetail.id,
 					Level = remoteDetail.level,
 					Value = remoteDetail.value,
 					Next = previousDetail

@@ -40,6 +40,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 						.WithArguments(ScreenPrefab);
 
 			subContainer.BindFactory<IShopLootboxesView, IShopLootboxesScreenContext, ShopLootboxesPresenter, ShopLootboxesPresenter.Factory>();
+			subContainer.BindFactory<IShopLootboxView, IShopLootboxContext, ShopLootboxPresenter, ShopLootboxPresenter.Factory>();
 		}
 	}
 }

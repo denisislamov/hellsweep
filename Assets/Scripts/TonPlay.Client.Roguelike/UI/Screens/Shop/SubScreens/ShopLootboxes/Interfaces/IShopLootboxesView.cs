@@ -4,5 +4,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.Inte
 {
 	public interface IShopLootboxesView : IView
 	{
+		IShopLootboxView CommonLootboxView { get; }
+		IShopLootboxView UncommonLootboxView { get; }
+		IShopLootboxView RareLootboxView { get; }
+		IShopLootboxView LegendaryLootboxView { get; }
 	}
 }
