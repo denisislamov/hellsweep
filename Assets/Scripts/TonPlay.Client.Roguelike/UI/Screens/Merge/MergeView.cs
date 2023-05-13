@@ -73,6 +73,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         [SerializeField] 
         private Animator _animator;
+
+        [SerializeField] 
+        private GameObject _raycastBlocker;
         
         public IProfileBarView ProfileBarView => _profileBarView;
         public INavigationMenuView NavigationMenuView => _navigationMenuView;
@@ -91,6 +94,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         public ParticleSystem MergeParticles => _mergeParticles;
         public int RestApiVersion => _restApiVersion;
 
+        public GameObject RaycastBlocker => _raycastBlocker;
+        
         [SerializeField] 
         private TMP_Text _panelText;
         [SerializeField] 

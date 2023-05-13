@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDebugToken: 1
-  _username: disadisa
+  _username: csharky
   _debugTokenSettings: {fileID: 11400000, guid: ba1bb272dd831ad4dbafeff965d60682, type: 2}
   _networkSettings: {fileID: 11400000, guid: 146c6c424c23c4646a83725a32473812, type: 2}
   _unitAllResponse:
@@ -258,6 +258,25 @@ MonoBehaviour:
   _itemMergePostBody:
     itemDetailIds: []
   _itemMergeResponse:
+    successful: 0
+    response:
+      id: 
+      level: 0
+      value: 0
+      item:
+        id: 
+        name: 
+        rarity: 
+        purpose: 
+        feature: 
+        details: []
+    error:
+      code: 
+      description: 
+      message: 
+  _itemMergePostBodyV2:
+    userItemDetailIds: []
+  _itemMergeResponseV2:
     successful: 0
     response:
       id: 
@@ -361,7 +380,17 @@ MonoBehaviour:
   _userInventoryResponse:
     successful: 0
     response:
-      blueprints: 0
+      blueprintsArms: 0
+      blueprintsBody: 0
+      blueprintsBelt: 0
+      blueprintsFeet: 0
+      blueprintsNeck: 0
+      blueprintsWeapon: 0
+      keysCommon: 0
+      keysUncommon: 0
+      keysRare: 0
+      keysLegendary: 0
+      heroSkins: 0
     error:
       code: 
       description: 

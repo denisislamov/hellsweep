@@ -570,6 +570,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             else
             {
                 Debug.Log("Merging success");
+                View.MergeParticles.gameObject.SetActive(false);
+                View.RaycastBlocker.SetActive(true);
                 View.PlayMergeAnimation();
                 
                 await UniTask.Delay(TimeSpan.FromSeconds(4.2), ignoreTimeScale: false);
@@ -580,6 +582,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
                 await UpdateInventoryModel();
 
+                View.RaycastBlocker.SetActive(false);
+                
                 // UpdateView();
             }
             // TODO - update inventory
@@ -612,7 +616,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
 
                 await UpdateInventoryModel();
-
+                
                 // UpdateView();
             }
             // TODO - update inventory
