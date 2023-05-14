@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
@@ -22,6 +23,7 @@ using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
 using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -533,20 +535,33 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
 
         private async void OnMergeButtonClickHandler()
         {
+            switch (View.RestApiVersion)
+            {
+                case 1:
+                    await MergeV1();
+                    break;
+                case 2:
+                    await MergeV2();
+                    break;
+            }
+        }
+        
+        private async Task MergeV1()
+        {
             var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
             var itemMergePostBody = new ItemMergePostBody();
-            
+
             foreach (var mergingSlot in mergingSlots)
             {
                 var itemModel = GetItemModel(mergingSlot.ItemId.Value);
                 if (itemModel is null)
                 {
                     return;
-                } 
-                
+                }
+
                 itemMergePostBody.itemDetailIds.Add(itemModel.DetailId.Value);
             }
-            
+
             var itemMergeResponse = await _restApiClient.PostItemMerge(itemMergePostBody);
             if (itemMergeResponse == null)
             {
@@ -555,25 +570,64 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             else
             {
                 Debug.Log("Merging success");
-                // UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
+                View.MergeParticles.gameObject.SetActive(false);
+                View.RaycastBlocker.SetActive(true);
+                View.PlayMergeAnimation();
                 
+                await UniTask.Delay(TimeSpan.FromSeconds(4.2), ignoreTimeScale: false);
+                // UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
+
                 _inventoryItemsPresenter?.Dispose();
                 _itemStates?.Clear();
+
+                await UpdateInventoryModel();
+
+                View.RaycastBlocker.SetActive(false);
                 
+                // UpdateView();
+            }
+            // TODO - update inventory
+        }
+
+        private async Task MergeV2()
+        {
+            var mergingSlots = _metaGameModelProvider.Get().ProfileModel.InventoryModel.MergeSlots;
+            var itemMergePostBody = new ItemMergePostBodyV2();
+
+            foreach (var mergingSlot in mergingSlots)
+            {
+                var itemModel = GetItemModel(mergingSlot.ItemId.Value);
+                if (itemModel is null)
+                {
+                    return;
+                }
+
+                itemMergePostBody.userItemDetailIds.Add(itemModel.Id.Value);
+            }
+
+            var itemMergeResponse = await _restApiClient.PostItemMergeV2(itemMergePostBody);
+            if (itemMergeResponse == null)
+            {
+                Debug.Log("itemMergeResponse == null");
+            }
+            else
+            {
+                Debug.Log("Merging success");
+                UpdateInventoryModel(itemMergeResponse.response, itemMergePostBody);
+
                 await UpdateInventoryModel();
                 
                 // UpdateView();
             }
-            
             // TODO - update inventory
         }
-
-        private void UpdateInventoryModel(ItemMergeResponse itemMergeResponse, ItemMergePostBody itemMergePostBody)
+        
+        private void UpdateInventoryModel(ItemMergeResponse itemMergeResponse, ItemMergePostBodyV2 itemMergePostBody)
         {
             var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
             var inventoryData = inventoryModel.ToData();
 
-            inventoryData.Items.RemoveAll(x => itemMergePostBody.itemDetailIds.Contains(x.DetailId));
+            inventoryData.Items.RemoveAll(x => itemMergePostBody.userItemDetailIds.Contains(x.DetailId));
             
             foreach (var mergeSlot in inventoryData.MergeSlots)
             {
@@ -705,10 +759,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                     _inventoryItemPresentationProvider.GetColors(rarityValue, out var mainColor, out var rarityMaterial);
                     View.GlowImage.color = mainColor;
                     
-                    View.SetPanelsColor(mainColor);
-                    View.SetBackgroundGradientMaterial(rarityMaterial, i - 1);
-                    View.SetPanelText($"Lv.{currentHighLevel}");
-                    
                     var particlesMain = View.MergeParticles.main;
                     particlesMain.startColor = mainColor;
                     // <color=#FF5FAB>Legendary</color> Armor Shirt>(1/3 Items)
@@ -723,6 +773,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                                                   + name + " (" + i + "/3 Items)");
                     View.SetDescriptionInfoText(maxLevelLabel + "\n" +
                                                 attributeNameLabel);
+                    
+                    _inventoryItemPresentationProvider.GetColors(itemConfig.Rarity, out mainColor, out rarityMaterial);
+                    View.SetPanelsColor(mainColor);
+                    View.SetBackgroundGradientMaterial(rarityMaterial, i - 1);
+                    View.SetPanelText($"Lv.{currentHighLevel}");
                 }
             }
 

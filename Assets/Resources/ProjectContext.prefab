@@ -274,12 +274,21 @@ MonoBehaviour:
       code: 
       description: 
       message: 
-  _itemLootResponse:
+  _itemMergePostBodyV2:
+    userItemDetailIds: []
+  _itemMergeResponseV2:
     successful: 0
     response:
       id: 
-      itemId: 
-      itemDetailId: 
+      level: 0
+      value: 0
+      item:
+        id: 
+        name: 
+        rarity: 
+        purpose: 
+        feature: 
+        details: []
     error:
       code: 
       description: 
