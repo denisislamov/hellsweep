@@ -12,18 +12,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 	internal class ShopPackItemCollectionPresenter : CollectionPresenter<IShopPackItemView, IShopPackItemCollectionContext>
 	{
 		private readonly ShopPackItemPresenter.Factory _itemPresenterFactory;
-		private readonly IShopPackPresentationProvider _shopPackPresentationProvider;
+		private readonly IShopRewardPresentationProvider _shopRewardPresentationProvider;
 
 		public ShopPackItemCollectionPresenter(
 			ICollectionView<IShopPackItemView> view,
 			IShopPackItemCollectionContext screenContext,
 			ICollectionItemPool<IShopPackItemView> itemPool,
 			ShopPackItemPresenter.Factory itemPresenterFactory,
-			IShopPackPresentationProvider shopPackPresentationProvider)
+			IShopRewardPresentationProvider shopRewardPresentationProvider)
 			: base(view, screenContext, itemPool)
 		{
 			_itemPresenterFactory = itemPresenterFactory;
-			_shopPackPresentationProvider = shopPackPresentationProvider;
+			_shopRewardPresentationProvider = shopRewardPresentationProvider;
 
 			InitView();
 		}
@@ -74,11 +74,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		
 		private void AddRewardPresenter(string rewardId, ulong amount)
 		{
-			var presentation = _shopPackPresentationProvider.GetRewardPresentation(rewardId);
+			var presentation = _shopRewardPresentationProvider.GetRewardPresentation(rewardId);
 
 			if (presentation == null)
 			{
-				Debug.LogWarning($"[ShopPackItemCollectionPresenter] Presentation for reward {rewardId} hasn't been found");
+				Debug.LogWarning($"[ShopLootboxItemCollectionPresenter] Presentation for reward {rewardId} hasn't been found");
 				return;
 			}
 

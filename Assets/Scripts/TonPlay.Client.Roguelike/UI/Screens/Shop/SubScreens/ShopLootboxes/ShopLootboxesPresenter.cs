@@ -56,7 +56,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		
 		private void AddLootboxPresenter(IShopLootboxView view, RarityName rarityName)
 		{
-			var presenter = _shopLootboxPresenterFactory.Create(view, new ShopLootboxContext(rarityName));
+			var presenter = _shopLootboxPresenterFactory.Create(view, new ShopLootboxContext(rarityName){ Screen = Context.Screen });
 			Presenters.Add(presenter);
 		}
 

@@ -7,7 +7,7 @@ using Screen = TonPlay.Client.Common.UIService.Screen;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 {
-	public class ShopResourcePopupScreen : Screen<ShopResourcePopupScreenContext>
+	public class ShopResourcePopupScreen : Screen<IShopResourcePopupScreenContext>
 	{
 		[SerializeField]
 		private ShopResourcePopupView _view;

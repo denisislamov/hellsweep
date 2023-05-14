@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -15,14 +18,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 	internal class ShopLootboxPresenter : Presenter<IShopLootboxView, IShopLootboxContext>
 	{
 		private readonly IUIService _uiService;
+		private readonly IRestApiClient _restApiClient;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
-		private IRestApiClient _restApiClient;
-		private ReactiveProperty<bool> _buttonLockReactiveProperty = new ReactiveProperty<bool>();
-		private ReactiveProperty<string> _buttonTextReactiveProperty = new ReactiveProperty<string>();
+		private readonly ReactiveProperty<bool> _buttonLockReactiveProperty = new ReactiveProperty<bool>();
+		private readonly ReactiveProperty<string> _buttonTextReactiveProperty = new ReactiveProperty<string>();
 
 		public ShopLootboxPresenter(
 			IShopLootboxView view,
@@ -58,6 +61,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			var metaGameModel = _metaGameModelProvider.Get();
 			var keysCount = metaGameModel.ProfileModel.InventoryModel.ToData().GetKeysValue(Context.Rarity);
 			_buttonLockReactiveProperty.SetValueAndForceNotify(keysCount < 1);
+			//_buttonLockReactiveProperty.SetValueAndForceNotify(false);
 			_buttonTextReactiveProperty.SetValueAndForceNotify($"{keysCount}/1 {Context.Rarity.ToString().ToLowerInvariant().FirstCharToUpper()} Keys");
 		}
 
@@ -73,9 +77,37 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			Presenters.Add(presenter);
 		}
 		
-		private void ButtonClickHandler()
+		private async void ButtonClickHandler()
 		{
-			Debug.Log($"{Context.Rarity} Lootbox Clicked");
+			var response = await _restApiClient.PostItemLoot(Context.Rarity);
+
+			if (!response.successful)
+			{
+				return;
+			}
+			
+			_uiService.Close(Context.Screen, true);
+
+			var itemModel = new InventoryItemModel();
+			var itemData = new InventoryItemData()
+			{
+				Id = response.response.id,
+				DetailId = response.response.itemDetailId,
+				ItemId = response.response.itemId
+			};
+			itemModel.Update(itemData);
+
+			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+			var inventoryData = inventoryModel.ToData();
+			inventoryData.Items.Add(itemData);
+			inventoryModel.Update(inventoryData);
+			
+			_uiService.Open<ShopLootboxOpeningScreen, IShopLootboxOpeningScreenContext>(
+				new ShopLootboxOpeningScreenContext(new List<IInventoryItemModel>()
+				{
+					itemModel
+				}), 
+				true);
 		}
 
 		internal class Factory : PlaceholderFactory<IShopLootboxView, IShopLootboxContext, ShopLootboxPresenter>

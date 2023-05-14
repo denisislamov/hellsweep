@@ -1,16 +1,17 @@
+using System;
+using System.Threading;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
-using TonPlay.Client.Roguelike.Models.Interfaces;
-using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Models;
+using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
-using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks;
-using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SuccessPayment;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SuccessPayment.Interfaces;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
@@ -19,27 +20,26 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 	{
 		private readonly IUIService _uiService;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
-		private readonly IMetaGameModelProvider _metaGameModelProvider;
-		private readonly IRestApiClient _restApiClient;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		private readonly ShopPurchaseAction.Factory _shopPurchaseActionFactory;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
+
+		private readonly CancellationTokenSource _purchasingCancellationTokenSource = new CancellationTokenSource();
 
 		public ShopResourcePopupPresenter(
 			IShopResourcePopupView view,
 			IShopResourcePopupScreenContext context,
 			IUIService uiService,
 			IButtonPresenterFactory buttonPresenterFactory,
-			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient,
-			IInventoryItemPresentationProvider inventoryItemPresentationProvider)
+			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
+			ShopPurchaseAction.Factory shopPurchaseActionFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
-			_metaGameModelProvider = metaGameModelProvider;
-			_restApiClient = restApiClient;
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
+			_shopPurchaseActionFactory = shopPurchaseActionFactory;
 
 			InitView();
 			AddBuyButtonPresenter();
@@ -54,6 +54,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 		public override void Dispose()
 		{
 			_compositeDisposables.Dispose();
+			_purchasingCancellationTokenSource?.Cancel();
 			base.Dispose();
 		}
 		
@@ -94,9 +95,46 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 			_uiService.Close(Context.Screen);
 		}
 
-		private void OnBuyButtonClickHandler()
+		private async void OnBuyButtonClickHandler()
 		{
-			Debug.Log($"Clicked shop resource with id {Context.Model.Id}");
+			var reason = PaymentReason.ITEM;
+			object value = null;
+			switch (Context.Model.Type)
+			{
+				case ShopResourceType.Items:
+				{
+					reason = PaymentReason.ITEM;
+					value = ((IShopItemResourcePopupScreenContext) Context).ItemDetailId;
+					break;
+				}
+				case ShopResourceType.Keys:
+					reason = PaymentReason.KEYS;
+					value = Context.Model.Rarity;
+					break;
+				case ShopResourceType.Energy:
+					reason = PaymentReason.ENERGY;
+					break;
+				case ShopResourceType.Blueprints:
+					reason = PaymentReason.BLUEPRINTS;
+					break;
+				case ShopResourceType.Coins:
+					throw new NotImplementedException();
+				case ShopResourceType.HeroSkins:
+					throw new NotImplementedException();
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+			
+			var action = _shopPurchaseActionFactory.Create(
+				new ShopPurchaseActionContext(reason, value, _purchasingCancellationTokenSource.Token));
+			
+			await action.Begin();
+
+			var result = await action.CompletionSource.Task;
+			if (result.Status == PaymentStatus.COMPLETED)
+			{
+				_uiService.Open<ShopSuccessPaymentScreen, IShopSuccessPaymentScreenContext>(new ShopSuccessPaymentScreenContext(result.Rewards));
+			}
 		}
 
 		internal class Factory : PlaceholderFactory<IShopResourcePopupView, IShopResourcePopupScreenContext, ShopResourcePopupPresenter>

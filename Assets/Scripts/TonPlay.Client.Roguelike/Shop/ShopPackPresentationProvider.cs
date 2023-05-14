@@ -6,7 +6,7 @@ using UnityEngine;
 namespace TonPlay.Client.Roguelike.Shop
 {
 	[CreateAssetMenu(fileName = nameof(ShopPackPresentationProvider), menuName = AssetMenuConstants.SHOP_UI_CONFIGS + nameof(ShopPackPresentationProvider))]
-	public class ShopPackPresentationProvider : ScriptableObject, IShopPackPresentationProvider
+	public class ShopPackPresentationProvider : ScriptableObject, IShopRewardPresentationProvider
 	{
 		[SerializeField]
 		private ShopPackPresentationConfig[] _configs;

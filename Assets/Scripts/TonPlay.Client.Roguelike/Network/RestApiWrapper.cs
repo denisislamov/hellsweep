@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network;
+using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
@@ -198,6 +199,22 @@ namespace TonPlay.Client.Roguelike.Network
             }
         }
         
+        [SerializeField] private Response<UserItemResponse> _itemLootResponse;
+        [ContextMenu("PostItemLoot")]
+        public async UniTask<Response<UserItemResponse>> PostItemLoot(RarityName rarity)
+        {
+            _itemLootResponse = new Response<UserItemResponse>();
+
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<UserItemResponse> {rarity}");
+            var postTask = _networkClient.PostAsync<UserItemResponse>($"v1/item/loot?rarity={rarity.ToString().ToUpperInvariant()}", null);
+
+            var result = await postTask;
+            
+            _itemLootResponse = result;
+
+            return result;
+        }
+
         [SerializeField] private Response<ItemsGetResponse> _itemsGetResponse;
         [ContextMenu("GetAllItems")]
         public async UniTask<Response<ItemsGetResponse>> GetAllItems()
@@ -476,6 +493,90 @@ namespace TonPlay.Client.Roguelike.Network
 
             var result = await getTask;
             _shopResourcesResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _paymentTransactionResponse;
+        [ContextMenu("GetPaymentTransaction")]
+        public async UniTask<Response<PaymentTransactionResponse>> GetPaymentTransaction(string txId)
+        {
+            _paymentTransactionResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log("_networkClient.GetAsync<PaymentTransactionResponse>");
+            var getTask = _networkClient.GetAsync<PaymentTransactionResponse>($"v1/market/tx/payment?id={txId}", null);
+
+            var result = await getTask;
+            _paymentTransactionResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _buyMarketPackResponse;
+        [ContextMenu("PostBuyMarketPack")]
+        public async UniTask<Response<PaymentTransactionResponse>> PostBuyMarketPack(BuyMarketPackPostBody body)
+        {
+            _buyMarketPackResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<PaymentTransactionResponse> {body.packId}");
+            var postTask = _networkClient.PostAsync<PaymentTransactionResponse>("v1/market/buy/pack", body);
+
+            var result = await postTask;
+            _buyMarketPackResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _buyMarketEnergyResponse;
+        [ContextMenu("PostBuyMarketEnergy")]
+        public async UniTask<Response<PaymentTransactionResponse>> PostBuyMarketEnergy()
+        {
+            _buyMarketEnergyResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<PaymentTransactionResponse>");
+            var postTask = _networkClient.PostAsync<PaymentTransactionResponse>("v1/market/buy/energy", null);
+
+            var result = await postTask;
+            _buyMarketEnergyResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _buyMarketBlueprintsResponse;
+        [ContextMenu("PostBuyMarketBlueprints")]
+        public async UniTask<Response<PaymentTransactionResponse>> PostBuyMarketBlueprints()
+        {
+            _buyMarketBlueprintsResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<PaymentTransactionResponse>");
+            var postTask = _networkClient.PostAsync<PaymentTransactionResponse>("v1/market/buy/blueprints", null);
+
+            var result = await postTask;
+            _buyMarketBlueprintsResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _buyMarketKeysResponse;
+        [ContextMenu("PostBuyMarketKeys")]
+        public async UniTask<Response<PaymentTransactionResponse>> PostBuyMarketKeys(RarityName rarityName)
+        {
+            _buyMarketKeysResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<PaymentTransactionResponse>");
+            var postTask = _networkClient.PostAsync<PaymentTransactionResponse>($"v1/market/buy/keys?rarity={rarityName.ToString().ToUpperInvariant()}", null);
+
+            var result = await postTask;
+            _buyMarketKeysResponse = result;
+
+            return result;
+        }
+        
+        [SerializeField] private Response<PaymentTransactionResponse> _buyMarketItemResponse;
+        [ContextMenu("PostBuyMarketItem")]
+        public async UniTask<Response<PaymentTransactionResponse>> PostBuyMarketItem(BuyMarketItemPostBody body)
+        {
+            _buyMarketItemResponse = new Response<PaymentTransactionResponse>();
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<PaymentTransactionResponse> {body.itemDetailId}");
+            var postTask = _networkClient.PostAsync<PaymentTransactionResponse>($"v1/market/buy/item", body);
+
+            var result = await postTask;
+            _buyMarketItemResponse = result;
 
             return result;
         }

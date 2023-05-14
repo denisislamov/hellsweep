@@ -1,15 +1,10 @@
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
-using TonPlay.Client.Roguelike.Models.Interfaces;
-using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
-using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks;
-using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Interfaces;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
@@ -18,8 +13,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 	{
 		private readonly IUIService _uiService;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
-		private readonly IMetaGameModelProvider _metaGameModelProvider;
-		private readonly IRestApiClient _restApiClient;
 		
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
@@ -27,15 +20,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 			IShopResourceView view,
 			IShopResourceContext context,
 			IUIService uiService,
-			IButtonPresenterFactory buttonPresenterFactory,
-			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient)
+			IButtonPresenterFactory buttonPresenterFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
-			_metaGameModelProvider = metaGameModelProvider;
-			_restApiClient = restApiClient;
 
 			InitView();
 			AddButtonPresenter();
@@ -72,10 +61,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 		
 		private void OnButtonClickHandler()
 		{
-			var context = new ShopResourcePopupScreenContext(
+			IShopResourcePopupScreenContext context = new ShopResourcePopupScreenContext(
 				Context.Model,
 				Context.Title,
 				Context.Icon);
+
+			if (Context is IShopItemResourceContext itemResourceContext)
+			{
+				context = new ShopItemResourcePopupScreenContext(itemResourceContext.ItemDetailId, context);
+			}
 
 			var screen = _uiService.Open<ShopResourcePopupScreen, IShopResourcePopupScreenContext>(context);
 

@@ -15,6 +15,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		[Inject]
 		private void Construct(ShopLootboxesPresenter.Factory factory)
 		{
+			Context.Screen = this;
+
 			var presenter = factory.Create(_view, Context);
 			Presenters.Add(presenter);
 		}

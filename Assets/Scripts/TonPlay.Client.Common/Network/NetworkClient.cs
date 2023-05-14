@@ -122,7 +122,7 @@ namespace TonPlay.Client.Common.Network
 
 		public async UniTask<ResponseContext> SendAsync(RequestContext context, CancellationToken cancellationToken, Func<RequestContext, CancellationToken, UniTask<ResponseContext>> _)
 		{
-			var data = context.Value != null ? JsonUtility.ToJson(context.Value) : " ";
+			var data = context.Value != null ? JsonUtility.ToJson(context.Value) : "";
 			var formData = new Dictionary<string, string> {{"body", data}};
 			Utilities.Logger.Log($"body:\n {data}");
 			
@@ -141,7 +141,7 @@ namespace TonPlay.Client.Common.Network
 				}
 				
 				// TODO - not sure about it
-				if (req.uploadHandler != null)
+				if (req.uploadHandler != null && !string.IsNullOrEmpty(data))
 				{
 					req.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(data));
 					req.uploadHandler.contentType = "application/json";

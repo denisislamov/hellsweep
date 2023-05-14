@@ -1,3 +1,4 @@
+using System.Threading;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
@@ -9,6 +10,8 @@ using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SuccessPayment;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.SuccessPayment.Interfaces;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -20,11 +23,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		private readonly IUIService _uiService;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly IRestApiClient _restApiClient;
-		private readonly IShopPackPresentationProvider _shopPackPresentationProvider;
+		private readonly IShopRewardPresentationProvider _shopRewardPresentationProvider;
 		private readonly ShopPackItemCollectionPresenter.Factory _collectionPresenterFactory;
+		private readonly ShopPurchaseAction.Factory _shopPurchaseActionFactory;
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
+
+		private readonly CancellationTokenSource _purchasingCancellationTokenSource = new CancellationTokenSource();
 
 		public ShopPackPopupPresenter(
 			IShopPackPopupView view,
@@ -33,16 +39,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient,
-			IShopPackPresentationProvider shopPackPresentationProvider,
-			ShopPackItemCollectionPresenter.Factory collectionPresenterFactory)
+			IShopRewardPresentationProvider shopRewardPresentationProvider,
+			ShopPackItemCollectionPresenter.Factory collectionPresenterFactory,
+			ShopPurchaseAction.Factory shopPurchaseActionFactory)
 			: base(view, context)
 		{
 			_uiService = uiService;
 			_buttonPresenterFactory = buttonPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
-			_shopPackPresentationProvider = shopPackPresentationProvider;
+			_shopRewardPresentationProvider = shopRewardPresentationProvider;
 			_collectionPresenterFactory = collectionPresenterFactory;
+			_shopPurchaseActionFactory = shopPurchaseActionFactory;
 
 			InitView();
 			AddCollectionPresenter();
@@ -58,12 +66,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 		public override void Dispose()
 		{
 			_compositeDisposables.Dispose();
+			_purchasingCancellationTokenSource?.Cancel();
+			_purchasingCancellationTokenSource?.Dispose();
 			base.Dispose();
 		}
 		
 		private void InitView()
 		{
-			var presentation = _shopPackPresentationProvider.Get(Context.Model.Id);
+			var presentation = _shopRewardPresentationProvider.Get(Context.Model.Id);
 			
 			View.SetTitleText(presentation.Title);
 			View.SetPanelsColor(presentation.MainColor);
@@ -106,9 +116,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 			_uiService.Close(Context.Screen);
 		}
 
-		private void OnBuyButtonClickHandler()
+		private async void OnBuyButtonClickHandler()
 		{
-			Debug.Log($"Clicked shop resource with id {Context.Model.Id}");
+			var action = _shopPurchaseActionFactory.Create(new ShopPurchaseActionContext(
+				PaymentReason.PACK, 
+				Context.Model.Id,
+				_purchasingCancellationTokenSource.Token));
+			
+			await action.Begin();
+
+			var result = await action.CompletionSource.Task;
+			if (result.Status == PaymentStatus.COMPLETED)
+			{
+				_uiService.Open<ShopSuccessPaymentScreen, IShopSuccessPaymentScreenContext>(new ShopSuccessPaymentScreenContext(result.Rewards));
+			}
 		}
 
 		internal class Factory : PlaceholderFactory<IShopPackPopupView, IShopPackPopupScreenContext, ShopPackPopupPresenter>

@@ -3,6 +3,7 @@ using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Skills.Config;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.Profile;
+using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 using Zenject;
@@ -35,6 +36,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.Bind<ISkillConfigUpdater>().To<SkillConfigUpdater>().AsSingle();
 
 			MatchInstaller.Install(Container);
+
+			Container.BindFactory<IShopPurchaseActionContext, ShopPurchaseAction, ShopPurchaseAction.Factory>().AsSingle();
 		}
 	}
 }

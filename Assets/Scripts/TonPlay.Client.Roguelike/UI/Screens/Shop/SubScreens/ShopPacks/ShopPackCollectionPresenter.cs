@@ -13,7 +13,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 	{
 		private readonly ShopPackPresenter.Factory _packPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
-		private readonly IShopPackPresentationProvider _shopPackPresentationProvider;
+		private readonly IShopRewardPresentationProvider _shopRewardPresentationProvider;
 
 		public ShopPackCollectionPresenter(
 			ICollectionView<IShopPackView> view,
@@ -21,12 +21,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 			ICollectionItemPool<IShopPackView> itemPool,
 			ShopPackPresenter.Factory packPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			IShopPackPresentationProvider shopPackPresentationProvider)
+			IShopRewardPresentationProvider shopRewardPresentationProvider)
 			: base(view, screenContext, itemPool)
 		{
 			_packPresenterFactory = packPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
-			_shopPackPresentationProvider = shopPackPresentationProvider;
+			_shopRewardPresentationProvider = shopRewardPresentationProvider;
 
 			InitView();
 		}
@@ -38,7 +38,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 			for (int i = 0; i < packs.Count; i++)
 			{
 				var packModel = packs[i];
-				var packPresentation = _shopPackPresentationProvider.Get(packModel.Id);
+				var packPresentation = _shopRewardPresentationProvider.Get(packModel.Id);
 				
 				var view = Add();
 				var context = new ShopPackContext(packModel, packPresentation.Title, packPresentation.MainColor, packPresentation.BackgroundGradientMaterial);

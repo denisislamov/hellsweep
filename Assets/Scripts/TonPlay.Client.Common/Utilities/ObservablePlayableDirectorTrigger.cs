@@ -9,16 +9,9 @@ namespace TonPlay.Client.Common.Utilities
 	{
 		private Subject<Unit> _onFinishedPlayingTriggerAsObservable = new Subject<Unit>();
 		
-		private PlayableDirector _playableDirector;
-
-		private void Awake()
-		{
-			_playableDirector = GetComponent<PlayableDirector>();
-		}
-
 		public IObservable<Unit> OnFinishedPlayingTriggerAsObservable()
 		{
-			_playableDirector.stopped += PlayableDirectorOnStopped;
+			GetComponent<PlayableDirector>().stopped += PlayableDirectorOnStopped;
 			return _onFinishedPlayingTriggerAsObservable;
 		}
 		
