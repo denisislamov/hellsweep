@@ -4,6 +4,7 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
+using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.Interfaces;
@@ -19,6 +20,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly ShopLootboxItemCollectionPresenter.Factory _shopLootboxItemCollectionPresenterFactory;
+		private readonly IShopEmbeddedScreenStorage _embeddedScreenStorage;
 
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
@@ -31,7 +33,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient,
-			ShopLootboxItemCollectionPresenter.Factory shopLootboxItemCollectionPresenterFactory)
+			ShopLootboxItemCollectionPresenter.Factory shopLootboxItemCollectionPresenterFactory,
+			IShopEmbeddedScreenStorage embeddedScreenStorage)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -39,6 +42,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
 			_shopLootboxItemCollectionPresenterFactory = shopLootboxItemCollectionPresenterFactory;
+			_embeddedScreenStorage = embeddedScreenStorage;
 
 			AddAnimationSubscription();
 			AddItemCollectionPresenter();
@@ -91,8 +95,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		
 		private void CloseButtonClickHandler()
 		{
-			_uiService.Close(Context.Screen, true);
-			_uiService.Open<ShopLootboxesScreen, IShopLootboxesScreenContext>(new ShopLootboxesScreenContext(), true);
+			if (_embeddedScreenStorage.Current != null)
+			{
+				_uiService.Close(_embeddedScreenStorage.Current, true);
+			}
+			
+			_embeddedScreenStorage.Set(
+				_uiService.Open<ShopLootboxesScreen, IShopLootboxesScreenContext>(new ShopLootboxesScreenContext(), true));
 		}
 
 		internal class Factory : PlaceholderFactory<IShopLootboxOpeningView, IShopLootboxOpeningScreenContext, ShopLootboxOpeningPresenter>

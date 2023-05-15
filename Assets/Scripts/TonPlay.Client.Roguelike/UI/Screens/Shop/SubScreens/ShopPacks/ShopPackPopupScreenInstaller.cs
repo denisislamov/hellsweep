@@ -54,8 +54,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 						.AsCached()
 						.WithArguments(ScreenPrefab);
 			
-			subContainer.Bind<IShopRewardPresentationProvider>().FromInstance(_presentationProvider).AsSingle();
-
 			subContainer.BindFactory<IShopPackPopupView, IShopPackPopupScreenContext, ShopPackPopupPresenter, ShopPackPopupPresenter.Factory>();
 			
 			subContainer

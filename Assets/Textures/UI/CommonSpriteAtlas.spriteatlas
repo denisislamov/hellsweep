@@ -53,15 +53,18 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4754f820bf67944a3a864453fe145f74, type: 3}
   - {fileID: 21300000, guid: 6eaf12a05b55e416eb6b3e1582b87fcf, type: 3}
   - {fileID: 21300000, guid: b82329c0f542a4e9f8518822473baac7, type: 3}
+  - {fileID: 21300000, guid: faae9ac0baa21494380ad66be6bcea6f, type: 3}
   - {fileID: 21300000, guid: c8e77161f82a547759efd49011af25f0, type: 3}
   - {fileID: 21300000, guid: 1c615e91b3997445985f872b47223181, type: 3}
   - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
   - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
+  - {fileID: 21300000, guid: 955f8a224a7cb42ec8f9e130ae53ff73, type: 3}
   - {fileID: 21300000, guid: d47bab522d11846668dbdbe0422890c3, type: 3}
   - {fileID: 21300000, guid: 6e144172d12ee43fa9dc7ed38cd8fecc, type: 3}
   - {fileID: 21300000, guid: e9ccee82ac1024dc99be2f71add15e63, type: 3}
   - {fileID: 21300000, guid: 640118a268380ec4c866f3eacb743dc8, type: 3}
+  - {fileID: 21300000, guid: 936225b2fb12749139c15fd397c49d02, type: 3}
   - {fileID: 21300000, guid: 73b636b206e194048a8cb3d091e3ae0e, type: 3}
   - {fileID: 21300000, guid: b07b23c2d66cf420795672b35b056d3b, type: 3}
   - {fileID: 21300000, guid: 2735c4c2e596842cdb4fed5473510de2, type: 3}
@@ -109,6 +112,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
   - {fileID: 21300000, guid: f0010c38e50cfda4bbd0e2d1bda869b8, type: 3}
+  - {fileID: 21300000, guid: 00527c682b3994c86a025b376e79ee00, type: 3}
   - {fileID: 21300000, guid: 7694ab98d9b7a4ea3a5bd464f363e549, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
   - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
@@ -123,6 +127,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9cc526f9f18464c93b544cc506a5d219, type: 3}
   - {fileID: 21300000, guid: 58db841a7ba2f4f8480a3101fcf48c03, type: 3}
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
+  - {fileID: 21300000, guid: a537814bbb15a4a8489cf844b82fa27d, type: 3}
+  - {fileID: 21300000, guid: 05a9c06b858f14ea49d167a6159e1b09, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
   - {fileID: 21300000, guid: 4b9cc68b8a4cc417280631ed8202a0ad, type: 3}
   - {fileID: 21300000, guid: ae2ce99b50d384c52b72f02810a0198b, type: 3}
@@ -154,15 +160,18 @@ SpriteAtlas:
   - TitleBackgroundTexture_02
   - GameLabelPanel_01a
   - Boot
+  - Icon_Blueprint_Neck
   - Plus
   - Icons_HiPowerBullet_01a
   - SliderBackground_01
   - Button
   - RectangleRounded16
+  - Icon_Blueprint_Hand
   - BackgroundSidebarActive_01
   - SubTitleBackgroundTexture_02
   - RevolverSight_01a
   - Close_button
+  - Icon_Blueprint_Weapon
   - TitleBackgroundTexture_05
   - HeaderBarBackground_01a
   - Icon_Key_01a
@@ -210,6 +219,7 @@ SpriteAtlas:
   - joystick_01a
   - Settings_skull
   - Pink_glow
+  - Icon_Blueprint_Belt
   - Blueprint_02
   - Belt
   - Shield
@@ -224,6 +234,8 @@ SpriteAtlas:
   - Title holder
   - Power
   - CrossLine_01a
+  - Icon_Blueprint_Body
+  - Icon_Blueprint_Feet
   - Rectangle
   - Icons_Power_01a
   - Icons_SportShoes_01a

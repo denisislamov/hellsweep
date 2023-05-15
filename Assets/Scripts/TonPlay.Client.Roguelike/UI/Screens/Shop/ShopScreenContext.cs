@@ -5,11 +5,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 {
 	public class ShopScreenContext : ScreenContext, IShopScreenContext
 	{
-		public ShopNavTab InitialTab { get; }
+		public ShopNavTabName InitialTabName { get; }
 
-		public ShopScreenContext(ShopNavTab initialTab)
+		public ShopScreenContext(ShopNavTabName initialTabName)
 		{
-			InitialTab = initialTab;
+			InitialTabName = initialTabName;
 		}
 	}
 }

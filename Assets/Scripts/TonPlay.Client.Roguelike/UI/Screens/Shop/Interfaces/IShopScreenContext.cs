@@ -4,6 +4,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.Interfaces
 {
 	public interface IShopScreenContext : IScreenContext
 	{
-		ShopNavTab InitialTab { get; }
+		ShopNavTabName InitialTabName { get; }
 	}
 }

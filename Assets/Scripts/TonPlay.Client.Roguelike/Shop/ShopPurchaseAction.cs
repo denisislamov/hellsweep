@@ -1,16 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Network;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
+using TonPlay.Client.Roguelike.UI.Screens.Shop;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -25,6 +30,9 @@ namespace TonPlay.Client.Roguelike.Shop
 		private readonly IUIService _uiService;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
 		private readonly IShopPurchaseActionContext _context;
+		private readonly IShopRewardPresentationProvider _shopRewardPresentationProvider;
+		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
+		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 		private readonly IRestApiClient _restApiClient;
 
 		private readonly IReadOnlyDictionary<PaymentReason, Func<object, UniTask<Response<PaymentTransactionResponse>>>> _reasonFuncs;
@@ -43,11 +51,17 @@ namespace TonPlay.Client.Roguelike.Shop
 			IRestApiClient restApiClient,
 			IUIService uiService,
 			IMetaGameModelProvider metaGameModelProvider,
-			IShopPurchaseActionContext context)
+			IShopPurchaseActionContext context,
+			IShopRewardPresentationProvider shopRewardPresentationProvider,
+			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider)
 		{
 			_uiService = uiService;
 			_metaGameModelProvider = metaGameModelProvider;
 			_context = context;
+			_shopRewardPresentationProvider = shopRewardPresentationProvider;
+			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
+			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 			_restApiClient = restApiClient;
 
 			_reasonFuncs = new Dictionary<PaymentReason, Func<object, UniTask<Response<PaymentTransactionResponse>>>>()
@@ -73,14 +87,15 @@ namespace TonPlay.Client.Roguelike.Shop
 
 		public async UniTask Begin()
 		{
-			_lockerScreen = _uiService.Open<ShopTransactionProcessingScreen, IScreenContext>(ScreenContext.Empty);
-
 			var response = await _reasonFuncs[_context.PaymentReason].Invoke(_context.Value);
 			if (!response.successful)
 			{
 				OnRequestFailed(response);
 				return;
 			}
+
+			_lockerScreen = _uiService.Open<ShopTransactionProcessingScreen, IShopTransactionProcessingScreenContext>(
+				new ShopTransactionProcessingScreenContext(response.response.tonPayInResponse.tonkeeper, LockerCloseButtonClickCallback));
 
 			_currentPaymentTransactionResponse.SetValueAndForceNotify(response.response);
 
@@ -90,6 +105,11 @@ namespace TonPlay.Client.Roguelike.Shop
 											   .Subscribe((unit) => UpdateCurrentTransaction());
 		}
 		
+		private void LockerCloseButtonClickCallback()
+		{
+			OnRequestFailed(null);
+		}
+
 		private void OnRequestFailed(Response<PaymentTransactionResponse> response)
 		{
 			_currentPaymentStatusListener?.Dispose();
@@ -159,15 +179,53 @@ namespace TonPlay.Client.Roguelike.Shop
 			var result = (PaymentStatus) Enum.Parse(typeof(PaymentStatus), responseStatus, true);
 			return result;
 		}
+		
+		private IShopRewardItemContext CreateRewardContext(string rewardId, ulong amount)
+		{
+			var presentation = _shopRewardPresentationProvider.GetRewardPresentation(rewardId);
+
+			if (presentation == null)
+			{
+				var config = _inventoryItemsConfigProvider.GetConfigByDetailId(rewardId);
+
+				if (config == null)
+				{
+					Debug.LogWarning($"[ShopPurchaseAction] Presentation for reward {rewardId} hasn't been found");
+					return null;
+				}
+				
+				var itemPresentation = _inventoryItemPresentationProvider.GetItemPresentation(config.Id);
+
+				if (itemPresentation == null)
+				{
+					Debug.LogWarning($"[ShopPurchaseAction] Presentation for reward {rewardId} hasn't been found");
+					return null;
+				}
+
+
+				_inventoryItemPresentationProvider.GetColors(config.Rarity, out var color, out var gradient);
+
+				return new ShopRewardItemContext(itemPresentation.Title, itemPresentation.Icon, gradient);
+			}
+
+			return new ShopRewardItemContext($"x{amount.ConvertToSuffixedFormat(1000, 2)}", presentation.Icon, presentation.BackgroundGradientMaterial);
+		}
 
 		private void ProcessBuyingBlueprintsTransaction(PaymentTransactionResponse response)
 		{
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var inventoryData = inventoryModel.ToData();
 
-			inventoryData.SetBlueprintsValue(response.attributes.blueprintsSlotPurpose, response.attributes.amount);
+			inventoryData.SetBlueprintsValue(
+				response.attributes.blueprintsSlotPurpose, 
+				inventoryData.GetBlueprintsValue(response.attributes.blueprintsSlotPurpose) + response.attributes.amount);
 
 			inventoryModel.Update(inventoryData);
+			
+			_rewardsResults.Add(
+				CreateRewardContext(
+					$"blueprints_{response.attributes.blueprintsSlotPurpose.ToString().ToLowerInvariant()}", 
+					Convert.ToUInt64(inventoryData.GetBlueprintsValue(response.attributes.blueprintsSlotPurpose))));
 		}
 
 		private void ProcessBuyingEnergyTransaction(PaymentTransactionResponse response)
@@ -175,14 +233,11 @@ namespace TonPlay.Client.Roguelike.Shop
 			var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
 			var balanceData = balanceModel.ToData();
 
-			balanceData.Energy = response.attributes.amount;
+			balanceData.Energy += response.attributes.amount;
 
 			balanceModel.Update(balanceData);
-		}
-
-		private void ProcessBuyingPackTransaction(PaymentTransactionResponse response)
-		{
-
+			
+			_rewardsResults.Add(CreateRewardContext("energy", Convert.ToUInt64(balanceModel.Energy.Value)));
 		}
 
 		private void ProcessBuyingKeysTransaction(PaymentTransactionResponse response)
@@ -190,9 +245,16 @@ namespace TonPlay.Client.Roguelike.Shop
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var inventoryData = inventoryModel.ToData();
 
-			inventoryData.SetKeysValue(response.attributes.rarity, Convert.ToInt32(response.attributes.amount));
+			inventoryData.SetKeysValue(
+				response.attributes.rarity, 
+				inventoryData.GetKeysValue(response.attributes.rarity) + Convert.ToInt32(response.attributes.amount));
 
 			inventoryModel.Update(inventoryData);
+			
+			_rewardsResults.Add(
+				CreateRewardContext(
+					$"keys_{response.attributes.rarity.ToString().ToLowerInvariant()}", 
+					Convert.ToUInt64(inventoryData.GetKeysValue(response.attributes.rarity))));
 		}
 
 		private void ProcessBuyingItemTransaction(PaymentTransactionResponse response)
@@ -210,6 +272,102 @@ namespace TonPlay.Client.Roguelike.Shop
 			inventoryData.Items.Add(itemData);
 
 			inventoryModel.Update(inventoryData);
+			
+			_rewardsResults.Add(
+				CreateRewardContext(response.attributes.itemDetailId, 1));
+		}
+		
+		private void ProcessBuyingPackTransaction(PaymentTransactionResponse response)
+		{
+			var model = _metaGameModelProvider.Get().ShopModel.Packs.FirstOrDefault(_ => _.Id == response.packRateId);
+
+			if (model == null)
+			{
+				Debug.LogError($"Shop Pack Model with id {response.packRateId} hasn't been found!");
+				return;
+			}
+			
+			var packs = _metaGameModelProvider.Get().ShopModel.Packs;
+
+			for (var i = 0; i < packs.Count; i++)
+			{
+				if (model.Rewards.Coins > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("coins", model.Rewards.Coins));
+					var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
+					var balanceData = balanceModel.ToData();
+					balanceData.Gold += Convert.ToInt64(model.Rewards.Coins);
+					balanceModel.Update(balanceData);
+				}
+			
+				if (model.Rewards.Energy > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("energy", model.Rewards.Energy));
+					var balanceModel = _metaGameModelProvider.Get().ProfileModel.BalanceModel;
+					var balanceData = balanceModel.ToData();
+					balanceData.Energy += Convert.ToInt64(model.Rewards.Energy);
+					balanceModel.Update(balanceData);
+				}
+			
+				if (model.Rewards.Blueprints > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("blueprints", model.Rewards.Blueprints));
+					var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+					var inventoryData = inventoryModel.ToData();
+					inventoryData.SetBlueprintsValue(response.attributes.blueprintsSlotPurpose, Convert.ToInt64(model.Rewards.Blueprints));
+					inventoryModel.Update(inventoryData);
+				}
+			
+				//todo: uncomment it if we would use heroSkins
+				// if (model.Rewards.HeroSkins > 0)
+				// {
+				// 	_rewardsResults.Add(CreateRewardContext("hero_skins", Context.RewardsModel.HeroSkins));
+				// }
+			
+				if (model.Rewards.KeysCommon > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("keys_common", model.Rewards.KeysCommon));
+					
+					var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+					var inventoryData = inventoryModel.ToData();
+					inventoryData.SetKeysValue(RarityName.COMMON, 
+						Convert.ToInt32(inventoryData.GetKeysValue(RarityName.COMMON) + model.Rewards.KeysCommon));
+					inventoryModel.Update(inventoryData);
+				}
+			
+				if (model.Rewards.KeysUncommon > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("keys_uncommon", model.Rewards.KeysUncommon));
+					
+					var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+					var inventoryData = inventoryModel.ToData();
+					inventoryData.SetKeysValue(RarityName.UNCOMMON, 
+						Convert.ToInt32(inventoryData.GetKeysValue(RarityName.UNCOMMON) + model.Rewards.KeysUncommon));
+					inventoryModel.Update(inventoryData);
+				}
+			
+				if (model.Rewards.KeysRare > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("keys_rare", model.Rewards.KeysRare));
+					
+					var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+					var inventoryData = inventoryModel.ToData();
+					inventoryData.SetKeysValue(RarityName.RARE, 
+						Convert.ToInt32(inventoryData.GetKeysValue(RarityName.RARE) + model.Rewards.KeysRare));
+					inventoryModel.Update(inventoryData);
+				}
+			
+				if (model.Rewards.KeysLegendary > 0)
+				{
+					_rewardsResults.Add(CreateRewardContext("keys_legendary", model.Rewards.KeysLegendary));
+					
+					var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
+					var inventoryData = inventoryModel.ToData();
+					inventoryData.SetKeysValue(RarityName.LEGENDARY, 
+						Convert.ToInt32(inventoryData.GetKeysValue(RarityName.LEGENDARY) + model.Rewards.KeysLegendary));
+					inventoryModel.Update(inventoryData);
+				}
+			}
 		}
 
 		public class Factory : PlaceholderFactory<IShopPurchaseActionContext, ShopPurchaseAction>

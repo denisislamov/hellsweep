@@ -18,6 +18,9 @@ namespace TonPlay.Client.Roguelike.Installers
 		[SerializeField]
 		private SkillConfigProvider _skillConfigProvider;
 
+		[SerializeField]
+		private ShopPackPresentationProvider _shopRewardPresentationProvider;
+
 		public override void InstallBindings()
 		{
 			SignalBusInstaller.Install(Container);
@@ -34,6 +37,9 @@ namespace TonPlay.Client.Roguelike.Installers
 			var skillConfigProviderInstance = Instantiate(_skillConfigProvider);
 			Container.Bind<ISkillConfigProvider>().FromInstance(skillConfigProviderInstance).AsSingle();
 			Container.Bind<ISkillConfigUpdater>().To<SkillConfigUpdater>().AsSingle();
+			Container.Bind<IShopEmbeddedScreenStorage>().To<ShopEmbeddedScreenStorage>().AsSingle();
+
+			Container.Bind<IShopRewardPresentationProvider>().FromInstance(_shopRewardPresentationProvider).AsSingle();
 
 			MatchInstaller.Install(Container);
 

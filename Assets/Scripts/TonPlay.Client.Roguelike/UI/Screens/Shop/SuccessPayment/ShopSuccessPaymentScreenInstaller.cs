@@ -54,8 +54,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SuccessPayment
 						.AsCached()
 						.WithArguments(ScreenPrefab);
 			
-			subContainer.Bind<IShopRewardPresentationProvider>().FromInstance(_presentationProvider).AsSingle();
-
 			subContainer.BindFactory<IShopSuccessPaymentView, IShopSuccessPaymentScreenContext, ShopSuccessPaymentPresenter, ShopSuccessPaymentPresenter.Factory>();
 			
 			subContainer

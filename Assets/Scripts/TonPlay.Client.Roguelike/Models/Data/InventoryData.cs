@@ -94,7 +94,7 @@ namespace TonPlay.Client.Roguelike.Models.Data
 			}
 		}
 		
-		public long GetKeysValue(RarityName rarity)
+		public int GetKeysValue(RarityName rarity)
 		{
 			switch (rarity)
 			{

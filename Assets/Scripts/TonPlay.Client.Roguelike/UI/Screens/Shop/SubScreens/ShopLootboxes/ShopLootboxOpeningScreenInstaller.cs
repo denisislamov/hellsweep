@@ -60,8 +60,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			subContainer.BindFactory<IShopLootboxItemCollectionView, IShopLootboxItemCollectionContext, ShopLootboxItemCollectionPresenter, ShopLootboxItemCollectionPresenter.Factory>();
 			subContainer.BindFactory<IShopRewardItemView, IShopRewardItemContext, ShopRewardItemPresenter, ShopRewardItemPresenter.Factory>();
 			
-			subContainer.Bind<IShopRewardPresentationProvider>().FromInstance(_presentationProvider).AsSingle();
-
 			var screenHolder = subContainer.Resolve<IUIService>();
 			var embeddingRoot = screenHolder.GetScreensRoot(new DefaultScreenLayer());
 			var pooledItemsContainer = GameObject.Instantiate(_pooledItemsContainerPrefab, embeddingRoot);

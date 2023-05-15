@@ -78,7 +78,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks
 
 			if (presentation == null)
 			{
-				Debug.LogWarning($"[ShopLootboxItemCollectionPresenter] Presentation for reward {rewardId} hasn't been found");
+				Debug.LogWarning($"[ShopPackItemCollectionPresenter] Presentation for reward {rewardId} hasn't been found");
 				return;
 			}
 

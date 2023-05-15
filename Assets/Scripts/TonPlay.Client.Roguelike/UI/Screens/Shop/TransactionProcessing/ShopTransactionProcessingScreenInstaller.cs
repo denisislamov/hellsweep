@@ -1,5 +1,6 @@
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
@@ -17,12 +18,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 
 			Bind(subContainer);
 
-			Container.Bind<IScreenFactory<IScreenContext, ShopTransactionProcessingScreen>>()
+			Container.Bind<IScreenFactory<IShopTransactionProcessingScreenContext, ShopTransactionProcessingScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
 
-			Container.Bind<IScreenFactory<ScreenContext, ShopTransactionProcessingScreen>>()
+			Container.Bind<IScreenFactory<ShopTransactionProcessingScreenContext, ShopTransactionProcessingScreen>>()
 					 .FromSubContainerResolve()
 					 .ByInstance(subContainer)
 					 .AsCached();
@@ -30,15 +31,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 
 		private void Bind(DiContainer subContainer)
 		{
-			subContainer.Bind<IScreenFactory<IScreenContext, ShopTransactionProcessingScreen>>()
+			subContainer.Bind<IScreenFactory<IShopTransactionProcessingScreenContext, ShopTransactionProcessingScreen>>()
 						.To<ShopTransactionProcessingScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
 
-			subContainer.Bind<IScreenFactory<ScreenContext, ShopTransactionProcessingScreen>>()
+			subContainer.Bind<IScreenFactory<ShopTransactionProcessingScreenContext, ShopTransactionProcessingScreen>>()
 						.To<ShopTransactionProcessingScreen.Factory>()
 						.AsCached()
 						.WithArguments(ScreenPrefab);
+			
+			subContainer.BindFactory<IShopTransactionProcessingView, IShopTransactionProcessingScreenContext, ShopTransactionProcessingPresenter, ShopTransactionProcessingPresenter.Factory>();
 		}
 	}
 }

@@ -1,6 +1,6 @@
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 {
-	public enum ShopNavTab
+	public enum ShopNavTabName
 	{
 		Packs,
 		Lootboxes,

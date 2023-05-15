@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiServiceInstaller: {fileID: 11400000, guid: 941c053fe759f4ab29bf8dbe125f156d, type: 2}
   _skillConfigProvider: {fileID: 11400000, guid: 03bd7816bb333457db6d5a2ac1ed953e, type: 2}
+  _shopRewardPresentationProvider: {fileID: 11400000, guid: 7d6732b55561140c7aeaa55cd98973a7, type: 2}
 --- !u!114 &5968772282407841107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +271,16 @@ MonoBehaviour:
         purpose: 
         feature: 
         details: []
+    error:
+      code: 
+      description: 
+      message: 
+  _itemLootResponse:
+    successful: 0
+    response:
+      id: 
+      itemId: 
+      itemDetailId: 
     error:
       code: 
       description: 
@@ -466,6 +477,132 @@ MonoBehaviour:
         LEGENDARY:
           amount: 0
           price: 0
+    error:
+      code: 
+      description: 
+      message: 
+  _paymentTransactionResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
+    error:
+      code: 
+      description: 
+      message: 
+  _buyMarketPackResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
+    error:
+      code: 
+      description: 
+      message: 
+  _buyMarketEnergyResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
+    error:
+      code: 
+      description: 
+      message: 
+  _buyMarketBlueprintsResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
+    error:
+      code: 
+      description: 
+      message: 
+  _buyMarketKeysResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
+    error:
+      code: 
+      description: 
+      message: 
+  _buyMarketItemResponse:
+    successful: 0
+    response:
+      id: 
+      reason: 0
+      status: 
+      packRateId: 
+      attributes:
+        id: 
+        itemId: 
+        itemDetailId: 
+        amount: 0
+        rarity: 0
+        blueprintsSlotPurpose: 0
+      tonPayInResponse:
+        tonkeeper: 
+        tonhub: 
     error:
       code: 
       description: 

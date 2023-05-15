@@ -11,6 +11,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
 		public string status;
 		public string packRateId;
 		public PaymentTransactionAttributes attributes;
+		public TonPayInResponse tonPayInResponse;
 		
 		[System.Serializable]
 		public class PaymentTransactionAttributes

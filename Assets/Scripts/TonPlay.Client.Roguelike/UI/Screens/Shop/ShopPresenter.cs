@@ -10,6 +10,7 @@ using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
+using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
@@ -45,10 +46,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 		private IRestApiClient _restApiClient;
 
 		private bool _launchingMatch;
-		private ReactiveProperty<ShopNavTab> _currentNavTab = new ReactiveProperty<ShopNavTab>();
+		private ReactiveProperty<ShopNavTabName> _currentNavTab = new ReactiveProperty<ShopNavTabName>();
 		private InventoryItemCollectionPresenter _inventoryItemsPresenter;
-		private DictionaryExt<ShopNavTab, ReactiveProperty<bool>> _navTabLockProperties;
-		private IScreen _currentSubScreen;
+		private DictionaryExt<ShopNavTabName, ReactiveProperty<bool>> _navTabLockProperties;
+		private IShopEmbeddedScreenStorage _embeddedScreenStorage;
 
 		public ShopPresenter(
 			IShopView view,
@@ -58,7 +59,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 			ProfileBarPresenter.Factory profileBarPresenterFactory,
 			NavigationMenuPresenter.Factory navigationMenuPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
-			IRestApiClient restApiClient)
+			IRestApiClient restApiClient,
+			IShopEmbeddedScreenStorage embeddedScreenStorage)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -67,19 +69,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 			_navigationMenuPresenterFactory = navigationMenuPresenterFactory;
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
+			_embeddedScreenStorage = embeddedScreenStorage;
 
-			_navTabLockProperties = new DictionaryExt<ShopNavTab, ReactiveProperty<bool>>()
+			_navTabLockProperties = new DictionaryExt<ShopNavTabName, ReactiveProperty<bool>>()
 			{
-				[ShopNavTab.Packs] = new ReactiveProperty<bool>(Context.InitialTab == ShopNavTab.Packs),
-				[ShopNavTab.Lootboxes] = new ReactiveProperty<bool>(Context.InitialTab == ShopNavTab.Lootboxes),
-				[ShopNavTab.Resources] = new ReactiveProperty<bool>(Context.InitialTab == ShopNavTab.Resources)
+				[ShopNavTabName.Packs] = new ReactiveProperty<bool>(Context.InitialTabName == ShopNavTabName.Packs),
+				[ShopNavTabName.Lootboxes] = new ReactiveProperty<bool>(Context.InitialTabName == ShopNavTabName.Lootboxes),
+				[ShopNavTabName.Resources] = new ReactiveProperty<bool>(Context.InitialTabName == ShopNavTabName.Resources)
 			};
 
 			AddNestedProfileBarPresenter();
 			AddNavigationMenuPresenter();
 			AddUserProfileUpdateScheduler();
 			AddNavTabPresenters();
-			SetCurrentNavTab(Context.InitialTab);
+			SetCurrentNavTab(Context.InitialTabName);
 			AddCurrentNavTabSubscription();
 		}
 		
@@ -87,26 +90,29 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 		{
 			_currentNavTab.Subscribe(currentTab =>
 			{
-				if (!(_currentSubScreen is null))
+				if (!(_embeddedScreenStorage.Current is null))
 				{
-					_uiService.Close(_currentSubScreen, true);
+					_uiService.Close(_embeddedScreenStorage.Current, true);
 				}
 
 				switch (currentTab)
 				{
-					case ShopNavTab.Packs:
+					case ShopNavTabName.Packs:
 					{
-						_currentSubScreen = _uiService.Open<ShopPacksScreen, ShopPacksScreenContext>(new ShopPacksScreenContext(), true);
+						_embeddedScreenStorage.Set(
+							_uiService.Open<ShopPacksScreen, ShopPacksScreenContext>(new ShopPacksScreenContext(), true));
 						break;
 					}
-					case ShopNavTab.Lootboxes:
+					case ShopNavTabName.Lootboxes:
 					{
-						_currentSubScreen = _uiService.Open<ShopLootboxesScreen, ShopLootboxesScreenContext>(new ShopLootboxesScreenContext(), true);
+						_embeddedScreenStorage.Set(
+							_uiService.Open<ShopLootboxesScreen, ShopLootboxesScreenContext>(new ShopLootboxesScreenContext(), true));
 						break;
 					}
-					case ShopNavTab.Resources:
+					case ShopNavTabName.Resources:
 					{
-						_currentSubScreen = _uiService.Open<ShopResourcesScreen, ShopResourcesScreenContext>(new ShopResourcesScreenContext(), true);
+						_embeddedScreenStorage.Set(
+							_uiService.Open<ShopResourcesScreen, ShopResourcesScreenContext>(new ShopResourcesScreenContext(), true));
 						break;
 					}
 				}
@@ -172,24 +178,24 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 
 		private void AddNavTabPresenters()
 		{
-			var presenter = CreateNavTabButtonPresenter(View.PacksNavBarButtonView, ShopNavTab.Packs);
+			var presenter = CreateNavTabButtonPresenter(View.PacksNavBarButtonView, ShopNavTabName.Packs);
 			Presenters.Add(presenter);
 
-			presenter = CreateNavTabButtonPresenter(View.LootboxesNavBarButtonView, ShopNavTab.Lootboxes);
+			presenter = CreateNavTabButtonPresenter(View.LootboxesNavBarButtonView, ShopNavTabName.Lootboxes);
 			Presenters.Add(presenter);
 			
-			presenter = CreateNavTabButtonPresenter(View.ResourcesNavBarButtonView, ShopNavTab.Resources);
+			presenter = CreateNavTabButtonPresenter(View.ResourcesNavBarButtonView, ShopNavTabName.Resources);
 			Presenters.Add(presenter);
 		}
 		
-		private IButtonPresenter CreateNavTabButtonPresenter(IButtonView view, ShopNavTab navTab) =>
+		private IButtonPresenter CreateNavTabButtonPresenter(IButtonView view, ShopNavTabName navTabName) =>
 			_buttonPresenterFactory.Create(
 				view,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(() => SetCurrentNavTab(navTab)))
-				   .Add(new ReactiveLockButtonContext(_navTabLockProperties[navTab])));
+				   .Add(new ClickableButtonContext(() => SetCurrentNavTab(navTabName)))
+				   .Add(new ReactiveLockButtonContext(_navTabLockProperties[navTabName])));
 
-		private void SetCurrentNavTab(ShopNavTab packs)
+		private void SetCurrentNavTab(ShopNavTabName packs)
 		{
 			_currentNavTab.SetValueAndForceNotify(packs);
 		}

@@ -106,7 +106,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation
 		private void OnShopButtonClickHandler()
 		{
 			_uiService.Close(Context.Screen);
-			_uiService.Open<ShopScreen, IShopScreenContext>(new ShopScreenContext(ShopNavTab.Packs));
+			_uiService.Open<ShopScreen, IShopScreenContext>(new ShopScreenContext(ShopNavTabName.Packs));
 		}
 
 		public class Factory : PlaceholderFactory<INavigationMenuView, INavigationMenuContext, NavigationMenuPresenter>
