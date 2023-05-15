@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 	{
 		[SerializeField]
 		private PlayableDirector _playableDirector;
-		
+
 		[SerializeField] 
 		private ShopLootboxItemCollectionView _shopLootboxItemCollectionView;
 		
@@ -31,13 +31,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		[SerializeField] 
 		private ContentSizeFitter _itemsLayoutContentSizeFitter;
 
+		private readonly Subject<Unit> _scalingAnimationSubject = new Subject<Unit>();
+		private readonly Subject<Unit> _openingAnimationSubject = new Subject<Unit>();
+
 		public IShopLootboxItemCollectionView ShopLootboxItemCollectionView => _shopLootboxItemCollectionView;
 		public IButtonView CloseButtonView => _closeButtonView;
-		public IObservable<Unit> OpeningAnimationFinishedAsObservable => _playableDirector.OnFinishedPlayingAsObservable();
+		public IObservable<Unit> ScalingAnimationFinishedAsObservable => _scalingAnimationSubject;
+		public IObservable<Unit> OpeningAnimationFinishedAsObservable => _openingAnimationSubject;
 		
-		public void PlayOpeningAnimation()
+		public void PlayAnimation()
 		{
 			_playableDirector.Play();
+		}
+		
+		public void PauseAnimation()
+		{
+			_playableDirector.Pause();
 		}
 		
 		public void SetPlayableDirectorActiveState(bool state)
@@ -53,6 +62,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 		public void SetItemsLayoutContentSizeFitterActiveState(bool state)
 		{
 			_itemsLayoutContentSizeFitter.enabled = state;
+		}
+
+		public void ScalingAnimationFinishedSignalHandler()
+		{
+			_scalingAnimationSubject?.OnNext(Unit.Default);
+		}
+		
+		public void OpeningAnimationFinishedSignalHandler()
+		{
+			_openingAnimationSubject?.OnNext(Unit.Default);
 		}
 	}
 }

@@ -691,7 +691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -0.053287454, y: 230.93}
+  m_AnchoredPosition: {x: -0.025902672, y: 230.93}
   m_SizeDelta: {x: 0, y: 461.86}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5349057760937746581
@@ -967,6 +967,7 @@ GameObject:
   - component: {fileID: 4354655740944435594}
   - component: {fileID: 2568796527654389798}
   - component: {fileID: 596700707187967090}
+  - component: {fileID: 3159450534063360969}
   m_Layer: 0
   m_Name: ShopLootboxOpeningScreen
   m_TagString: Untagged
@@ -1121,6 +1122,53 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3159450534063360969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354655740944435596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1f647a27a76284673b09a1a5ec836968, type: 2}
+    - {fileID: 11400000, guid: e674fede23f5749c586b6c6d59f6d2f0, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4354655740944435592}
+          m_TargetAssemblyTypeName: TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.ShopLootboxOpeningView,
+            TonPlay.Roguelike.Client
+          m_MethodName: ScalingAnimationFinishedSignalHandler
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4354655740944435592}
+          m_TargetAssemblyTypeName: TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.ShopLootboxOpeningView,
+            TonPlay.Roguelike.Client
+          m_MethodName: OpeningAnimationFinishedSignalHandler
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4354655742378128124
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -12,24 +13,65 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 	public class ShopTransactionProcessingPresenter : Presenter<IShopTransactionProcessingView, IShopTransactionProcessingScreenContext>
 	{
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
-		private readonly IUIService _uiService;
 		
-		private readonly ReactiveProperty<bool> _closeButtonLocked = new ReactiveProperty<bool>();
+		private readonly ReactiveProperty<bool> _closeButtonLocked = new ReactiveProperty<bool>(true);
+		private readonly ReactiveProperty<bool> _payButtonLocked = new ReactiveProperty<bool>(true);
 		
+		private IDisposable _tonkeeperSubscription;
+		private string _tonkeeperUrl;
+		private IDisposable _receiveResponseSubscription;
+
 		public ShopTransactionProcessingPresenter(
 			IShopTransactionProcessingView view, 
 			IShopTransactionProcessingScreenContext context,
-			IButtonPresenterFactory buttonPresenterFactory,
-			IUIService uiService) 
+			IButtonPresenterFactory buttonPresenterFactory)
 			: base(view, context)
 		{
 			_buttonPresenterFactory = buttonPresenterFactory;
-			_uiService = uiService;
 
+			AddReceiveResponseSubscription();
+			AddTonkeeperUrlSubscription();
 			AddPayButtonPresenter();
 			AddCloseButtonPresenter();
 		}
+
+		public override void Dispose()
+		{
+			_tonkeeperSubscription?.Dispose();
+			_receiveResponseSubscription?.Dispose();
+			base.Dispose();
+		}
 		
+		private void AddReceiveResponseSubscription()
+		{
+			_receiveResponseSubscription = Context.ResponseReceived.Subscribe(received =>
+			{
+				if (!received)
+				{
+					return;
+				}
+				
+				_receiveResponseSubscription?.Dispose();
+				_closeButtonLocked.SetValueAndForceNotify(false);
+			});
+		}
+
+		private void AddTonkeeperUrlSubscription()
+		{
+			_tonkeeperSubscription = Context.TonkeeperUrl.Subscribe(url =>
+			{
+				if (string.IsNullOrEmpty(url) || !string.IsNullOrEmpty(_tonkeeperUrl))
+				{
+					return;
+				}
+
+				_tonkeeperSubscription?.Dispose();
+				
+				_tonkeeperUrl = url;
+				_payButtonLocked.SetValueAndForceNotify(false);
+			});
+		}
+
 		private void AddCloseButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(
@@ -46,8 +88,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 			var presenter = _buttonPresenterFactory.Create(
 				View.PayButtonView,
 				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(PayButtonClickHandler)));
-			
+				   .Add(new ClickableButtonContext(PayButtonClickHandler))
+				   .Add(new ReactiveLockButtonContext(_payButtonLocked)));
+
 			Presenters.Add(presenter);
 		}
 		
@@ -55,7 +98,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 		{
 			_closeButtonLocked.SetValueAndForceNotify(true);
 			
-			Application.OpenURL(Context.TonkeeperUrl);
+			Application.OpenURL(Context.TonkeeperUrl.Value);
 		}
 		
 		private void CloseButtonClickHandler()

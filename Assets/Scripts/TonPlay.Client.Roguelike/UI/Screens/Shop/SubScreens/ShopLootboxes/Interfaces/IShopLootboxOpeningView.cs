@@ -8,13 +8,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.Inte
 {
 	public interface IShopLootboxOpeningView : IView
 	{
+		IObservable<Unit> ScalingAnimationFinishedAsObservable { get; }
+		
 		IObservable<Unit> OpeningAnimationFinishedAsObservable { get; }
 		
 		IShopLootboxItemCollectionView ShopLootboxItemCollectionView { get; }
 		
 		IButtonView CloseButtonView { get; }
 
-		void PlayOpeningAnimation();
+		void PlayAnimation();
+		
+		void PauseAnimation();
 		
 		void SetPlayableDirectorActiveState(bool state);
 		

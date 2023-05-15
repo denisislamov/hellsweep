@@ -82,6 +82,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 
 		private async void ButtonClickHandler()
 		{
+			if (_embeddedScreenStorage.Current != null)
+			{
+				_uiService.Close(_embeddedScreenStorage.Current, true);
+			}
+
+			var rewards = new Subject<IReadOnlyList<IInventoryItemModel>>();
+
+			_embeddedScreenStorage.Set(
+				_uiService.Open<ShopLootboxOpeningScreen, IShopLootboxOpeningScreenContext>(
+					new ShopLootboxOpeningScreenContext(rewards),
+					true));
+			
 			var response = await _restApiClient.PostItemLoot(Context.Rarity);
 
 			if (!response.successful)
@@ -102,19 +114,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			var inventoryData = inventoryModel.ToData();
 			inventoryData.Items.Add(itemData);
 			inventoryModel.Update(inventoryData);
-
-			if (_embeddedScreenStorage.Current != null)
+			
+			rewards.OnNext(new List<IInventoryItemModel>()
 			{
-				_uiService.Close(_embeddedScreenStorage.Current, true);
-			}
-
-			_embeddedScreenStorage.Set(
-				_uiService.Open<ShopLootboxOpeningScreen, IShopLootboxOpeningScreenContext>(
-					new ShopLootboxOpeningScreenContext(new List<IInventoryItemModel>()
-					{
-						itemModel
-					}),
-					true));
+				itemModel
+			});
 		}
 
 		internal class Factory : PlaceholderFactory<IShopLootboxView, IShopLootboxContext, ShopLootboxPresenter>

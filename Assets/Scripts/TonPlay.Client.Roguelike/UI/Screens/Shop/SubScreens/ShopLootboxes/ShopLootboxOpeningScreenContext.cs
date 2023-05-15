@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -7,11 +8,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 {
 	public class ShopLootboxOpeningScreenContext : ScreenContext, IShopLootboxOpeningScreenContext
 	{
-		public IReadOnlyList<IInventoryItemModel> Items { get; }
+		public IObservable<IReadOnlyList<IInventoryItemModel>> ItemsAsObservable { get; }
 
-		public ShopLootboxOpeningScreenContext(IReadOnlyList<IInventoryItemModel> items)
+		public ShopLootboxOpeningScreenContext(IObservable<IReadOnlyList<IInventoryItemModel>> itemsAsObservable)
 		{
-			Items = items;
+			ItemsAsObservable = itemsAsObservable;
 		}
 	}
 }
