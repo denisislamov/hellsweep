@@ -566,7 +566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Contains <color=#50F253>2 equipment</color>
+  m_text: Contains <color=#50F253>1 equipment</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e42934f00aadd4eb2bc744d1b701c3cb, type: 2}
@@ -6205,7 +6205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Contains <color=#50F253>2 equipment</color>
+  m_text: Contains <color=#50F253>1 equipment</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e42934f00aadd4eb2bc744d1b701c3cb, type: 2}
@@ -17396,7 +17396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Contains <color=#50F253>2 equipment</color>
+  m_text: Contains <color=#50F253>1 equipment</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e42934f00aadd4eb2bc744d1b701c3cb, type: 2}
@@ -38709,7 +38709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Contains <color=#50F253>2 equipment</color>
+  m_text: Contains <color=#50F253>1 equipment</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e42934f00aadd4eb2bc744d1b701c3cb, type: 2}
