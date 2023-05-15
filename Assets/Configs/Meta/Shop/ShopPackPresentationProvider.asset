@@ -14,26 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configs:
   - _id: 0cfb4989-af8e-4ef6-bcdd-4709b7aba4e3
-    _title: Common Pack
-    _description: Temporary Description
+    _title: Warrior set
+    _description: Reliable equipment that will help more than once in battle. The
+      choice of a true warrior.
     _rarityText: Common
     _mainColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: 8b26e165f1d1e45859deb1ff71e45583, type: 2}
   - _id: 8daec682-5e59-40c2-943d-b66c61b59fb5
-    _title: Uncommon Pack
-    _description: Temporary Description
+    _title: Champion set
+    _description: Rarities and wonders from all parts of the Empire. The merchants
+      of the Golden Cities collected only the most valuable things for their protector.
     _rarityText: Uncommon
     _mainColor: {r: 0.5411765, g: 0.9058824, b: 0.5803922, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: d44871cc1dd0b4566a0c5d8b65be8883, type: 2}
   - _id: 768495af-c303-4130-89e8-d05dfc368e57
-    _title: Rare Pack
-    _description: Temporary Description
+    _title: Hero set
+    _description: Regalia of heroes and creations of the best masters of the Empire.
+      Ideal for destroying demons.
     _rarityText: Rare
     _mainColor: {r: 0.4784314, g: 0.9686275, b: 1, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: d91df79db3b8d48d3821db119ae74c01, type: 2}
   - _id: b9920255-e715-4a85-85c2-ebfeb749303e
-    _title: Legendary Pack
-    _description: Temporary Description
+    _title: Emperor's set
+    _description: The gods themselves blessed these artifacts in order to defeat
+      the demons. Even the emperor will bow his head to the one who owns them.
     _rarityText: Legendary
     _mainColor: {r: 0.67058825, g: 0.47058827, b: 1, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: 730d93a27556842b48286e7940b216e3, type: 2}
