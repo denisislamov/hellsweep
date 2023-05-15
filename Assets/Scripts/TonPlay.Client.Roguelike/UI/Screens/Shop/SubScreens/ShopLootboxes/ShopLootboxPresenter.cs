@@ -112,7 +112,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var inventoryData = inventoryModel.ToData();
+			
 			inventoryData.Items.Add(itemData);
+			inventoryData.SetKeysValue(Context.Rarity, inventoryData.GetKeysValue(Context.Rarity) - 1);
+			
 			inventoryModel.Update(inventoryData);
 			
 			rewards.OnNext(new List<IInventoryItemModel>()
