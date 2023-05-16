@@ -1,4 +1,5 @@
 using System;
+using ReactWrapper.TelegramAPI;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
@@ -98,7 +99,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 		{
 			_closeButtonLocked.SetValueAndForceNotify(true);
 			
-			Application.OpenURL(Context.TonkeeperUrl.Value);
+			TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
 		}
 		
 		private void CloseButtonClickHandler()
