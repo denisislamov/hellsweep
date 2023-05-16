@@ -42,6 +42,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces
 
 		void SetBlueprintsPriceText(string text);
 
+		void SetBlueprintsIcon(Sprite icon);
+
 		void UpdateGradeLayout();
 		
 		void SetGradeLayoutActiveState(bool state);
