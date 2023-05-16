@@ -89,23 +89,23 @@ namespace TonPlay.Client.Roguelike.Shop
 		{
 			var tonkeeperReactiveProperty = new ReactiveProperty<string>(null);
 			var responseReceivedReactiveProperty = new ReactiveProperty<bool>(false);
-			
+
 			_lockerScreen = _uiService.Open<ShopTransactionProcessingScreen, IShopTransactionProcessingScreenContext>(
 				new ShopTransactionProcessingScreenContext(
 					tonkeeperReactiveProperty,
 					responseReceivedReactiveProperty,
 					LockerCloseButtonClickCallback));
-			
+
 			var response = await _reasonFuncs[_context.PaymentReason].Invoke(_context.Value);
 
 			responseReceivedReactiveProperty.SetValueAndForceNotify(true);
-			
+
 			if (!response.successful)
 			{
 				OnRequestFailed(response);
 				return;
 			}
-			
+
 			tonkeeperReactiveProperty.SetValueAndForceNotify(response.response.tonPayInResponse.tonkeeper);
 
 			_currentPaymentTransactionResponse.SetValueAndForceNotify(response.response);
@@ -318,7 +318,11 @@ namespace TonPlay.Client.Roguelike.Shop
 
 			if (model.Rewards.Blueprints > 0)
 			{
-				_rewardsResults.Add(CreateRewardContext("blueprints", model.Rewards.Blueprints));
+				_rewardsResults.Add(
+					CreateRewardContext(
+						$"blueprints_{response.attributes.blueprintsSlotPurpose.ToString().ToLowerInvariant()}",
+						model.Rewards.Blueprints));
+
 				var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 				var inventoryData = inventoryModel.ToData();
 				inventoryData.SetBlueprintsValue(response.attributes.blueprintsSlotPurpose, Convert.ToInt64(model.Rewards.Blueprints));
