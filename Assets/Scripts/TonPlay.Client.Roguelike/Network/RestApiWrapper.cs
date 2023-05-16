@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.Network;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TonPlay.Client.Roguelike.Network
 {
-    public class RestApiWrapper : MonoBehaviour, IRestApiClient
+    public class RestApiWrapper : MonoBehaviour, IRestApiClient, IUriProvider
     {
         [SerializeField] private bool _useDebugToken;
         [SerializeField] private string _username;
@@ -23,6 +21,8 @@ namespace TonPlay.Client.Roguelike.Network
         [SerializeField]
         private NetworkSettings _networkSettings;
 
+        public string CurrentUri => GetUri();
+
         private void Awake()
         {
              Init();
@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Network
 
         public void Init()
         {
-            var uri = _useDebugToken ? _debugTokenSettings.GetFullDebugAppUrl(_username) : Application.absoluteURL;
+            var uri = GetUri();
             _token = UriParser.Parse(uri)["token"];
             
             Debug.LogFormat("_token {0}", _token);
@@ -41,6 +41,7 @@ namespace TonPlay.Client.Roguelike.Network
                 new SetupTokenDecorator(_token),
                 new SetupHeadersDecorator());
         }
+        private string GetUri() => _useDebugToken ? _debugTokenSettings.GetFullDebugAppUrl(_username) : Application.absoluteURL;
 
         public void Init(bool useDebugToken,
                          DebugTokenSettings debugTokenSettings,

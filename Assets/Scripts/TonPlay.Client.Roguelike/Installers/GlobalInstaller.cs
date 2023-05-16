@@ -1,3 +1,4 @@
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Bootstrap;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
@@ -40,6 +41,8 @@ namespace TonPlay.Client.Roguelike.Installers
 			Container.BindInterfacesTo<BootstrapService>().AsSingle();
 			Container.BindInterfacesTo<GameModelProvider>().AsSingle();
 			Container.BindInterfacesTo<MetaGameModelProvider>().AsSingle();
+
+			Container.BindInterfacesTo<TelegramPlatformProvider>().AsSingle();
 
 			var locationConfigProvider = Instantiate(_locationConfigProvider);
 			Container.Bind<ILocationConfigProvider>().FromInstance(locationConfigProvider).AsSingle();

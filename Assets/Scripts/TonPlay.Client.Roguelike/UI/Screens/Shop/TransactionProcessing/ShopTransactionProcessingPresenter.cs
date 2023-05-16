@@ -2,6 +2,7 @@ using System;
 using ReactWrapper.TelegramAPI;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing.Interfaces;
@@ -14,7 +15,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 	public class ShopTransactionProcessingPresenter : Presenter<IShopTransactionProcessingView, IShopTransactionProcessingScreenContext>
 	{
 		private readonly IButtonPresenterFactory _buttonPresenterFactory;
-		
+		private readonly ITelegramPlatformProvider _telegramPlatformProvider;
+
 		private readonly ReactiveProperty<bool> _closeButtonLocked = new ReactiveProperty<bool>(true);
 		private readonly ReactiveProperty<bool> _payButtonLocked = new ReactiveProperty<bool>(true);
 		
@@ -25,10 +27,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 		public ShopTransactionProcessingPresenter(
 			IShopTransactionProcessingView view, 
 			IShopTransactionProcessingScreenContext context,
-			IButtonPresenterFactory buttonPresenterFactory)
+			IButtonPresenterFactory buttonPresenterFactory,
+			ITelegramPlatformProvider telegramPlatformProvider)
 			: base(view, context)
 		{
 			_buttonPresenterFactory = buttonPresenterFactory;
+			_telegramPlatformProvider = telegramPlatformProvider;
 
 			AddReceiveResponseSubscription();
 			AddTonkeeperUrlSubscription();
@@ -98,8 +102,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 		private void PayButtonClickHandler()
 		{
 			_closeButtonLocked.SetValueAndForceNotify(true);
-			
-			TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
+
+			if (_telegramPlatformProvider.Current == TelegramPlatform.Desktop || _telegramPlatformProvider.Current == TelegramPlatform.MacOS)
+			{
+				TelegramAPI.OpenLink($"https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={Context.TonkeeperUrl.Value}");
+			}
+			else
+			{
+				TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
+			}
 		}
 		
 		private void CloseButtonClickHandler()
