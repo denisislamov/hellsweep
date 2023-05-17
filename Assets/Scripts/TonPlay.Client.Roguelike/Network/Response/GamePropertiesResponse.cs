@@ -21,6 +21,8 @@ namespace TonPlay.Client.Roguelike.Network.Response
                 public bool ScreenGameStick;
                 public bool VisualizeDamage;
             }
+            
+            public bool applicationLaunchedNotFirstTime;
         }
     }
 }

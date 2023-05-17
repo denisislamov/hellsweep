@@ -102,6 +102,11 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			
 			_uiService.Close(loadingScreen);
 
+			var metaGameModel = _metaGameModelProvider.Get();
+			var profileData = metaGameModel.ProfileModel.ToData();
+			
+			_analyticsServiceWrapper.OnStartChapter(profileData.BalanceData.Gold.ToString(), _locationConfig.Id);
+
 			return true;
 		}
 
@@ -152,7 +157,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			
 			await UpdateUserBalance();
 
-			_analyticsServiceWrapper.OnSingleMatchFinishSession(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value);
+			//_analyticsServiceWrapper.OnSingleMatchFinishSession(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value);
 			
 			return gameSessionResponse?.response;
 		}

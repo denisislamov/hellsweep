@@ -5,9 +5,11 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.UIService.Layers;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
@@ -37,7 +39,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 		private readonly ILocationConfigStorage _locationConfigStorage;
 		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
 		private readonly ISceneService _sceneService;
-
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		private readonly ILocationConfig _locationConfig;
+		private readonly IMetaGameModelProvider _metaGameModelProvider;
+		
 		private bool _loading;
 		private bool _matchFinished;
 
@@ -50,7 +55,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			IMatchProvider matchProvider,
 			ILocationConfigStorage locationConfigStorage,
 			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory,
-			ISceneService sceneService)
+			ISceneService sceneService, 
+			IAnalyticsServiceWrapper analyticsServiceWrapper,
+			ILocationConfig locationConfig)
 			: base(view, context)
 		{
 			_gameModelProvider = gameModelProvider;
@@ -60,7 +67,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			_locationConfigStorage = locationConfigStorage;
 			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
 			_sceneService = sceneService;
-
+			_analyticsServiceWrapper = analyticsServiceWrapper;
+			_locationConfig = locationConfig;
+			
 			FinishMatchSession().ContinueWith(response =>
 			{
 				_matchFinished = true;
@@ -146,6 +155,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			_uiService.CloseAll(new DefaultScreenLayer());
 
 			_matchProvider.Current.Finish();
+			
+			var metaGameModel = _metaGameModelProvider.Get();
+			var profileData = metaGameModel.ProfileModel.ToData();
+			
+			_analyticsServiceWrapper.OnStartChapter(profileData.BalanceData.Gold.ToString(),
+													_locationConfig.Id);
+			
 		}
 		
 		private UniTask<GameSessionResponse> FinishMatchSession()
