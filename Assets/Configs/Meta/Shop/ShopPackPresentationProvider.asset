@@ -35,14 +35,14 @@ MonoBehaviour:
     _mainColor: {r: 0.4784314, g: 0.9686275, b: 1, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: d91df79db3b8d48d3821db119ae74c01, type: 2}
   - _id: b9920255-e715-4a85-85c2-ebfeb749303e
-    _title: Emperor's set
+    _title: Emperor set
     _description: The gods themselves blessed these artifacts in order to defeat
       the demons. Even the emperor will bow his head to the one who owns them.
     _rarityText: Legendary
     _mainColor: {r: 0.67058825, g: 0.47058827, b: 1, a: 1}
     _backgroundGradientMaterial: {fileID: 2100000, guid: 730d93a27556842b48286e7940b216e3, type: 2}
   - _id: 45713766-b78e-4bc3-bbfc-1a11ea495d02
-    _title: God's set
+    _title: God set
     _description: It's such a great and divine set that we couldn't find enough words
       to describe it
     _rarityText: Epic

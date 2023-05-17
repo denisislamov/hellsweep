@@ -50,6 +50,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private Image _itemIconImage;
 		
 		[SerializeField]
+		private Image _blueprintsIcon;
+		
+		[SerializeField]
 		private RawImage _itemBackgroundImage;
 		
 		[SerializeField]
@@ -133,6 +136,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			_drawingPriceText.SetText(text);
 		}
 		
+		public void SetBlueprintsIcon(Sprite icon)
+		{
+			_blueprintsIcon.sprite = icon;
+		}
+
 		public void UpdateGradeLayout()
 		{
 			LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) _gradesLayout.transform);

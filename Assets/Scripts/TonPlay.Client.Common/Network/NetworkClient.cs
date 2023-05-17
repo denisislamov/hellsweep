@@ -40,7 +40,22 @@ namespace TonPlay.Client.Common.Network
 			{
 				[RequestType.GET]    = (path, data) => UnityWebRequest.Get(path),
 				[RequestType.POST]   = (path, data) => UnityWebRequest.Post(path, data),
-				[RequestType.PUT]    = (path, data) => UnityWebRequest.Put(path, data),
+				[RequestType.PUT]    = (path, data) =>
+				{
+					UploadHandler uploadHandler = null;
+
+					if (!string.IsNullOrEmpty(data))
+					{
+						uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(data));
+						uploadHandler.contentType = "application/json";
+					}
+					
+					return new UnityWebRequest(
+						path, 
+						"PUT", 
+						new DownloadHandlerBuffer(), 
+						uploadHandler); 
+				},
 				[RequestType.DELETE] = (path, data) =>
 				{
 					var request = UnityWebRequest.Delete(path);
@@ -141,7 +156,7 @@ namespace TonPlay.Client.Common.Network
 				}
 				
 				// TODO - not sure about it
-				if (req.uploadHandler != null && !string.IsNullOrEmpty(data))
+				if ((req.uploadHandler != null && !string.IsNullOrEmpty(data)))
 				{
 					req.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(data));
 					req.uploadHandler.contentType = "application/json";

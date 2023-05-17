@@ -84,6 +84,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			View.SetRarityColor(mainColor);
 			View.SetItemBackgroundGradientMaterial(backgroundGradient);
 			View.SetAttributeIcon(_inventoryItemPresentationProvider.GetItemAttributeIcon(config.AttributeName));
+			View.SetBlueprintsIcon(_inventoryItemPresentationProvider.GetSlotIcon(config.SlotName));
 
 			UpdateAttributeValueText(detailConfig);
 			UpdateLevelText(detailConfig);
