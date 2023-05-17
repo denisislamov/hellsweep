@@ -668,8 +668,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.8423, y: 96.8943}
-  m_SizeDelta: {x: 818.4202, y: 858.1492}
+  m_AnchoredPosition: {x: 1.8422852, y: 89.04834}
+  m_SizeDelta: {x: 818.4202, y: 842.4574}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5157728027303918323
 CanvasRenderer:
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_text: 'Important!
 
 
-    After you click <color=#4EF352>"Pay"</color>, you will
+    After you click <color=#4EF352>"Buy"</color>, you will
     need to wait until the transaction is completed to see your purchased boosters.
 
 
@@ -712,12 +712,12 @@ MonoBehaviour:
 
 
     <color=#F73838>"Cancel"</color> button
-    will be locked after clicking <color=#4EF352>"Pay"</color>.
+    will be locked after clicking <color=#4EF352>"Buy"</color>.
 
 
     If you are
-    playing from Windows or MacOS, after click on "Pay" you will get a QR code, scan
-    it with your smartphone to make payment via <color=#3B7BF3><b>"Tonkeeper"</b></color>
+    playing on Windows or MacOS, after click on <color=#4EF352>"Buy"</color> you
+    will get a QR code, scan it with your smartphone to make payment via <color=#3B7BF3><b>"Tonkeeper"</b></color>
     app'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 1257675150296168409, guid: c12054932ac44424387927136169425b, type: 2}
@@ -6646,7 +6646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 1257675150296168409, guid: c12054932ac44424387927136169425b, type: 2}

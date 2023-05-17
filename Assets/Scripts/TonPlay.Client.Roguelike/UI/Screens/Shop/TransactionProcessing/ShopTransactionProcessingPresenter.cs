@@ -1,4 +1,5 @@
 using System;
+using ReactWrapper.ReactAPI;
 using ReactWrapper.TelegramAPI;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
@@ -8,6 +9,7 @@ using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing.Interfaces;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Networking;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
@@ -103,13 +105,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.TransactionProcessing
 		{
 			_closeButtonLocked.SetValueAndForceNotify(true);
 
-			if (_telegramPlatformProvider.Current == TelegramPlatform.Desktop || _telegramPlatformProvider.Current == TelegramPlatform.MacOS)
+			switch (_telegramPlatformProvider.Current)
 			{
-				TelegramAPI.OpenLink($"https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={Context.TonkeeperUrl.Value}");
-			}
-			else
-			{
-				TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
+				case TelegramPlatform.Desktop:
+				case TelegramPlatform.MacOS:
+					TelegramAPI.OpenLink($"https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={UnityWebRequest.EscapeURL(Context.TonkeeperUrl.Value)}");
+					break;
+				case TelegramPlatform.iOS:
+					TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
+					break;
+				default:
+					TelegramAPI.OpenLink(Context.TonkeeperUrl.Value);
+					break;
 			}
 		}
 		
