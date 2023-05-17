@@ -90,7 +90,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 			var userSummaryResponse = await _restApiClient.GetUserSummary();
 			
 			var theTime = DateTime.Now;
-			var date = theTime.ToString("dd/MM/yy");
+			var date = theTime.ToString("dd/MM/yy HH:mm:ss");
 			
 			_analyticsServiceWrapper.OnAppLaunch(userSummaryResponse.response.identifier, 
 												 date, 
@@ -98,7 +98,7 @@ namespace TonPlay.Client.Roguelike.AppEntryPoint
 												 _telegramPlatformProvider.Current.ToString(),
 												 SystemInfo.deviceModel,
 												 Application.systemLanguage.ToString(), 
-												 (Screen.height / (float) (Screen.width) * 9) + ":9" ,
+												 (int)(Screen.height / (float) (Screen.width) * 9) + ":9" ,
 												 "none");
 		}
     }
