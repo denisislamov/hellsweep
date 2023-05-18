@@ -200,14 +200,14 @@ namespace TonPlay.Client.Roguelike.Network
             }
         }
         
-        [SerializeField] private Response<UserItemResponse> _itemLootResponse;
+        [SerializeField] private Response<ItemLootResponse> _itemLootResponse;
         [ContextMenu("PostItemLoot")]
-        public async UniTask<Response<UserItemResponse>> PostItemLoot(RarityName rarity)
+        public async UniTask<Response<ItemLootResponse>> PostItemLoot(RarityName rarity)
         {
-            _itemLootResponse = new Response<UserItemResponse>();
+            _itemLootResponse = new Response<ItemLootResponse>();
 
-            Common.Utilities.Logger.Log($"_networkClient.PostAsync<UserItemResponse> {rarity}");
-            var postTask = _networkClient.PostAsync<UserItemResponse>($"v1/item/loot?rarity={rarity.ToString().ToUpperInvariant()}", null);
+            Common.Utilities.Logger.Log($"_networkClient.PostAsync<ItemLootResponse> {rarity}");
+            var postTask = _networkClient.PostAsync<ItemLootResponse>($"v2/item/loot?rarity={rarity.ToString().ToUpperInvariant()}", null);
 
             var result = await postTask;
             
