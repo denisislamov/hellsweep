@@ -18,7 +18,7 @@ namespace TonPlay.Client.Roguelike.Network.Interfaces
 		UniTask<Response<ItemLevelUpPutResponse>> PutItemLevelUp(string id, bool isMax);
 		UniTask<Response<ItemMergeResponse>> PostItemMerge(ItemMergePostBody value);
 		
-		UniTask<Response<UserItemResponse>> PostItemLoot(RarityName rarity);
+		UniTask<Response<ItemLootResponse>> PostItemLoot(RarityName rarity);
 		UniTask<Response<ItemMergeResponse>> PostItemMergeV2(ItemMergePostBodyV2 value);
 		UniTask<Response<ItemsGetResponse>> GetAllItems();
 		UniTask<Response<ItemLevelRatesResponse>> GetItemLevelRatesAll();

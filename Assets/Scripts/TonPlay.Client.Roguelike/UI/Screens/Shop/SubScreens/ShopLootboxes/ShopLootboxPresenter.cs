@@ -82,6 +82,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 
 		private async void ButtonClickHandler()
 		{
+			if (_metaGameModelProvider.Get().ProfileModel.InventoryModel.ToData().GetKeysValue(Context.Rarity) <= 0)
+			{
+				return;
+			}
+			
 			if (_embeddedScreenStorage.Current != null)
 			{
 				_uiService.Close(_embeddedScreenStorage.Current, true);
@@ -98,30 +103,39 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 
 			if (!response.successful)
 			{
+				_uiService.Close(_embeddedScreenStorage.Current, true);
+				_embeddedScreenStorage.Set(
+					_uiService.Open<ShopLootboxesScreen, IShopLootboxesScreenContext>(new ShopLootboxesScreenContext(), true));
 				return;
 			}
 
-			var itemModel = new InventoryItemModel();
-			var itemData = new InventoryItemData()
-			{
-				Id = response.response.id,
-				DetailId = response.response.itemDetailId,
-				ItemId = response.response.itemId
-			};
-			itemModel.Update(itemData);
-
+			var receivedItemModels = new List<IInventoryItemModel>(response.response.items.Count);
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var inventoryData = inventoryModel.ToData();
 			
-			inventoryData.Items.Add(itemData);
+			for (var i = 0; i < response.response.items.Count; i++)
+			{
+				var itemResponseData = response.response.items[i];
+				
+				var itemModel = new InventoryItemModel();
+				var itemData = new InventoryItemData()
+				{
+					Id = itemResponseData.id,
+					DetailId = itemResponseData.itemDetailId,
+					ItemId = itemResponseData.itemId
+				};
+				itemModel.Update(itemData);
+				
+				inventoryData.Items.Add(itemData);
+				
+				receivedItemModels.Add(itemModel);
+			}
+			
 			inventoryData.SetKeysValue(Context.Rarity, inventoryData.GetKeysValue(Context.Rarity) - 1);
 			
 			inventoryModel.Update(inventoryData);
 			
-			rewards.OnNext(new List<IInventoryItemModel>()
-			{
-				itemModel
-			});
+			rewards.OnNext(receivedItemModels);
 		}
 
 		internal class Factory : PlaceholderFactory<IShopLootboxView, IShopLootboxContext, ShopLootboxPresenter>
