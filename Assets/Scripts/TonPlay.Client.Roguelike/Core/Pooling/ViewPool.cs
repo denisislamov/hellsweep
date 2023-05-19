@@ -1,4 +1,5 @@
 using System;
+using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -10,15 +11,17 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 	public class ViewPool<T> : IViewPool<T> where T : Component
 	{
 		private readonly T _prefab;
+		private readonly PoolType _poolType;
 		private readonly Vector3 _spawnPosition = Vector3.one*-100000f;
 
 		private IViewPoolObject<T>[] _pool;
 
 		private int _pointer = 0;
 
-		public ViewPool(T prefab, int size = 32)
+		public ViewPool(T prefab, int size = 32, PoolType poolType = PoolType.FindInactive)
 		{
 			_prefab = prefab;
+			_poolType = poolType;
 
 			if (size == 0)
 			{
@@ -43,6 +46,33 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 
 		public IViewPoolObject<T> Get()
 		{
+			switch (_poolType)
+			{
+				case PoolType.Loop:
+				{
+					SetCurrentPointerWithLoopMethod();
+					break;
+				}
+				case PoolType.FindInactive:
+				default:
+				{
+					SetCurrentPointerWithFindInactiveMethod();
+					break;
+				}
+			}
+			
+			_pointer++;
+			_pointer %= _pool.Length;
+
+			var obj = _pool[_pointer];
+			
+			obj.SetActive(true);
+
+			return obj;
+		}
+		
+		private void SetCurrentPointerWithFindInactiveMethod()
+		{
 			var iterations = 0;
 			while (iterations < _pool.Length)
 			{
@@ -55,16 +85,19 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 					break;
 				}
 			}
-
-			var obj = _pool[_pointer];
-
-			return obj;
 		}
+		
+		private void SetCurrentPointerWithLoopMethod()
+        {
+        	_pointer++;
+        	_pointer %= _pool.Length;
+        }
 
 		public void Release(ViewPoolObject<T> viewPoolObject)
 		{
 			viewPoolObject.Object.transform.position = _spawnPosition;
 			viewPoolObject.SetActive(false);
+			viewPoolObject.EntityId = EcsEntity.DEFAULT_ID;
 		}
 
 		public void IncreaseSize(int count)

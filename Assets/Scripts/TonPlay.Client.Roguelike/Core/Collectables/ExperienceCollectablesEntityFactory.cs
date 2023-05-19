@@ -3,6 +3,7 @@ using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Extensions;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
 using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
@@ -26,9 +27,16 @@ namespace TonPlay.Client.Roguelike.Core.Collectables
 			{
 				return null;
 			}
-
-			var entity = world.NewEntity();
+			
 			var view = poolObject.Object;
+			var entity = world.NewEntity();
+
+			if (poolObject.EntityId != EcsEntity.DEFAULT_ID)
+			{
+				world.DelEntity(poolObject.EntityId);
+				
+				poolObject.EntityId = entity.Id;
+			}
 
 			var gameObject = view.gameObject;
 

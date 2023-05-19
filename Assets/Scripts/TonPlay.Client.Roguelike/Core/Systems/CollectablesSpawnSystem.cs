@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Collectables.Config.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables.Interfaces;
 using TonPlay.Client.Roguelike.Core.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables;
@@ -51,7 +52,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			foreach (var kvp in maxSpawnedQuantityPerPrefab)
 			{
-				_pool.Add(new CollectableViewPoolIdentity(kvp.Key), kvp.Key, kvp.Value);
+				_pool.Add(new CollectableViewPoolIdentity(kvp.Key), kvp.Key, kvp.Value, PoolType.Loop);
 			}
 
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(total);

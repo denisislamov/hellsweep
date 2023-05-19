@@ -521,5 +521,12 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.Value = value;
 			return ref component;
 		}
+		
+		public static ref DestroyOnTimerComponent AddDestroyOnTimerComponent(this EcsEntity entity, float value)
+		{
+			ref var component = ref entity.Add<DestroyOnTimerComponent>();
+			component.TimeLeft = value;
+			return ref component;
+		}
 	}
 }

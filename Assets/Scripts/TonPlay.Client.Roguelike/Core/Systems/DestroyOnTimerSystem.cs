@@ -11,7 +11,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
-			var filter = world.Filter<DestroyOnTimerComponent>().Exc<InactiveComponent>().End();
+			var filter = world.Filter<DestroyOnTimerComponent>().Exc<InactiveComponent>().Exc<DestroyComponent>().End();
 			var pool = world.GetPool<DestroyOnTimerComponent>();
 			var destroyPool = world.GetPool<DestroyComponent>();
 

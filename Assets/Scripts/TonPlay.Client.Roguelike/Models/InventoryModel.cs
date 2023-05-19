@@ -152,16 +152,9 @@ namespace TonPlay.Client.Roguelike.Models
 				if (_items.Count >= i && _items.Count != data.Items.Count)
 				{
 					_items.Add(new InventoryItemModel());
-
-					if (_itemsMap.ContainsKey(data.Items[i].Id))
-					{
-						_itemsMap[data.Items[i].Id] = _items[i];
-					}
-					else
-					{
-						_itemsMap.Add(data.Items[i].Id, _items[i]);
-					}
 				}
+				
+				_itemsMap[data.Items[i].Id] = _items[i];
 
 				_items[i].Update(data.Items[i]);
 			}

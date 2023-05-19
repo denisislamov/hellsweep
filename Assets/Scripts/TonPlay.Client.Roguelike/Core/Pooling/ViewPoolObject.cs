@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 
 		public T Object => _obj;
 		public bool Active => _active;
+		
+		public int EntityId { get; set; } = EcsEntity.DEFAULT_ID;
 
 		public ViewPoolObject(IViewPool<T> viewPool, T obj)
 		{

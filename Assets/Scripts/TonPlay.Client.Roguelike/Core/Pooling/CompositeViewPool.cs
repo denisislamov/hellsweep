@@ -9,15 +9,15 @@ namespace TonPlay.Client.Roguelike.Core.Pooling
 	{
 		private readonly Dictionary<string, object> _pools = new Dictionary<string, object>(8);
 
-		public void Add<T>(IViewPoolIdentity viewPoolIdentity, T prefab, int count = 32) where T : Component
+		public void Add<T>(IViewPoolIdentity viewPoolIdentity, T prefab, int count = 32, PoolType poolType = PoolType.FindInactive) where T : Component
 		{
-			if (_pools.ContainsKey(viewPoolIdentity.Id))
+			if (_pools.TryGetValue(viewPoolIdentity.Id, out var pool))
 			{
-				((IViewPool<T>)_pools[viewPoolIdentity.Id]).IncreaseSize(count);
+				((IViewPool<T>)pool).IncreaseSize(count);
 				return;
 			}
 
-			_pools.Add(viewPoolIdentity.Id, new ViewPool<T>(prefab, count));
+			_pools.Add(viewPoolIdentity.Id, new ViewPool<T>(prefab, count, poolType));
 		}
 
 		public bool TryGet<T>(IViewPoolIdentity viewPoolIdentity, out IViewPoolObject<T> result) where T : Component
