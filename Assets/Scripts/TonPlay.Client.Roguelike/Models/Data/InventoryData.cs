@@ -28,6 +28,8 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public int RareKeys { get; set; }
 		
 		public int LegendaryKeys { get; set; }
+		
+		public int LastUpdateIndex { get; set; }
 
 		public void SetBlueprintsValue(SlotName slotName, long value)
 		{

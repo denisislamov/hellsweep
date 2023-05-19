@@ -14,16 +14,20 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly ReactiveProperty<string> _detailId = new ReactiveProperty<string>();
 		
 		private string _innerItemId;
+		private int _lastUpdateIndex;
 
 		public IReadOnlyReactiveProperty<string> Id => _id;
 		public IReadOnlyReactiveProperty<string> DetailId => _detailId;
 		public IReadOnlyReactiveProperty<string> ItemId => _itemId;
+
+		public int LastUpdateIndex => _lastUpdateIndex;
 
 		public void Update(InventoryItemData data)
 		{
 			_id.SetValueAndForceNotify(data.Id);
 			_itemId.SetValueAndForceNotify(data.ItemId);
 			_detailId.SetValueAndForceNotify(data.DetailId);
+			_lastUpdateIndex = data.LastUpdateIndex;
 		}
 		
 		public InventoryItemData ToData()

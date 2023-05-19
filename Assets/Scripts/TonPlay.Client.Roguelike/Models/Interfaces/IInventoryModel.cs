@@ -36,5 +36,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IObservable<Unit> Updated { get; }
 		
 		IInventoryItemModel GetItemModel(string userItemId);
+		
+		int LastUpdateIndex { get; }
 	}
 }

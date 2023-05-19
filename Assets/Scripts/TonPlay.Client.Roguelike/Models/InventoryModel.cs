@@ -39,6 +39,8 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly ReactiveProperty<int> _uncommonKeys = new ReactiveProperty<int>();
 		private readonly ReactiveProperty<int> _rareKeys = new ReactiveProperty<int>();
 		private readonly ReactiveProperty<int> _legendaryKeys = new ReactiveProperty<int>();
+		
+		private int _lastUpdateIndex;
 
 		public IReadOnlyReactiveProperty<long> BlueprintsArms => _blueprintsArms;
 		public IReadOnlyReactiveProperty<long> BlueprintsBody => _blueprintsBody;
@@ -53,14 +55,23 @@ namespace TonPlay.Client.Roguelike.Models
 		public IReadOnlyReactiveProperty<int> LegendaryKeys => _legendaryKeys;
 		
 		public IObservable<Unit> Updated => _updated;
+
+		public int LastUpdateIndex => _lastUpdateIndex;
 		
 		public IInventoryItemModel GetItemModel(string userItemId)
 		{
+			if (string.IsNullOrWhiteSpace(userItemId) || !_itemsMap.ContainsKey(userItemId))
+			{
+				return null;
+			}
+			
 			return _itemsMap[userItemId];
 		}
 
 		public void Update(InventoryData data)
 		{
+			_lastUpdateIndex++;
+
 			UpdateItems(data);
 			UpdateSlots(data);
 			UpdateMergeSlots(data);
@@ -149,20 +160,39 @@ namespace TonPlay.Client.Roguelike.Models
 		{
 			for (var i = 0; i < data.Items.Count; i++)
 			{
-				if (_items.Count >= i && _items.Count != data.Items.Count)
-				{
-					_items.Add(new InventoryItemModel());
-				}
+				IInventoryItemModel model;
 				
-				_itemsMap[data.Items[i].Id] = _items[i];
+				if (!_itemsMap.ContainsKey(data.Items[i].Id))
+				{
+					model = new InventoryItemModel();
+					_items.Add(model);
+				}
+				else
+				{
+					model = _itemsMap[data.Items[i].Id];
+				}
 
-				_items[i].Update(data.Items[i]);
+				data.Items[i].LastUpdateIndex = _lastUpdateIndex;
+
+				model.Update(data.Items[i]);
+
+				_itemsMap[data.Items[i].Id] = model;
 			}
 
-			while (_items.Count > data.Items.Count)
+			for (var i = 0; i < _items.Count; i++)
 			{
-				_itemsMap.Remove(_items[_items.Count - 1].Id.Value);
-				_items.RemoveAt(_items.Count - 1);
+				if (_items[i].LastUpdateIndex == _lastUpdateIndex)
+				{
+					continue;
+				}
+
+				if (!string.IsNullOrWhiteSpace(_items[i].Id.Value))
+				{
+					_itemsMap.Remove(_items[i].Id.Value);
+				}
+				
+				_items.RemoveAt(i);
+				i--;
 			}
 		}
 
@@ -170,7 +200,7 @@ namespace TonPlay.Client.Roguelike.Models
 		{
 			for (var i = 0; i < data.MergeSlots.Count; i++)
 			{
-				if (_mergeSlots.Count >= i)
+				if (i >= _mergeSlots.Count)
 				{
 					_mergeSlots.Add(new SlotModel());
 				}

@@ -10,5 +10,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IReadOnlyReactiveProperty<string> ItemId { get; }
 
 		IReadOnlyReactiveProperty<string> DetailId { get; }
+
+		int LastUpdateIndex { get; }
 	}
 }

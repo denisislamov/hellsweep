@@ -7,5 +7,6 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public string Id { get; set; }
 		public string ItemId { get; set; }
 		public string DetailId { get; set; }
+		public int LastUpdateIndex { get; set; }
 	}
 }
