@@ -34,6 +34,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 
 				Presenters.Add(presenter);
 			}
+			
+			View.RebuildLayout();
 		}
 
 		internal class Factory : PlaceholderFactory<IShopRewardItemCollectionView, IShopRewardItemCollectionContext, ShopRewardItemCollectionPresenter>

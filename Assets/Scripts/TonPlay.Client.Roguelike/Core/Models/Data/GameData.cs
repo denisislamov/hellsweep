@@ -13,5 +13,11 @@ namespace TonPlay.Client.Roguelike.Core.Models.Data
 		public bool Paused { get; set; }
 		
 		public int DebugEnemyMovementToEachOtherCollisionCount { get; set; }
+		
+		public bool DebugForcedLose { get; set; }
+
+		public bool DebugForcedWin { get; set; }
+		
+		public bool DebugForcedTime { get; set; }
 	}
 }

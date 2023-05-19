@@ -76,6 +76,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 				var presenter = _itemPresenterFactory.Create(view, context);
 				Presenters.Add(presenter);
 			}
+			
+			View.RebuildLayout();
 		}
 
 		private static int GetCurrentSkillLevel(ISkillsModel skillsModel, SkillName skillName) =>

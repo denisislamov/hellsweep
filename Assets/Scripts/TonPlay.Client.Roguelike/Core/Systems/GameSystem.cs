@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
 using UnityEngine;
@@ -39,6 +40,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				if (time.Paused)
 				{
 					continue;
+				}
+				
+				var model = _sharedData.GameModel;
+				var data = model.ToData();
+
+				if (data.DebugForcedTime)
+				{
+					time.Time = Convert.ToSingle(data.GameTimeInSeconds);
+					data.DebugForcedTime = false;
+					
+					model.Update(data);
+					break;
 				}
 
 				time.Time += Time.deltaTime;

@@ -15,8 +15,6 @@ using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
-using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
-using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
@@ -86,26 +84,25 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_playerConfigProvider = playerConfigProvider;
 			_restApiClient = restApiClient;
 
+			InitView();
+			RefreshItems();
+			UpdateSkinView();
+			RefreshAttributes();
 			AddNestedProfileBarPresenter();
 			AddNavigationMenuPresenter();
 			AddSlotPresenters();
 			AddUserProfileUpdateScheduler();
-			RefreshAttributes();
 			AddSubscriptionToSlotsToRefreshAttributes();
 			AddToggleSortPanelButtonPresenter();
 			AddSortButtonsPresenters();
 			AddSubscriptionToCurrentSortType();
-			AddSettingsButtonPresenter();
 			AddMergeButtonPresenter();
-			InitView();
-			RefreshItems();
-			UpdateSkinView();
 		}
 
 		public override void Show()
 		{
 			base.Show();
-			
+
 			View.SortPanelView.Hide();
 		}
 
@@ -114,22 +111,24 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_compositeDisposables.Dispose();
 			base.Dispose();
 		}
-		
+
 		private void InitView()
 		{
 			SetCurrentSortType(InventorySortType.Rarity);
 		}
-		
+
 		private void AddSubscriptionToCurrentSortType()
 		{
-			_currentSortType.Subscribe(sortType =>
-			{
-				RefreshItems();
-				RefreshSortButtonsActiveState();
-				RefreshSortButtonText();
-			}).AddTo(_compositeDisposables);
+			_currentSortType
+			   .SkipLatestValueOnSubscribe()
+			   .Subscribe(sortType =>
+				{
+					RefreshItems();
+					RefreshSortButtonsActiveState();
+					RefreshSortButtonText();
+				}).AddTo(_compositeDisposables);
 		}
-		
+
 		private void RefreshSortButtonText()
 		{
 			_sortButtonText.SetValueAndForceNotify(_currentSortType.Value.ToString());
@@ -139,7 +138,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			_inventoryItemsPresenter?.Dispose();
 			_itemStates?.Clear();
-			
+
 			AddItemCollectionPresenter();
 		}
 
@@ -172,12 +171,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				if (slot.ItemId?.Value is null) continue;
 
 				var itemModel = GetItemModel(slot.ItemId.Value);
-				
+
 				if (itemModel is null) continue;
 
 				var itemConfig = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
 				var detailConfig = itemConfig.GetDetails(itemModel.DetailId.Value);
-				
+
 				switch (itemConfig.AttributeName)
 				{
 					case AttributeName.ATTACK:
@@ -197,7 +196,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			View.SetHealthValueText(health.ToString());
 		}
 
-		private IInventoryItemModel GetItemModel(string itemId) 
+		private IInventoryItemModel GetItemModel(string itemId)
 			=> _metaGameModelProvider.Get().ProfileModel.InventoryModel.Items.FirstOrDefault(_ => _.Id.Value == itemId);
 
 		private async void UpdateUserProfile()
@@ -239,9 +238,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			var items = inventory.Items
 								 .Select(item => (IInventoryItemState)new InventoryItemState(item))
 								 .ToList();
-								 
+
 			items.Sort(SortItemsByCurrentSortType);
-			
+
 			var slots = inventory.Slots;
 
 			for (var i = 0; i < items.Count; i++)
@@ -261,42 +260,42 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 			_inventoryItemsPresenter = presenter;
 		}
-		
+
 		private void UpdateSkinView()
 		{
 			var slotUserItemId = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[SlotName.WEAPON].ItemId?.Value;
-			var itemId = string.IsNullOrEmpty(slotUserItemId) 
-				? "bae7a647-359a-4bb5-ae6b-7181a616cf7f" 
+			var itemId = string.IsNullOrEmpty(slotUserItemId)
+				? "bae7a647-359a-4bb5-ae6b-7181a616cf7f"
 				: _metaGameModelProvider.Get().ProfileModel.InventoryModel.GetItemModel(slotUserItemId)?.ItemId?.Value;
-			
+
 			var skinConfig = _playerConfigProvider.GetSkin(_playerConfigProvider.Get().SkinId);
 
 			if (string.IsNullOrEmpty(itemId))
 			{
 				itemId = "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
 			}
-			
+
 			for (var i = 0; i < View.SkinRoot.childCount; i++)
 			{
 				Object.Destroy(View.SkinRoot.GetChild(i).gameObject);
 			}
 
 			var prefab = skinConfig.GetInventorySpriteForWeaponItemId(itemId);
-			
+
 			if (prefab == null)
 			{
 				itemId = "bae7a647-359a-4bb5-ae6b-7181a616cf7f";
 				prefab = skinConfig.GetInventorySpriteForWeaponItemId(itemId);
 			}
-			
+
 			Object.Instantiate(prefab, View.SkinRoot);
 		}
-		
+
 		private int SortItemsByCurrentSortType(IInventoryItemState x, IInventoryItemState y)
 		{
 			var xConfig = _inventoryItemsConfigProvider.Get(x.Model.ItemId.Value);
 			var yConfig = _inventoryItemsConfigProvider.Get(y.Model.ItemId.Value);
-			
+
 			switch (_currentSortType.Value)
 			{
 				case InventorySortType.Level:
@@ -343,7 +342,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			_uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
 				new InventoryItemUpgradeScreenContext(item, EquipItem, false));
 		}
-		
+
 		private void SlotClickHandler(ISlotModel slotModel)
 		{
 			if (slotModel.ItemId?.Value is null)
@@ -352,16 +351,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			}
 
 			var itemModel = GetItemModel(slotModel.ItemId.Value);
-			
+
 			_uiService.Open<InventoryItemUpgradeScreen, InventoryItemUpgradeScreenContext>(
 				new InventoryItemUpgradeScreenContext(itemModel, UnequipItem, true));
 		}
-		
+
 		private async void UnequipItem(IInventoryItemModel item)
 		{
 			var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
 			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
-			
+
 			var response = await _restApiClient.DeleteItem(requiredSlot.Id.Value);
 			if (response != null && response.successful)
 			{
@@ -375,14 +374,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			var itemConfig = _inventoryItemsConfigProvider.Get(item.ItemId.Value);
 			var requiredSlot = _metaGameModelProvider.Get().ProfileModel.InventoryModel.Slots[itemConfig.SlotName];
-			
+
 			var response = await _restApiClient.PutItem(
 				new ItemPutBody()
 				{
 					userItemId = item.Id.Value,
 					slotId = requiredSlot.Id.Value
 				});
-			
+
 			if (response != null)
 			{
 				SetSlotItemEquippedState(requiredSlot, false);
@@ -423,10 +422,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(SortButtonClickHandler))
 				   .Add(new ReactiveTextButtonContext(_sortButtonText)));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddSortButtonsPresenters()
 		{
 			var presenter = _buttonPresenterFactory.Create(
@@ -434,26 +433,26 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(() => SetCurrentSortType(InventorySortType.Level)))
 				   .Add(new ReactiveLockButtonContext(_sortByLevelButtonActiveState)));
-			
+
 			Presenters.Add(presenter);
-			
+
 			presenter = _buttonPresenterFactory.Create(
 				View.SortPanelView.RarityButtonView,
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(() => SetCurrentSortType(InventorySortType.Rarity)))
 				   .Add(new ReactiveLockButtonContext(_sortByRarityButtonActiveState)));
-			
+
 			Presenters.Add(presenter);
-			
+
 			presenter = _buttonPresenterFactory.Create(
 				View.SortPanelView.SlotButtonView,
 				new CompositeButtonContext()
 				   .Add(new ClickableButtonContext(() => SetCurrentSortType(InventorySortType.Slot)))
 				   .Add(new ReactiveLockButtonContext(_sortBySlotButtonActiveState)));
-			
+
 			Presenters.Add(presenter);
 		}
-		
+
 		private void SetCurrentSortType(InventorySortType sortType)
 		{
 			_currentSortType.SetValueAndForceNotify(sortType);
@@ -470,16 +469,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		{
 			View.SortPanelView.Toggle();
 		}
-		
-		private void AddSettingsButtonPresenter()
-		{
-			var presenter = _buttonPresenterFactory.Create(View.GameSettingsButtonView,
-				new CompositeButtonContext()
-				   .Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
 
-			Presenters.Add(presenter);
-		}
-		
 		private void AddMergeButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(View.MergeButtonView,
@@ -488,18 +478,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 
 			Presenters.Add(presenter);
 		}
-		
-		private void OnSettingsButtonClickHandler()
-		{
-			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
-		}
 
 		private void OnMergeButtonClickHandler()
 		{
 			_uiService.Close(Context.Screen);
 			_uiService.Open<MergeScreen, IMergeScreenContext>(new MergeScreenContext());
 		}
-		
+
 		internal class Factory : PlaceholderFactory<IInventoryView, IInventoryScreenContext, InventoryPresenter>
 		{
 		}

@@ -41,6 +41,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			{
 				AddRewardPresenter(model);
 			}
+			
+			View.RebuildLayout();
 		}
 		
 		private void AddRewardPresenter(IInventoryItemModel model)

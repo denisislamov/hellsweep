@@ -18,6 +18,8 @@ namespace TonPlay.Client.Roguelike.Models
 		
 		private readonly Subject<Unit> _updated = new Subject<Unit>();
 
+		private Dictionary<string, IInventoryItemModel> _itemsMap = new Dictionary<string, IInventoryItemModel>();
+
 		private List<IInventoryItemModel> _items = new List<IInventoryItemModel>();
 		private Dictionary<SlotName, ISlotModel> _slots = new Dictionary<SlotName, ISlotModel>();
 		private List<ISlotModel> _mergeSlots = new List<ISlotModel>(3);
@@ -54,7 +56,7 @@ namespace TonPlay.Client.Roguelike.Models
 		
 		public IInventoryItemModel GetItemModel(string userItemId)
 		{
-			return Items.FirstOrDefault(_ => _.Id.Value == userItemId);
+			return _itemsMap[userItemId];
 		}
 
 		public void Update(InventoryData data)
@@ -147,9 +149,18 @@ namespace TonPlay.Client.Roguelike.Models
 		{
 			for (var i = 0; i < data.Items.Count; i++)
 			{
-				if (_items.Count >= i)
+				if (_items.Count >= i && _items.Count != data.Items.Count)
 				{
 					_items.Add(new InventoryItemModel());
+
+					if (_itemsMap.ContainsKey(data.Items[i].Id))
+					{
+						_itemsMap[data.Items[i].Id] = _items[i];
+					}
+					else
+					{
+						_itemsMap.Add(data.Items[i].Id, _items[i]);
+					}
 				}
 
 				_items[i].Update(data.Items[i]);
@@ -157,6 +168,7 @@ namespace TonPlay.Client.Roguelike.Models
 
 			while (_items.Count > data.Items.Count)
 			{
+				_itemsMap.Remove(_items[_items.Count - 1].Id.Value);
 				_items.RemoveAt(_items.Count - 1);
 			}
 		}

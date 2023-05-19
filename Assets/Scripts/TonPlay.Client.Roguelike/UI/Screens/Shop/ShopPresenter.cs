@@ -1,35 +1,21 @@
 using System;
-using System.Linq;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
-using TonPlay.Client.Roguelike.Core.Player.Configs;
-using TonPlay.Client.Roguelike.Core.Player.Configs.Interfaces;
-using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
-using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
-using TonPlay.Client.Roguelike.Network.Response;
 using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
-using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
-using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory;
-using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
-using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
-using TonPlay.Client.Roguelike.UI.Screens.Merge;
-using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources;
-using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 {

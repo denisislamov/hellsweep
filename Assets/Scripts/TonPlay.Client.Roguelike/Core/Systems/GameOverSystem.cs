@@ -21,6 +21,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
 			var world = systems.GetWorld();
 			var sharedData = systems.GetShared<ISharedData>();
+
+			if (sharedData.GameModel.DebugForcedLose)
+			{
+				FinishGame(sharedData);
+			}
+			
 			var playerFilter = world.Filter<PlayerComponent>()
 									.Inc<DeadComponent>()
 									.Exc<OpenedUIComponent>()
@@ -32,12 +38,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				openedUiPool.Add(entityId);
 
-				_uiService.Open<DefeatGameScreen, IDefeatGameScreenContext>(new DefeatGameScreenContext());
-
-				PauseGame(sharedData);
+				FinishGame(sharedData);
 			}
 
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+		}
+		
+		private void FinishGame(ISharedData sharedData)
+		{
+			_uiService.Open<DefeatGameScreen, IDefeatGameScreenContext>(new DefeatGameScreenContext());
+
+			PauseGame(sharedData);
 		}
 
 		private static void PauseGame(ISharedData sharedData)

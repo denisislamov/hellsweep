@@ -1,5 +1,10 @@
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
+using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UniRx;
@@ -9,6 +14,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 {
 	public class ProfileBarPresenter : Presenter<IProfileBarView, IProfileBarContext>
 	{
+		private readonly IButtonPresenterFactory _buttonPresenterFactory;
+		private readonly IUIService _uiService;
 		private readonly IProfileModel _profileModel;
 
 		private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
@@ -16,12 +23,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		public ProfileBarPresenter(
 			IProfileBarView view,
 			IProfileBarContext context,
-			IMetaGameModelProvider metaGameModelProvider)
+			IMetaGameModelProvider metaGameModelProvider,
+			IButtonPresenterFactory buttonPresenterFactory,
+			IUIService uiService)
 			: base(view, context)
 		{
+			_buttonPresenterFactory = buttonPresenterFactory;
+			_uiService = uiService;
 			_profileModel = metaGameModelProvider.Get().ProfileModel;
 
 			AddSubscriptions();
+			AddSettingsButtonPresenter();
 		}
 
 		public override void Dispose()
@@ -63,6 +75,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		{
 			var progressBarValue = _profileModel.Experience.Value/_profileModel.MaxExperience.Value;
 			View.ExperienceProgressBarView.SetSize(progressBarValue);
+		}
+
+		private void AddSettingsButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(View.GameSettingsButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
+
+			Presenters.Add(presenter);
+		}
+		
+		private void OnSettingsButtonClickHandler()
+		{
+			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
 		}
 
 		public class Factory : PlaceholderFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter>

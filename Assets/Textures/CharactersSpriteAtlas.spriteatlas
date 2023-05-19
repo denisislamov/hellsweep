@@ -79,6 +79,11 @@ SpriteAtlas:
   - {fileID: 1791841957707171421, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
   - {fileID: 1043882855472502738, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
   - {fileID: 8592439468376855652, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
+  - {fileID: 7116606765221526623, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
+  - {fileID: -4885780771943455533, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
+  - {fileID: 5027835171455036500, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
+  - {fileID: 2349891864070118148, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
+  - {fileID: 1914598703855841773, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
   - {fileID: -2650085375041473971, guid: bf7b8194298ef42ee8a4b9f394242687, type: 3}
   - {fileID: -110071756765197960, guid: bf7b8194298ef42ee8a4b9f394242687, type: 3}
   - {fileID: -5161773097022427103, guid: bf7b8194298ef42ee8a4b9f394242687, type: 3}
@@ -499,6 +504,11 @@ SpriteAtlas:
   - skeleton_miniboss_0
   - skeleton_miniboss_1
   - skeleton_miniboss_8
+  - mobs_death_black_w35_h33_4
+  - mobs_death_black_w35_h33_1
+  - mobs_death_black_w35_h33_0
+  - mobs_death_black_w35_h33_3
+  - mobs_death_black_w35_h33_2
   - crossbow_char_run_arbalet_w20_h27_1
   - crossbow_char_run_arbalet_w20_h27_0
   - crossbow_char_run_arbalet_w20_h27_3

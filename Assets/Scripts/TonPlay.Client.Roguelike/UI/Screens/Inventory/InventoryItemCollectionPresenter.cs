@@ -82,6 +82,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 				
 				Presenters.Add(presenter);
 			}
+			
+			View.RebuildLayout();
 		}
 
 		private InventoryItemContext CreateItemContext(

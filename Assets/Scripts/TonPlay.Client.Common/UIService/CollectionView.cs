@@ -1,9 +1,9 @@
 using TonPlay.Client.Common.UIService.Interfaces;
-using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
+using TonPlay.Roguelike.Client.UI.UIService;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TonPlay.Roguelike.Client.UI.UIService
+namespace TonPlay.Client.Common.UIService
 {
 	public abstract class CollectionView<TItemView> : View, ICollectionView<TItemView>
 		where TItemView : ICollectionItemView
@@ -14,7 +14,6 @@ namespace TonPlay.Roguelike.Client.UI.UIService
 		public void AddContent(TItemView item)
 		{
 			SetItemParent(item);
-			RebuildLayout();
 		}
 		
 		public void RebuildLayout()

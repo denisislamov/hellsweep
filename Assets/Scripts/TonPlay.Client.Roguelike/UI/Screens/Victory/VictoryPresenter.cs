@@ -40,9 +40,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
 		private readonly ISceneService _sceneService;
 		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
-		private readonly ILocationConfig _locationConfig;
 		private readonly IMetaGameModelProvider _metaGameModelProvider;
-		
+
 		private bool _loading;
 		private bool _matchFinished;
 
@@ -55,9 +54,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			IMatchProvider matchProvider,
 			ILocationConfigStorage locationConfigStorage,
 			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory,
-			ISceneService sceneService, 
+			ISceneService sceneService,
 			IAnalyticsServiceWrapper analyticsServiceWrapper,
-			ILocationConfig locationConfig)
+			IMetaGameModelProvider metaGameModelProvider)
 			: base(view, context)
 		{
 			_gameModelProvider = gameModelProvider;
@@ -68,12 +67,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
 			_sceneService = sceneService;
 			_analyticsServiceWrapper = analyticsServiceWrapper;
-			_locationConfig = locationConfig;
-			
+			_metaGameModelProvider = metaGameModelProvider;
+
 			FinishMatchSession().ContinueWith(response =>
 			{
 				_matchFinished = true;
-				
+
 				Show();
 				InitView();
 				AddButtonPresenter();
@@ -101,7 +100,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 
 			View.SetTitleText("Victory");
 			View.SetCongratsText("Congratulations!");
-			
+
 			View.SetLevelTitleText(_locationConfigStorage.Current.Value.Title);
 			View.SetKilledEnemiesCountText(string.Format("Enemies defeated: <size=150%>{0}</size>", gameModel.DeadEnemiesCount));
 		}
@@ -115,7 +114,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 
 			Presenters.Add(presenter);
 		}
-		
+
 		private void AddRewardItemCollectionPresenter()
 		{
 			var rewardList = new List<IRewardData>();
@@ -126,21 +125,21 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			{
 				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.COINS_ID, gainModel.Gold.Value));
 			}
-			
+
 			if (gainModel.ProfileExperience.Value > 0)
 			{
-				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int) gainModel.ProfileExperience.Value));
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int)gainModel.ProfileExperience.Value));
 			}
 
 			foreach (var itemRewardModel in gainModel.Items)
 			{
 				rewardList.Add(new RewardData(itemRewardModel.ItemId.Value, 1));
 			}
-			
+
 			var presenter = _rewardItemCollectionPresenterFactory.Create(
-				View.RewardItemCollectionView, 
+				View.RewardItemCollectionView,
 				new RewardItemCollectionContext(rewardList));
-			
+
 			Presenters.Add(presenter);
 		}
 
@@ -155,15 +154,16 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			_uiService.CloseAll(new DefaultScreenLayer());
 
 			_matchProvider.Current.Finish();
-			
+
 			var metaGameModel = _metaGameModelProvider.Get();
 			var profileData = metaGameModel.ProfileModel.ToData();
-			
-			_analyticsServiceWrapper.OnStartChapter(profileData.BalanceData.Gold.ToString(),
-													_locationConfig.Id);
-			
+
+			_analyticsServiceWrapper.OnStartChapter(
+				_locationConfigStorage.Current.Value.Id,
+				profileData.BalanceData.Gold.ToString());
+
 		}
-		
+
 		private UniTask<GameSessionResponse> FinishMatchSession()
 		{
 			var gameModel = _gameModelProvider.Get();
@@ -174,7 +174,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 					gainModel.Gold.Value,
 					gainModel.ProfileExperience.Value));
 		}
-		
+
 		internal class Factory : PlaceholderFactory<IVictoryView, IVictoryScreenContext, VictoryPresenter>
 		{
 		}

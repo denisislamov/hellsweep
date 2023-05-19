@@ -73,9 +73,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			AddCurrentLocationSubscription();
 
 			AddUserProfileUpdateScheduler();
-			
-			AddSettingsButtonPresenter();
-
 		}
 
 		public override void Dispose()
@@ -165,20 +162,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			var presenter = _profileBarPresenterFactory.Create(View.ProfileBarView, new ProfileBarContext());
 
 			Presenters.Add(presenter);
-		}
-		
-		private void AddSettingsButtonPresenter()
-		{
-			var presenter = _buttonPresenterFactory.Create(View.GameSettingsButtonView,
-				new CompositeButtonContext()
-					.Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
-
-			Presenters.Add(presenter);
-		}
-		
-		private void OnSettingsButtonClickHandler()
-		{
-			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
 		}
 		
 		private async void OnPlayButtonClickHandler()

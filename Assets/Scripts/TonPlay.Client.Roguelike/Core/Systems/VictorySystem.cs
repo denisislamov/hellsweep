@@ -23,6 +23,13 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var sharedData = systems.GetShared<ISharedData>();
 			var lastWave = sharedData.EnemyWavesConfigProvider.Last;
 
+			if (sharedData.GameModel.DebugForcedWin)
+			{
+				FinishGame(sharedData);
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+				return;
+			}
+			
 			if (lastWave == null)
 			{
 				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
@@ -69,11 +76,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			if (!enemiesLeft)
 			{
-				_uiService.Open<VictoryScreen, VictoryScreenContext>(new VictoryScreenContext());
-				PauseGame(sharedData);
+				FinishGame(sharedData);
 			}
 
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+		}
+		
+		private void FinishGame(ISharedData sharedData)
+		{
+			_uiService.Open<VictoryScreen, VictoryScreenContext>(new VictoryScreenContext());
+			PauseGame(sharedData);
 		}
 
 		private static void PauseGame(ISharedData sharedData)

@@ -62,6 +62,8 @@ namespace TonPlay.Client.Roguelike.UI.Rewards
 				
 				Presenters.Add(presenter);
 			}
+			
+			View.RebuildLayout();
 		}
 		
 		public class Factory : PlaceholderFactory<IRewardItemCollectionView, IRewardItemCollectionContext, RewardItemCollectionPresenter>

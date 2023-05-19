@@ -76,6 +76,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5f4ed9c36416e4645a11cc717060a717, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
+  - {fileID: 21300000, guid: 0647c5e3ab880430c8e9e0db8272dfe1, type: 3}
   - {fileID: 21300000, guid: 6848fdf360b684dd094e0e428df7046c, type: 3}
   - {fileID: 21300000, guid: c4f345044774447da85d83ba4de4ae21, type: 3}
   - {fileID: 21300000, guid: ff37e0145e7d34880b8d9074902b67a5, type: 3}
@@ -184,6 +185,7 @@ SpriteAtlas:
   - Background_Items_01b
   - RectangleHalfRounded8
   - Icons_ExoBracer_01a
+  - Arrow_01
   - EquipTitleBackground
   - Shop
   - SubTitleBackgroundTexture_03

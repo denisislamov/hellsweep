@@ -66,9 +66,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 			subContainer
 			   .BindMemoryPoolCustomInterface<InventoryItemView, CollectionItemPool<IInventoryItemView, InventoryItemView>,
 					ICollectionItemPool<IInventoryItemView>>()
-			   .WithInitialSize(20)
+			   .WithInitialSize(32)
+			   .ExpandByDoubling()
 			   .FromComponentInNewPrefab(_prefab)
-			   .UnderTransform(pooledItemsContainer.transform);
+			   .UnderTransform(pooledItemsContainer.transform)
+			   .NonLazy();
 
 			subContainer
 			   .BindFactory<IInventoryItemView, IInventoryItemContext, InventoryItemPresenter, InventoryItemPresenter.Factory>()

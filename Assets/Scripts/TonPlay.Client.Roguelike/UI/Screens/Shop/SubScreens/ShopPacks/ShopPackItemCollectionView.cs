@@ -1,3 +1,4 @@
+using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopPacks.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
 

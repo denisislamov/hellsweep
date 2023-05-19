@@ -139,7 +139,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
 				});
 
-				if (response.response.rewardSummary != null)
+				if (response.successful && response.response.rewardSummary != null)
 				{
 					UpdateGainModelWithResponse(gameModel, response.response);
 				}

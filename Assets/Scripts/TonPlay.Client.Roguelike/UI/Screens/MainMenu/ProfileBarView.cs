@@ -1,4 +1,6 @@
 using TMPro;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar.Views.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -20,8 +22,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 		[SerializeField]
 		private FillImageProgressBarView _experienceProgressBarView;
+		
+		[SerializeField] 
+		private ButtonView _gameSettingsButtonView;
 
 		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;
+		public IButtonView GameSettingsButtonView => _gameSettingsButtonView;
 
 		public void SetLevelText(string text)
 		{
