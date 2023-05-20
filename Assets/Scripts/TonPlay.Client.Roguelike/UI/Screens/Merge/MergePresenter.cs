@@ -546,13 +546,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             }
 
             var itemMergeResponse = await _restApiClient.PostItemMerge(itemMergePostBody);
-            if (itemMergeResponse == null)
+            if (itemMergeResponse != null && itemMergeResponse.successful)
             {
-                Debug.Log("itemMergeResponse == null");
-            }
-            else
-            {
-                Debug.Log("Merging success");
+                Common.Utilities.Logger.Log("Merging success");
+                
                 View.MergeParticles.gameObject.SetActive(false);
                 View.RaycastBlocker.SetActive(true);
                 View.PlayMergeAnimation();
