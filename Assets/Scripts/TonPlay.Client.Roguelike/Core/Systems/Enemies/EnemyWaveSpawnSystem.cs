@@ -27,19 +27,12 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 	{
 		public const int PREPARE_BEFORE_BOSS_SPAWN_SECONDS = 10;
 		private const int PROJECTILE_COUNT_PER_ENEMY = 8;
-
-		private readonly KdTreeStorage _kdTreeStorage;
-
+		
 		private ICompositeViewPool _pool;
 		private ILevelEnemyWaveConfigProvider _enemyWavesConfigProvider;
 		private IEnemyConfigProvider _enemyConfigProvider;
 		private ISharedData _sharedData;
-
-		public EnemyWaveSpawnSystem(KdTreeStorage kdTreeStorage)
-		{
-			_kdTreeStorage = kdTreeStorage;
-		}
-
+		
 		public void Init(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
@@ -116,15 +109,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			{
 				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value*PROJECTILE_COUNT_PER_ENEMY);
 			}
-
-			//todo: its some kind of optimization, seems like need to replace
-			totalEnemies /= 4;
-			totalEnemies = totalEnemies <= 0 ? 1 : totalEnemies;
-
-			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(totalEnemies);
-			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(totalEnemies);
-
-			_kdTreeStorage.KdTree.Build(new Vector2[totalEnemies]);
 
 			_sharedData = sharedData;
 		}
@@ -253,10 +237,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			var spawnPosition = GetSpawnPosition(playerPosition, enemyConfig.EnemyType, enemyWaveConfig.WaveSpawnType, randomizedWavePosition, groupSize);
 
 			enemyView.transform.position = spawnPosition;
-
-			var treeIndex = _kdTreeStorage.AddEntity(entity.Id, spawnPosition);
-
-			entity.AddKdTreeElementComponent(_kdTreeStorage, treeIndex);
 
 			enemyView.SetEntityId(entity.Id);
 

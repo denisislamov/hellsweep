@@ -122,6 +122,10 @@ namespace TonPlay.Client.Roguelike.Core
 			_arenasKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.ARENA_MAX_COUNT);
 			_arenasKdTreeStorage.CreateKdTreeIndexToEntityIdMap(RoguelikeConstants.Core.ARENA_MAX_COUNT);
 			_arenasKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.ARENA_MAX_COUNT]);
+			
+			_enemyKdTreeStorage.CreateEntityIdToKdTreeIndexMap(RoguelikeConstants.Core.KD_TREE_ENEMY_INIT_COUNT);
+			_enemyKdTreeStorage.CreateKdTreeIndexToEntityIdMap(RoguelikeConstants.Core.KD_TREE_ENEMY_INIT_COUNT);
+			_enemyKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.KD_TREE_ENEMY_INIT_COUNT]);
 
 			_sharedData = sharedDataFactory.Create();
 			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
@@ -145,7 +149,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_spawnSystems = new EcsSystems(_world, _sharedData)
 						   .Add(new PlayerSpawnSystem(_playersKdTreeStorage, _metaGameModelProvider, _inventoryItemsConfigProvider))
-						   .Add(new EnemyWaveSpawnSystem(_enemyKdTreeStorage))
+						   .Add(new EnemyWaveSpawnSystem())
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
 						   .Add(new CollectablesSpawnOnEnemyDiedEventSystem(_collectablesEntityFactory))
 						   .Add(new GoldCollectablesSpawnSystem(_collectablesEntityFactory))
@@ -158,6 +162,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_updateSystems = new EcsSystems(_world, _sharedData)
 							.Add(new GameSystem())
 							.Add(new EvaluatePlayableDirector())
+							.Add(new EnemiesKdTreeSystem(_enemyKdTreeStorage))
 							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))
 							.Add(new PrepareToExplodeCollectedBombsSystem())
 							.Add(new StickEaseMovementToEntityPositionSystem())

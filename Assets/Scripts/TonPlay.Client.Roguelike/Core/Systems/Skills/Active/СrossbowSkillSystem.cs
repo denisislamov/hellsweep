@@ -45,7 +45,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			_poolIdentity = new ProjectileConfigViewPoolIdentity(_config.ProjectileConfig);
 
 			_pool = _sharedData.CompositeViewPool;
-			_pool.Add(_poolIdentity, _config.ProjectileConfig.PrefabView, 16);
+			_pool.Add(_poolIdentity, _config.ProjectileConfig.PrefabView, 128);
 		}
 
 		public void Run(EcsSystems systems)

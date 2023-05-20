@@ -15,9 +15,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 	{
 		private const int MAX_NEIGHBORS_CHECK_AMOUNT = 250;
 		private const int MAX_FRAMES_CHECK_DELAY = 4;
-		private const int CHECK_DISTANCE_TO_PLAYER = 14;
-		private const int SQR_CHECK_DISTANCE_TO_PLAYER = CHECK_DISTANCE_TO_PLAYER * CHECK_DISTANCE_TO_PLAYER;
-		
+		private const int CHECK_DISTANCE_TO_PLAYER = 15;
+		private const int SQR_CHECK_DISTANCE_TO_PLAYER = CHECK_DISTANCE_TO_PLAYER*CHECK_DISTANCE_TO_PLAYER;
+
 		private readonly IOverlapExecutor _overlapExecutor;
 
 		private ISharedData _sharedData;
@@ -62,17 +62,17 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			overlapParams.Build();
 
 			var entitiesCount = enemyFilter.GetEntitiesCount();
-			var maxDynamicNeighborsCheckAmount = enemyFilter.GetEntitiesCount() / MAX_FRAMES_CHECK_DELAY;
+			var maxDynamicNeighborsCheckAmount = enemyFilter.GetEntitiesCount()/MAX_FRAMES_CHECK_DELAY;
 			var maxNeighborsCheckAmount = maxDynamicNeighborsCheckAmount > MAX_NEIGHBORS_CHECK_AMOUNT ?
-				maxDynamicNeighborsCheckAmount:
+				maxDynamicNeighborsCheckAmount :
 				MAX_NEIGHBORS_CHECK_AMOUNT;
-			
-			var maxParts = entitiesCount / maxNeighborsCheckAmount + 1;
 
-			_lastCheckedPart = ++_lastCheckedPart % maxParts;
+			var maxParts = entitiesCount/maxNeighborsCheckAmount + 1;
 
-			var startIndex = _lastCheckedPart * maxNeighborsCheckAmount;
-			var lastIndex = (_lastCheckedPart + 1) * maxNeighborsCheckAmount;
+			_lastCheckedPart = ++_lastCheckedPart%maxParts;
+
+			var startIndex = _lastCheckedPart*maxNeighborsCheckAmount;
+			var lastIndex = (_lastCheckedPart + 1)*maxNeighborsCheckAmount;
 
 			lastIndex = lastIndex > entitiesCount ? entitiesCount : lastIndex;
 
@@ -85,7 +85,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			for (var currentIndex = startIndex; currentIndex < lastIndex; currentIndex++)
 			{
 				var entityId = entitiesRaw[currentIndex];
-				
+
 				ref var rigidbodyComponent = ref positionComponents.Get(entityId);
 
 				var position = rigidbodyComponent.Position;
@@ -94,7 +94,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				{
 					continue;
 				}
-				
+
 				ref var movementComponent = ref movementComponents.Get(entityId);
 				ref var collisionComponent = ref collisionComponents.Get(entityId);
 
@@ -116,19 +116,19 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			var data = _sharedData.GameModel.ToData();
 			data.DebugEnemyMovementToEachOtherCollisionCount = includedInCollisionEnemiesCount;
 			_sharedData.GameModel.Update(data);
-			
+
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}
 
 		private static Vector2 CombineMovementDirection(Vector2 separateVector, Vector2 movementVector)
 		{
-			return separateVector * 0.66f + movementVector * 0.33f;
+			return separateVector*0.66f + movementVector*0.33f;
 		}
 
 		private Vector2 SeparateWithNeighbors(ref List<int> neighborsEntityIds,
 											  EcsPool<PositionComponent> positionComponents,
 											  Vector2 position,
-											  int excludeEntityId, 
+											  int excludeEntityId,
 											  float radius)
 		{
 			var separateVector = Vector2.zero;
