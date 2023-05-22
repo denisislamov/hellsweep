@@ -39,7 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 		public override void Execute(int callerEntityIdx, ISharedData sharedData)
 		{
-			var entity = new EcsEntity(sharedData.World, callerEntityIdx);
+			var entity = new EcsEntity(sharedData.MainWorld, callerEntityIdx);
 
 			ref var bossWormComponent = ref entity.Add<BossButcherComponent>();
 			bossWormComponent.FollowSpeed = _followSpeed;

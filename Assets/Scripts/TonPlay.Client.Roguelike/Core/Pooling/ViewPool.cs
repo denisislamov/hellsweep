@@ -2,7 +2,6 @@ using System;
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

@@ -1,7 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 {
@@ -16,6 +16,8 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 		IItemDrop<string>[] RandomCollectableDrops { get; }
 
 		IViewPoolIdentity Identity { get; }
+		
+		IDeathEffectConfig DeathEffectConfig { get; }
 
 		bool HasProperty<T>() where T : IEnemyPropertyConfig;
 

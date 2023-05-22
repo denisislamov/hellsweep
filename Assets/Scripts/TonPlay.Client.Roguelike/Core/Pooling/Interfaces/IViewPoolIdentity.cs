@@ -1,4 +1,4 @@
-namespace TonPlay.Roguelike.Client.Core.Pooling.Interfaces
+namespace TonPlay.Client.Roguelike.Core.Pooling.Interfaces
 {
 	public interface IViewPoolIdentity
 	{

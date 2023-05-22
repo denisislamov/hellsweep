@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Pooling

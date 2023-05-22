@@ -15,7 +15,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 		public override void Execute(int callerEntityIdx, ISharedData sharedData)
 		{
-			var world = sharedData.World;
+			var world = sharedData.MainWorld;
 			var filter = world.Filter<GameComponent>().Inc<GameTimeComponent>().End();
 			var pool = world.GetPool<GameTimeComponent>();
 
