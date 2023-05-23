@@ -39,6 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				var entity = effectsWorld.NewEntity();
 
 				view.transform.position = position.Position;
+				view.PlayableDirector.time = 0;
 				
 				entity.AddPositionComponent(position.Position);
 				entity.AddDestroyOnTimerComponent(enemyConfig.DeathEffectConfig.DestroyTimer);
