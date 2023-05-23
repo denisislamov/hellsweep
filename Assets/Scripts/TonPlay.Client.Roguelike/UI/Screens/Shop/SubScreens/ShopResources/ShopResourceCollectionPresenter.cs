@@ -68,7 +68,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopResources
 
 					var view = Add();
 					var context = new ShopItemResourceContext(
-						randomItemConfig.Id, detailItemConfig.Id, model, randomItemConfig.Name, presentation.BackgroundGradientMaterial, itemPresentation.Icon);
+						randomItemConfig.Id, detailItemConfig.Id, model, itemPresentation.Title, presentation.BackgroundGradientMaterial, itemPresentation.Icon);
 					var presenter = _resourcePresenterFactory.Create(view, context);
 				
 					Presenters.Add(presenter);
