@@ -8,7 +8,6 @@ using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collectables;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems

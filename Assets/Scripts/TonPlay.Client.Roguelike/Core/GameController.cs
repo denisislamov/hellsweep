@@ -36,7 +36,9 @@ namespace TonPlay.Client.Roguelike.Core
 		[SerializeField]
 		private Transform _blocksRoot;
 
-		private EcsWorld _world;
+		private EcsWorld _mainWorld;
+		private EcsWorld _effectsWorld;
+
 		private EcsSystems _updateSystems;
 		private EcsSystems _collectablesSystem;
 		private EcsSystems _changeHealthSystem;
@@ -93,9 +95,14 @@ namespace TonPlay.Client.Roguelike.Core
 
 			CreateGameModel(gameModelSetter);
 
-			_world = new EcsWorld(new EcsWorld.Config()
+			_mainWorld = new EcsWorld(new EcsWorld.Config()
 			{
 				Entities = 2048
+			});
+			
+			_effectsWorld = new EcsWorld(new EcsWorld.Config()
+			{
+				Entities = 1024
 			});
 
 			_enemyKdTreeStorage = new KdTreeStorage(LayerMask.NameToLayer("Enemy"));
@@ -128,13 +135,14 @@ namespace TonPlay.Client.Roguelike.Core
 			_enemyKdTreeStorage.KdTree.Build(new Vector2[RoguelikeConstants.Core.KD_TREE_ENEMY_INIT_COUNT]);
 
 			_sharedData = sharedDataFactory.Create();
-			_overlapExecutor = overlapExecutorFactory.Create(_world, _storages);
+			_overlapExecutor = overlapExecutorFactory.Create(_mainWorld, _storages);
 
 			var weaponItemId = GetPlayerWeaponItemId(metaGameModelProvider);
 			_sharedData.SetPlayerWeapon(weaponItemId);
 			_sharedData.SetCollectablesKdTreeStorage(_collectablesKdTreeStorage);
 			_sharedData.SetArenasKdTreeStorage(_arenasKdTreeStorage);
-			_sharedData.SetWorld(_world);
+			_sharedData.SetMainWorld(_mainWorld);
+			_sharedData.SetEffectsWorld(_effectsWorld);
 
 			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
 
@@ -147,7 +155,8 @@ namespace TonPlay.Client.Roguelike.Core
 		{
 			AddCameraToEcsWorld();
 
-			_spawnSystems = new EcsSystems(_world, _sharedData)
+			_spawnSystems = new EcsSystems(_mainWorld, _sharedData)
+						   .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 						   .Add(new PlayerSpawnSystem(_playersKdTreeStorage, _metaGameModelProvider, _inventoryItemsConfigProvider))
 						   .Add(new EnemyWaveSpawnSystem())
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))
@@ -159,7 +168,8 @@ namespace TonPlay.Client.Roguelike.Core
 						   .Add(new LocationSpawnSystem(_blocksRoot, _locationBlocksKdTreeStorage, _locationConfigStorage))
 						   .Add(new SpawnExperienceCollectablesToGainFirstLevelsSystem(_collectablesEntityFactory));
 
-			_updateSystems = new EcsSystems(_world, _sharedData)
+			_updateSystems = new EcsSystems(_mainWorld, _sharedData)
+							.AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							.Add(new GameSystem())
 							.Add(new EvaluatePlayableDirector())
 							.Add(new EnemiesKdTreeSystem(_enemyKdTreeStorage))
@@ -213,20 +223,21 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new VictorySystem(_uiService))
 				;
 
-			_bossWormSystems = new EcsSystems(_world, _sharedData)
+			_bossWormSystems = new EcsSystems(_mainWorld, _sharedData)
 			   .Add(new BossWormFollowStateSystem())
 			   .Add(new BossWormTankStateSystem())
 			   .Add(new BossWormShootStateSystem());
 
-			_bossButcherSystems = new EcsSystems(_world, _sharedData)
+			_bossButcherSystems = new EcsSystems(_mainWorld, _sharedData)
 								 .Add(new BossButcherFollowStateSystem())
 								 .Add(new BossButcherTankStateSystem());
 
-			_syncKdTreePositionSystems = new EcsSystems(_world, _sharedData)
+			_syncKdTreePositionSystems = new EcsSystems(_mainWorld, _sharedData)
 										.Add(new UpdateKdTreeElementPositionSystem())
 										.Add(new RebuildKdTreeSystem(_storages));
 
-			_skillsSystems = new EcsSystems(_world, _sharedData)
+			_skillsSystems = new EcsSystems(_mainWorld, _sharedData)
+							.AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							.Add(new RPGSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new GuardianSkillSystem(_playerProjectilesKdTreeStorage))
 							.Add(new BrickSkillSystem(_playerProjectilesKdTreeStorage))
@@ -245,18 +256,20 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ExoBracerSkillSystem())
 							 ;
 
-			_animationSystems = new EcsSystems(_world, _sharedData)
+			_animationSystems = new EcsSystems(_mainWorld, _sharedData)
+							   .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							   .Add(new AttackAnimationAnimatorSystem())
 							   .Add(new RunAnimationAnimatorSystem())
 							   .Add(new RunBloodAnimationAnimatorSystem())
 							   .Add(new FlipSpriteInRotationDirectionSystem());
 
-			_fixedUpdateSystems = new EcsSystems(_world, _sharedData)
+			_fixedUpdateSystems = new EcsSystems(_mainWorld, _sharedData)
+								 .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 								 .Add(new PlayerMovementInputSystem())
 								 .Add(new RigidbodyMovementSystem())
 								 .Add(new RigidbodyPositionSystem());
 			
-			_collectablesSystem = new EcsSystems(_world, _sharedData)
+			_collectablesSystem = new EcsSystems(_mainWorld, _sharedData)
 								 .Add(new ApplyCollectablesSystem())
 								 .Add(new ApplyProfileExperienceCollectableSystem())
 								 .Add(new ApplyExperienceCollectableSystem())
@@ -265,12 +278,14 @@ namespace TonPlay.Client.Roguelike.Core
 								 .Add(new ApplyMagnetCollectableSystem())
 								 .Add(new ApplyBombCollectableSystem());
 			
-			_changeHealthSystem = new EcsSystems(_world, _sharedData)
+			_changeHealthSystem = new EcsSystems(_mainWorld, _sharedData)
 			   .Add(new ChangeHealthSystem());
 
-			_destroySystems = new EcsSystems(_world, _sharedData)
+			_destroySystems = new EcsSystems(_mainWorld, _sharedData)
+							 .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							 .Add(new UpdateWaveDataOnEnemyDeathSystem())
 							 .Add(new PerformActionsOnEnemyDeathSystem())
+							 .Add(new SpawnEnemyDeathEffectSystem())
 							 .Add(new DestroyOnReceiveDamageSystem())
 							 .Add(new DestroyIfDistanceExceededSystem())
 							 .Add(new DestroyOnTimerSystem())
@@ -355,7 +370,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 		private void AddCameraToEcsWorld()
 		{
-			var cameraEntityId = _world.NewEntity();
+			var cameraEntityId = _mainWorld.NewEntity();
 			cameraEntityId.Add<CameraComponent>();
 			cameraEntityId.Add<CameraShakeComponent>();
 			ref var cameraTransformComponent = ref cameraEntityId.Add<TransformComponent>();

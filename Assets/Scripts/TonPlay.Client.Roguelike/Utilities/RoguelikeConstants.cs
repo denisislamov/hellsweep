@@ -19,6 +19,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 			public const int AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP = 1;
 			public const float REMOTE_CONFIG_RANGE_MULTIPLIER = 2f;
 			public const float MAX_MATCH_TIME_MINUTES = 15;
+			public const string EFFECTS_WORLD_NAME = "EFFECTS";
 
 			public static class Skills
 			{

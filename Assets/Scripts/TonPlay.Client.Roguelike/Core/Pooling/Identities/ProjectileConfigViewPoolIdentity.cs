@@ -1,5 +1,5 @@
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Pooling.Identities
 {

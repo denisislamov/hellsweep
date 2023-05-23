@@ -15,7 +15,6 @@ MonoBehaviour:
   _id: mage_test
   _enemyType: 0
   _prefab: {fileID: 5109476924477383283, guid: 5296a6b7114494c8e89c817bcfdeeab6, type: 3}
-  _health: 15
   _collectablesIdsOnDeath:
   - _collectableId: exp_test
     _weight: 1
@@ -25,3 +24,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7bf82a30e50743149f72c229c4ccc16, type: 2}
   - {fileID: 11400000, guid: a2b5458d8877e474aadd1b668be439a0, type: 2}
   - {fileID: 11400000, guid: b5985547be27648bb99cd887521baefb, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

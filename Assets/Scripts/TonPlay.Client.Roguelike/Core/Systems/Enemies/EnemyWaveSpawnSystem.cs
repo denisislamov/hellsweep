@@ -15,8 +15,8 @@ using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Extensions;
+using TonPlay.Client.Roguelike.Utilities;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
@@ -48,6 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			var maxSpawnedQuantityPerConfig = new Dictionary<IEnemyConfig, int>();
 			var maxSpawnedQuantityOfProjectiles = new Dictionary<IProjectileConfig, int>();
+			var deathEffectConfigs = new HashSet<IDeathEffectConfig>();
 
 			foreach (var waveConfig in allWaves)
 			{
@@ -102,7 +103,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			foreach (var kvp in maxSpawnedQuantityPerConfig)
 			{
-				_pool.Add(kvp.Key.Identity, kvp.Key.Prefab, kvp.Value);
+				var enemyConfig = kvp.Key;
+				var quantity = kvp.Value;
+				
+				_pool.Add(enemyConfig.Identity, enemyConfig.Prefab, quantity);
+
+				if (enemyConfig.DeathEffectConfig != null)
+				{
+					deathEffectConfigs.Add(enemyConfig.DeathEffectConfig);
+				}
+			}
+
+			foreach (var deathEffect in deathEffectConfigs)
+			{
+				_pool.Add(deathEffect.Identity, deathEffect.Prefab, deathEffect.PoolSize);
 			}
 
 			foreach (var kvp in maxSpawnedQuantityOfProjectiles)

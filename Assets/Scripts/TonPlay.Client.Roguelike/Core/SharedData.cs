@@ -13,7 +13,6 @@ using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using Zenject;
 
@@ -53,7 +52,9 @@ namespace TonPlay.Client.Roguelike.Core
 
 		public IPlayersLevelsConfigProvider PlayersLevelsConfigProvider { get; }
 
-		public EcsWorld World { get; private set; }
+		public EcsWorld MainWorld { get; private set; }
+		
+		public EcsWorld EffectsWorld { get; private set; }
 
 		public DiContainer Container { get; private set; }
 
@@ -107,9 +108,14 @@ namespace TonPlay.Client.Roguelike.Core
 			ArenasKdTreeStorage = kdTreeStorage;
 		}
 
-		public void SetWorld(EcsWorld world)
+		public void SetMainWorld(EcsWorld world)
 		{
-			World = world;
+			MainWorld = world;
+		}
+		
+		public void SetEffectsWorld(EcsWorld world)
+		{
+			EffectsWorld = world;
 		}
 
 		public class Factory : PlaceholderFactory<SharedData>

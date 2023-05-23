@@ -13,7 +13,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 	{
 		public override void Execute(int callerEntityIdx, ISharedData sharedData)
 		{
-			var world = sharedData.World;
+			var world = sharedData.MainWorld;
 			var filter = world.Filter<Arena>().Exc<DestroyComponent>().End();
 			var destroyPool = world.GetPool<DestroyComponent>();
 

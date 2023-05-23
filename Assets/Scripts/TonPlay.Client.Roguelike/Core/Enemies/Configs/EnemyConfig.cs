@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TonPlay.Client.Roguelike.Core.Drops;
 using TonPlay.Client.Roguelike.Core.Drops.Interfaces;
+using TonPlay.Client.Roguelike.Core.Effects.Death;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Properties.Interfaces;
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
+using TonPlay.Client.Roguelike.Core.Pooling.Identities;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling.Identities;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -32,6 +34,9 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 		[SerializeField]
 		private EnemyPropertyConfig[] _propertyConfigs;
 
+		[SerializeField]
+		private DeathEffectConfig _deathEffectConfig;
+
 		private IItemDrop<string>[] _randomCollectablesDrop;
 		private Dictionary<Type, IEnemyPropertyConfig> _enemyPropertyConfigMap;
 		private IViewPoolIdentity _identity;
@@ -43,6 +48,7 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs
 
 		public IItemDrop<string>[] RandomCollectableDrops => _randomCollectablesDrop ??= _collectablesIdsOnDeath.Select(_ => new RandomCollectableIdDrop(_)).ToArray();
 		public IViewPoolIdentity Identity => _identity ??= new EnemyViewPoolIdentity(Prefab);
+		public IDeathEffectConfig DeathEffectConfig => _deathEffectConfig;
 
 		public bool HasProperty<T>() where T : IEnemyPropertyConfig
 		{

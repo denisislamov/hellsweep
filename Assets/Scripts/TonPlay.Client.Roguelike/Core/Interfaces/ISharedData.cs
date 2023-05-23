@@ -11,7 +11,6 @@ using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using Zenject;
 
@@ -51,7 +50,9 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 
 		DamageTextView DamageTextViewPrefab { get; }
 
-		EcsWorld World { get; }
+		EcsWorld MainWorld { get; }
+		
+		EcsWorld EffectsWorld { get; }
 
 		DiContainer Container { get; }
 	}

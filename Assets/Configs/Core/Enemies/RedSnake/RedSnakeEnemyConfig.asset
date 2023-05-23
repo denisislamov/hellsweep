@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d51584ef011bb411582d294294f35b6a, type: 2}
   - {fileID: 11400000, guid: f2ca7688fdcb341a8b4da004506a8c16, type: 2}
   - {fileID: 11400000, guid: 8624b408b385b4812b0dcd6ba9c911c6, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

@@ -6,7 +6,6 @@ using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Views;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 using UnityEngine;
 
@@ -81,7 +80,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossWorm
 			ISharedData sharedData, 
 			IProjectileConfig projectileConfig)
 		{
-			var world = sharedData.World;
+			var world = sharedData.MainWorld;
 			var pool = sharedData.CompositeViewPool;
 			
 			var collisionLayerMask = sharedData.CollisionConfigProvider.Get(projectileConfig.Layer)?.LayerMask ?? 0;

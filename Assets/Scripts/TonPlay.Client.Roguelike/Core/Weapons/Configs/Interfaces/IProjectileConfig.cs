@@ -1,6 +1,6 @@
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Views;
 using TonPlay.Roguelike.Client.Core.Movement.Interfaces;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Views;
 
 namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces

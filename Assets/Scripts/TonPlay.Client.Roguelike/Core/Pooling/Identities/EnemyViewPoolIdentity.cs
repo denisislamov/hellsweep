@@ -1,7 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Enemies.Views;
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling.Identities
+namespace TonPlay.Client.Roguelike.Core.Pooling.Identities
 {
 	public class EnemyViewPoolIdentity : IViewPoolIdentity
 	{
