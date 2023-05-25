@@ -1,0 +1,35 @@
+Файлы _gif.gif и gif.webp - это для понимания, как оно должно выглядеть в итоге.
+webp на всякий случай, потому что в обычной гифке все немного мерцает.
+
+Итак, нужные слои от дальнего к ближнему:
+
+1) ФОН с дымом, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6224115
+
+нужен спрайтшит под номером 1 (1_background_skulls_smoke_fire_double_sparkles_w90_h160 - с черным фоном)
+или 2 (2_skulls_smoke_fire_double_sparkles_w90_h160 - без черного фона)
+
+2) КАМЕНЬ С ДЕРЕВЬЯМИ, ссылка на архив:
+https://fantasylabs.flowfast.io/space/78941/card/6235138
+
+файл "green_stone_trees_w148_h170"
+там сам камень, анимированные деревья и падающие листья
+
+3) БОСС ДРУИД, файлы также в архиве:
+"druid_stay_w49_h62"
+
+4) СВЕЧЕНИЕ ОТ ПЕРСОНАЖА + САМ ГЛАВНЫЙ ПЕРСОНАЖ, файлы также в архиве:
+"char_green_light_behind_char_w33_h33"
+"char_stay_bow_w29_h28"
+
+5) ЛЕТУЧИЕ МЫШИ 2шт, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6222536
+
+"летучая мышь/bat_fly"
+
+6) ПРИЗРАКИ 2шт, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6222536
+
+"призрак/ghost_fly"
+
+

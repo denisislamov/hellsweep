@@ -1,0 +1,42 @@
+Файлы _hell_location.gif и _hell_location.webp - это для понимания, как оно должно выглядеть в итоге.
+webp на всякий случай, потому что в обычной гифке все немного мерцает.
+
+ОСОБОЕ ВНИМАНИЕ на картинку _hell_location.PNG, там правильные размеры мобов (например, летучие мыши разных размеров)
+
+Итак, нужные слои от дальнего к ближнему:
+
+1) ФОН с дымом, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6224115
+
+нужен спрайтшит под номером 1 (1_background_skulls_smoke_fire_double_sparkles_w90_h160 - с черным фоном)
+или 2 (2_skulls_smoke_fire_double_sparkles_w90_h160 - без черного фона)
+
+2) КАМЕНЬ С МАГМОЙ, ссылка на архив:
+https://fantasylabs.flowfast.io/space/78941/card/6235138
+
+файл "orange_stone_magma_w141_h162.png"
+там сам камень и анимированная магма
+
+3) БОСС АРХИДЕМОН, файлы также в архиве:
+"archidemon_breathe_w39_h62.png"
+
+4) ГЛАВНЫЙ ПЕРСОНАЖ С ОГНЕННЫМ МЕЧОМ, ссылка на архив:
+https://fantasylabs.flowfast.io/space/78941/card/6222534
+
+архив "огненный меч/char_fire_sword"
+
+5) ЛЕТУЧИЕ МЫШИ 4шт, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6222536
+
+архив: "летучая мышь/bat_fly"
+
+6) ГАРПИЯ 1шт, ссылка:
+https://fantasylabs.flowfast.io/space/78941/card/6222536
+
+архив: "гарпия/harpy_fly"
+
+7) СКЕЛЕТ 1шт, файлы также в архиве:
+"skeleton_breathe_w16_h25.png"
+
+
+

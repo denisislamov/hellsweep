@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: c7d73bf1a6c345c47b4cc69db8a5ca0c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1901573320898293633
+    second: _green_location_trees_leafs_w91_h86_0
+  - first:
+      213: -8723065499338982824
+    second: _green_location_trees_leafs_w91_h86_1
+  - first:
+      213: 1568434634563481700
+    second: _green_location_trees_leafs_w91_h86_2
+  - first:
+      213: -7014952518330329194
+    second: _green_location_trees_leafs_w91_h86_3
+  - first:
+      213: 802460107941491357
+    second: _green_location_trees_leafs_w91_h86_4
+  - first:
+      213: -3989572278087221302
+    second: _green_location_trees_leafs_w91_h86_5
+  - first:
+      213: -7822669018060627664
+    second: _green_location_trees_leafs_w91_h86_6
+  - first:
+      213: -8522614662497002353
+    second: _green_location_trees_leafs_w91_h86_7
+  - first:
+      213: -602502365453382677
+    second: _green_location_trees_leafs_w91_h86_8
+  - first:
+      213: -8977823910523809561
+    second: _green_location_trees_leafs_w91_h86_9
+  - first:
+      213: -4561794520132452990
+    second: _green_location_trees_leafs_w91_h86_10
+  - first:
+      213: -1475476332292395746
+    second: _green_location_trees_leafs_w91_h86_11
+  - first:
+      213: -6325703605031236739
+    second: _green_location_trees_leafs_w91_h86_12
+  - first:
+      213: 1192287276969863172
+    second: _green_location_trees_leafs_w91_h86_13
+  - first:
+      213: 1756061804245688198
+    second: _green_location_trees_leafs_w91_h86_14
+  - first:
+      213: 6614599988482128939
+    second: _green_location_trees_leafs_w91_h86_15
+  - first:
+      213: 692157675870698484
+    second: _green_location_trees_leafs_w91_h86_16
+  - first:
+      213: 2625227202878340229
+    second: _green_location_trees_leafs_w91_h86_17
+  - first:
+      213: -2794542158688110441
+    second: _green_location_trees_leafs_w91_h86_18
+  - first:
+      213: 3349200841447758226
+    second: _green_location_trees_leafs_w91_h86_19
+  - first:
+      213: 8761073079818118686
+    second: _green_location_trees_leafs_w91_h86_20
+  - first:
+      213: -4083365178337744194
+    second: _green_location_trees_leafs_w91_h86_21
+  - first:
+      213: -3113143357034692404
+    second: _green_location_trees_leafs_w91_h86_22
+  - first:
+      213: 4588537531591672318
+    second: _green_location_trees_leafs_w91_h86_23
+  - first:
+      213: -6052118274162321174
+    second: _green_location_trees_leafs_w91_h86_24
+  - first:
+      213: 3526796750302706895
+    second: _green_location_trees_leafs_w91_h86_25
+  - first:
+      213: 4816777691284519774
+    second: _green_location_trees_leafs_w91_h86_26
+  - first:
+      213: 5210253011637356819
+    second: _green_location_trees_leafs_w91_h86_27
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18fa0824cdeb36a10800000000000000
+      internalID: 1901573320898293633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85a3f67252271f680800000000000000
+      internalID: -8723065499338982824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_2
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460739e7df234c510800000000000000
+      internalID: 1568434634563481700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_3
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69750b4f9d1e5ae90800000000000000
+      internalID: -7014952518330329194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_4
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9236407739e22b00800000000000000
+      internalID: 802460107941491357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_5
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acf7dd6962132a8c0800000000000000
+      internalID: -3989572278087221302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_6
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 031ea0f69fb407390800000000000000
+      internalID: -7822669018060627664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_7
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8c94548e1799b980800000000000000
+      internalID: -8522614662497002353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_8
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beb81d27a4b73a7f0800000000000000
+      internalID: -602502365453382677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_9
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e0583d48bc586380800000000000000
+      internalID: -8977823910523809561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_10
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28d7e29ad0041b0c0800000000000000
+      internalID: -4561794520132452990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_11
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1d273bd71e068be0800000000000000
+      internalID: -1475476332292395746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_12
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7b84b316169638a0800000000000000
+      internalID: -6325703605031236739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_13
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 408a10e16fadb8010800000000000000
+      internalID: 1192287276969863172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_14
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68f12bd28e8ce5810800000000000000
+      internalID: 1756061804245688198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_15
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2cb7c4d4a7cbcb50800000000000000
+      internalID: 6614599988482128939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_16
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb35de2db90b9900800000000000000
+      internalID: 692157675870698484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_17
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58c71426b3eae6420800000000000000
+      internalID: 2625227202878340229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_18
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 798ba8976bac739d0800000000000000
+      internalID: -2794542158688110441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_19
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 299dee3ab60ca7e20800000000000000
+      internalID: 3349200841447758226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_20
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16ebc54c85959970800000000000000
+      internalID: 8761073079818118686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_21
+      rect:
+        serializedVersion: 2
+        x: 1911
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebaaaf04109f457c0800000000000000
+      internalID: -4083365178337744194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_22
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc084156c94ebc4d0800000000000000
+      internalID: -3113143357034692404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_23
+      rect:
+        serializedVersion: 2
+        x: 2093
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef1c119e292cdaf30800000000000000
+      internalID: 4588537531591672318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_24
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae897e1ce7e820ca0800000000000000
+      internalID: -6052118274162321174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_25
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcc7bc865f2b1f030800000000000000
+      internalID: 3526796750302706895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_26
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5b3a033ac1a8d240800000000000000
+      internalID: 4816777691284519774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _green_location_trees_leafs_w91_h86_27
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 0
+        width: 91
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 319cd8c42898e4840800000000000000
+      internalID: 5210253011637356819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
