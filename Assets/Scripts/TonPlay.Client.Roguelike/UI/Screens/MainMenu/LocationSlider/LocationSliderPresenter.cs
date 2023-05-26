@@ -118,6 +118,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			View.SetIcon(config.Icon);
 			View.SetTitleText(config.Title);
 			View.SetSubtitleText($"Longest Survived: {longestSurvivedTime:mm}m {longestSurvivedTime:ss}s");
+			View.SetLocationView(_currentLocationConfigIndex);
 		}
 
 		private void SelectLocation(int currentLocationConfigIndex)

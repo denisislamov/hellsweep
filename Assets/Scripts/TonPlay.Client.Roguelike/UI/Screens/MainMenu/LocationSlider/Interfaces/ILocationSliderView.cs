@@ -16,5 +16,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider.Interfaces
 		void SetSubtitleText(string text);
 
 		void SetIcon(Sprite sprite);
+		
+		void SetLocationView(int index);
 	}
 }
