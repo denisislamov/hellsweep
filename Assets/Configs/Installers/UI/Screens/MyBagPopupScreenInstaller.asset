@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screen: {fileID: 7731770092352465333, guid: 9dd958bc56ea14cdabefe1109961e5d4, type: 3}
   _presentationProvider: {fileID: 11400000, guid: 7d6732b55561140c7aeaa55cd98973a7, type: 2}
-  _rewardItemView: {fileID: 9176206670934049324, guid: 94101ed8755ce43cc9fcac682476a810, type: 3}
+  _rewardItemView: {fileID: 8661642527623637051, guid: 94101ed8755ce43cc9fcac682476a810, type: 3}
   _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}
