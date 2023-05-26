@@ -73,6 +73,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f66dec4364eb645adb66a0f26adde46c, type: 3}
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
   - {fileID: 21300000, guid: 5833458341820d449a545a554a195a6a, type: 3}
+  - {fileID: 21300000, guid: e7c7e0b361dc8f84ca593c54f3881731, type: 3}
   - {fileID: 21300000, guid: 5f4ed9c36416e4645a11cc717060a717, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
@@ -116,6 +117,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f0010c38e50cfda4bbd0e2d1bda869b8, type: 3}
   - {fileID: 21300000, guid: 00527c682b3994c86a025b376e79ee00, type: 3}
   - {fileID: 21300000, guid: 7694ab98d9b7a4ea3a5bd464f363e549, type: 3}
+  - {fileID: 21300000, guid: 1e3518094d42f40419f16a2e38f832db, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
   - {fileID: 21300000, guid: d6b5da39aac5d487c98187f38b4d7ab2, type: 3}
   - {fileID: 21300000, guid: d3dbd0494d8254f13ba25bc90bfeadd9, type: 3}
@@ -182,6 +184,7 @@ SpriteAtlas:
   - SkillChoiceItemBackground_01a
   - RectangleHalfRounded32
   - Slider red
+  - settings_bg
   - Background_Items_01b
   - RectangleHalfRounded8
   - Icons_ExoBracer_01a
@@ -225,6 +228,7 @@ SpriteAtlas:
   - Pink_glow
   - Icon_Blueprint_Belt
   - Blueprint_02
+  - enery_bg
   - Belt
   - Shield
   - Icons_Forcefield_01a
