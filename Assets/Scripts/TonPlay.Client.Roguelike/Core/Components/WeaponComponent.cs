@@ -1,4 +1,4 @@
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 
 namespace TonPlay.Client.Roguelike.Core.Components
 {

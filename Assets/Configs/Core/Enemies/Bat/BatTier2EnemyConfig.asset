@@ -15,7 +15,6 @@ MonoBehaviour:
   _id: bat_tier2
   _enemyType: 0
   _prefab: {fileID: 9169473473442074980, guid: dfa7176ef7e924ff4a9dca80d7201b6e, type: 3}
-  _health: 20
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
     _weight: 0.85
@@ -23,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 601a7959223314bb39bca1d024b7d454, type: 2}
   - {fileID: 11400000, guid: 24eb808ee0fd246ff80ce32c3a7add7b, type: 2}
   - {fileID: 11400000, guid: 77656acf616b945f1bbf787edf102290, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

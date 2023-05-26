@@ -1,4 +1,3 @@
-using TonPlay.Roguelike.Client.Core.Pooling.Interfaces;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Pooling.Interfaces

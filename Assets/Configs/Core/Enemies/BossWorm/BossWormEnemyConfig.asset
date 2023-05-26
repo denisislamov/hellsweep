@@ -15,7 +15,6 @@ MonoBehaviour:
   _id: boss_worm
   _enemyType: 1
   _prefab: {fileID: 8115066223926428980, guid: e41e2546564af4ff7b52d46fc1d3ccc1, type: 3}
-  _health: 8000
   _collectablesIdsOnDeath: []
   _propertyConfigs:
   - {fileID: 11400000, guid: b8ca049976b7a4871b0a067c7a19eb41, type: 2}
@@ -23,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21f0e2cfd246547f3a9c4c2678b82252, type: 2}
   - {fileID: 11400000, guid: 1d8a8be31252b4321b28b456d62bdaf8, type: 2}
   - {fileID: 11400000, guid: 828cbd65a2aa44032a4af8ce4d6d13fb, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}
