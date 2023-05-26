@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HellLocationSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 12b3cb8850ac26a4d9cadc68391f62f0, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -7336076024710570116, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -457342592055918264, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 4048323942627790962, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -6250644087536966874, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 8377466051320977555, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -7504565633607882608, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 1904437362979579094, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -1770462079813952234, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 2189397466758058495, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -5179301354540531768, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 465171145588277109, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: 7124435231957636722, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -1773154815311565671, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -893779839385605547, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -8776371503488359843, guid: f15d1d83c9a640540a4e4384cbb82101, type: 3}
+  - {fileID: -6619408657875920699, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 3938595694991570125, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 3686059925997730731, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 4429667301772355358, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -8141885273123724075, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -3841971897834681768, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -193987865384905301, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 2108197442848247407, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -692325816434705859, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 6521497898340310671, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 5945192911739262255, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -3291063551725329513, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -7590058670581983339, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: 7576966251474681921, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -5909398734766776017, guid: d1edd086bd2800847b0bcf460ef84ed2, type: 3}
+  - {fileID: -4828682915706078282, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: -7154143377071729594, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: -8362848519956722261, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: -624763760666653088, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 1092210953211559093, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 5035544279095202465, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 9081705117126404085, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 5115961389836008486, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: -2207452041312044820, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 8808355488544432924, guid: 7d0dda285138df542ba05e8857689d62, type: 3}
+  - {fileID: 6324529197805926105, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: 2534602362194784390, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: 8559036893055894138, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: 4560652352599158554, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: 1435983319610781729, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: -8821394342928172089, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: -7309884741471912157, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: -4118019271390909631, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  - {fileID: 452646620206661079, guid: a00c439d01b1c104ba51de77242a1b1f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - char_stay_fire_sword_w24_h36_10
+  - char_stay_fire_sword_w24_h36_11
+  - char_stay_fire_sword_w24_h36_12
+  - char_stay_fire_sword_w24_h36_13
+  - char_stay_fire_sword_w24_h36_14
+  - char_stay_fire_sword_w24_h36_9
+  - char_stay_fire_sword_w24_h36_8
+  - char_stay_fire_sword_w24_h36_1
+  - char_stay_fire_sword_w24_h36_0
+  - char_stay_fire_sword_w24_h36_3
+  - char_stay_fire_sword_w24_h36_2
+  - char_stay_fire_sword_w24_h36_5
+  - char_stay_fire_sword_w24_h36_4
+  - char_stay_fire_sword_w24_h36_7
+  - char_stay_fire_sword_w24_h36_6
+  - orange_stone_magma_w141_h162_14
+  - orange_stone_magma_w141_h162_13
+  - orange_stone_magma_w141_h162_12
+  - orange_stone_magma_w141_h162_11
+  - orange_stone_magma_w141_h162_10
+  - orange_stone_magma_w141_h162_8
+  - orange_stone_magma_w141_h162_9
+  - orange_stone_magma_w141_h162_4
+  - orange_stone_magma_w141_h162_5
+  - orange_stone_magma_w141_h162_6
+  - orange_stone_magma_w141_h162_7
+  - orange_stone_magma_w141_h162_0
+  - orange_stone_magma_w141_h162_1
+  - orange_stone_magma_w141_h162_2
+  - orange_stone_magma_w141_h162_3
+  - archidemon_breathe_w39_h62_5
+  - archidemon_breathe_w39_h62_4
+  - archidemon_breathe_w39_h62_7
+  - archidemon_breathe_w39_h62_6
+  - archidemon_breathe_w39_h62_1
+  - archidemon_breathe_w39_h62_0
+  - archidemon_breathe_w39_h62_3
+  - archidemon_breathe_w39_h62_2
+  - archidemon_breathe_w39_h62_9
+  - archidemon_breathe_w39_h62_8
+  - skeleton_breathe_w16_h25_4
+  - skeleton_breathe_w16_h25_5
+  - skeleton_breathe_w16_h25_6
+  - skeleton_breathe_w16_h25_7
+  - skeleton_breathe_w16_h25_0
+  - skeleton_breathe_w16_h25_1
+  - skeleton_breathe_w16_h25_2
+  - skeleton_breathe_w16_h25_3
+  - skeleton_breathe_w16_h25_8
+  m_RenderDataMap: {}
+  m_Tag: HellLocationSpriteAtlas
+  m_IsVariant: 0
