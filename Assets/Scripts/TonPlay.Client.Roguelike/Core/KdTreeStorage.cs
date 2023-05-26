@@ -152,6 +152,8 @@ namespace TonPlay.Client.Roguelike.Core
 
 				return i;
 			}
+			
+			Debug.LogError("There're no free index!");
 
 			return -1;
 		}

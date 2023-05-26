@@ -25,7 +25,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			var invertRotationOnBossAppearing = IsInversionRequiredOnBossAppearing(world, systems.GetShared<ISharedData>());
 
-			if (!invertRotationOnBossAppearing) return;
+			if (!invertRotationOnBossAppearing)
+			{
+				TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
+				return;
+			}
 
 			foreach (var entityId in filter)
 			{

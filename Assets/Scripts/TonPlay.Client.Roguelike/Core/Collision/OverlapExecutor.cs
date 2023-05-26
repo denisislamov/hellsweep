@@ -50,7 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Collision
 
 				var radius = GetOverlapRadius(collisionArea);
 
-				query.Radius(kdTreeStorage.KdTree, position, radius + RoguelikeConstants.Core.Collision.OVERLAP_MIN_RADIUS, _results);
+				query.Radius(kdTreeStorage.KdTree, position, radius * radius + RoguelikeConstants.Core.Collision.OVERLAP_MIN_RADIUS, _results);
 
 				for (var j = 0; j < _results.Count; j++)
 				{

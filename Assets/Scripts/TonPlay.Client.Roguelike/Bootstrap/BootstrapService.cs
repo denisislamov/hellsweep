@@ -32,7 +32,7 @@ namespace TonPlay.Client.Roguelike.Bootstrap
 			// Default AsyncConversions is Scheduler.ThreadPool
 			Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.MainThread;
 #endif
-			Application.targetFrameRate = -1;
+			Application.targetFrameRate = 30;
 
 			_restApiClient.Init();
 			

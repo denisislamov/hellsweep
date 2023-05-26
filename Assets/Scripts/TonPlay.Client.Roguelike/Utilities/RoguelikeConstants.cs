@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 		{
 			public const int PLAYER_PROJECTILES_MAX_COUNT = 64;
 			public const int ARENA_MAX_COUNT = 1;
+			public const int KD_TREE_ENEMY_INIT_COUNT = 128;
 			public const float REQUIRED_POSITION_CHANGED_DIFF = 0.00001f;
 			public const int AMOUNT_OF_START_LEVELS_TO_SPAWN_EQUAL_EXP = 1;
 			public const float REMOTE_CONFIG_RANGE_MULTIPLIER = 2f;
@@ -36,7 +37,7 @@ namespace TonPlay.Client.Roguelike.Utilities
 
 			public class Collision
 			{
-				public const int OVERLAP_MIN_RADIUS = 10;
+				public const float OVERLAP_MIN_RADIUS = 2.5f;
 			}
 			
 			public class Camera
