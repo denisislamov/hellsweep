@@ -6,6 +6,7 @@ using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MyBag;
 using TonPlay.Roguelike.Client.UI.UIService;
 using UniRx;
 using Zenject;
@@ -95,7 +96,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		
 		private void OnSettingsButtonClickHandler()
 		{
-			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
+			_uiService.Open<MyBagPopupScreen, MyBagPopupScreenContext>(new MyBagPopupScreenContext());
 		}
 		
 		

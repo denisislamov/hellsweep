@@ -45,7 +45,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private readonly DictionaryExt<string, IInventoryItemState> _itemStates = new DictionaryExt<string, IInventoryItemState>();
 		private readonly ReactiveProperty<string> _sortButtonText = new ReactiveProperty<string>();
 
-		private readonly ReactiveProperty<InventorySortType> _currentSortType = new ReactiveProperty<InventorySortType>();
+		private readonly ReactiveProperty<InventorySortType> _currentSortType = new ReactiveProperty<InventorySortType>(InventorySortType.Rarity);
 		private readonly ReactiveProperty<bool> _sortBySlotButtonActiveState = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<bool> _sortByLevelButtonActiveState = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<bool> _sortByRarityButtonActiveState = new ReactiveProperty<bool>();
@@ -115,6 +115,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Inventory
 		private void InitView()
 		{
 			SetCurrentSortType(InventorySortType.Rarity);
+			RefreshSortButtonText();
 		}
 
 		private void AddSubscriptionToCurrentSortType()

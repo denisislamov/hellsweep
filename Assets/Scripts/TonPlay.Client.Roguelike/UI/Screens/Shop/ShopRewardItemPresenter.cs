@@ -46,6 +46,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop
 			View.SetAmountText($"{Context.AmountText}");
 			View.SetIcon(Context.Icon);
 			View.SetBackgroundGradient(Context.BackgroundGradientMaterial);
+
+			if (Context is IShopRewardItemWithTextPanelContext withTextPanelContext && View is IShopRewardItemWithTextPanelView withTextPanelView)
+			{
+				withTextPanelView.SetTextPanelColor(withTextPanelContext.TextPanelColor);
+			}
 		}
 		
 		internal class Factory : PlaceholderFactory<IShopRewardItemView, IShopRewardItemContext, ShopRewardItemPresenter>

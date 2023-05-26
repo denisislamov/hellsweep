@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e498bb508e40129fdb6f19fb7bd47d, type: 3}
+  m_Name: MyBagPopupScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 7731770092352465333, guid: 9dd958bc56ea14cdabefe1109961e5d4, type: 3}
+  _presentationProvider: {fileID: 11400000, guid: 7d6732b55561140c7aeaa55cd98973a7, type: 2}
+  _rewardItemView: {fileID: 9176206670934049324, guid: 94101ed8755ce43cc9fcac682476a810, type: 3}
+  _pooledItemsContainerPrefab: {fileID: 3159286006783927674, guid: 11e5efc1d14bd45ed88fe18726bb8647, type: 3}

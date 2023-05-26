@@ -278,9 +278,7 @@ MonoBehaviour:
   _itemLootResponse:
     successful: 0
     response:
-      id: 
-      itemId: 
-      itemDetailId: 
+      items: []
     error:
       code: 
       description: 
@@ -344,6 +342,7 @@ MonoBehaviour:
           MusicVolume: 0
           ScreenGameStick: 0
           VisualizeDamage: 0
+        applicationLaunchedNotFirstTime: 0
     error:
       code: 
       description: 
