@@ -13,5 +13,7 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public float MaxExperience { get; set; }
 
 		public int Level { get; set; }
+		
+		public string Username { get; set; }
 	}
 }

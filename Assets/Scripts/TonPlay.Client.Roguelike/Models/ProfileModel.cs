@@ -12,11 +12,12 @@ namespace TonPlay.Client.Roguelike.Models
 		private readonly ReactiveProperty<float> _experience = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<float> _maxExperience = new ReactiveProperty<float>();
 		private readonly ReactiveProperty<int> _level = new ReactiveProperty<int>();
+		private readonly ReactiveProperty<string> _username = new ReactiveProperty<string>();
 
 		public IReadOnlyReactiveProperty<int> Level => _level;
 		public IReadOnlyReactiveProperty<float> Experience => _experience;
 		public IReadOnlyReactiveProperty<float> MaxExperience => _maxExperience;
-
+		public IReadOnlyReactiveProperty<string> Username => _username;
 		
 		public IBalanceModel BalanceModel { get; } = new BalanceModel();
 		public IInventoryModel InventoryModel { get; } = new InventoryModel();
@@ -37,7 +38,12 @@ namespace TonPlay.Client.Roguelike.Models
 			{
 				_level.SetValueAndForceNotify(data.Level);
 			}
-
+			
+			if (data.Username != _username.Value)
+			{
+				_username.SetValueAndForceNotify(data.Username);
+			}
+			
 			BalanceModel.Update(data.BalanceData);
 			InventoryModel.Update(data.InventoryData);
 		}

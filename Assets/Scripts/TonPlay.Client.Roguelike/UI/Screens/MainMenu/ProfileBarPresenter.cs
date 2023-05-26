@@ -54,6 +54,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 			_profileModel.Experience.Subscribe(UpdateExperienceInfo).AddTo(_subscriptions);
 			_profileModel.MaxExperience.Subscribe(UpdateExperienceInfo).AddTo(_subscriptions);
+
+			_profileModel.Username.Subscribe(UpdateUsername).AddTo(_subscriptions);
 		}
 
 		private void UpdateEnergyInfo(long value)
@@ -71,6 +73,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			View.SetLevelText($"{_profileModel.Level.Value}");
 		}
 
+		private void UpdateUsername(string value)
+		{
+			View.SetUsername($"{_profileModel.Username.Value}");
+		}
+		
 		private void UpdateExperienceInfo(float value)
 		{
 			var progressBarValue = _profileModel.Experience.Value/_profileModel.MaxExperience.Value;
@@ -90,7 +97,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		{
 			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
 		}
-
+		
+		
 		public class Factory : PlaceholderFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter>
 		{
 		}

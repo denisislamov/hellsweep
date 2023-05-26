@@ -28,7 +28,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 
 		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;
 		public IButtonView GameSettingsButtonView => _gameSettingsButtonView;
-
+		
+		[SerializeField]
+		private TextMeshProUGUI _usernameText;
+		
 		public void SetLevelText(string text)
 		{
 			_levelText.SetText(text);
@@ -42,6 +45,11 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		public void SetGoldText(string text)
 		{
 			_goldText.SetText(text);
+		}
+
+		public void SetUsername(string text)
+		{
+			_usernameText.SetText(text);
 		}
 	}
 }

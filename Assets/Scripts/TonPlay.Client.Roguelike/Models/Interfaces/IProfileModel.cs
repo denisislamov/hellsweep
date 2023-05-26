@@ -14,5 +14,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IReadOnlyReactiveProperty<float> Experience { get; }
 
 		IReadOnlyReactiveProperty<float> MaxExperience { get; }
+		
+		IReadOnlyReactiveProperty<string> Username { get; }
 	}
 }
