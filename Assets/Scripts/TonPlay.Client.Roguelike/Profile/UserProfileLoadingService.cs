@@ -40,13 +40,13 @@ namespace TonPlay.Client.Roguelike.Profile
 			data.BalanceData.Energy = userSummaryResponse.response.profile.energy;
 			data.BalanceData.MaxEnergy = userSummaryResponse.response.profile.energyMax;
 
-			if (!string.IsNullOrEmpty(userSummaryResponse.response.username))
-			{
-				data.Username = userSummaryResponse.response.username;
-			}
-			else if (!string.IsNullOrEmpty(userSummaryResponse.response.profile.telegram))
+			if (!string.IsNullOrEmpty(userSummaryResponse.response.profile.telegram))
 			{
 				data.Username = userSummaryResponse.response.profile.telegram;
+			}
+			else if (!string.IsNullOrEmpty(userSummaryResponse.response.username))
+			{
+				data.Username = userSummaryResponse.response.username;
 			}
 			else if (!string.IsNullOrEmpty(userSummaryResponse.response.profile.nickname))
 			{

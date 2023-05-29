@@ -55,6 +55,8 @@ namespace TonPlay.Client.Roguelike.Models
 
 			_cached.BalanceData = BalanceModel.ToData();
 			_cached.InventoryData = InventoryModel.ToData();
+
+			_cached.Username = _username.Value;
 			return _cached;
 		}
 	}
