@@ -5,5 +5,6 @@ namespace TonPlay.Client.Roguelike.Network.Response
     {
         public long coins;
         public long surviveMills;
+        public long killed;
     }
 }

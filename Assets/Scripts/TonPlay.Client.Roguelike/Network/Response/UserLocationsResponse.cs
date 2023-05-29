@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
 			public int chapter;
 			public bool infinite;
 			public long surviveMills;
+			public long maxKilled;
 		}
 	}
 }

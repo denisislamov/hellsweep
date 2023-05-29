@@ -15,6 +15,7 @@ using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
+using TonPlay.Client.Roguelike.Profile;
 using TonPlay.Client.Roguelike.Profile.Interfaces;
 using TonPlay.Client.Roguelike.SceneService.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Loading;
@@ -136,7 +137,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				response = await _restApiClient.PostGameSessionClose(new CloseGameSessionPostBody()
 				{
 					surviveMills = Convert.ToInt64(surviveTime.TotalMilliseconds),
-					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value)
+					coins = Convert.ToInt64(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value),
+					killed = Convert.ToInt64(gameModel.DeadEnemiesCount.Value)
 				});
 
 				if (response.successful && response.response.rewardSummary != null)
@@ -156,7 +158,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			locationsModel.Update(locationsData);
 			
 			await UpdateUserBalance();
-
+			
+			await new UserLocationsLoadingService(_metaGameModelProvider, _locationConfigProvider, _restApiClient).Load();
 			//_analyticsServiceWrapper.OnSingleMatchFinishSession(gameModel.PlayerModel.MatchProfileGainModel.Gold.Value);
 			
 			return gameSessionResponse?.response;

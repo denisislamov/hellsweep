@@ -114,10 +114,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			var locationsModel = _metaGameModelProvider.Get().LocationsModel;
 			var model = locationsModel.Locations.ContainsKey(config.ChapterIdx) ? locationsModel.Locations[config.ChapterIdx] : new LocationModel();
 			var longestSurvivedTime = TimeSpan.FromMilliseconds(model.LongestSurvivedMillis.Value);
-			
+			var maxKilled = model.MaxKilled;
+
 			View.SetIcon(config.Icon);
 			View.SetTitleText(config.Title);
-			View.SetSubtitleText($"Longest Survived: {longestSurvivedTime:mm}m {longestSurvivedTime:ss}s");
+			View.SetSubtitleText($"Enemy killed:          {maxKilled}\n" + 
+			                     $"Longest Survived: {longestSurvivedTime:mm}m {longestSurvivedTime:ss}s");
 			View.SetLocationView(_currentLocationConfigIndex);
 		}
 

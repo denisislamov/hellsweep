@@ -313,7 +313,6 @@ namespace TonPlay.Client.Roguelike.Network
             var postTask = _networkClient.PostAsync<GameSessionResponse, CloseGameSessionPostBody>("v1/game/session/close", value);
 
             try
-            
             {
                 var result = await postTask;
                 _gameSessionResponse = result;

@@ -11,5 +11,7 @@ namespace TonPlay.Client.Roguelike.Models.Data
 		public bool Won { get; set; }
 		
 		public bool Unlocked { get; set; }
+
+		public long MaxKilled { get; set; }
 	}
 }

@@ -46,12 +46,15 @@ namespace TonPlay.Client.Roguelike.Profile
 				var userLocation = userLocationsResponse.response.items.FirstOrDefault(_ => _.chapter == locationConfig.ChapterIdx);
 				var userLocationSurviveMills = Convert.ToDouble(userLocation?.surviveMills ?? 0L);
 				var userLocationFinished = userLocationSurviveMills >= TimeSpan.FromMinutes(14.99d).TotalMilliseconds;
+				var maxKilled = userLocation?.maxKilled ?? 0;
+				
 				var locationData = new LocationData()
 				{
 					ChapterIdx = locationConfig.ChapterIdx,
 					LongestSurvivedMillis = userLocationSurviveMills,
 					Unlocked = !(userLocation is null),
-					Won = userLocationFinished
+					Won = userLocationFinished,
+					MaxKilled = maxKilled
 				};
 				
 				locationsData.Locations.Add(locationData.ChapterIdx, locationData);

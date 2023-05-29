@@ -12,5 +12,7 @@ namespace TonPlay.Client.Roguelike.Models.Interfaces
 		IReadOnlyReactiveProperty<bool> Won { get; }
 		
 		IReadOnlyReactiveProperty<bool> Unlocked { get; }
+		
+		IReadOnlyReactiveProperty<long> MaxKilled { get; }
 	}
 }
