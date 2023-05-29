@@ -30,7 +30,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: background_skulls_smoke_fire_double_sparkles_w90_h160
-  m_Speed: 0.19
+  m_Speed: 0.152
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
