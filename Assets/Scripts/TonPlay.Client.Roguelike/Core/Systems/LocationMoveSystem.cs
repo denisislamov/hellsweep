@@ -38,6 +38,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			foreach (var entityId in filter)
 			{
 				ref var location = ref locationPool.Get(entityId);
+				
+				if (!location.InfinityX && !location.InfinityY)
+				{
+					continue;
+				}
 
 				if (location.LastNearestBlockToPlayerEntityId == nearestBlockEntityId)
 				{

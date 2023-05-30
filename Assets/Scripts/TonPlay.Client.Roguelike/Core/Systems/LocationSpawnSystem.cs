@@ -44,12 +44,54 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 
 			ref var location = ref locationEntity.Add<LocationComponent>();
 			location.BlockEntityIds = new int[matrix.Count][];
-
+			location.InfinityX = _locationConfig.InfiniteX;
+			location.InfinityY = _locationConfig.InfiniteY;
+			
 			var index = 0;
 
 			_kdTreeStorage.CreateEntityIdToKdTreeIndexMap(matrixSize);
 			_kdTreeStorage.CreateKdTreeIndexToEntityIdMap(matrixSize);
 
+			if (!_locationConfig.InfiniteX)
+			{
+				var col = -1;
+				for (var i = 0; i < 2; i++)
+				{
+					for (var row = 0; row < matrix.Count; row++)
+					{
+						var x = col - matrix[0].Count/2;
+						var y = row - matrix.Count/2;
+						var prefab = _locationConfig.BlockerPrefab;
+						var position = new Vector2(size.x * x, size.y * y);
+
+						var view = Object.Instantiate(prefab, _blocksRoot);
+						view.transform.position = position;
+					}
+
+					col = matrix[0].Count;
+				}
+			}
+
+			if (!_locationConfig.InfiniteY)
+			{
+				var row = -1;
+				for (var i = 0; i < 2; i++)
+				{
+					for (var col = 0; col < matrix[0].Count; col++)
+					{
+						var x = col - matrix[0].Count/2;
+						var y = row - matrix.Count/2;
+						var prefab = _locationConfig.BlockerPrefab;
+						var position = new Vector2(size.x*x, size.y*y);
+
+						var view = Object.Instantiate(prefab, _blocksRoot);
+						view.transform.position = position;
+					}
+
+					row = matrix.Count;
+				}
+			}
+			
 			for (var row = 0; row < matrix.Count; row++)
 			{
 				location.BlockEntityIds[row] = new int[matrix[row].Count];

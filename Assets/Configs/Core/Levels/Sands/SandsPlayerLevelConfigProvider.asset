@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25fc01e9ab840d6a78e03c9633e5e91, type: 3}
+  m_Name: SandsPlayerLevelConfigProvider
+  m_EditorClassIdentifier: 
+  _levelConfigs:
+  - _experienceToNextLevel: 10
+  - _experienceToNextLevel: 20
+  - _experienceToNextLevel: 30
+  - _experienceToNextLevel: 40
+  - _experienceToNextLevel: 50
+  - _experienceToNextLevel: 60
+  - _experienceToNextLevel: 70
+  - _experienceToNextLevel: 80
+  - _experienceToNextLevel: 90
+  - _experienceToNextLevel: 105
+  - _experienceToNextLevel: 120
+  - _experienceToNextLevel: 135
+  - _experienceToNextLevel: 150
+  - _experienceToNextLevel: 165
+  - _experienceToNextLevel: 180
+  - _experienceToNextLevel: 195
+  - _experienceToNextLevel: 210
+  - _experienceToNextLevel: 225
+  - _experienceToNextLevel: 240
+  - _experienceToNextLevel: 255
+  - _experienceToNextLevel: 270
+  - _experienceToNextLevel: 285
+  - _experienceToNextLevel: 300
+  - _experienceToNextLevel: 315
+  - _experienceToNextLevel: 330
+  - _experienceToNextLevel: 345
+  - _experienceToNextLevel: 360
+  - _experienceToNextLevel: 375
+  - _experienceToNextLevel: 390
+  - _experienceToNextLevel: 405
+  - _experienceToNextLevel: 425
+  - _experienceToNextLevel: 445
+  - _experienceToNextLevel: 465
+  - _experienceToNextLevel: 485
+  - _experienceToNextLevel: 505
+  - _experienceToNextLevel: 525
+  - _experienceToNextLevel: 545
+  - _experienceToNextLevel: 565
+  - _experienceToNextLevel: 585
+  - _experienceToNextLevel: 605
+  - _experienceToNextLevel: 625
+  - _experienceToNextLevel: 645
+  - _experienceToNextLevel: 665
+  - _experienceToNextLevel: 685
+  - _experienceToNextLevel: 705
+  - _experienceToNextLevel: 725
+  - _experienceToNextLevel: 745
+  - _experienceToNextLevel: 765
+  - _experienceToNextLevel: 785
+  - _experienceToNextLevel: 805
+  - _experienceToNextLevel: 830
+  - _experienceToNextLevel: 855
+  - _experienceToNextLevel: 880
+  - _experienceToNextLevel: 905
+  - _experienceToNextLevel: 930
+  - _experienceToNextLevel: 955
+  - _experienceToNextLevel: 980
+  - _experienceToNextLevel: 1005
+  - _experienceToNextLevel: 1030
+  - _experienceToNextLevel: 1055

@@ -1,0 +1,383 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b6a361bee4fcd87ae8d2ded9578c0, type: 3}
+  m_Name: SandsEnemyWaveConfigProvider
+  m_EditorClassIdentifier: 
+  _waveConfigs:
+  - _waves:
+    - _id: 1_bat
+      _enemyId: bat
+      _enemiesQuantity: 260
+      _maxSpawnedQuantity: 260
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 4
+      StartHealth: 15
+    - _id: 1_garpy
+      _enemyId: garpy
+      _enemiesQuantity: 50
+      _maxSpawnedQuantity: 50
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 1
+        _seconds: 0
+      StartHealth: 30
+    _startTiming:
+      _minutes: 0
+      _seconds: 4
+  - _waves:
+    - _id: 2_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 1
+        _seconds: 30
+      StartHealth: 15
+    _startTiming:
+      _minutes: 1
+      _seconds: 30
+  - _waves:
+    - _id: 3_bat
+      _enemyId: bat
+      _enemiesQuantity: 1100
+      _maxSpawnedQuantity: 250
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 2
+        _seconds: 0
+      StartHealth: 15
+    - _id: 3_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 3
+        _seconds: 0
+      StartHealth: 1000
+    - _id: 3_garpy
+      _enemyId: garpy
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 3
+        _seconds: 15
+      StartHealth: 25
+    _startTiming:
+      _minutes: 2
+      _seconds: 0
+  - _waves:
+    - _id: 4_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 600
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 4
+        _seconds: 0
+      StartHealth: 15
+    _startTiming:
+      _minutes: 4
+      _seconds: 0
+  - _waves:
+    - _id: 5_bat
+      _enemyId: bat
+      _enemiesQuantity: 350
+      _maxSpawnedQuantity: 350
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 4
+        _seconds: 30
+      StartHealth: 15
+    _startTiming:
+      _minutes: 4
+      _seconds: 30
+  - _waves:
+    - _id: boss_shooter
+      _enemyId: boss_shooter
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 5
+        _seconds: 0
+      StartHealth: 6000
+    _startTiming:
+      _minutes: 5
+      _seconds: 0
+  - _waves:
+    - _id: 7_skeleton
+      _enemyId: skeleton
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 5
+        _seconds: 10
+      StartHealth: 450
+    _startTiming:
+      _minutes: 5
+      _seconds: 10
+  - _waves:
+    - _id: 8_bat
+      _enemyId: bat
+      _enemiesQuantity: 850
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 6
+        _seconds: 0
+      StartHealth: 30
+    - _id: 8_red_snake
+      _enemyId: red_snake
+      _enemiesQuantity: 480
+      _maxSpawnedQuantity: 250
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 6
+        _seconds: 5
+      StartHealth: 75
+    _startTiming:
+      _minutes: 6
+      _seconds: 0
+  - _waves:
+    - _id: 9_skeleton
+      _enemyId: skeleton
+      _enemiesQuantity: 700
+      _maxSpawnedQuantity: 350
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 6
+        _seconds: 30
+      StartHealth: 300
+    - _id: 9_garpy
+      _enemyId: garpy
+      _enemiesQuantity: 150
+      _maxSpawnedQuantity: 150
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 7
+        _seconds: 0
+      StartHealth: 30
+    - _id: 9_ghost
+      _enemyId: ghost
+      _enemiesQuantity: 5500
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 8
+        _seconds: 10
+      StartHealth: 25
+    - _id: 9_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 8
+        _seconds: 0
+      StartHealth: 5700
+    _startTiming:
+      _minutes: 6
+      _seconds: 30
+  - _waves:
+    - _id: 10_garpy
+      _enemyId: garpy
+      _enemiesQuantity: 500
+      _maxSpawnedQuantity: 350
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 9
+        _seconds: 5
+      StartHealth: 40
+    _startTiming:
+      _minutes: 9
+      _seconds: 5
+  - _waves:
+    - _id: boss_worm
+      _enemyId: boss_worm
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 10
+        _seconds: 0
+      StartHealth: 12000
+    _startTiming:
+      _minutes: 10
+      _seconds: 0
+  - _waves:
+    - _id: 12_red_snake
+      _enemyId: red_snake
+      _enemiesQuantity: 3500
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 10
+        _seconds: 2
+      StartHealth: 75
+    - _id: 12_snake_fast
+      _enemyId: snake_fast
+      _enemiesQuantity: 800
+      _maxSpawnedQuantity: 200
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 11
+        _seconds: 0
+      StartHealth: 60
+    _startTiming:
+      _minutes: 10
+      _seconds: 2
+  - _waves:
+    - _id: 13_skeleton
+      _enemyId: skeleton
+      _enemiesQuantity: 1750
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 11
+        _seconds: 30
+      StartHealth: 500
+    - _id: 13_slime_miniboss
+      _enemyId: slime_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 12
+        _seconds: 0
+      StartHealth: 9000
+    - _id: 13_red_snake
+      _enemyId: red_snake
+      _enemiesQuantity: 11100
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 13
+        _seconds: 0
+      StartHealth: 600
+    - _id: 13_snake_fast
+      _enemyId: snake_fast
+      _enemiesQuantity: 800
+      _maxSpawnedQuantity: 200
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 13
+        _seconds: 20
+      StartHealth: 200
+    - _id: 13_skeleton_miniboss
+      _enemyId: skeleton_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 14
+        _seconds: 0
+      StartHealth: 9000
+    _startTiming:
+      _minutes: 11
+      _seconds: 30
+  - _waves:
+    - _id: boss_butcher
+      _enemyId: boss_butcher
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 5
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 15
+        _seconds: 0
+      StartHealth: 150000
+    _startTiming:
+      _minutes: 15
+      _seconds: 0
