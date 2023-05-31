@@ -17,7 +17,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Sands
 			_updateSystems = new EcsSystems(GameController.MainWorld, GameController.SharedData)
 			   .AddWorld(GameController.EffectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME);
 			
-			_updateSystems.Add(new SandStormSystem(_sandsParticles));
+			_updateSystems.Add(new SandStormSystem(_sandsParticles))
+						  .Add(new SandStormCameraShakeSystem());
 			
 			_updateSystems.Init();
 		}
