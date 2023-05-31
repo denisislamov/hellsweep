@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Forest.unity
     guid: 6f0e90741403c4a789904c227885409e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Sands.unity
+    guid: 6f2d4828b89584109a58f0c37d49493f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fdd2500000fd547a6a2daa9554ba81f8, type: 2}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Collectables;
@@ -28,13 +29,20 @@ using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core
 {
-	internal class GameController : MonoBehaviour, IInitializable
+	internal class GameController : MonoBehaviour, IInitializable, IGameController
 	{
 		[SerializeField]
 		private Camera _camera;
 
 		[SerializeField]
 		private Transform _blocksRoot;
+
+		[SerializeField]
+		private List<GameControllerExtension> _extensions;
+
+		public ISharedData SharedData => _sharedData;
+		public EcsWorld MainWorld => _mainWorld;
+		public EcsWorld EffectsWorld => _effectsWorld;
 
 		private EcsWorld _mainWorld;
 		private EcsWorld _effectsWorld;
@@ -311,6 +319,12 @@ namespace TonPlay.Client.Roguelike.Core
 			_animationSystems.Init();
 			_fixedUpdateSystems.Init();
 			_destroySystems.Init();
+			
+			for (var i = 0; i < _extensions.Count; i++)
+			{
+				_extensions[i].Setup(this);
+				_extensions[i].OnInit();
+			}
 
 			_uiService.Open<GameScreen, IGameScreenContext>(new GameScreenContext());
 
@@ -336,6 +350,11 @@ namespace TonPlay.Client.Roguelike.Core
 			_collectablesSystem?.Run();
 			_changeHealthSystem?.Run();
 			_destroySystems?.Run();
+			
+			for (var i = 0; i < _extensions.Count; i++)
+			{
+				_extensions[i].OnUpdate();
+			}
 		}
 
 		private void FixedUpdate()
@@ -343,6 +362,11 @@ namespace TonPlay.Client.Roguelike.Core
 			if (!_inited || _gameModel.Paused.Value) return;
 
 			_fixedUpdateSystems?.Run();
+			
+			for (var i = 0; i < _extensions.Count; i++)
+			{
+				_extensions[i].OnFixedUpdate();
+			}
 		}
 
 		private void OnDestroy()
