@@ -79,6 +79,12 @@ SpriteAtlas:
   - {fileID: 1791841957707171421, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
   - {fileID: 1043882855472502738, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
   - {fileID: 8592439468376855652, guid: bb5073e38f9ba4f4791fdab0e17224dd, type: 3}
+  - {fileID: 4688502800951753871, guid: 077f1404a212841c987eff357a78eca7, type: 3}
+  - {fileID: -5680425782073179026, guid: 077f1404a212841c987eff357a78eca7, type: 3}
+  - {fileID: -3711844708387179466, guid: 077f1404a212841c987eff357a78eca7, type: 3}
+  - {fileID: -2018191157695278976, guid: 077f1404a212841c987eff357a78eca7, type: 3}
+  - {fileID: -1931764378014598223, guid: 077f1404a212841c987eff357a78eca7, type: 3}
+  - {fileID: -1627753256633271238, guid: 077f1404a212841c987eff357a78eca7, type: 3}
   - {fileID: 7116606765221526623, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
   - {fileID: -4885780771943455533, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
   - {fileID: 5027835171455036500, guid: b50ffb84038ed464bb8159ca2c44c595, type: 3}
@@ -352,6 +358,31 @@ SpriteAtlas:
   - {fileID: -3454911740855128157, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
   - {fileID: 4263911879689093872, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
   - {fileID: 2193040893298345364, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
+  - {fileID: -2774491084676869652, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 4447055569662253595, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 3769719485920905391, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -8326396114988925740, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -6597900338169046311, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -2561805594705080674, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 6139664208520647860, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 7870389029009391661, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 5971429458745250116, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 6993374167219510614, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 7290378555387718879, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -5393924113803470674, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 5409085514185640963, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -4181316995076793699, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -557883832495176721, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -4259894978123697934, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 6117590008128165863, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -8046032995376539302, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -776615338369852623, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: -2218877073354198215, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 8347468919874183612, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 8630450577883679793, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 898474125675717370, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 6305530713257445910, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
+  - {fileID: 7858251130032220049, guid: a59299bb4a5214ee1b6da3480efd0220, type: 3}
   - {fileID: 21300000, guid: f8c5c04c6cf754484a56021ecf7f149c, type: 3}
   - {fileID: -8919241492249901647, guid: a55b4a4c4c31e423896da44284f7055f, type: 3}
   - {fileID: -916742723277322813, guid: a55b4a4c4c31e423896da44284f7055f, type: 3}
@@ -504,6 +535,12 @@ SpriteAtlas:
   - skeleton_miniboss_0
   - skeleton_miniboss_1
   - skeleton_miniboss_8
+  - crow_fly_w13_h12_5
+  - crow_fly_w13_h12_4
+  - crow_fly_w13_h12_3
+  - crow_fly_w13_h12_2
+  - crow_fly_w13_h12_1
+  - crow_fly_w13_h12_0
   - mobs_death_black_w35_h33_4
   - mobs_death_black_w35_h33_1
   - mobs_death_black_w35_h33_0
@@ -777,6 +814,31 @@ SpriteAtlas:
   - char_run_shuriken_w22_h29_5
   - char_run_shuriken_w22_h29_6
   - char_run_shuriken_w22_h29_7
+  - crow_sit_w12_h9_23
+  - crow_sit_w12_h9_22
+  - crow_sit_w12_h9_21
+  - crow_sit_w12_h9_20
+  - crow_sit_w12_h9_16
+  - crow_sit_w12_h9_17
+  - crow_sit_w12_h9_14
+  - crow_sit_w12_h9_15
+  - crow_sit_w12_h9_24
+  - crow_sit_w12_h9_12
+  - crow_sit_w12_h9_13
+  - crow_sit_w12_h9_10
+  - crow_sit_w12_h9_11
+  - crow_sit_w12_h9_18
+  - crow_sit_w12_h9_19
+  - crow_sit_w12_h9_3
+  - crow_sit_w12_h9_2
+  - crow_sit_w12_h9_1
+  - crow_sit_w12_h9_0
+  - crow_sit_w12_h9_7
+  - crow_sit_w12_h9_6
+  - crow_sit_w12_h9_5
+  - crow_sit_w12_h9_4
+  - crow_sit_w12_h9_9
+  - crow_sit_w12_h9_8
   - Skin_Inv_Tanjiro_Shuriken
   - boss_butcher_5
   - boss_butcher_4

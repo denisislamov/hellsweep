@@ -12,6 +12,7 @@ using TonPlay.Roguelike.Client.Core;
 using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core.Interfaces
@@ -55,5 +56,7 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		EcsWorld EffectsWorld { get; }
 
 		DiContainer Container { get; }
+		
+		Vector2 LocationSize { get; }
 	}
 }

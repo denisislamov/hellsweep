@@ -32,6 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 		public void Init(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
+			var sharedData = systems.GetShared<SharedData>();
 			var positionPool = world.GetPool<PositionComponent>();
 
 			var size = _locationConfig.BlockSize;
@@ -130,6 +131,16 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 					index++;
 				}
 			}
+
+			var locationSize = new Vector2(
+				_locationConfig.InfiniteX 
+					? float.PositiveInfinity 
+					: location.BlockEntityIds[0].Length * _locationConfig.BlockSize.x,
+				_locationConfig.InfiniteY 
+					? float.PositiveInfinity 
+					: location.BlockEntityIds.Length * _locationConfig.BlockSize.y);
+			
+			sharedData.SetLocationSize(locationSize);
 
 			_kdTreeStorage.KdTree.Build(positions);
 

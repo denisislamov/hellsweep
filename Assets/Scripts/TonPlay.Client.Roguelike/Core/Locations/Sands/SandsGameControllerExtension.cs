@@ -10,15 +10,19 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Sands
 		[SerializeField]
 		private SandStormEffect _sandsParticles;
 		
-		private EcsSystems _updateSystems;
+		[SerializeField]
+		private RavenView _ravenView;
 		
+		private EcsSystems _updateSystems;
+
 		public override void OnInit()
 		{
 			_updateSystems = new EcsSystems(GameController.MainWorld, GameController.SharedData)
 			   .AddWorld(GameController.EffectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME);
 			
 			_updateSystems.Add(new SandStormSystem(_sandsParticles))
-						  .Add(new SandStormCameraShakeSystem());
+						  .Add(new SandStormCameraShakeSystem())
+						  .Add(new RavenSystem(_ravenView));
 			
 			_updateSystems.Init();
 		}

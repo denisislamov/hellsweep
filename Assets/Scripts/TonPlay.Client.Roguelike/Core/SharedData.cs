@@ -14,6 +14,7 @@ using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core
@@ -57,6 +58,8 @@ namespace TonPlay.Client.Roguelike.Core
 		public EcsWorld EffectsWorld { get; private set; }
 
 		public DiContainer Container { get; private set; }
+		
+		public Vector2 LocationSize { get; private set; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
@@ -116,6 +119,11 @@ namespace TonPlay.Client.Roguelike.Core
 		public void SetEffectsWorld(EcsWorld world)
 		{
 			EffectsWorld = world;
+		}
+
+		public void SetLocationSize(Vector2 locationSize)
+		{
+			LocationSize = locationSize;
 		}
 
 		public class Factory : PlaceholderFactory<SharedData>

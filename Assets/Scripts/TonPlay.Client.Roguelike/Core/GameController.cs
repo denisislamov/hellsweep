@@ -82,6 +82,7 @@ namespace TonPlay.Client.Roguelike.Core
 		private KdTreeStorage[] _storages;
 		private IMetaGameModelProvider _metaGameModelProvider;
 		private IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
+		private Vector2 _currentLocationSize;
 
 		[Inject]
 		public void Construct(
@@ -153,7 +154,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_sharedData.SetEffectsWorld(_effectsWorld);
 
 			_collectablesEntityFactory = collectablesEntityFactoryFactory.Create(_sharedData);
-
+			
 			sharedDataProvider.SetSharedData(_sharedData);
 
 			Initialize();

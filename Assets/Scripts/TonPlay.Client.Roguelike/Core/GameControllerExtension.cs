@@ -4,7 +4,7 @@ namespace TonPlay.Client.Roguelike.Core
 {
 	internal abstract class GameControllerExtension : MonoBehaviour, IGameControllerExtension
 	{
-		protected GameController GameController;
+		protected IGameController GameController;
 		
 		public void Setup(GameController gameController)
 		{

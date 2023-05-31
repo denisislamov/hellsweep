@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1004089385558797663}
   - component: {fileID: 4042033162651967298}
   - component: {fileID: 2138478229817500281}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Level_Sands_Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
