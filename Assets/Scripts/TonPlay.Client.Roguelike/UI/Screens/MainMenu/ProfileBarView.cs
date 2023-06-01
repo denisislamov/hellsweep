@@ -26,11 +26,19 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 		[SerializeField] 
 		private ButtonView _gameSettingsButtonView;
 
+		[SerializeField] 
+		private ButtonView _menuPanelButtonView;
+		
 		public IProgressBarView ExperienceProgressBarView => _experienceProgressBarView;
 		public IButtonView GameSettingsButtonView => _gameSettingsButtonView;
-		
+		public IButtonView MenuPanelButtonView => _menuPanelButtonView;
+
 		[SerializeField]
 		private TextMeshProUGUI _usernameText;
+		
+		[SerializeField] 
+		private MenuPanelView _menuPanelView;
+		public IMenuPanelView MenuPanelView => _menuPanelView;
 		
 		public void SetLevelText(string text)
 		{
