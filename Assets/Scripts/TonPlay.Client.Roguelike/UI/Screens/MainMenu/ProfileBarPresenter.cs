@@ -34,13 +34,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			_profileModel = metaGameModelProvider.Get().ProfileModel;
 
 			AddSubscriptions();
-			AddSettingsButtonPresenter();
+			// AddSettingsButtonPresenter();
+			AddMenuPanelButtonsPresenters();
+			AddToggleMenuPanelButtonPresenter();
+		}
+
+		public override void Show()
+		{
+			base.Show();
+			View.MenuPanelView.Hide();
 		}
 
 		public override void Dispose()
 		{
 			_subscriptions?.Dispose();
-
 			base.Dispose();
 		}
 
@@ -94,12 +101,66 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			Presenters.Add(presenter);
 		}
 		
-		private void OnSettingsButtonClickHandler()
+		private void AddMenuPanelButtonsPresenters()
 		{
-			_uiService.Open<MyBagPopupScreen, MyBagPopupScreenContext>(new MyBagPopupScreenContext());
+			// var presenter = _buttonPresenterFactory.Create(
+			// 	View.MenuPanelView.MyBagButtonView,
+			// 	new CompositeButtonContext()
+			// 		.Add(new ClickableButtonContext(() => SetCurrentSortType(InventorySortType.Level)))
+			// 		.Add(new ReactiveLockButtonContext(_sortByLevelButtonActiveState)));
+			//
+			// Presenters.Add(presenter);
+			//
+			// presenter = _buttonPresenterFactory.Create(
+			// 	View.MenuPanelView.AchievementsButtonView,
+			// 	new CompositeButtonContext()
+			// 		.Add(new ClickableButtonContext(() => SetCurrentSortType(InventorySortType.Rarity)))
+			// 		.Add(new ReactiveLockButtonContext(_sortByRarityButtonActiveState)));
+			//
+			// Presenters.Add(presenter);
+			
+			var presenter = _buttonPresenterFactory.Create(
+				View.MenuPanelView.MyBagButtonView,
+				new CompositeButtonContext()
+					.Add(new ClickableButtonContext(OnMyBagButtonClickHandler)));
+
+			Presenters.Add(presenter);
+			
+			presenter = _buttonPresenterFactory.Create(
+				View.MenuPanelView.SettingsButtonView,
+				new CompositeButtonContext()
+					.Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
+
+			Presenters.Add(presenter);
 		}
 		
+		private void AddToggleMenuPanelButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(
+				View.MenuPanelButtonView,
+				new CompositeButtonContext()
+					.Add(new ClickableButtonContext(MenuPanelButtonClickHandler)));
+
+			Presenters.Add(presenter);
+		}
+
+		private void MenuPanelButtonClickHandler()
+		{
+			View.MenuPanelView.Toggle();
+		}
 		
+		private void OnSettingsButtonClickHandler()
+		{
+			View.MenuPanelView.Hide();
+			_uiService.Open<GameSettingsScreen, IGameSettingsScreenContext>(new GameSettingsScreenContext());
+		}
+		
+		private void OnMyBagButtonClickHandler()
+		{
+			View.MenuPanelView.Hide();
+			_uiService.Open<MyBagPopupScreen, MyBagPopupScreenContext>(new MyBagPopupScreenContext());
+		}
+
 		public class Factory : PlaceholderFactory<IProfileBarView, IProfileBarContext, ProfileBarPresenter>
 		{
 		}
