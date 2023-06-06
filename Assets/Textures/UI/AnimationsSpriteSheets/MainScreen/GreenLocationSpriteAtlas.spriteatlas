@@ -49,6 +49,14 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -2480081081172858146, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: -3173407706801398599, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: -4474430676489582121, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: 4270349621571756897, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: -6660165801409158877, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: -6385666386167655294, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: 9047729147366024596, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
+  - {fileID: 3962698181069802608, guid: 5433da81889bb403d93e6a8d07dc0201, type: 3}
   - {fileID: -2794542158688110441, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
   - {fileID: 3349200841447758226, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
   - {fileID: -4561794520132452990, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
@@ -77,6 +85,7 @@ SpriteAtlas:
   - {fileID: -6052118274162321174, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
   - {fileID: 5210253011637356819, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
   - {fileID: 4816777691284519774, guid: c7d73bf1a6c345c47b4cc69db8a5ca0c, type: 3}
+  - {fileID: 21300000, guid: 169165b3b01b745db83f1aafd49a409c, type: 3}
   - {fileID: -3995768092963568070, guid: b0fb48a65dd79d84bb69f3bbfdaa9c63, type: 3}
   - {fileID: 3313144890637781467, guid: b0fb48a65dd79d84bb69f3bbfdaa9c63, type: 3}
   - {fileID: -4317965316777123396, guid: b0fb48a65dd79d84bb69f3bbfdaa9c63, type: 3}
@@ -114,6 +123,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9993684e7e5e065469d072b23d37f4dc, type: 3}
   - {fileID: 21300000, guid: b57587cf77efd244ba39f6549b7ac361, type: 3}
   m_PackedSpriteNamesToIndex:
+  - bat_fly_w26_h26_no_shadow_5
+  - bat_fly_w26_h26_no_shadow_4
+  - bat_fly_w26_h26_no_shadow_7
+  - bat_fly_w26_h26_no_shadow_6
+  - bat_fly_w26_h26_no_shadow_1
+  - bat_fly_w26_h26_no_shadow_0
+  - bat_fly_w26_h26_no_shadow_3
+  - bat_fly_w26_h26_no_shadow_2
   - _green_location_trees_leafs_w91_h86_18
   - _green_location_trees_leafs_w91_h86_19
   - _green_location_trees_leafs_w91_h86_10
@@ -142,6 +159,7 @@ SpriteAtlas:
   - _green_location_trees_leafs_w91_h86_24
   - _green_location_trees_leafs_w91_h86_27
   - _green_location_trees_leafs_w91_h86_26
+  - Bat-shadow
   - char_stay_bow_w29_h28_20
   - char_stay_bow_w29_h28_12
   - char_stay_bow_w29_h28_13
