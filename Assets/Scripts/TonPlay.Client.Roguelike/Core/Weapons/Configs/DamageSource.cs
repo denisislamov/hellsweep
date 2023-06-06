@@ -32,6 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		Enemy_RedSnake,
 		Enemy_Boss_Shooter,
 		Enemy_Boss_Worm,
-		Enemy_Boss_Butcher
+		Enemy_Boss_Butcher,
+		Enemy_Shadow_Caster
 	}
 }

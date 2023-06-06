@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: TerracottaWarriorEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: terracotta_warrior
+  _enemyType: 0
+  _prefab: {fileID: 7034668178285727538, guid: adb7ed7a325724e30a0409c301c95ef1, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: 23ed629f4069844538fe86d7184457b4, type: 2}
+  - {fileID: 11400000, guid: c0a17b59255de445f8438c9fd9b51a5a, type: 2}
+  - {fileID: 11400000, guid: 2518e47fd48394c82ae221cb150b70f6, type: 2}
+  - {fileID: 11400000, guid: 221388c12b4c14ad7823cf8c2516ab22, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}
