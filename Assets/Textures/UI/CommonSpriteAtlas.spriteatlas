@@ -90,7 +90,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: afed94f4d4ae545439de103e226e155c, type: 3}
   - {fileID: 21300000, guid: 2bbac415e3f194c9cb424313092e7f66, type: 3}
   - {fileID: 21300000, guid: 952755157a18c4a98a03d38ac47036ac, type: 3}
+  - {fileID: 21300000, guid: 971f5a25cac7a4654824f97d6fc0ba9b, type: 3}
   - {fileID: 21300000, guid: b8772045f46ff4c8587fbb3d0e8be2f2, type: 3}
+  - {fileID: 21300000, guid: 438ae6455b2df40ce81d23d5a51e0236, type: 3}
   - {fileID: 21300000, guid: 567306a502202429993999780fed243b, type: 3}
   - {fileID: 21300000, guid: bdbd17a59019341fabe2ab4299a6eb71, type: 3}
   - {fileID: 21300000, guid: 239d8dd563867704abeebd2f473b598e, type: 3}
@@ -103,6 +105,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1462e98630b6a4799ad3f77c02cd4948, type: 3}
   - {fileID: 21300000, guid: 216beb86078be0b47bab2da14e9395ac, type: 3}
   - {fileID: 21300000, guid: 581ce496f109047dd8956c0220b39cf1, type: 3}
+  - {fileID: 21300000, guid: 85265de6a7de64375ba9484010feb383, type: 3}
   - {fileID: 21300000, guid: a106ef17fe2684aa69bf5b33665d83fd, type: 3}
   - {fileID: 21300000, guid: 461ddb27c2e8346ab92e82a01c85f3ac, type: 3}
   - {fileID: 21300000, guid: f7d8f157bef03400b938a491cafadfd5, type: 3}
@@ -112,6 +115,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 70df96d7a07b647f1b852f87f45bacdd, type: 3}
   - {fileID: 21300000, guid: d19230e78cdc948c284c4e3233d3255a, type: 3}
   - {fileID: 21300000, guid: 9f266ce7d8e26444f81468c964ed5bcd, type: 3}
+  - {fileID: 21300000, guid: 9cbc89f727c124e43839ea4e9636a388, type: 3}
   - {fileID: 21300000, guid: 0d8e0538d6b7b44f98a9e7d1509593db, type: 3}
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
   - {fileID: 21300000, guid: f0010c38e50cfda4bbd0e2d1bda869b8, type: 3}
@@ -201,7 +205,9 @@ SpriteAtlas:
   - RectangleDonut
   - Icon_Skill_SilverBar_01a
   - CircleDonut_01a
+  - Achievements
   - CloseButton_01
+  - Settings
   - Heart
   - SkillLevelPoint_01b
   - Locked
@@ -214,6 +220,7 @@ SpriteAtlas:
   - joystick_background_01a
   - merge_added_icon
   - BackgroundSidebarInactive_01
+  - SkillChoiceItemBackground_02a
   - Icon_Attribute_Armor_01
   - SkillLevelPoint_02a
   - SkillLevelProgressBar_01a
@@ -223,6 +230,7 @@ SpriteAtlas:
   - TitleBackgroundTexture_01
   - SortButton01
   - Icons_FitnessGuide_01a
+  - Pack
   - joystick_01a
   - Settings_skull
   - Pink_glow

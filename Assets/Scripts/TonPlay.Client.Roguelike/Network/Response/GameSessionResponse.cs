@@ -15,7 +15,8 @@ namespace TonPlay.Client.Roguelike.Network.Response
         public class RewardSummary
         {
             public int xp;
-            public int coin;
+            public int coins;
+            public int blueprints;
             public int energy;
             public List<UserItemResponse> items;
         }

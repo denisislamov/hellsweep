@@ -10,6 +10,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces
 		
 		IButtonView GameSettingsButtonView { get; }
 
+		IButtonView MenuPanelButtonView { get; }
+		
+		IMenuPanelView MenuPanelView { get; }
+		
 		void SetLevelText(string text);
 
 		void SetEnergyText(string text);
