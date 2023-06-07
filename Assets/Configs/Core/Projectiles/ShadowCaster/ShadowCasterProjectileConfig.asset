@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: ShadowCasterProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8314694239058947396, guid: d3c4d06a0620d44e78a3c9232ede4f3c, type: 3}
+  _movementConfig:
+    _startSpeed: 4
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 98a4c7b76dfa14425809d0669f3ba0b0, type: 2}
+  - {fileID: 11400000, guid: c29b9387330b14a36a5f73d7a6fb11c8, type: 2}
+  - {fileID: 11400000, guid: 40c7478a5f597414e8554049f7f33d29, type: 2}
+  - {fileID: 11400000, guid: 88f6eb5722b4f40ddaa5749420c73d73, type: 2}
+  _layer: 11

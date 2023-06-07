@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: JadeArcherDamageOnCollisionEnemyPropertyConfig
   m_EditorClassIdentifier: 
   _damageProvider:
-    damageSource: 23
-    damage: 10
+    damageSource: 33
+    damage: 25
     rate: 0.25

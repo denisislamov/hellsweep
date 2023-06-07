@@ -18,5 +18,5 @@ MonoBehaviour:
   _layer: 11
   _minDistanceToTargetToShoot: 0
   _maxDistanceToTargetToShoot: 8
-  _projectileConfig: {fileID: 11400000, guid: 07e2448fea90a4c34bf1ba1ee173c89d, type: 2}
+  _projectileConfig: {fileID: 11400000, guid: 6fde140f5c7a84f888e88ba4aa0de8d4, type: 2}
   _pooledProjectileCount: 3

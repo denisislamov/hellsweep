@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: BossUnicornEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: unicorn
+  _enemyType: 1
+  _prefab: {fileID: 3509069771737221472, guid: 20480638c932d4c1b8d1c40199add9c5, type: 3}
+  _collectablesIdsOnDeath: []
+  _propertyConfigs:
+  - {fileID: 11400000, guid: c43b4d98b45cd4689a6d679fb9d9d20c, type: 2}
+  - {fileID: 11400000, guid: 68a4d10099d4e4972bea48e608fa2d71, type: 2}
+  - {fileID: 11400000, guid: dbd1cf953273a483f90d6270119c4737, type: 2}
+  - {fileID: 11400000, guid: bdb6496b96bdd431cadb9a94af2ab8ab, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

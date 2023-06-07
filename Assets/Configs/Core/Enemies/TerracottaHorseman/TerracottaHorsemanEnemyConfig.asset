@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: TerracottaHorsemanEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: terracotta_horseman
+  _enemyType: 0
+  _prefab: {fileID: 8716920717563201350, guid: 4044e9d4fbf914e95a1cd07e2b3a9168, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: ecc7c5bc04e514e6984c4709dc6c04e5, type: 2}
+  - {fileID: 11400000, guid: 953e25ef655d845d296429aab31dd6cc, type: 2}
+  - {fileID: 11400000, guid: e5294b9734fee4637b318cdd66ddf141, type: 2}
+  - {fileID: 11400000, guid: 13018aec60e4d439aaf2b7c2905648c2, type: 2}
+  - {fileID: 11400000, guid: e820edc34a80946129472aaf7b16cd7e, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

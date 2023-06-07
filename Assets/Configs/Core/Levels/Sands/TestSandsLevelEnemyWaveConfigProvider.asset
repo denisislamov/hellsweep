@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b6a361bee4fcd87ae8d2ded9578c0, type: 3}
+  m_Name: TestSandsLevelEnemyWaveConfigProvider
+  m_EditorClassIdentifier: 
+  _waveConfigs:
+  - _waves:
+    - _id: 1_terracotta_warrior
+      _enemyId: terracotta_warrior
+      _enemiesQuantity: 260
+      _maxSpawnedQuantity: 260
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 25
+    - _id: 1_terracotta_archer
+      _enemyId: terracotta_archer
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 30
+    - _id: 1_jade_archer
+      _enemyId: jade_archer
+      _enemiesQuantity: 100
+      _maxSpawnedQuantity: 100
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 1
+        _seconds: 0
+      StartHealth: 35
+    _startTiming:
+      _minutes: 0
+      _seconds: 0
+  - _waves:
+    - _id: 2_shadow_caster_miniboss
+      _enemyId: shadow_caster_miniboss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 0
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 1500
+    _startTiming:
+      _minutes: 2
+      _seconds: 0
+  - _waves:
+    - _id: 3_jiangshi
+      _enemyId: jiangshi
+      _enemiesQuantity: 800
+      _maxSpawnedQuantity: 400
+      _spawnRate:
+        _minutes: 0
+        _seconds: 1
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 1
+      StartHealth: 1000
+    _startTiming:
+      _minutes: 2
+      _seconds: 2
+  - _waves:
+    - _id: 4_caster_boss
+      _enemyId: caster_boss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 0
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 30000
+    _startTiming:
+      _minutes: 4
+      _seconds: 0
+  - _waves:
+    - _id: 5_moguy
+      _enemyId: moguy
+      _enemiesQuantity: 2900
+      _maxSpawnedQuantity: 500
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 30
+    _startTiming:
+      _minutes: 4
+      _seconds: 2
+  - _waves:
+    - _id: 7_terracotta_horseman
+      _enemyId: terracotta_horseman
+      _enemiesQuantity: 1650
+      _maxSpawnedQuantity: 500
+      _spawnRate:
+        _minutes: 0
+        _seconds: 3
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 50
+    _startTiming:
+      _minutes: 6
+      _seconds: 2
+  - _waves:
+    - _id: 8_unicorn
+      _enemyId: unicorn
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 0
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 50
+    _startTiming:
+      _minutes: 7
+      _seconds: 0
+  - _waves:
+    - _id: 9_floating_skull
+      _enemyId: floating_skull
+      _enemiesQuantity: 170
+      _maxSpawnedQuantity: 170
+      _spawnRate:
+        _minutes: 0
+        _seconds: 2
+      _waveSpawnType: 1
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 40
+    _startTiming:
+      _minutes: 7
+      _seconds: 2

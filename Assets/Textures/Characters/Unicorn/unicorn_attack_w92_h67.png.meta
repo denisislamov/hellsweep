@@ -1,0 +1,577 @@
+fileFormatVersion: 2
+guid: 47072c933b8a84f4086dad273dec3412
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7214770880233461292
+    second: unicorn_attack_w92_h67_0
+  - first:
+      213: -1138697404013849598
+    second: unicorn_attack_w92_h67_1
+  - first:
+      213: -6185977335479669763
+    second: unicorn_attack_w92_h67_2
+  - first:
+      213: 1823048837998512527
+    second: unicorn_attack_w92_h67_3
+  - first:
+      213: -2626791643791085433
+    second: unicorn_attack_w92_h67_4
+  - first:
+      213: 3305170009769225028
+    second: unicorn_attack_w92_h67_5
+  - first:
+      213: 5973776812643979295
+    second: unicorn_attack_w92_h67_6
+  - first:
+      213: 2516039263865618454
+    second: unicorn_attack_w92_h67_7
+  - first:
+      213: 7985926726588334493
+    second: unicorn_attack_w92_h67_8
+  - first:
+      213: -5156897411572171463
+    second: unicorn_attack_w92_h67_9
+  - first:
+      213: -4185017979263630379
+    second: unicorn_attack_w92_h67_10
+  - first:
+      213: -6891919506883953656
+    second: unicorn_attack_w92_h67_11
+  - first:
+      213: 1476852593106571701
+    second: unicorn_attack_w92_h67_12
+  - first:
+      213: -4096344634243105379
+    second: unicorn_attack_w92_h67_13
+  - first:
+      213: 8578904704391093081
+    second: unicorn_attack_w92_h67_14
+  - first:
+      213: -5207413664010667604
+    second: unicorn_attack_w92_h67_15
+  - first:
+      213: -2518011456419103157
+    second: unicorn_attack_w92_h67_16
+  - first:
+      213: -4025168735641888338
+    second: unicorn_attack_w92_h67_17
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d92ad32c1cffdb90800000000000000
+      internalID: -7214770880233461292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 204581f7eb88230f0800000000000000
+      internalID: -1138697404013849598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_2
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfbed1a536ef62aa0800000000000000
+      internalID: -6185977335479669763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_3
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89071d5245cc4910800000000000000
+      internalID: 1823048837998512527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_4
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7803ed4dae2cb8bd0800000000000000
+      internalID: -2626791643791085433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_5
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ba192cc925edd20800000000000000
+      internalID: 3305170009769225028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_6
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f101c155c5e17e250800000000000000
+      internalID: 5973776812643979295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_7
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61045a34164cae220800000000000000
+      internalID: 2516039263865618454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_8
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91889ceb06b3de60800000000000000
+      internalID: 7985926726588334493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_9
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93dfb1860250f68b0800000000000000
+      internalID: -5156897411572171463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_10
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d34e5f2254dbe5c0800000000000000
+      internalID: -4185017979263630379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_11
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80cb89339bbfa50a0800000000000000
+      internalID: -6891919506883953656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_12
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b15bb5db95de7410800000000000000
+      internalID: 1476852593106571701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_13
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9dbc5e224cd627c0800000000000000
+      internalID: -4096344634243105379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_14
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b982b20646e0770800000000000000
+      internalID: 8578904704391093081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_15
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca9f026dcdc8bb7b0800000000000000
+      internalID: -5207413664010667604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_16
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e76cfdbe93e0dd0800000000000000
+      internalID: -2518011456419103157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unicorn_attack_w92_h67_17
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 0
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.6, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea99e077c5ab328c0800000000000000
+      internalID: -4025168735641888338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

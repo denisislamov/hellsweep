@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SandsLevelInstaller
   m_EditorClassIdentifier: 
   _enemyConfigProvider: {fileID: 11400000, guid: 2879246fa45e24d9faa218c42984858d, type: 2}
-  levelEnemyWaveConfigProvider: {fileID: 11400000, guid: 013041d5903a148de85d0680ec1f8365, type: 2}
+  levelEnemyWaveConfigProvider: {fileID: 11400000, guid: 9d1e5a6bed9914604843f944af8fd416, type: 2}
   _playersLevelsConfigProvider: {fileID: 11400000, guid: d041c68a4a1c6402babc47a5d638c542, type: 2}
   _collectablesConfigProvider: {fileID: 11400000, guid: 11178122303ac42a58a82fbab912186a, type: 2}

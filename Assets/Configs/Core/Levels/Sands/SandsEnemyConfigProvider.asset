@@ -16,5 +16,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5508d9432fecd4440b479858ad0a4012, type: 2}
   - {fileID: 11400000, guid: ecac5908ebdde47c98418d4d64725465, type: 2}
   - {fileID: 11400000, guid: c714c68803dca4cc9adde5176bb7fd00, type: 2}
-  - {fileID: 11400000, guid: c714c68803dca4cc9adde5176bb7fd00, type: 2}
+  - {fileID: 11400000, guid: 4d7a54497175d4158a63d203aa7fb4a0, type: 2}
+  - {fileID: 11400000, guid: 0546ac0414ab34fdeb3ac44587e0165e, type: 2}
+  - {fileID: 11400000, guid: f5205905119f84f929e2d025643f2485, type: 2}
+  - {fileID: 11400000, guid: 5d2c1668de4d6445f979d117ecd368c4, type: 2}
+  - {fileID: 11400000, guid: 206a89646024740b8ae93a44a6397cb3, type: 2}
+  - {fileID: 11400000, guid: 2ce0dde4f0d44433dbc5887a289919f1, type: 2}
+  - {fileID: 11400000, guid: 214f43e77aa944a7794f1ad7539737c9, type: 2}
   _defaultConfigId: terracotta_warrior

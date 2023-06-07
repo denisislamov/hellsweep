@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
   m_Name: JadeArcherEnemyConfig
   m_EditorClassIdentifier: 
-  _id: terracotta_archer
+  _id: jade_archer
   _enemyType: 0
   _prefab: {fileID: 2203375749416096569, guid: 5b6ac3bf240334c8388b766081e6822e, type: 3}
   _collectablesIdsOnDeath:

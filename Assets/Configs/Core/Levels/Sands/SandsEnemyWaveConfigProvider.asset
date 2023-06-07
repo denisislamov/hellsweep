@@ -181,3 +181,19 @@ MonoBehaviour:
     _startTiming:
       _minutes: 7
       _seconds: 2
+  - _waves:
+    - _id: 10_jade_horseman_boss
+      _enemyId: jade_horseman_boss
+      _enemiesQuantity: 1
+      _maxSpawnedQuantity: 1
+      _spawnRate:
+        _minutes: 0
+        _seconds: 0
+      _waveSpawnType: 0
+      _startTiming:
+        _minutes: 0
+        _seconds: 0
+      StartHealth: 100000
+    _startTiming:
+      _minutes: 8
+      _seconds: 0

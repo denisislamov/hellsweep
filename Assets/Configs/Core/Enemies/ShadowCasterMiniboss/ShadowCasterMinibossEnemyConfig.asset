@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ShadowCasterMinibossEnemyConfig
   m_EditorClassIdentifier: 
   _id: shadow_caster_miniboss
-  _enemyType: 0
-  _prefab: {fileID: 704262828941590574, guid: 64c5e46131a684ae89896e7281f08887, type: 3}
+  _enemyType: 1
+  _prefab: {fileID: 2659378153142871548, guid: 52563c5bd82b64955bc90eb7dd37ebb6, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_1
     _weight: 0.85
@@ -23,4 +23,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 591272f158d734380904d333070803d4, type: 2}
   - {fileID: 11400000, guid: ccc656f8090f14badb15946a72e786db, type: 2}
   - {fileID: 11400000, guid: cbace3313db01450182161588ff98d39, type: 2}
+  - {fileID: 11400000, guid: 822c01e198cd447e7bb4f31d0d159db6, type: 2}
+  - {fileID: 11400000, guid: d79cba7038c86415faa161eb9940ddab, type: 2}
   _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

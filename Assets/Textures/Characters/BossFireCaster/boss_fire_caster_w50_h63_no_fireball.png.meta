@@ -1,0 +1,1345 @@
+fileFormatVersion: 2
+guid: 46b7b2edc5feb4d89b1128f7ed898e0d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4067713132411610081
+    second: boss_fire_caster_w50_h63_no_fireball_0
+  - first:
+      213: -8775562984636173513
+    second: boss_fire_caster_w50_h63_no_fireball_1
+  - first:
+      213: 7221896217114885376
+    second: boss_fire_caster_w50_h63_no_fireball_2
+  - first:
+      213: -4735568354552145308
+    second: boss_fire_caster_w50_h63_no_fireball_3
+  - first:
+      213: -1400364186539393566
+    second: boss_fire_caster_w50_h63_no_fireball_4
+  - first:
+      213: -5243017946711998783
+    second: boss_fire_caster_w50_h63_no_fireball_5
+  - first:
+      213: 5953001423205810203
+    second: boss_fire_caster_w50_h63_no_fireball_6
+  - first:
+      213: -3194674666908872180
+    second: boss_fire_caster_w50_h63_no_fireball_7
+  - first:
+      213: 5611135945754236059
+    second: boss_fire_caster_w50_h63_no_fireball_8
+  - first:
+      213: -3930179390842179546
+    second: boss_fire_caster_w50_h63_no_fireball_9
+  - first:
+      213: -1861970587760348398
+    second: boss_fire_caster_w50_h63_no_fireball_10
+  - first:
+      213: -6824785150921802957
+    second: boss_fire_caster_w50_h63_no_fireball_11
+  - first:
+      213: 8817174205475007952
+    second: boss_fire_caster_w50_h63_no_fireball_12
+  - first:
+      213: -5106688821634852846
+    second: boss_fire_caster_w50_h63_no_fireball_13
+  - first:
+      213: 1259756727393208607
+    second: boss_fire_caster_w50_h63_no_fireball_14
+  - first:
+      213: -8114923995352780288
+    second: boss_fire_caster_w50_h63_no_fireball_15
+  - first:
+      213: -587397968535993655
+    second: boss_fire_caster_w50_h63_no_fireball_16
+  - first:
+      213: 844377341315843244
+    second: boss_fire_caster_w50_h63_no_fireball_17
+  - first:
+      213: 1029420371723567908
+    second: boss_fire_caster_w50_h63_no_fireball_18
+  - first:
+      213: -7885161212839278441
+    second: boss_fire_caster_w50_h63_no_fireball_19
+  - first:
+      213: 399662849169068024
+    second: boss_fire_caster_w50_h63_no_fireball_20
+  - first:
+      213: -5618192388863699180
+    second: boss_fire_caster_w50_h63_no_fireball_21
+  - first:
+      213: 5807759904417037068
+    second: boss_fire_caster_w50_h63_no_fireball_22
+  - first:
+      213: -1458008360449787830
+    second: boss_fire_caster_w50_h63_no_fireball_23
+  - first:
+      213: 7070569837990297748
+    second: boss_fire_caster_w50_h63_no_fireball_24
+  - first:
+      213: 6259187684111758969
+    second: boss_fire_caster_w50_h63_no_fireball_25
+  - first:
+      213: -7088686777184181162
+    second: boss_fire_caster_w50_h63_no_fireball_26
+  - first:
+      213: -4608760086641060361
+    second: boss_fire_caster_w50_h63_no_fireball_27
+  - first:
+      213: -967681009449358317
+    second: boss_fire_caster_w50_h63_no_fireball_28
+  - first:
+      213: 3595937761170302530
+    second: boss_fire_caster_w50_h63_no_fireball_29
+  - first:
+      213: 2674808842227572314
+    second: boss_fire_caster_w50_h63_no_fireball_30
+  - first:
+      213: 5807929546551325526
+    second: boss_fire_caster_w50_h63_no_fireball_31
+  - first:
+      213: 3283783097907205971
+    second: boss_fire_caster_w50_h63_no_fireball_32
+  - first:
+      213: -3871571453463814901
+    second: boss_fire_caster_w50_h63_no_fireball_33
+  - first:
+      213: 1301438060288443210
+    second: boss_fire_caster_w50_h63_no_fireball_34
+  - first:
+      213: 7491571656491060490
+    second: boss_fire_caster_w50_h63_no_fireball_35
+  - first:
+      213: 3410112277950236824
+    second: boss_fire_caster_w50_h63_no_fireball_36
+  - first:
+      213: -2697886453541616066
+    second: boss_fire_caster_w50_h63_no_fireball_37
+  - first:
+      213: 6155178477432215760
+    second: boss_fire_caster_w50_h63_no_fireball_38
+  - first:
+      213: 7107097054784852596
+    second: boss_fire_caster_w50_h63_no_fireball_39
+  - first:
+      213: 9032123261595013009
+    second: boss_fire_caster_w50_h63_no_fireball_40
+  - first:
+      213: 4710615352780543029
+    second: boss_fire_caster_w50_h63_no_fireball_41
+  - first:
+      213: -3884044688491799212
+    second: boss_fire_caster_w50_h63_no_fireball_42
+  - first:
+      213: -2402284675192145349
+    second: boss_fire_caster_w50_h63_no_fireball_43
+  - first:
+      213: -4369614727072020328
+    second: boss_fire_caster_w50_h63_no_fireball_44
+  - first:
+      213: 4455028507505253492
+    second: boss_fire_caster_w50_h63_no_fireball_45
+  - first:
+      213: -2207327227463011273
+    second: boss_fire_caster_w50_h63_no_fireball_46
+  - first:
+      213: -3043656578954179840
+    second: boss_fire_caster_w50_h63_no_fireball_47
+  - first:
+      213: 3625899107618993708
+    second: boss_fire_caster_w50_h63_no_fireball_48
+  - first:
+      213: 7278126723905642754
+    second: boss_fire_caster_w50_h63_no_fireball_49
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1c1a6e25749c87c0800000000000000
+      internalID: -4067713132411610081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733b1bcd5ffe63680800000000000000
+      internalID: -8775562984636173513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00dbed1a854593460800000000000000
+      internalID: 7221896217114885376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46a9651fba1e74eb0800000000000000
+      internalID: -4735568354552145308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2edf3291138e09ce0800000000000000
+      internalID: -1400364186539393566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cebb37c4fe0d37b0800000000000000
+      internalID: -5243017946711998783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b10c399014f4d9250800000000000000
+      internalID: 5953001423205810203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0215f9015c3aa3d0800000000000000
+      internalID: -3194674666908872180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_8
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b945b11e962cedd40800000000000000
+      internalID: 5611135945754236059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_9
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6207a41caa23579c0800000000000000
+      internalID: -3930179390842179546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_10
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 213b1569d93f826e0800000000000000
+      internalID: -1861970587760348398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_11
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33bf1f2801e7941a0800000000000000
+      internalID: -6824785150921802957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_12
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dd23187935ec5a70800000000000000
+      internalID: 8817174205475007952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2181ff7b2956129b0800000000000000
+      internalID: -5106688821634852846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_14
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f194eafa11e8b7110800000000000000
+      internalID: 1259756727393208607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_15
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00234b5fe9ff16f80800000000000000
+      internalID: -8114923995352780288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_16
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c240a7e8a429d7f0800000000000000
+      internalID: -587397968535993655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_17
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4058dd7b4d7bb00800000000000000
+      internalID: 844377341315843244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_18
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 423422dbf5c394e00800000000000000
+      internalID: 1029420371723567908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_19
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 798c60087a7429290800000000000000
+      internalID: -7885161212839278441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_20
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ff84aa6e33eb8500800000000000000
+      internalID: 399662849169068024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_21
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417d9fde9cb2802b0800000000000000
+      internalID: -5618192388863699180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_22
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0bb88bbcde499050800000000000000
+      internalID: 5807759904417037068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_23
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4837dbfe1d14cbe0800000000000000
+      internalID: -1458008360449787830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_24
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490c0016ec5bf1260800000000000000
+      internalID: 7070569837990297748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_25
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9763bfd390a1dd650800000000000000
+      internalID: 6259187684111758969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_26
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654ade10fecef9d90800000000000000
+      internalID: -7088686777184181162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_27
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f5d2c49e156a00c0800000000000000
+      internalID: -4608760086641060361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_28
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31c21e7bf3b1292f0800000000000000
+      internalID: -967681009449358317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_29
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24628f8775657e130800000000000000
+      internalID: 3595937761170302530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_30
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e5c036874de1520800000000000000
+      internalID: 2674808842227572314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_31
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 653ffae9629e99050800000000000000
+      internalID: 5807929546551325526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_32
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 357d03e4457529d20800000000000000
+      internalID: 3283783097907205971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_33
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0d1fb9864a654ac0800000000000000
+      internalID: -3871571453463814901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_34
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a438aa04503af0210800000000000000
+      internalID: 1301438060288443210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_35
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0dc882cab867f760800000000000000
+      internalID: 7491571656491060490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_36
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8980c6b9c07235f20800000000000000
+      internalID: 3410112277950236824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_37
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e364054809e2f8ad0800000000000000
+      internalID: -2697886453541616066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_38
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d81a74b6369b6550800000000000000
+      internalID: 6155178477432215760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_39
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4721da6cd1b71a260800000000000000
+      internalID: 7107097054784852596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_40
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19fc9ee804c885d70800000000000000
+      internalID: 9032123261595013009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_41
+      rect:
+        serializedVersion: 2
+        x: 2050
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5345cf794b77f5140800000000000000
+      internalID: 4710615352780543029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_42
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d14b23fe9191ac0800000000000000
+      internalID: -3884044688491799212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_43
+      rect:
+        serializedVersion: 2
+        x: 2150
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3abec5d0de59aed0800000000000000
+      internalID: -2402284675192145349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_44
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8988e839e820c53c0800000000000000
+      internalID: -4369614727072020328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_45
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47cd616e2d073dd30800000000000000
+      internalID: 4455028507505253492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_46
+      rect:
+        serializedVersion: 2
+        x: 2300
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 734f400e49ffd51e0800000000000000
+      internalID: -2207327227463011273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_47
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00bc729a772c2c5d0800000000000000
+      internalID: -3043656578954179840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_48
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c26390d0708c15230800000000000000
+      internalID: 3625899107618993708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_fire_caster_w50_h63_no_fireball_49
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 0
+        width: 50
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2016ca8b1b9110560800000000000000
+      internalID: 7278126723905642754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

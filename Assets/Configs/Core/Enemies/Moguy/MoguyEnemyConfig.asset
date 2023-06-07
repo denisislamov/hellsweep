@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: MoguyEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: moguy
+  _enemyType: 0
+  _prefab: {fileID: 2208029074203188477, guid: 2f38f928e0a5242f69b4ba9c2ffc25b5, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: 041e82fcd3dfa488b87d39c69b7c5231, type: 2}
+  - {fileID: 11400000, guid: ea70613883bed45dc81f0175c21bd24c, type: 2}
+  - {fileID: 11400000, guid: 1d13acbb4c540435780b5ff33268c181, type: 2}
+  - {fileID: 11400000, guid: 31a156a8e8d154e8b9225cbb0be10208, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}
