@@ -59,6 +59,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 64ad62d1d561d4580a91cf16783fd2e7, type: 3}
   - {fileID: 21300000, guid: 4b1abdd1bf1f34835b809e16ad7ed8e2, type: 3}
   - {fileID: 21300000, guid: 2585f9e1c27734590bf7ce17fc5febc3, type: 3}
+  - {fileID: 21300000, guid: d28e7de19e8f0449a9afc8cd9411c8d4, type: 3}
   - {fileID: 21300000, guid: a64c51f1bb4944816b6e6ca54e71af0f, type: 3}
   - {fileID: 21300000, guid: 955f8a224a7cb42ec8f9e130ae53ff73, type: 3}
   - {fileID: 21300000, guid: d47bab522d11846668dbdbe0422890c3, type: 3}
@@ -174,6 +175,7 @@ SpriteAtlas:
   - SliderBackground_01
   - Button
   - RectangleRounded16
+  - SkillChoiceSubtitle_01b
   - EmptyBlueprint
   - Icon_Blueprint_Hand
   - BackgroundSidebarActive_01

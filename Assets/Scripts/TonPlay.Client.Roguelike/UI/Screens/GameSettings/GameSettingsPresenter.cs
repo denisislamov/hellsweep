@@ -198,8 +198,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.GameSettings
 
 		private void CloseButtonClickHandler()
 		{
-			Debug.Log("CloseButtonClickHandler");
-			Hide();
+			_uiService.Close(Context.Screen);
 		}
 
 		internal class Factory : PlaceholderFactory<IGameSettingsView, IGameSettingsScreenContext, GameSettingsPresenter>
