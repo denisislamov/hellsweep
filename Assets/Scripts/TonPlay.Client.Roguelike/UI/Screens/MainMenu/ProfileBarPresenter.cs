@@ -3,6 +3,8 @@ using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Samples;
+using TonPlay.Client.Roguelike.UI.Samples.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings;
 using TonPlay.Client.Roguelike.UI.Screens.GameSettings.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
@@ -127,13 +129,26 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu
 			Presenters.Add(presenter);
 			
 			presenter = _buttonPresenterFactory.Create(
+				View.MenuPanelView.AchievementsButtonView,
+				new CompositeButtonContext()
+					.Add(new ClickableButtonContext(OnAchievementsButtonClickHandler)));
+
+			Presenters.Add(presenter);
+			
+			presenter = _buttonPresenterFactory.Create(
 				View.MenuPanelView.SettingsButtonView,
 				new CompositeButtonContext()
 					.Add(new ClickableButtonContext(OnSettingsButtonClickHandler)));
 
 			Presenters.Add(presenter);
 		}
-		
+
+		private void OnAchievementsButtonClickHandler()
+		{
+			View.MenuPanelView.Hide();
+			_uiService.Open<SimplePopupScreen, ISimplePopupScreenContext>(new SimplePopupScreenContext());
+		}
+
 		private void AddToggleMenuPanelButtonPresenter()
 		{
 			var presenter = _buttonPresenterFactory.Create(
