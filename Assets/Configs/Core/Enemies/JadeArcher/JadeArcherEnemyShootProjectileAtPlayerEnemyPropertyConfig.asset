@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a395774b0454f19825380b21421f68e, type: 3}
   m_Name: JadeArcherEnemyShootProjectileAtPlayerEnemyPropertyConfig
   m_EditorClassIdentifier: 
-  _shootRateInSeconds: 3
+  _shootRateInSeconds: 1
   _quantity: 1
   _fieldOfView: 1
   _layer: 11

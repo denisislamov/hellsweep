@@ -716,9 +716,9 @@ MonoBehaviour:
 
 
     If you are
-    playing on Windows or MacOS, after click on <color=#4EF352>"Buy"</color> you
-    will get a QR code, scan it with your smartphone to make payment via <color=#3B7BF3><b>"Tonkeeper"</b></color>
-    app'
+    playing on Windows or macOS, you will get a QR code after clicking <color=#4EF352>"Buy"</color>.
+    Scan it with your smartphone to make the payment via <color=#3B7BF3><b>"Tonkeeper"</b></color>
+    app.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c12054932ac44424387927136169425b, type: 2}
   m_sharedMaterial: {fileID: 1257675150296168409, guid: c12054932ac44424387927136169425b, type: 2}
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
+  m_fontSize: 25.55
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1

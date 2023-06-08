@@ -72,11 +72,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossFireCaster
 				var position = positionPool.Get(entityId).Position;
 				var rotation = rotationPool.Get(entityId).Direction;
 
-				var angle = 180 / boss.ProjectileQuantity;
+				var angle = 360 / boss.ProjectileQuantity;
 				var offset = angle * 0.5f * shoot.Wave;
 				for (var i = 0; i < boss.ProjectileQuantity; i++)
 				{
-					var direction = rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
+					var direction = -rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
 					
 					CreateProjectile(position, direction, sharedData, boss.ProjectileConfig);
 				}

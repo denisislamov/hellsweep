@@ -7,5 +7,6 @@ namespace TonPlay.Client.Roguelike.Core.Components
 	{
 		public IDamageProvider DamageProvider;
 		public ICollisionAreaConfig CollisionConfig;
+		public int CollisionLayerMask;
 	}
 }

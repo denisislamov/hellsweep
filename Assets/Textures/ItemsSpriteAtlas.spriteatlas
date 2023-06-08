@@ -76,11 +76,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b1ce29d42a4db431d90ae1f868992ded, type: 3}
   - {fileID: 21300000, guid: 805fe1c56d1934517b55a177d8adc39c, type: 3}
   - {fileID: 21300000, guid: f71e52c580f7a451693d6da980df27a2, type: 3}
+  - {fileID: 21300000, guid: 74204ee5ae15f4acab505e56461c0a15, type: 3}
   - {fileID: 21300000, guid: 573dd456b314d439eac17725ff18b40b, type: 3}
   - {fileID: 21300000, guid: c4d7ed866c06c4315a58c6c40eaca8bf, type: 3}
   - {fileID: 21300000, guid: 701d15b6c5fa84997b60e4a0650331c1, type: 3}
   - {fileID: 21300000, guid: 62594e077569344fabcce3b2e70899b5, type: 3}
   - {fileID: 21300000, guid: bbb8df17b65b44098b0ac2c5d8947e5a, type: 3}
+  - {fileID: 21300000, guid: 3aaa7027077544cbe8884946153ec10e, type: 3}
   - {fileID: 21300000, guid: 21c132279ab954968bcbfa54807d0717, type: 3}
   - {fileID: 21300000, guid: 014d2727d81c446daa0427157c231ad2, type: 3}
   - {fileID: 21300000, guid: e8ab3b876b6ec49c4997c3bdd8e6bf92, type: 3}
@@ -496,11 +498,13 @@ SpriteAtlas:
   - Item_Armor_Metal
   - Item_Belt_Stylish Belt
   - Item_Neck_Trendy Charm
+  - BombRadius
   - Light
   - Item_Boots_Sabaton
   - Item_Belt_Broad waistguard
   - Item_Neck_Crystal Pendant
   - Item_Weapon_Fireknife
+  - Bomb
   - Item_Health_01a
   - Item_Boots_Claws
   - Item_Coins_02a

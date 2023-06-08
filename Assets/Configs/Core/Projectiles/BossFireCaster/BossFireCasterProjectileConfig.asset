@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8370536519358272292, guid: c16a75cba684f4065bbc4934e723828d, type: 3}
   _movementConfig:
-    _startSpeed: 4
+    _startSpeed: 8
     _acceleration: 0
   _properties:
   - {fileID: 11400000, guid: 73d02bc5f8e314f8c9713ba0acc1d999, type: 2}

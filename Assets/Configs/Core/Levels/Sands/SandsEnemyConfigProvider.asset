@@ -23,4 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 206a89646024740b8ae93a44a6397cb3, type: 2}
   - {fileID: 11400000, guid: 2ce0dde4f0d44433dbc5887a289919f1, type: 2}
   - {fileID: 11400000, guid: 214f43e77aa944a7794f1ad7539737c9, type: 2}
+  - {fileID: 11400000, guid: e537ac21a135b4cf7803ae0a45da93e5, type: 2}
   _defaultConfigId: terracotta_warrior

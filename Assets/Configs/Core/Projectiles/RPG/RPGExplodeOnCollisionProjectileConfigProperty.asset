@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500ae2b4b81436ba33dea266645a78b, type: 3}
   m_Name: RPGExplodeOnCollisionProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _damageProvider:
-    damageSource: 0
-    damage: 0
-    rate: 0
-  _explodeCollisionAreaConfig: {fileID: 11400000, guid: b9abbf0eebfae4325bfa867aa2661544, type: 2}
+  _explodeProjectileConfig: {fileID: 11400000, guid: d58fc962cd9504c3da0db76b425ee665, type: 2}

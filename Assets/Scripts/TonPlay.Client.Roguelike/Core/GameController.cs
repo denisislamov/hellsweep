@@ -219,6 +219,7 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new DamageOnCollisionSystem())
 							.Add(new ProjectileExplodeOnMoveDistanceSystem())
 							.Add(new ProjectileExplodeOnCollisionSystem())
+							.Add(new ProjectileExplodeOnTimerSystem())
 							.Add(new ExplosionSystem(_overlapExecutor))
 							.Add(new BossShooterRicochetProjectileOffTheArenaSystem())
 							.Add(new BlockTimerApplyDamageSystem())

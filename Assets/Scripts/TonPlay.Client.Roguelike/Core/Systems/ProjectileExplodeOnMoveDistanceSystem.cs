@@ -8,13 +8,6 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 {
 	public class ProjectileExplodeOnMoveDistanceSystem : IEcsRunSystem
 	{
-		private readonly int _layerMask;
-
-		public ProjectileExplodeOnMoveDistanceSystem()
-		{
-			_layerMask = LayerMask.GetMask("Enemy");
-		}
-
 		public void Run(EcsSystems systems)
 		{
 			TonPlay.Client.Common.Utilities.ProfilingTool.BeginSample(this);
@@ -40,7 +33,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				{
 					var explosionEntity = world.NewEntity();
 					explosionEntity.AddPositionComponent(position.Position);
-					explosionEntity.AddExplosionComponent(explodeOnMove.DamageProvider, CollisionAreaFactory.Create(explodeOnMove.CollisionConfig), _layerMask);
+					explosionEntity.AddExplosionComponent(explodeOnMove.DamageProvider, CollisionAreaFactory.Create(explodeOnMove.CollisionConfig), explodeOnMove.CollisionLayerMask);
 					explosionEntity.AddStackTryApplyDamageComponent();
 					explosionEntity.AddBlockApplyDamageTimerComponent();
 

@@ -65,16 +65,28 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				ref var projectileDestroyOnTimer = ref projectileEntity.Add<DestroyOnTimerComponent>();
 				projectileDestroyOnTimer.TimeLeft = destroyOnTimerProjectileConfigProperty.Timer;
 			}
+			
+			if (config.HasProperty<IExplodeOnTimerProjectileConfigProperty>())
+			{
+				var property = config.GetProperty<IExplodeOnTimerProjectileConfigProperty>();
+
+				ref var explode = ref projectileEntity.Add<ExplodeOnTimerComponent>();
+				explode.CollisionConfig = property.ExplodeProjectileConfig.ExplodeCollisionAreaConfig;
+				explode.DamageProvider = property.ExplodeProjectileConfig.DamageProvider;
+				explode.CollisionLayerMask = property.ExplodeProjectileConfig.ExplodeCollisionLayerMask;
+				explode.TimeLeft = property.Timer;
+			}
 
 			if (config.HasProperty<IExplodeOnMoveDistanceProjectileConfigProperty>())
 			{
 				var explodeOnMoveDistanceProjectileConfigProperty = config.GetProperty<IExplodeOnMoveDistanceProjectileConfigProperty>();
 
 				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnMoveDistanceComponent>();
-				explodeOnMoveDistance.CollisionConfig = explodeOnMoveDistanceProjectileConfigProperty.ExplodeCollisionAreaConfig;
+				explodeOnMoveDistance.CollisionConfig = explodeOnMoveDistanceProjectileConfigProperty.ExplodeProjectileConfig.ExplodeCollisionAreaConfig;
 				explodeOnMoveDistance.DistanceToExplode = explodeOnMoveDistanceProjectileConfigProperty.Distance;
 				explodeOnMoveDistance.StartPosition = position;
-				explodeOnMoveDistance.DamageProvider = explodeOnMoveDistanceProjectileConfigProperty.DamageProvider;
+				explodeOnMoveDistance.DamageProvider = explodeOnMoveDistanceProjectileConfigProperty.ExplodeProjectileConfig.DamageProvider;
+				explodeOnMoveDistance.CollisionLayerMask = explodeOnMoveDistanceProjectileConfigProperty.ExplodeProjectileConfig.ExplodeCollisionLayerMask;
 			}
 
 			if (config.HasProperty<IExplodeOnCollisionProjectileConfigProperty>())
@@ -82,8 +94,9 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				var projectileConfigProperty = config.GetProperty<IExplodeOnCollisionProjectileConfigProperty>();
 
 				ref var explodeOnMoveDistance = ref projectileEntity.Add<ExplodeOnCollisionComponent>();
-				explodeOnMoveDistance.CollisionConfig = projectileConfigProperty.ExplodeCollisionAreaConfig;
-				explodeOnMoveDistance.DamageProvider = projectileConfigProperty.DamageProvider;
+				explodeOnMoveDistance.CollisionConfig = projectileConfigProperty.ExplodeProjectileConfig.ExplodeCollisionAreaConfig;
+				explodeOnMoveDistance.DamageProvider = projectileConfigProperty.ExplodeProjectileConfig.DamageProvider;
+				explodeOnMoveDistance.CollisionLayerMask = projectileConfigProperty.ExplodeProjectileConfig.ExplodeCollisionLayerMask;
 			}
 
 			if (config.HasProperty<IDamageOnCollisionProjectileConfigProperty>())

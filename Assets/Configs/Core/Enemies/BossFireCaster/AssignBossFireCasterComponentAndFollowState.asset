@@ -18,4 +18,4 @@ MonoBehaviour:
   _shootStateDuration: 3.3
   _projectileConfig: {fileID: 11400000, guid: 3fcfc67748727497aa2a31a6330861fc, type: 2}
   _shootDelay: 1
-  _projectileQuantity: 12
+  _projectileQuantity: 13

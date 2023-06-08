@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Enemies.BossFireCaster;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.ShadowCasterMiniboss;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
@@ -38,7 +39,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 		{
 			var entity = new EcsEntity(sharedData.MainWorld, callerEntityIdx);
 
-			ref var shadowCasterComponent = ref entity.Add<ShadowCasterComponent>();
+			ref var shadowCasterComponent = ref entity.Add<BossFireCasterComponent>();
 			shadowCasterComponent.ShootDelay = _shootDelay;
 			shadowCasterComponent.FollowSpeed = _followSpeed;
 			shadowCasterComponent.FollowStateDuration = _followStateDuration;
@@ -47,11 +48,10 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 			shadowCasterComponent.ProjectileConfig = _projectileConfig;
 			shadowCasterComponent.ProjectileQuantity = _projectileQuantity;
 			
-			entity.Add<ShadowCasterFollowStateComponent>();
+			entity.Add<BossFireCasterFollowStateComponent>();
 			
 			entity.AddOrGet<MovementComponent>();
 			entity.AddOrGet<RotationComponent>();
-			entity.AddSpeedComponent(_followSpeed);
 		}
 	}
 }

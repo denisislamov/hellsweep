@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2586a7cb9b4049dca73367f3ebe7eeb2, type: 3}
+  m_Name: BossJadeWarriorBombExplodeProjectileConfig
+  m_EditorClassIdentifier: 
+  _explodeCollisionAreConfig: {fileID: 11400000, guid: 073d8ea7e9291406098ddc856143dedc, type: 2}
+  _damageProvider:
+    damageSource: 0
+    damage: 100
+    rate: 0.25
+  _explodeCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

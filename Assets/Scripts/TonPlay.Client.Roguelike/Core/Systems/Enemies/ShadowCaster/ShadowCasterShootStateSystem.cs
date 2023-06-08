@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.ShadowCaster
 	public class ShadowCasterShootStateSystem : IEcsRunSystem
 	{
 		private static readonly int s_Shoot = Animator.StringToHash("Shoot");
+		
 		public void Run(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
@@ -73,10 +74,10 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.ShadowCaster
 				var rotation = rotationPool.Get(entityId).Direction;
 
 				var angle = 120 / boss.ProjectileQuantity;
-				var offset = angle * 0.5f * shoot.Wave;
+				var offset = angle * 0.5f;
 				for (var i = 0; i < boss.ProjectileQuantity; i++)
 				{
-					var direction = rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
+					var direction = -rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
 					
 					CreateProjectile(position, direction, sharedData, boss.ProjectileConfig);
 				}
