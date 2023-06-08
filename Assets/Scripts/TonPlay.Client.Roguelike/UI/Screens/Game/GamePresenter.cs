@@ -1,6 +1,9 @@
 using System;
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
@@ -19,10 +22,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private readonly PlayerHealthBarPresenter.Factory _playerHealthBarPresenterFactory;
 		private readonly BossHealthBarPresenter.Factory _bossHealthBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
+		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
 		private readonly DebugPresenter.Factory _debugPresenterFactory;
 		private readonly IGameModelProvider _gameModelProvider;
-		
+		private readonly IUIService _uiService;
+
 		private IDisposable _bossExistsListener;
 		private IPresenter _bossPresenter;
 
@@ -33,18 +38,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			PlayerHealthBarPresenter.Factory playerHealthBarPresenterFactory,
 			BossHealthBarPresenter.Factory bossHealthBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
+			IButtonPresenterFactory buttonPresenterFactory,
 			TimerPresenter.Factory timerPresenterFactory,
 			DebugPresenter.Factory debugPresenterFactory,
-			IGameModelProvider gameModelProvider)
+			IGameModelProvider gameModelProvider,
+			IUIService uiService)
 			: base(view, context)
 		{
 			_levelProgressBarPresenterFactory = levelProgressBarPresenterFactory;
 			_playerHealthBarPresenterFactory = playerHealthBarPresenterFactory;
 			_bossHealthBarPresenterFactory = bossHealthBarPresenterFactory;
-			_matchScorePresenter = matchScorePresenter;
+			_buttonPresenterFactory = buttonPresenterFactory;
 			_timerPresenterFactory = timerPresenterFactory;
 			_debugPresenterFactory = debugPresenterFactory;
+			_matchScorePresenter = matchScorePresenter;
 			_gameModelProvider = gameModelProvider;
+			_uiService = uiService;
 
 			AddHealthBarPresenter();
 			AddExperienceBarPresenter();
@@ -52,6 +61,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			AddTimerPresenter();
 			AddDebugPresenter();
 			AddBossHealthBarPresenter();
+			AddPauseButtonPresenter();
 		}
 		
 		private void AddBossHealthBarPresenter()
@@ -102,6 +112,20 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 				new TimerContext(gameModel.GameTimeInSeconds));
 
 			Presenters.Add(presenter);
+		}
+
+		private void AddPauseButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(
+				View.PauseButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(PauseButtonClickHandler)));
+
+			Presenters.Add(presenter);
+		}
+		
+		private void PauseButtonClickHandler()
+		{
 		}
 
 		private void AddDebugPresenter()

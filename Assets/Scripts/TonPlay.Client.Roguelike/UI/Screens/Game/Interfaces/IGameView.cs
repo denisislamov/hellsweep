@@ -1,3 +1,4 @@
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore.Interfaces;
@@ -18,6 +19,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces
 		ITimerView TimerView { get; }
 
 		IMatchScoreView MatchScoreView { get; }
+		
+		IButtonView PauseButtonView { get; }
 
 		IDebugView DebugView { get; }
 	}

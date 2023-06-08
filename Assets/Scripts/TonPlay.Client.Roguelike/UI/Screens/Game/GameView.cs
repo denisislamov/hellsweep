@@ -1,3 +1,5 @@
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
@@ -32,6 +34,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private MatchScoreView _matchScoreView;
 
 		[SerializeField]
+		private ButtonView _pauseButtonView;
+
+		[SerializeField]
 		private DebugView _debugView;
 
 		public IPlayerHealthBarView HealthProgressBarView => _healthProgressBarView;
@@ -43,6 +48,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		public ITimerView TimerView => _timerView;
 
 		public IMatchScoreView MatchScoreView => _matchScoreView;
+		
+		public IButtonView PauseButtonView => _pauseButtonView;
 
 		public IDebugView DebugView => _debugView;
 	}
