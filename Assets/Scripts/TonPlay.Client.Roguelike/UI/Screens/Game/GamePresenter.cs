@@ -10,6 +10,8 @@ using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
+using TonPlay.Client.Roguelike.UI.Screens.Pause;
+using TonPlay.Client.Roguelike.UI.Screens.Pause.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using Zenject;
@@ -126,6 +128,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		
 		private void PauseButtonClickHandler()
 		{
+			SetGamePauseState(true);
+
+			_uiService.Open<PauseScreen, IPauseScreenContext>(new PauseScreenContext(() => SetGamePauseState(false)));
+		}
+		
+		private void SetGamePauseState(bool state)
+		{
+			var gameModel = _gameModelProvider.Get();
+			var gameData = gameModel.ToData();
+			gameData.Paused = state;
+			gameModel.Update(gameData);
 		}
 
 		private void AddDebugPresenter()

@@ -74,9 +74,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f66dec4364eb645adb66a0f26adde46c, type: 3}
   - {fileID: 21300000, guid: 7f96a8537454144079f6b61e60c023a9, type: 3}
   - {fileID: 21300000, guid: 5833458341820d449a545a554a195a6a, type: 3}
+  - {fileID: 21300000, guid: 5e2299a37736248d98dae896cfd48909, type: 3}
   - {fileID: 21300000, guid: e7c7e0b361dc8f84ca593c54f3881731, type: 3}
   - {fileID: 21300000, guid: 5f4ed9c36416e4645a11cc717060a717, type: 3}
   - {fileID: 21300000, guid: d4fbf6d3598de450488ebc2e21c95c16, type: 3}
+  - {fileID: 21300000, guid: 396d3bd307aa64f8989e40aed7e8a09c, type: 3}
   - {fileID: 21300000, guid: 0fe64cd3fdebc4a38811f6c1f03fbb31, type: 3}
   - {fileID: 21300000, guid: 0647c5e3ab880430c8e9e0db8272dfe1, type: 3}
   - {fileID: 21300000, guid: 6848fdf360b684dd094e0e428df7046c, type: 3}
@@ -121,6 +123,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6cc1b9381cebffe408180a7f876bee81, type: 3}
   - {fileID: 21300000, guid: f0010c38e50cfda4bbd0e2d1bda869b8, type: 3}
   - {fileID: 21300000, guid: 00527c682b3994c86a025b376e79ee00, type: 3}
+  - {fileID: 21300000, guid: 5d6a5b9890fef4ea5a499c2a7ddc03ed, type: 3}
   - {fileID: 21300000, guid: 7694ab98d9b7a4ea3a5bd464f363e549, type: 3}
   - {fileID: 21300000, guid: 1e3518094d42f40419f16a2e38f832db, type: 3}
   - {fileID: 21300000, guid: f5332b1963b76462da6ae328705a2b2c, type: 3}
@@ -135,7 +138,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 768cace996f4c483c9e35817368edbcc, type: 3}
   - {fileID: 21300000, guid: 9cc526f9f18464c93b544cc506a5d219, type: 3}
   - {fileID: 21300000, guid: 58db841a7ba2f4f8480a3101fcf48c03, type: 3}
+  - {fileID: 21300000, guid: ba62293a7671e4b419fc12bea287cb1e, type: 3}
+  - {fileID: 21300000, guid: c6a7b54a242f74f3793fc2dff42c1b61, type: 3}
   - {fileID: 21300000, guid: de1d067ab8d014fc9940ed64445326ee, type: 3}
+  - {fileID: 21300000, guid: 2fc101ba487a144c8b4fc716dcc85a25, type: 3}
   - {fileID: 21300000, guid: a537814bbb15a4a8489cf844b82fa27d, type: 3}
   - {fileID: 21300000, guid: 05a9c06b858f14ea49d167a6159e1b09, type: 3}
   - {fileID: 21300000, guid: dd2b1b7b0e98a4fd6aaa9e25548e8b4f, type: 3}
@@ -143,6 +149,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ae2ce99b50d384c52b72f02810a0198b, type: 3}
   - {fileID: 21300000, guid: c538c2cb68a70ac4298ef6fb0993b42f, type: 3}
   - {fileID: 21300000, guid: f764c0fb6cf284f96b420a9ce5f5ab65, type: 3}
+  - {fileID: 21300000, guid: 7eb1d30c74b5746ffb5094d7c9f7ea49, type: 3}
   - {fileID: 21300000, guid: ac2f460c456424e3ea7cfeab5a756a8b, type: 3}
   - {fileID: 21300000, guid: d08621ac7ae2c4c0b91b7ae02a9d2c46, type: 3}
   - {fileID: 21300000, guid: afe83aac7b5334b5cb4dfe0a22a75b4a, type: 3}
@@ -190,9 +197,11 @@ SpriteAtlas:
   - SkillChoiceItemBackground_01a
   - RectangleHalfRounded32
   - Slider red
+  - Skill_Choice_Skill_Background
   - settings_bg
   - Background_Items_01b
   - RectangleHalfRounded8
+  - Pause_Button_01a
   - Icons_ExoBracer_01a
   - Arrow_01
   - EquipTitleBackground
@@ -237,6 +246,7 @@ SpriteAtlas:
   - Settings_skull
   - Pink_glow
   - Icon_Blueprint_Belt
+  - Skill_Choice_Skill_Background_Defence
   - Blueprint_02
   - enery_bg
   - Belt
@@ -251,7 +261,10 @@ SpriteAtlas:
   - Icons_Coin_02a
   - Title holder
   - Power
+  - Pause_Title_Background_01a
+  - Pause_Skills_Background_01a
   - CrossLine_01a
+  - SkillLevelProgressBar_02a
   - Icon_Blueprint_Body
   - Icon_Blueprint_Feet
   - Rectangle
@@ -259,6 +272,7 @@ SpriteAtlas:
   - Icons_SportShoes_01a
   - Apply_button
   - RectangleRounded32
+  - Skill_Choice_Skill_Background_Attack
   - TitleBackground_03
   - SubTitleBackgroundTexture_02-1
   - CircleAvatar_01a
