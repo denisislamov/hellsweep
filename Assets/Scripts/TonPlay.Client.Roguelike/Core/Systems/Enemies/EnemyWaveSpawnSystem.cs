@@ -121,7 +121,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			foreach (var kvp in maxSpawnedQuantityOfProjectiles)
 			{
-				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value*PROJECTILE_COUNT_PER_ENEMY);
+ 				_pool.Add(kvp.Key.Identity, kvp.Key.PrefabView, kvp.Value*PROJECTILE_COUNT_PER_ENEMY);
 			}
 
 			_sharedData = sharedData;

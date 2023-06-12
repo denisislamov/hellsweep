@@ -222,6 +222,17 @@ SpriteAtlas:
   - {fileID: -6014047195226921239, guid: 845c0785c0a0a4ae1a0fbe201d3ea6b0, type: 3}
   - {fileID: 3668060501170634226, guid: 845c0785c0a0a4ae1a0fbe201d3ea6b0, type: 3}
   - {fileID: 2035611533294050714, guid: 845c0785c0a0a4ae1a0fbe201d3ea6b0, type: 3}
+  - {fileID: -5977630288766946458, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 8430340711681122468, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 815821163784979974, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 5651757949064455140, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 6683967876716112384, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 4607792210186225426, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: -777255695103561014, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: 4825121754388158841, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: -563165454263823179, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: -569280877846426493, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
+  - {fileID: -7205358757364785702, guid: 7a9f089510b6f4552a9ab417abf8b515, type: 3}
   - {fileID: -5398299524736936219, guid: 051c9b9567f6a481b97b297942431d7e, type: 3}
   - {fileID: 1362689616701784338, guid: 051c9b9567f6a481b97b297942431d7e, type: 3}
   - {fileID: -342030319607962893, guid: 051c9b9567f6a481b97b297942431d7e, type: 3}
@@ -553,6 +564,13 @@ SpriteAtlas:
   - {fileID: -738229359990596850, guid: fcfc25facc0584ae684e3eeba31973dc, type: 3}
   - {fileID: 2458410986372082338, guid: fcfc25facc0584ae684e3eeba31973dc, type: 3}
   - {fileID: -7093280800551107120, guid: fcfc25facc0584ae684e3eeba31973dc, type: 3}
+  - {fileID: 7503909114181434561, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 3094893296496752919, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 314711947665131798, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 8563973166562252900, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 7322307715908029686, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 4721776680029099202, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
+  - {fileID: 6187851116592862899, guid: 882408fab4a494aa1b733be4b837b15c, type: 3}
   - {fileID: -4589409668975893164, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
   - {fileID: -7930478249341368546, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
   - {fileID: -168451850047146214, guid: a592b22b6ccbe499389f9ab86dc4c092, type: 3}
@@ -1033,6 +1051,17 @@ SpriteAtlas:
   - bow_char_run_bow_attack_w29_h27_10
   - bow_char_run_bow_attack_w29_h27_13
   - bow_char_run_bow_attack_w29_h27_12
+  - jade_general_stay_w52_h65_8
+  - jade_general_stay_w52_h65_9
+  - jade_general_stay_w52_h65_0
+  - jade_general_stay_w52_h65_1
+  - jade_general_stay_w52_h65_2
+  - jade_general_stay_w52_h65_3
+  - jade_general_stay_w52_h65_4
+  - jade_general_stay_w52_h65_5
+  - jade_general_stay_w52_h65_6
+  - jade_general_stay_w52_h65_7
+  - jade_general_stay_w52_h65_10
   - shadow_caster_miniboss_stay_w36_h40_0
   - shadow_caster_miniboss_stay_w36_h40_1
   - shadow_caster_miniboss_stay_w36_h40_2
@@ -1364,6 +1393,13 @@ SpriteAtlas:
   - skeleton_walking_0
   - skeleton_walking_9
   - skeleton_walking_8
+  - jade_general_run_w59_h65_1
+  - jade_general_run_w59_h65_0
+  - jade_general_run_w59_h65_3
+  - jade_general_run_w59_h65_2
+  - jade_general_run_w59_h65_5
+  - jade_general_run_w59_h65_4
+  - jade_general_run_w59_h65_6
   - char_run_shuriken_w22_h29_19
   - char_run_shuriken_w22_h29_18
   - char_run_shuriken_w22_h29_13

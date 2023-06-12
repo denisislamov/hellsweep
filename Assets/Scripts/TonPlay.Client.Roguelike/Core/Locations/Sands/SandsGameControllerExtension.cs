@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossFireCaster;
+using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeHorseman;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.BossUnicorn;
 using TonPlay.Client.Roguelike.Core.Systems.Enemies.ShadowCaster;
@@ -36,7 +37,9 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Sands
 						  .Add(new ShadowCasterShootStateSystem())
 						  .Add(new TerracottaHorsemanAnimatorSystem())
 						  .Add(new BossJadeWarriorFollowStateSystem())
-						  .Add(new BossJadeWarriorTankStateSystem());
+						  .Add(new BossJadeWarriorTankStateSystem())
+						  .Add(new BossJadeHorsemanTankStateSystem())
+						  .Add(new BossJadeHorsemanShootStateSystem());
 			
 			_updateSystems.Init();
 		}

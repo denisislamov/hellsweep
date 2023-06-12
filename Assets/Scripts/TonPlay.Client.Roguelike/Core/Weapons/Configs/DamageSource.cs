@@ -41,5 +41,6 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		Enemy_Terracotta_Horseman,
 		Enemy_Floating_Skull,
 		Enemy_Boss_Unicorn,
+		Enemy_Jade_Horseman,
 	}
 }
