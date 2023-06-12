@@ -58,5 +58,7 @@ namespace TonPlay.Client.Roguelike.Core.Interfaces
 		DiContainer Container { get; }
 		
 		Vector2 LocationSize { get; }
+		
+		ILevelPoolObjectCreatorList LevelPoolObjectCreatorList { get; }
 	}
 }

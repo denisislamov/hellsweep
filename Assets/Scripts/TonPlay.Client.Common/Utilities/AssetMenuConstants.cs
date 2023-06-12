@@ -43,5 +43,7 @@ namespace TonPlay.Roguelike.Client.Utilities
 		public const string NETWORK_SERVICE_INSTALLERS = SERVICE_INSTALLERS + "Network/";
 		
 		public const string LOCATION_CONFIGS = CORE_CONFIGS + "Locations/";
+		
+		public const string POOLING_CONFIGS = CORE_CONFIGS + "Pooling/";
 	}
 }

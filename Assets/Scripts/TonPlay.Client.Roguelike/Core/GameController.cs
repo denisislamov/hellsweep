@@ -166,6 +166,7 @@ namespace TonPlay.Client.Roguelike.Core
 
 			_spawnSystems = new EcsSystems(_mainWorld, _sharedData)
 						   .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
+						   .Add(new PoolObjectCreateSystem())
 						   .Add(new PlayerSpawnSystem(_playersKdTreeStorage, _metaGameModelProvider, _inventoryItemsConfigProvider))
 						   .Add(new EnemyWaveSpawnSystem())
 						   .Add(new CollectablesSpawnSystem(_collectablesKdTreeStorage))

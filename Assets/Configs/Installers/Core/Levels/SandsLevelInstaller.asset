@@ -16,3 +16,4 @@ MonoBehaviour:
   levelEnemyWaveConfigProvider: {fileID: 11400000, guid: 86ec8579fb4044032a201775c3663ec6, type: 2}
   _playersLevelsConfigProvider: {fileID: 11400000, guid: d041c68a4a1c6402babc47a5d638c542, type: 2}
   _collectablesConfigProvider: {fileID: 11400000, guid: 11178122303ac42a58a82fbab912186a, type: 2}
+  _levelPoolObjectCreatorList: {fileID: 11400000, guid: a077d84ddbccb418e8c190e3605a9fda, type: 2}

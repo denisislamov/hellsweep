@@ -59,6 +59,8 @@ namespace TonPlay.Client.Roguelike.Core
 
 		public DiContainer Container { get; private set; }
 		
+		public ILevelPoolObjectCreatorList LevelPoolObjectCreatorList { get; }
+
 		public Vector2 LocationSize { get; private set; }
 
 		public SharedData(
@@ -74,7 +76,8 @@ namespace TonPlay.Client.Roguelike.Core
 			ICompositeViewPool compositeViewPool,
 			SignalBus signalBus,
 			DamageTextView damageTextViewPrefab,
-			DiContainer container)
+			DiContainer container,
+			ILevelPoolObjectCreatorList levelPoolObjectCreatorList)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
@@ -89,6 +92,7 @@ namespace TonPlay.Client.Roguelike.Core
 			SignalBus = signalBus;
 			DamageTextViewPrefab = damageTextViewPrefab;
 			Container = container;
+			LevelPoolObjectCreatorList = levelPoolObjectCreatorList;
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)

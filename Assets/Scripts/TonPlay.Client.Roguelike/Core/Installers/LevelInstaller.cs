@@ -4,6 +4,8 @@ using TonPlay.Client.Roguelike.Core.Enemies.Configs;
 using TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Core.Locations;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
+using TonPlay.Client.Roguelike.Core.Pooling;
+using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Client.Roguelike.Core.Waves;
 using TonPlay.Client.Roguelike.Core.Waves.Interfaces;
 using TonPlay.Roguelike.Client.Core.Levels.Config;
@@ -30,12 +32,20 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 		[SerializeField]
 		private CollectableConfigProvider _collectablesConfigProvider;
 
+		[SerializeField]
+		private LevelPoolObjectCreatorList _levelPoolObjectCreatorList;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<IEnemyConfigProvider>().FromInstance(_enemyConfigProvider).AsSingle();
 			Container.Bind<ILevelEnemyWaveConfigProvider>().FromInstance(levelEnemyWaveConfigProvider).AsSingle();
 			Container.Bind<ICollectableConfigProvider>().FromInstance(_collectablesConfigProvider).AsSingle();
 			Container.Bind<IPlayersLevelsConfigProvider>().FromInstance(_playersLevelsConfigProvider).AsSingle();
+
+			if (_levelPoolObjectCreatorList != null)
+			{
+				Container.Bind<ILevelPoolObjectCreatorList>().FromInstance(_levelPoolObjectCreatorList).AsSingle();
+			}
 		}
 	}
 }
