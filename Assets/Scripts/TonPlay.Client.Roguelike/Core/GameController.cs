@@ -295,6 +295,7 @@ namespace TonPlay.Client.Roguelike.Core
 							 .AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							 .Add(new UpdateWaveDataOnEnemyDeathSystem())
 							 .Add(new PerformActionsOnEnemyDeathSystem())
+							 .Add(new SpawnEffectOnDestroySystem())
 							 .Add(new SpawnEnemyDeathEffectSystem())
 							 .Add(new DestroyOnReceiveDamageSystem())
 							 .Add(new DestroyIfDistanceExceededSystem())

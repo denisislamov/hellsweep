@@ -18,4 +18,5 @@ MonoBehaviour:
     _acceleration: 0
   _properties:
   - {fileID: 11400000, guid: 5b4e7fcb329454324aad6b2c1bf227d4, type: 2}
+  - {fileID: 11400000, guid: 87020f3d88275460aaab5ea0a87529a2, type: 2}
   _layer: 11

@@ -55,12 +55,14 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Pause
 			{
 				var skillItemView = View.AttackSkillItemViews[index];
 				skillItemView.SetColor(new Color(1f, 1f, 1f, 0f));
+				skillItemView.SetCurrentLevel(0);
 			}
 			
 			for (var index = 0; index < View.DefenceSkillItemViews.Length; index++)
 			{
 				var skillItemView = View.DefenceSkillItemViews[index];
 				skillItemView.SetColor(new Color(1f, 1f, 1f, 0f));
+				skillItemView.SetCurrentLevel(0);
 			}
 
 			foreach (var kvp in _gameModelProvider.Get().PlayerModel.SkillsModel.SkillLevels)

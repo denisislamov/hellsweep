@@ -161,6 +161,14 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 				projectileEntity.AddRicochetOffTheArenaComponent(property.CollisionLayerMask);
 			}
 
+			if (config.HasProperty<ISpawnEffectOnDestroyProjectileConfigProperty>())
+			{
+				var property = config.GetProperty<ISpawnEffectOnDestroyProjectileConfigProperty>();
+				ref var component = ref projectileEntity.Add<SpawnEffectOnDestroyComponent>();
+				component.EffectIdentity = property.EffectViewPoolIdentity;
+				component.DestroyTimer = property.DestroyTimer;
+			}
+
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 
 			return projectileEntity;
