@@ -106,7 +106,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var metaGameModel = _metaGameModelProvider.Get();
 			var profileData = metaGameModel.ProfileModel.ToData();
 			
-			_analyticsServiceWrapper.OnStartChapter(profileData.BalanceData.Gold.ToString(), _locationConfig.Id);
+			_analyticsServiceWrapper.OnStartChapter(_locationConfig.Id, balanceModel.Gold.Value);
 
 			return true;
 		}

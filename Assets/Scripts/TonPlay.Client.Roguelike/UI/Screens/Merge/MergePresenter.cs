@@ -6,6 +6,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Data;
@@ -19,6 +20,7 @@ using TonPlay.Client.Roguelike.UI.Screens.Inventory;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Navigation;
 using TonPlay.Client.Roguelike.UI.Screens.Merge.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService;
@@ -51,6 +53,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
         private readonly ReactiveProperty<bool> _sortByRarityButtonActiveState = new ReactiveProperty<bool>();
 
         private IRestApiClient _restApiClient;
+        private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+        private readonly ILocationConfigStorage _locationConfigStorage;
         
         private bool _launchingMatch;
         private ReactiveProperty<bool> _playButtonLockState;
@@ -68,7 +72,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             InventoryItemCollectionPresenter.Factory inventoryItemCollectionPresenter,
             IMetaGameModelProvider metaGameModelProvider,
             IInventoryItemsConfigProvider inventoryItemsConfigProvider,
-            IRestApiClient restApiClient) : base(view, context)
+            IRestApiClient restApiClient,
+            IAnalyticsServiceWrapper analyticsServiceWrapper,
+            ILocationConfigStorage locationConfigStorage) : base(view, context)
         {
             _uiService = uiService;
             _buttonPresenterFactory = buttonPresenterFactory;
@@ -82,6 +88,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             _inventoryItemsConfigProvider = inventoryItemsConfigProvider;
             
             _restApiClient = restApiClient;
+            _analyticsServiceWrapper = analyticsServiceWrapper;
+            _locationConfigStorage = locationConfigStorage;
             
             AddNestedProfileBarPresenter();
             AddNavigationMenuPresenter();
@@ -550,6 +558,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             {
                 Common.Utilities.Logger.Log("Merging success");
                 
+                var itemModel = GetItemModel(mergingSlots[0].ItemId.Value);
+                if (itemModel != null)
+                {
+                    var config = _inventoryItemsConfigProvider.Get(itemModel.ItemId.Value);
+                    var metaGameModel = _metaGameModelProvider.Get();
+                    var data = metaGameModel.ProfileModel.ToData();
+                    _analyticsServiceWrapper.OnMergeItems(string.Join(", ", itemMergePostBody.itemDetailIds.ToArray()),
+                                                          config.Rarity.ToString(), config.Name, 
+                                                          data.BalanceData.Gold, _locationConfigStorage.Current.Value.Id,
+                                                          itemMergePostBody.itemDetailIds.Count);
+                }
+
                 View.MergeParticles.gameObject.SetActive(false);
                 View.RaycastBlocker.SetActive(true);
                 View.PlayMergeAnimation();

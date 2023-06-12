@@ -3,6 +3,7 @@ using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Network.Interfaces;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -12,6 +13,7 @@ using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Inventory.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -27,7 +29,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private readonly IInventoryItemsConfigProvider _inventoryItemsConfigProvider;
 		private readonly IInventoryItemPresentationProvider _inventoryItemPresentationProvider;
 		private readonly InventoryItemGradeDescriptionPresenter.Factory _gradeDescriptionPresenterFactory;
-
+		private readonly ILocationConfigStorage _locationConfigStorage;
+		
 		private readonly CompositeDisposable _compositeDisposables = new CompositeDisposable();
 
 		private readonly ReactiveProperty<bool> _equipButtonLockState = new ReactiveProperty<bool>();
@@ -36,6 +39,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 		private readonly ReactiveProperty<bool> _upgradeButtonLockState = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<bool> _maxLevelButtonLockState = new ReactiveProperty<bool>();
 
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		
 		public InventoryItemUpgradePresenter(
 			IInventoryItemUpgradeView view,
 			IInventoryItemUpgradeScreenContext context,
@@ -45,7 +50,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			IButtonPresenterFactory buttonPresenterFactory,
 			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
 			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
-			InventoryItemGradeDescriptionPresenter.Factory gradeDescriptionPresenterFactory)
+			InventoryItemGradeDescriptionPresenter.Factory gradeDescriptionPresenterFactory,
+			IAnalyticsServiceWrapper analyticsServiceWrapper,
+			ILocationConfigStorage locationConfigStorage)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -55,7 +62,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
 			_gradeDescriptionPresenterFactory = gradeDescriptionPresenterFactory;
-
+			_analyticsServiceWrapper = analyticsServiceWrapper;
+			_locationConfigStorage = locationConfigStorage;
+				
 			InitView();
 			
 			AddCloseButtonPresenter();
@@ -228,7 +237,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var config = _inventoryItemsConfigProvider.Get(Context.Item.ItemId.Value);
 			var previousDetailConfig = config.GetDetails(Context.Item.DetailId.Value);
 			var paidUpgradePrice = _inventoryItemsConfigProvider.GetUpgradePrice(previousDetailConfig.Level);
-
+			
 			var itemModel = Context.Item;
 			var itemData = itemModel.ToData();
 			itemData.DetailId = response.response.itemDetailId;
@@ -240,6 +249,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 			var balanceData = balanceModel.ToData();
 			var inventoryData = inventoryModel.ToData();
 
+			_analyticsServiceWrapper.OnLevelUpItems(Context.Item.Id.Value, config.Rarity.ToString(), config.Name,
+				balanceData.Gold, _locationConfigStorage.Current.Value.Id, 1);
+				
 			balanceData.Gold -= paidUpgradePrice.Coins;
 			inventoryData.SetBlueprintsValue(config.SlotName, inventoryData.GetBlueprintsValue(config.SlotName) - paidUpgradePrice.Blueprints);
 

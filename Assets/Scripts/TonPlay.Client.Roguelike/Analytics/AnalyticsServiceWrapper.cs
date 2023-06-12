@@ -16,25 +16,25 @@ namespace TonPlay.Client.Roguelike.Analytics
             //{
             await UnityServices.InitializeAsync();
             //Debug.Log("Done");
-                // var consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
+            // var consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
             //}
             // catch (ConsentCheckException e)
             // {
             //     // Something went wrong when checking the GeoIP, check the e.Reason and handle appropriately.
             // }
         }
-        
+
         public void OnSingleMatchFinishSession(int coins)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "coins", coins }
             };
-            
+
             AnalyticsService.Instance.CustomData("single_match_finish_session", parameters);
             AnalyticsService.Instance.Flush();
         }
-        
+
         /// <summary>
         /// First time application launch
         /// </summary>
@@ -42,11 +42,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         {
             var parameters = new Dictionary<string, object>();
             AnalyticsService.Instance.CustomData("first_app_launch", parameters);
-            Debug.LogFormat("AnalyticsService.Instance.CustomData('first_app_launch', parameters); {0}", 
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('first_app_launch', parameters); {0}",
                 string.Join("\n", parameters));
             AnalyticsService.Instance.Flush();
         }
-        
+
         /// <summary>
         /// Application launch
         /// </summary>
@@ -58,14 +58,14 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// <param name="country">country code GS/UA/US</param>
         /// <param name="sizeScreen">device aspect ratio 18:9/16:9, etc.</param>
         /// <param name="internet">Internet source mobile / Wi-Fi</param>
-        public void OnAppLaunch(string playerIdPlatform, 
-                                string date,
-                                string version,
-                                string os,
-                                string deviceModel,
-                                string country,
-                                string sizeScreen, 
-                                string internet)
+        public void OnAppLaunch(string playerIdPlatform,
+            string date,
+            string version,
+            string os,
+            string deviceModel,
+            string country,
+            string sizeScreen,
+            string internet)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -78,47 +78,219 @@ namespace TonPlay.Client.Roguelike.Analytics
                 { "size_screen", sizeScreen },
                 { "internet", internet },
             };
-            
+
             AnalyticsService.Instance.CustomData("app_launch", parameters);
-            Debug.LogFormat("AnalyticsService.Instance.CustomData('app_launch', parameters); {0}", 
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('app_launch', parameters); {0}",
                 string.Join("\n", parameters));
             AnalyticsService.Instance.Flush();
         }
-        
+
         /// <summary>
         /// Start game at location
         /// </summary>
         /// <param name="idLocation">id location</param>
         /// <param name="balanceCoins">coins balance</param>
-        public void OnStartChapter(string idLocation, string balanceCoins)
+        public void OnStartChapter(string idLocation, long balanceCoinsV2)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "id_location", idLocation },
-                { "balance_coins", balanceCoins }
+                { "balance_coins_v2", balanceCoinsV2 }
             };
-            
+
             AnalyticsService.Instance.CustomData("start_chapter", parameters);
-            Debug.LogFormat("AnalyticsService.Instance.CustomData('start _chapter', parameters); {0}", 
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('start _chapter', parameters); {0}",
                 string.Join("\n", parameters));
             AnalyticsService.Instance.Flush();
         }
-        
+
         /// <summary>
         /// Location completed
         /// </summary>
         /// <param name="idLocation">id location</param>
         /// <param name="balanceCoins">coins balance</param>
-        public void OnCompleteChapter(string idLocation, string  balanceCoins)
+        public void OnCompleteChapter(string idLocation, long balanceCoinsV2)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "id_location", idLocation },
-                { "balance_coins", balanceCoins }
+                { "balance_coins_v2", balanceCoinsV2 }
+            };
+
+            AnalyticsService.Instance.CustomData("complete_chapter", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('complete_chapter', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        /// <summary>
+        /// Игрок проиграл на локации и вылетает поп ап DEFEAT + время которое продержался
+        /// </summary>
+        /// <param name="idLocation">id location</param>
+        /// <param name="balanceCoins">balance coins</param>
+        /// <param name="time">time</param>
+        /// <param name="levelSkills">level skills</param>
+        public void OnDefeatChapter(string idLocation, long balanceCoinsV2,
+                                    int time, int levelSkills)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "id_location", idLocation },
+                { "balance_coins_v2", balanceCoinsV2 },
+                { "time", time },
+                { "level_skills", levelSkills }
             };
             
-            AnalyticsService.Instance.CustomData("complete_chapter", parameters);
-            Debug.LogFormat("AnalyticsService.Instance.CustomData('complete_chapter', parameters); {0}", 
+            AnalyticsService.Instance.CustomData("defeat_chapter", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('defeat_chapter', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        /// <summary>
+        /// Игроку вылетает поп ап левел апа
+        /// </summary>
+        /// <param name="idLevel"></param>
+        /// <param name="idLocation"></param>
+        /// <param name="balanceCoinsV2"></param>
+        public void OnLevelUpProfile(string idLevel, string idLocation, long balanceCoinsV2)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "id_level", idLevel },
+                { "balance_coins_v2", balanceCoinsV2 },
+                { "id_location", idLocation }
+            };
+            
+            AnalyticsService.Instance.CustomData("level_up_profile", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('level_up_profile', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnLevelUpItems(string idLevelItems, string rarityItem,
+                                   string nameItem, long balanceCoinsV2,
+                                   string idLocation, int counts)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"id_level_items", idLevelItems },
+                {"rarity_item", rarityItem },
+                {"name_item", nameItem },
+                {"balance_coins_v2", balanceCoinsV2 },
+                {"id_location", idLocation },
+                {"counts", counts }
+            };
+            
+            AnalyticsService.Instance.CustomData("level_up_items", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('level_up_items', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnMergeItems(string idLevelItems, string rarityItem,
+            string nameItem, long balanceCoinsV2,
+            string idLocation, int counts)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"id_level_items", idLevelItems },
+                {"rarity_item", rarityItem },
+                {"name_item", nameItem },
+                {"balance_coins_v2", balanceCoinsV2 },
+                {"id_location", idLocation },
+                {"counts", counts }
+            };
+            
+            AnalyticsService.Instance.CustomData("merge_items", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('merge_items', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnOpenLootbox(string idRarityLootbox, string idItems,
+            long balanceCoinsV2, int levelPlayer,
+            string idLocation, int counts)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"id_rarity_lootbox", idRarityLootbox },
+                {"id_items", idItems },
+                {"balance_coins_v2", balanceCoinsV2 },
+                {"id_location", idLocation },
+                {"level_player", levelPlayer },
+                {"counts", counts }
+            };
+            
+            AnalyticsService.Instance.CustomData("open_lootbox", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('open_lootbox', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnTonPurchase(string idPurchaseItems,
+            long balanceCoinsV2, int levelPlayer,
+            string idLocation, int counts)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"id_purchase_items", idPurchaseItems },
+                {"level_player", levelPlayer },
+                {"balance_coins_v2", balanceCoinsV2 },
+                {"id_location", idLocation },
+                {"level_player", levelPlayer },
+                {"counts", counts }
+            };
+            
+            AnalyticsService.Instance.CustomData("ton_purchase", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('ton_purchase', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnCompleteQuests(string idQuests,
+            long balanceCoinsV2, string rewardPoints,
+            string idLocation, int counts)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"id_quests", idQuests },
+                {"reward_points", rewardPoints },
+                {"balance_coins_v2", balanceCoinsV2 },
+                {"id_location", idLocation },
+                {"counts", counts }
+            };
+            
+            AnalyticsService.Instance.CustomData("complete_quests", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('complete_quests', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnReceiveCoins(string source, long quantityCoins)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "source", source },
+                { "quantity_coins", quantityCoins }
+            };
+
+            AnalyticsService.Instance.CustomData("receive_coins", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('receive_coins', parameters); {0}",
+                string.Join("\n", parameters));
+            AnalyticsService.Instance.Flush();
+        }
+        
+        public void OnSpentCoins(string source, long quantityCoins)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "source", source },
+                { "quantity_coins", quantityCoins }
+            };
+
+            AnalyticsService.Instance.CustomData("spent coins", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('spent coins', parameters); {0}",
                 string.Join("\n", parameters));
             AnalyticsService.Instance.Flush();
         }
