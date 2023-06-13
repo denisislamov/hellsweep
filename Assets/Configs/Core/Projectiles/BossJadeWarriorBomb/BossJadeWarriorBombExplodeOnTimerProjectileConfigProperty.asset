@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f66522287a648afa70bfa991a48752c, type: 3}
   m_Name: BossJadeWarriorBombExplodeOnTimerProjectileConfigProperty
   m_EditorClassIdentifier: 
-  _timer: 1
+  _timer: 2
   _explodeProjectileConfig: {fileID: 11400000, guid: d0216e3f69b5c4bc4851e9f9451873ee, type: 2}
