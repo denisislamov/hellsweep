@@ -29,16 +29,20 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeHorseman
 			var tankStatePool = world.GetPool<BossJadeHorsemanTankStateComponent>();
 			var shootStatePool = world.GetPool<BossJadeHorsemanShootStateComponent>();
 			var positionPool = world.GetPool<PositionComponent>();
+			var speedPool = world.GetPool<SpeedComponent>();
 
 			foreach (var entityId in filter)
 			{
 				ref var boss = ref bossPool.Get(entityId);
 				ref var shoot = ref shootStatePool.Get(entityId);
+				ref var speed = ref speedPool.Get(entityId);
 
 				if (!shoot.IsInited)
 				{
 					shoot.IsInited = true;
 					shoot.TimeLeft = boss.ShootStateDuration;
+					
+					speed.InitialSpeed = 0f;
 				}
 
 				shoot.TimeLeft -= Time.deltaTime;
@@ -47,6 +51,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeHorseman
 				if (shoot.TimeLeft <= 0)
 				{
 					shootStatePool.Del(entityId);
+
+					speed.InitialSpeed = 0f;
 					
 					tankStatePool.Add(entityId);
 					continue;

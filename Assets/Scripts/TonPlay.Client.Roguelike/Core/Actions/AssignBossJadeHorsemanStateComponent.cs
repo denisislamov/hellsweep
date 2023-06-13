@@ -70,10 +70,11 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 			bossComponent.TankStateDamageProvider = _tankStateDamageProvider;
 			bossComponent.ShootStateDamageProvider = _shootStateDamageProvider;
 			
-			entity.Add<BossWormTankStateComponent>();
+			entity.Add<BossJadeHorsemanShootStateComponent>();
 			
 			entity.AddOrGet<MovementComponent>();
 			entity.AddOrGet<RotationComponent>();
+			entity.AddOrGet<SpeedComponent>();
 		}
 	}
 }
