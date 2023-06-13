@@ -6,5 +6,6 @@ namespace TonPlay.Client.Common.Utilities
 		MainMenu,
 		Level_Hell,
 		Level_Forest,
+		Level_Sands,
 	}
 }

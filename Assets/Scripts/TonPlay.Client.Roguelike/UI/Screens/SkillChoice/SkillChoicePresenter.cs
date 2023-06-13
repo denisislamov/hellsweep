@@ -39,7 +39,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			_skillConfigProvider = skillConfigProvider;
 
 			AddCollectionPresenter();
-			AddNestedLevelProgressBarPresenter();
 			InitCurrentSkillViews();
 		}
 
@@ -64,6 +63,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 						var view = View.DefenceCurrentSkillViews[defenceSkillsCount];
 						view.SetColor(Color.white);
 						view.SetIcon(config.Icon);
+						view.SetBackgroundFilledSprite();
 						defenceSkillsCount++;
 						break;
 					}
@@ -72,6 +72,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 						var view = View.UtilityCurrentSkillViews[utilitySkillsCount];
 						view.SetColor(Color.white);
 						view.SetIcon(config.Icon);
+						view.SetBackgroundFilledSprite();
 						utilitySkillsCount++;
 						break;
 					}
@@ -81,10 +82,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			for (var i = defenceSkillsCount; i < PlayerLevelUpgradeSystem.MAX_DEFENCE_SKILLS; i++)
 			{
 				View.DefenceCurrentSkillViews[i].SetColor(new Color(1f, 1f, 1f, 0f));
+				View.DefenceCurrentSkillViews[i].SetBackgroundEmptySprite();
 			}
 			for (var i = utilitySkillsCount; i < PlayerLevelUpgradeSystem.MAX_UTILITY_SKILLS; i++)
 			{
 				View.UtilityCurrentSkillViews[i].SetColor(new Color(1f, 1f, 1f, 0f));
+				View.UtilityCurrentSkillViews[i].SetBackgroundEmptySprite();
 			}
 		}
 
@@ -93,17 +96,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice
 			var presenter = _collectionPresenterFactory.Create(
 				View.CollectionView,
 				new SkillChoiceCollectionContext(Context.SkillsToUpgrade, SkillClickedHandler));
-
-			Presenters.Add(presenter);
-		}
-
-		private void AddNestedLevelProgressBarPresenter()
-		{
-			var playerModel = _gameModelProvider.Get().PlayerModel;
-
-			var presenter = _levelProgressBarPresenterFactory.Create(
-				View.LevelProgressBarView,
-				new LevelProgressBarContext(playerModel.SkillsModel.Level, _fakeExperience, _fakeExperience));
 
 			Presenters.Add(presenter);
 		}

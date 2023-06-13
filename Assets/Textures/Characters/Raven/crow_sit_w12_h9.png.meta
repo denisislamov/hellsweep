@@ -1,0 +1,745 @@
+fileFormatVersion: 2
+guid: a59299bb4a5214ee1b6da3480efd0220
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -776615338369852623
+    second: crow_sit_w12_h9_0
+  - first:
+      213: -8046032995376539302
+    second: crow_sit_w12_h9_1
+  - first:
+      213: 6117590008128165863
+    second: crow_sit_w12_h9_2
+  - first:
+      213: -4259894978123697934
+    second: crow_sit_w12_h9_3
+  - first:
+      213: 898474125675717370
+    second: crow_sit_w12_h9_4
+  - first:
+      213: 8630450577883679793
+    second: crow_sit_w12_h9_5
+  - first:
+      213: 8347468919874183612
+    second: crow_sit_w12_h9_6
+  - first:
+      213: -2218877073354198215
+    second: crow_sit_w12_h9_7
+  - first:
+      213: 7858251130032220049
+    second: crow_sit_w12_h9_8
+  - first:
+      213: 6305530713257445910
+    second: crow_sit_w12_h9_9
+  - first:
+      213: -5393924113803470674
+    second: crow_sit_w12_h9_10
+  - first:
+      213: 5409085514185640963
+    second: crow_sit_w12_h9_11
+  - first:
+      213: 6993374167219510614
+    second: crow_sit_w12_h9_12
+  - first:
+      213: 7290378555387718879
+    second: crow_sit_w12_h9_13
+  - first:
+      213: 6139664208520647860
+    second: crow_sit_w12_h9_14
+  - first:
+      213: 7870389029009391661
+    second: crow_sit_w12_h9_15
+  - first:
+      213: -6597900338169046311
+    second: crow_sit_w12_h9_16
+  - first:
+      213: -2561805594705080674
+    second: crow_sit_w12_h9_17
+  - first:
+      213: -4181316995076793699
+    second: crow_sit_w12_h9_18
+  - first:
+      213: -557883832495176721
+    second: crow_sit_w12_h9_19
+  - first:
+      213: -8326396114988925740
+    second: crow_sit_w12_h9_20
+  - first:
+      213: 3769719485920905391
+    second: crow_sit_w12_h9_21
+  - first:
+      213: 4447055569662253595
+    second: crow_sit_w12_h9_22
+  - first:
+      213: -2774491084676869652
+    second: crow_sit_w12_h9_23
+  - first:
+      213: 5971429458745250116
+    second: crow_sit_w12_h9_24
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.49666652, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13b5855e678e835f0800000000000000
+      internalID: -776615338369852623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a595283de9fb65090800000000000000
+      internalID: -8046032995376539302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_2
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e755f333bb06e450800000000000000
+      internalID: 6117590008128165863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_3
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f077785610d1e4c0800000000000000
+      internalID: -4259894978123697934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af2e7ccf475087c00800000000000000
+      internalID: 898474125675717370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_5
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c4252131585c770800000000000000
+      internalID: 8630450577883679793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1e6be71ca28d370800000000000000
+      internalID: 8347468919874183612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_7
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 933f672de07f431e0800000000000000
+      internalID: -2218877073354198215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 197e16994cd1e0d60800000000000000
+      internalID: 7858251130032220049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_9
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a860c86ceb18750800000000000000
+      internalID: 6305530713257445910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea89453c89ee425b0800000000000000
+      internalID: -5393924113803470674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_11
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30c0fb8dd9ee01b40800000000000000
+      internalID: 5409085514185640963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_12
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d138aa0c47d0160800000000000000
+      internalID: 6993374167219510614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_13
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdca2088ba0ac2560800000000000000
+      internalID: 7290378555387718879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_14
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b49d0d7118743550800000000000000
+      internalID: 6139664208520647860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_15
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d208c3e6f1d393d60800000000000000
+      internalID: 7870389029009391661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9da1100899c8f64a0800000000000000
+      internalID: -6597900338169046311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_17
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ecef77263a27cd0800000000000000
+      internalID: -2561805594705080674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_18
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9ad427b85af8f5c0800000000000000
+      internalID: -4181316995076793699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_19
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe301323c9ff148f0800000000000000
+      internalID: -557883832495176721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_20
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dc74ea39d2b27c80800000000000000
+      internalID: -8326396114988925740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_21
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa80f2d46ebb05430800000000000000
+      internalID: 3769719485920905391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_22
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a1426aa7d17bd30800000000000000
+      internalID: 4447055569662253595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_23
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1d851fe070f79d0800000000000000
+      internalID: -2774491084676869652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_sit_w12_h9_24
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1111111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44150d96477ced250800000000000000
+      internalID: 5971429458745250116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

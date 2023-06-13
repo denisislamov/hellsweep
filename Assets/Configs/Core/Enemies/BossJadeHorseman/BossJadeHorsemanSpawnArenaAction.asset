@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6200366bbbe4f25aef92ea8d733b091, type: 3}
+  m_Name: BossJadeHorsemanSpawnArenaAction
+  m_EditorClassIdentifier: 
+  _arenaView: {fileID: 219731952405902173, guid: 559466f29461e45a5b641ce429f2440e, type: 3}
+  _collisionAreaConfig: {fileID: 11400000, guid: 3327e9db9e90748d0a3347e23f1c9501, type: 2}
+  _layer: 12
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64

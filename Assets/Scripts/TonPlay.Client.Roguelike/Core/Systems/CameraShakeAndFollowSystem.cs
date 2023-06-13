@@ -50,9 +50,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 				
 				transformComponent.Transform.position = 
 					targetPosition + 
-					RoguelikeConstants.Core.Camera.CAMERA_SHAKE_RADIUS * 
-					shake.TimeLeft / RoguelikeConstants.Core.Camera.CAMERA_SHAKE_TIME
-					* Random.insideUnitSphere;
+					shake.ShakeMagnitude * shake.TimeLeft / RoguelikeConstants.Core.Camera.CAMERA_SHAKE_TIME * Random.insideUnitSphere;
 			}
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();
 		}

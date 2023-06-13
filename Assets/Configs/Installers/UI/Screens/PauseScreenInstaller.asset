@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41ec66fcf34fc184baaed30a5a3995, type: 3}
+  m_Name: PauseScreenInstaller
+  m_EditorClassIdentifier: 
+  _screen: {fileID: 78439793628473017, guid: 5a2ae8875babc4979b3a96033155196e, type: 3}

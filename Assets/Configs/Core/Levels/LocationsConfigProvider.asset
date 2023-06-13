@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configs:
   - _id: location_forest
-    _infinite: 0
+    _infiniteX: 1
+    _infiniteY: 1
     _title: Forest
     _icon: {fileID: 21300000, guid: 0483d959e45cb4b788214078124d1a7f, type: 3}
     _sceneName: 3
@@ -78,8 +79,11 @@ MonoBehaviour:
       - {fileID: 8560196128710351001, guid: 0bce72b7631b8464e8920120dd2f508b, type: 3}
       - {fileID: 2069870743693741169, guid: 6e4a0cfec372c4739bb62cfc54bc3396, type: 3}
     index: 1
+    _locationBlockMatrix: {fileID: 0}
+    _blockerPrefab: {fileID: 0}
   - _id: location_hell
-    _infinite: 0
+    _infiniteX: 1
+    _infiniteY: 1
     _title: Hell
     _icon: {fileID: 21300000, guid: ec9585b8e43d2413bbb3f233442e1fbd, type: 3}
     _sceneName: 2
@@ -143,3 +147,17 @@ MonoBehaviour:
       - {fileID: 6590213076859963639, guid: fd3b355dae93a4389b6dcfc743079e54, type: 3}
       - {fileID: 8965550830968474546, guid: b7dde0ad7942f4a19920f71fc5ea7981, type: 3}
     index: 2
+    _locationBlockMatrix: {fileID: 0}
+    _blockerPrefab: {fileID: 0}
+  - _id: location_sands
+    _infiniteX: 0
+    _infiniteY: 0
+    _title: Valley of the Dead
+    _icon: {fileID: 21300000, guid: ec9585b8e43d2413bbb3f233442e1fbd, type: 3}
+    _sceneName: 4
+    _blockSize: {x: 5.95, y: 5.95}
+    _alreadyUnlocked: 0
+    _blocksMatrix: []
+    index: 3
+    _locationBlockMatrix: {fileID: 11400000, guid: 805160eab7a63428482466abe38388a6, type: 2}
+    _blockerPrefab: {fileID: 5848267456756940341, guid: 3636708f085fb45ac95f08e9d3d08313, type: 3}

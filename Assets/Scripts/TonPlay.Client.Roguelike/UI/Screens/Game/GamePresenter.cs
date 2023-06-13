@@ -1,12 +1,17 @@
 using System;
 using TonPlay.Client.Common.UIService;
+using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.UI.Buttons;
+using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Debug;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Game.LevelProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.MatchScore;
 using TonPlay.Client.Roguelike.UI.Screens.Game.ProgressBar;
 using TonPlay.Client.Roguelike.UI.Screens.Game.Timer;
+using TonPlay.Client.Roguelike.UI.Screens.Pause;
+using TonPlay.Client.Roguelike.UI.Screens.Pause.Interfaces;
 using TonPlay.Roguelike.Client.UI.UIService.Interfaces;
 using UniRx;
 using Zenject;
@@ -19,10 +24,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 		private readonly PlayerHealthBarPresenter.Factory _playerHealthBarPresenterFactory;
 		private readonly BossHealthBarPresenter.Factory _bossHealthBarPresenterFactory;
 		private readonly MatchScorePresenter.Factory _matchScorePresenter;
+		private readonly IButtonPresenterFactory _buttonPresenterFactory;
 		private readonly TimerPresenter.Factory _timerPresenterFactory;
 		private readonly DebugPresenter.Factory _debugPresenterFactory;
 		private readonly IGameModelProvider _gameModelProvider;
-		
+		private readonly IUIService _uiService;
+
 		private IDisposable _bossExistsListener;
 		private IPresenter _bossPresenter;
 
@@ -33,18 +40,22 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			PlayerHealthBarPresenter.Factory playerHealthBarPresenterFactory,
 			BossHealthBarPresenter.Factory bossHealthBarPresenterFactory,
 			MatchScorePresenter.Factory matchScorePresenter,
+			IButtonPresenterFactory buttonPresenterFactory,
 			TimerPresenter.Factory timerPresenterFactory,
 			DebugPresenter.Factory debugPresenterFactory,
-			IGameModelProvider gameModelProvider)
+			IGameModelProvider gameModelProvider,
+			IUIService uiService)
 			: base(view, context)
 		{
 			_levelProgressBarPresenterFactory = levelProgressBarPresenterFactory;
 			_playerHealthBarPresenterFactory = playerHealthBarPresenterFactory;
 			_bossHealthBarPresenterFactory = bossHealthBarPresenterFactory;
-			_matchScorePresenter = matchScorePresenter;
+			_buttonPresenterFactory = buttonPresenterFactory;
 			_timerPresenterFactory = timerPresenterFactory;
 			_debugPresenterFactory = debugPresenterFactory;
+			_matchScorePresenter = matchScorePresenter;
 			_gameModelProvider = gameModelProvider;
+			_uiService = uiService;
 
 			AddHealthBarPresenter();
 			AddExperienceBarPresenter();
@@ -52,6 +63,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 			AddTimerPresenter();
 			AddDebugPresenter();
 			AddBossHealthBarPresenter();
+			AddPauseButtonPresenter();
 		}
 		
 		private void AddBossHealthBarPresenter()
@@ -102,6 +114,31 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Game
 				new TimerContext(gameModel.GameTimeInSeconds));
 
 			Presenters.Add(presenter);
+		}
+
+		private void AddPauseButtonPresenter()
+		{
+			var presenter = _buttonPresenterFactory.Create(
+				View.PauseButtonView,
+				new CompositeButtonContext()
+				   .Add(new ClickableButtonContext(PauseButtonClickHandler)));
+
+			Presenters.Add(presenter);
+		}
+		
+		private void PauseButtonClickHandler()
+		{
+			SetGamePauseState(true);
+
+			_uiService.Open<PauseScreen, IPauseScreenContext>(new PauseScreenContext(() => SetGamePauseState(false)));
+		}
+		
+		private void SetGamePauseState(bool state)
+		{
+			var gameModel = _gameModelProvider.Get();
+			var gameData = gameModel.ToData();
+			gameData.Paused = state;
+			gameModel.Update(gameData);
 		}
 
 		private void AddDebugPresenter()

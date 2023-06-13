@@ -14,17 +14,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views
 		private SkillChoiceCollectionView _collectionView;
 
 		[SerializeField]
-		private LevelProgressBarView _levelProgressBarView;
-
-		[SerializeField]
 		private SkillChoiceCurrentSkillView[] _defenceCurrentSkillViews;
 
 		[SerializeField]
 		private SkillChoiceCurrentSkillView[] _utilityCurrentSkillViews;
 
 		public ISkillChoiceCollectionView CollectionView => _collectionView;
-
-		public ILevelProgressBarView LevelProgressBarView => _levelProgressBarView;
 
 		public ISkillChoiceCurrentSkillView[] DefenceCurrentSkillViews => _defenceCurrentSkillViews;
 

@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Utilities;
+using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
 {
@@ -31,6 +32,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			{
 				ref var shake = ref shakePool.AddOrGet(cameraEntityId);
 				shake.TimeLeft = RoguelikeConstants.Core.Camera.CAMERA_SHAKE_TIME;
+				shake.ShakeMagnitude = Mathf.Max(shake.ShakeMagnitude, RoguelikeConstants.Core.Camera.CAMERA_SHAKE_RADIUS);
 			}
 			
 			TonPlay.Client.Common.Utilities.ProfilingTool.EndSample();

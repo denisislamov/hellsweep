@@ -11,7 +11,9 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 		
 		int ChapterIdx { get; }
 		
-		bool Infinite { get; }
+		bool InfiniteX { get; }
+		
+		bool InfiniteY { get; }
 
 		string Title { get; }
 
@@ -25,6 +27,8 @@ namespace TonPlay.Client.Roguelike.Core.Locations.Interfaces
 		
 		bool AlreadyUnlocked { get; }
 		
+		GameObject BlockerPrefab { get; }
+
 		void AcceptUpdater(ILocationConfigUpdaterVisitor locationConfigUpdaterVisitor);
 	}
 }

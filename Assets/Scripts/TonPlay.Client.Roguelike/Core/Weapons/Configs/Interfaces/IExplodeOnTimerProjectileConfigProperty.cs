@@ -6,6 +6,6 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces
 	{
 		float Timer { get; }
 
-		ICollisionAreaConfig ExplodeCollisionAreConfig { get; }
+		IExplodeProjectileConfig ExplodeProjectileConfig { get; }
 	}
 }

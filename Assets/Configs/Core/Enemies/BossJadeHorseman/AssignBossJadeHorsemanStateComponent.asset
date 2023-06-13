@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d25e2e11f44243b90a843c529894f8, type: 3}
+  m_Name: AssignBossJadeHorsemanStateComponent
+  m_EditorClassIdentifier: 
+  _tankCount: 3
+  _tankRunningSpeed: 7
+  _tankRunningDuration: 1
+  _tankPreparingDuration: 0.3
+  _tankStoppingDuration: 0.5
+  _shootStateDuration: 0.5
+  _projectileConfig: {fileID: 11400000, guid: bc10116cd82a045c982906bbb03e8dc8, type: 2}
+  _shootCount: 1
+  _shootDelay: 0.5
+  _projectileQuantity: 18
+  _tankStateDamageProvider:
+    damageSource: 39
+    damage: 1000
+    rate: 0.25
+  _shootStateDamageProvider:
+    damageSource: 20
+    damage: 150
+    rate: 0.25

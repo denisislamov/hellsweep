@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: BossJadeHorsemanProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7959029979017957063, guid: 9f783623939834852a7a73f1d0176718, type: 3}
+  _movementConfig:
+    _startSpeed: 10
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 22ce729ddeccd4d3ca877ade5ff66cc4, type: 2}
+  - {fileID: 11400000, guid: db107f192d3b04660a73767f199e1e0d, type: 2}
+  - {fileID: 11400000, guid: f16f9128e52fe46348f8319d151180f8, type: 2}
+  - {fileID: 11400000, guid: 371f258adfd6b408391f87dd278d96cd, type: 2}
+  _layer: 11

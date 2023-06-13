@@ -10,5 +10,6 @@ namespace TonPlay.Client.Roguelike.Core.Components
 		public IDamageProvider DamageProvider;
 		public float DistanceToExplode;
 		public ICollisionAreaConfig CollisionConfig;
+		public int CollisionLayerMask;
 	}
 }

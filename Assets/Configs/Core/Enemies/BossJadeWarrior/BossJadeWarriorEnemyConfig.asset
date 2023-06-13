@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b3138789684e7895c493c6aa27e051, type: 3}
+  m_Name: BossJadeWarriorEnemyConfig
+  m_EditorClassIdentifier: 
+  _id: jade_warrior_boss
+  _enemyType: 1
+  _prefab: {fileID: 2165977174468807844, guid: 3084d68600cae4509a481d70b38be3d4, type: 3}
+  _collectablesIdsOnDeath:
+  - _collectableId: exp_1
+    _weight: 0.85
+  _propertyConfigs:
+  - {fileID: 11400000, guid: 476588430f8d944ca846a744d99207ab, type: 2}
+  - {fileID: 11400000, guid: ee3ad755048484218a4e7917af4843c7, type: 2}
+  - {fileID: 11400000, guid: 8e19d8993978943438324a7deaa60d55, type: 2}
+  - {fileID: 11400000, guid: 0d29a7e5e3fc64fa0bd42c06417a16f1, type: 2}
+  - {fileID: 11400000, guid: 34b9a275e07f3459b9ef8b397e74c5bf, type: 2}
+  - {fileID: 11400000, guid: 6d4a0cc9caf8146548adb4a9322cb7d1, type: 2}
+  - {fileID: 11400000, guid: 2d71f15030fc94a9f8b76affebab429e, type: 2}
+  _deathEffectConfig: {fileID: 11400000, guid: 43d1c0cd060f64897b37932d73da2449, type: 2}

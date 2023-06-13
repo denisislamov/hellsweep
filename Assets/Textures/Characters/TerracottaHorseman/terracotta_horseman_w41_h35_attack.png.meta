@@ -1,0 +1,577 @@
+fileFormatVersion: 2
+guid: 3f99521cc83384cb087e3b08bde277a0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3035780209773440094
+    second: terracotta_general_w41_h35_attack_0
+  - first:
+      213: -1199721654947441553
+    second: terracotta_general_w41_h35_attack_1
+  - first:
+      213: -4943980147399669784
+    second: terracotta_general_w41_h35_attack_2
+  - first:
+      213: 5938569747938769865
+    second: terracotta_general_w41_h35_attack_3
+  - first:
+      213: -883532586454468686
+    second: terracotta_general_w41_h35_attack_4
+  - first:
+      213: -4100300412730702364
+    second: terracotta_general_w41_h35_attack_5
+  - first:
+      213: 4142180205268924172
+    second: terracotta_general_w41_h35_attack_6
+  - first:
+      213: 8402884833016838389
+    second: terracotta_general_w41_h35_attack_7
+  - first:
+      213: 5010178169254175364
+    second: terracotta_general_w41_h35_attack_8
+  - first:
+      213: 5197156632679355456
+    second: terracotta_general_w41_h35_attack_9
+  - first:
+      213: 7227563352321281659
+    second: terracotta_general_w41_h35_attack_10
+  - first:
+      213: 3390826391115618641
+    second: terracotta_general_w41_h35_attack_11
+  - first:
+      213: 7389401316592841043
+    second: terracotta_general_w41_h35_attack_12
+  - first:
+      213: 5125893961163142456
+    second: terracotta_general_w41_h35_attack_13
+  - first:
+      213: -6615661296593709446
+    second: terracotta_general_w41_h35_attack_14
+  - first:
+      213: 6928598338349813976
+    second: terracotta_general_w41_h35_attack_15
+  - first:
+      213: -8778057700827878830
+    second: terracotta_horseman_w41_h35_attack_0
+  - first:
+      213: 6291823900778439993
+    second: terracotta_horseman_w41_h35_attack_1
+  - first:
+      213: 3063584270872068770
+    second: terracotta_horseman_w41_h35_attack_2
+  - first:
+      213: -4759602885921676474
+    second: terracotta_horseman_w41_h35_attack_3
+  - first:
+      213: -1713369364745160739
+    second: terracotta_horseman_w41_h35_attack_4
+  - first:
+      213: 6611617803659962391
+    second: terracotta_horseman_w41_h35_attack_5
+  - first:
+      213: 5353455614378807363
+    second: terracotta_horseman_w41_h35_attack_6
+  - first:
+      213: 3161976329567256369
+    second: terracotta_horseman_w41_h35_attack_7
+  - first:
+      213: -8239135235543985633
+    second: terracotta_horseman_w41_h35_attack_8
+  - first:
+      213: 3225483856129128119
+    second: terracotta_horseman_w41_h35_attack_9
+  - first:
+      213: -8953628379205370390
+    second: terracotta_horseman_w41_h35_attack_10
+  - first:
+      213: 9160981070652709453
+    second: terracotta_horseman_w41_h35_attack_11
+  - first:
+      213: -8403432038898575139
+    second: terracotta_horseman_w41_h35_attack_12
+  - first:
+      213: 7169966109097673923
+    second: terracotta_horseman_w41_h35_attack_13
+  - first:
+      213: 5239088515607054125
+    second: terracotta_horseman_w41_h35_attack_14
+  - first:
+      213: -1417337489233178710
+    second: terracotta_horseman_w41_h35_attack_15
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25aa54c77031e2680800000000000000
+      internalID: -8778057700827878830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9352633908c015750800000000000000
+      internalID: 6291823900778439993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2cdcca9a9048a20800000000000000
+      internalID: 3063584270872068770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_3
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 643e6b8846e72fdb0800000000000000
+      internalID: -4759602885921676474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_4
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7f35df3a3e838e0800000000000000
+      internalID: -1713369364745160739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_5
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 718ecc1dc5f21cb50800000000000000
+      internalID: 6611617803659962391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_6
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3409ed7748b4b4a40800000000000000
+      internalID: 5353455614378807363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_7
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13fbc0808b891eb20800000000000000
+      internalID: 3161976329567256369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_8
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f121ff4f726b8ad80800000000000000
+      internalID: -8239135235543985633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_9
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b675515a7833cc20800000000000000
+      internalID: 3225483856129128119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_10
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aed7b9e6d625eb380800000000000000
+      internalID: -8953628379205370390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_11
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4a155e2fb7522f70800000000000000
+      internalID: 9160981070652709453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_12
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8505b7513016b80800000000000000
+      internalID: -8403432038898575139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_13
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c44b582036d08360800000000000000
+      internalID: 7169966109097673923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_14
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d27469f3f3bf4b840800000000000000
+      internalID: 5239088515607054125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terracotta_horseman_w41_h35_attack_15
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 0
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.42, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf896b101b945ce0800000000000000
+      internalID: -1417337489233178710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

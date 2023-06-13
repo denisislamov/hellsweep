@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09195829c5184adea22143cf41ec7002, type: 3}
+  m_Name: ShadowCasterMinibossPerformActionsOnSpawnEnemyPropertyConfig
+  m_EditorClassIdentifier: 
+  _actions:
+  - {fileID: 11400000, guid: 60c2cfa7cb9a24179ab32239bdab79a4, type: 2}
+  - {fileID: 11400000, guid: 1e14cfc1b6fd243c684d9773a7f458e1, type: 2}

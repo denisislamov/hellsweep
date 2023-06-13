@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e4b49854ee4339a8d92e95da19bbf6, type: 3}
+  m_Name: FloatingSkullDeathEffectPoolObjectCreator
+  m_EditorClassIdentifier: 
+  _poolCount: 128
+  _poolType: 0
+  _effectView: {fileID: 1133885553020399458, guid: d6f235908e1834ca6b1a5e5da43a9a75, type: 3}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb5ab89d91540a48e13b57763bc0931, type: 3}
+  m_Name: BossFireCasterProjectileConfig
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8370536519358272292, guid: c16a75cba684f4065bbc4934e723828d, type: 3}
+  _movementConfig:
+    _startSpeed: 8
+    _acceleration: 0
+  _properties:
+  - {fileID: 11400000, guid: 73d02bc5f8e314f8c9713ba0acc1d999, type: 2}
+  - {fileID: 11400000, guid: 320327128ceb34ea9a14ac7451c130be, type: 2}
+  - {fileID: 11400000, guid: 61091001cac274af1b89b2cbcd2fc930, type: 2}
+  - {fileID: 11400000, guid: 4bfba5c91586842fe92449142d040829, type: 2}
+  _layer: 11

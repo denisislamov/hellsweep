@@ -8,5 +8,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.SkillChoice.Views.Interfaces
 		void SetColor(Color color);
 
 		void SetIcon(Sprite icon);
+
+		public void SetBackgroundEmptySprite();
+
+		public void SetBackgroundFilledSprite();
 	}
 }

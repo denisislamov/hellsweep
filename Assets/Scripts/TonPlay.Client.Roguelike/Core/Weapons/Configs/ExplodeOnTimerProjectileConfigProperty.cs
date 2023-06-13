@@ -1,9 +1,5 @@
-using TonPlay.Client.Roguelike.Core.Collision.CollisionAreas.Interfaces;
-using TonPlay.Client.Roguelike.Core.Collision.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs.Interfaces;
-using TonPlay.Roguelike.Client.Core.Collision.Interfaces;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs;
-using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
 using TonPlay.Roguelike.Client.Utilities;
 using UnityEngine;
 
@@ -15,10 +11,11 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		[SerializeField]
 		private float _timer;
 
-		[SerializeField]
-		private CollisionAreaConfig _explodeCollisionAreConfig;
+		[SerializeField] 
+		private ExplodeProjectileConfig _explodeProjectileConfig;
 
 		public float Timer => _timer;
-		public ICollisionAreaConfig ExplodeCollisionAreConfig => _explodeCollisionAreConfig;
+		
+		public IExplodeProjectileConfig ExplodeProjectileConfig => _explodeProjectileConfig;
 	}
 }

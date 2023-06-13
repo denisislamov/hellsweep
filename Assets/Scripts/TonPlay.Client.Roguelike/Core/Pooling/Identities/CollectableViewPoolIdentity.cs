@@ -1,7 +1,7 @@
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
 using TonPlay.Roguelike.Client.Core.Collectables;
 
-namespace TonPlay.Roguelike.Client.Core.Pooling.Identities
+namespace TonPlay.Client.Roguelike.Core.Pooling.Identities
 {
 	public class CollectableViewPoolIdentity : IViewPoolIdentity
 	{

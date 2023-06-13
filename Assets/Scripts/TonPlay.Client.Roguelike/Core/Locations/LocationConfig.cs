@@ -15,7 +15,10 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		private string _id;
 
 		[SerializeField]
-		private bool _infinite;
+		private bool _infiniteX;
+		
+		[SerializeField]
+		private bool _infiniteY;
 
 		[SerializeField]
 		private string _title;
@@ -36,19 +39,30 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		private List<LocationBlockList> _blocksMatrix;
 
 		public int index = -1;
+		
+		[SerializeField]
+		private LocationBlockMatrix _locationBlockMatrix;
+		
+		[SerializeField]
+		private GameObject _blockerPrefab;
 
 		public string Id => _id;
 		public int ChapterIdx => index;
-		public bool Infinite => _infinite;
+		public bool InfiniteX => _infiniteX;
+		public bool InfiniteY => _infiniteY;
 		public string Title => _title;
 		public Sprite Icon => _icon;
 		public Vector2 BlockSize => _blockSize;
 
 		public IReadOnlyList<IReadOnlyList<LocationBlockView>> BlocksPrefabsMatrix =>
-			_blocksMatrix.Select(_ => _.Prefabs).ToList();
+			_locationBlockMatrix is null 
+				? _blocksMatrix.Select(_ => _.Prefabs).ToList() 
+				: _locationBlockMatrix.Matrix;
+		
 		public SceneName SceneName => _sceneName;
 		public bool AlreadyUnlocked => _alreadyUnlocked;
-		
+		public GameObject BlockerPrefab => _blockerPrefab;
+
 		public void AcceptUpdater(ILocationConfigUpdaterVisitor locationConfigUpdaterVisitor)
 		{
 			locationConfigUpdaterVisitor.Visit(this);
@@ -59,9 +73,14 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 			_id = id;
 		}
 		
-		public void SetInfinite(bool infinite)
+		public void SetInfiniteX(bool infinite)
 		{
-			_infinite = infinite;
+			_infiniteX = infinite;
+		}
+		
+		public void SetInfiniteY(bool infinite)
+		{
+			_infiniteY = infinite;
 		}
 
 		[Serializable]

@@ -32,6 +32,15 @@ namespace TonPlay.Client.Roguelike.Core.Weapons.Configs
 		Enemy_RedSnake,
 		Enemy_Boss_Shooter,
 		Enemy_Boss_Worm,
-		Enemy_Boss_Butcher
+		Enemy_Boss_Butcher,
+		Enemy_Shadow_Caster,
+		Enemy_Jiangshi,
+		Enemy_Moguy,
+		Enemy_Jade_Archer,
+		Enemy_Boss_Fire_Caster,
+		Enemy_Terracotta_Horseman,
+		Enemy_Floating_Skull,
+		Enemy_Boss_Unicorn,
+		Enemy_Jade_Horseman,
 	}
 }

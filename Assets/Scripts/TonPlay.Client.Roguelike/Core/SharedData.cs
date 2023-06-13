@@ -14,6 +14,7 @@ using TonPlay.Roguelike.Client.Core.Collision.Config;
 using TonPlay.Roguelike.Client.Core.Levels.Config.Interfaces;
 using TonPlay.Roguelike.Client.Core.Pooling;
 using TonPlay.Roguelike.Client.Core.Weapons.Configs.Interfaces;
+using UnityEngine;
 using Zenject;
 
 namespace TonPlay.Client.Roguelike.Core
@@ -57,6 +58,10 @@ namespace TonPlay.Client.Roguelike.Core
 		public EcsWorld EffectsWorld { get; private set; }
 
 		public DiContainer Container { get; private set; }
+		
+		public ILevelPoolObjectCreatorList LevelPoolObjectCreatorList { get; }
+
+		public Vector2 LocationSize { get; private set; }
 
 		public SharedData(
 			IPlayerConfigProvider playerConfigProvider,
@@ -71,7 +76,8 @@ namespace TonPlay.Client.Roguelike.Core
 			ICompositeViewPool compositeViewPool,
 			SignalBus signalBus,
 			DamageTextView damageTextViewPrefab,
-			DiContainer container)
+			DiContainer container,
+			ILevelPoolObjectCreatorList levelPoolObjectCreatorList)
 		{
 			PlayerConfigProvider = playerConfigProvider;
 			EnemyConfigProvider = enemyConfigProvider;
@@ -86,6 +92,7 @@ namespace TonPlay.Client.Roguelike.Core
 			SignalBus = signalBus;
 			DamageTextViewPrefab = damageTextViewPrefab;
 			Container = container;
+			LevelPoolObjectCreatorList = levelPoolObjectCreatorList;
 		}
 
 		public void SetPlayerPositionProvider(IPositionProvider positionProvider)
@@ -116,6 +123,11 @@ namespace TonPlay.Client.Roguelike.Core
 		public void SetEffectsWorld(EcsWorld world)
 		{
 			EffectsWorld = world;
+		}
+
+		public void SetLocationSize(Vector2 locationSize)
+		{
+			LocationSize = locationSize;
 		}
 
 		public class Factory : PlaceholderFactory<SharedData>

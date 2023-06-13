@@ -33,7 +33,6 @@ namespace TonPlay.Client.Roguelike.Core.Locations
 		public void Visit(LocationConfig locationConfig)
 		{
 			locationConfig.SetId(_remoteConfig.id);
-			locationConfig.SetInfinite(_remoteConfig.infinite);
 		}
 	}
 }

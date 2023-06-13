@@ -4,5 +4,7 @@ namespace TonPlay.Client.Roguelike.Core.Components
 	{
 		public int[][] BlockEntityIds;
 		public int LastNearestBlockToPlayerEntityId;
+		public bool InfinityX;
+		public bool InfinityY;
 	}
 }
