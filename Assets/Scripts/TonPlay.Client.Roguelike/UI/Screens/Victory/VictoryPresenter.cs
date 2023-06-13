@@ -161,7 +161,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			_analyticsServiceWrapper.OnCompleteChapter(
 				_locationConfigStorage.Current.Value.Id,
 				profileData.BalanceData.Gold);
-
 		}
 
 		private UniTask<GameSessionResponse> FinishMatchSession()
