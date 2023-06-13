@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
-using log4net.Filter;
 using TonPlay.Client.Roguelike.Core.Components;
-using TonPlay.Client.Roguelike.Core.Components.Enemies.BossButcher;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.ShadowCasterMiniboss;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using TonPlay.Client.Roguelike.Core.Weapons.Configs;
