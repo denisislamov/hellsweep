@@ -267,11 +267,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             AnalyticsService.Instance.Flush();
         }
         
-        public void OnReceiveCoins(string source, long quantityCoins)
+        public void OnReceiveCoins(GoldСhangeSourceTypes source, long quantityCoins)
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "source", source },
+                { "source", source.ToString() },
                 { "quantity_coins", quantityCoins }
             };
 
@@ -281,11 +281,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             AnalyticsService.Instance.Flush();
         }
         
-        public void OnSpentCoins(string source, long quantityCoins)
+        public void OnSpentCoins(GoldСhangeSourceTypes source, long quantityCoins)
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "source", source },
+                { "source", source.ToString() },
                 { "quantity_coins", quantityCoins }
             };
 

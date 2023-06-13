@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TonPlay.Client.Roguelike.Analytics;
 
 namespace TonPlay.Client.Roguelike.Interfaces
 {
@@ -19,6 +20,7 @@ namespace TonPlay.Client.Roguelike.Interfaces
 
         public void OnDefeatChapter(string idLocation, long balanceCoinsV2,
                                     int time, int levelSkills);
+        
         // TODO - ask where user level up
         public void OnLevelUpProfile(string idLevel, string idLocation, long balanceCoinsV2);
 
@@ -39,7 +41,8 @@ namespace TonPlay.Client.Roguelike.Interfaces
                                      string idLocation, int counts);
         
         
-        public void OnReceiveCoins(string source, long quantityCoins);
-        public void OnSpentCoins(string source, long quantityCoins);
+        public void OnReceiveCoins(GoldСhangeSourceTypes source, long quantityCoins);
+        public void OnSpentCoins(GoldСhangeSourceTypes source, long quantityCoins);
+        
     }
 }
