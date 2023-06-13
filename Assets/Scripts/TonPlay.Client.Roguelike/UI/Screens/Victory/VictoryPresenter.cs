@@ -158,9 +158,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			var metaGameModel = _metaGameModelProvider.Get();
 			var profileData = metaGameModel.ProfileModel.ToData();
 
-			_analyticsServiceWrapper.OnStartChapter(
+			_analyticsServiceWrapper.OnCompleteChapter(
 				_locationConfigStorage.Current.Value.Id,
-				profileData.BalanceData.Gold.ToString());
+				profileData.BalanceData.Gold);
 
 		}
 

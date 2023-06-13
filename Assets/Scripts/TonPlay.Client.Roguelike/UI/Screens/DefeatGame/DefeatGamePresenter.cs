@@ -9,6 +9,7 @@ using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
 using TonPlay.Client.Roguelike.Network.Response;
@@ -41,6 +42,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		private readonly ILocationConfigStorage _locationConfigStorage;
 		private readonly RewardItemCollectionPresenter.Factory _rewardItemCollectionPresenterFactory;
 		private readonly IMatchProvider _matchProvider;
+		
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		
 		private bool _loading;
 		private bool _matchFinished;
 
@@ -195,7 +199,18 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 		{
 			var gameModel = _gameModelProvider.Get();
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
-
+			
+			var metaGameModel = _metaGameModelProvider.Get();
+			var profileData = metaGameModel.ProfileModel.ToData();
+			var levelSkills = gameModel.PlayerModel.SkillsModel.Level;
+			
+			_analyticsServiceWrapper.OnDefeatChapter(
+				_locationConfigStorage.Current.Value.Id,
+				profileData.BalanceData.Gold, 
+				(int)gameModel.GameTimeInSeconds.Value, 
+				levelSkills.Value
+				);
+			
 			return _matchProvider.Current.FinishSession(
 				new MatchResult(MatchResultType.Lose,
 					gainModel.Gold.Value,

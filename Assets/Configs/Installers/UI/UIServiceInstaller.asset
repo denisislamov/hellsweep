@@ -34,5 +34,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60c36a6efadf645679a0e292eaadf4a7, type: 2}
   - {fileID: 11400000, guid: 0e570c538fb6e48ebaf52890d4edb06c, type: 2}
   - {fileID: 11400000, guid: 197f74bdb016c4c71bd349e4e80d59e2, type: 2}
+  - {fileID: 11400000, guid: 4b2cf319597884e0891132f65d1996b8, type: 2}
   - {fileID: 11400000, guid: d7fe08b21eea24ab798ad3e63c7ea0c9, type: 2}
   _buttonsInstaller: {fileID: 11400000, guid: d0fa5bdfc2c1b4d7dad4556e2dd5fc9c, type: 2}
