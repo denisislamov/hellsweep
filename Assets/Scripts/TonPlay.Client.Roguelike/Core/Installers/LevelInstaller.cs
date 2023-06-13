@@ -23,8 +23,8 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 		[SerializeField]
 		private EnemyConfigProvider _enemyConfigProvider;
 
-		[FormerlySerializedAs("_levelWaveConfigProvider")] [SerializeField]
-		private LevelEnemyWaveConfigProvider levelEnemyWaveConfigProvider;
+		[SerializeField]
+		private LevelEnemyWaveConfigProvider _levelEnemyWaveConfigProvider;
 
 		[SerializeField]
 		private PlayerLevelsConfigProvider _playersLevelsConfigProvider;
@@ -38,14 +38,10 @@ namespace TonPlay.Client.Roguelike.Core.Installers
 		public override void InstallBindings()
 		{
 			Container.Bind<IEnemyConfigProvider>().FromInstance(_enemyConfigProvider).AsSingle();
-			Container.Bind<ILevelEnemyWaveConfigProvider>().FromInstance(levelEnemyWaveConfigProvider).AsSingle();
+			Container.Bind<ILevelEnemyWaveConfigProvider>().FromInstance(_levelEnemyWaveConfigProvider).AsSingle();
 			Container.Bind<ICollectableConfigProvider>().FromInstance(_collectablesConfigProvider).AsSingle();
 			Container.Bind<IPlayersLevelsConfigProvider>().FromInstance(_playersLevelsConfigProvider).AsSingle();
-
-			if (_levelPoolObjectCreatorList != null)
-			{
-				Container.Bind<ILevelPoolObjectCreatorList>().FromInstance(_levelPoolObjectCreatorList).AsSingle();
-			}
+			Container.Bind<ILevelPoolObjectCreatorList>().FromInstance(_levelPoolObjectCreatorList).AsSingle();
 		}
 	}
 }
