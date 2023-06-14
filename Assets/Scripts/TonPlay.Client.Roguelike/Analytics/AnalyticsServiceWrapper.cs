@@ -153,7 +153,7 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// <param name="idLevel"></param>
         /// <param name="idLocation"></param>
         /// <param name="balanceCoinsV2"></param>
-        public void OnLevelUpProfile(string idLevel, string idLocation, long balanceCoinsV2)
+        public void OnLevelUpProfile(int idLevel, string idLocation, long balanceCoinsV2)
         {
             var parameters = new Dictionary<string, object>()
             {

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Data;
 using TonPlay.Client.Roguelike.Models.Interfaces;
@@ -9,6 +10,7 @@ using TonPlay.Client.Roguelike.Network.Interfaces;
 using TonPlay.Client.Roguelike.Shop;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.MainMenu.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes.Interfaces;
 using UniRx;
 using Zenject;
@@ -27,7 +29,10 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 
 		private readonly ReactiveProperty<bool> _buttonLockReactiveProperty = new ReactiveProperty<bool>();
 		private readonly ReactiveProperty<string> _buttonTextReactiveProperty = new ReactiveProperty<string>();
-
+		
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		private readonly ILocationConfigStorage _locationConfigStorage;
+		
 		public ShopLootboxPresenter(
 			IShopLootboxView view,
 			IShopLootboxContext context,
@@ -35,7 +40,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			IButtonPresenterFactory buttonPresenterFactory,
 			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient,
-			IShopEmbeddedScreenStorage embeddedScreenStorage)
+			IShopEmbeddedScreenStorage embeddedScreenStorage,
+			IAnalyticsServiceWrapper analyticsServiceWrapper,
+			ILocationConfigStorage locationConfigStorage)
 			: base(view, context)
 		{
 			_uiService = uiService;
@@ -43,7 +50,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			_metaGameModelProvider = metaGameModelProvider;
 			_restApiClient = restApiClient;
 			_embeddedScreenStorage = embeddedScreenStorage;
-
+			_analyticsServiceWrapper = analyticsServiceWrapper;
+			_locationConfigStorage = locationConfigStorage;
+			
 			AddButtonPresenter();
 			InitView();
 		}
@@ -112,7 +121,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 			var receivedItemModels = new List<IInventoryItemModel>(response.response.items.Count);
 			var inventoryModel = _metaGameModelProvider.Get().ProfileModel.InventoryModel;
 			var inventoryData = inventoryModel.ToData();
-			
+
+			var idItems = new List<string>();
 			for (var i = 0; i < response.response.items.Count; i++)
 			{
 				var itemResponseData = response.response.items[i];
@@ -129,8 +139,17 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Shop.SubScreens.ShopLootboxes
 				inventoryData.Items.Add(itemData);
 				
 				receivedItemModels.Add(itemModel);
+				idItems.Add(itemResponseData.itemId);
 			}
 			
+			var data = _metaGameModelProvider.Get().ProfileModel.ToData();
+			
+			_analyticsServiceWrapper.OnOpenLootbox(Context.Rarity.ToString(), 
+										    string.Join(", ", idItems.ToArray()), 
+										    data.BalanceData.Gold, data.Level, 
+										    _locationConfigStorage.Current.Value.Id,
+										    1);
+
 			inventoryData.SetKeysValue(Context.Rarity, inventoryData.GetKeysValue(Context.Rarity) - 1);
 			
 			inventoryModel.Update(inventoryData);

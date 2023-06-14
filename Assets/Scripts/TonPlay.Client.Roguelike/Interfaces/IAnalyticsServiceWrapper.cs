@@ -21,10 +21,8 @@ namespace TonPlay.Client.Roguelike.Interfaces
         public void OnDefeatChapter(string idLocation, long balanceCoinsV2,
                                     int time, int levelSkills);
         
-        // TODO - ask where user level up
-        public void OnLevelUpProfile(string idLevel, string idLocation, long balanceCoinsV2);
+        public void OnLevelUpProfile(int idLevel, string idLocation, long balanceCoinsV2);
 
-        // TODO - counts?
         public void OnLevelUpItems(string idLevelItems, string rarityItem,
             string nameItem, long balanceCoinsV2,
             string idLocation, int counts);

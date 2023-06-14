@@ -8,6 +8,9 @@ namespace TonPlay.Client.Roguelike.Analytics
         DailyQuests,
         LevelUp,
         Tournament,
-        TonPacks
+        TonPacks,
+        LevelUpItems,
+        MergeItems,
+        EvolveBranchSkills
     }
 }

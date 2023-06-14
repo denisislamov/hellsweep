@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Analytics;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
@@ -280,6 +281,9 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
             var model = metaGameModel.ProfileModel;
             var data = metaGameModel.ProfileModel.ToData();
 
+            var goldSpent = data.BalanceData.Gold - userBalanceResponse.response.coins;
+            
+            _analyticsServiceWrapper.OnSpentCoins(GoldСhangeSourceTypes.MergeItems, goldSpent);
             data.BalanceData.Gold = userBalanceResponse.response.coins;
             data.BalanceData.Energy = userBalanceResponse.response.energy;
 

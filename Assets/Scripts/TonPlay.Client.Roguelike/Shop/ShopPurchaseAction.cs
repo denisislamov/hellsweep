@@ -6,6 +6,8 @@ using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Network;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Analytics;
+using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
 using TonPlay.Client.Roguelike.Models.Data;
@@ -41,7 +43,9 @@ namespace TonPlay.Client.Roguelike.Shop
 		private readonly ReactiveProperty<PaymentTransactionResponse> _currentPaymentTransactionResponse = new ReactiveProperty<PaymentTransactionResponse>();
 
 		private readonly List<IShopRewardItemContext> _rewardsResults = new List<IShopRewardItemContext>();
-
+		
+		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
+		
 		private IDisposable _currentPaymentStatusListener;
 		private IDisposable _loopedTransactionRequestListener;
 		private IScreen _lockerScreen;
@@ -54,7 +58,8 @@ namespace TonPlay.Client.Roguelike.Shop
 			IShopPurchaseActionContext context,
 			IShopRewardPresentationProvider shopRewardPresentationProvider,
 			IInventoryItemPresentationProvider inventoryItemPresentationProvider,
-			IInventoryItemsConfigProvider inventoryItemsConfigProvider)
+			IInventoryItemsConfigProvider inventoryItemsConfigProvider,
+			IAnalyticsServiceWrapper analyticsServiceWrapper)
 		{
 			_uiService = uiService;
 			_metaGameModelProvider = metaGameModelProvider;
@@ -63,7 +68,7 @@ namespace TonPlay.Client.Roguelike.Shop
 			_inventoryItemPresentationProvider = inventoryItemPresentationProvider;
 			_inventoryItemsConfigProvider = inventoryItemsConfigProvider;
 			_restApiClient = restApiClient;
-
+			_analyticsServiceWrapper = analyticsServiceWrapper;
 			_reasonFuncs = new Dictionary<PaymentReason, Func<object, UniTask<Response<PaymentTransactionResponse>>>>()
 			{
 				[PaymentReason.ITEM] = (value) => restApiClient.PostBuyMarketItem(new BuyMarketItemPostBody() {itemDetailId = (string)value}),
@@ -305,6 +310,8 @@ namespace TonPlay.Client.Roguelike.Shop
 				var balanceData = balanceModel.ToData();
 				balanceData.Gold += Convert.ToInt64(model.Rewards.Coins);
 				balanceModel.Update(balanceData);
+				
+				_analyticsServiceWrapper.OnReceiveCoins(GoldСhangeSourceTypes.LootBoxes, (long)model.Rewards.Coins);
 			}
 
 			if (model.Rewards.Energy > 0)

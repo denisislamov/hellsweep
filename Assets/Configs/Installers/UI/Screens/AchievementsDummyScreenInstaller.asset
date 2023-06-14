@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54d1a881a8a4cecac7faa30d7d8a7e5, type: 3}
   m_Name: AchievementsDummyScreenInstaller
   m_EditorClassIdentifier: 
-  _screen: {fileID: 0}
+  _screen: {fileID: 1272323198220626931, guid: b145e8507c4fc450884b92107592aa72, type: 3}
