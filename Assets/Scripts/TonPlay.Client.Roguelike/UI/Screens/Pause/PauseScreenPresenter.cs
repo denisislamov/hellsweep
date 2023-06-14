@@ -139,6 +139,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Pause
 					gainModel.Gold.Value,
 					gainModel.ProfileExperience.Value));
 
+			_uiService.Close(Context.Screen);
+			
 			await _matchProvider.Current.Finish();
 		}
 
