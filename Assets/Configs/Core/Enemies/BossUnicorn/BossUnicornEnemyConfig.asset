@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossUnicornEnemyConfig
   m_EditorClassIdentifier: 
   _id: unicorn
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 3509069771737221472, guid: 20480638c932d4c1b8d1c40199add9c5, type: 3}
   _collectablesIdsOnDeath: []
   _propertyConfigs:

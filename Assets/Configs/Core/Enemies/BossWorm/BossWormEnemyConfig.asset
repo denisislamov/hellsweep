@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossWormEnemyConfig
   m_EditorClassIdentifier: 
   _id: boss_worm
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 8115066223926428980, guid: e41e2546564af4ff7b52d46fc1d3ccc1, type: 3}
   _collectablesIdsOnDeath: []
   _propertyConfigs:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossShooterEnemyConfig
   m_EditorClassIdentifier: 
   _id: boss_shooter
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 3859152423040865116, guid: d1774aa2b0598405089a53de198bf329, type: 3}
   _collectablesIdsOnDeath: []
   _propertyConfigs:

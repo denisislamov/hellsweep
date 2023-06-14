@@ -15,7 +15,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			var sharedData = systems.GetShared<ISharedData>();
 
 			var bossFilter = world.Filter<BossEnemy>().Inc<HealthComponent>().End();
-			var bossExists = bossFilter.GetEntitiesCount() > 0;
+			var miniBossFilter = world.Filter<MiniBossEnemy>().Inc<HealthComponent>().End();
+			var bossExists = bossFilter.GetEntitiesCount() > 0 || miniBossFilter.GetEntitiesCount() > 0;
 			
 			var bossModel = sharedData.GameModel.BossModel;
 			var bossData = bossModel.ToData();
@@ -31,12 +32,25 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 			var healthPool = world.GetPool<HealthComponent>();
 
-			foreach (var entityId in bossFilter)
+			if (bossFilter.GetEntitiesCount() > 0)
 			{
-				ref var health = ref healthPool.Get(entityId);
+				foreach (var entityId in bossFilter)
+				{
+					ref var health = ref healthPool.Get(entityId);
 
-				bossData.Health = health.CurrentHealth;
-				bossData.MaxHealth = health.MaxHealth;
+					bossData.Health = health.CurrentHealth;
+					bossData.MaxHealth = health.MaxHealth;
+				}
+			} 
+			else if (miniBossFilter.GetEntitiesCount() > 0)
+			{
+				foreach (var entityId in miniBossFilter)
+				{
+					ref var health = ref healthPool.Get(entityId);
+
+					bossData.Health = health.CurrentHealth;
+					bossData.MaxHealth = health.MaxHealth;
+				}
 			}
 			
 			bossModel.Update(bossData);

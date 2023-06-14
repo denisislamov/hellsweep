@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossJadeHorsemanEnemyConfig
   m_EditorClassIdentifier: 
   _id: jade_horseman_boss
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 8086123244067857055, guid: 7398edcb099c64cd2a86231b1071784c, type: 3}
   _collectablesIdsOnDeath: []
   _propertyConfigs:

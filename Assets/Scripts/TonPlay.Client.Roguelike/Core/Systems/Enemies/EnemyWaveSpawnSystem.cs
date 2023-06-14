@@ -404,6 +404,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				case EnemyType.Boss:
 					entity.Add<BossEnemy>();
 					return;
+				case EnemyType.Miniboss:
+					entity.Add<MiniBossEnemy>();
+					return;
 				default:
 					entity.Add<RegularEnemy>();
 					return;

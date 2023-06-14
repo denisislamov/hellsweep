@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossButcherEnemyConfig
   m_EditorClassIdentifier: 
   _id: boss_butcher
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 2903438154617585018, guid: ef45b1d0ac01e4fe49d2ec60cff76bab, type: 3}
   _collectablesIdsOnDeath: []
   _propertyConfigs:

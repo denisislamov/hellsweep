@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossFireCasterEnemyConfig
   m_EditorClassIdentifier: 
   _id: caster_boss
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 9107513249233578008, guid: 0b2b2c67308cf439f8fc53b7c5ea8a0b, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_2

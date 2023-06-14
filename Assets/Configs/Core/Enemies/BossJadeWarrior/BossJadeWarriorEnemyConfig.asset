@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossJadeWarriorEnemyConfig
   m_EditorClassIdentifier: 
   _id: jade_warrior_boss
-  _enemyType: 1
+  _enemyType: 2
   _prefab: {fileID: 2165977174468807844, guid: 3084d68600cae4509a481d70b38be3d4, type: 3}
   _collectablesIdsOnDeath:
   - _collectableId: exp_2
