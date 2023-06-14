@@ -6,6 +6,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.UIService.Layers;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Analytics;
 using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
 using TonPlay.Client.Roguelike.Core.Models.Interfaces;
@@ -165,6 +166,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			if (gainModel.Gold.Value > 0)
 			{
 				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.COINS_ID, gainModel.Gold.Value));
+				_analyticsServiceWrapper.OnReceiveCoins(GoldСhangeSourceTypes.VictoryOrDefeatLocation, gainModel.Gold.Value);
 			}
 
 			if (gainModel.ProfileExperience.Value > 0)

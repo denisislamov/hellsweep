@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TonPlay.Client.Roguelike.Interfaces;
@@ -9,12 +10,35 @@ namespace TonPlay.Client.Roguelike.Analytics
 {
     public class AnalyticsServiceWrapper : IAnalyticsServiceWrapper
     {
+        private string _consentIdentifier;
+        private bool _isOptInConsentRequired;
+        private bool _isInitSuccess;
         public async UniTask Init()
         {
             //Debug.Log("Init");
             //try
             //{
-            await UnityServices.InitializeAsync();
+            _isInitSuccess = true;
+            try
+            {
+                await UnityServices.InitializeAsync();
+                var consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
+                if (consentIdentifiers.Count > 0)
+                {
+                    _consentIdentifier = consentIdentifiers[0];
+                    _isOptInConsentRequired = _consentIdentifier == "pipl";
+                }
+
+                
+            }
+            catch (ConsentCheckException e)
+            {
+                _isInitSuccess = false;
+                Debug.LogFormat("Something went wrong when checking the GeoIP, " +
+                                "check the e.Reason and handle appropriately\n {0}", e.Message);
+                // Something went wrong when checking the GeoIP, check the e.Reason and handle appropriately
+            }
+            
             //Debug.Log("Done");
             // var consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
             //}
@@ -26,6 +50,11 @@ namespace TonPlay.Client.Roguelike.Analytics
 
         public void OnSingleMatchFinishSession(int coins)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+
             var parameters = new Dictionary<string, object>()
             {
                 { "coins", coins }
@@ -40,6 +69,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// </summary>
         public void OnFirstAppLaunch()
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>();
             AnalyticsService.Instance.CustomData("first_app_launch", parameters);
             Debug.LogFormat("AnalyticsService.Instance.CustomData('first_app_launch', parameters); {0}",
@@ -67,6 +101,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             string sizeScreen,
             string internet)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "player_id_platform", playerIdPlatform },
@@ -82,6 +121,7 @@ namespace TonPlay.Client.Roguelike.Analytics
             AnalyticsService.Instance.CustomData("app_launch", parameters);
             Debug.LogFormat("AnalyticsService.Instance.CustomData('app_launch', parameters); {0}",
                 string.Join("\n", parameters));
+            
             AnalyticsService.Instance.Flush();
         }
 
@@ -92,6 +132,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// <param name="balanceCoins">coins balance</param>
         public void OnStartChapter(string idLocation, long balanceCoinsV2)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "id_location", idLocation },
@@ -111,6 +156,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// <param name="balanceCoins">coins balance</param>
         public void OnCompleteChapter(string idLocation, long balanceCoinsV2)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "id_location", idLocation },
@@ -133,6 +183,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         public void OnDefeatChapter(string idLocation, long balanceCoinsV2,
                                     int time, int levelSkills)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "id_location", idLocation },
@@ -153,8 +208,13 @@ namespace TonPlay.Client.Roguelike.Analytics
         /// <param name="idLevel"></param>
         /// <param name="idLocation"></param>
         /// <param name="balanceCoinsV2"></param>
-        public void OnLevelUpProfile(string idLevel, string idLocation, long balanceCoinsV2)
+        public void OnLevelUpProfile(int idLevel, string idLocation, long balanceCoinsV2)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "id_level", idLevel },
@@ -172,6 +232,11 @@ namespace TonPlay.Client.Roguelike.Analytics
                                    string nameItem, long balanceCoinsV2,
                                    string idLocation, int counts)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 {"id_level_items", idLevelItems },
@@ -192,6 +257,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             string nameItem, long balanceCoinsV2,
             string idLocation, int counts)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 {"id_level_items", idLevelItems },
@@ -212,6 +282,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             long balanceCoinsV2, int levelPlayer,
             string idLocation, int counts)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 {"id_rarity_lootbox", idRarityLootbox },
@@ -232,6 +307,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             long balanceCoinsV2, int levelPlayer,
             string idLocation, int counts)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 {"id_purchase_items", idPurchaseItems },
@@ -252,6 +332,11 @@ namespace TonPlay.Client.Roguelike.Analytics
             long balanceCoinsV2, string rewardPoints,
             string idLocation, int counts)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 {"id_quests", idQuests },
@@ -269,6 +354,11 @@ namespace TonPlay.Client.Roguelike.Analytics
         
         public void OnReceiveCoins(GoldСhangeSourceTypes source, long quantityCoins)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "source", source.ToString() },
@@ -283,14 +373,19 @@ namespace TonPlay.Client.Roguelike.Analytics
         
         public void OnSpentCoins(GoldСhangeSourceTypes source, long quantityCoins)
         {
+            if (!_isInitSuccess)
+            {
+                return;
+            }
+            
             var parameters = new Dictionary<string, object>()
             {
                 { "source", source.ToString() },
                 { "quantity_coins", quantityCoins }
             };
 
-            AnalyticsService.Instance.CustomData("spent coins", parameters);
-            Debug.LogFormat("AnalyticsService.Instance.CustomData('spent coins', parameters); {0}",
+            AnalyticsService.Instance.CustomData("spent_coins", parameters);
+            Debug.LogFormat("AnalyticsService.Instance.CustomData('spent_coins', parameters); {0}",
                 string.Join("\n", parameters));
             AnalyticsService.Instance.Flush();
         }

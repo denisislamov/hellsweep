@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Analytics;
 using TonPlay.Client.Roguelike.Core.Player.Configs;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
@@ -568,6 +569,15 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                                                           config.Rarity.ToString(), config.Name, 
                                                           data.BalanceData.Gold, _locationConfigStorage.Current.Value.Id,
                                                           itemMergePostBody.itemDetailIds.Count);
+                    
+                    var userBalanceResponse = await _restApiClient.GetUserBalance();
+                    data.BalanceData.Gold = userBalanceResponse.response.coins;
+                    
+                    var model = metaGameModel.ProfileModel;
+                    model.Update(data);
+                    
+                    var goldSpent = data.BalanceData.Gold - userBalanceResponse.response.coins;
+                    _analyticsServiceWrapper.OnSpentCoins(GoldСhangeSourceTypes.MergeItems, goldSpent);
                 }
 
                 View.MergeParticles.gameObject.SetActive(false);
@@ -583,7 +593,6 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Merge
                 await UpdateInventoryModel();
 
                 View.RaycastBlocker.SetActive(false);
-                
                 // UpdateView();
             }
             // TODO - update inventory

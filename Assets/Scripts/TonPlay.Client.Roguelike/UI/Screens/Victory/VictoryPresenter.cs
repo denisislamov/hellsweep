@@ -5,6 +5,7 @@ using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
 using TonPlay.Client.Common.UIService.Layers;
 using TonPlay.Client.Common.Utilities;
+using TonPlay.Client.Roguelike.Analytics;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Core.Match;
 using TonPlay.Client.Roguelike.Core.Match.Interfaces;
@@ -157,7 +158,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 
 			var metaGameModel = _metaGameModelProvider.Get();
 			var profileData = metaGameModel.ProfileModel.ToData();
-
+			
 			_analyticsServiceWrapper.OnCompleteChapter(
 				_locationConfigStorage.Current.Value.Id,
 				profileData.BalanceData.Gold);
@@ -167,6 +168,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 		{
 			var gameModel = _gameModelProvider.Get();
 			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
+			
+			_analyticsServiceWrapper.OnReceiveCoins(GoldСhangeSourceTypes.VictoryOrDefeatLocation, gainModel.Gold.Value);
 
 			return _matchProvider.Current.FinishSession(
 				new MatchResult(MatchResultType.Win,

@@ -3,6 +3,7 @@ using TonPlay.Client.Common.Extensions;
 using TonPlay.Client.Common.Network.Interfaces;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Common.UIService.Interfaces;
+using TonPlay.Client.Roguelike.Analytics;
 using TonPlay.Client.Roguelike.Interfaces;
 using TonPlay.Client.Roguelike.Inventory.Configs.Interfaces;
 using TonPlay.Client.Roguelike.Models;
@@ -254,7 +255,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.InventoryItemUpgrade
 				
 			balanceData.Gold -= paidUpgradePrice.Coins;
 			inventoryData.SetBlueprintsValue(config.SlotName, inventoryData.GetBlueprintsValue(config.SlotName) - paidUpgradePrice.Blueprints);
-
+			
+			_analyticsServiceWrapper.OnSpentCoins(GoldСhangeSourceTypes.LevelUpItems, paidUpgradePrice.Coins);
 			balanceModel.Update(balanceData);
 			inventoryModel.Update(inventoryData);
 

@@ -38,7 +38,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 		private readonly IRestApiClient _restApiClient;
 		private readonly ILocationConfigProvider _locationConfigProvider;
 		private readonly IAnalyticsServiceWrapper _analyticsServiceWrapper;
-		
+		private readonly ILocationConfigStorage _locationConfigStorage;
+
 		public SingleMatch(
 			ILocationConfig locationConfig,
 			ISceneService sceneService,
@@ -48,7 +49,8 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			IMetaGameModelProvider metaGameModelProvider,
 			IRestApiClient restApiClient,
 			ILocationConfigProvider locationConfigProvider,
-			IAnalyticsServiceWrapper analyticsServiceWrapper)
+			IAnalyticsServiceWrapper analyticsServiceWrapper,
+			ILocationConfigStorage locationConfigStorage)
 		{
 			_sceneService = sceneService;
 			_uiService = uiService;
@@ -59,6 +61,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			_restApiClient = restApiClient;
 			_locationConfigProvider = locationConfigProvider;
 			_analyticsServiceWrapper = analyticsServiceWrapper;
+			_locationConfigStorage = locationConfigStorage;
 		}
 		
 		public async UniTask<bool> Launch()
@@ -201,7 +204,10 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			{
 				profileData.Level++;
 				profileData.Experience -= profileData.MaxExperience;
-
+				
+				_analyticsServiceWrapper.OnLevelUpProfile(profileData.Level, _locationConfigStorage.Current.Value.Id,
+					profileData.BalanceData.Gold);
+				
 				var config = _profileConfigProvider.Get(profileData.Level);
 				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += RoguelikeConstants.Meta.INCREASE_ENERGY_PER_GAINED_LEVEL;
