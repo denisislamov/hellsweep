@@ -10,7 +10,5 @@ namespace TonPlay.Client.Roguelike.Core.Enemies.Configs.Interfaces
 		DeathEffectView Prefab { get; }
 		
 		float DestroyTimer { get; }
-		
-		int PoolSize { get; }
 	}
 }

@@ -527,5 +527,11 @@ namespace TonPlay.Client.Roguelike.Extensions
 			component.TimeLeft = value;
 			return ref component;
 		}
+		
+		public static ref EffectComponent AddEffectComponent(this EcsEntity entity)
+		{
+			ref var component = ref entity.Add<EffectComponent>();
+			return ref component;
+		}
 	}
 }

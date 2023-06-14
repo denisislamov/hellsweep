@@ -30,7 +30,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				var enemyConfig = sharedData.EnemyConfigProvider.Get(enemy.ConfigId);
 				
 				if (enemyConfig.DeathEffectConfig == null || 
-					!sharedData.CompositeViewPool.TryGet<DeathEffectView>(enemyConfig.DeathEffectConfig.Identity, out var viewPoolObject))
+					!sharedData.CompositeViewPool.TryGet<EffectView>(enemyConfig.DeathEffectConfig.Identity, out var viewPoolObject))
 				{
 					return;
 				}
@@ -40,7 +40,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 
 				view.transform.position = position.Position;
 				view.PlayableDirector.time = 0;
-				
+
+				entity.AddEffectComponent();
 				entity.AddPositionComponent(position.Position);
 				entity.AddDestroyOnTimerComponent(enemyConfig.DeathEffectConfig.DestroyTimer);
 				entity.AddPlayableDirectorComponent(view.PlayableDirector);

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e9cc2550184094b2fd1753573dc9a8, type: 3}
   m_Name: ForestLevelPoolObjectCreatorList
   m_EditorClassIdentifier: 
-  _creators: []
+  _creators:
+  - {fileID: 11400000, guid: e84bb4cfe4c724e3397c6ab0a8b24c33, type: 2}

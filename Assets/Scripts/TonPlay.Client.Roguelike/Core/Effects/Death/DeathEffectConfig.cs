@@ -15,16 +15,12 @@ namespace TonPlay.Client.Roguelike.Core.Effects.Death
 		[SerializeField]
 		private float _destroyTimer;
 		
-		[SerializeField] 
-		private int _poolSize;
-		
 		private IViewPoolIdentity _identity;
 
-		public IViewPoolIdentity Identity => _identity ?? new DeathEffectViewPoolIdentity(_prefab);
+		public IViewPoolIdentity Identity => _identity ?? new GameObjectViewPoolIdentity(_prefab.gameObject);
 		
 		public DeathEffectView Prefab => _prefab;
 		
 		public float DestroyTimer => _destroyTimer;
-		public int PoolSize => _poolSize;
 	}
 }
