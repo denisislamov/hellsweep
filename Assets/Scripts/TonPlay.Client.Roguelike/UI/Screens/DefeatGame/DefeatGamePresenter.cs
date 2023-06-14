@@ -61,7 +61,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			IProfileConfigProvider profileConfigProvider,
 			ILocationConfigStorage locationConfigStorage,
 			RewardItemCollectionPresenter.Factory rewardItemCollectionPresenterFactory,
-			IMatchProvider matchProvider)
+			IMatchProvider matchProvider,
+			IAnalyticsServiceWrapper analyticsServiceWrapper)
 			: base(view, context)
 		{
 			_timerPresenterFactory = timerPresenterFactory;
@@ -74,7 +75,8 @@ namespace TonPlay.Client.Roguelike.UI.Screens.DefeatGame
 			_locationConfigStorage = locationConfigStorage;
 			_rewardItemCollectionPresenterFactory = rewardItemCollectionPresenterFactory;
 			_matchProvider = matchProvider;
-			
+			_analyticsServiceWrapper = analyticsServiceWrapper;
+
 			FinishMatchSession().ContinueWith(response =>
 			{
 				_matchFinished = true;

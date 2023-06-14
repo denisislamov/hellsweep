@@ -49,29 +49,25 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -2869977044642771822, guid: 21a915c4d84fa4b6db155b753bc7d800, type: 3}
   - {fileID: 21300000, guid: 59fb9455da96b4c3db2f7ef15227e822, type: 3}
-  - {fileID: 21300000, guid: f4a1bf850109142ea93d76bfa915fd5e, type: 3}
+  - {fileID: 21300000, guid: 9e37476932191443c8ea5e1f0b2a9e13, type: 3}
   - {fileID: 21300000, guid: 8baae4d9a4c51463b961f16a52f939b3, type: 3}
   - {fileID: 21300000, guid: 1323329bc55624f5d9c6df02698aacd5, type: 3}
   - {fileID: 21300000, guid: 7d793fcb87d044fa7a11cdc5e95be77e, type: 3}
-  - {fileID: 21300000, guid: afa4e05c4bdcc438c9ec26c456f7b437, type: 3}
   - {fileID: 21300000, guid: 62f3918c51ee147d4918942e31d9a8e9, type: 3}
   - {fileID: 21300000, guid: 48672dfcd4a3c47db9b735162f4078f9, type: 3}
-  - {fileID: 21300000, guid: 0eeede3e368684105a86ba4574aac8ad, type: 3}
   - {fileID: 21300000, guid: 1625194e020154d47b5fc41a6ffb915b, type: 3}
-  - {fileID: 21300000, guid: 4097616fb7068401bb4768788bfb069a, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Sands_Plane_Border_0
   - Sands_Plane_4
-  - Sands_Tree_Plane_3
+  - Sands_Plane_8
   - Sands_Tree_Plane_6
   - Sands_Plane_5
   - Sands_Tree_Plane_4
-  - Sands_Plane_2
   - Sands_Plane_6
   - Sands_Plane_1
-  - Sands_Plane_3
   - Sands_Plane_7
-  - Sands_Tree_Plane_2
   m_RenderDataMap: {}
   m_Tag: SandsLocationSpriteAtlas
   m_IsVariant: 0

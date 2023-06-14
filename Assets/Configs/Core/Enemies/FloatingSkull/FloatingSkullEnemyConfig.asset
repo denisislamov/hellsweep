@@ -16,7 +16,7 @@ MonoBehaviour:
   _enemyType: 0
   _prefab: {fileID: 2112637554807013318, guid: 42a4de0e684f745f28bfdaf157385219, type: 3}
   _collectablesIdsOnDeath:
-  - _collectableId: exp_1
+  - _collectableId: exp_2
     _weight: 0.85
   _propertyConfigs:
   - {fileID: 11400000, guid: 4668f532f7f6d475fa8047820f8d0946, type: 2}

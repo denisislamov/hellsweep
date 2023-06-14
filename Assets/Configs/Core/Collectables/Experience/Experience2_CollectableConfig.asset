@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a395ba55574779866f0cf68432b639, type: 3}
+  m_Name: Experience2_CollectableConfig
+  m_EditorClassIdentifier: 
+  _id: exp_2
+  _value: 2
+  _prefab: {fileID: 7397804992388197930, guid: d547e9350f9384ba99704a6aa9563508, type: 3}
+  _collisionAreaConfig: {fileID: 11400000, guid: 158516e93dfe84168b5d880f3cad207d, type: 2}
+  _poolSize: 512
+  _layer: 9
+  _collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0

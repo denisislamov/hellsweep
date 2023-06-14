@@ -108,8 +108,8 @@ MonoBehaviour:
       _maxSpawnedQuantity: 500
       _spawnRate:
         _minutes: 0
-        _seconds: 2
-      _waveSpawnType: 1
+        _seconds: 3
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 0
         _seconds: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 3
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 0
         _seconds: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 2
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 0
         _seconds: 0
