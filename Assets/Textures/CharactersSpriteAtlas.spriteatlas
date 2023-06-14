@@ -451,6 +451,7 @@ SpriteAtlas:
   - {fileID: 6751076904797247059, guid: 5d77faa828ee64d1e921f96a0a576169, type: 3}
   - {fileID: 6818996523705717248, guid: 5d77faa828ee64d1e921f96a0a576169, type: 3}
   - {fileID: -5124686006149545356, guid: 5d77faa828ee64d1e921f96a0a576169, type: 3}
+  - {fileID: 21300000, guid: 497c7ec8673034df1a8c9bda89e06fef, type: 3}
   - {fileID: -7089947600880928372, guid: 21d80c294e5a44c21bd85e4b1f37806b, type: 3}
   - {fileID: -8357503955377842983, guid: 21d80c294e5a44c21bd85e4b1f37806b, type: 3}
   - {fileID: 2677234668004304574, guid: 21d80c294e5a44c21bd85e4b1f37806b, type: 3}
@@ -832,6 +833,22 @@ SpriteAtlas:
   - {fileID: -3884044688491799212, guid: 46b7b2edc5feb4d89b1128f7ed898e0d, type: 3}
   - {fileID: -2402284675192145349, guid: 46b7b2edc5feb4d89b1128f7ed898e0d, type: 3}
   - {fileID: 21300000, guid: d68735fd7515c40dbb2671da9ae8685c, type: 3}
+  - {fileID: -8837489874069182010, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -1618222703187832630, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 7999511917777672802, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -3458413178845462969, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -6007925463599235714, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -7978703551385815384, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 4030345033690333773, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 1411371283545919557, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -2159747970929652935, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 5973985589490096540, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -7032268271066813982, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 6448680951694285870, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 6522944397615250191, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 8405901620641798502, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: -3023457751515251799, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
+  - {fileID: 2425098917173839967, guid: d2c9651e8e5c44d3e80874d7fdb96f42, type: 3}
   - {fileID: 4066100106943480313, guid: 0b0e3cbed61a744be86225c834d5bf23, type: 3}
   - {fileID: 3294927306481638430, guid: 0b0e3cbed61a744be86225c834d5bf23, type: 3}
   - {fileID: -3905477245160982028, guid: 0b0e3cbed61a744be86225c834d5bf23, type: 3}
@@ -1280,6 +1297,7 @@ SpriteAtlas:
   - bow_char_stay_bow_attack_w29_h27_12
   - bow_char_stay_bow_attack_w29_h27_11
   - bow_char_stay_bow_attack_w29_h27_10
+  - light (1)
   - jiangshi2_w26_h27_12
   - jiangshi2_w26_h27_13
   - jiangshi2_w26_h27_10
@@ -1661,6 +1679,22 @@ SpriteAtlas:
   - boss_fire_caster_w50_h63_no_fireball_42
   - boss_fire_caster_w50_h63_no_fireball_43
   - Skin_Inv_Tanjiro_Kanabo
+  - fireball_blue_small_w19_h11_14
+  - fireball_blue_small_w19_h11_15
+  - fireball_blue_small_w19_h11_10
+  - fireball_blue_small_w19_h11_11
+  - fireball_blue_small_w19_h11_12
+  - fireball_blue_small_w19_h11_13
+  - fireball_blue_small_w19_h11_5
+  - fireball_blue_small_w19_h11_4
+  - fireball_blue_small_w19_h11_7
+  - fireball_blue_small_w19_h11_6
+  - fireball_blue_small_w19_h11_1
+  - fireball_blue_small_w19_h11_0
+  - fireball_blue_small_w19_h11_3
+  - fireball_blue_small_w19_h11_2
+  - fireball_blue_small_w19_h11_9
+  - fireball_blue_small_w19_h11_8
   - unicorn_walk_w82_h71_0
   - unicorn_walk_w82_h71_7
   - unicorn_walk_w82_h71_6
