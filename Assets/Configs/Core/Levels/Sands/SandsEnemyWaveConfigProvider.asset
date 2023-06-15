@@ -65,7 +65,7 @@ MonoBehaviour:
       _startTiming:
         _minutes: 0
         _seconds: 0
-      StartHealth: 1500
+      StartHealth: 15000
     _startTiming:
       _minutes: 2
       _seconds: 0
