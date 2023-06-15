@@ -8,6 +8,8 @@ using TonPlay.Client.Roguelike.Core.Skills;
 using TonPlay.Client.Roguelike.Core.Skills.Config.Interfaces;
 using TonPlay.Client.Roguelike.UI.Buttons;
 using TonPlay.Client.Roguelike.UI.Buttons.Interfaces;
+using TonPlay.Client.Roguelike.UI.Screens.DefeatGame;
+using TonPlay.Client.Roguelike.UI.Screens.DefeatGame.Interfaces;
 using TonPlay.Client.Roguelike.UI.Screens.Pause.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -127,21 +129,13 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Pause
 			Context?.ScreenClosedCallback?.Invoke();
 		}
 
-		private async void QuitButtonClickHandler()
+		private void QuitButtonClickHandler()
 		{
 			_buttonsLockedProperty.SetValueAndForceNotify(true);
 			
-			var gameModel = _gameModelProvider.Get();
-			var gainModel = gameModel.PlayerModel.MatchProfileGainModel;
-
-			await _matchProvider.Current.FinishSession(
-				new MatchResult(MatchResultType.Lose,
-					gainModel.Gold.Value,
-					gainModel.ProfileExperience.Value));
-
 			_uiService.Close(Context.Screen);
-			
-			await _matchProvider.Current.Finish();
+
+			_uiService.Open<DefeatGameScreen, IDefeatGameScreenContext>(new DefeatGameScreenContext());
 		}
 
 		public class Factory : PlaceholderFactory<IPauseScreenView, IPauseScreenContext, PauseScreenPresenter>
