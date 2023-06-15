@@ -89,7 +89,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 3
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 3
         _seconds: 15
@@ -105,7 +105,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 1
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 4
         _seconds: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 2
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 9
         _seconds: 5
@@ -293,7 +293,7 @@ MonoBehaviour:
       _spawnRate:
         _minutes: 0
         _seconds: 1
-      _waveSpawnType: 1
+      _waveSpawnType: 0
       _startTiming:
         _minutes: 11
         _seconds: 0
