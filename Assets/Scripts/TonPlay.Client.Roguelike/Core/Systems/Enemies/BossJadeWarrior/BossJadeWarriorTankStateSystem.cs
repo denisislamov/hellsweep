@@ -8,6 +8,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior
 {
 	public class BossJadeWarriorTankStateSystem : IEcsRunSystem
 	{
+		private static readonly int s_Attack = Animator.StringToHash("Attack");
 		public void Run(EcsSystems systems)
 		{
 			var world = systems.GetWorld();
@@ -15,6 +16,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior
 							  .Inc<BossJadeWarriorTankStateComponent>()
 							  .Inc<MovementComponent>()
 							  .Inc<SpeedComponent>()
+							  .Inc<AnimatorComponent>()
 							  .Exc<DeadComponent>()
 							  .Exc<DestroyComponent>()
 							  .End();
@@ -26,6 +28,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior
 			var movementPool = world.GetPool<MovementComponent>();
 			var speedPool = world.GetPool<SpeedComponent>();
 			var damagePool = world.GetPool<DamageOnCollisionComponent>();
+			var animatorPool = world.GetPool<AnimatorComponent>();
 
 			var playerPosition = Vector2.zero;			
 			
@@ -40,6 +43,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior
 				ref var boss = ref bossPool.Get(entityId);
 				ref var tank = ref tankStatePool.Get(entityId);
 				ref var speed = ref speedPool.Get(entityId);
+				ref var animator = ref animatorPool.Get(entityId);
 				
 				if (!tank.IsInited)
 				{
@@ -63,11 +67,15 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.BossJadeWarrior
 					}
 					case BossJadeWarriorTankState.Stop:
 					{
+						animator.Animator.SetBool(s_Attack, false);
+
 						RunStoppingState(ref tank, ref speed, tankStatePool, entityId, followStatePool);
 						break;
 					}
 					case BossJadeWarriorTankState.Run:
 					{
+						animator.Animator.SetBool(s_Attack, true);
+						
 						RunRunningState(ref tank, ref boss, ref speed);
 						break;
 					}
