@@ -39,13 +39,18 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				var entity = effectsWorld.NewEntity();
 
 				view.transform.position = position.Position;
-				view.PlayableDirector.time = 0;
 
 				entity.AddEffectComponent();
 				entity.AddPositionComponent(position.Position);
 				entity.AddDestroyOnTimerComponent(enemyConfig.DeathEffectConfig.DestroyTimer);
-				entity.AddPlayableDirectorComponent(view.PlayableDirector);
 				entity.AddPoolObjectComponent(viewPoolObject);
+				
+				if (view.PlayableDirector != null)
+				{
+					view.PlayableDirector.Stop();
+					view.PlayableDirector.Play();
+					entity.AddPlayableDirectorComponent(view.PlayableDirector);
+				}
 			}
 		}
 	}

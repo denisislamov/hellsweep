@@ -56,6 +56,8 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 			if (view.PlayableDirector != null)
 			{
+				view.PlayableDirector.Stop();
+				view.PlayableDirector.Play();
 				effectEntity.AddPlayableDirectorComponent(view.PlayableDirector);
 			}
 

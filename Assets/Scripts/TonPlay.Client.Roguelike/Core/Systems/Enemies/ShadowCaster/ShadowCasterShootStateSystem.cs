@@ -77,7 +77,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.ShadowCaster
 				var offset = angle * 0.5f;
 				for (var i = 0; i < boss.ProjectileQuantity; i++)
 				{
-					var direction = -rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
+					var direction = rotation.Rotate(offset + angle * (i - boss.ProjectileQuantity * 0.5f));
 					
 					CreateProjectile(position, direction, sharedData, boss.ProjectileConfig);
 				}

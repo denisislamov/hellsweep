@@ -278,6 +278,9 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 			
 			if (enemyView.PlayableDirector != null)
 			{
+				enemyView.PlayableDirector.Stop();
+				enemyView.PlayableDirector.Play();
+				
 				entity.AddPlayableDirectorComponent(enemyView.PlayableDirector);
 			}
 

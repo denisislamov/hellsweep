@@ -47,7 +47,11 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 						if ((cameraTransform.Transform.position.ToVector2XY() - playablePosition.Position).SqrMagnitude() < SQR_DISTANCE_TO_CAMERA_TO_EVALUATE)
 						{
 							ref var playable = ref playablePool.Get(entityIdx);
-							playable.PlayableDirector.playableGraph.Evaluate(UnityEngine.Time.deltaTime);
+
+							if (playable.PlayableDirector.playableGraph.IsValid())
+							{
+								playable.PlayableDirector.playableGraph.Evaluate(UnityEngine.Time.deltaTime);
+							}
 						}
 					}
 				}

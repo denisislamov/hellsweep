@@ -19,6 +19,24 @@ MonoBehaviour:
   - _id: profile_experience
     _icon: {fileID: 21300000, guid: 97f1013e02bc84f87b97ed0a07878413, type: 3}
     _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_arms
+    _icon: {fileID: 21300000, guid: 955f8a224a7cb42ec8f9e130ae53ff73, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_body
+    _icon: {fileID: 21300000, guid: a537814bbb15a4a8489cf844b82fa27d, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_belt
+    _icon: {fileID: 21300000, guid: 00527c682b3994c86a025b376e79ee00, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_feet
+    _icon: {fileID: 21300000, guid: 05a9c06b858f14ea49d167a6159e1b09, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_neck
+    _icon: {fileID: 21300000, guid: faae9ac0baa21494380ad66be6bcea6f, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
+  - _id: blueprints_weapon
+    _icon: {fileID: 21300000, guid: 936225b2fb12749139c15fd397c49d02, type: 3}
+    _backgroundGradientMaterial: {fileID: 0}
   _default:
     _id: 
     _icon: {fileID: -5480063800276842923, guid: 75746f7ab7ab84cc783390e5c23a563d, type: 3}

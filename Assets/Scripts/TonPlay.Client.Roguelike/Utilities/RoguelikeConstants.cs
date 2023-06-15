@@ -50,6 +50,12 @@ namespace TonPlay.Client.Roguelike.Utilities
 			{
 				public const string COINS_ID = "coins";
 				public const string PROFILE_EXPERIENCE_ID = "profile_experience";
+				public const string BLUEPRINTS_ARMS = "blueprints_arms";
+				public const string BLUEPRINTS_BODY = "blueprints_body";
+				public const string BLUEPRINTS_BELT = "blueprints_belt";
+				public const string BLUEPRINTS_FEET = "blueprints_feet";
+				public const string BLUEPRINTS_NECK = "blueprints_neck";
+				public const string BLUEPRINTS_WEAPON = "blueprints_weapons";
 			}
 
 			public class UI

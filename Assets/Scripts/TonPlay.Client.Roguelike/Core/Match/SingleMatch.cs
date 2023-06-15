@@ -212,6 +212,13 @@ namespace TonPlay.Client.Roguelike.Core.Match
 				profileData.MaxExperience = config?.ExperienceToLevelUp ?? 1_000_000_000;
 				profileData.BalanceData.Energy += RoguelikeConstants.Meta.INCREASE_ENERGY_PER_GAINED_LEVEL;
 			}
+
+			profileData.InventoryData.BlueprintsArms += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsArms.Value;
+			profileData.InventoryData.BlueprintsBelt += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsBelt.Value;
+			profileData.InventoryData.BlueprintsBody += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsBody.Value;
+			profileData.InventoryData.BlueprintsFeet += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsFeet.Value;
+			profileData.InventoryData.BlueprintsNeck += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsNeck.Value;
+			profileData.InventoryData.BlueprintsWeapon += gameModel.PlayerModel.MatchProfileGainModel.BlueprintsWeapon.Value;
 			
 			profileData.InventoryData.Items.AddRange(gameModel.PlayerModel.MatchProfileGainModel.ToData().Items);
 		}
@@ -268,6 +275,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
 			gainData.Gold = response.rewardSummary.coins; 
 			gainData.ProfileExperience += response.rewardSummary.xp;
+			gainData.SetBlueprintsValue(response.rewardSummary.blueprintsSlot, response.rewardSummary.blueprints);
 
 			var responseItems = response.rewardSummary.items;
 			if (responseItems != null && responseItems.Count > 0)
