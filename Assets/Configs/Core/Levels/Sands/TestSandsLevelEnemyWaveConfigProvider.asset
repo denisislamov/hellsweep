@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveConfigs:
   - _waves:
-    - _id: 6_jade_warrior_boss
-      _enemyId: jade_warrior_boss
+    - _id: 6_floating_skull
+      _enemyId: floating_skull
       _enemiesQuantity: 1
       _maxSpawnedQuantity: 1
       _spawnRate:

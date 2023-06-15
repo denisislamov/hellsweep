@@ -275,17 +275,21 @@ namespace TonPlay.Client.Roguelike.Extensions
 			return ref component;
 		}
 
-		public static ref SyncPositionWithAnotherEntityComponent AddSyncPositionWithAnotherEntityComponent(this EcsEntity entity, int parentEntityId)
+		public static ref SyncPositionWithAnotherEntityComponent AddSyncPositionWithAnotherEntityComponent(
+			this EcsEntity entity, int parentEntityId, EcsWorld parentWorld)
 		{
 			ref var component = ref entity.Add<SyncPositionWithAnotherEntityComponent>();
 			component.ParentEntityId = parentEntityId;
+			component.ParentWorld = parentWorld;
 			return ref component;
 		}
 
-		public static ref SyncRotationWithAnotherEntityComponent AddSyncRotationWithAnotherEntityComponent(this EcsEntity entity, int parentEntityId)
+		public static ref SyncRotationWithAnotherEntityComponent AddSyncRotationWithAnotherEntityComponent(
+			this EcsEntity entity, int parentEntityId, EcsWorld parentWorld)
 		{
 			ref var component = ref entity.Add<SyncRotationWithAnotherEntityComponent>();
 			component.ParentEntityId = parentEntityId;
+			component.ParentWorld = parentWorld;
 			return ref component;
 		}
 

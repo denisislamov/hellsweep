@@ -199,7 +199,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			entity.AddPositionComponent(position);
 			entity.AddTransformComponent(effect.transform);
 			entity.AddForcefieldDeviceEffectComponent(parentEntityId, level);
-			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId);
+			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId, _world);
 
 			return entity;
 		}

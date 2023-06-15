@@ -295,8 +295,8 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Skills.Active
 			entity.AddRotationComponent(right);
 			entity.AddTransformComponent(effect.transform);
 			entity.AddRevolverSightEffectComponent(effect, parentEntityId);
-			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId);
-			entity.AddSyncRotationWithAnotherEntityComponent(parentEntityId);
+			entity.AddSyncPositionWithAnotherEntityComponent(parentEntityId, _world);
+			entity.AddSyncRotationWithAnotherEntityComponent(parentEntityId, _world);
 
 			return entity;
 		}

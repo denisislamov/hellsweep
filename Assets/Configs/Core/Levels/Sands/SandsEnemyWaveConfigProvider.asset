@@ -73,7 +73,7 @@ MonoBehaviour:
     - _id: 3_jiangshi
       _enemyId: jiangshi
       _enemiesQuantity: 800
-      _maxSpawnedQuantity: 400
+      _maxSpawnedQuantity: 500
       _spawnRate:
         _minutes: 0
         _seconds: 1
@@ -168,11 +168,11 @@ MonoBehaviour:
   - _waves:
     - _id: 9_floating_skull
       _enemyId: floating_skull
-      _enemiesQuantity: 170
-      _maxSpawnedQuantity: 170
+      _enemiesQuantity: 1700
+      _maxSpawnedQuantity: 500
       _spawnRate:
         _minutes: 0
-        _seconds: 2
+        _seconds: 4
       _waveSpawnType: 0
       _startTiming:
         _minutes: 0

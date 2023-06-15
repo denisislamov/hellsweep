@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c90b8e75414f44861b6d0730b07e5d, type: 3}
+  m_Name: FloatingSkull_SkullFireSpawnEffectAction
+  m_EditorClassIdentifier: 
+  _effectView: {fileID: 6971544732024454784, guid: f40b02a47fce142939c1d38ff4f127e5, type: 3}
+  _spawnOffset: {x: 0, y: 0}
+  _syncDestroyWithCaller: 1
+  _syncPositionWithCaller: 1
+  _syncRotationWithCaller: 0
+  _syncRotationWithMovementDifference: 1

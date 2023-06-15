@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44852cf329824850a7e2536afb2a63c2, type: 3}
-  m_Name: FloatingSkullMoveOnPlayerEnemyPropertyConfig
+  m_Script: {fileID: 11500000, guid: a6e4b49854ee4339a8d92e95da19bbf6, type: 3}
+  m_Name: SkullFireEffectPoolObjectCreator
   m_EditorClassIdentifier: 
-  _movementConfig:
-    _startSpeed: 3
-    _acceleration: 0
+  _poolCount: 512
+  _poolType: 0
+  _effectView: {fileID: 6971544732024454784, guid: f40b02a47fce142939c1d38ff4f127e5, type: 3}

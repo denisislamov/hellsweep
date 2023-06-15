@@ -1,46 +1,46 @@
 fileFormatVersion: 2
-guid: 379af877dfb2d4dcd9d1955a45047659
+guid: 0988037cbe87845a799f038074b1c4a8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4158431409844133634
-    second: floating_skull_w33_h22_0
+      213: -5714878246739661158
+    second: fire_separated_w30_h14_0
   - first:
-      213: -5441548917058813350
-    second: floating_skull_w33_h22_1
+      213: -933298568114406112
+    second: fire_separated_w30_h14_1
   - first:
-      213: 3397662932802358401
-    second: floating_skull_w33_h22_2
+      213: -3943617407704449711
+    second: fire_separated_w30_h14_2
   - first:
-      213: -7874575997364326500
-    second: floating_skull_w33_h22_3
+      213: -6311834053972936785
+    second: fire_separated_w30_h14_3
   - first:
-      213: -2753490010790128708
-    second: floating_skull_w33_h22_4
+      213: -6744811503306035246
+    second: fire_separated_w30_h14_4
   - first:
-      213: 7561631030781300357
-    second: floating_skull_w33_h22_5
+      213: -2642489733845461269
+    second: fire_separated_w30_h14_5
   - first:
-      213: 8059431961068261157
-    second: floating_skull_w33_h22_6
+      213: 8563184419465779907
+    second: fire_separated_w30_h14_6
   - first:
-      213: -813492089739755846
-    second: floating_skull_w33_h22_7
+      213: -4406311058334692338
+    second: fire_separated_w30_h14_7
   - first:
-      213: 362725653097735468
-    second: floating_skull_w33_h22_8
+      213: 1135968660507046867
+    second: fire_separated_w30_h14_8
   - first:
-      213: -6012800085370122795
-    second: floating_skull_w33_h22_9
+      213: -6852833302145299663
+    second: fire_separated_w30_h14_9
   - first:
-      213: -5018107388827067837
-    second: floating_skull_w33_h22_10
+      213: -1973978878392069008
+    second: fire_separated_w30_h14_10
   - first:
-      213: -3903810371145979569
-    second: floating_skull_w33_h22_11
+      213: 1336124398806960122
+    second: fire_separated_w30_h14_11
   - first:
-      213: -1268566594531998345
-    second: floating_skull_w33_h22_12
+      213: 3631870923599268322
+    second: fire_separated_w30_h14_12
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -167,274 +167,274 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: floating_skull_w33_h22_0
+      name: fire_separated_w30_h14_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20f169eb557b5b930800000000000000
-      internalID: 4158431409844133634
+      spriteID: a9ea978638ca0b0b0800000000000000
+      internalID: -5714878246739661158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_1
+      name: fire_separated_w30_h14_1
       rect:
         serializedVersion: 2
-        x: 33
+        x: 30
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a524cca271cbb74b0800000000000000
-      internalID: -5441548917058813350
+      spriteID: 02df82aa5e14c03f0800000000000000
+      internalID: -933298568114406112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_2
+      name: fire_separated_w30_h14_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 60
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18c42309f6ce62f20800000000000000
-      internalID: 3397662932802358401
+      spriteID: 15dbab3acd47549c0800000000000000
+      internalID: -3943617407704449711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_3
+      name: fire_separated_w30_h14_3
       rect:
         serializedVersion: 2
-        x: 99
+        x: 90
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9f28480ad2e7b290800000000000000
-      internalID: -7874575997364326500
+      spriteID: fa7bab39e5cd768a0800000000000000
+      internalID: -6311834053972936785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_4
+      name: fire_separated_w30_h14_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 120
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb3944e7c63a9c9d0800000000000000
-      internalID: -2753490010790128708
+      spriteID: 2dfa97c5cad9562a0800000000000000
+      internalID: -6744811503306035246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_5
+      name: fire_separated_w30_h14_5
       rect:
         serializedVersion: 2
-        x: 165
+        x: 150
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58e4a48fb5f40f860800000000000000
-      internalID: 7561631030781300357
+      spriteID: be6568b669df35bd0800000000000000
+      internalID: -2642489733845461269
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_6
+      name: fire_separated_w30_h14_6
       rect:
         serializedVersion: 2
-        x: 198
+        x: 180
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52f47eafaaad8df60800000000000000
-      internalID: 8059431961068261157
+      spriteID: 3cada6c1cda86d670800000000000000
+      internalID: 8563184419465779907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_7
+      name: fire_separated_w30_h14_7
       rect:
         serializedVersion: 2
-        x: 231
+        x: 210
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abeb8732145e5b4f0800000000000000
-      internalID: -813492089739755846
+      spriteID: e0cc5162073a9d2c0800000000000000
+      internalID: -4406311058334692338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_8
+      name: fire_separated_w30_h14_8
       rect:
         serializedVersion: 2
-        x: 264
+        x: 240
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c25efc74f09a80500800000000000000
-      internalID: 362725653097735468
+      spriteID: 3d3bf756a75c3cf00800000000000000
+      internalID: 1135968660507046867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_9
+      name: fire_separated_w30_h14_9
       rect:
         serializedVersion: 2
-        x: 297
+        x: 270
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5dd4316fd2e3e8ca0800000000000000
-      internalID: -6012800085370122795
+      spriteID: 13b89a86b68d5e0a0800000000000000
+      internalID: -6852833302145299663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_10
+      name: fire_separated_w30_h14_10
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 30
+        height: 14
+      alignment: 9
+      pivot: {x: 0.892, y: 0.521}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 074115f2ba40b94e0800000000000000
+      internalID: -1973978878392069008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_separated_w30_h14_11
       rect:
         serializedVersion: 2
         x: 330
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34a133cbae91c5ab0800000000000000
-      internalID: -5018107388827067837
+      spriteID: af70f96cf0eda8210800000000000000
+      internalID: 1336124398806960122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floating_skull_w33_h22_11
+      name: fire_separated_w30_h14_12
       rect:
         serializedVersion: 2
-        x: 363
+        x: 360
         y: 0
-        width: 33
-        height: 22
+        width: 30
+        height: 14
       alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
+      pivot: {x: 0.892, y: 0.521}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f49ab559621e2d9c0800000000000000
-      internalID: -3903810371145979569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floating_skull_w33_h22_12
-      rect:
-        serializedVersion: 2
-        x: 396
-        y: 0
-        width: 33
-        height: 22
-      alignment: 9
-      pivot: {x: 0.8693973, y: 0.6602207}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7754ef64765256ee0800000000000000
-      internalID: -1268566594531998345
+      spriteID: 2e9443fcc5ff66230800000000000000
+      internalID: 3631870923599268322
       vertices: []
       indices: 
       edges: []

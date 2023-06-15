@@ -298,6 +298,7 @@ namespace TonPlay.Client.Roguelike.Core
 							 .Add(new PerformActionsOnEnemyDeathSystem())
 							 .Add(new SpawnEffectOnDestroySystem())
 							 .Add(new SpawnEnemyDeathEffectSystem())
+							 .Add(new SyncDestroyEntitySystem())
 							 .Add(new DestroyOnReceiveDamageSystem())
 							 .Add(new DestroyIfDistanceExceededSystem())
 							 .Add(new DestroyOnTimerSystem())
