@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TonPlay.Client.Roguelike.Models;
+using UnityEngine.Serialization;
 
 namespace TonPlay.Client.Roguelike.Network.Response
 {
@@ -20,7 +21,7 @@ namespace TonPlay.Client.Roguelike.Network.Response
             public int blueprints;
             public int energy;
             public List<UserItemResponse> items;
-            public SlotName blueprintsSlot;
+            public SlotName blueprintsSlotPurpose;
         }
     }
 }

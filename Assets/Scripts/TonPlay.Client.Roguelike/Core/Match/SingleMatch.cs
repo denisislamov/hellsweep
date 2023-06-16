@@ -275,7 +275,7 @@ namespace TonPlay.Client.Roguelike.Core.Match
 			var gainData = gameModel.PlayerModel.MatchProfileGainModel.ToData();
 			gainData.Gold = response.rewardSummary.coins; 
 			gainData.ProfileExperience += response.rewardSummary.xp;
-			gainData.SetBlueprintsValue(response.rewardSummary.blueprintsSlot, response.rewardSummary.blueprints);
+			gainData.SetBlueprintsValue(response.rewardSummary.blueprintsSlotPurpose, response.rewardSummary.blueprints);
 
 			var responseItems = response.rewardSummary.items;
 			if (responseItems != null && responseItems.Count > 0)
