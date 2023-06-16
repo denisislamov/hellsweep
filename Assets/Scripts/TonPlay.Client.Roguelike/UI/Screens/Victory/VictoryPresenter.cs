@@ -131,6 +131,36 @@ namespace TonPlay.Client.Roguelike.UI.Screens.Victory
 			{
 				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.PROFILE_EXPERIENCE_ID, (int)gainModel.ProfileExperience.Value));
 			}
+			
+			if (gainModel.BlueprintsArms.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_ARMS, (int)gainModel.BlueprintsArms.Value));
+			}
+			
+			if (gainModel.BlueprintsBody.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_BODY, (int)gainModel.BlueprintsBody.Value));
+			}
+			
+			if (gainModel.BlueprintsBelt.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_BELT, (int)gainModel.BlueprintsBelt.Value));
+			}
+			
+			if (gainModel.BlueprintsFeet.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_FEET, (int)gainModel.BlueprintsFeet.Value));
+			}
+			
+			if (gainModel.BlueprintsNeck.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_NECK, (int)gainModel.BlueprintsNeck.Value));
+			}
+			
+			if (gainModel.BlueprintsWeapon.Value > 0)
+			{
+				rewardList.Add(new RewardData(RoguelikeConstants.Core.Rewards.BLUEPRINTS_WEAPON, (int)gainModel.BlueprintsWeapon.Value));
+			}
 
 			foreach (var itemRewardModel in gainModel.Items)
 			{

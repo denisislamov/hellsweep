@@ -73,7 +73,7 @@ MonoBehaviour:
     - _id: 3_jiangshi
       _enemyId: jiangshi
       _enemiesQuantity: 800
-      _maxSpawnedQuantity: 500
+      _maxSpawnedQuantity: 800
       _spawnRate:
         _minutes: 0
         _seconds: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
     - _id: 5_moguy
       _enemyId: moguy
       _enemiesQuantity: 2900
-      _maxSpawnedQuantity: 500
+      _maxSpawnedQuantity: 1500
       _spawnRate:
         _minutes: 0
         _seconds: 3
@@ -137,7 +137,7 @@ MonoBehaviour:
     - _id: 7_terracotta_horseman
       _enemyId: terracotta_horseman
       _enemiesQuantity: 1650
-      _maxSpawnedQuantity: 500
+      _maxSpawnedQuantity: 1500
       _spawnRate:
         _minutes: 0
         _seconds: 3
@@ -169,7 +169,7 @@ MonoBehaviour:
     - _id: 9_floating_skull
       _enemyId: floating_skull
       _enemiesQuantity: 1700
-      _maxSpawnedQuantity: 500
+      _maxSpawnedQuantity: 1500
       _spawnRate:
         _minutes: 0
         _seconds: 4

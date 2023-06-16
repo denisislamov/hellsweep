@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0}
   _doNotInitiateCollisionOverlap: 0
-  _radius: 0.8
+  _radius: 1.4
