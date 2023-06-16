@@ -181,6 +181,7 @@ namespace TonPlay.Client.Roguelike.Core
 			_updateSystems = new EcsSystems(_mainWorld, _sharedData)
 							.AddWorld(_effectsWorld, RoguelikeConstants.Core.EFFECTS_WORLD_NAME)
 							.Add(new GameSystem())
+							.Add(new DisableAnimatorWarningLogsSystems())
 							.Add(new EvaluatePlayableDirector())
 							.Add(new EnemiesKdTreeSystem(_enemyKdTreeStorage))
 							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))

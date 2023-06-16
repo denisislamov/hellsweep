@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TonPlay.Client.Common.UIService;
 using TonPlay.Client.Roguelike.Core.Locations.Interfaces;
 using TonPlay.Client.Roguelike.Models;
@@ -36,6 +37,7 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			_metaGameModelProvider = metaGameModelProvider;
 
 			AddNestedButtonsPresenter();
+			SetCurrentLocationConfigIdToLastUnlocked();
 			SelectLocation(_currentLocationConfigIndex);
 			RefreshView();
 		}
@@ -121,6 +123,12 @@ namespace TonPlay.Client.Roguelike.UI.Screens.MainMenu.LocationSlider
 			View.SetSubtitleText($"Enemy killed:          {maxKilled}\n" + 
 			                     $"Longest Survived: {longestSurvivedTime:mm}m {longestSurvivedTime:ss}s");
 			View.SetLocationView(_currentLocationConfigIndex);
+		}
+		
+		private void SetCurrentLocationConfigIdToLastUnlocked()
+		{
+			var locationsModel = _metaGameModelProvider.Get().LocationsModel;
+			_currentLocationConfigIndex = _locationConfigProvider.Configs.LastOrDefault(_ => locationsModel.Locations[_.ChapterIdx].Unlocked.Value)?.ChapterIdx - 1 ?? 0;
 		}
 
 		private void SelectLocation(int currentLocationConfigIndex)
