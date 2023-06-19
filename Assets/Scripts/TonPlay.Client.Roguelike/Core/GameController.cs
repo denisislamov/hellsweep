@@ -185,7 +185,6 @@ namespace TonPlay.Client.Roguelike.Core
 							.Add(new ToggleMonoAnimatorOnVisibilityChangedSystem())
 							.Add(new ToggleMonoPlayableDirectorOnVisibilityChangedSystem())
 							.Add(new EvaluatePlayableDirectorSystem())
-							.Add(new EvaluateAnimatorSystem())
 							.Add(new EnemiesKdTreeSystem(_enemyKdTreeStorage))
 							.Add(new ActiveMagnetSystem(_collectablesKdTreeStorage))
 							.Add(new PrepareToExplodeCollectedBombsSystem())
