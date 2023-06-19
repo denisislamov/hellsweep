@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.BossButcher;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.BossUnicorn;
 using UnityEngine;

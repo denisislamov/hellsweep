@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.BossWorm;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.ShadowCasterMiniboss;
 using UnityEngine;

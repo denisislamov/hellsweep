@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using UnityEngine;
 
 namespace TonPlay.Client.Roguelike.Core.Systems
@@ -14,6 +15,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var filter = world
 						.Filter<AnimatorComponent>()
 						.Inc<MovementComponent>()
+						.Inc<VisibleComponent>()
 						.Exc<DeadComponent>()
 						.Exc<DestroyComponent>()
 						.End();

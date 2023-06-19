@@ -14,6 +14,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems
 			var filter = world
 						.Filter<BloodAnimatorComponent>()
 						.Inc<ApplyDamageComponent>()
+						.Inc<VisibleComponent>()
 						.Exc<DeadComponent>()
 						.Exc<DestroyComponent>()
 						.End();

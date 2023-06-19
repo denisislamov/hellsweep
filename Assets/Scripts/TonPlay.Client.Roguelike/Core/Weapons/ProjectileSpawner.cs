@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Collision;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Pooling.Interfaces;
@@ -57,6 +58,12 @@ namespace TonPlay.Client.Roguelike.Core.Weapons
 			projectileEntity.AddStackTryApplyDamageComponent();
 			projectileEntity.AddBlockApplyDamageTimerComponent();
 			projectileEntity.AddLayerComponent(config.Layer);
+
+			if (projectileView.PlayableDirector != null)
+			{
+				projectileView.PlayableDirector.OptimizedPlay();
+				projectileEntity.AddPlayableDirectorComponent(projectileView.PlayableDirector);
+			}
 
 			if (config.HasProperty<IDestroyOnTimerProjectileConfigProperty>())
 			{

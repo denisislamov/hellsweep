@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Extensions;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Effects;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -56,8 +57,7 @@ namespace TonPlay.Client.Roguelike.Core.Actions
 
 			if (view.PlayableDirector != null)
 			{
-				view.PlayableDirector.Stop();
-				view.PlayableDirector.Play();
+				view.PlayableDirector.OptimizedPlay();
 				effectEntity.AddPlayableDirectorComponent(view.PlayableDirector);
 			}
 

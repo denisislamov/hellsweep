@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e407ff66cad430cba7bc11a46d25b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playableDirector: {fileID: 0}
+  _playableDirector: {fileID: 4385510146612862089}
 --- !u!58 &8764963793033674992
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ PlayableDirector:
   m_PlayableAsset: {fileID: 11400000, guid: 6635f6d3709dc48798ce405edc8bdfac, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
-  m_DirectorUpdateMode: 1
+  m_DirectorUpdateMode: 3
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: -2609822123039540686, guid: 6635f6d3709dc48798ce405edc8bdfac, type: 2}

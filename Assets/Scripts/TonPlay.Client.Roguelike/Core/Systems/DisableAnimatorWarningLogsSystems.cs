@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using TonPlay.Client.Roguelike.Utilities;
 
 namespace TonPlay.Client.Roguelike.Core.Systems

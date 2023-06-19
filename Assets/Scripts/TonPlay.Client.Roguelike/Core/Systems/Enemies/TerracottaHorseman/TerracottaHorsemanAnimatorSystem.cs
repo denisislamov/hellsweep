@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.TerracottaHorseman;
 using TonPlay.Client.Roguelike.Core.Interfaces;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies.TerracottaHorseman
 			var filter = world.Filter<TerracottaHorsemanComponent>()
 							  .Inc<PositionComponent>()
 							  .Inc<AnimatorComponent>()
+							  .Inc<VisibleComponent>()
 							  .Exc<DeadComponent>()
 							  .End();
 			var horsemanPool = world.GetPool<TerracottaHorsemanComponent>();

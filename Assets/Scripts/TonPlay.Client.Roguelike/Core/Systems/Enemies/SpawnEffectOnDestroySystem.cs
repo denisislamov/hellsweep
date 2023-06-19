@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
 using TonPlay.Client.Roguelike.Core.Effects;
 using TonPlay.Client.Roguelike.Core.Interfaces;
@@ -44,8 +45,7 @@ namespace TonPlay.Client.Roguelike.Core.Systems.Enemies
 				
 				if (view.PlayableDirector != null)
 				{
-					view.PlayableDirector.Stop();
-					view.PlayableDirector.Play();
+					view.PlayableDirector.OptimizedPlay();
 					entity.AddPlayableDirectorComponent(view.PlayableDirector);
 				}
 			}

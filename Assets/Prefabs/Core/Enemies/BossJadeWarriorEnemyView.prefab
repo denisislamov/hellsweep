@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 2165977175076656634}
   - component: {fileID: 2165977175076656637}
   - component: {fileID: 7439333171790333879}
-  - component: {fileID: 6192925999960842605}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -200,25 +199,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!320 &6192925999960842605
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2165977175076656635}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 1
-  m_WrapMode: 1
-  m_DirectorUpdateMode: 3
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -4472560886462408795, guid: 3d44cebff56334b089701fecfc1aac2b, type: 2}
-    value: {fileID: 7439333171790333879}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &2165977175254291103
 GameObject:
   m_ObjectHideFlags: 0

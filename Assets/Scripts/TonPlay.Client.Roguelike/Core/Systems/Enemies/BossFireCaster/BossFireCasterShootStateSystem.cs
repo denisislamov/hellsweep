@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using TonPlay.Client.Common.Utilities;
 using TonPlay.Client.Roguelike.Core.Components;
+using TonPlay.Client.Roguelike.Core.Components.Animator;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.BossFireCaster;
 using TonPlay.Client.Roguelike.Core.Components.Enemies.ShadowCasterMiniboss;
 using TonPlay.Client.Roguelike.Core.Interfaces;
